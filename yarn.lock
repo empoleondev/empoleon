@@ -1551,8 +1551,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@empoleon/carousel@workspace:packages/@empoleon/carousel"
   peerDependencies:
-    "@empoleon/core": "workspace:*"
-    "@empoleon/hooks": "workspace:*"
+    "@empoleon/core": 7.0.0
+    "@empoleon/hooks": 7.0.0
     embla-carousel: ">=8.0.0"
     embla-carousel-solid: ">=8.0.0"
   languageName: unknown
@@ -1582,9 +1582,9 @@ __metadata:
   resolution: "@empoleon/core@workspace:packages/@empoleon/core"
   dependencies:
     "@empoleon/hooks": "workspace:*"
-    "@empoleon/solid-floating-ui": "npm:^0.0.4"
-    "@empoleon/solid-number-format": "npm:^0.0.3"
-    "@empoleon/solid-remove-scroll": "npm:0.0.4-0"
+    "@empoleon/solid-floating-ui": "npm:0.0.4"
+    "@empoleon/solid-number-format": "npm:0.0.3"
+    "@empoleon/solid-remove-scroll": "npm:0.0.2-0"
     "@solid-primitives/presence": "npm:0.1.1"
     "@solid-primitives/refs": "npm:1.1.1"
     "@solid-primitives/resize-observer": "npm:2.1.1"
@@ -1594,7 +1594,7 @@ __metadata:
     solid-transition-group: "npm:0.3.0"
     type-fest: "npm:4.27.0"
   peerDependencies:
-    "@empoleon/hooks": "workspace:*"
+    "@empoleon/hooks": 7.0.0
   languageName: unknown
   linkType: soft
 
@@ -1614,7 +1614,7 @@ __metadata:
   dependencies:
     "@empoleon/core": "workspace:*"
     "@empoleon/hooks": "workspace:*"
-    "@empoleon/solid-dropzone": "npm:^1.0.1"
+    "@empoleon/solid-dropzone": "npm:1.0.1"
   languageName: unknown
   linkType: soft
 
@@ -1651,7 +1651,7 @@ __metadata:
   dependencies:
     "@empoleon/core": "workspace:*"
     "@empoleon/hooks": "workspace:*"
-    "@empoleon/store": "npm:8.0.0"
+    "@empoleon/store": "npm:7.0.0"
     solid-transition-group: "npm:0.3.0"
   languageName: unknown
   linkType: soft
@@ -1662,7 +1662,7 @@ __metadata:
   dependencies:
     "@empoleon/core": "workspace:*"
     "@empoleon/hooks": "workspace:*"
-    "@empoleon/store": "npm:8.0.0"
+    "@empoleon/store": "npm:7.0.0"
   languageName: unknown
   linkType: soft
 
@@ -1678,7 +1678,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@empoleon/solid-dropzone@npm:^1.0.1":
+"@empoleon/solid-dropzone@npm:1.0.1":
   version: 1.0.1
   resolution: "@empoleon/solid-dropzone@npm:1.0.1"
   dependencies:
@@ -1687,7 +1687,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@empoleon/solid-floating-ui@npm:^0.0.4":
+"@empoleon/solid-floating-ui@npm:0.0.4":
   version: 0.0.4
   resolution: "@empoleon/solid-floating-ui@npm:0.0.4"
   dependencies:
@@ -1698,24 +1698,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@empoleon/solid-number-format@npm:^0.0.3":
+"@empoleon/solid-number-format@npm:0.0.3":
   version: 0.0.3
   resolution: "@empoleon/solid-number-format@npm:0.0.3"
   checksum: 10c0/6c91669549aa7b82a3a39e5355adf308aec5a919fd9e2b5b69841747d77240c2c4e825eb3b91b2d27d8c08d82615bffa9fdad4288229c4ba34389e1fcd743078
   languageName: node
   linkType: hard
 
-"@empoleon/solid-remove-scroll@npm:0.0.4-0":
-  version: 0.0.4-0
-  resolution: "@empoleon/solid-remove-scroll@npm:0.0.4-0"
+"@empoleon/solid-remove-scroll@npm:0.0.2-0":
+  version: 0.0.2-0
+  resolution: "@empoleon/solid-remove-scroll@npm:0.0.2-0"
   dependencies:
-    solid-js: "npm:^1.9.7"
     solid-prevent-scroll: "npm:0.1.10"
-  checksum: 10c0/a72258c1834eb6e2a08041964ce27fc25851bc376da669515e2620c9674c72c10f7eba258e66459141e48f73d88dcdda31cabc7a3ee0dd0c78ababba96443a3f
+  checksum: 10c0/a173c98d29c1a9df262452613a9e3ab29e2bca8c5778b3ef750a59359b8dca934330458c152f3ccb352006c68e85c5c569bcef22510661f1f0dc3cad812fa26f
   languageName: node
   linkType: hard
 
-"@empoleon/solid-tiptap@npm:^1.0.0":
+"@empoleon/solid-tiptap@npm:1.0.0":
   version: 1.0.0
   resolution: "@empoleon/solid-tiptap@npm:1.0.0"
   dependencies:
@@ -1821,11 +1820,11 @@ __metadata:
   dependencies:
     "@empoleon/core": "workspace:*"
     "@empoleon/hooks": "workspace:*"
-    "@empoleon/store": "npm:8.0.0"
+    "@empoleon/store": "npm:7.0.0"
   languageName: unknown
   linkType: soft
 
-"@empoleon/store@npm:8.0.0, @empoleon/store@workspace:packages/@empoleon/store":
+"@empoleon/store@npm:7.0.0, @empoleon/store@workspace:packages/@empoleon/store":
   version: 0.0.0-use.local
   resolution: "@empoleon/store@workspace:packages/@empoleon/store"
   languageName: unknown
@@ -1837,7 +1836,7 @@ __metadata:
   dependencies:
     "@empoleon/core": "workspace:*"
     "@empoleon/hooks": "workspace:*"
-    "@empoleon/solid-tiptap": "npm:^1.0.0"
+    "@empoleon/solid-tiptap": "npm:1.0.0"
   languageName: unknown
   linkType: soft
 

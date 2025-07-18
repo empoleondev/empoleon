@@ -1,6 +1,6 @@
 {
   "name": "@empoleon/core",
-  "version": "8.0.0",
+  "version": "7.0.0",
   "description": "SolidJS components library focused on usability, accessibility and developer experience",
   "homepage": "https://empoleon.dev/",
   "license": "MIT",
@@ -43,12 +43,12 @@
     "directory": "packages/@empoleon/core"
   },
   "peerDependencies": {
-    "@empoleon/hooks": "workspace:*"
+    "@empoleon/hooks": "7.0.0"
   },
   "dependencies": {
-    "@empoleon/solid-floating-ui": "^0.0.4",
-    "@empoleon/solid-number-format": "^0.0.3",
-    "@empoleon/solid-remove-scroll": "0.0.4-0",
+    "@empoleon/solid-floating-ui": "0.0.4",
+    "@empoleon/solid-number-format": "0.0.3",
+    "@empoleon/solid-remove-scroll": "0.0.2-0",
     "@solid-primitives/presence": "0.1.1",
     "@solid-primitives/refs": "1.1.1",
     "@solid-primitives/resize-observer": "2.1.1",

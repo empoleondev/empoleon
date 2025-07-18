@@ -1,6 +1,6 @@
 {
   "name": "@empoleon/modals",
-  "version": "8.0.0",
+  "version": "7.0.0",
   "description": "Modals manager based on Empoleon components",
   "homepage": "https://empoleon.dev/x/modals/",
   "license": "MIT",
