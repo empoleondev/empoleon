@@ -4,7 +4,7 @@
   "description": "A library to generate 10 shades of color based on provided color value",
   "homepage": "https://empoleon.dev",
   "license": "MIT",
-  "author": "Vitaly Rtishchev <rtivital@gmail.com>",
+  "author": "Paul M",
   "keywords": [
     "frontend",
     "hooks",

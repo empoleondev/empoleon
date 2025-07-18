@@ -162,13 +162,16 @@ export const RichTextEditorLinkControl = factory<RichTextEditorLinkControlFactor
                 disabled={local.disableTooltips}
                 zIndex={10000}
               >
-                <UnstyledButton
-                  onClick={() => setExternal((e) => !e)}
-                  data-active={external || undefined}
-                  {...ctx.getStyles('linkEditorExternalControl', stylesApiProps)}
-                >
-                  <IconExternalLink style={{ width: rem(14), height: rem(14) }} />
-                </UnstyledButton>
+                {(props) => (
+                  <UnstyledButton
+                    onClick={() => setExternal((e) => !e)}
+                    data-active={external || undefined}
+                    {...ctx.getStyles('linkEditorExternalControl', stylesApiProps)}
+                    {...props}
+                  >
+                    <IconExternalLink style={{ width: rem(14), height: rem(14) }} />
+                  </UnstyledButton>
+                )}
               </Tooltip>
             }
           />

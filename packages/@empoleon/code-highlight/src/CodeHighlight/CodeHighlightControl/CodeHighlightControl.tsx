@@ -63,7 +63,7 @@ export const CodeHighlightControl = polymorphicFactory<CodeHighlightControlFacto
         transitionProps={{ duration: 0 }}
         withinPortal={false}
       >
-        {control}
+        {(props) => <span {...props}>{control}</span>}
       </Tooltip>
     );
   }

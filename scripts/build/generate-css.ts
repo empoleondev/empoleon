@@ -55,11 +55,11 @@ export async function generateCoreCSS() {
       file.endsWith('default-css-variables.css')
   );
 
-  fs.writeJsonSync(
-    getPath('apps/empoleon.dev/src/.docgen/css-exports.json'),
-    { modules: modules.map(transformFileName), global: global.map(transformFileName) },
-    { spaces: 2 }
-  );
+  // fs.writeJsonSync(
+  //   getPath('apps/empoleon.dev/src/.docgen/css-exports.json'),
+  //   { modules: modules.map(transformFileName), global: global.map(transformFileName) },
+  //   { spaces: 2 }
+  // );
 
   const outputFolder = getPath('packages/@empoleon/core/styles');
 

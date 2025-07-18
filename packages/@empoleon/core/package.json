@@ -1,10 +1,10 @@
 {
   "name": "@empoleon/core",
-  "version": "8.0.0-alpha.3",
+  "version": "8.0.0",
   "description": "SolidJS components library focused on usability, accessibility and developer experience",
   "homepage": "https://empoleon.dev/",
   "license": "MIT",
-  "author": "Vitaly Rtishchev <rtivital@gmail.com>",
+  "author": "Paul M",
   "keywords": [
     "components",
     "design",

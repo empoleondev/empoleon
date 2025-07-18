@@ -23,8 +23,10 @@ export async function getPackageBuildOrder(
     ...pkg.packageJson.dependencies,
     ...pkg.packageJson.devDependencies,
   })
-    .filter((dependency) => dependency.includes('@empoleon/') || dependency.includes('@empoleonx/'))
-    .map((dependency) => packages.find((pkgItem) => pkgItem.packageJson.name === dependency));
+    // .filter((dependency) => dependency.includes('@empoleon/') || dependency.includes('@empoleonx/'))
+    .filter((dependency) => dependency.includes('@empoleon/'))
+    .map((dependency) => packages.find((pkgItem) => pkgItem.packageJson.name === dependency))
+    .filter(Boolean) as Package[];
 
   if (dependencies.length === 0) {
     order[name] = 0;
