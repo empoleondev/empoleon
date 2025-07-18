@@ -1,0 +1,54 @@
+{
+  "name": "@empoleon/notifications",
+  "version": "8.0.0",
+  "description": "Empoleon notifications system",
+  "homepage": "https://empoleon.dev",
+  "license": "MIT",
+  "author": "Vitaly Rtishchev <rtivital@gmail.com>",
+  "keywords": [
+    "components",
+    "frontend",
+    "library",
+    "next",
+    "nextjs",
+    "notification",
+    "notification-manager",
+    "notification-system",
+    "react",
+    "ui",
+    "ui-kit"
+  ],
+  "sideEffects": [
+    "*.css"
+  ],
+  "main": "./cjs/index.cjs",
+  "module": "./esm/index.mjs",
+  "types": "./lib/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./lib/index.d.mts",
+        "default": "./esm/index.mjs"
+      },
+      "require": {
+        "types": "./lib/index.d.ts",
+        "default": "./cjs/index.cjs"
+      }
+    },
+    "./styles.css": "./styles.css",
+    "./styles.layer.css": "./styles.layer.css"
+  },
+  "repository": {
+    "url": "https://github.com/empoleondev/empoleon.git",
+    "type": "git",
+    "directory": "packages/@empoleon/notifications"
+  },
+  "dependencies": {
+    "@empoleon/store": "8.0.0",
+    "solid-transition-group": "0.3.0"
+  },
+  "devDependencies": {
+    "@empoleon/core": "workspace:*",
+    "@empoleon/hooks": "workspace:*"
+  }
+}

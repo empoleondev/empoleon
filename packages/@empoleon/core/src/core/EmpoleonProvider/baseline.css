@@ -1,0 +1,37 @@
+:root {
+  color-scheme: var(--empoleon-color-scheme);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+button,
+select {
+  text-transform: none;
+}
+
+body {
+  margin: 0;
+  font-family: var(--empoleon-font-family);
+  font-size: var(--empoleon-font-size-md);
+  line-height: var(--empoleon-line-height);
+  background-color: var(--empoleon-color-body);
+  color: var(--empoleon-color-text);
+
+  -webkit-font-smoothing: var(--empoleon-webkit-font-smoothing);
+  -moz-osx-font-smoothing: var(--empoleon-moz-font-smoothing);
+
+  @media screen and (max-device-width: em(500px)) {
+    -webkit-text-size-adjust: 100%;
+  }
+}

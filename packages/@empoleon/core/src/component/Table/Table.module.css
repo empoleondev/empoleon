@@ -1,0 +1,134 @@
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  line-height: var(--empoleon-line-height);
+  font-size: var(--empoleon-font-size-sm);
+  table-layout: var(--table-layout, auto);
+  caption-side: var(--table-caption-side, bottom);
+  border: none;
+
+  @mixin where-light {
+    --table-hover-color: var(--empoleon-color-gray-1);
+    --table-striped-color: var(--empoleon-color-gray-0);
+    --table-border-color: var(--empoleon-color-gray-3);
+  }
+
+  @mixin where-dark {
+    --table-hover-color: var(--empoleon-color-dark-5);
+    --table-striped-color: var(--empoleon-color-dark-6);
+    --table-border-color: var(--empoleon-color-dark-4);
+  }
+
+  &:where([data-with-table-border]) {
+    border: rem(1px) solid var(--table-border-color);
+  }
+
+  &:where([data-tabular-nums]) {
+    font-variant-numeric: tabular-nums;
+  }
+
+  &:where([data-variant='vertical']) :where(.th) {
+    font-weight: 500;
+
+    @mixin where-light {
+      background-color: var(--empoleon-color-gray-0);
+    }
+
+    @mixin where-dark {
+      background-color: var(--empoleon-color-dark-6);
+    }
+  }
+}
+
+.th {
+  text-align: left;
+
+  @mixin where-rtl {
+    text-align: right;
+  }
+}
+
+.tr {
+  border-bottom: none;
+  background-color: transparent;
+
+  @mixin hover {
+    &:where([data-hover]) {
+      background-color: var(--tr-hover-bg);
+    }
+  }
+
+  &:where([data-with-row-border]) {
+    border-bottom: rem(1px) solid var(--table-border-color);
+  }
+}
+
+.td,
+.th {
+  padding: var(--table-vertical-spacing) var(--table-horizontal-spacing, var(--empoleon-spacing-xs));
+
+  &:where([data-with-column-border]:not(:last-child)) {
+    border-inline-end: rem(1px) solid var(--table-border-color);
+  }
+}
+
+.tbody {
+  & > :where(tr) {
+    &:where([data-with-row-border]:last-of-type) {
+      border-bottom: none;
+    }
+
+    &:where([data-striped='odd']:nth-of-type(odd)) {
+      background-color: var(--table-striped-color);
+    }
+
+    &:where([data-striped='even']:nth-of-type(even)) {
+      background-color: var(--table-striped-color);
+    }
+
+    &[data-hover] {
+      --tr-hover-bg: var(--table-highlight-on-hover-color, var(--table-hover-color));
+    }
+  }
+}
+
+.thead {
+  top: var(--table-sticky-header-offset, 0);
+  z-index: 3;
+
+  &:where([data-sticky]) {
+    position: sticky;
+
+    & .th {
+      position: sticky;
+      top: var(--table-sticky-header-offset, 0);
+      background-color: var(--empoleon-color-body);
+    }
+  }
+}
+
+:where([data-with-table-border]) .thead[data-sticky] .th {
+  top: initial;
+}
+
+.caption {
+  color: var(--empoleon-color-dimmed);
+
+  &:where([data-side='top']) {
+    margin-bottom: var(--empoleon-spacing-xs);
+  }
+
+  &:where([data-side='bottom']) {
+    margin-top: var(--empoleon-spacing-xs);
+  }
+}
+
+.scrollContainer {
+  overflow-x: var(--table-overflow);
+}
+
+.scrollContainerInner {
+  min-width: var(--table-min-width);
+  max-height: var(--table-max-height);
+}

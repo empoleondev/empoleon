@@ -1,0 +1,54 @@
+.root {
+  --card-padding: var(--empoleon-spacing-md);
+
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: var(--card-padding);
+  color: var(--empoleon-color-text);
+
+  @mixin where-light {
+    background-color: var(--empoleon-color-white);
+  }
+
+  @mixin where-dark {
+    background-color: var(--empoleon-color-dark-6);
+  }
+}
+
+.section {
+  display: block;
+  margin-inline: calc(var(--card-padding) * -1);
+
+  &:where(:first-child) {
+    margin-top: calc(var(--card-padding) * -1);
+    border-top: none !important;
+  }
+
+  &:where(:last-child) {
+    margin-bottom: calc(var(--card-padding) * -1);
+    border-bottom: none !important;
+  }
+
+  &:where([data-inherit-padding]) {
+    padding-inline: var(--card-padding);
+  }
+
+  &:where([data-with-border]) {
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+  }
+
+  @mixin where-light {
+    border-color: var(--empoleon-color-gray-3);
+  }
+
+  @mixin where-dark {
+    border-color: var(--empoleon-color-dark-4);
+  }
+
+  & + & {
+    border-top: none !important;
+  }
+}

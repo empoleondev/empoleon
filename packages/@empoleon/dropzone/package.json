@@ -1,0 +1,53 @@
+{
+  "name": "@empoleon/dropzone",
+  "version": "8.0.0",
+  "description": "Dropzone component built with Empoleon theme and components",
+  "homepage": "https://empoleon.dev/x/dropzone/",
+  "license": "MIT",
+  "author": "Vitaly Rtishchev <rtivital@gmail.com>",
+  "keywords": [
+    "components",
+    "dragndrop",
+    "dropzone",
+    "frontend",
+    "library",
+    "next",
+    "nextjs",
+    "react",
+    "ui",
+    "ui-kit",
+    "upload"
+  ],
+  "sideEffects": [
+    "*.css"
+  ],
+  "main": "./cjs/index.cjs",
+  "module": "./esm/index.mjs",
+  "types": "./lib/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./lib/index.d.mts",
+        "default": "./esm/index.mjs"
+      },
+      "require": {
+        "types": "./lib/index.d.ts",
+        "default": "./cjs/index.cjs"
+      }
+    },
+    "./styles.css": "./styles.css",
+    "./styles.layer.css": "./styles.layer.css"
+  },
+  "repository": {
+    "url": "https://github.com/empoleondev/empoleon.git",
+    "type": "git",
+    "directory": "packages/@empoleon/dropzone"
+  },
+  "dependencies": {
+    "@empoleon/solid-dropzone": "^1.0.1"
+  },
+  "devDependencies": {
+    "@empoleon/core": "workspace:*",
+    "@empoleon/hooks": "workspace:*"
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "name": "@empoleon/core",
+  "version": "8.0.0-alpha.3",
+  "description": "SolidJS components library focused on usability, accessibility and developer experience",
+  "homepage": "https://empoleon.dev/",
+  "license": "MIT",
+  "author": "Vitaly Rtishchev <rtivital@gmail.com>",
+  "keywords": [
+    "components",
+    "design",
+    "frontend",
+    "library",
+    "next",
+    "nextjs",
+    "solidjs",
+    "ui",
+    "ui-kit"
+  ],
+  "sideEffects": [
+    "*.css"
+  ],
+  "main": "./cjs/index.cjs",
+  "module": "./esm/index.mjs",
+  "types": "./lib/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./lib/index.d.mts",
+        "default": "./esm/index.mjs"
+      },
+      "require": {
+        "types": "./lib/index.d.ts",
+        "default": "./cjs/index.cjs"
+      }
+    },
+    "./styles.css": "./styles.css",
+    "./styles.layer.css": "./styles.layer.css",
+    "./styles/*": "./styles/*"
+  },
+  "repository": {
+    "url": "https://github.com/empoleondev/empoleon.git",
+    "type": "git",
+    "directory": "packages/@empoleon/core"
+  },
+  "peerDependencies": {
+    "@empoleon/hooks": "workspace:*"
+  },
+  "dependencies": {
+    "@empoleon/solid-floating-ui": "^0.0.4",
+    "@empoleon/solid-number-format": "^0.0.3",
+    "@empoleon/solid-remove-scroll": "0.0.4-0",
+    "@solid-primitives/presence": "0.1.1",
+    "@solid-primitives/refs": "1.1.1",
+    "@solid-primitives/resize-observer": "2.1.1",
+    "@solid-primitives/utils": "6.3.1",
+    "clsx": "2.1.1",
+    "solid-textarea-autosize": "0.0.5",
+    "solid-transition-group": "0.3.0",
+    "type-fest": "4.27.0"
+  },
+  "devDependencies": {
+    "@empoleon/hooks": "workspace:*"
+  }
+}

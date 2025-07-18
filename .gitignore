@@ -1,0 +1,57 @@
+# os
+.DS_Store
+
+## yarn
+.yarn-integrity
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*
+
+# editor
+.idea/
+.vscode/
+.nova/
+.gitpod.yml
+
+# node
+node_modules/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# env
+.env.test
+.env*.local
+
+# build
+lib/
+cjs/
+esm/
+
+# typescript
+*.tsbuildinfo
+
+# project
+next-env.d.ts
+.eslintcache
+storybook-static
+.next
+packages/*/*/styles.css
+packages/*/*/styles.layer.css
+packages/@empoleon/core/styles
+.stylelintcache
+____test.*
+apps/help.empoleon.dev/out
+apps/empoleon.dev/components/___test.internal.tsx
+apps/empoleon.dev/.cache
+apps/empoleon.dev/out
+apps/empoleon.dev/.next
+apps/empoleon.dev/src/.docgen/
+.samples

@@ -1,0 +1,12 @@
+.yearsList {
+  border-collapse: collapse;
+  border-width: 0;
+}
+
+.yearsListCell {
+  padding: 0;
+
+  &:where([data-with-spacing]) {
+    padding: 0.5px;
+  }
+}

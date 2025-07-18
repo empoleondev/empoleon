@@ -1,0 +1,246 @@
+.root {
+  & :first-child {
+    margin-top: 0;
+  }
+
+  & :last-child {
+    margin-bottom: 0;
+  }
+
+  & :where(h1, h2, h3, h4, h5, h6) {
+    margin-bottom: var(--empoleon-spacing-xs);
+    text-wrap: var(--empoleon-heading-text-wrap);
+    font-family: var(--empoleon-font-family-headings);
+  }
+
+  & :where(h1) {
+    margin-top: calc(1.5 * var(--empoleon-spacing-xl));
+    font-size: var(--empoleon-h1-font-size);
+    line-height: var(--empoleon-h1-line-height);
+    font-weight: var(--empoleon-h1-font-weight);
+  }
+
+  & :where(h2) {
+    margin-top: var(--empoleon-spacing-xl);
+    font-size: var(--empoleon-h2-font-size);
+    line-height: var(--empoleon-h2-line-height);
+    font-weight: var(--empoleon-h2-font-weight);
+  }
+
+  & :where(h3) {
+    margin-top: calc(0.8 * var(--empoleon-spacing-xl));
+    font-size: var(--empoleon-h3-font-size);
+    line-height: var(--empoleon-h3-line-height);
+    font-weight: var(--empoleon-h3-font-weight);
+  }
+
+  & :where(h4) {
+    margin-top: calc(0.8 * var(--empoleon-spacing-xl));
+    font-size: var(--empoleon-h4-font-size);
+    line-height: var(--empoleon-h4-line-height);
+    font-weight: var(--empoleon-h4-font-weight);
+  }
+
+  & :where(h5) {
+    margin-top: calc(0.5 * var(--empoleon-spacing-xl));
+    font-size: var(--empoleon-h5-font-size);
+    line-height: var(--empoleon-h5-line-height);
+    font-weight: var(--empoleon-h5-font-weight);
+  }
+
+  & :where(h6) {
+    margin-top: calc(0.5 * var(--empoleon-spacing-xl));
+    font-size: var(--empoleon-h6-font-size);
+    line-height: var(--empoleon-h6-line-height);
+    font-weight: var(--empoleon-h6-font-weight);
+  }
+
+  & :where(img) {
+    max-width: 100%;
+    margin-bottom: var(--empoleon-spacing-xs);
+  }
+
+  & :where(p) {
+    margin-top: 0;
+    margin-bottom: var(--empoleon-spacing-lg);
+  }
+
+  & :where(mark) {
+    @mixin where-light {
+      background-color: var(--empoleon-color-yellow-2);
+      color: inherit;
+    }
+
+    @mixin where-dark {
+      background-color: var(--empoleon-color-yellow-5);
+      color: var(--empoleon-color-black);
+    }
+  }
+
+  & :where(a) {
+    color: var(--empoleon-color-anchor);
+    text-decoration: none;
+
+    @mixin hover {
+      text-decoration: underline;
+    }
+  }
+
+  & :where(hr) {
+    margin-top: var(--empoleon-spacing-md);
+    margin-bottom: var(--empoleon-spacing-md);
+    border: 0;
+    border-top: 1px solid;
+
+    @mixin where-light {
+      border-color: var(--empoleon-color-gray-3);
+    }
+
+    @mixin where-dark {
+      border-color: var(--empoleon-color-dark-3);
+    }
+  }
+
+  & :where(pre) {
+    padding: var(--empoleon-spacing-xs);
+    line-height: var(--empoleon-line-height);
+    margin: 0;
+    margin-top: var(--empoleon-spacing-md);
+    margin-bottom: var(--empoleon-spacing-md);
+    overflow-x: auto;
+    font-family: var(--empoleon-font-family-monospace);
+    font-size: var(--empoleon-font-size-xs);
+    border-radius: var(--empoleon-radius-sm);
+
+    @mixin where-light {
+      background-color: var(--empoleon-color-gray-0);
+    }
+
+    @mixin where-dark {
+      background-color: var(--empoleon-color-dark-8);
+    }
+
+    & :where(code) {
+      background-color: transparent;
+      padding: 0;
+      border-radius: 0;
+      color: inherit;
+      border: 0;
+    }
+  }
+
+  & :where(kbd) {
+    --kbd-fz: 12px;
+    --kbd-padding: 3px 5px;
+
+    font-family: var(--empoleon-font-family-monospace);
+    line-height: var(--empoleon-line-height);
+    font-weight: 700;
+    padding: var(--kbd-padding);
+    font-size: var(--kbd-fz);
+    border-radius: var(--empoleon-radius-sm);
+    border: 1px solid;
+    border-bottom-width: 3px;
+
+    @mixin where-light {
+      border-color: var(--empoleon-color-gray-3);
+      color: var(--empoleon-color-gray-7);
+      background-color: var(--empoleon-color-gray-0);
+    }
+
+    @mixin where-dark {
+      border-color: var(--empoleon-color-dark-3);
+      color: var(--empoleon-color-dark-0);
+      background-color: var(--empoleon-color-dark-5);
+    }
+  }
+
+  & :where(code) {
+    line-height: var(--empoleon-line-height);
+    padding: 1px 5px;
+    border-radius: var(--empoleon-radius-sm);
+    font-family: var(--empoleon-font-family-monospace);
+    font-size: var(--empoleon-font-size-xs);
+
+    @mixin where-light {
+      background-color: var(--empoleon-color-gray-0);
+      color: var(--empoleon-color-black);
+    }
+
+    @mixin where-dark {
+      background-color: var(--empoleon-color-dark-5);
+      color: var(--empoleon-color-white);
+    }
+  }
+
+  & :where(ul, ol):not([data-type='taskList']) {
+    margin-bottom: var(--empoleon-spacing-md);
+    padding-inline-start: var(--empoleon-spacing-xl);
+    list-style-position: outside;
+  }
+
+  & :where(table) {
+    width: 100%;
+    border-collapse: collapse;
+    caption-side: bottom;
+    margin-bottom: var(--empoleon-spacing-md);
+
+    @mixin where-light {
+      --table-border-color: var(--empoleon-color-gray-3);
+    }
+
+    @mixin where-dark {
+      --table-border-color: var(--empoleon-color-dark-4);
+    }
+
+    & :where(caption) {
+      margin-top: var(--empoleon-spacing-xs);
+      font-size: var(--empoleon-font-size-sm);
+      color: var(--empoleon-color-dimmed);
+    }
+
+    & :where(th) {
+      text-align: left;
+      font-weight: bold;
+      font-size: var(--empoleon-font-size-sm);
+      padding: var(--empoleon-spacing-xs) var(--empoleon-spacing-sm);
+    }
+
+    & :where(thead th) {
+      border-bottom: 1px solid;
+      border-color: var(--table-border-color);
+    }
+
+    & :where(tfoot th) {
+      border-top: 1px solid;
+      border-color: var(--table-border-color);
+    }
+
+    & :where(td) {
+      padding: var(--empoleon-spacing-xs) var(--empoleon-spacing-sm);
+      border-bottom: 1px solid;
+      border-color: var(--table-border-color);
+      font-size: var(--empoleon-font-size-sm);
+    }
+
+    & :where(tr:last-of-type td) {
+      border-bottom: 0;
+    }
+  }
+
+  & :where(blockquote) {
+    font-size: var(--empoleon-font-size-lg);
+    line-height: var(--empoleon-line-height);
+    margin: var(--empoleon-spacing-md) 0;
+    border-radius: var(--empoleon-radius-sm);
+    padding: var(--empoleon-spacing-md) var(--empoleon-spacing-lg);
+
+    @mixin where-light {
+      background-color: var(--empoleon-color-gray-0);
+    }
+
+    @mixin where-dark {
+      background-color: var(--empoleon-color-dark-8);
+    }
+  }
+}

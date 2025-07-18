@@ -1,0 +1,23 @@
+name: Report an issue with empoleon.dev or help.empoleon.dev websites
+description: Help us find and fix mistakes, bad wording, etc.
+labels: 'review required'
+body:
+  - type: input
+    id: link
+    attributes:
+      label: Link to the page where something is not right
+      placeholder: https://empoleon.dev/some/page
+  - type: textarea
+    id: quote
+    attributes:
+      label: What is wrong?
+      placeholder: Describe the issue
+    validations:
+      required: true
+  - type: checkboxes
+    id: self-service
+    attributes:
+      label: Self-service
+      description: You are welcome to submit a fix for this issue after it is reviewed.
+      options:
+        - label: I would be willing to implement a fix for this issue

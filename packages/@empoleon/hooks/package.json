@@ -1,0 +1,42 @@
+{
+  "name": "@empoleon/hooks",
+  "version": "8.0.0-alpha.3",
+  "description": "A collection of 50+ hooks for state and UI management",
+  "homepage": "https://empoleon.dev",
+  "license": "MIT",
+  "author": "Vitaly Rtishchev <rtivital@gmail.com>",
+  "keywords": [
+    "frontend",
+    "hooks",
+    "library",
+    "next",
+    "nextjs",
+    "solid",
+    "state"
+  ],
+  "sideEffects": false,
+  "main": "./cjs/index.cjs",
+  "module": "./esm/index.mjs",
+  "types": "./lib/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./lib/index.d.mts",
+        "default": "./esm/index.mjs"
+      },
+      "require": {
+        "types": "./lib/index.d.ts",
+        "default": "./cjs/index.cjs"
+      }
+    }
+  },
+  "repository": {
+    "url": "https://github.com/empoleondev/empoleon.git",
+    "type": "git",
+    "directory": "packages/@empoleon/hooks"
+  },
+  "dependencies": {
+    "@solid-primitives/debounce": "1.3.0",
+    "@solid-primitives/refs": "1.1.1"
+  }
+}

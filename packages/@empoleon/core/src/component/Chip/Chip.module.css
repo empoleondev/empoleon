@@ -1,0 +1,169 @@
+.root {
+  --chip-size-xs: 23px;
+  --chip-size-sm: 28px;
+  --chip-size-md: 32px;
+  --chip-size-lg: 36px;
+  --chip-size-xl: 40px;
+
+  --chip-icon-size-xs: 10px;
+  --chip-icon-size-sm: 12px;
+  --chip-icon-size-md: 14px;
+  --chip-icon-size-lg: 16px;
+  --chip-icon-size-xl: 18px;
+
+  --chip-padding-xs: 16px;
+  --chip-padding-sm: 20px;
+  --chip-padding-md: 24px;
+  --chip-padding-lg: 28px;
+  --chip-padding-xl: 32px;
+
+  --chip-checked-padding-xs: 7.5px;
+  --chip-checked-padding-sm: 10px;
+  --chip-checked-padding-md: 11.7px;
+  --chip-checked-padding-lg: 13.5px;
+  --chip-checked-padding-xl: 15.7px;
+
+  --chip-spacing-xs: 10px;
+  --chip-spacing-sm: 12px;
+  --chip-spacing-md: 16px;
+  --chip-spacing-lg: 20px;
+  --chip-spacing-xl: 22px;
+
+  --chip-size: var(--chip-size-sm);
+  --chip-icon-size: var(--chip-icon-size-sm);
+  --chip-padding: var(--chip-padding-sm);
+  --chip-spacing: var(--chip-spacing-sm);
+  --chip-checked-padding: var(--chip-checked-padding-sm);
+  --chip-bg: var(--empoleon-primary-color-filled);
+  --chip-hover: var(--empoleon-primary-color-filled-hover);
+  --chip-color: var(--empoleon-color-white);
+  --chip-bd: 1px solid transparent;
+}
+
+.label {
+  display: inline-flex;
+  align-items: center;
+  user-select: none;
+  border-radius: var(--chip-radius, 1000rem);
+  height: var(--chip-size);
+  font-size: var(--chip-fz, var(--empoleon-font-size-sm));
+  line-height: calc(var(--chip-size) - rem(2px));
+  padding-inline: var(--chip-padding);
+  cursor: pointer;
+  white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+  border: 1px solid transparent;
+  color: var(--empoleon-color-text);
+
+  &:where([data-checked]) {
+    padding: var(--chip-checked-padding);
+  }
+
+  &:where([data-disabled]) {
+    cursor: not-allowed;
+
+    @mixin where-light {
+      background-color: var(--empoleon-color-gray-2);
+      color: var(--empoleon-color-gray-5);
+    }
+
+    @mixin where-dark {
+      background-color: var(--empoleon-color-dark-6);
+      color: var(--empoleon-color-dark-3);
+    }
+  }
+}
+
+.label--outline:not([data-disabled]) {
+  @mixin where-light {
+    background-color: var(--empoleon-color-white);
+    border: 1px solid var(--empoleon-color-gray-3);
+  }
+
+  @mixin where-dark {
+    background-color: var(--empoleon-color-dark-6);
+    border: 1px solid var(--empoleon-color-dark-4);
+  }
+
+  @mixin hover {
+    @mixin where-light {
+      background-color: var(--empoleon-color-gray-0);
+    }
+
+    @mixin where-dark {
+      background-color: var(--empoleon-color-dark-5);
+    }
+  }
+
+  &:where([data-checked]) {
+    --chip-icon-color: var(--chip-color);
+    border: var(--chip-bd);
+
+    @mixin hover {
+      background-color: var(--chip-hover);
+    }
+  }
+}
+
+.label--filled:not([data-disabled]),
+.label--light:not([data-disabled]) {
+  border: 1px solid transparent;
+  color: var(--empoleon-color-text);
+
+  @mixin where-light {
+    background-color: var(--empoleon-color-gray-1);
+  }
+
+  @mixin where-dark {
+    background-color: var(--empoleon-color-dark-5);
+  }
+
+  @mixin hover {
+    @mixin where-light {
+      background-color: var(--empoleon-color-gray-2);
+    }
+
+    @mixin where-dark {
+      background-color: var(--empoleon-color-dark-4);
+    }
+  }
+
+  &:where([data-checked]) {
+    --chip-icon-color: var(--chip-color);
+    color: var(--chip-color);
+    background-color: var(--chip-bg);
+
+    @mixin hover {
+      background-color: var(--chip-hover);
+    }
+  }
+}
+
+.iconWrapper {
+  width: calc(var(--chip-icon-size) + (var(--chip-spacing) / 1.5));
+  max-width: calc(var(--chip-icon-size) + (var(--chip-spacing) / 1.5));
+  height: var(--chip-icon-size);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.checkIcon {
+  width: var(--chip-icon-size);
+  height: var(--chip-icon-size);
+  display: block;
+  color: var(--chip-icon-color, inherit);
+}
+
+.input {
+  width: 0;
+  height: 0;
+  padding: 0;
+  opacity: 0;
+  margin: 0;
+
+  &:focus-visible + .label {
+    outline: 2px solid var(--empoleon-primary-color-filled);
+    outline-offset: 2px;
+  }
+}

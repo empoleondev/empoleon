@@ -1,0 +1,121 @@
+.root {
+  --pill-fz-xs: 10px;
+  --pill-fz-sm: 12px;
+  --pill-fz-md: 14px;
+  --pill-fz-lg: 16px;
+  --pill-fz-xl: 18px;
+
+  --pill-height-xs: 18px;
+  --pill-height-sm: 22px;
+  --pill-height-md: 25px;
+  --pill-height-lg: 28px;
+  --pill-height-xl: 32px;
+
+  --pill-fz: var(--pill-fz-sm);
+  --pill-height: var(--pill-height-sm);
+
+  font-size: var(--pill-fz);
+  flex: 0;
+  height: var(--pill-height);
+  padding-inline: 0.8em;
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--pill-radius, 1000rem);
+  line-height: 1;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-user-select: none;
+  max-width: 100%;
+
+  @mixin where-dark {
+    background-color: var(--empoleon-color-dark-7);
+    color: var(--empoleon-color-dark-0);
+  }
+
+  @mixin where-light {
+    color: var(--empoleon-color-black);
+  }
+
+  &:where([data-with-remove]:not(:has(button:disabled))) {
+    padding-inline-end: 0;
+  }
+
+  &:where([data-disabled], :has(button:disabled)) {
+    cursor: not-allowed;
+  }
+}
+
+.root--default {
+  @mixin where-light {
+    background-color: var(--empoleon-color-gray-1);
+
+    &:where([data-disabled], :has(button:disabled)) {
+      background-color: var(--empoleon-color-gray-3);
+    }
+  }
+}
+
+.root--contrast {
+  @mixin where-light {
+    background-color: var(--empoleon-color-white);
+
+    &:where([data-disabled], :has(button:disabled)) {
+      background-color: var(--empoleon-color-gray-3);
+    }
+  }
+}
+
+.label {
+  cursor: inherit;
+  overflow: hidden;
+  height: 100%;
+  line-height: var(--pill-height);
+  text-overflow: ellipsis;
+}
+
+.remove {
+  color: inherit;
+  font-size: inherit;
+  height: 100%;
+  min-height: unset;
+  min-width: 2em;
+  width: unset;
+  border-radius: 0;
+  padding-inline-start: 0.1em;
+  padding-inline-end: 0.3em;
+  flex: 0;
+  border-end-end-radius: var(--pill-radius, 50%);
+  border-start-end-radius: var(--pill-radius, 50%);
+
+  .root[data-disabled] > &,
+  &:disabled {
+    display: none;
+    background-color: transparent;
+    width: 0.8em;
+    min-width: 0.8em;
+    padding: 0;
+    cursor: not-allowed;
+
+    & > svg {
+      display: none;
+    }
+  }
+
+  & > svg {
+    pointer-events: none;
+  }
+}
+
+.group {
+  --pg-gap-xs: 6px;
+  --pg-gap-sm: 8px;
+  --pg-gap-md: 10px;
+  --pg-gap-lg: 12px;
+  --pg-gap-xl: 12px;
+  --pg-gap: var(--pg-gap-sm);
+
+  display: flex;
+  align-items: center;
+  gap: var(--pg-gap);
+  flex-wrap: wrap;
+}

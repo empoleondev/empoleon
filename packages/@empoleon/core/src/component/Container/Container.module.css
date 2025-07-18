@@ -1,0 +1,16 @@
+.root {
+  --container-size-xs: 540px;
+  --container-size-sm: 720px;
+  --container-size-md: 960px;
+  --container-size-lg: 1140px;
+  --container-size-xl: 1320px;
+  --container-size: var(--container-size-md);
+
+  max-width: var(--container-size);
+  padding-inline: var(--empoleon-spacing-md);
+  margin-inline: auto;
+
+  &:where([data-fluid]) {
+    max-width: 100%;
+  }
+}

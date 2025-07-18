@@ -1,0 +1,54 @@
+{
+  "name": "@empoleon/dates",
+  "version": "8.0.0",
+  "description": "Calendars, date and time pickers based on Empoleon components",
+  "homepage": "https://empoleon.dev/dates/getting-started/",
+  "license": "MIT",
+  "author": "Vitaly Rtishchev <rtivital@gmail.com>",
+  "keywords": [
+    "calendar",
+    "components",
+    "date",
+    "frontend",
+    "library",
+    "next",
+    "nextjs",
+    "picker",
+    "react",
+    "time",
+    "ui",
+    "ui-kit"
+  ],
+  "sideEffects": [
+    "*.css"
+  ],
+  "main": "./cjs/index.cjs",
+  "module": "./esm/index.mjs",
+  "types": "./lib/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./lib/index.d.mts",
+        "default": "./esm/index.mjs"
+      },
+      "require": {
+        "types": "./lib/index.d.ts",
+        "default": "./cjs/index.cjs"
+      }
+    },
+    "./styles.css": "./styles.css",
+    "./styles.layer.css": "./styles.layer.css"
+  },
+  "repository": {
+    "url": "https://github.com/empoleondev/empoleon.git",
+    "type": "git",
+    "directory": "packages/@empoleon/dates"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1"
+  },
+  "devDependencies": {
+    "@empoleon/core": "workspace:*",
+    "@empoleon/hooks": "workspace:*"
+  }
+}

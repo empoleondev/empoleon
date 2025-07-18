@@ -1,0 +1,95 @@
+name: Report an issue with @empoleon/* or @empoleonx/* scoped package
+description: Use this template to report issues with the library. To ask questions or to suggest new features, use GitHub discussions instead
+body:
+  - type: checkboxes
+    id: dependencies
+    attributes:
+      label: Dependencies check up
+      description: Before submitting an issue please make sure that you use latest version of all @empoleon/* packages.
+      options:
+        - label: I have verified that I use latest version of all @empoleon/* packages
+          required: true
+  - type: input
+    id: version
+    attributes:
+      placeholder: 0.0.0
+      label: What version of @empoleon/* packages do you have in package.json?
+    validations:
+      required: true
+  - type: dropdown
+    id: package
+    attributes:
+      label: What package has an issue?
+      options:
+        - '@empoleon/core'
+        - '@empoleon/hooks'
+        - '@empoleon/dates'
+        - '@empoleon/charts'
+        - '@empoleon/form'
+        - '@empoleon/notifications'
+        - '@empoleon/tiptap'
+        - '@empoleon/code-highlight'
+        - '@empoleon/modals'
+        - '@empoleon/dropzone'
+        - '@empoleon/spotlight'
+        - '@empoleon/nprogress'
+        - '@empoleon/carousel'
+        - '@empoleon/colors-generator'
+        - '@empoleon/store'
+        - '@empoleon/vanilla-extract'
+        - '@empoleonx/empoleon-logo'
+        - '@empoleonx/demo'
+        - '@empoleonx/dev-icons'
+        - '@empoleonx/empoleon-header'
+        - '@empoleonx/empoleon-meta'
+    validations:
+      required: true
+
+  - type: dropdown
+    id: framework
+    attributes:
+      label: What framework do you use?
+      options:
+        - 'Next.js'
+        - 'Vite'
+        - 'React Router'
+        - 'Gatsby'
+        - 'Redwood'
+        - 'create-react-app (CRA)'
+        - 'Other, I will specify in the bug description'
+    validations:
+      required: true
+  - type: dropdown
+    id: browser
+    attributes:
+      label: In which browsers you can reproduce the issue?
+      options:
+        - 'All'
+        - 'Chrome'
+        - 'Safari'
+        - 'Firefox'
+        - 'Other, I will specify in the bug description'
+        - 'Not applicable – issue is not related to the browser'
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the bug
+      placeholder: A clear and concise description of what the bug is and how to reproduce it
+    validations:
+      required: true
+  - type: input
+    id: link
+    attributes:
+      label: If possible, include a link to a codesandbox with a minimal reproduction
+      description: Codesandbox template – https://codesandbox.io/p/sandbox/empoleon-react-template-q4dd5d. Note that issues that cannot be reproduced by maintainers will be closed.
+  - type: textarea
+    id: possibleFix
+    attributes:
+      label: Possible fix
+  - type: checkboxes
+    id: self-service
+    attributes:
+      label: Self-service
+      description: You are welcome to contribute to the library, if you are willing to implement a fix for this issue, please check the box below. You can find contribution guide here – https://empoleon.dev/contribute/
+      options:
+        - label: I would be willing to implement a fix for this issue

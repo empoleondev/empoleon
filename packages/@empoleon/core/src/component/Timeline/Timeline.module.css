@@ -1,0 +1,177 @@
+.root {
+  --offset: calc(var(--tl-bullet-size) / 2 + var(--tl-line-width) / 2);
+  --tl-bullet-size: 20px;
+  --tl-line-width: 4px;
+  --tl-radius: 1000px;
+  --tl-color: var(--empoleon-primary-color-filled);
+
+  &:where([data-align='left']) {
+    padding-inline-start: var(--offset);
+  }
+
+  &:where([data-align='right']) {
+    padding-inline-end: var(--offset);
+  }
+}
+
+.itemTitle {
+  font-weight: 500;
+  line-height: 1;
+  margin-bottom: calc(var(--empoleon-spacing-xs) / 2);
+}
+
+.item {
+  --item-border: var(--tl-line-width) var(--tli-border-style, solid) var(--item-border-color);
+
+  position: relative;
+  color: var(--empoleon-color-text);
+
+  &::before {
+    content: '';
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: var(--timeline-line-left, 0);
+    right: var(--timeline-line-right, 0);
+    bottom: calc(var(--empoleon-spacing-xl) * -1);
+    border-inline-start: var(--item-border);
+    display: var(--timeline-line-display, none);
+
+    .root[data-align='left'] & {
+      --timeline-line-left: calc(var(--tl-line-width) * -1);
+      --timeline-line-right: auto;
+
+      @mixin rtl {
+        --timeline-line-left: auto;
+        --timeline-line-right: calc(var(--tl-line-width) * -1);
+      }
+    }
+
+    .root[data-align='right'] & {
+      --timeline-line-left: auto;
+      --timeline-line-right: calc(var(--tl-line-width) * -1);
+
+      @mixin rtl {
+        --timeline-line-left: calc(var(--tl-line-width) * -1);
+        --timeline-line-right: auto;
+      }
+    }
+  }
+
+  .root:where([data-align='left']) & {
+    padding-inline-start: var(--offset);
+    text-align: left;
+  }
+
+  .root:where([data-align='right']) & {
+    padding-inline-end: var(--offset);
+    text-align: right;
+  }
+
+  @mixin where-light {
+    --item-border-color: var(--empoleon-color-gray-3);
+  }
+
+  @mixin where-dark {
+    --item-border-color: var(--empoleon-color-dark-4);
+  }
+
+  &:where([data-line-active]) {
+    &::before {
+      border-color: var(--tli-color, var(--tl-color));
+    }
+  }
+
+  &:where(:not(:last-of-type)) {
+    --timeline-line-display: block;
+  }
+
+  &:where(:not(:first-of-type)) {
+    margin-top: var(--empoleon-spacing-xl);
+  }
+}
+
+.itemBullet {
+  width: var(--tl-bullet-size);
+  height: var(--tl-bullet-size);
+  border-radius: var(--tli-radius, var(--tl-radius));
+  border: var(--tl-line-width) solid;
+  background-color: var(--empoleon-color-body);
+  position: absolute;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--empoleon-color-text);
+
+  @mixin where-light {
+    border-color: var(--empoleon-color-gray-3);
+  }
+
+  @mixin where-dark {
+    border-color: var(--empoleon-color-dark-4);
+  }
+
+  .root:where([data-align='left']) & {
+    left: calc((var(--tl-bullet-size) / 2 + var(--tl-line-width) / 2) * -1);
+    right: auto;
+
+    @mixin where-rtl {
+      left: auto;
+      right: calc((var(--tl-bullet-size) / 2 + var(--tl-line-width) / 2) * -1);
+    }
+  }
+
+  .root:where([data-align='right']) & {
+    left: auto;
+    right: calc((var(--tl-bullet-size) / 2 + var(--tl-line-width) / 2) * -1);
+
+    @mixin where-rtl {
+      left: calc((var(--tl-bullet-size) / 2 + var(--tl-line-width) / 2) * -1);
+      right: auto;
+    }
+  }
+
+  &:where([data-with-child]) {
+    border-width: var(--tl-line-width);
+
+    @mixin where-light {
+      background-color: var(--empoleon-color-gray-3);
+    }
+
+    @mixin where-dark {
+      background-color: var(--empoleon-color-dark-4);
+    }
+  }
+
+  &:where([data-active]) {
+    border-color: var(--tli-color, var(--tl-color));
+    background-color: var(--empoleon-color-white);
+    color: var(--tl-icon-color, var(--empoleon-color-white));
+
+    &:where([data-with-child]) {
+      background-color: var(--tli-color, var(--tl-color));
+      color: var(--tl-icon-color, var(--empoleon-color-white));
+    }
+  }
+}
+
+.itemBody {
+  .root:where([data-align='left']) & {
+    padding-inline-start: var(--offset);
+    text-align: left;
+
+    @mixin where-rtl {
+      text-align: right;
+    }
+  }
+
+  .root:where([data-align='right']) & {
+    padding-inline-end: var(--offset);
+    text-align: right;
+
+    @mixin where-rtl {
+      text-align: left;
+    }
+  }
+}

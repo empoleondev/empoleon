@@ -1,0 +1,8 @@
+.input {
+  cursor: pointer;
+  line-height: unset;
+
+  &:where([data-read-only]) {
+    cursor: default;
+  }
+}

@@ -1,0 +1,56 @@
+[data-respect-reduced-motion] {
+  @media (prefers-reduced-motion: reduce) {
+    [data-reduce-motion] {
+      transition: none;
+      animation: none;
+    }
+  }
+}
+
+.empoleon-light-hidden {
+  @mixin light {
+    display: none;
+  }
+}
+
+.empoleon-dark-hidden {
+  @mixin dark {
+    display: none;
+  }
+}
+
+.empoleon-focus-auto {
+  &:focus-visible {
+    outline: 2px solid var(--empoleon-primary-color-filled);
+    outline-offset: 2px;
+  }
+}
+
+.empoleon-focus-always {
+  &:focus {
+    outline: 2px solid var(--empoleon-primary-color-filled);
+    outline-offset: 2px;
+  }
+}
+
+.empoleon-focus-never {
+  &:focus {
+    outline: none;
+  }
+}
+
+.empoleon-active {
+  &:active {
+    transform: translateY(rem(1px));
+  }
+
+  fieldset:disabled &:active {
+    transform: none;
+  }
+}
+
+.empoleon-rotate-rtl {
+  @mixin where-rtl {
+    transform: rotate(180deg);
+  }
+}

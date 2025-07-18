@@ -1,0 +1,42 @@
+{
+  "name": "@empoleon/colors-generator",
+  "version": "8.0.0",
+  "description": "A library to generate 10 shades of color based on provided color value",
+  "homepage": "https://empoleon.dev",
+  "license": "MIT",
+  "author": "Vitaly Rtishchev <rtivital@gmail.com>",
+  "keywords": [
+    "frontend",
+    "hooks",
+    "library",
+    "next",
+    "nextjs",
+    "react",
+    "react-hooks",
+    "state"
+  ],
+  "sideEffects": false,
+  "main": "./cjs/index.cjs",
+  "module": "./esm/index.mjs",
+  "types": "./lib/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./lib/index.d.mts",
+        "default": "./esm/index.mjs"
+      },
+      "require": {
+        "types": "./lib/index.d.ts",
+        "default": "./cjs/index.cjs"
+      }
+    }
+  },
+  "repository": {
+    "url": "https://github.com/empoleondev/empoleon.git",
+    "type": "git",
+    "directory": "packages/@empoleon/colors-generator"
+  },
+  "peerDependencies": {
+    "chroma-js": ">=2.4.2"
+  }
+}

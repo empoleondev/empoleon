@@ -1,0 +1,27 @@
+.root {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.breadcrumb {
+  line-height: 1;
+  white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.separator {
+  margin-inline: var(--bc-separator-margin, var(--empoleon-spacing-xs));
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @mixin where-light {
+    color: var(--empoleon-color-gray-7);
+  }
+
+  @mixin where-dark {
+    color: var(--empoleon-color-dark-2);
+  }
+}

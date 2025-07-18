@@ -1,0 +1,21 @@
+.root {
+  font-family: var(--empoleon-font-family-monospace);
+  line-height: var(--empoleon-line-height);
+  padding: 2px calc(var(--empoleon-spacing-xs) / 2);
+  border-radius: var(--empoleon-radius-sm);
+  font-size: var(--empoleon-font-size-xs);
+  margin: 0;
+  overflow: auto;
+
+  @mixin where-light {
+    background-color: var(--code-bg, var(--empoleon-color-gray-0));
+  }
+
+  @mixin where-dark {
+    background-color: var(--code-bg, var(--empoleon-color-dark-6));
+  }
+
+  &[data-block] {
+    padding: var(--empoleon-spacing-xs);
+  }
+}

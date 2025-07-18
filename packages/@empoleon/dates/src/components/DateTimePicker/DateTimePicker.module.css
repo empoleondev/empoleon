@@ -1,0 +1,10 @@
+.timeWrapper {
+  display: flex;
+  align-items: stretch;
+  margin-top: var(--empoleon-spacing-md);
+}
+
+.timeInput {
+  flex: 1;
+  margin-inline-end: var(--empoleon-spacing-md);
+}

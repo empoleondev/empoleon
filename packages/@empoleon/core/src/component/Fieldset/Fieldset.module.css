@@ -1,0 +1,49 @@
+.root {
+  padding: var(--empoleon-spacing-lg);
+  padding-top: var(--empoleon-spacing-xs);
+  border-radius: var(--fieldset-radius, var(--empoleon-radius-default));
+  min-inline-size: auto;
+}
+
+.root--default {
+  border: 1px solid;
+
+  @mixin where-light {
+    border-color: var(--empoleon-color-gray-3);
+    background-color: var(--empoleon-color-white);
+  }
+
+  @mixin where-dark {
+    border-color: var(--empoleon-color-dark-4);
+    background-color: var(--empoleon-color-dark-7);
+  }
+}
+
+.root--filled {
+  border: 1px solid;
+
+  @mixin where-light {
+    border-color: var(--empoleon-color-gray-3);
+    background-color: var(--empoleon-color-gray-0);
+  }
+
+  @mixin where-dark {
+    border-color: var(--empoleon-color-dark-4);
+    background-color: var(--empoleon-color-dark-6);
+  }
+}
+
+.root--unstyled {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+}
+
+.legend {
+  font-size: var(--empoleon-font-size-sm);
+}
+
+.legend--unstyled {
+  padding: 0;
+  margin-bottom: var(--empoleon-spacing-sm);
+}

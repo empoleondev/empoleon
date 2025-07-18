@@ -1,0 +1,33 @@
+.control {
+  text-align: center;
+  padding-inline: 1em;
+  padding-block: 0.25em;
+  border: 1px solid var(--empoleon-color-default-border);
+  background-color: var(--empoleon-color-default);
+  color: var(--empoleon-color-default-color);
+  border-radius: var(--time-grid-radius, var(--empoleon-radius-default));
+  font-size: var(--time-grid-fz, var(--empoleon-font-size-sm));
+
+  @mixin hover {
+    &:where(:not([data-disabled])) {
+      background-color: var(--empoleon-color-default-hover);
+    }
+  }
+
+  &:where([data-active]) {
+    background-color: var(--empoleon-primary-color-filled);
+    color: var(--empoleon-color-white);
+    border-color: transparent;
+
+    @mixin hover {
+      &:where(:not([data-disabled])) {
+        background-color: var(--empoleon-primary-color-filled-hover);
+      }
+    }
+  }
+
+  &:where(:disabled, [data-disabled]) {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}

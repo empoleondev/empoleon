@@ -1,0 +1,34 @@
+.tooltip {
+  --tooltip-radius: var(--empoleon-radius-default);
+
+  position: absolute;
+  padding: calc(var(--empoleon-spacing-xs) / 2) var(--empoleon-spacing-xs);
+  pointer-events: none;
+  font-size: var(--empoleon-font-size-sm);
+  white-space: nowrap;
+  border-radius: var(--tooltip-radius);
+
+  @mixin where-light {
+    background-color: var(--tooltip-bg, var(--empoleon-color-gray-9));
+    color: var(--tooltip-color, var(--empoleon-color-white));
+  }
+
+  @mixin where-dark {
+    background-color: var(--tooltip-bg, var(--empoleon-color-gray-2));
+    color: var(--tooltip-color, var(--empoleon-color-black));
+  }
+
+  &:where([data-multiline]) {
+    white-space: normal;
+  }
+
+  &:where([data-fixed]) {
+    position: fixed;
+  }
+}
+
+.arrow {
+  background-color: inherit;
+  border: 0;
+  z-index: 1;
+}

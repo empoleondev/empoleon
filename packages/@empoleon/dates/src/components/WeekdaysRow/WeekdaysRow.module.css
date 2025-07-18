@@ -1,0 +1,7 @@
+.weekday {
+  color: var(--empoleon-color-dimmed);
+  font-weight: normal;
+  font-size: var(--wr-fz, var(--empoleon-font-size-sm));
+  text-transform: capitalize;
+  padding-bottom: calc(var(--wr-spacing, var(--empoleon-spacing-sm)) / 2);
+}
