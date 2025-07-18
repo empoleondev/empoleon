@@ -1,6 +1,15 @@
-# Empoleon
-
-This is a SolidJS fork of the popular components library Mantine by Vitaly Rtishchev.
+<div align="center">
+  <a href="https://github.com/empoleondev/empoleon">
+    <img src="./images/logo.png" alt="Logo">
+  </a>
+  <h3 align="center">Empoleon</h3>
+  <p align="center">
+    This is a SolidJS fork of the popular components library Mantine by Vitaly Rtishchev.
+  </p>
+  <p align="center">
+    <i>Push the envelope, watch it bend.</i>
+  </p>
+</div>
 
 ## Notes
 
