@@ -1,6 +1,6 @@
 {
   "name": "@empoleon/colors-generator",
-  "version": "7.0.0",
+  "version": "8.0.0",
   "description": "A library to generate 10 shades of color based on provided color value",
   "homepage": "https://empoleon.dev",
   "license": "MIT",

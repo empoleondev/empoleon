@@ -1,6 +1,6 @@
 {
   "name": "@empoleon/nprogress",
-  "version": "7.0.0",
+  "version": "8.0.0",
   "description": "Navigation progress bar",
   "homepage": "https://empoleon.dev/x/nprogress/",
   "license": "MIT",
@@ -43,7 +43,7 @@
     "directory": "packages/@empoleon/nprogress"
   },
   "dependencies": {
-    "@empoleon/store": "7.0.0"
+    "@empoleon/store": "8.0.0"
   },
   "devDependencies": {
     "@empoleon/core": "workspace:*",

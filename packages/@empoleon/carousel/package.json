@@ -1,6 +1,6 @@
 {
   "name": "@empoleon/carousel",
-  "version": "7.0.0",
+  "version": "8.0.0",
   "description": "Embla based carousel",
   "homepage": "https://empoleon.dev/x/carousel/",
   "license": "MIT",
@@ -44,8 +44,8 @@
     "directory": "packages/@empoleon/carousel"
   },
   "peerDependencies": {
-    "@empoleon/core": "7.0.0",
-    "@empoleon/hooks": "7.0.0",
+    "@empoleon/core": "8.0.0",
+    "@empoleon/hooks": "8.0.0",
     "embla-carousel": ">=8.0.0",
     "embla-carousel-solid": ">=8.0.0"
   }

@@ -1,6 +1,6 @@
 {
   "name": "@empoleon/core",
-  "version": "7.0.0",
+  "version": "8.0.0",
   "description": "SolidJS components library focused on usability, accessibility and developer experience",
   "homepage": "https://empoleon.dev/",
   "license": "MIT",
@@ -43,7 +43,7 @@
     "directory": "packages/@empoleon/core"
   },
   "peerDependencies": {
-    "@empoleon/hooks": "7.0.0"
+    "@empoleon/hooks": "8.0.0"
   },
   "dependencies": {
     "@empoleon/solid-floating-ui": "0.0.4",

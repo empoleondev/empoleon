@@ -1,6 +1,6 @@
 {
   "name": "@empoleon/dates",
-  "version": "7.0.0",
+  "version": "8.0.0",
   "description": "Calendars, date and time pickers based on Empoleon components",
   "homepage": "https://empoleon.dev/dates/getting-started/",
   "license": "MIT",
