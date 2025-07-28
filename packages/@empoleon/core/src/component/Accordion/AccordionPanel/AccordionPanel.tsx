@@ -10,7 +10,7 @@ import { Collapse } from '../../Collapse';
 import { useAccordionContext } from '../Accordion.context';
 import { useAccordionItemContext } from '../AccordionItem.context';
 import classes from '../Accordion.module.css';
-import { splitProps } from 'solid-js';
+import { createEffect, splitProps } from 'solid-js';
 
 export type AccordionPanelStylesNames = 'panel' | 'content';
 
@@ -46,12 +46,14 @@ export const AccordionPanel = factory<AccordionPanelFactory>(_props => {
   const { value } = useAccordionItemContext();
   const ctx = useAccordionContext();
 
+  const active = () => ctx.isItemActive(value);
+
   return (
     <Collapse
       ref={local.ref}
       {...ctx.getStyles('panel', { className: local.className, classNames: local.classNames, style: local.style, styles: local.styles })}
       {...others}
-      in={ctx.isItemActive(value)}
+      in={active()}
       transitionDuration={ctx.transitionDuration ?? 200}
       role="region"
       id={ctx.getRegionId(value)}

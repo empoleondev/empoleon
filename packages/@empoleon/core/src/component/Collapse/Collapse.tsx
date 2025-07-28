@@ -1,5 +1,5 @@
-import { JSX, splitProps } from 'solid-js';
-import { useReducedMotion } from '@empoleon/hooks';
+import { createEffect, createMemo, JSX, splitProps } from 'solid-js';
+import { useMergedRef, useReducedMotion } from '@empoleon/hooks';
 import {
   Box,
   BoxProps,
@@ -54,8 +54,7 @@ export const Collapse = factory<CollapseFactory>(_props => {
     'ref'
   ]);
 
-  const opened = local.in;
-
+  const opened = () => local.in;
   const theme = useEmpoleonTheme();
   const shouldReduceMotion = useReducedMotion();
   const reduceMotion = theme.respectReducedMotion ? shouldReduceMotion : false;
@@ -69,24 +68,30 @@ export const Collapse = factory<CollapseFactory>(_props => {
   });
 
   if (duration === 0) {
-    return opened ? <Box {...others}>{local.children}</Box> : null;
+    return opened() ? <Box {...others}>{local.children}</Box> : null;
   }
 
-  const collapseProps = getCollapseProps();
+  const collapseProps = createMemo(() => getCollapseProps());
+  const mergedRef = useMergedRef(collapseProps().ref, local.ref);
 
   return (
     <Box
       {...collapseProps}
+      {...others}
       style={{
-        ...(collapseProps.style as Record<string, any>),
-        opacity: opened || !local.animateOpacity ? 1 : 0,
-        transition: local.animateOpacity ? `opacity ${duration}ms ${local.transitionTimingFunction}` : 'none',
+        ...(collapseProps().style as Record<string, any>),
         ...getStyleObject(local.style, theme),
       }}
-      ref={local.ref}
-      {...others}
+      ref={mergedRef}
     >
-      {local.children}
+      <div
+        style={{
+          transition: `opacity ${duration}ms ${local.transitionTimingFunction || 'ease'}`,
+          opacity: opened() ? 1 : 0,
+        }}
+      >
+        {local.children}
+      </div>
     </Box>
   );
 });

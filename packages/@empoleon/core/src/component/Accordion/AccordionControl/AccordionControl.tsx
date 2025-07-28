@@ -1,4 +1,4 @@
-import { JSX, splitProps } from 'solid-js';
+import { Component, JSX, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
@@ -62,9 +62,14 @@ export const AccordionControl = factory<AccordionControlFactory>(_props => {
 
   const { value } = useAccordionItemContext();
   const ctx = useAccordionContext();
-  const isActive = ctx.isItemActive(value);
+  const isActive = () => ctx.isItemActive(value);
   const shouldWrapWithHeading = typeof ctx.order === 'number';
   const Heading = `h${ctx.order!}` as const;
+  const raw = local.chevron || ctx.chevron;
+  const Chevron: Component<{}> =
+  typeof raw === 'function'
+    ? (raw as Component<{}>)
+    : () => raw as JSX.Element;
 
   const content = (
     <UnstyledButton<'button'>
@@ -73,7 +78,7 @@ export const AccordionControl = factory<AccordionControlFactory>(_props => {
       unstyled={ctx.unstyled}
       mod={[
         'accordion-control',
-        { active: isActive, 'chevron-position': ctx.chevronPosition, disabled: local.disabled },
+        { active: isActive(), 'chevron-position': ctx.chevronPosition, disabled: local.disabled },
         local.mod,
       ]}
       ref={local.ref}
@@ -86,7 +91,7 @@ export const AccordionControl = factory<AccordionControlFactory>(_props => {
       }}
       type="button"
       disabled={local.disabled}
-      aria-expanded={isActive}
+      aria-expanded={isActive()}
       aria-controls={ctx.getRegionId(value)}
       id={ctx.getControlId(value)}
       onKeyDown={createScopedKeydownHandler({
@@ -105,7 +110,7 @@ export const AccordionControl = factory<AccordionControlFactory>(_props => {
         mod={{ rotate: !ctx.disableChevronRotation && isActive, position: ctx.chevronPosition }}
         {...ctx.getStyles('chevron', { classNames: local.classNames, styles: local.styles  })}
       >
-        {local.chevron || ctx.chevron}
+        <Chevron />
       </Box>
       <span {...ctx.getStyles('label', { classNames: local.classNames, styles: local.styles })}>{local.children}</span>
       {local.icon && (

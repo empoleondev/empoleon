@@ -35,20 +35,20 @@ export function Usage() {
       navbar={{
         width: { base: 200, md: 300 },
         breakpoint: 'sm',
-        collapsed: { desktop: !navbarOpened, mobile: !navbarMobileOpened },
+        collapsed: { desktop: !navbarOpened(), mobile: !navbarMobileOpened() },
       }}
       aside={{
         width: { base: 200, md: 300 },
         breakpoint: 'sm',
-        collapsed: { desktop: !asideOpened, mobile: !asideMobileOpened },
+        collapsed: { desktop: !asideOpened(), mobile: !asideMobileOpened() },
       }}
       header={{
         height: 60,
-        collapsed: !headerOpened,
+        collapsed: !headerOpened(),
       }}
       footer={{
         height: 50,
-        collapsed: !footerOpened,
+        collapsed: !footerOpened(),
       }}
     >
       <AppShell.Navbar>

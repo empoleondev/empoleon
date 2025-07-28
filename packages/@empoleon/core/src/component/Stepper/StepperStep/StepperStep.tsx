@@ -194,10 +194,6 @@ export const StepperStep = factory<StepperStepFactory>(_props => {
 
   const isLoading = createMemo(() => !!local.loading);
 
-  createEffect(() => {
-    console.log('icon', local.withIcon);
-  });
-
   return (
     <UnstyledButton
       {...ctx.getStyles('step', {

@@ -1,4 +1,4 @@
-import { JSX } from 'solid-js';
+import { Component, JSX } from 'solid-js';
 import { createSafeContext, GetStylesApi } from '../../core';
 import type { AccordionFactory } from './Accordion';
 import { AccordionChevronPosition, AccordionHeadingOrder } from './Accordion.types';
@@ -9,7 +9,7 @@ interface AccordionContext {
   disableChevronRotation: boolean | undefined;
   chevronPosition: AccordionChevronPosition | undefined;
   order: AccordionHeadingOrder | undefined;
-  chevron: JSX.Element;
+  chevron: JSX.Element | Component;
   onChange: (value: string) => void;
   isItemActive: (value: string) => boolean;
   getControlId: (value: string) => string;

@@ -6,7 +6,7 @@ const originalWarn = console.warn;
     originalWarn(message, ...args);
   };
 
-import { JSX, splitProps } from 'solid-js';
+import { Component, createEffect, createMemo, JSX, splitProps } from 'solid-js';
 import { useId, useUncontrolled } from '@empoleon/hooks';
 import {
   Box,
@@ -84,7 +84,7 @@ export interface AccordionProps<Multiple extends boolean = false>
   order?: AccordionHeadingOrder;
 
   /** Custom chevron icon that will be used in all items */
-  chevron?: JSX.Element;
+  chevron?: JSX.Element | Component;
 
   /** Key of `theme.radius` or any valid CSS value to set border-radius. Numbers are converted to rem. `theme.defaultRadius` by default. */
   radius?: EmpoleonRadius;
@@ -103,7 +103,7 @@ const defaultProps: Partial<AccordionProps> = {
   disableChevronRotation: false,
   chevronPosition: 'right',
   variant: 'default',
-  chevron: <AccordionChevron />,
+  chevron: AccordionChevron,
 };
 
 const varsResolver = createVarsResolver<AccordionFactory>(
@@ -151,18 +151,35 @@ export function Accordion<Multiple extends boolean = false>(_props: AccordionPro
     onChange: local.onChange,
   });
 
-  const isItemActive = (itemValue: string) =>
-    Array.isArray(_value) ? _value.includes(itemValue) : itemValue === _value();
+  // createEffect(() => {
+  //   console.log('[Accordion] _value (reactive)', _value());
+  // });
+
+  // const isItemActive = (itemValue: string) =>
+  //   Array.isArray(_value) ? _value.includes(itemValue) : itemValue === _value();
+
+  const isItemActive = (itemValue: string) => {
+    const currentValue = _value();
+    return Array.isArray(currentValue) ? currentValue.includes(itemValue) : itemValue === currentValue;
+  };
 
   const handleItemChange = (itemValue: string) => {
-    const nextValue: AccordionValue<Multiple> = Array.isArray(_value)
-      ? _value.includes(itemValue)
-        ? _value.filter((selectedValue) => selectedValue !== itemValue)
-        : [..._value, itemValue]
-      : itemValue === _value()
+    const currentValue = _value();
+    // console.log('[Accordion] handleItemChange', {
+    //   itemValue,
+    //   currentValue,
+    //   multiple: local.multiple,
+    // });
+
+    const nextValue: AccordionValue<Multiple> = Array.isArray(currentValue)
+      ? currentValue.includes(itemValue)
+        ? currentValue.filter((selectedValue) => selectedValue !== itemValue)
+        : [...currentValue, itemValue]
+      : itemValue === currentValue
         ? null
         : (itemValue as any);
 
+    // console.log('[Accordion] nextValue', nextValue);
     handleChange(nextValue);
   };
 
@@ -179,10 +196,12 @@ export function Accordion<Multiple extends boolean = false>(_props: AccordionPro
     varsResolver,
   });
 
+  console.log("styles", getStyles('item'));
+
   return (
     <AccordionProvider
       value={{
-        isItemActive,
+        get isItemActive() { return isItemActive; },
         onChange: handleItemChange,
         getControlId: getSafeId(
           `${uid}-control`,
@@ -203,7 +222,7 @@ export function Accordion<Multiple extends boolean = false>(_props: AccordionPro
         unstyled: local.unstyled,
       }}
     >
-      <Box {...getStyles('root')} id={uid} {...others} variant={local.variant} data-accordion>
+      <Box {...getStyles('root', { variant: local.variant })} id={uid} {...others} variant={local.variant} data-accordion>
         {local.children}
       </Box>
     </AccordionProvider>

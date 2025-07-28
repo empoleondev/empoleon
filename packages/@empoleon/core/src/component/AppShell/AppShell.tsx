@@ -1,4 +1,4 @@
-import { JSX, splitProps } from 'solid-js';
+import { createEffect, JSX, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
@@ -161,11 +161,11 @@ export const AppShell = factory<AppShellFactory>(_props => {
   return (
     <AppShellProvider value={{ getStyles, withBorder: local.withBorder, zIndex: local.zIndex, disabled: local.disabled, offsetScrollbars }}>
       <AppShellMediaStyles
-        navbar={local.navbar}
-        header={local.header}
-        aside={local.aside}
-        footer={local.footer}
-        padding={local.padding}
+        navbar={() => local.navbar}
+        header={() => local.header}
+        aside={() => local.aside}
+        footer={() => local.footer}
+        padding={() => local.padding}
       />
       <Box
         ref={local.ref}

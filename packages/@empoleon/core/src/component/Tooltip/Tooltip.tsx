@@ -217,13 +217,6 @@ export const Tooltip = factory<TooltipFactory>(_props => {
     left: `${tooltip.x ?? 0}px`,
   }));
 
-  createEffect(() => {
-    console.log('Tooltip render - tooltip.opened:', tooltip.opened());
-    console.log('Tooltip render - tooltip.ref:', tooltip.floating);
-    console.log('Tooltip render - local.disabled:', local.disabled);
-    console.log('Tooltip render - mounted condition:', !local.disabled && !!tooltip.opened());
-  })
-
   return (
     <>
       <OptionalPortal {...local.portalProps} withinPortal={local.withinPortal}>
@@ -234,8 +227,6 @@ export const Tooltip = factory<TooltipFactory>(_props => {
           duration={tooltip.isGroupPhase ? 10 : transition.duration}
         >
           {(transitionStyles) => (
-            <>
-            {console.log("transitionStyles", transitionStyles)}
             <Box
               {...others}
               data-fixed={local.floatingStrategy === 'fixed' || undefined}
@@ -267,7 +258,6 @@ export const Tooltip = factory<TooltipFactory>(_props => {
                 {...getStyles('arrow')}
               />
             </Box>
-            </>
           )}
         </Transition>
       </OptionalPortal>
