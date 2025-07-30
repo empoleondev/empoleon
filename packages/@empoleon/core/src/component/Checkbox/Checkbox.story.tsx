@@ -98,7 +98,7 @@ export function WithTooltip() {
   return (
     <div style={{ 'padding': '40px' }}>
       <Tooltip label="Tooltip" refProp="rootRef" position="bottom-start">
-        <Checkbox label="With tooltip" default-checked />
+        {(props) => <Checkbox label="With tooltip" default-checked {...props} />}
       </Tooltip>
     </div>
   );

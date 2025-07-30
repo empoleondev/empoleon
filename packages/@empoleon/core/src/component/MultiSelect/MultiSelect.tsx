@@ -388,6 +388,7 @@ export const MultiSelect = factory<MultiSelectFactory>(_props => {
             <Pill.Group disabled={local.disabled} unstyled={local.unstyled} {...getStyles('pillsList')}>
               {values}
               <Combobox.EventsTarget autoComplete={autocomplete}>
+                {/* @ts-ignore */}
                 <PillsInput.Field
                   {...rest}
                   ref={local.ref}

@@ -79,7 +79,7 @@ export function InputRef() {
 
   return (
     <div style={{ 'padding': '40px' }}>
-      <PinInput ref={(el: HTMLInputElement) => (inputRef = el)} />
+      <PinInput ref={inputRef} />
       <Button onClick={() => inputRef?.focus()}>Focus first input</Button>
     </div>
   );

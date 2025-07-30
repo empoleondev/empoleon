@@ -232,7 +232,7 @@ export function PopoverTargetWithTooltip() {
       <Popover>
         <Popover.Target>
           <Tooltip label="Tooltip last">
-            <button type="button">Tooltip last</button>
+            {(props) => <button type="button" {...props}>Tooltip last</button>}
           </Tooltip>
         </Popover.Target>
 

@@ -135,9 +135,11 @@ export function MenuTargetWithTooltip() {
     <div style={{ padding: '40px' }}>
       <Menu>
         <Tooltip label="Tooltip first">
-          <Menu.Target>
-            <Button>Tooltip first</Button>
-          </Menu.Target>
+          {(props) => (
+            <Menu.Target {...props}>
+              <Button>Tooltip first</Button>
+            </Menu.Target>
+          )}
         </Tooltip>
 
         <Menu.Dropdown>
@@ -149,7 +151,9 @@ export function MenuTargetWithTooltip() {
       <Menu>
         <Menu.Target>
           <Tooltip label="Tooltip last">
-            <Button ml="xl">Tooltip last</Button>
+            {(props) => (
+              <Button ml="xl" {...props}>Tooltip last</Button>
+            )}
           </Tooltip>
         </Menu.Target>
 

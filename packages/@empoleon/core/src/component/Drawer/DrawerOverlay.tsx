@@ -6,6 +6,7 @@ import classes from './Drawer.module.css';
 
 export type DrawerOverlayStylesNames = 'overlay';
 
+// @ts-ignore
 export interface DrawerOverlayProps
   extends ModalBaseOverlayProps,
     CompoundStylesApiProps<DrawerOverlayFactory> {}

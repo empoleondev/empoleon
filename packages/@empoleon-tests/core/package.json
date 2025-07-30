@@ -1,0 +1,38 @@
+{
+  "name": "@empoleon-tests/core",
+  "version": "2.0.0",
+  "description": "Core tests package for Empoleon",
+  "license": "MIT",
+  "author": "Paul M",
+  "keywords": [
+    "jest",
+    "empoleon",
+    "tests"
+  ],
+  "sideEffects": false,
+  "main": "./cjs/index.cjs",
+  "module": "./esm/index.mjs",
+  "types": "./lib/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./lib/index.d.mts",
+        "default": "./esm/index.mjs"
+      },
+      "require": {
+        "types": "./lib/index.d.ts",
+        "default": "./cjs/index.cjs"
+      }
+    }
+  },
+  "repository": {
+    "url": "https://github.com/empoleondev",
+    "type": "git",
+    "directory": "packages/@empoleon-tests/core"
+  },
+  "devDependencies": {
+    "@empoleon/core": "workspace:*",
+    "@empoleon/hooks": "workspace:*",
+    "solid-js": "^1.9.7"
+  }
+}

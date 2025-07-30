@@ -137,6 +137,7 @@ export const RadioCard = factory<RadioCardFactory>(_props => {
 
   return (
     <RadioCardProvider value={{ checked: _checked }}>
+      {/* @ts-ignore */}
       <UnstyledButton
         ref={local.ref}
         mod={[{ 'with-border': local.withBorder, checked: _checked }, local.mod]}

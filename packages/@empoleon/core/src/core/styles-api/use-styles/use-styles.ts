@@ -8,7 +8,7 @@ import {
   useEmpoleonWithStaticClasses,
 } from '../../EmpoleonProvider';
 import { PartialVarsResolver, VarsResolver } from '../create-vars-resolver/create-vars-resolver';
-import { ClassNames, ClassNamesArray, GetStylesApiOptions, Styles } from '../styles-api.types';
+import { Attributes, ClassNames, ClassNamesArray, GetStylesApiOptions, Styles } from '../styles-api.types';
 import { getClassName } from './get-class-name/get-class-name';
 import { getStyle } from './get-style/get-style';
 import { useStylesTransform } from './use-transformed-styles';
@@ -26,6 +26,7 @@ export interface UseStylesInput<Payload extends FactoryPayload> {
   styles?: Styles<Payload>;
   vars?: PartialVarsResolver<Payload>;
   varsResolver?: VarsResolver<Payload>;
+  attributes?: Attributes<Payload>;
 }
 
 // type StyleProp = JSX.HTMLAttributes<any>['style']
@@ -51,13 +52,14 @@ export function useStyles<Payload extends FactoryPayload>({
   styles,
   vars,
   varsResolver,
+  attributes,
 }: UseStylesInput<Payload>): GetStylesApi<Payload> {
   const theme = useEmpoleonTheme();
   const classNamesPrefix = useEmpoleonClassNamesPrefix();
   const withStaticClasses = useEmpoleonWithStaticClasses();
   const headless = useEmpoleonIsHeadless();
   const themeName = (Array.isArray(name) ? name : [name]).filter((n) => n) as string[];
-  const { withStylesTransform, getTransformedStyles } = useStylesTransform({
+  const stylesTransformProps = useStylesTransform({
     props,
     stylesCtx,
     themeName,
@@ -79,7 +81,7 @@ export function useStyles<Payload extends FactoryPayload>({
       stylesCtx,
       withStaticClasses,
       headless,
-      transformedStyles: getTransformedStyles([options?.styles, styles]),
+      transformedStyles: stylesTransformProps.getTransformedStyles([options?.styles, styles]),
     }),
 
     style: getStyle({
@@ -95,7 +97,9 @@ export function useStyles<Payload extends FactoryPayload>({
       vars,
       varsResolver,
       headless,
-      withStylesTransform,
+      withStylesTransform: stylesTransformProps.withStylesTransform,
     }),
+
+    ...attributes?.[selector],
   });
 }

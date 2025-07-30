@@ -151,13 +151,6 @@ export function Accordion<Multiple extends boolean = false>(_props: AccordionPro
     onChange: local.onChange,
   });
 
-  // createEffect(() => {
-  //   console.log('[Accordion] _value (reactive)', _value());
-  // });
-
-  // const isItemActive = (itemValue: string) =>
-  //   Array.isArray(_value) ? _value.includes(itemValue) : itemValue === _value();
-
   const isItemActive = (itemValue: string) => {
     const currentValue = _value();
     return Array.isArray(currentValue) ? currentValue.includes(itemValue) : itemValue === currentValue;
@@ -165,12 +158,6 @@ export function Accordion<Multiple extends boolean = false>(_props: AccordionPro
 
   const handleItemChange = (itemValue: string) => {
     const currentValue = _value();
-    // console.log('[Accordion] handleItemChange', {
-    //   itemValue,
-    //   currentValue,
-    //   multiple: local.multiple,
-    // });
-
     const nextValue: AccordionValue<Multiple> = Array.isArray(currentValue)
       ? currentValue.includes(itemValue)
         ? currentValue.filter((selectedValue) => selectedValue !== itemValue)
@@ -179,7 +166,6 @@ export function Accordion<Multiple extends boolean = false>(_props: AccordionPro
         ? null
         : (itemValue as any);
 
-    // console.log('[Accordion] nextValue', nextValue);
     handleChange(nextValue);
   };
 
@@ -195,8 +181,6 @@ export function Accordion<Multiple extends boolean = false>(_props: AccordionPro
     vars: local.vars,
     varsResolver,
   });
-
-  console.log("styles", getStyles('item'));
 
   return (
     <AccordionProvider

@@ -95,6 +95,7 @@ export const ActionIconGroupSection = factory<ActionIconGroupSectionFactory>(_pr
     'gradient',
     'radius',
     'autoContrast',
+    'attributes',
     'ref'
   ]);
 
@@ -107,6 +108,7 @@ export const ActionIconGroupSection = factory<ActionIconGroupSectionFactory>(_pr
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
     rootSelector: 'groupSection',

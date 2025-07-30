@@ -6,6 +6,7 @@ import classes from './Modal.module.css';
 
 export type ModalOverlayStylesNames = 'overlay';
 
+// @ts-ignore
 export interface ModalOverlayProps
   extends ModalBaseOverlayProps,
     CompoundStylesApiProps<ModalOverlayFactory> {}

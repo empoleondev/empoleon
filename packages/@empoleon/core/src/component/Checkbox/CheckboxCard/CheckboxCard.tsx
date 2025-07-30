@@ -109,6 +109,7 @@ export const CheckboxCard = factory<CheckboxCardFactory>(_props => {
 
   return (
     <CheckboxCardProvider value={{ checked: _value }}>
+      {/* @ts-ignore */}
       <UnstyledButton
         ref={local.ref}
         mod={[{ 'with-border': local.withBorder, checked: _value() }, local.mod]}

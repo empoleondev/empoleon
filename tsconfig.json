@@ -1,5 +1,7 @@
 {
   "include": [
+    "./vitest.d.ts",
+    "./vitest.setup.tsx",
     "./scripts",
     "./@types",
     "./packages/@empoleon-tests/*/src",
@@ -24,7 +26,7 @@
     "./packages/@empoleonx/*/lib/**/*"
   ],
   "compilerOptions": {
-    "types": ["node", "jest", "@testing-library/jest-dom"],
+    "types": ["node", "vitest/globals", "@testing-library/jest-dom"],
     "target": "ES2015",
     "lib": ["DOM", "ESNext"],
     "module": "ESNext",

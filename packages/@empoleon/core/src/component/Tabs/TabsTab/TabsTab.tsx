@@ -17,6 +17,7 @@ import classes from '../Tabs.module.css';
 
 export type TabsTabStylesNames = 'tab' | 'tabSection' | 'tabLabel';
 
+// @ts-ignore
 export interface TabsTabProps
   extends Omit<UnstyledButtonProps, 'classNames' | 'styles' | 'vars'>,
     CompoundStylesApiProps<TabsTabFactory>,

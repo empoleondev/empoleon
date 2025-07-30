@@ -1,9 +1,19 @@
-import { createSignal } from 'solid-js';
+import { createSignal, JSX } from 'solid-js';
 import { RadioGroup } from '../RadioGroup/RadioGroup';
 import { RadioIndicator } from '../RadioIndicator/RadioIndicator';
 import { RadioCard } from './RadioCard';
+import { EmpoleonProvider } from '../../../core';
 
-export default { title: 'RadioCard' };
+export default {
+  title: 'RadioCard',
+  decorators: [
+    (Story: () => JSX.Element) => (
+      <EmpoleonProvider>
+        <Story />
+      </EmpoleonProvider>
+    ),
+  ],
+};
 
 export function Usage() {
   const [checked, setChecked] = createSignal(false);

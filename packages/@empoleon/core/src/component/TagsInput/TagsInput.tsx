@@ -436,6 +436,7 @@ export const TagsInput = factory<TagsInputFactory>(_props => {
             <Pill.Group disabled={local.disabled} unstyled={local.unstyled} {...getStyles('pillsList')}>
               {values}
               <Combobox.EventsTarget autoComplete={autocomplete}>
+                {/* @ts-ignore */}
                 <PillsInput.Field
                   {...rest}
                   ref={useMergedRef(local.ref, inputRef)}
