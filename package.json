@@ -166,6 +166,7 @@
   },
   "resolutions": {
     "prosemirror-model": "1.18.1",
-    "@babel/core": "7.26.0"
+    "@babel/core": "7.26.0",
+    "linkifyjs": "^4.3.2"
   }
 }
