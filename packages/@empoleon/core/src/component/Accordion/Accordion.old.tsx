@@ -101,7 +101,7 @@ describe('@empoleon/core/Accordion', () => {
   });
 
   it('supports controlled state (multiple: false, default)', async () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     render(<Accordion {...defaultProps} value="item-2" onChange={spy} />);
 
     expect(screen.getByText('test-item-2')).toBeInTheDocument();

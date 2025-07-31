@@ -31,6 +31,9 @@ export interface FileButtonProps<Multiple extends boolean = false> {
 
   /** Passes down props to the input element used to capture files */
   inputProps?: JSX.HTMLAttributes<HTMLInputElement>;
+
+  /** Ref callback for the underlying file `<input>` */
+  ref?: (el: HTMLInputElement) => void;
 }
 
 const defaultProps: Partial<FileButtonProps> = {
@@ -53,7 +56,8 @@ export function FileButton (_props: FileButtonProps) {
     'resetRef',
     'disabled',
     'capture',
-    'inputProps'
+    'inputProps',
+    'ref'
   ]);
 
   let inputRef: HTMLInputElement | undefined;
@@ -95,7 +99,10 @@ export function FileButton (_props: FileButtonProps) {
         accept={local.accept}
         multiple={local.multiple}
         onChange={handleChange}
-        ref={el => (inputRef = el!)}
+        ref={el => {
+          inputRef = el!;
+          local.ref?.(el!);
+        }}
         name={local.name}
         form={local.form}
         capture={local.capture === true ? "environment" : local.capture || undefined}

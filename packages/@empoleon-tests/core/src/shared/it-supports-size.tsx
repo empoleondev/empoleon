@@ -1,5 +1,5 @@
 import { JSX } from 'solid-js';
-import { renderComponent } from '../render';
+import { render } from '../render';
 
 interface Options<Props = any> {
   component: (props: Props) => JSX.Element;
@@ -9,7 +9,7 @@ interface Options<Props = any> {
 
 export function itSupportsSize<Props>(options: Options<Props>, name = 'supports size') {
   it(name, () => {
-    const { container } = renderComponent(
+    const { container } = render(
       () => <options.component {...options.props} size="__test-size" />
     );
     expect(container.querySelector(options.selector || '*:not(style)')!).toHaveAttribute(
@@ -17,7 +17,7 @@ export function itSupportsSize<Props>(options: Options<Props>, name = 'supports 
       '__test-size'
     );
 
-    const { container: container2 } = renderComponent(
+    const { container: container2 } = render(
       () => <options.component {...options.props} size="5rem" />
     );
     expect(container2.querySelector(options.selector || '*:not(style)')!).not.toHaveAttribute(

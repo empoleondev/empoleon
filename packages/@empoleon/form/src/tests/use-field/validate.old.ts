@@ -12,11 +12,11 @@ function validateAsync(value: string): Promise<string | null> {
 
 describe('@empoleon/form/use-field/validate', () => {
   beforeAll(() => {
-    jest.useFakeTimers();
+    vi.useFakeTimers();
   });
 
   afterAll(() => {
-    jest.useRealTimers();
+    vi.useRealTimers();
   });
 
   it('supports sync validation', async () => {
@@ -35,7 +35,7 @@ describe('@empoleon/form/use-field/validate', () => {
     const hook = renderHook(() => useField({ initialValue: 'test', validate: validateAsync }));
     await act(() => {
       const validate = hook.result.current.validate();
-      jest.advanceTimersByTime(1000);
+      vi.advanceTimersByTime(1000);
       return validate;
     });
     expect(hook.result.current.error).toBe('error');
@@ -43,7 +43,7 @@ describe('@empoleon/form/use-field/validate', () => {
     await act(() => hook.result.current.setValue('new value'));
     await act(() => {
       const validate = hook.result.current.validate();
-      jest.advanceTimersByTime(1000);
+      vi.advanceTimersByTime(1000);
       return validate;
     });
     expect(hook.result.current.error).toBe(null);

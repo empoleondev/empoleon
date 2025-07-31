@@ -2,17 +2,17 @@ import { render } from '@testing-library/react';
 import { useColorScheme } from './use-color-scheme';
 
 describe('@empoleon/hooks/use-color-scheme', () => {
-  let trace = jest.fn<(colorScheme: string) => void, string[]>();
-  const mockMatchMedia = jest.fn().mockImplementation(() => ({
+  let trace = vi.fn<(colorScheme: string) => void, string[]>();
+  const mockMatchMedia = vi.fn().mockImplementation(() => ({
     matches: true,
     media: '',
     onchange: null,
-    addListener: jest.fn(),
-    removeListener: jest.fn(),
+    addListener: vi.fn(),
+    removeListener: vi.fn(),
   }));
   const retainMatchMedia = window.matchMedia;
   beforeEach(() => {
-    trace = jest.fn();
+    trace = vi.fn();
     window.matchMedia = retainMatchMedia;
   });
   function WrapperComponent({

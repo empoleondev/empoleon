@@ -145,7 +145,7 @@ describe('@empoleon/dates/DateTimePicker', () => {
   });
 
   it('closes when a submit button onClick handler is provided', async () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     const { container } = render(
       <DateTimePicker
         {...defaultProps}
@@ -177,7 +177,7 @@ describe('@empoleon/dates/DateTimePicker', () => {
   });
 
   it('supports controlled state', async () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
 
     const { container } = render(
       <DateTimePicker {...defaultProps} value="2022-04-11" onChange={spy} />
@@ -266,7 +266,7 @@ describe('@empoleon/dates/DateTimePicker', () => {
   });
 
   it('calls onChange with null when controlled input is cleared', async () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     const { container } = render(
       <DateTimePicker {...defaultProps} value="2022-04-11" clearable onChange={spy} />
     );

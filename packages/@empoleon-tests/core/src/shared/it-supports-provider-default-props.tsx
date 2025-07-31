@@ -1,5 +1,5 @@
 import { JSX } from 'solid-js';
-import { renderComponent } from '../render';
+import { render } from '../render';
 
 interface Options<Props = any> {
   component: (props: Props) => JSX.Element;
@@ -12,7 +12,7 @@ export function itSupportsProviderDefaultProps<Props>(
   name = 'supports default props on EmpoleonProvider'
 ) {
   it(name, () => {
-    const { container } = renderComponent(() => <options.component {...(options.props as any)} />, {
+    const { container } = render(() => <options.component {...(options.props as any)} />, {
       components: {
         [options.providerName]: {
           defaultProps: { 'data-provider-prop': 'test-provider-prop' },

@@ -70,7 +70,7 @@ describe('@empoleon/core/ColorPicker', () => {
   });
 
   it('calls onChangeEnd when swatch is clicked', async () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     const { container } = render(
       <ColorPicker onChangeEnd={spy} format="hex" swatches={['#ffffff', '#000000']} />
     );
@@ -79,7 +79,7 @@ describe('@empoleon/core/ColorPicker', () => {
   });
 
   it('calls onColorSwatchClick when swatch is clicked', async () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     const { container } = render(
       <ColorPicker onColorSwatchClick={spy} format="hex" swatches={['#ffffff', '#000000']} />
     );

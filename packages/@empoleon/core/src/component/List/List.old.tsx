@@ -4,13 +4,13 @@ import { ListItem } from './ListItem/ListItem';
 
 const defaultProps: ListProps = {
   children: [
-    <List.Item key="1" icon="$">
+    <List.Item icon="$">
       1
     </List.Item>,
-    <List.Item key="2" icon="$">
+    <List.Item icon="$">
       2
     </List.Item>,
-    <List.Item key="3" icon="$">
+    <List.Item icon="$">
       3
     </List.Item>,
   ],
@@ -35,11 +35,11 @@ describe('@empoleon/core/List', () => {
   });
 
   it('changes root element based on type prop', () => {
-    const { container, rerender } = render(<List {...defaultProps} type="ordered" />);
+    const { container, rerender } = render(() => <List {...defaultProps} type="ordered" />);
     expect(container.querySelector('ul')).toBe(null);
     expect(container.querySelector('ol')).not.toBe(null);
 
-    rerender(<List {...defaultProps} type="unordered" />);
+    rerender(() => <List {...defaultProps} type="unordered" />);
     expect(container.querySelector('ul')).not.toBe(null);
     expect(container.querySelector('ol')).toBe(null);
   });

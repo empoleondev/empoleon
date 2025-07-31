@@ -1,5 +1,5 @@
 import { JSX } from 'solid-js/jsx-runtime';
-import { renderComponent } from '../render';
+import { render } from '../render';
 
 interface Options<Props = any> {
   component: (props: Props) => JSX.Element;
@@ -11,7 +11,7 @@ export function itSupportsInputContainer<Props>(
   name = 'supports inputContainer props'
 ) {
   it(name, () => {
-    const { container } = renderComponent(
+    const { container } = render(
       () => <options.component
         {...options.props}
         inputContainer={(children: JSX.Element) => (

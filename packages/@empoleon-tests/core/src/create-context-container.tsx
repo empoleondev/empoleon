@@ -1,21 +1,21 @@
 import { JSX } from 'solid-js';
 
-export function createContextContainer<T extends JSX.IntrinsicAttributes>(
-  Component: (props: T) => JSX.Element,
+export function createContextContainer<P>(
+  Component: (props: P) => JSX.Element,
   Provider: (props: any) => JSX.Element,
   providerProps?: Record<string, any>
-) {
-  const Container = (props: T) => (
+): (props: P) => JSX.Element {
+  const Container = (props: any) => (
     <Provider {...providerProps}>
       <Component {...props} />
     </Provider>
   );
 
-  // Copy over any additional properties from the original component
   (Container as any).displayName = (Component as any).displayName;
-  (Container as any).extend = (Component as any).extend;
-  (Container as any).classes = (Component as any).classes;
-  (Container as any).withProps = (Component as any).withProps;
+  (Container as any).extend      = (Component as any).extend;
+  (Container as any).classes     = (Component as any).classes;
+  (Container as any).withProps   = (Component as any).withProps;
 
-  return Container;
+  // But cast the whole thing back to the proper signature
+  return Container as (props: P) => JSX.Element;
 }

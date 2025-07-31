@@ -24,7 +24,7 @@ describe('@empoleon/form/use-field/value', () => {
   });
 
   it('calls onValueChange handler when value changes', async () => {
-    const onValueChange = jest.fn();
+    const onValueChange = vi.fn();
     const hook = renderHook(() => useField({ initialValue: 'test', onValueChange }));
     await act(() => hook.result.current.setValue('new value'));
     expect(onValueChange).toHaveBeenLastCalledWith('new value');

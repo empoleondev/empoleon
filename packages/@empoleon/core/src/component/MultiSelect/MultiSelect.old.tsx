@@ -67,7 +67,7 @@ describe('@empoleon/core/MultiSelect', () => {
   });
 
   it('supports controlled state', async () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     render(
       <MultiSelect {...defaultProps} value={['test-1']} onChange={spy} name="test-multi-select" />
     );

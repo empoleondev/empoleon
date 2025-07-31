@@ -1,5 +1,5 @@
 import { JSX } from 'solid-js';
-import { renderComponent } from '../render';
+import { render } from '../render';
 
 interface Options<Props = any> {
   component: (props: Props) => JSX.Element;
@@ -9,14 +9,14 @@ interface Options<Props = any> {
 
 export function itSupportsMod<Props>(options: Options<Props>, name = 'supports mod') {
   it(`${name}: string`, () => {
-    const { container } = renderComponent(() => <options.component {...options.props} mod="test" />);
+    const { container } = render(() => <options.component {...options.props} mod="test" />);
     expect(container.querySelector(options.selector || '*:not(style)')!).toHaveAttribute(
       'data-test'
     );
   });
 
   it(`${name}: object`, () => {
-    const { container } = renderComponent(
+    const { container } = render(
       () => <options.component {...options.props} mod={{ test: true, test2: false }} />
     );
 
@@ -30,7 +30,7 @@ export function itSupportsMod<Props>(options: Options<Props>, name = 'supports m
   });
 
   it(`${name}: array`, () => {
-    const { container } = renderComponent(() => <options.component {...options.props} mod={['test', 'test2']} />);
+    const { container } = render(() => <options.component {...options.props} mod={['test', 'test2']} />);
 
     expect(container.querySelector(options.selector || '*:not(style)')!).toHaveAttribute(
       'data-test'
@@ -42,7 +42,7 @@ export function itSupportsMod<Props>(options: Options<Props>, name = 'supports m
   });
 
   it(`${name}: array with object`, () => {
-    const { container } = renderComponent(
+    const { container } = render(
       () => <options.component {...options.props} mod={['test', { test2: true }]} />
     );
 

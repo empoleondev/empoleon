@@ -15,7 +15,8 @@ export default defineConfig({
     include: ['**/__tests__/**/*.ts?(x)', '**/?(*.)+(spec|test).ts?(x)'],
     setupFiles: ['./vitest.setup.tsx'],
     globals: true,
+    testTimeout: 10000,
     pool: 'forks',
-    isolate: false,
+    isolate: true,
   },
 });

@@ -5,19 +5,19 @@ const mockEvent: any = { key: 'Escape', code: 'Escape' };
 
 describe('@empoleon/core/close-on-escape', () => {
   it('calls given callback function', () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     closeOnEscape(spy)(mockEvent);
     expect(spy).toHaveBeenCalledTimes(1);
   });
 
   it('does not call callback if options.active is false', () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     closeOnEscape(spy, { active: false })(mockEvent);
     expect(spy).toHaveBeenCalledTimes(0);
   });
 
   it('does not call callback if button that is pressed is not escape', () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     closeOnEscape(spy, { active: false })({ key: 'ArrowRight', code: 'ArrowRight' } as any);
     expect(spy).toHaveBeenCalledTimes(0);
   });
@@ -28,7 +28,7 @@ describe('@empoleon/core/close-on-escape', () => {
   });
 
   it('calls given trigger when callback triggers', () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     closeOnEscape(noop, { active: true, onTrigger: spy })(mockEvent);
     expect(spy).toHaveBeenCalledTimes(1);
 

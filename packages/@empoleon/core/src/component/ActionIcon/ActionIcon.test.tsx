@@ -1,4 +1,4 @@
-import { renderComponent, tests } from '@empoleon-tests/core';
+import { render, tests } from '@empoleon-tests/core';
 import { ActionIcon, ActionIconProps, ActionIconStylesNames } from './ActionIcon';
 import { ActionIconGroup } from './ActionIconGroup/ActionIconGroup';
 
@@ -39,27 +39,26 @@ describe('@empoleon/core/ActionIcon', () => {
   });
 
   it('sets data-loading attribute when loading prop is set to true', () => {
-    const { container, rerender } = renderComponent(() => <ActionIcon loading />);
+    const { container, rerender } = render(() => <ActionIcon loading />);
     expect(container.querySelector('[data-loading]')).toBeInTheDocument();
     rerender(() => <ActionIcon loading={false} />);
     expect(container.querySelector('[data-loading]')).not.toBeInTheDocument();
   });
 
   it('sets data-disabled attribute when disabled prop is set to true', () => {
-    const { container, rerender } = renderComponent(() => <ActionIcon disabled />);
+    const { container, rerender } = render(() => <ActionIcon disabled />);
     expect(container.querySelector('[data-disabled]')).toBeInTheDocument();
     rerender(() => <ActionIcon disabled={false} />);
     expect(container.querySelector('[data-disabled]')).not.toBeInTheDocument();
   });
 
   it('sets disabled attribute when disabled prop is set to true', () => {
-    // Test with separate renders instead of rerender since SolidJS doesn't re-render
-    const { container: disabledContainer } = renderComponent(() => <ActionIcon disabled />);
+    const { container: disabledContainer } = render(() => <ActionIcon disabled />);
     const disabledButton = disabledContainer.querySelector('button');
     expect(disabledButton).toBeInTheDocument();
     expect(disabledButton).toHaveAttribute('disabled');
 
-    const { container: enabledContainer } = renderComponent(() => <ActionIcon disabled={false} />);
+    const { container: enabledContainer } = render(() => <ActionIcon disabled={false} />);
     const enabledButton = enabledContainer.querySelector('button');
     expect(enabledButton).toBeInTheDocument();
     expect(enabledButton).not.toHaveAttribute('disabled');

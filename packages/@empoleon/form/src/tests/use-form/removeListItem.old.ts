@@ -72,7 +72,7 @@ function tests(mode: FormMode) {
   });
 
   it('calls onValuesChange when removeListItem is called', () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     const hook = renderHook(() =>
       useForm({
         mode,

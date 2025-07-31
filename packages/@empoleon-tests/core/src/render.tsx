@@ -1,11 +1,10 @@
 import { render as testingLibraryRender } from '@solidjs/testing-library';
 import { EmpoleonProvider, EmpoleonProviderProps, EmpoleonThemeOverride } from '@empoleon/core';
-import { JSX } from 'solid-js';
+import { JSX, createSignal } from 'solid-js';
 
 type RenderResult = ReturnType<typeof testingLibraryRender>;
 
-// Provide a render function that matches the signature expected by your tests
-export function renderComponent(
+export function render(
   component: () => JSX.Element,
   themeOverride?: EmpoleonThemeOverride,
   providerProps?: Omit<EmpoleonProviderProps, 'theme'>
@@ -13,22 +12,22 @@ export function renderComponent(
   container: Element;
   rerender: (newComponent: () => JSX.Element) => RenderResult;
 } {
-  const localRender = (componentFn: () => JSX.Element) => {
-    return testingLibraryRender(() => (
-      <EmpoleonProvider theme={themeOverride || {}} env="test" {...providerProps}>
-        {componentFn()}
-      </EmpoleonProvider>
-    ));
-  };
+  const [currentComponent, setCurrentComponent] = createSignal(component);
 
-  const result = localRender(component);
+  const finalTheme = themeOverride || {};
+
+  const result = testingLibraryRender(() => (
+    <EmpoleonProvider theme={finalTheme} env="test" {...providerProps}>
+      {currentComponent()()}
+    </EmpoleonProvider>
+  ));
 
   return {
     container: result.container,
     rerender: (newComponent: () => JSX.Element): RenderResult => {
-      result.unmount();
-      const newResult = localRender(newComponent);
-      return newResult;
+      setCurrentComponent(() => newComponent);
+      return result;
     }
   };
 }
+

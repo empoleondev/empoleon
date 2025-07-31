@@ -45,7 +45,7 @@ describe('@empoleon/hooks/use-pagination', () => {
   });
 
   it('calls onChange correctly with active page', () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     const { result } = renderHook(() =>
       usePagination({
         page: 7,

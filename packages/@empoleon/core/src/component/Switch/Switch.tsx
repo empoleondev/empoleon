@@ -1,4 +1,4 @@
-import { Ref, splitProps, JSX } from 'solid-js';
+import { splitProps, JSX } from 'solid-js';
 import { useId, useUncontrolled } from '@empoleon/hooks';
 import {
   Box,
@@ -84,7 +84,7 @@ export interface SwitchProps
   error?: JSX.Element;
 
   /** Assigns ref of the root element */
-  rootRef?: Ref<HTMLDivElement>;
+  rootRef?: (el: HTMLDivElement | undefined) => void;
 
   /** If set, the indicator will be displayed inside thumb, `true` by default */
   withThumbIndicator?: boolean;

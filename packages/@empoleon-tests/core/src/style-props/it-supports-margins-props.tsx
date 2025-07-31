@@ -1,5 +1,5 @@
 import { rem } from '@empoleon/core';
-import { renderComponent } from '../render';
+import { render } from '../render';
 import { JSX } from 'solid-js';
 
 interface Options<Props = any> {
@@ -15,16 +15,16 @@ export function itSupportsMarginsProps<Props>(
   const selector = options.selector || '*:not(style)';
 
   it(name, () => {
-    const { container: m } = renderComponent(() => <options.component {...options.props} m={45} />);
-    const { container: theme } = renderComponent(() => <options.component {...options.props} m="xl" />);
-    const { container: mx } = renderComponent(() => <options.component {...options.props} mx={34} />);
-    const { container: my } = renderComponent(() => <options.component {...options.props} my={22} />);
-    const { container: mt } = renderComponent(() => <options.component {...options.props} mt={13} />);
-    const { container: mb } = renderComponent(() => <options.component {...options.props} mb={43} />);
-    const { container: mr } = renderComponent(() => <options.component {...options.props} mr={98} />);
-    const { container: ml } = renderComponent(() => <options.component {...options.props} ml={11} />);
-    const { container: me } = renderComponent(() => <options.component {...options.props} me={37} />);
-    const { container: ms } = renderComponent(() => <options.component {...options.props} ms={39} />);
+    const { container: m } = render(() => <options.component {...options.props} m={45} />);
+    const { container: theme } = render(() => <options.component {...options.props} m="xl" />);
+    const { container: mx } = render(() => <options.component {...options.props} mx={34} />);
+    const { container: my } = render(() => <options.component {...options.props} my={22} />);
+    const { container: mt } = render(() => <options.component {...options.props} mt={13} />);
+    const { container: mb } = render(() => <options.component {...options.props} mb={43} />);
+    const { container: mr } = render(() => <options.component {...options.props} mr={98} />);
+    const { container: ml } = render(() => <options.component {...options.props} ml={11} />);
+    const { container: me } = render(() => <options.component {...options.props} me={37} />);
+    const { container: ms } = render(() => <options.component {...options.props} ms={39} />);
 
     expect(m.querySelector(selector)).toHaveStyle({ margin: rem(45) });
     expect(theme.querySelector(selector)).toHaveStyle({ margin: 'var(--empoleon-spacing-xl)' });

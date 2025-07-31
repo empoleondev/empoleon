@@ -1,5 +1,5 @@
 import { JSX } from 'solid-js';
-import { renderComponent } from '../render';
+import { render } from '../render';
 
 interface Options<Props = any> {
   component: (props: Props) => JSX.Element;
@@ -11,7 +11,7 @@ export function itSupportsClassName<Props>(
   name = 'supports className prop'
 ) {
   it(name, () => {
-    const { container } = renderComponent(
+    const { container } = render(
       () => <options.component {...options.props} className="test-class-name" />
     );
 

@@ -1,5 +1,5 @@
 import { JSX } from 'solid-js';
-import { renderComponent } from '../render';
+import { render } from '../render';
 
 interface Options<Props = any> {
   component: (props: Props) => JSX.Element;
@@ -12,7 +12,7 @@ export function itSupportsOthers<Props>(
   name = 'supports ...others props'
 ) {
   it(name, () => {
-    const { container } = renderComponent(() => <options.component {...options.props} data-test-attribute />);
+    const { container } = render(() => <options.component {...options.props} data-test-attribute />);
     expect(container.querySelector('[data-test-attribute]')).toBeInTheDocument();
   });
 }

@@ -61,7 +61,7 @@ describe('@empoleon/core/ComboboxOption', () => {
   });
 
   it('calls onClick when the option is clicked', async () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     render(<TestContainer {...defaultProps} onClick={spy} />);
 
     await userEvent.click(screen.getByRole('option'));
@@ -69,7 +69,7 @@ describe('@empoleon/core/ComboboxOption', () => {
   });
 
   it('calls onMouseDown when the option is clicked', async () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     render(<TestContainer {...defaultProps} onMouseDown={spy} />);
 
     await userEvent.click(screen.getByRole('option'));
@@ -77,7 +77,7 @@ describe('@empoleon/core/ComboboxOption', () => {
   });
 
   it('calls onMouseOver when the option is hovered', async () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     render(<TestContainer {...defaultProps} onMouseOver={spy} />);
 
     await userEvent.hover(screen.getByRole('option'));

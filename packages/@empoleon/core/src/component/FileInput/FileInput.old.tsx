@@ -8,7 +8,7 @@ const defaultProps: FileInputProps = {
 };
 
 describe('@empoleon/core/FileInput', () => {
-  tests.axe([<FileInput aria-label="test-label" key="1" />]);
+  tests.axe([() => <FileInput aria-label="test-label" />]);
 
   tests.itSupportsSystemProps<FileInputProps, __InputStylesNames | 'placeholder'>({
     component: FileInput,

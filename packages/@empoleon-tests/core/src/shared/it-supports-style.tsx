@@ -1,5 +1,5 @@
 import { DEFAULT_THEME, EmpoleonTheme } from '@empoleon/core';
-import { renderComponent } from '../render';
+import { render } from '../render';
 import { JSX } from 'solid-js';
 
 interface Options<Props = any> {
@@ -10,7 +10,7 @@ interface Options<Props = any> {
 
 export function itSupportsStyle<Props>(options: Options<Props>, name = 'supports style') {
   it(`${name}: object`, () => {
-    const { container } = renderComponent(
+    const { container } = render(
       () => <options.component {...options.props} style={{ color: 'salmon' }} />
     );
 
@@ -20,7 +20,7 @@ export function itSupportsStyle<Props>(options: Options<Props>, name = 'supports
   });
 
   it(`${name}: theme function`, () => {
-    const { container } = renderComponent(
+    const { container } = render(
       () => <options.component
         {...options.props}
         style={(theme: EmpoleonTheme) => ({ color: theme.colors.pink[4] })}
@@ -33,7 +33,7 @@ export function itSupportsStyle<Props>(options: Options<Props>, name = 'supports
   });
 
   it(`${name}: array of objects`, () => {
-    const { container } = renderComponent(
+    const { container } = render(
       () => <options.component
         {...options.props}
         style={[{ color: 'salmon' }, { background: 'olive' }]}
@@ -47,7 +47,7 @@ export function itSupportsStyle<Props>(options: Options<Props>, name = 'supports
   });
 
   it(`${name}: array of theme functions`, () => {
-    const { container } = renderComponent(
+    const { container } = render(
       () => <options.component
         {...options.props}
         style={[

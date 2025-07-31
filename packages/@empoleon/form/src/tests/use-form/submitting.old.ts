@@ -14,7 +14,7 @@ function tests(mode: FormMode) {
     });
 
     expect(hook.result.current.submitting).toBe(true);
-    jest.runAllTimers();
+    vi.runAllTimers();
     await waitFor(() => {
       expect(hook.result.current.submitting).toBe(false);
     });
@@ -39,13 +39,13 @@ function tests(mode: FormMode) {
 }
 
 describe('@empoleon/form/submitting-controlled', () => {
-  beforeAll(() => jest.useFakeTimers());
-  afterAll(() => jest.useRealTimers());
+  beforeAll(() => vi.useFakeTimers());
+  afterAll(() => vi.useRealTimers());
   tests('controlled');
 });
 
 describe('@empoleon/form/submitting-uncontrolled', () => {
-  beforeAll(() => jest.useFakeTimers());
-  afterAll(() => jest.useRealTimers());
+  beforeAll(() => vi.useFakeTimers());
+  afterAll(() => vi.useRealTimers());
   tests('uncontrolled');
 });

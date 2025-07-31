@@ -1,5 +1,5 @@
 import { JSX } from 'solid-js/jsx-runtime';
-import { renderComponent } from '../render';
+import { render } from '../render';
 
 interface Options<Props = any> {
   component: (props: Props) => JSX.Element;
@@ -12,7 +12,7 @@ export function itConnectsLabelAndInput<Props>(
   name = 'connects label and input'
 ) {
   it(name, () => {
-    const { container } = renderComponent(
+    const { container } = render(
       () => <options.component {...options.props} id="secret-test-id" label="Test label" />
     );
     expect(container.querySelector('[for="secret-test-id"]')).toBeInTheDocument();

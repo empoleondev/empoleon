@@ -1,5 +1,5 @@
 import { JSX } from 'solid-js';
-import { renderComponent } from '../render';
+import { render } from '../render';
 
 interface Options<Props = any> {
   component: (props: Props) => JSX.Element;
@@ -16,7 +16,7 @@ export function itSupportsRef<Props>(options: Options<Props>, name = 'supports r
       ref = el;
     };
 
-    renderComponent(() => <options.component {...options.props} {...{ [options.refProp || 'ref']: refCallback }} />);
+    render(() => <options.component {...options.props} {...{ [options.refProp || 'ref']: refCallback }} />);
     expect(ref).toBeInstanceOf(options.refType);
   });
 }

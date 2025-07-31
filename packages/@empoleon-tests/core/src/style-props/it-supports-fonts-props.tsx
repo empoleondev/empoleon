@@ -1,5 +1,5 @@
 import { JSX } from 'solid-js';
-import { renderComponent } from '../render';
+import { render } from '../render';
 
 interface Options<Props = any> {
   component: (props: Props) => JSX.Element;
@@ -14,16 +14,16 @@ export function itSupportsFontsProps<Props>(
   const selector = options.selector || '*:not(style)';
 
   it(name, () => {
-    const { container: theme } = renderComponent(() => <options.component {...options.props} fz="xs" />);
-    const { container: fz } = renderComponent(() => <options.component {...options.props} fz={32} />);
-    const { container: fw } = renderComponent(() => <options.component {...options.props} fw={700} />);
-    const { container: ff } = renderComponent(() => <options.component {...options.props} ff="sans-serif" />);
-    const { container: lts } = renderComponent(() => <options.component {...options.props} lts={16} />);
-    const { container: ta } = renderComponent(() => <options.component {...options.props} ta="right" />);
-    const { container: lh } = renderComponent(() => <options.component {...options.props} lh={2.25} />);
-    const { container: fs } = renderComponent(() => <options.component {...options.props} fs="italic" />);
-    const { container: tt } = renderComponent(() => <options.component {...options.props} tt="uppercase" />);
-    const { container: td } = renderComponent(() => <options.component {...options.props} td="underline" />);
+    const { container: theme } = render(() => <options.component {...options.props} fz="xs" />);
+    const { container: fz } = render(() => <options.component {...options.props} fz={32} />);
+    const { container: fw } = render(() => <options.component {...options.props} fw={700} />);
+    const { container: ff } = render(() => <options.component {...options.props} ff="sans-serif" />);
+    const { container: lts } = render(() => <options.component {...options.props} lts={16} />);
+    const { container: ta } = render(() => <options.component {...options.props} ta="right" />);
+    const { container: lh } = render(() => <options.component {...options.props} lh={2.25} />);
+    const { container: fs } = render(() => <options.component {...options.props} fs="italic" />);
+    const { container: tt } = render(() => <options.component {...options.props} tt="uppercase" />);
+    const { container: td } = render(() => <options.component {...options.props} td="underline" />);
 
     expect(theme.querySelector(selector)).toHaveStyle({ fontSize: 'var(--empoleon-font-size-xs)' });
     expect(fz.querySelector(selector)).toHaveStyle({

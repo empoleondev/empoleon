@@ -1,4 +1,4 @@
-import { createSignal, JSX, splitProps } from 'solid-js';
+import { createMemo, createSignal, JSX, splitProps } from 'solid-js';
 import { Box } from '../../../core';
 import { Transition, TransitionOverride } from '../../Transition';
 import { useSliderContext } from '../Slider.context';
@@ -52,7 +52,9 @@ export function Thumb(props: ThumbProps) {
 
   const [focused, setFocused] = createSignal(false);
 
-  const isVisible = local.labelAlwaysOn || local.dragging || focused() || (local.showLabelOnHover && local.isHovered);
+  const isVisible = createMemo(() =>
+    local.labelAlwaysOn || local.dragging || focused() || (local.showLabelOnHover && local.isHovered)
+  );
 
   return (
     <Box<'div'>
@@ -81,7 +83,7 @@ export function Thumb(props: ThumbProps) {
     >
       {local.children}
       <Transition
-        mounted={local.label != null && !!isVisible}
+        mounted={local.label != null && !!isVisible()}
         transition="fade"
         duration={0}
         {...local.labelTransitionProps}

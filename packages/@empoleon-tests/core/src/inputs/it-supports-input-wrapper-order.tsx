@@ -1,6 +1,6 @@
 import { JSX } from 'solid-js';
 import { inputWrapperQueries } from '../queries';
-import { renderComponent } from '../render';
+import { render } from '../render';
 
 interface Options<Props = any> {
   component: (props: Props) => JSX.Element;
@@ -12,7 +12,7 @@ export function itSupportsInputWrapperOrder<Props>(
   name = 'supports inputWrapperOrder prop'
 ) {
   it(name, () => {
-    const { container } = renderComponent(
+    const { container } = render(
       () => <options.component {...options.props} inputWrapperOrder={['error', 'label']} />
     );
     expect(inputWrapperQueries.getError(container as HTMLElement).nextElementSibling).toBe(
@@ -20,7 +20,7 @@ export function itSupportsInputWrapperOrder<Props>(
     );
 
     // Re-render with different props by creating a new render
-    const { container: container2 } = renderComponent(
+    const { container: container2 } = render(
       () => <options.component {...options.props} inputWrapperOrder={['label', 'error']} />
     );
     expect(inputWrapperQueries.getLabel(container2 as HTMLElement).nextElementSibling).toBe(

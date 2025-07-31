@@ -159,7 +159,7 @@ describe('@empoleon/dates/Calendar', () => {
   });
 
   it('calls onLevelChange when level changes', async () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     const { container } = render(<Calendar {...defaultProps} onLevelChange={spy} />);
 
     await userEvent.click(screen.getByLabelText('month-level'));
@@ -238,7 +238,7 @@ describe('@empoleon/dates/Calendar', () => {
   });
 
   it('calls onDateChange when date changes', async () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     const { rerender } = render(
       <Calendar {...defaultProps} level="month" date="2022-04-11" onDateChange={spy} />
     );
@@ -289,14 +289,14 @@ describe('@empoleon/dates/Calendar', () => {
   });
 
   it('calls onYearSelect when year control is clicked', async () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     const { container } = render(<Calendar {...defaultProps} level="decade" onYearSelect={spy} />);
     await userEvent.click(container.querySelector('table button')!);
     expect(spy).toHaveBeenCalledWith('2020-01-01');
   });
 
   it('calls onMonthSelect when month control is clicked', async () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     const { container } = render(<Calendar {...defaultProps} level="year" onMonthSelect={spy} />);
     await userEvent.click(container.querySelector('table button')!);
     expect(spy).toHaveBeenCalledWith('2022-01-01');

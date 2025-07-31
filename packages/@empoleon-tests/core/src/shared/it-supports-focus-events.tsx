@@ -1,5 +1,5 @@
 import { fireEvent } from '@solidjs/testing-library';
-import { renderComponent } from '../render';
+import { render } from '../render';
 import { JSX } from 'solid-js';
 import { vi } from 'vitest';
 
@@ -17,7 +17,7 @@ export function itSupportsFocusEvents<Props>(
     const onFocus = vi.fn();
     const onBlur = vi.fn();
 
-    const { container } = renderComponent(
+    const { container } = render(
       () => <options.component {...options.props} onFocus={onFocus} onBlur={onBlur} />
     );
 

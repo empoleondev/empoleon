@@ -74,7 +74,7 @@ export interface CheckboxProps
   icon?: Component<{ indeterminate: boolean | undefined; className: string }>;
 
   /** Assigns ref of the root element */
-  rootRef?: HTMLDivElement;
+  rootRef?: (el: HTMLDivElement | undefined) => void;
 
   /** Key of `theme.colors` or any valid CSS color to set icon color, by default value depends on `theme.autoContrast` */
   iconColor?: EmpoleonColor;
@@ -221,7 +221,10 @@ export const Checkbox = factory<CheckboxFactory>(_props => {
         <Box
           component="input"
           id={uuid}
-          ref={ref as HTMLInputElement}
+          ref={(el) => {
+            inputRef = el;
+            if (typeof ref === 'function') ref(el);
+          }}
           checked={local.checked}
           disabled={local.disabled}
           mod={{ error: !!local.error, indeterminate: local.indeterminate }}

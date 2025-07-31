@@ -17,7 +17,7 @@ describe('@empoleon/core/Combobox/use-combobox', () => {
   });
 
   it('supports controlled opened state', () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     const hook = renderHook(() => useCombobox({ opened: true, onOpenedChange: spy }));
     expect(hook.result.current.dropdownOpened).toBe(true);
 
@@ -31,7 +31,7 @@ describe('@empoleon/core/Combobox/use-combobox', () => {
   });
 
   it('calls onDropdownOpen when dropdown is opened', () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     const hook = renderHook(() => useCombobox({ onDropdownOpen: spy }));
     expect(spy).not.toHaveBeenCalled();
 
@@ -43,7 +43,7 @@ describe('@empoleon/core/Combobox/use-combobox', () => {
   });
 
   it('calls onDropdownClose when dropdown is closed', () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     const hook = renderHook(() => useCombobox({ onDropdownClose: spy }));
     expect(spy).not.toHaveBeenCalled();
 

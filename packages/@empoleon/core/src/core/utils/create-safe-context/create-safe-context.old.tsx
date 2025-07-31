@@ -16,7 +16,7 @@ describe('@empoleon/core/create-safe-context', () => {
   });
 
   it('returns context value when useSafeContext hook was called within Provider', () => {
-    const fn = jest.fn();
+    const fn = vi.fn();
     const [Provider, useContext] = createSafeContext<ContextType>('test-error');
     const wrapper = ({ children }: { children: React.ReactNode }) => (
       <Provider value={{ value: 100, onChange: fn }}>{children}</Provider>

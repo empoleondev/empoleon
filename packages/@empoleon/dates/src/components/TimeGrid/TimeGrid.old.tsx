@@ -23,14 +23,14 @@ describe('@empoleon/dates/TimeGrid', () => {
   });
 
   it('calls onChange with correct value when time is clicked', async () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     render(<TimeGrid {...defaultProps} onChange={spy} />);
     await userEvent.click(screen.getByRole('button', { name: '10:00' }));
     expect(spy).toHaveBeenLastCalledWith('10:00');
   });
 
   it('calls onChange with null when time is clicked and allowDeselect is true', async () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     const { rerender } = render(
       <TimeGrid {...defaultProps} onChange={spy} allowDeselect defaultValue="10:00" />
     );

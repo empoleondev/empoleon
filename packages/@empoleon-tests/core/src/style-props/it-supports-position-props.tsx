@@ -1,5 +1,5 @@
 import { JSX } from 'solid-js';
-import { renderComponent } from '../render';
+import { render } from '../render';
 
 interface Options<Props = any> {
   component: (props: Props) => JSX.Element;
@@ -14,14 +14,14 @@ export function itSupportsPositionProps<Props>(
   const selector = options.selector || '*:not(style)';
 
   it(name, () => {
-    const { container: pos } = renderComponent(() => <options.component {...options.props} pos="absolute" />);
-    const { container: top } = renderComponent(() => <options.component {...options.props} top="1rem" />);
-    const { container: left } = renderComponent(() => <options.component {...options.props} left="2rem" />);
-    const { container: bottom } = renderComponent(() => <options.component {...options.props} bottom="3rem" />);
-    const { container: right } = renderComponent(() => <options.component {...options.props} right="4rem" />);
-    const { container: inset } = renderComponent(() => <options.component {...options.props} inset="5rem" />);
-    const { container: display } = renderComponent(() => <options.component {...options.props} display="flex" />);
-    const { container: flex } = renderComponent(() => <options.component {...options.props} flex="0 0 1" />);
+    const { container: pos } = render(() => <options.component {...options.props} pos="absolute" />);
+    const { container: top } = render(() => <options.component {...options.props} top="1rem" />);
+    const { container: left } = render(() => <options.component {...options.props} left="2rem" />);
+    const { container: bottom } = render(() => <options.component {...options.props} bottom="3rem" />);
+    const { container: right } = render(() => <options.component {...options.props} right="4rem" />);
+    const { container: inset } = render(() => <options.component {...options.props} inset="5rem" />);
+    const { container: display } = render(() => <options.component {...options.props} display="flex" />);
+    const { container: flex } = render(() => <options.component {...options.props} flex="0 0 1" />);
 
     expect(pos.querySelector(selector)).toHaveStyle({ position: 'absolute' });
     expect(top.querySelector(selector)).toHaveStyle({ top: '1rem' });

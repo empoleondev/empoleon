@@ -74,7 +74,7 @@ export interface RadioProps
   radius?: EmpoleonRadius;
 
   /** Assigns ref of the root element */
-  rootRef?: HTMLDivElement | ((el: HTMLDivElement) => void) | undefined;
+  rootRef?: (el: HTMLDivElement | undefined) => void;
 
   /** Key of `theme.colors` or any valid CSS color to set icon color, by default value depends on `theme.autoContrast` */
   iconColor?: EmpoleonColor;

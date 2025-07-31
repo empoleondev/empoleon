@@ -1,5 +1,5 @@
 import { JSX } from 'solid-js';
-import { renderComponent } from '../render';
+import { render } from '../render';
 
 interface Options<Props = any> {
   component: (props: Props) => JSX.Element;
@@ -14,9 +14,9 @@ export function itSupportsColorsProps<Props>(
   const selector = options.selector || '*:not(style)';
 
   it(name, () => {
-    const { container: c } = renderComponent(() => <options.component {...options.props} c="#FEFEFE" />);
-    const { container: bg } = renderComponent(() => <options.component {...options.props} bg="#DCDCDC" />);
-    const { container: opacity } = renderComponent(() => <options.component {...options.props} opacity={0.85} />);
+    const { container: c } = render(() => <options.component {...options.props} c="#FEFEFE" />);
+    const { container: bg } = render(() => <options.component {...options.props} bg="#DCDCDC" />);
+    const { container: opacity } = render(() => <options.component {...options.props} opacity={0.85} />);
 
     expect(c.querySelector(selector)).toHaveStyle({ color: '#FEFEFE' });
     expect(bg.querySelector(selector)).toHaveStyle({ background: '#DCDCDC' });

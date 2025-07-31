@@ -242,7 +242,7 @@ describe('@empoleon/dates/TimePicker', () => {
   });
 
   it('handles paste event correctly', async () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     render(<TimePicker {...defaultProps} withSeconds format="24h" onChange={spy} />);
 
     await userEvent.click(screen.getByLabelText('test-hours'));
@@ -256,7 +256,7 @@ describe('@empoleon/dates/TimePicker', () => {
   });
 
   it('calls onChange function when the value is valid (24h format)', async () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     render(<TimePicker {...defaultProps} withSeconds format="24h" onChange={spy} />);
 
     await userEvent.type(screen.getByLabelText('test-hours'), '8');
@@ -268,7 +268,7 @@ describe('@empoleon/dates/TimePicker', () => {
   });
 
   it('calls onChange function when the value is valid (12h format)', async () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     render(<TimePicker {...defaultProps} withSeconds format="12h" onChange={spy} />);
 
     await userEvent.type(screen.getByLabelText('test-hours'), '8');
@@ -281,7 +281,7 @@ describe('@empoleon/dates/TimePicker', () => {
   });
 
   it('clamps time based on the given min and max props (24h format)', async () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     render(
       <TimePicker
         {...defaultProps}
@@ -310,7 +310,7 @@ describe('@empoleon/dates/TimePicker', () => {
   });
 
   it('clamps time based on the given min and max props (12h format)', async () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     render(
       <TimePicker
         {...defaultProps}
@@ -369,7 +369,7 @@ describe('@empoleon/dates/TimePicker', () => {
   });
 
   it('clear input when the clear button is clicked', async () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     render(
       <TimePicker {...defaultProps} clearable withSeconds defaultValue="12:34:55" onChange={spy} />
     );
@@ -385,7 +385,7 @@ describe('@empoleon/dates/TimePicker', () => {
   });
 
   it('clears partial input value when the clear button is clicked', async () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     render(
       <TimePicker {...defaultProps} clearable withSeconds defaultValue="12:34" onChange={spy} />
     );
@@ -516,7 +516,7 @@ describe('@empoleon/dates/TimePicker', () => {
   });
 
   it('allows customizing paste split behavior with pasteSplit prop', async () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     const customSplit = () => ({ hours: 1, minutes: 34, seconds: 53, amPm: null });
     render(
       <TimePicker
@@ -534,7 +534,7 @@ describe('@empoleon/dates/TimePicker', () => {
   });
 
   it('calls onFocus once when one of the inputs is focused', async () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     render(<TimePicker {...defaultProps} format="12h" withSeconds onFocus={spy} />);
 
     await userEvent.click(screen.getByLabelText('test-hours'));
@@ -551,7 +551,7 @@ describe('@empoleon/dates/TimePicker', () => {
   });
 
   it('calls onBlur once when one of the inputs is blurred', async () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     render(<TimePicker {...defaultProps} format="12h" withSeconds onBlur={spy} />);
 
     await userEvent.click(screen.getByLabelText('test-hours'));

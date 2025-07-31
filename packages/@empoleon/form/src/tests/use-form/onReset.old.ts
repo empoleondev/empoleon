@@ -2,7 +2,7 @@ import { act, renderHook } from '@testing-library/react';
 import { FormMode } from '../../types';
 import { useForm } from '../../use-form';
 
-const getFormEvent = () => ({ preventDefault: jest.fn() }) as any;
+const getFormEvent = () => ({ preventDefault: vi.fn() }) as any;
 
 function tests(mode: FormMode) {
   it('resets form with onReset handler', () => {

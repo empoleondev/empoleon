@@ -109,7 +109,7 @@ describe('@empoleon/dates/DatePickerInput', () => {
   });
 
   it('supports controlled state (dropdown click)', async () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     const { container } = render(
       <DatePickerInput {...defaultProps} value="2022-04-11" onChange={spy} />
     );

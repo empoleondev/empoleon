@@ -17,7 +17,7 @@ function TestComponent({ watch }: { watch: FormFieldSubscriber<any, any> }) {
 
 describe('@empoleon/form/watch', () => {
   it('allows observing field changes', async () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     render(<TestComponent watch={spy} />);
     expect(spy).not.toHaveBeenCalled();
 
@@ -41,7 +41,7 @@ describe('@empoleon/form/watch', () => {
   });
 
   it('does not call subscriber function when other field changes', async () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     render(<TestComponent watch={spy} />);
     expect(spy).not.toHaveBeenCalled();
 
@@ -54,7 +54,7 @@ describe('@empoleon/form/watch', () => {
     const hook = renderHook(() =>
       useForm({ mode: 'uncontrolled', initialValues: { a: '', b: '' } })
     );
-    const spy = jest.fn();
+    const spy = vi.fn();
 
     act(() => renderHook(() => hook.result.current.watch('a', spy)));
     expect(spy).not.toHaveBeenCalled();
@@ -73,7 +73,7 @@ describe('@empoleon/form/watch', () => {
     const hook = renderHook(() =>
       useForm({ mode: 'uncontrolled', initialValues: { a: '', b: '' } })
     );
-    const spy = jest.fn();
+    const spy = vi.fn();
 
     act(() => renderHook(() => hook.result.current.watch('a', spy)));
     expect(spy).not.toHaveBeenCalled();

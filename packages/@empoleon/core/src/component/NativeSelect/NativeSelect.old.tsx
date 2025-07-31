@@ -63,7 +63,7 @@ describe('@empoleon/core/NativeSelect', () => {
   });
 
   it('supports controlled state', async () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     const { container } = render(
       <NativeSelect
         data={['test-1', 'test-2']}

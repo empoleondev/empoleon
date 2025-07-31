@@ -57,7 +57,7 @@ describe('@empoleon/dates/MonthPicker', () => {
   });
 
   it('can be controlled (type="default")', async () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     const { container } = render(
       <MonthPicker {...defaultProps} date="2022-04-11" value="2022-04-11" onChange={spy} />
     );
@@ -85,7 +85,7 @@ describe('@empoleon/dates/MonthPicker', () => {
   });
 
   it('can be controlled (type="multiple")', async () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     const { container } = render(
       <MonthPicker
         {...defaultProps}
@@ -116,7 +116,7 @@ describe('@empoleon/dates/MonthPicker', () => {
   });
 
   it('can be controlled (type="range")', async () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     const { container } = render(
       <MonthPicker {...defaultProps} type="range" value={[null, null]} onChange={spy} />
     );
@@ -125,7 +125,7 @@ describe('@empoleon/dates/MonthPicker', () => {
   });
 
   it('supports onClick handler from getMonthControlProps', async () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     const { container } = render(
       <MonthPicker {...defaultProps} getMonthControlProps={() => ({ onClick: spy })} />
     );
@@ -134,7 +134,7 @@ describe('@empoleon/dates/MonthPicker', () => {
   });
 
   it('handles allowSingleDateInRange={true} correctly', async () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     const { container } = render(
       <MonthPicker {...defaultProps} type="range" allowSingleDateInRange onChange={spy} />
     );
@@ -145,7 +145,7 @@ describe('@empoleon/dates/MonthPicker', () => {
   });
 
   it('handles allowSingleDateInRange={false} correctly', async () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     const { container } = render(
       <MonthPicker {...defaultProps} type="range" allowSingleDateInRange={false} onChange={spy} />
     );

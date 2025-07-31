@@ -8,7 +8,7 @@ interface ContextType {
 
 describe('@empoleon/core/create-optional-context', () => {
   it('returns context value when useSafeContext hook was called within Provider', () => {
-    const fn = jest.fn();
+    const fn = vi.fn();
     const [Provider, useContext] = createOptionalContext<ContextType>();
     const wrapper = ({ children }: { children: React.ReactNode }) => (
       <Provider value={{ value: 100, onChange: fn }}>{children}</Provider>

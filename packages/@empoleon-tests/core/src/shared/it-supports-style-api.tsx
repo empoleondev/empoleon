@@ -1,5 +1,5 @@
 import { DEFAULT_THEME, EmpoleonTheme } from '@empoleon/core';
-import { renderComponent } from '../render';
+import { render } from '../render';
 import { JSX } from 'solid-js/jsx-runtime';
 
 const randomNumber = (min = 10, max = 100) => Math.floor(Math.random() * (max - min + 1) + min);
@@ -32,7 +32,7 @@ export function itSupportsStylesApi<
 >(options: Options<Props, Selectors>, name = 'supports styles api') {
   it(`${name}: classNames (inline object)`, () => {
     const classNames = getTestObjectClassNames(options.selectors);
-    const { container } = renderComponent(() => <options.component {...options.props} classNames={classNames} />);
+    const { container } = render(() => <options.component {...options.props} classNames={classNames} />);
 
     options.selectors.forEach((selector) => {
       try {
@@ -46,7 +46,7 @@ export function itSupportsStylesApi<
   if (!options.compound) {
     it(`${name}: classNames (inline function)`, () => {
       const classNames = getTestFunctionClassNames(options.selectors);
-      const { container } = renderComponent(
+      const { container } = render(
         () => <options.component {...options.props} data-test="__test" classNames={classNames} />
       );
       options.selectors.forEach((selector) => {
@@ -69,7 +69,7 @@ export function itSupportsStylesApi<
       {}
     );
 
-    const { container } = renderComponent(
+    const { container } = render(
       () => <options.component {...options.props} classNames={classNames} styles={styles} />
     );
 
@@ -92,7 +92,7 @@ export function itSupportsStylesApi<
           return acc;
         }, {});
 
-      const { container } = renderComponent(
+      const { container } = render(
         () => <options.component
           {...options.props}
           data-test="orange"
@@ -110,7 +110,7 @@ export function itSupportsStylesApi<
   }
 
   it(`${name}: static classNames (default)`, () => {
-    const { container } = renderComponent(() => <options.component {...options.props} />);
+    const { container } = render(() => <options.component {...options.props} />);
     options.selectors.forEach((selector) => {
       try {
         expect(
@@ -125,7 +125,7 @@ export function itSupportsStylesApi<
   if (options.providerStylesApi === undefined || options.providerStylesApi === true) {
     it(`${name}: classNames (EmpoleonProvider object)`, () => {
       const classNames = getTestObjectClassNames(options.selectors);
-      const { container } = renderComponent(
+      const { container } = render(
         () => <options.component {...options.props} classNames={classNames} />,
         {
           components: {
@@ -143,7 +143,7 @@ export function itSupportsStylesApi<
 
     it(`${name}: classNames (EmpoleonProvider function)`, () => {
       const classNames = getTestFunctionClassNames(options.selectors);
-      const { container } = renderComponent(
+      const { container } = render(
         () => <options.component {...options.props} data-test="__test" classNames={classNames} />,
         {
           components: {
@@ -172,7 +172,7 @@ export function itSupportsStylesApi<
         {}
       );
 
-      const { container } = renderComponent(() => <options.component {...options.props} />, {
+      const { container } = render(() => <options.component {...options.props} />, {
         components: {
           [options.providerName]: {
             styles,
@@ -199,7 +199,7 @@ export function itSupportsStylesApi<
           return acc;
         }, {});
 
-      const { container } = renderComponent(() => <options.component {...options.props} data-test="orange" />, {
+      const { container } = render(() => <options.component {...options.props} data-test="orange" />, {
         components: {
           [options.providerName]: {
             styles: styles as any,
@@ -220,7 +220,7 @@ export function itSupportsStylesApi<
     });
 
     it(`${name}: static classNames (EmpoleonProvider)`, () => {
-      const { container } = renderComponent(
+      const { container } = render(
         () => <options.component {...options.props} />,
         {},
         { classNamesPrefix: 'test' }

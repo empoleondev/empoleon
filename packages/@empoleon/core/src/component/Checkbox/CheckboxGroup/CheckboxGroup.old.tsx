@@ -45,7 +45,7 @@ describe('@empoleon/core/CheckboxGroup', () => {
   });
 
   it('supports controlled state', async () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     render(<CheckboxGroup {...defaultProps} value={['test-value-2']} onChange={spy} />);
     expect(screen.getAllByRole('checkbox')[1]).toBeChecked();
     await userEvent.click(screen.getAllByRole('checkbox')[0]);

@@ -1,6 +1,6 @@
 import { JSX } from 'solid-js';
 import { patchConsoleError } from '../patch-console-error';
-import { renderComponent } from '../render';
+import { render } from '../render';
 
 interface Options<Props = any> {
   component: (props: Props) => JSX.Element;
@@ -14,7 +14,7 @@ export function itThrowsContextError<Props>(
 ) {
   it(name, async () => {
     patchConsoleError();
-    expect(() => renderComponent(() => <options.component {...options.props} />)).toThrow(
+    expect(() => render(() => <options.component {...options.props} />)).toThrow(
       new Error(options.error)
     );
     patchConsoleError.release();

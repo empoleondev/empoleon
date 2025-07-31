@@ -1,5 +1,5 @@
 import { ComponentProps, JSX } from 'solid-js';
-import { renderComponent } from '../render';
+import { render } from '../render';
 
 interface Options<Props = any> {
   component: (props: Props) => JSX.Element;
@@ -16,7 +16,7 @@ export function itIsPolymorphic<Props>(options: Options<Props>, name = 'is polym
     container.querySelector(options.selector || '*:not(style)')!;
 
   it(`${name}: html element`, () => {
-    const { container } = renderComponent(
+    const { container } = render(
       () => <options.component component="a" href="#test-link" {...options.props} />
     );
 
@@ -26,18 +26,18 @@ export function itIsPolymorphic<Props>(options: Options<Props>, name = 'is polym
   });
 
   it(`${name}: React component`, () => {
-    const { container } = renderComponent(
+    const { container } = render(
       () => <options.component component={TestComponent} data-parent-prop {...options.props} />
     );
 
     const target = getTarget(container as HTMLElement);
     expect(target.tagName).toBe('MARK');
-    expect(target).toHaveAttribute('data-child-prop');
-    expect(target).toHaveAttribute('data-parent-prop');
+    expect(target.getAttribute('data-child-prop')).toBe('');
+    expect(target.getAttribute('data-parent-prop')).toBe('true');
   });
 
   it(`${name}: renderRoot`, () => {
-    const { container } = renderComponent(
+    const { container } = render(
       () => <options.component
         renderRoot={(props: any) => <a href="#test-link" {...props} />}
         {...options.props}

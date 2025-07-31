@@ -1,5 +1,5 @@
 import { screen } from '@solidjs/testing-library';
-import { renderComponent } from '../render';
+import { render } from '../render';
 import { JSX } from 'solid-js';
 
 interface Options<Props = any> {
@@ -13,17 +13,17 @@ export function itSupportsInputSections<Props>(
 ) {
   describe(name, () => {
     it('supports rightSection', () => {
-      renderComponent(() => <options.component {...options.props} rightSection="test-right-section" />);
+      render(() => <options.component {...options.props} rightSection="test-right-section" />);
       expect(screen.getByText('test-right-section')).toBeInTheDocument();
     });
 
     it('supports leftSection', () => {
-      renderComponent(() => <options.component {...options.props} leftSection="test-left-section" />);
+      render(() => <options.component {...options.props} leftSection="test-left-section" />);
       expect(screen.getByText('test-left-section')).toBeInTheDocument();
     });
 
     it('supports rightSectionProps', () => {
-      renderComponent(
+      render(
         () => <options.component
           {...options.props}
           rightSection="test-right-section"
@@ -34,7 +34,7 @@ export function itSupportsInputSections<Props>(
     });
 
     it('supports leftSectionProps', () => {
-      renderComponent(
+      render(
         () => <options.component
           {...options.props}
           leftSection="test-left-section"

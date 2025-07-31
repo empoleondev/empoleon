@@ -34,7 +34,7 @@ describe('@empoleon/form/validate-values', () => {
   });
 
   it('calls validate function with values', () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     validateValues(spy, { a: 1, b: 2 });
     expect(spy).toHaveBeenCalledWith({ a: 1, b: 2 });
   });

@@ -75,7 +75,7 @@ const varsResolver = createVarsResolver<BurgerFactory>(
 );
 
 export const Burger = factory<BurgerFactory>(_props => {
-  const props = mergeProps(defaultProps, defaultProps, _props);
+  const props = useProps('Burger', null, _props);
 
   const [local, others] = splitProps(props, [
     'classNames',

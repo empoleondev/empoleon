@@ -150,7 +150,7 @@ describe('@empoleon/dates/DateInput', () => {
   });
 
   it('supports controlled state (dropdown click)', async () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     const { container } = render(
       <DateInput {...defaultProps} date="2022-04-11" value="2022-04-11" onChange={spy} />
     );
@@ -169,7 +169,7 @@ describe('@empoleon/dates/DateInput', () => {
   });
 
   it('supports controlled state (free input)', async () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     const { container } = render(<DateInput {...defaultProps} value="2022-04-11" onChange={spy} />);
     await userEvent.tab();
     await userEvent.clear(getInput(container));
@@ -195,7 +195,7 @@ describe('@empoleon/dates/DateInput', () => {
   });
 
   it('clears input when clear button is clicked (controlled)', async () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     const { container } = render(
       <DateInput
         {...defaultProps}
@@ -224,7 +224,7 @@ describe('@empoleon/dates/DateInput', () => {
   });
 
   it('allows to clear input value when clearable is set (controlled)', async () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     const { container } = render(
       <DateInput {...defaultProps} clearable value="2022-04-11" onChange={spy} />
     );
@@ -248,7 +248,7 @@ describe('@empoleon/dates/DateInput', () => {
   });
 
   it('does not allow to clear input value when clearable is not set (controlled)', async () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     const { container } = render(
       <DateInput {...defaultProps} clearable={false} value="2022-04-11" onChange={spy} />
     );
@@ -272,7 +272,7 @@ describe('@empoleon/dates/DateInput', () => {
   });
 
   it('allows to clear input value by clicking the selected date when clearable and allowDeselect are set (controlled)', async () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     const { container } = render(
       <DateInput {...defaultProps} clearable allowDeselect value="2022-04-01" onChange={spy} />
     );
@@ -296,7 +296,7 @@ describe('@empoleon/dates/DateInput', () => {
   });
 
   it('does not allow to clear input value by clicking the selected date when allowDeselect is not set (controlled)', async () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     const { container } = render(
       <DateInput
         {...defaultProps}
@@ -315,7 +315,7 @@ describe('@empoleon/dates/DateInput', () => {
   });
 
   it('calls onClick when input is clicked', async () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     const { container } = render(<DateInput {...defaultProps} onClick={spy} />);
     await userEvent.click(getInput(container));
     expect(spy).toHaveBeenCalled();

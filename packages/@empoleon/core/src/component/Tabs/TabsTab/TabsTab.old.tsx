@@ -42,14 +42,14 @@ describe('@empoleon/core/TabsTab', () => {
   });
 
   it('calls onClick function from props', async () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     render(<TestContainer {...defaultProps} onClick={spy} />);
     await userEvent.click(screen.getByRole('tab'));
     expect(spy).toHaveBeenCalledTimes(1);
   });
 
   it('calls onKeyDown function from props', async () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     render(<TestContainer {...defaultProps} onKeyDown={spy} />);
     await userEvent.type(screen.getByRole('tab'), 'R');
     expect(spy).toHaveBeenCalledTimes(1);

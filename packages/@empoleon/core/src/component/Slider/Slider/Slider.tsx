@@ -224,8 +224,8 @@ export const Slider = factory<SliderFactory>(_props => {
   const pos = getPosition({ value: _value(), min: local.min!, max: local.max! });
   return pos;
 });
-  const scaledValue = local.scale!(_value());
-  const _label = typeof local.label === 'function' ? local.label(scaledValue) : local.label;
+  const scaledValue = createMemo(() => local.scale!(_value()));
+  const _label = createMemo(() => typeof local.label === 'function' ? local.label(scaledValue()) : local.label);
   const precision = local.precision ?? getPrecision(local.step!);
 
   const handleChange = ({ x }: { x: number }) => {
@@ -311,6 +311,7 @@ export const Slider = factory<SliderFactory>(_props => {
             Math.min(Math.max(dir === 'rtl' ? _value() - local.step! : _value() + local.step!, local.min!), local.max!),
             precision
           );
+
           setValue(nextValue);
           callOnChangeEnd(nextValue);
           break;
@@ -411,7 +412,7 @@ export const Slider = factory<SliderFactory>(_props => {
           marks={local.marks}
           min={local.min!}
           max={local.max!}
-          value={scaledValue}
+          value={scaledValue()}
           disabled={local.disabled}
           containerProps={{
             ref: (el: any) => {
@@ -425,10 +426,10 @@ export const Slider = factory<SliderFactory>(_props => {
           <Thumb
             max={local.max!}
             min={local.min!}
-            value={scaledValue}
+            value={scaledValue()}
             position={position()}
             dragging={active()}
-            label={_label}
+            label={_label()}
             ref={thumb as any}
             labelTransitionProps={local.labelTransitionProps}
             labelAlwaysOn={local.labelAlwaysOn}
@@ -442,7 +443,7 @@ export const Slider = factory<SliderFactory>(_props => {
           </Thumb>
         </Track>
 
-        <input type="hidden" name={local.name} value={scaledValue} {...local.hiddenInputProps} />
+        <input type="hidden" name={local.name} value={scaledValue()} {...local.hiddenInputProps} />
       </SliderRoot>
     </SliderProvider>
   );

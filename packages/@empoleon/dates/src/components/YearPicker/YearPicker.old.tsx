@@ -47,7 +47,7 @@ describe('@empoleon/dates/YearPicker', () => {
   });
 
   it('can be controlled (type="default")', async () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     const { container } = render(
       <YearPicker {...defaultProps} date="2022-04-11" value="2023-04-11" onChange={spy} />
     );
@@ -75,7 +75,7 @@ describe('@empoleon/dates/YearPicker', () => {
   });
 
   it('can be controlled (type="multiple")', async () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     const { container } = render(
       <YearPicker
         {...defaultProps}
@@ -106,7 +106,7 @@ describe('@empoleon/dates/YearPicker', () => {
   });
 
   it('can be controlled (type="range")', async () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     const { container } = render(
       <YearPicker {...defaultProps} type="range" value={[null, null]} onChange={spy} />
     );
@@ -115,7 +115,7 @@ describe('@empoleon/dates/YearPicker', () => {
   });
 
   it('supports onClick handler from getYearControlProps', async () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     const { container } = render(
       <YearPicker {...defaultProps} getYearControlProps={() => ({ onClick: spy })} />
     );
@@ -124,7 +124,7 @@ describe('@empoleon/dates/YearPicker', () => {
   });
 
   it('handles allowSingleDateInRange={true} correctly', async () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     const { container } = render(
       <YearPicker {...defaultProps} type="range" allowSingleDateInRange onChange={spy} />
     );
@@ -135,7 +135,7 @@ describe('@empoleon/dates/YearPicker', () => {
   });
 
   it('handles allowSingleDateInRange={false} correctly', async () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     const { container } = render(
       <YearPicker {...defaultProps} type="range" allowSingleDateInRange={false} onChange={spy} />
     );

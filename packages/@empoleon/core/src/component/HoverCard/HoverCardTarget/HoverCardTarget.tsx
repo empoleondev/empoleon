@@ -1,5 +1,5 @@
-import { JSX, splitProps } from 'solid-js';
-import { createEventHandler, isElement, useProps } from '../../../core';
+import { JSX, splitProps, children as getChildren } from 'solid-js';
+import { createEventHandler, useProps } from '../../../core';
 import { Popover, PopoverTargetProps } from '../../Popover';
 import { useHoverCardContext } from '../HoverCard.context';
 
@@ -27,10 +27,21 @@ export function HoverCardTarget(_props: HoverCardTargetProps) {
   //   );
   // }
 
-  const ctx = useHoverCardContext();
+  const safe = getChildren(() => local.children);
+  const resolved = safe();
 
-  const onMouseEnter = createEventHandler((local.children as any)?.props?.onMouseEnter, ctx.openDropdown);
-  const onMouseLeave = createEventHandler((local.children as any)?.props?.onMouseLeave, ctx.closeDropdown);
+  // If more than one top‑level node, or primitive, reject
+  if (!resolved || Array.isArray(resolved) || typeof resolved === 'string' || typeof resolved === 'number') {
+    throw new Error(
+      'HoverCard.Target component children should be an element or a component that accepts ref. Fragments, strings, numbers and other primitive values are not supported'
+    );
+  }
+
+  const child = resolved as any;
+
+  const ctx = useHoverCardContext();
+  const onMouseEnter = createEventHandler(child.props?.onMouseEnter, ctx.openDropdown);
+  const onMouseLeave = createEventHandler(child.props?.onMouseLeave, ctx.closeDropdown);
 
   const eventListeners = { onMouseEnter, onMouseLeave };
 

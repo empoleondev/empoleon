@@ -8,11 +8,11 @@ const defaultProps: JsonInputProps = {
 
 describe('@empoleon/core/JsonInput', () => {
   tests.axe([
-    <JsonInput aria-label="test-label" key="1" />,
-    <JsonInput label="test-label" key="2" />,
-    <JsonInput label="test-label" error key="3" />,
-    <JsonInput label="test-label" error="test-error" id="test" key="4" />,
-    <JsonInput label="test-label" description="test-description" key="5" />,
+    () => <JsonInput aria-label="test-label" />,
+    () => <JsonInput label="test-label" />,
+    () => <JsonInput label="test-label" error />,
+    () => <JsonInput label="test-label" error="test-error" id="test" />,
+    () => <JsonInput label="test-label" description="test-description" />,
   ]);
 
   tests.itSupportsSystemProps<JsonInputProps, __InputStylesNames>({

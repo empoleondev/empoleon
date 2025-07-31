@@ -2,7 +2,7 @@ import { act, renderHook } from '@testing-library/react';
 import { FormMode } from '../../types';
 import { useForm } from '../../use-form';
 
-const getFormEvent = () => ({ preventDefault: jest.fn() }) as any;
+const getFormEvent = () => ({ preventDefault: vi.fn() }) as any;
 
 function tests(mode: FormMode) {
   it('calls handleSubmit with values and event when all values are valid', () => {
@@ -11,8 +11,8 @@ function tests(mode: FormMode) {
     );
 
     const event = getFormEvent();
-    const handleSubmit = jest.fn();
-    const handleValidationFailure = jest.fn();
+    const handleSubmit = vi.fn();
+    const handleValidationFailure = vi.fn();
 
     act(() => hook.result.current.onSubmit(handleSubmit, handleValidationFailure)(event));
 
@@ -42,8 +42,8 @@ function tests(mode: FormMode) {
     );
 
     const event = getFormEvent();
-    const handleSubmit = jest.fn();
-    const handleValidationFailure = jest.fn();
+    const handleSubmit = vi.fn();
+    const handleValidationFailure = vi.fn();
 
     act(() => hook.result.current.onSubmit(handleSubmit, handleValidationFailure)(event));
     expect(handleSubmit).not.toHaveBeenCalled();
@@ -73,7 +73,7 @@ function tests(mode: FormMode) {
 
   it('allows to call onSubmit without event', () => {
     const hook = renderHook(() => useForm({ mode, initialValues: { a: 1 } }));
-    const handleSubmit = jest.fn();
+    const handleSubmit = vi.fn();
     act(() => hook.result.current.onSubmit(handleSubmit)());
     expect(handleSubmit).toHaveBeenCalledWith({ a: 1 }, undefined);
   });

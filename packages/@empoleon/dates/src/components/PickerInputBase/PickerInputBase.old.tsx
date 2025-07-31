@@ -45,7 +45,7 @@ describe('@empoleon/dates/PickerInputBase', () => {
   });
 
   it('supports onClick handler', async () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
     render(<PickerInputBase {...defaultProps} onClick={spy} />);
     await userEvent.click(screen.getByText('test-value'));
     expect(spy).toHaveBeenCalled();
@@ -104,7 +104,7 @@ describe('@empoleon/dates/PickerInputBase', () => {
   });
 
   it('calls onClear when clear button is clicked', async () => {
-    const spy = jest.fn();
+    const spy = vi.fn();
 
     render(
       <PickerInputBase

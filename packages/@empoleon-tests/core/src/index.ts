@@ -83,7 +83,7 @@ export const tests = {
   axe,
 };
 
-export { renderComponent } from './render';
+export { render } from './render';
 export { wait } from './wait';
 export { patchConsoleError, patchConsoleWarn } from './patch-console-error';
 export { createContextContainer } from './create-context-container';

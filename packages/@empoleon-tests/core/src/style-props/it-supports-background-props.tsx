@@ -1,5 +1,5 @@
 import { JSX } from 'solid-js';
-import { renderComponent } from '../render';
+import { render } from '../render';
 
 interface Options<Props = any> {
   component: (props: Props) => JSX.Element;
@@ -14,10 +14,10 @@ export function itSupportsBackgroundProps<Props>(
   const selector = options.selector || '*:not(style)';
 
   it(name, () => {
-    const { container: bgsz } = renderComponent(() => <options.component {...options.props} bgsz={32} />);
-    const { container: bgp } = renderComponent(() => <options.component {...options.props} bgp="center" />);
-    const { container: bgr } = renderComponent(() => <options.component {...options.props} bgr="repeat" />);
-    const { container: bga } = renderComponent(() => <options.component {...options.props} bga="fixed" />);
+    const { container: bgsz } = render(() => <options.component {...options.props} bgsz={32} />);
+    const { container: bgp } = render(() => <options.component {...options.props} bgp="center" />);
+    const { container: bgr } = render(() => <options.component {...options.props} bgr="repeat" />);
+    const { container: bga } = render(() => <options.component {...options.props} bga="fixed" />);
 
     expect(bgsz.querySelector(selector)).toHaveStyle({
       backgroundSize: 'calc(2rem * var(--empoleon-scale))',
