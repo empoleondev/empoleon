@@ -12,7 +12,7 @@ const defaultProps: RadioProps = {
 describe('@empoleon/core/Radio', () => {
   tests.itSupportsSystemProps<RadioProps, RadioStylesNames>({
     component: Radio,
-    props: defaultProps,
+    props: () => defaultProps,
     mod: true,
     styleProps: true,
     extend: true,

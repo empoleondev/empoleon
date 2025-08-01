@@ -3,7 +3,7 @@ import { render } from '../render';
 
 interface Options<Props = any> {
   component: (props: Props) => JSX.Element;
-  props: Props;
+  props: Props | (() => Props);
   selector?: string;
 }
 
@@ -14,10 +14,18 @@ export function itSupportsBackgroundProps<Props>(
   const selector = options.selector || '*:not(style)';
 
   it(name, () => {
-    const { container: bgsz } = render(() => <options.component {...options.props} bgsz={32} />);
-    const { container: bgp } = render(() => <options.component {...options.props} bgp="center" />);
-    const { container: bgr } = render(() => <options.component {...options.props} bgr="repeat" />);
-    const { container: bga } = render(() => <options.component {...options.props} bga="fixed" />);
+    const propsWithBgsz = { ...options.props, bgsz: 32 } as Props & { bgsz: number };
+    const { container: bgsz } = render(() => <options.component {...propsWithBgsz} />);
+
+    const propsWithBgp = { ...options.props, bgp: "center" } as Props & { bgp: string };
+    const { container: bgp } = render(() => <options.component {...propsWithBgp} />);
+
+    const propsWithBgr = { ...options.props, bgr: "repeat" } as Props & { bgr: string };
+    const { container: bgr } = render(() => <options.component {...propsWithBgr} />);
+
+    const propsWithBga = { ...options.props, bga: "fixed" } as Props & { bga: string };
+    const { container: bga } = render(() => <options.component {...propsWithBga} />);
+
 
     expect(bgsz.querySelector(selector)).toHaveStyle({
       backgroundSize: 'calc(2rem * var(--empoleon-scale))',

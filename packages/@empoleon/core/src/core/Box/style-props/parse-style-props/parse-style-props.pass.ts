@@ -14,7 +14,7 @@ describe('@empoleon/core/Box/parse-style-props', () => {
       hasResponsiveStyles: false,
       inlineStyles: {
         padding: 'calc(1.5rem * var(--empoleon-scale))',
-        marginInline: 'calc(2rem * var(--empoleon-scale))',
+        'margin-inline': 'calc(2rem * var(--empoleon-scale))',
         color: 'var(--empoleon-color-red-5)',
         opacity: 0.65,
       },
@@ -73,7 +73,7 @@ describe('@empoleon/core/Box/parse-style-props', () => {
     ).toStrictEqual({
       hasResponsiveStyles: true,
       inlineStyles: {
-        marginInline: 'calc(4rem * var(--empoleon-scale))',
+        'margin-inline': 'calc(4rem * var(--empoleon-scale))',
         color: 'var(--empoleon-color-red-6)',
       },
       styles: {

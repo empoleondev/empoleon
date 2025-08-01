@@ -3,7 +3,7 @@ import { render } from '../render';
 
 interface Options<Props = any> {
   component: (props: Props) => JSX.Element;
-  props: Props;
+  props: Props | (() => Props)
 }
 
 export function itSupportsClassName<Props>(
@@ -11,8 +11,10 @@ export function itSupportsClassName<Props>(
   name = 'supports className prop'
 ) {
   it(name, () => {
+    const propsWithClassName = { ...options.props, className: "test-class-name" } as Props & { className: string };
+
     const { container } = render(
-      () => <options.component {...options.props} className="test-class-name" />
+      () => <options.component {...propsWithClassName} className="test-class-name" />
     );
 
     expect(container.querySelector('.test-class-name')).toBeInTheDocument();

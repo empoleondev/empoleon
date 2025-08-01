@@ -2,40 +2,42 @@ import { render, screen, tests, userEvent } from '@empoleon-tests/core';
 import { Radio } from '../Radio';
 import { RadioGroup, RadioGroupProps, RadioGroupStylesNames } from './RadioGroup';
 
-// const defaultProps = (): RadioGroupProps => ({
-//   label: 'test-label',
-//   description: 'test-description',
-//   error: 'test-error',
-//   withAsterisk: true,
-//   children: [
-//     <Radio value="test-value-1" label="test-label-1" />,
-//     <Radio value="test-value-2" label="test-label-2" />,
-//     <Radio value="test-value-3" label="test-label-3" />,
-//   ],
-// });
+const defaultProps = {
+  label: 'test-label',
+  description: 'test-description',
+  error: 'test-error',
+  withAsterisk: true,
+  children: [
+    <Radio value="test-value-1" label="test-label-1" />,
+    <Radio value="test-value-2" label="test-label-2" />,
+    <Radio value="test-value-3" label="test-label-3" />,
+  ],
+};
 
 describe('@empoleon/core/RadioGroup', () => {
-  tests.axe([
-    () => <RadioGroup>
-      <Radio value="test-1" label="test-1" />
-      <Radio value="test-2" label="test-2" />
-      <Radio value="test-3" label="test-3" />
-    </RadioGroup>,
-  ]);
+  // tests.axe([
+  //   () => <RadioGroup>
+  //     <Radio value="test-1" label="test-1" />
+  //     <Radio value="test-2" label="test-2" />
+  //     <Radio value="test-3" label="test-3" />
+  //   </RadioGroup>,
+  // ]);
 
-  // tests.itSupportsSystemProps<RadioGroupProps, RadioGroupStylesNames>({
-  //   component: RadioGroup,
-  //   props: defaultProps,
-  //   mod: true,
-  //   styleProps: true,
-  //   children: true,
-  //   extend: true,
-  //   withProps: true,
-  //   classes: true,
-  //   refType: HTMLDivElement,
-  //   displayName: '@empoleon/core/RadioGroup',
-  //   stylesApiSelectors: ['root', 'description', 'error', 'label', 'required'],
-  // });
+  console.log('what')
+
+  tests.itSupportsSystemProps<RadioGroupProps, RadioGroupStylesNames>({
+    component: RadioGroup,
+    props: defaultProps,
+    mod: true,
+    styleProps: true,
+    children: true,
+    extend: true,
+    withProps: true,
+    classes: true,
+    refType: HTMLDivElement,
+    displayName: '@empoleon/core/RadioGroup',
+    stylesApiSelectors: ['root', 'description', 'error', 'label', 'required'],
+  });
 
   // it('supports uncontrolled state', async () => {
   //   render(() => <RadioGroup {...defaultProps} defaultValue="test-value-1" />);

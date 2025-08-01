@@ -1,25 +1,26 @@
-import { renderHook } from '@testing-library/react';
+import { renderHook } from '@solidjs/testing-library';
 import { EmpoleonProvider } from '../EmpoleonProvider';
 import { useEmpoleonColorScheme } from './use-empoleon-color-scheme';
+import { JSX } from 'solid-js';
 
-function Wrapper({ children }: { children: React.ReactNode }) {
-  return <EmpoleonProvider defaultColorScheme="dark">{children}</EmpoleonProvider>;
+function Wrapper(props: { children: JSX.Element }) {
+  return <EmpoleonProvider defaultColorScheme="dark">{props.children}</EmpoleonProvider>;
 }
 
 describe('@empoleon/core/EmpoleonProvider/use-empoleon-color-scheme', () => {
   it('returns color scheme from EmpoleonProvider context', () => {
     const { result } = renderHook(() => useEmpoleonColorScheme(), { wrapper: Wrapper });
-    expect(result.current.colorScheme).toBe('dark');
+    expect(result.colorScheme).toBe('dark');
   });
 
   describe('with default values', () => {
-    function DefaultWrapper({ children }: { children: React.ReactNode }) {
-      return <EmpoleonProvider>{children}</EmpoleonProvider>;
+    function DefaultWrapper(props: { children: JSX.Element }) {
+      return <EmpoleonProvider>{props.children}</EmpoleonProvider>;
     }
 
     it('returns the correct color schema based on prefers-color-scheme', () => {
       const { result } = renderHook(() => useEmpoleonColorScheme(), { wrapper: DefaultWrapper });
-      expect(result.current.colorScheme).toBe('light');
+      expect(result.colorScheme).toBe('light');
     });
   });
 });

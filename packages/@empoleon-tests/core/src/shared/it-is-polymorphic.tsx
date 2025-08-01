@@ -3,7 +3,7 @@ import { render } from '../render';
 
 interface Options<Props = any> {
   component: (props: Props) => JSX.Element;
-  props: Props;
+  props: Props | (() => Props)
   selector?: string;
 }
 
@@ -16,8 +16,9 @@ export function itIsPolymorphic<Props>(options: Options<Props>, name = 'is polym
     container.querySelector(options.selector || '*:not(style)')!;
 
   it(`${name}: html element`, () => {
+    const propsWithComponentAndHref = { ...options.props, component: "a", href: "#test-link" } as Props & { component: string; href: string };
     const { container } = render(
-      () => <options.component component="a" href="#test-link" {...options.props} />
+      () => <options.component {...propsWithComponentAndHref} />
     );
 
     const target = getTarget(container as HTMLElement);
@@ -26,8 +27,9 @@ export function itIsPolymorphic<Props>(options: Options<Props>, name = 'is polym
   });
 
   it(`${name}: React component`, () => {
+    const propsWithComponentAndDataAttribute = { ...options.props, component: TestComponent, "data-parent-prop": true } as Props & { component: typeof TestComponent; "data-parent-prop": boolean };
     const { container } = render(
-      () => <options.component component={TestComponent} data-parent-prop {...options.props} />
+      () => <options.component {...propsWithComponentAndDataAttribute} />
     );
 
     const target = getTarget(container as HTMLElement);
@@ -37,11 +39,9 @@ export function itIsPolymorphic<Props>(options: Options<Props>, name = 'is polym
   });
 
   it(`${name}: renderRoot`, () => {
+    const propsWithRenderRoot = { ...options.props, renderRoot: (props: any) => <a href="#test-link" {...props} /> } as Props & { renderRoot: (props: any) => JSX.Element };
     const { container } = render(
-      () => <options.component
-        renderRoot={(props: any) => <a href="#test-link" {...props} />}
-        {...options.props}
-      />
+      () => <options.component {...propsWithRenderRoot} />
     );
 
     const target = getTarget(container as HTMLElement);

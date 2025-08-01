@@ -3,7 +3,7 @@ import { render } from '../render';
 
 interface Options<Props = any> {
   component: (props: Props) => JSX.Element;
-  props: Props;
+  props: Props | (() => Props)
   selector?: string;
 }
 
@@ -12,7 +12,9 @@ export function itSupportsOthers<Props>(
   name = 'supports ...others props'
 ) {
   it(name, () => {
-    const { container } = render(() => <options.component {...options.props} data-test-attribute />);
+    const propsWithDataAttribute = { ...options.props, "data-test-attribute": true } as Props & { "data-test-attribute": boolean };
+
+    const { container } = render(() => <options.component {...propsWithDataAttribute} data-test-attribute />);
     expect(container.querySelector('[data-test-attribute]')).toBeInTheDocument();
   });
 }

@@ -69,7 +69,6 @@ export const Card = polymorphicFactory<CardFactory>(_props => {
     'vars',
     'children',
     'padding',
-    'mod',
     'ref'
   ]);
 

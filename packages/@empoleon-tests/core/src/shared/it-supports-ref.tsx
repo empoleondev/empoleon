@@ -3,7 +3,7 @@ import { render } from '../render';
 
 interface Options<Props = any> {
   component: (props: Props) => JSX.Element;
-  props: Props;
+  props: Props | (() => Props)
   refType: any;
   refProp?: string;
   selector?: string;
@@ -16,7 +16,8 @@ export function itSupportsRef<Props>(options: Options<Props>, name = 'supports r
       ref = el;
     };
 
-    render(() => <options.component {...options.props} {...{ [options.refProp || 'ref']: refCallback }} />);
+    const propsWithRef = { ...options.props, [options.refProp || 'ref']: refCallback } as Props & { [K in string]: (el: typeof options.refType) => void };
+    render(() => <options.component {...propsWithRef} {...{ [options.refProp || 'ref']: refCallback }} />);
     expect(ref).toBeInstanceOf(options.refType);
   });
 }

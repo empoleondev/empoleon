@@ -3,7 +3,7 @@ import { render } from '../render';
 
 interface Options<Props = any> {
   component: (props: Props) => JSX.Element;
-  props: Props;
+  props: Props | (() => Props)
   selector?: string;
 }
 
@@ -14,16 +14,35 @@ export function itSupportsFontsProps<Props>(
   const selector = options.selector || '*:not(style)';
 
   it(name, () => {
-    const { container: theme } = render(() => <options.component {...options.props} fz="xs" />);
-    const { container: fz } = render(() => <options.component {...options.props} fz={32} />);
-    const { container: fw } = render(() => <options.component {...options.props} fw={700} />);
-    const { container: ff } = render(() => <options.component {...options.props} ff="sans-serif" />);
-    const { container: lts } = render(() => <options.component {...options.props} lts={16} />);
-    const { container: ta } = render(() => <options.component {...options.props} ta="right" />);
-    const { container: lh } = render(() => <options.component {...options.props} lh={2.25} />);
-    const { container: fs } = render(() => <options.component {...options.props} fs="italic" />);
-    const { container: tt } = render(() => <options.component {...options.props} tt="uppercase" />);
-    const { container: td } = render(() => <options.component {...options.props} td="underline" />);
+    const propsWithFzTheme = { ...options.props, fz: "xs" } as Props & { fz: string };
+    const { container: theme } = render(() => <options.component {...propsWithFzTheme} />);
+
+    const propsWithFz = { ...options.props, fz: 32 } as Props & { fz: number };
+    const { container: fz } = render(() => <options.component {...propsWithFz} />);
+
+    const propsWithFw = { ...options.props, fw: 700 } as Props & { fw: number };
+    const { container: fw } = render(() => <options.component {...propsWithFw} />);
+
+    const propsWithFf = { ...options.props, ff: "sans-serif" } as Props & { ff: string };
+    const { container: ff } = render(() => <options.component {...propsWithFf} />);
+
+    const propsWithLts = { ...options.props, lts: 16 } as Props & { lts: number };
+    const { container: lts } = render(() => <options.component {...propsWithLts} />);
+
+    const propsWithTa = { ...options.props, ta: "right" } as Props & { ta: string };
+    const { container: ta } = render(() => <options.component {...propsWithTa} />);
+
+    const propsWithLh = { ...options.props, lh: 2.25 } as Props & { lh: number };
+    const { container: lh } = render(() => <options.component {...propsWithLh} />);
+
+    const propsWithFs = { ...options.props, fs: "italic" } as Props & { fs: string };
+    const { container: fs } = render(() => <options.component {...propsWithFs} />);
+
+    const propsWithTt = { ...options.props, tt: "uppercase" } as Props & { tt: string };
+    const { container: tt } = render(() => <options.component {...propsWithTt} />);
+
+    const propsWithTd = { ...options.props, td: "underline" } as Props & { td: string };
+    const { container: td } = render(() => <options.component {...propsWithTd} />);
 
     expect(theme.querySelector(selector)).toHaveStyle({ fontSize: 'var(--empoleon-font-size-xs)' });
     expect(fz.querySelector(selector)).toHaveStyle({

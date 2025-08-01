@@ -9,8 +9,8 @@ describe('@empoleon/core/css-object-to-string', () => {
     expect(
       cssObjectToString({
         padding: '1vh',
-        fontSize: '2.2vh',
-        borderTopRightRadius: '10px',
+        'font-size': '2.2vh',
+        'border-top-right-radius': '10px',
       })
     ).toBe(result);
   });
@@ -19,8 +19,8 @@ describe('@empoleon/core/css-object-to-string', () => {
     expect(
       cssObjectToString({
         padding: '1vh',
-        fontSize: undefined,
-        borderTopRightRadius: '10px',
+        'font-size': undefined,
+        'border-top-right-radius': '10px',
       })
     ).toBe(undefinedResult);
   });

@@ -26,7 +26,7 @@ import { itSupportsSizeProps } from './style-props/it-supports-size-props';
 
 interface Options<Props extends Record<string, any>, StylesApiSelectors extends string> {
   component: ParentComponent<Props>;
-  props: Props;
+  props: () => Props;
   mod?: boolean;
   classes?: boolean;
   withProps?: boolean;
@@ -63,18 +63,20 @@ export function itSupportsSystemProps<
     const providerName = options.providerName || predictedProviderName;
     const stylesApiName = options.stylesApiName || providerName;
 
-    itSupportsClassName(options);
-    itSupportsHiddenVisible(options);
-    itSupportsLightDarkHidden(options);
-    itSupportsStyle(options);
-    itSupportsOthers(options);
-    options.refType && itSupportsRef({ ...options, refType: options.refType });
+    const getProps = () => typeof options.props === 'function' ? options.props() : options.props;
+
+    itSupportsClassName({ ...options, props: getProps });
+    itSupportsHiddenVisible({ ...options, props: getProps });
+    itSupportsLightDarkHidden({ ...options, props: getProps });
+    itSupportsStyle({ ...options, props: getProps });
+    itSupportsOthers({ ...options, props: getProps });
+    options.refType && itSupportsRef({ ...options, props: getProps, refType: options.refType });
     options.polymorphic &&
-      itIsPolymorphic({ ...options, selector: options.polymorphicSelector || options.selector });
-    options.children && itRendersChildren(options);
-    typeof providerName === 'string' &&
-      options.providerName !== null &&
-      itSupportsProviderDefaultProps({ ...options, providerName });
+      itIsPolymorphic({ ...options, props: getProps, selector: options.polymorphicSelector || options.selector });
+    options.children && itRendersChildren({ ...options, props: getProps });
+    // typeof providerName === 'string' &&
+    //   options.providerName !== null &&
+    //   itSupportsProviderDefaultProps({ ...options, props: getProps, providerName });
 
     if (options.styleProps) {
       itSupportsMarginsProps(options);
@@ -87,20 +89,21 @@ export function itSupportsSystemProps<
     }
 
     if (options.variant) {
-      itSupportsVariant({ ...options, selector: options.variantSelector || options.selector });
+      itSupportsVariant({ ...options, props: getProps, selector: options.variantSelector || options.selector });
     }
 
     if (options.size) {
-      itSupportsSize({ ...options, selector: options.sizeSelector || options.selector });
+      itSupportsSize({ ...options, props: getProps, selector: options.sizeSelector || options.selector });
     }
 
     if (options.mod) {
-      itSupportsMod({ ...options, selector: options.sizeSelector || options.selector });
+      itSupportsMod({ ...options, props: getProps, selector: options.sizeSelector || options.selector });
     }
 
     if (Array.isArray(options.stylesApiSelectors) && stylesApiName) {
       itSupportsStylesApi<Props, StylesApiSelectors>({
         ...options,
+        props: getProps,
         selectors: options.stylesApiSelectors,
         providerName: stylesApiName,
       });

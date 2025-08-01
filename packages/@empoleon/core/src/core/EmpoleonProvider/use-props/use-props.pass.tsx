@@ -1,8 +1,9 @@
-import { renderHook } from '@testing-library/react';
+import { renderHook } from '@solidjs/testing-library';
 import { EmpoleonProvider } from '../EmpoleonProvider';
 import { useProps } from './use-props';
+import { JSX } from 'solid-js';
 
-function Wrapper({ children }: { children: React.ReactNode }) {
+function Wrapper(props: { children: JSX.Element }) {
   return (
     <EmpoleonProvider
       theme={{
@@ -15,7 +16,7 @@ function Wrapper({ children }: { children: React.ReactNode }) {
         },
       }}
     >
-      {children}
+      {props.children}
     </EmpoleonProvider>
   );
 }
@@ -25,7 +26,7 @@ describe('@empoleon/core/use-component-default-props', () => {
     const { result } = renderHook(() => useProps<{ test?: string }>('TestComponent', {}, {}), {
       wrapper: Wrapper,
     });
-    expect(result.current.test).toBe('theme-default-prop');
+    expect(result.test).toBe('theme-default-prop');
   });
 
   it('overrides theme default props with props passed to hook', () => {
@@ -33,7 +34,7 @@ describe('@empoleon/core/use-component-default-props', () => {
       () => useProps<{ test?: string }>('TestComponent', {}, { test: 'direct-prop' }),
       { wrapper: Wrapper }
     );
-    expect(result.current.test).toBe('direct-prop');
+    expect(result.test).toBe('direct-prop');
   });
 
   it('overrides component default props with props passed to hook', () => {
@@ -46,6 +47,6 @@ describe('@empoleon/core/use-component-default-props', () => {
         ),
       { wrapper: EmpoleonProvider }
     );
-    expect(result.current.test).toBe('direct-prop');
+    expect(result.test).toBe('direct-prop');
   });
 });

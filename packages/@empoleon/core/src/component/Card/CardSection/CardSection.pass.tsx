@@ -9,7 +9,7 @@ const defaultProps: CardSectionProps = {};
 describe('@empoleon/core/CardSection', () => {
   tests.itSupportsSystemProps<any, CardSectionStylesNames>({
     component: TestContainer,
-    props: () => defaultProps,
+    props: defaultProps,
     mod: true,
     polymorphic: true,
     styleProps: true,

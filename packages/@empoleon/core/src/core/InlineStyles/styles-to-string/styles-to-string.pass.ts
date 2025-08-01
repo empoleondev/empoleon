@@ -17,7 +17,7 @@ describe('@empoleon/core/styles-to-string', () => {
         selector: '.test',
         styles: {
           padding: '2vh',
-          borderRadius: '5px',
+          'border-radius': '5px',
           color: 'red',
         },
       })
@@ -33,7 +33,7 @@ describe('@empoleon/core/styles-to-string', () => {
             query: '(max-width:50em)',
             styles: {
               padding: '2vh',
-              borderRadius: '5px',
+              'border-radius': '5px',
               color: 'red',
             },
           },
@@ -48,7 +48,7 @@ describe('@empoleon/core/styles-to-string', () => {
         selector: '.test',
         styles: {
           padding: '2vh',
-          borderRadius: '5px',
+          'border-radius': '5px',
           color: 'red',
         },
         media: [
@@ -77,7 +77,7 @@ describe('@empoleon/core/styles-to-string', () => {
         selector: '.test',
         styles: {
           padding: '2vh',
-          borderRadius: '5px',
+          'border-radius': '5px',
           color: 'red',
         },
         container: [

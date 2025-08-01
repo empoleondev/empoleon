@@ -4,7 +4,7 @@ import { JSX } from 'solid-js';
 
 interface Options<Props = any> {
   component: (props: Props) => JSX.Element;
-  props: Props;
+  props: Props | (() => Props)
   selector?: string;
 }
 
@@ -15,16 +15,35 @@ export function itSupportsMarginsProps<Props>(
   const selector = options.selector || '*:not(style)';
 
   it(name, () => {
-    const { container: m } = render(() => <options.component {...options.props} m={45} />);
-    const { container: theme } = render(() => <options.component {...options.props} m="xl" />);
-    const { container: mx } = render(() => <options.component {...options.props} mx={34} />);
-    const { container: my } = render(() => <options.component {...options.props} my={22} />);
-    const { container: mt } = render(() => <options.component {...options.props} mt={13} />);
-    const { container: mb } = render(() => <options.component {...options.props} mb={43} />);
-    const { container: mr } = render(() => <options.component {...options.props} mr={98} />);
-    const { container: ml } = render(() => <options.component {...options.props} ml={11} />);
-    const { container: me } = render(() => <options.component {...options.props} me={37} />);
-    const { container: ms } = render(() => <options.component {...options.props} ms={39} />);
+    const propsWithM = { ...options.props, m: 45 } as Props & { m: number };
+    const { container: m } = render(() => <options.component {...propsWithM} />);
+
+    const propsWithMTheme = { ...options.props, m: "xl" } as Props & { m: string };
+    const { container: theme } = render(() => <options.component {...propsWithMTheme} />);
+
+    const propsWithMx = { ...options.props, mx: 34 } as Props & { mx: number };
+    const { container: mx } = render(() => <options.component {...propsWithMx} />);
+
+    const propsWithMy = { ...options.props, my: 22 } as Props & { my: number };
+    const { container: my } = render(() => <options.component {...propsWithMy} />);
+
+    const propsWithMt = { ...options.props, mt: 13 } as Props & { mt: number };
+    const { container: mt } = render(() => <options.component {...propsWithMt} />);
+
+    const propsWithMb = { ...options.props, mb: 43 } as Props & { mb: number };
+    const { container: mb } = render(() => <options.component {...propsWithMb} />);
+
+    const propsWithMr = { ...options.props, mr: 98 } as Props & { mr: number };
+    const { container: mr } = render(() => <options.component {...propsWithMr} />);
+
+    const propsWithMl = { ...options.props, ml: 11 } as Props & { ml: number };
+    const { container: ml } = render(() => <options.component {...propsWithMl} />);
+
+    const propsWithMe = { ...options.props, me: 37 } as Props & { me: number };
+    const { container: me } = render(() => <options.component {...propsWithMe} />);
+
+    const propsWithMs = { ...options.props, ms: 39 } as Props & { ms: number };
+    const { container: ms } = render(() => <options.component {...propsWithMs} />);
 
     expect(m.querySelector(selector)).toHaveStyle({ margin: rem(45) });
     expect(theme.querySelector(selector)).toHaveStyle({ margin: 'var(--empoleon-spacing-xl)' });

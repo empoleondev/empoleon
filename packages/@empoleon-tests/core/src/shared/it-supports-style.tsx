@@ -4,14 +4,16 @@ import { JSX } from 'solid-js';
 
 interface Options<Props = any> {
   component: (props: Props) => JSX.Element;
-  props: Props;
+  props: Props | (() => Props)
   selector?: string;
 }
 
 export function itSupportsStyle<Props>(options: Options<Props>, name = 'supports style') {
   it(`${name}: object`, () => {
+    const propsWithStyle = { ...options.props, style: { color: 'salmon' } } as Props & { style: any };
+
     const { container } = render(
-      () => <options.component {...options.props} style={{ color: 'salmon' }} />
+      () => <options.component {...propsWithStyle} style={{ color: 'salmon' }} />
     );
 
     expect(container.querySelector(options.selector || '*:not(style)')).toHaveStyle({
@@ -20,9 +22,11 @@ export function itSupportsStyle<Props>(options: Options<Props>, name = 'supports
   });
 
   it(`${name}: theme function`, () => {
+    const propsWithStyle = { ...options.props, style: (theme: EmpoleonTheme) => ({ color: theme.colors.pink[4] }) } as Props & { style: any };
+
     const { container } = render(
       () => <options.component
-        {...options.props}
+        {...propsWithStyle}
         style={(theme: EmpoleonTheme) => ({ color: theme.colors.pink[4] })}
       />
     );
@@ -33,9 +37,11 @@ export function itSupportsStyle<Props>(options: Options<Props>, name = 'supports
   });
 
   it(`${name}: array of objects`, () => {
+    const propsWithStyle = { ...options.props, style: [{ color: 'salmon' }, { background: 'olive' }] } as Props & { style: any };
+
     const { container } = render(
       () => <options.component
-        {...options.props}
+        {...propsWithStyle}
         style={[{ color: 'salmon' }, { background: 'olive' }]}
       />
     );
@@ -47,9 +53,14 @@ export function itSupportsStyle<Props>(options: Options<Props>, name = 'supports
   });
 
   it(`${name}: array of theme functions`, () => {
+    const propsWithStyle = { ...options.props, style: [
+      (theme: EmpoleonTheme) => ({ color: theme.colors.pink[4] }),
+      (theme: EmpoleonTheme) => ({ background: theme.colors.orange[9] }),
+    ] } as Props & { style: any };
+
     const { container } = render(
       () => <options.component
-        {...options.props}
+        {...propsWithStyle}
         style={[
           (theme: EmpoleonTheme) => ({ color: theme.colors.pink[4] }),
           (theme: EmpoleonTheme) => ({ background: theme.colors.orange[9] }),

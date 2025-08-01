@@ -1,6 +1,6 @@
 {
   "extends": "./tsconfig.json",
-  "exclude": ["./esm", "./cjs", "**/*.test.tsx", "**/*.test.ts", "**/*.old.tsx", "**/*.old.ts", "**/*.story.tsx"],
+  "exclude": ["./esm", "./cjs", "**/*.test.tsx", "**/*.test.ts", "**/*.old.tsx", "**/*.old.ts", "**/*.pass.tsx", "**/*.pass.ts", "**/*.story.tsx"],
   "compilerOptions": {
     "declarationDir": "./lib"
   }

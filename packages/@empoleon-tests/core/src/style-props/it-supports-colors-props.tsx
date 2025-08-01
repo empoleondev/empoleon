@@ -3,7 +3,7 @@ import { render } from '../render';
 
 interface Options<Props = any> {
   component: (props: Props) => JSX.Element;
-  props: Props;
+  props: Props | (() => Props)
   selector?: string;
 }
 
@@ -14,9 +14,14 @@ export function itSupportsColorsProps<Props>(
   const selector = options.selector || '*:not(style)';
 
   it(name, () => {
-    const { container: c } = render(() => <options.component {...options.props} c="#FEFEFE" />);
-    const { container: bg } = render(() => <options.component {...options.props} bg="#DCDCDC" />);
-    const { container: opacity } = render(() => <options.component {...options.props} opacity={0.85} />);
+    const propsWithC = { ...options.props, c: "#FEFEFE" } as Props & { c: string };
+    const { container: c } = render(() => <options.component {...propsWithC} />);
+
+    const propsWithBg = { ...options.props, bg: "#DCDCDC" } as Props & { bg: string };
+    const { container: bg } = render(() => <options.component {...propsWithBg} />);
+
+    const propsWithOpacity = { ...options.props, opacity: 0.85 } as Props & { opacity: number };
+    const { container: opacity } = render(() => <options.component {...propsWithOpacity} />);
 
     expect(c.querySelector(selector)).toHaveStyle({ color: '#FEFEFE' });
     expect(bg.querySelector(selector)).toHaveStyle({ background: '#DCDCDC' });

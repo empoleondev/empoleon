@@ -1,6 +1,7 @@
-import { renderHook } from '@testing-library/react';
+import { renderHook, render } from '@solidjs/testing-library';
 import { patchConsoleError } from '@empoleon-tests/core';
 import { createSafeContext } from './create-safe-context';
+import { JSX } from 'solid-js';
 
 interface ContextType {
   value: number;
@@ -15,14 +16,22 @@ describe('@empoleon/core/create-safe-context', () => {
     patchConsoleError.release();
   });
 
-  it('returns context value when useSafeContext hook was called within Provider', () => {
+  it('returns context value when used inside Provider', () => {
     const fn = vi.fn();
     const [Provider, useContext] = createSafeContext<ContextType>('test-error');
-    const wrapper = ({ children }: { children: React.ReactNode }) => (
-      <Provider value={{ value: 100, onChange: fn }}>{children}</Provider>
-    );
 
-    const view = renderHook(() => useContext(), { wrapper });
-    expect(view.result.current).toStrictEqual({ value: 100, onChange: fn });
+    let ctxValue: ContextType | undefined;
+    function Consumer() {
+      ctxValue = useContext();
+      return null;
+    }
+
+    render(() => (
+      <Provider value={{ value: 100, onChange: fn }}>
+        <Consumer />
+      </Provider>
+    ));
+
+    expect(ctxValue).toEqual({ value: 100, onChange: fn });
   });
 });

@@ -3,13 +3,15 @@ import { render } from '../render';
 
 interface Options<Props = any> {
   component: (props: Props) => JSX.Element;
-  props: Props;
+  props: Props | (() => Props)
   selector?: string;
 }
 
 export function itSupportsVariant<Props>(options: Options<Props>, name = 'supports variant') {
   it(name, () => {
-    const { container } = render(() => <options.component {...options.props} variant="__test-variant" />);
+    const propsWithVariant = { ...options.props, variant: "__test-variant" } as Props & { variant: string };
+
+    const { container } = render(() => <options.component {...propsWithVariant} variant="__test-variant" />);
     expect(container.querySelector(options.selector || '*:not(style)')!).toHaveAttribute(
       'data-variant',
       '__test-variant'
