@@ -14,7 +14,7 @@ describe('@empoleon/core/Notification', () => {
 
   tests.itSupportsSystemProps<NotificationProps, NotificationStylesNames>({
     component: Notification,
-    props: defaultProps,
+    props: () => defaultProps,
     mod: true,
     styleProps: true,
     children: true,
@@ -39,12 +39,14 @@ describe('@empoleon/core/Notification', () => {
     expect(container.querySelector('.empoleon-Notification-closeButton')).toBeInTheDocument();
   });
 
-  // it('renders given icon', () => {
-  //   const { container, rerender } = render(() => <Notification {...defaultProps} icon="test-icon" />);
-  //   expect(container.querySelector('.empoleon-Notification-icon')).toHaveTextContent('test-icon');
-  //   rerender(() => <Notification {...defaultProps} icon={null} />);
-  //   expect(container.querySelector('.empoleon-Notification-icon')).not.toBeInTheDocument();
-  // });
+  it('renders given icon', () => {
+    const { container, rerender } = render(() => <Notification {...defaultProps} icon="test-icon" />);
+    const iconElement = container.querySelector('.empoleon-Notification-icon');
+    expect(iconElement?.textContent).toBe('test-icon');
+
+    rerender(() => <Notification {...defaultProps} icon={null} />);
+    expect(container.querySelector('.empoleon-Notification-icon')).not.toBeInTheDocument();
+  });
 
   it('displays loader when loading prop is true', () => {
     const { container, rerender } = render(() => <Notification {...defaultProps} loading />);
@@ -54,8 +56,9 @@ describe('@empoleon/core/Notification', () => {
     expect(container.querySelector('.empoleon-Notification-loader')).not.toBeInTheDocument();
   });
 
-  // it('renders given title', () => {
-  //   const { container } = render(() => <Notification {...defaultProps} title="test-title" />);
-  //   expect(container.querySelector('.empoleon-Notification-title')).toHaveTextContent('test-title');
-  // });
+  it('renders given title', () => {
+    const { container } = render(() => <Notification {...defaultProps} title="test-title" />);
+    const titleElement = container.querySelector('.empoleon-Notification-title');
+    expect(titleElement?.textContent).toBe('test-title');
+  });
 });

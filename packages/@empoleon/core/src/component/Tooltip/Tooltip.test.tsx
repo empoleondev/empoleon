@@ -4,18 +4,24 @@ import { TooltipStylesNames } from './Tooltip.types';
 import { TooltipFloating } from './TooltipFloating/TooltipFloating';
 import { TooltipGroup } from './TooltipGroup/TooltipGroup';
 
-const defaultProps: TooltipProps = {
-  withinPortal: false,
-  opened: true,
-  transitionProps: { duration: 0 },
-  label: 'test-tooltip',
-  children: <button type="button">test-target</button>,
-};
+// const defaultProps: TooltipProps = {
+//   withinPortal: false,
+//   opened: true,
+//   transitionProps: { duration: 0 },
+//   label: 'test-tooltip',
+//   children: <button type="button">test-target</button>,
+// };
 
 describe('@empoleon/core/Tooltip', () => {
   // tests.itSupportsSystemProps<TooltipProps, TooltipStylesNames>({
   //   component: Tooltip,
-  //   props: defaultProps,
+  //   props: () => ({
+  //     withinPortal: false,
+  //     opened: true,
+  //     transitionProps: { duration: 0 },
+  //     label: 'test-tooltip',
+  //     children: <button type="button">test-target</button>,
+  //   }),
   //   mod: true,
   //   styleProps: true,
   //   extend: true,

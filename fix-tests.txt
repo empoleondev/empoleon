@@ -2,41 +2,25 @@ Core:
 
 Accordion - component broken
 Autocomplete - fail
-Card - fail
 ColorInput - fail
 ColorPicker - fail
 Combobox - fail
 Drawer - fail
-FileInput - fail
-Grid - fail
 InlineInput - fail
 Input - fail
 InputsGroupFieldset - fail
 JsonInput - fail
-List - fail
-Menu - fail
 Modal - fail
 ModalBase - fail
 MultiSelect - fail
 NativeSelect - fail
 NavLink - fail
-Notification - fail
 NumberInput - fail
-PasswordInput - fail
-PillsInput - fail
-PinInput - nope
-Popover - fail
-Radio - fail
 Select - fail
 Stepper - fail
-Switch - fail
-Table - fail
-Tabs - fail
+Switch - fail - itHandlesSwitchCheckboxState
+Tabs - fail - tabstab, tabsPanel, tabsList - itSupportsSystemProps
 TagsInput - fail
-Textarea - fail
-TextInput - fail
-Timeline - fail
-Title - fail
 Tooltip - fail
 
 Others:

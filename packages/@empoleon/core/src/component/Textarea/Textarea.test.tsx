@@ -15,21 +15,21 @@ describe('@empoleon/core/Textarea', () => {
     () => <Textarea label="test-label" description="test-description" />,
   ]);
 
-  // tests.itSupportsSystemProps<TextareaProps, __InputStylesNames>({
-  //   component: Textarea,
-  //   props: defaultProps,
-  //   mod: true,
-  //   styleProps: true,
-  //   extend: true,
-  //   withProps: true,
-  //   size: true,
-  //   variant: true,
-  //   classes: true,
-  //   id: true,
-  //   refType: HTMLTextAreaElement,
-  //   displayName: '@empoleon/core/Textarea',
-  //   stylesApiSelectors: [...inputStylesApiSelectors],
-  // });
+  tests.itSupportsSystemProps<TextareaProps, __InputStylesNames>({
+    component: Textarea,
+    props: () => defaultProps,
+    mod: true,
+    styleProps: true,
+    extend: true,
+    withProps: true,
+    size: true,
+    variant: true,
+    classes: true,
+    id: true,
+    refType: HTMLTextAreaElement,
+    displayName: '@empoleon/core/Textarea',
+    stylesApiSelectors: [...inputStylesApiSelectors],
+  });
 
   tests.itSupportsInputProps<TextareaProps>({
     component: Textarea,

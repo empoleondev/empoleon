@@ -119,7 +119,7 @@ export const PopoverDropdown = factory<PopoverDropdownFactory>(_props => {
                   style: [
                     {
                       ...transitionStyles,
-                      zIndex: ctx.zIndex as JSX.CSSProperties['z-index'],
+                      'z-index': ctx.zIndex as JSX.CSSProperties['z-index'],
                       ...coords(),
                       width: ctx.width === 'target' ? undefined : rem(ctx.width),
                       ...(ctx.referenceHidden ? { display: 'none' } : null),

@@ -74,9 +74,9 @@ export function itSupportsSystemProps<
     options.polymorphic &&
       itIsPolymorphic({ ...options, props: getProps, selector: options.polymorphicSelector || options.selector });
     options.children && itRendersChildren({ ...options, props: getProps });
-    // typeof providerName === 'string' &&
-    //   options.providerName !== null &&
-    //   itSupportsProviderDefaultProps({ ...options, props: getProps, providerName });
+    typeof providerName === 'string' &&
+      options.providerName !== null &&
+      itSupportsProviderDefaultProps({ ...options, props: getProps, providerName });
 
     if (options.styleProps) {
       itSupportsMarginsProps(options);

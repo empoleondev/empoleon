@@ -13,7 +13,7 @@ const TestContainer = createContextContainer(PopoverDropdown, Popover, {
 describe('@empoleon/core/PopoverDropdown', () => {
   tests.itSupportsSystemProps<PopoverDropdownProps>({
     component: TestContainer,
-    props: defaultProps,
+    props: () => defaultProps,
     mod: true,
     styleProps: true,
     children: true,

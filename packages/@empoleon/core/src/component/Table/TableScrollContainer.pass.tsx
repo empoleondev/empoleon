@@ -12,7 +12,7 @@ const defaultProps: TableScrollContainerProps = {
 describe('@empoleon/core/TableScrollContainer', () => {
   tests.itSupportsSystemProps<TableScrollContainerProps, TableScrollContainerStylesNames>({
     component: TableScrollContainer,
-    props: defaultProps,
+    props: () => defaultProps,
     mod: true,
     styleProps: true,
     children: true,

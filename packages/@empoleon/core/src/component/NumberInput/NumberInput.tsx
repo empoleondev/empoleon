@@ -293,6 +293,38 @@ export const NumberInput = factory<NumberInputFactory>(_props => {
     }
   };
 
+  // const increment = () => {
+  //   if (!canIncrement(_value())) {
+  //     return;
+  //   }
+
+  //   let val: number;
+  //   const currentValuePrecision = getDecimalPlaces(_value());
+  //   const stepPrecision = getDecimalPlaces(local.step!);
+  //   const maxPrecision = Math.max(currentValuePrecision, stepPrecision);
+  //   const factor = 10 ** maxPrecision;
+
+  //   if (!isNumberString(_value()) && (typeof _value() !== 'number' || Number.isNaN(_value()))) {
+  //     val = clamp(local.startValue!, local.min, local.max);
+  //   } else if (local.max !== undefined) {
+  //     const incrementedValue =
+  //       (Math.round(Number(_value()) * factor) + Math.round(local.step! * factor)) / factor;
+  //     val = incrementedValue <= local.max ? incrementedValue : local.max;
+  //   } else {
+  //     val = (Math.round(Number(_value()) * factor) + Math.round(local.step! * factor)) / factor;
+  //   }
+
+  //   const formattedValue = val.toFixed(maxPrecision);
+  //   const finalValue = parseFloat(formattedValue);
+
+  //   setValue(finalValue);
+  //   local.onValueChange?.(
+  //     { floatValue: finalValue, formattedValue, value: formattedValue },
+  //     { source: 'increment' as any }
+  //   );
+  //   setTimeout(() => adjustCursor(inputRef()?.value.length), 0);
+  // };
+
   const increment = () => {
     if (!canIncrement(_value())) {
       return;
@@ -303,25 +335,35 @@ export const NumberInput = factory<NumberInputFactory>(_props => {
     const stepPrecision = getDecimalPlaces(local.step!);
     const maxPrecision = Math.max(currentValuePrecision, stepPrecision);
     const factor = 10 ** maxPrecision;
+    const currentValue = _value();
 
-    if (!isNumberString(_value()) && (typeof _value() !== 'number' || Number.isNaN(_value()))) {
+    if (!isNumberString(currentValue) && (typeof currentValue !== 'number' || Number.isNaN(currentValue))) {
       val = clamp(local.startValue!, local.min, local.max);
     } else if (local.max !== undefined) {
       const incrementedValue =
-        (Math.round(Number(_value()) * factor) + Math.round(local.step! * factor)) / factor;
+        (Math.round(Number(currentValue) * factor) + Math.round(local.step! * factor)) / factor;
       val = incrementedValue <= local.max ? incrementedValue : local.max;
     } else {
-      val = (Math.round(Number(_value()) * factor) + Math.round(local.step! * factor)) / factor;
+      val = (Math.round(Number(currentValue) * factor) + Math.round(local.step! * factor)) / factor;
     }
 
     const formattedValue = val.toFixed(maxPrecision);
     const finalValue = parseFloat(formattedValue);
+    const currentNumericValue = typeof currentValue === 'number' ? currentValue : Number(currentValue);
+    const valueChanged = finalValue !== currentNumericValue;
 
     setValue(finalValue);
+
     local.onValueChange?.(
       { floatValue: finalValue, formattedValue, value: formattedValue },
       { source: 'increment' as any }
     );
+
+    // If setValue didn't trigger onChange due to no value change, call it explicitly
+    if (!valueChanged && local.onChange) {
+      local.onChange(finalValue);
+    }
+
     setTimeout(() => adjustCursor(inputRef()?.value.length), 0);
   };
 

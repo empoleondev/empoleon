@@ -112,10 +112,10 @@ describe('@empoleon/core/Popover', () => {
     expect(spy).toHaveBeenCalled();
   });
 
-  // it('sets dropdown z-index based on zIndex prop', () => {
-  //   render(() => <TestContainer defaultOpened zIndex={452} />);
-  //   expect(screen.getByRole('dialog')).toHaveStyle({ zIndex: 452 });
-  // });
+  it('sets dropdown z-index based on zIndex prop', () => {
+    render(() => <TestContainer defaultOpened zIndex={452} />);
+    expect(screen.getByRole('dialog')).toHaveStyle({ 'z-index': 452 });
+  });
 
   it('correctly handles withArrow={true}', () => {
     const { container } = render(() => <TestContainer defaultOpened withArrow />);

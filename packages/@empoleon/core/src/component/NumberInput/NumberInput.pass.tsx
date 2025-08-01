@@ -35,21 +35,21 @@ describe('@empoleon/core/NumberInput', () => {
     () => <NumberInput label="test-label" description="test-description" />,
   ]);
 
-  // tests.itSupportsSystemProps<NumberInputProps, __InputStylesNames>({
-  //   component: NumberInput,
-  //   props: defaultProps,
-  //   mod: true,
-  //   styleProps: true,
-  //   extend: true,
-  //   withProps: true,
-  //   size: true,
-  //   variant: true,
-  //   classes: true,
-  //   id: true,
-  //   refType: HTMLInputElement,
-  //   displayName: '@empoleon/core/NumberInput',
-  //   stylesApiSelectors: [...inputStylesApiSelectors],
-  // });
+  tests.itSupportsSystemProps<NumberInputProps, __InputStylesNames>({
+    component: NumberInput,
+    props: () => defaultProps,
+    mod: true,
+    styleProps: true,
+    extend: true,
+    withProps: true,
+    size: true,
+    variant: true,
+    classes: true,
+    id: true,
+    refType: HTMLInputElement,
+    displayName: '@empoleon/core/NumberInput',
+    stylesApiSelectors: [...inputStylesApiSelectors],
+  });
 
   tests.itSupportsInputProps<NumberInputProps>({
     component: NumberInput,
@@ -74,15 +74,15 @@ describe('@empoleon/core/NumberInput', () => {
   //   expect(spy).toHaveBeenLastCalledWith(0);
   // });
 
-  // it('returns empty string when input is empty', async () => {
-  //   const spy = vi.fn();
-  //   render(() => <NumberInput max={10} min={0} step={6} onChange={spy} />);
-  //   await enterText('5');
-  //   expect(spy).toHaveBeenLastCalledWith(5);
-  //   await enterText('{backspace}');
-  //   expect(spy).toHaveBeenLastCalledWith('');
-  //   expectValue('');
-  // });
+  it('returns empty string when input is empty', async () => {
+    const spy = vi.fn();
+    render(() => <NumberInput max={10} min={0} step={6} onChange={spy} />);
+    await enterText('5');
+    expect(spy).toHaveBeenLastCalledWith(5);
+    await enterText('{backspace}');
+    expect(spy).toHaveBeenLastCalledWith('');
+    expectValue('');
+  });
 
   it('triggers onChange for uncontrolled values for every meaningful input change', async () => {
     const spy = vi.fn();
@@ -181,15 +181,15 @@ describe('@empoleon/core/NumberInput', () => {
     expect(spy).toHaveBeenLastCalledWith(0);
   });
 
-  // it('does not allow negative numbers if the allowNegative prop is false', async () => {
-  //   const spy = vi.fn();
-  //   const { container } = render(() => <NumberInput onChange={spy} value={0} allowNegative={false} />);
+  it('does not allow negative numbers if the allowNegative prop is false', async () => {
+    const spy = vi.fn();
+    const { container } = render(() => <NumberInput onChange={spy} value={0} allowNegative={false} />);
 
-  //   await clickDecrement(container);
+    await clickDecrement(container);
 
-  //   expectValue('0');
-  //   expect(spy).toHaveBeenLastCalledWith(0);
-  // });
+    expectValue('0');
+    expect(spy).toHaveBeenLastCalledWith(0);
+  });
 
   it('does not call onChange when nothing has changed after blur', async () => {
     const onChangeSpy = vi.fn();

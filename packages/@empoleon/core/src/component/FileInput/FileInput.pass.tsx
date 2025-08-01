@@ -12,7 +12,7 @@ describe('@empoleon/core/FileInput', () => {
 
   tests.itSupportsSystemProps<FileInputProps, __InputStylesNames | 'placeholder'>({
     component: FileInput,
-    props: defaultProps,
+    props: () => defaultProps,
     mod: true,
     styleProps: true,
     extend: true,

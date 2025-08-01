@@ -10,35 +10,35 @@ const defaultProps: SwitchProps = {
 
 describe('@empoleon/core/Switch', () => {
   tests.axe([() => <Switch label="test-label" />, () => <Switch aria-label="test-label" />]);
-  // tests.itSupportsFocusEvents({ component: Switch, props: defaultProps, selector: 'input' });
+  tests.itSupportsFocusEvents({ component: Switch, props: defaultProps, selector: 'input' });
   // tests.itHandlesSwitchCheckboxState({ component: Switch, props: defaultProps });
-  // tests.itConnectsLabelAndInput({ component: Switch, props: defaultProps });
-  // tests.itSupportsSystemProps<SwitchProps, SwitchStylesNames>({
-  //   component: Switch,
-  //   props: defaultProps,
-  //   mod: true,
-  //   styleProps: true,
-  //   extend: true,
-  //   withProps: true,
-  //   size: true,
-  //   variant: true,
-  //   classes: true,
-  //   id: true,
-  //   refType: HTMLInputElement,
-  //   displayName: '@empoleon/core/Switch',
-  //   stylesApiSelectors: [
-  //     'root',
-  //     'track',
-  //     'trackLabel',
-  //     'thumb',
-  //     'input',
-  //     'body',
-  //     'labelWrapper',
-  //     'label',
-  //     'description',
-  //     'error',
-  //   ],
-  // });
+  tests.itConnectsLabelAndInput({ component: Switch, props: defaultProps });
+  tests.itSupportsSystemProps<SwitchProps, SwitchStylesNames>({
+    component: Switch,
+    props: () => defaultProps,
+    mod: true,
+    styleProps: true,
+    extend: true,
+    withProps: true,
+    size: true,
+    variant: true,
+    classes: true,
+    id: true,
+    refType: HTMLInputElement,
+    displayName: '@empoleon/core/Switch',
+    stylesApiSelectors: [
+      'root',
+      'track',
+      'trackLabel',
+      'thumb',
+      'input',
+      'body',
+      'labelWrapper',
+      'label',
+      'description',
+      'error',
+    ],
+  });
 
   it('render thumb icon', () => {
     const { container } = render(() => <Switch thumbIcon={<span class="thumb-crown" />} />);

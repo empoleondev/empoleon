@@ -1,9 +1,8 @@
 import clsx from 'clsx';
-import { createEffect, JSX } from 'solid-js';
+import { createEffect, JSX, splitProps, children as getChildren } from 'solid-js';
 import { useMergedRef } from '@empoleon/hooks';
 import { factory, Factory, getRefProp, isElement, useProps } from '../../../core';
 import { usePopoverContext } from '../Popover.context';
-import { splitProps } from 'solid-js';
 
 export interface PopoverTargetProps {
   /** Target element */
@@ -39,12 +38,6 @@ export const PopoverTarget = factory<PopoverTargetFactory>(_props => {
     'ref'
   ])
 
-  // if (!isElement(local.children)) {
-  //   throw new Error(
-  //     'Popover.Target component children should be an element or a component that accepts ref. Fragments, strings, numbers and other primitive values are not supported'
-  //   );
-  // }
-
   const ctx = usePopoverContext();
   const isOpened = () => ctx.opened();
 
@@ -59,7 +52,7 @@ export const PopoverTarget = factory<PopoverTargetFactory>(_props => {
       }
     : {};
 
-  // now we can have renderProps for hovercardtarget
+  // Handle render props case
   if (typeof local.children === 'function') {
     const combinedRef = useMergedRef(ctx.reference, local.ref);
     return local.children({
@@ -69,6 +62,17 @@ export const PopoverTarget = factory<PopoverTargetFactory>(_props => {
       ...others,
       onClick: !ctx.controlled ? ctx.onToggle : undefined,
     });
+  }
+
+  // Validate children for non-function case
+  const safe = getChildren(() => local.children as JSX.Element);
+  const resolved = safe();
+
+  // If more than one top‑level node, or primitive, reject
+  if (!resolved || Array.isArray(resolved) || typeof resolved === 'string' || typeof resolved === 'number') {
+    throw new Error(
+      'Popover.Target component children should be an element or a component that accepts ref. Fragments, strings, numbers and other primitive values are not supported'
+    );
   }
 
   return (

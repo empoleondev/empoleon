@@ -34,22 +34,22 @@ describe('@empoleon/core/PasswordInput', () => {
     />,
   ]);
 
-  // tests.itSupportsSystemProps<PasswordInputProps, __InputStylesNames>({
-  //   component: PasswordInput,
-  //   props: defaultProps,
-  //   mod: true,
-  //   styleProps: true,
-  //   extend: true,
-  //   withProps: true,
-  //   size: true,
-  //   variant: true,
-  //   classes: true,
-  //   id: true,
-  //   refType: HTMLInputElement,
-  //   displayName: '@empoleon/core/PasswordInput',
-  //   stylesApiSelectors: [...inputStylesApiSelectors],
-  //   providerStylesApi: false,
-  // });
+  tests.itSupportsSystemProps<PasswordInputProps, __InputStylesNames>({
+    component: PasswordInput,
+    props: () => defaultProps,
+    mod: true,
+    styleProps: true,
+    extend: true,
+    withProps: true,
+    size: true,
+    variant: true,
+    classes: true,
+    id: true,
+    refType: HTMLInputElement,
+    displayName: '@empoleon/core/PasswordInput',
+    stylesApiSelectors: [...inputStylesApiSelectors],
+    providerStylesApi: false,
+  });
 
   tests.itSupportsInputProps<PasswordInputProps>({
     component: PasswordInput,

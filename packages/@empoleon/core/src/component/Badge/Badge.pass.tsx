@@ -9,7 +9,7 @@ const defaultProps: BadgeProps = {
 describe('@empoleon/core/Badge', () => {
   tests.itSupportsSystemProps<BadgeProps, BadgeStylesNames>({
     component: Badge,
-    props: defaultProps,
+    props: () => defaultProps,
     mod: true,
     polymorphic: true,
     styleProps: true,

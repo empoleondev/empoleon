@@ -6,7 +6,7 @@ const defaultProps: TitleProps = {};
 describe('@empoleon/core/Title', () => {
   tests.itSupportsSystemProps<TitleProps, TitleStylesNames>({
     component: Title,
-    props: defaultProps,
+    props: () => defaultProps,
     mod: true,
     styleProps: true,
     children: true,

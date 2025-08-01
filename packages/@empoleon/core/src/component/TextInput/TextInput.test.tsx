@@ -15,21 +15,21 @@ describe('@empoleon/core/TextInput', () => {
     () => <TextInput label="test-label" description="test-description" />,
   ]);
 
-  // tests.itSupportsSystemProps<TextInputProps, __InputStylesNames>({
-  //   component: TextInput,
-  //   props: defaultProps,
-  //   mod: true,
-  //   styleProps: true,
-  //   extend: true,
-  //   withProps: true,
-  //   size: true,
-  //   variant: true,
-  //   classes: true,
-  //   id: true,
-  //   refType: HTMLInputElement,
-  //   displayName: '@empoleon/core/TextInput',
-  //   stylesApiSelectors: [...inputStylesApiSelectors],
-  // });
+  tests.itSupportsSystemProps<TextInputProps, __InputStylesNames>({
+    component: TextInput,
+    props: () => defaultProps,
+    mod: true,
+    styleProps: true,
+    extend: true,
+    withProps: true,
+    size: true,
+    variant: true,
+    classes: true,
+    id: true,
+    refType: HTMLInputElement,
+    displayName: '@empoleon/core/TextInput',
+    stylesApiSelectors: [...inputStylesApiSelectors],
+  });
 
   tests.itSupportsInputProps<TextInputProps>({
     component: TextInput,

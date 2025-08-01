@@ -357,10 +357,11 @@ export const PinInput = factory<PinInputFactory>(_props => {
   };
 
   createEffect(() => {
-    if (_valueToString.length !== local.length) {
+    const valueString = _value().join('').trim();
+    if (valueString.length !== local.length) {
       return;
     }
-    local.onComplete?.(_valueToString);
+    local.onComplete?.(valueString);
   });
 
   createEffect(() => {

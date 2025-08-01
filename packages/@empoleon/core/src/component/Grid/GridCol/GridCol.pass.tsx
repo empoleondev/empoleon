@@ -9,7 +9,7 @@ const defaultProps: GridColProps = {};
 describe('@empoleon/core/GridCol', () => {
   tests.itSupportsSystemProps<GridColProps, GridColStylesNames>({
     component: TestContainer,
-    props: defaultProps,
+    props: () => defaultProps,
     mod: true,
     styleProps: true,
     children: true,
