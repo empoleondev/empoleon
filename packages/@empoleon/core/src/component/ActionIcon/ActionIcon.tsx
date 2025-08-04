@@ -138,6 +138,7 @@ export const ActionIcon = polymorphicFactory<ActionIconFactory>(_props => {
     'data-disabled',
     'autoContrast',
     'mod',
+    'attributes',
     'ref'
   ]);
 
@@ -150,6 +151,7 @@ export const ActionIcon = polymorphicFactory<ActionIconFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
   });

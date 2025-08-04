@@ -1,6 +1,6 @@
 import { createSignal, createEffect, onCleanup, createMemo } from 'solid-js';
 import { getOverflowAncestors, shift, useFloating } from '@empoleon/solid-floating-ui';
-import { FloatingPosition } from '../../Floating';
+import { FloatingPosition } from '../../../utils/Floating';
 
 interface UseFloatingTooltip {
   offset: number;

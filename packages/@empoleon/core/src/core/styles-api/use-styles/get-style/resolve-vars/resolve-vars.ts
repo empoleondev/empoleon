@@ -22,21 +22,12 @@ interface ResolveVarsInput {
   headless?: boolean;
 }
 
-export function resolveVars({
-  vars,
-  varsResolver,
-  theme,
-  props,
-  stylesCtx,
-  selector,
-  themeName,
-  headless,
-}: ResolveVarsInput) {
+export function resolveVars(_props: ResolveVarsInput) {
   const _vars =  mergeVars([
-    headless ? {} : varsResolver?.(theme, props, stylesCtx),
-    ...themeName.map((name) => theme.components?.[name]?.vars?.(theme, props, stylesCtx)),
-    vars?.(theme, props, stylesCtx),
-  ])?.[selector] as JSX.CSSProperties;
+    _props.headless ? {} : _props.varsResolver?.(_props.theme, _props.props, _props.stylesCtx),
+    ..._props.themeName.map((name) => _props.theme.components?.[name]?.vars?.(_props.theme, _props.props, _props.stylesCtx)),
+    _props.vars?.(_props.theme, _props.props, _props.stylesCtx),
+  ])?.[_props.selector] as JSX.CSSProperties;
 
   return _vars;
 }

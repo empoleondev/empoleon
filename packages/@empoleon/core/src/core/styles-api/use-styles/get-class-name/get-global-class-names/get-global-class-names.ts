@@ -15,9 +15,9 @@ export const FOCUS_CLASS_NAMES = {
 } as const;
 
 /** Returns classes that are defined globally (focus and active styles) based on options */
-export function getGlobalClassNames({ theme, options, unstyled }: GetGlobalClassNamesOptions) {
+export function getGlobalClassNames(props: GetGlobalClassNamesOptions) {
   return cx(
-    options?.focusable && !unstyled && (theme.focusClassName || FOCUS_CLASS_NAMES[theme.focusRing]),
-    options?.active && !unstyled && theme.activeClassName
+    props.options?.focusable && !props.unstyled && (props.theme.focusClassName || FOCUS_CLASS_NAMES[props.theme.focusRing]),
+    props.options?.active && !props.unstyled && props.theme.activeClassName
   );
 }

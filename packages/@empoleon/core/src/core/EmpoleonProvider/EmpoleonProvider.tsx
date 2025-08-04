@@ -75,7 +75,7 @@ export function EmpoleonProvider(_props: EmpoleonProviderProps) {
     getRootElement: () => document.documentElement,
   }, _props);
 
-  const { colorScheme, setColorScheme, clearColorScheme } = useProviderColorScheme({
+  const colorSchemeProps = useProviderColorScheme({
     defaultColorScheme: props.defaultColorScheme,
     forceColorScheme: props.forceColorScheme,
     manager: props.colorSchemeManager,
@@ -90,9 +90,9 @@ export function EmpoleonProvider(_props: EmpoleonProviderProps) {
   return (
     <EmpoleonContext.Provider
       value={{
-        colorScheme,
-        setColorScheme,
-        clearColorScheme,
+        colorScheme: colorSchemeProps.colorScheme,
+        setColorScheme: colorSchemeProps.setColorScheme,
+        clearColorScheme: colorSchemeProps.clearColorScheme,
         getRootElement: props.getRootElement,
         classNamesPrefix: props.classNamesPrefix,
         getStyleNonce: props.getStyleNonce,

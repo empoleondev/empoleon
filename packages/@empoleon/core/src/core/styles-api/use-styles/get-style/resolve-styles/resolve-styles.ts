@@ -8,12 +8,12 @@ export interface ResolveStylesInput {
   stylesCtx: Record<string, any> | undefined;
 }
 
-export function resolveStyles({ theme, styles, props, stylesCtx }: ResolveStylesInput) {
-  const arrayStyles = Array.isArray(styles) ? styles : [styles];
+export function resolveStyles(_props: ResolveStylesInput) {
+  const arrayStyles = Array.isArray(_props.styles) ? _props.styles : [_props.styles];
 
   return arrayStyles.reduce<Record<string, any>>((acc, style) => {
     if (typeof style === 'function') {
-      return { ...acc, ...style(theme, props, stylesCtx) };
+      return { ...acc, ...style(_props.theme, _props.props, _props.stylesCtx) };
     }
 
     return { ...acc, ...style };

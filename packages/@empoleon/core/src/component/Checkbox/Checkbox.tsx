@@ -22,7 +22,7 @@ import {
   useProps,
   useStyles,
 } from '../../core';
-import { InlineInput, InlineInputClasses, InlineInputStylesNames } from '../InlineInput';
+import { InlineInput, InlineInputClasses, InlineInputStylesNames } from '../../utils/InlineInput';
 import { CheckboxCard } from './CheckboxCard/CheckboxCard';
 import { useCheckboxGroupContext } from './CheckboxGroup.context';
 import { CheckboxGroup } from './CheckboxGroup/CheckboxGroup';
@@ -99,7 +99,7 @@ export type CheckboxFactory = Factory<{
 const defaultProps: Partial<CheckboxProps> = {
   labelPosition: 'right',
   icon: CheckboxIcon,
-};
+} satisfies Partial<CheckboxProps>;
 
 const varsResolver = createVarsResolver<CheckboxFactory>(
   (theme, { radius, color, size, iconColor, variant, autoContrast }) => {
@@ -152,6 +152,7 @@ export const Checkbox = factory<CheckboxFactory>(_props => {
     'onChange',
     'autoContrast',
     'mod',
+    'attributes',
     'ref'
   ]);
 
@@ -168,6 +169,7 @@ export const Checkbox = factory<CheckboxFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
   });

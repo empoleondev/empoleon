@@ -1,5 +1,6 @@
 import { JSX } from 'solid-js';
 import { render } from '../render';
+import { getPropsValue } from './get-props-value';
 
 interface Options<Props = any> {
   component: (props: Props) => JSX.Element;
@@ -16,7 +17,8 @@ export function itSupportsRef<Props>(options: Options<Props>, name = 'supports r
       ref = el;
     };
 
-    const propsWithRef = { ...options.props, [options.refProp || 'ref']: refCallback } as Props & { [K in string]: (el: typeof options.refType) => void };
+    const baseProps = getPropsValue(options.props);
+    const propsWithRef = { ...baseProps, [options.refProp || 'ref']: refCallback } as Props & { [K in string]: (el: typeof options.refType) => void };
     render(() => <options.component {...propsWithRef} {...{ [options.refProp || 'ref']: refCallback }} />);
     expect(ref).toBeInstanceOf(options.refType);
   });

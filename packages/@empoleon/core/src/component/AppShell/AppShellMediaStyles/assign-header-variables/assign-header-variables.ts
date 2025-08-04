@@ -11,46 +11,42 @@ interface AssignHeaderVariablesInput {
   header: AppShellProps['header'] | undefined;
 }
 
-export function assignHeaderVariables({
-  baseStyles,
-  minMediaStyles,
-  header,
-}: AssignHeaderVariablesInput) {
-  const headerHeight = header?.height;
+export function assignHeaderVariables(props: AssignHeaderVariablesInput) {
+  const headerHeight = props.header?.height;
   const collapsedHeaderTransform = 'translateY(calc(var(--app-shell-header-height) * -1))';
-  const shouldOffset = header?.offset ?? true;
+  const shouldOffset = props.header?.offset ?? true;
 
   if (isPrimitiveSize(headerHeight)) {
     const baseSize = rem(getBaseSize(headerHeight));
-    baseStyles['--app-shell-header-height'] = baseSize;
+    props.baseStyles['--app-shell-header-height'] = baseSize;
     if (shouldOffset) {
-      baseStyles['--app-shell-header-offset'] = baseSize;
+      props.baseStyles['--app-shell-header-offset'] = baseSize;
     }
   }
 
   if (isResponsiveSize(headerHeight)) {
     if (typeof headerHeight.base !== 'undefined') {
-      baseStyles['--app-shell-header-height'] = rem(headerHeight.base);
+      props.baseStyles['--app-shell-header-height'] = rem(headerHeight.base);
 
       if (shouldOffset) {
-        baseStyles['--app-shell-header-offset'] = rem(headerHeight.base);
+        props.baseStyles['--app-shell-header-offset'] = rem(headerHeight.base);
       }
     }
 
     keys(headerHeight).forEach((key) => {
       if (key !== 'base') {
-        minMediaStyles[key] = minMediaStyles[key] || {};
-        minMediaStyles[key]['--app-shell-header-height'] = rem(headerHeight[key]);
+        props.minMediaStyles[key] = props.minMediaStyles[key] || {};
+        props.minMediaStyles[key]['--app-shell-header-height'] = rem(headerHeight[key]);
 
         if (shouldOffset) {
-          minMediaStyles[key]['--app-shell-header-offset'] = rem(headerHeight[key]);
+          props.minMediaStyles[key]['--app-shell-header-offset'] = rem(headerHeight[key]);
         }
       }
     });
   }
 
-  if (header?.collapsed) {
-    baseStyles['--app-shell-header-transform'] = collapsedHeaderTransform;
-    baseStyles['--app-shell-header-offset'] = '0px !important';
+  if (props.header?.collapsed) {
+    props.baseStyles['--app-shell-header-transform'] = collapsedHeaderTransform;
+    props.baseStyles['--app-shell-header-offset'] = '0px !important';
   }
 }

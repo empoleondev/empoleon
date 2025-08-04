@@ -156,6 +156,7 @@ export const ColorPicker = factory<ColorPickerFactory>(_props => {
     'onColorSwatchClick',
     '__staticSelector',
     'mod',
+    'attributes',
     'ref'
   ]);
 

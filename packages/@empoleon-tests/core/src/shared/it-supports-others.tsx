@@ -1,5 +1,6 @@
 import { JSX } from 'solid-js';
 import { render } from '../render';
+import { getPropsValue } from './get-props-value';
 
 interface Options<Props = any> {
   component: (props: Props) => JSX.Element;
@@ -12,7 +13,8 @@ export function itSupportsOthers<Props>(
   name = 'supports ...others props'
 ) {
   it(name, () => {
-    const propsWithDataAttribute = { ...options.props, "data-test-attribute": true } as Props & { "data-test-attribute": boolean };
+    const baseProps = getPropsValue(options.props);
+    const propsWithDataAttribute = { ...baseProps, "data-test-attribute": true } as Props & { "data-test-attribute": boolean };
 
     const { container } = render(() => <options.component {...propsWithDataAttribute} data-test-attribute />);
     expect(container.querySelector('[data-test-attribute]')).toBeInTheDocument();

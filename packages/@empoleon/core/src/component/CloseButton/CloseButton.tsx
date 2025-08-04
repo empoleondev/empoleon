@@ -90,6 +90,7 @@ export const CloseButton = polymorphicFactory<CloseButtonFactory>(_props => {
     'variant',
     'icon',
     'mod',
+    'attributes',
     '__staticSelector',
     'ref'
   ]);
@@ -103,6 +104,7 @@ export const CloseButton = polymorphicFactory<CloseButtonFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
   });

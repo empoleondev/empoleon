@@ -12,9 +12,9 @@ function getElementCenter(element: HTMLElement) {
 }
 
 function getAngle(coordinates: [number, number], element: HTMLElement) {
-  const [cx, cy] = getElementCenter(element);
-  const x = coordinates[0] - cx;
-  const y = coordinates[1] - cy;
+  const center = getElementCenter(element);
+  const x = coordinates[0] - center[0];
+  const y = coordinates[1] - center[1];
   const deg = radiansToDegrees(Math.atan2(x, y)) + 180;
   return 360 - deg;
 }
@@ -31,101 +31,124 @@ export function normalizeRadialValue(degree: number, step: number) {
   const clamped = clamp(degree, 0, 360);
   const high = Math.ceil(clamped / step);
   const low = Math.round(clamped / step);
-  const result =
-    high >= clamped / step
-      ? high * step === 360
-        ? 0
-        : high * step
-      : low * step;
-  return toFixed(result, getDigitsAfterDot(step));
+  return toFixed(
+    high >= clamped / step ? (high * step === 360 ? 0 : high * step) : low * step,
+    getDigitsAfterDot(step)
+  );
 }
 
 export interface UseRadialMoveOptions {
+  /** Number by which value is incremented/decremented with mouse and touch events, `0.01` by default */
   step?: number;
+
+  /** Called in `onMouseUp` and `onTouchEnd` events with the current value */
   onChangeEnd?: (value: number) => void;
+
+  /** Called in `onMouseDown` and `onTouchStart` events */
   onScrubStart?: () => void;
+
+  /** Called in `onMouseUp` and `onTouchEnd` events */
   onScrubEnd?: () => void;
 }
 
+export interface UseRadialMoveReturnValue<T extends HTMLElement = any> {
+  /** Ref to be passed to the element that should be used for radial move */
+  ref: Ref<T>;
+
+  /** Indicates whether the radial move is active */
+  active: () => boolean;
+}
+
 export function useRadialMove<T extends HTMLElement = any>(
-  onChange: (v: number) => void,
-  options: UseRadialMoveOptions = {}
-) {
-  const { step = 0.01, onChangeEnd, onScrubStart, onScrubEnd } = options;
-
-  // 1️⃣ element signal + setter as Ref<T>
-  const [node, setNode] = createSignal<T>();
-  const ref: Ref<T> = setNode;
-
-  // 2️⃣ active state
+  onChange: (value: number) => void,
+  { step = 0.01, onChangeEnd, onScrubStart, onScrubEnd }: UseRadialMoveOptions = {}
+): UseRadialMoveReturnValue<T> {
+  const [node, setNode] = createSignal<T | null>(null);
   const [active, setActive] = createSignal(false);
 
+  let mounted = false;
   let cleanup = () => {};
 
   onMount(() => {
-    const el = node();
-    if (!el) return;
+    mounted = true;
+  });
 
-    // event handlers
-    const update = (x: number, y: number, done = false) => {
-      el.style.userSelect = 'none';
-      const deg = getAngle([x, y], el);
-      const newValue = normalizeRadialValue(deg, step);
-      onChange(newValue);
-      if (done) onChangeEnd?.(newValue);
+  const ref: Ref<T> = (element: T | null) => {
+    cleanup();
+    setNode(() => element)
+
+    if (!element) return;
+
+    const update = (event: MouseEvent | Touch, done = false) => {
+      if (element) {
+        element.style.userSelect = 'none';
+        const deg = getAngle([event.clientX, event.clientY], element);
+        const newValue = normalizeRadialValue(deg, step || 1);
+
+        onChange(newValue);
+        done && onChangeEnd?.(newValue);
+      }
     };
 
-    let onMouseMove: (e: MouseEvent) => void;
-    let onMouseUp: (e: MouseEvent) => void;
-    let onTouchMove: (e: TouchEvent) => void;
-    let onTouchEnd: (e: TouchEvent) => void;
-
-    const begin = () => {
+    const beginTracking = () => {
       onScrubStart?.();
       setActive(true);
-      document.addEventListener('mousemove', onMouseMove);
-      document.addEventListener('mouseup', onMouseUp);
-      document.addEventListener('touchmove', onTouchMove, { passive: false });
-      document.addEventListener('touchend', onTouchEnd);
+      document.addEventListener('mousemove', handleMouseMove, false);
+      document.addEventListener('mouseup', handleMouseUp, false);
+      document.addEventListener('touchmove', handleTouchMove, { passive: false });
+      document.addEventListener('touchend', handleTouchEnd, false);
     };
 
-    const end = () => {
+    const endTracking = () => {
       onScrubEnd?.();
       setActive(false);
-      document.removeEventListener('mousemove', onMouseMove);
-      document.removeEventListener('mouseup', onMouseUp);
-      document.removeEventListener('touchmove', onTouchMove);
-      document.removeEventListener('touchend', onTouchEnd);
+      document.removeEventListener('mousemove', handleMouseMove, false);
+      document.removeEventListener('mouseup', handleMouseUp, false);
+      document.removeEventListener('touchmove', handleTouchMove, false);
+      document.removeEventListener('touchend', handleTouchEnd, false);
     };
 
-    const onMouseDown = (e: MouseEvent) => { begin(); update(e.clientX, e.clientY); };
-    onMouseMove = (e: MouseEvent) => update(e.clientX, e.clientY);
-    onMouseUp = (e: MouseEvent) => { update(e.clientX, e.clientY, true); end(); };
-
-    const onTouchStart = (e: TouchEvent) => {
-      e.preventDefault(); begin();
-      update(e.touches[0].clientX, e.touches[0].clientY);
-    };
-    onTouchMove = (e: TouchEvent) => {
-      e.preventDefault();
-      update(e.touches[0].clientX, e.touches[0].clientY);
-    };
-    onTouchEnd = (e: TouchEvent) => {
-      update(e.changedTouches[0].clientX, e.changedTouches[0].clientY, true);
-      end();
+    const onMouseDown = (event: MouseEvent) => {
+      beginTracking();
+      update(event);
     };
 
-    // attach to element
-    el.addEventListener('mousedown', onMouseDown);
-    el.addEventListener('touchstart', onTouchStart, { passive: false });
+    const handleMouseMove = (event: MouseEvent) => {
+      update(event);
+    };
 
-    // cleanup on unmount
+    const handleMouseUp = (event: MouseEvent) => {
+      update(event, true);
+      endTracking();
+    };
+
+    const handleTouchMove = (event: TouchEvent) => {
+      event.preventDefault();
+      update(event.touches[0]);
+    };
+
+    const handleTouchEnd = (event: TouchEvent) => {
+      update(event.changedTouches[0], true);
+      endTracking();
+    };
+
+    const handleTouchStart = (event: TouchEvent) => {
+      event.preventDefault();
+      beginTracking();
+      update(event.touches[0]);
+    };
+
+    element.addEventListener('mousedown', onMouseDown);
+    element.addEventListener('touchstart', handleTouchStart, { passive: false });
+
     cleanup = () => {
-      el.removeEventListener('mousedown', onMouseDown);
-      el.removeEventListener('touchstart', onTouchStart);
-      end();
+      if (element) {
+        element.removeEventListener('mousedown', onMouseDown);
+        element.removeEventListener('touchstart', handleTouchStart);
+      }
+      endTracking();
     };
-  });
+  };
 
   onCleanup(() => cleanup());
 

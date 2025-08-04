@@ -39,4 +39,4 @@ export const HueSlider = ((_props: HueSliderProps) => {
   );
 });
 
-// HueSlider.displayName = '@empoleon/core/HueSlider';
+(HueSlider as any).displayName = '@empoleon/core/HueSlider';

@@ -76,6 +76,7 @@ export const Divider = factory<DividerFactory>(_props => {
     'label',
     'labelPosition',
     'mod',
+    'attributes',
     'ref'
   ]);
 
@@ -88,6 +89,7 @@ export const Divider = factory<DividerFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
   });

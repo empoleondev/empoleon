@@ -1,6 +1,7 @@
 import { DEFAULT_THEME, EmpoleonTheme } from '@empoleon/core';
 import { render } from '../render';
 import { JSX } from 'solid-js/jsx-runtime';
+import { getPropsValue } from './get-props-value';
 
 const randomNumber = (min = 10, max = 100) => Math.floor(Math.random() * (max - min + 1) + min);
 const getTestObjectClassNames = (selectors: string[]) =>
@@ -9,13 +10,19 @@ const getTestObjectClassNames = (selectors: string[]) =>
     return acc;
   }, {});
 
-const getTestFunctionClassNames = (selectors: string[]) => (theme: EmpoleonTheme, props: any) =>
-  selectors.reduce<Record<string, string>>((acc, selector) => {
+const getTestFunctionClassNames = (selectors: string[]) => (theme: EmpoleonTheme, props: any) => {
+  console.log("getTestFunctionClassNames props: ", props['data-test'])
+  const result = selectors.reduce<Record<string, string>>((acc, selector) => {
     acc[selector] = `test-${
       props['data-test'] === undefined ? Math.random() : props['data-test']
     }-${theme === undefined ? Math.random() : theme.defaultRadius}-${selector}`;
     return acc;
   }, {});
+
+  console.log(result);
+
+  return result;
+};
 
 interface Options<Props extends Record<string, any> = any, Selectors extends string = string> {
   component: (props: Props) => JSX.Element;
@@ -32,34 +39,35 @@ export function itSupportsStylesApi<
 >(options: Options<Props, Selectors>, name = 'supports styles api') {
   // it(`${name}: classNames (inline object)`, () => {
   //   const classNames = getTestObjectClassNames(options.selectors);
-  //   const propsWithClassNames = { ...options.props, classNames } as Props & { classNames: any };
-  //   const { container } = render(() => <options.component {...propsWithClassNames} classNames={classNames} />);
+  //   const baseProps = getPropsValue(options.props);
+  //   const propsWithClassNames = { ...baseProps, classNames } as Props & { classNames: any };
+  //   const { container } = render(() => <options.component {...propsWithClassNames} />);
 
   //   options.selectors.forEach((selector) => {
   //     try {
   //       expect(container.querySelector(`.${classNames[selector]}`)).toBeInTheDocument();
   //     } catch (e) {
-  //       throw new Error(`Missing selector: .empoleon-${options.providerName}-${selector}`);
+  //       throw new Error(`Missing selector: .${classNames[selector]} - Check if this component actually renders elements with the '${selector}' selector`);
   //     }
   //   });
   // });
 
-  if (!options.compound) {
-    // it(`${name}: classNames (inline function)`, () => {
-    //   const classNames = getTestFunctionClassNames(options.selectors);
-    //   const propsWithClassNames = { ...options.props, "data-test": "__test", classNames } as Props & { "data-test": string; classNames: any };
-    //   const { container } = render(
-    //     () => <options.component {...propsWithClassNames} data-test="__test" classNames={classNames} />
-    //   );
-    //   options.selectors.forEach((selector) => {
-    //     expect(
-    //       container.querySelector(
-    //         `.${classNames(DEFAULT_THEME, { 'data-test': '__test' })[selector]}`
-    //       )
-    //     ).toBeInTheDocument();
-    //   });
-    // });
-  }
+  // if (!options.compound) {
+  //   it(`${name}: classNames (inline function)`, () => {
+  //     const classNames = getTestFunctionClassNames(options.selectors);
+  //     const baseProps = getPropsValue(options.props);
+  //     const { container } = render(
+  //       () => <options.component {...baseProps} data-test="__test" classNames={classNames} />
+  //     );
+  //     options.selectors.forEach((selector) => {
+  //       expect(
+  //         container.querySelector(
+  //           `.${classNames(DEFAULT_THEME, { 'data-test': '__test' })[selector]}`
+  //         )
+  //       ).toBeInTheDocument();
+  //     });
+  //   });
+  // }
 
   // it(`${name}: styles (inline object)`, () => {
   //   const classNames = getTestObjectClassNames(options.selectors);
@@ -71,9 +79,9 @@ export function itSupportsStylesApi<
   //     {}
   //   );
 
-  //   const propsWithStyles = { ...options.props, classNames, styles } as Props & { classNames: any; styles: any };
+  //   const baseProps = getPropsValue(options.props);
   //   const { container } = render(
-  //     () => <options.component {...propsWithStyles} classNames={classNames} styles={styles} />
+  //     () => <options.component {...baseProps} classNames={classNames} styles={styles} />
   //   );
 
   //   options.selectors.forEach((selector) => {
@@ -83,39 +91,39 @@ export function itSupportsStylesApi<
   //   });
   // });
 
-  if (!options.compound) {
-    // it(`${name}: styles (inline function)`, () => {
-    //   const classNames = getTestObjectClassNames(options.selectors);
-    //   const styles = (theme: EmpoleonTheme, props: any) =>
-    //     options.selectors.reduce<Record<string, JSX.CSSProperties>>((acc, selector) => {
-    //       acc[selector] = {
-    //         'outline-color': props['data-test'],
-    //         'box-shadow': theme.shadows.xl,
-    //       };
-    //       return acc;
-    //     }, {});
+  // if (!options.compound) {
+  //   it(`${name}: styles (inline function)`, () => {
+  //     const classNames = getTestObjectClassNames(options.selectors);
+  //     const styles = (theme: EmpoleonTheme, props: any) =>
+  //       options.selectors.reduce<Record<string, JSX.CSSProperties>>((acc, selector) => {
+  //         acc[selector] = {
+  //           'outline-color': props['data-test'],
+  //           'box-shadow': theme.shadows.xl,
+  //         };
+  //         return acc;
+  //       }, {});
 
-    //   const propsWithStyles = { ...options.props, "data-test": "orange", classNames, styles } as Props & { "data-test": string; classNames: any; styles: any };
-    //   const { container } = render(
-    //     () => <options.component
-    //       {...propsWithStyles}
-    //       data-test="orange"
-    //       classNames={classNames}
-    //       styles={styles}
-    //     />
-    //   );
+  //     const baseProps = getPropsValue(options.props);
+  //     const { container } = render(
+  //       () => <options.component
+  //         {...baseProps}
+  //         data-test="orange"
+  //         classNames={classNames}
+  //         styles={styles}
+  //       />
+  //     );
 
-    //   options.selectors.forEach((selector) => {
-    //     expect(container.querySelector(`.${classNames[selector]}`)).toHaveStyle({
-    //       ...styles(DEFAULT_THEME, { 'data-test': 'rgb(255, 165, 0)' })[selector],
-    //     });
-    //   });
-    // });
-  }
+  //     options.selectors.forEach((selector) => {
+  //       expect(container.querySelector(`.${classNames[selector]}`)).toHaveStyle({
+  //         ...styles(DEFAULT_THEME, { 'data-test': 'rgb(255, 165, 0)' })[selector],
+  //       });
+  //     });
+  //   });
+  // }
 
   // it(`${name}: static classNames (default)`, () => {
-  //   const resolvedProps = typeof options.props === 'function' ? options.props() : options.props;
-  //   const { container } = render(() => <options.component {...resolvedProps} />);
+  //   const baseProps = getPropsValue(options.props);
+  //   const { container } = render(() => <options.component {...baseProps} />);
   //   options.selectors.forEach((selector) => {
   //     try {
   //       expect(
@@ -128,114 +136,117 @@ export function itSupportsStylesApi<
   // });
 
   if (options.providerStylesApi === undefined || options.providerStylesApi === true) {
-    // it(`${name}: classNames (EmpoleonProvider object)`, () => {
-    //   const classNames = getTestObjectClassNames(options.selectors);
-    //   const propsWithClassNames = { ...options.props, classNames } as Props & { classNames: any };
-    //   const { container } = render(
-    //     () => <options.component {...propsWithClassNames} classNames={classNames} />,
-    //     {
-    //       components: {
-    //         [options.providerName]: {
-    //           classNames,
-    //         },
-    //       },
-    //     }
-    //   );
+  //   it(`${name}: classNames (EmpoleonProvider object)`, () => {
+  //     const classNames = getTestObjectClassNames(options.selectors);
+  //     const baseProps = getPropsValue(options.props);
+  //     const { container } = render(
+  //       () => <options.component {...baseProps} classNames={classNames} />,
+  //       {
+  //         components: {
+  //           [options.providerName]: {
+  //             classNames,
+  //           },
+  //         },
+  //       }
+  //     );
 
-    //   options.selectors.forEach((selector) => {
-    //     expect(container.querySelector(`.${classNames[selector]}`)).toBeInTheDocument();
-    //   });
-    // });
+  //     options.selectors.forEach((selector) => {
+  //       expect(container.querySelector(`.${classNames[selector]}`)).toBeInTheDocument();
+  //     });
+  //   });
 
-    // it(`${name}: classNames (EmpoleonProvider function)`, () => {
-    //   const classNames = getTestFunctionClassNames(options.selectors);
-    //   const propsWithClassNames = { ...options.props, "data-test": "__test", classNames } as Props & { "data-test": string; classNames: any };
-    //   const { container } = render(
-    //     () => <options.component {...propsWithClassNames} data-test="__test" classNames={classNames} />,
-    //     {
-    //       components: {
-    //         [options.providerName]: {
-    //           classNames: classNames as any,
-    //         },
-    //       },
-    //     }
-    //   );
-    //   options.selectors.forEach((selector) => {
-    //     expect(
-    //       container.querySelector(
-    //         `.${classNames(DEFAULT_THEME, { 'data-test': '__test' })[selector]}`
-    //       )
-    //     ).toBeInTheDocument();
-    //   });
-    // });
+    it(`${name}: classNames (EmpoleonProvider function)`, () => {
+      console.log('selectors!!', options.selectors);
+      const classNames = getTestFunctionClassNames(options.selectors);
+      const baseProps = getPropsValue(options.props);
+      console.log('component props', baseProps);
+      const { container } = render(
+        () => <options.component {...baseProps} data-test="__test" classNames={classNames} />,
+        {
+          components: {
+            [options.providerName]: {
+              classNames: classNames as any,
+            },
+          },
+        }
+      );
+      options.selectors.forEach((selector) => {
+        console.log('Container HTML:', container.innerHTML);
+        expect(
+          container.querySelector(
+            `.${classNames(DEFAULT_THEME, { 'data-test': '__test' })[selector]}`
+          )
+        ).toBeInTheDocument();
+      });
+    });
 
-    // it(`${name}: styles (EmpoleonProvider object)`, () => {
-    //   const classNames = getTestObjectClassNames(options.selectors);
-    //   const styles = options.selectors.reduce<Record<string, JSX.CSSProperties>>(
-    //     (acc, selector) => {
-    //       acc[selector] = { 'font-size': `${randomNumber()}px` };
-    //       return acc;
-    //     },
-    //     {}
-    //   );
+    it(`${name}: styles (EmpoleonProvider object)`, () => {
+      const classNames = getTestObjectClassNames(options.selectors);
+      const styles = options.selectors.reduce<Record<string, JSX.CSSProperties>>(
+        (acc, selector) => {
+          acc[selector] = { 'font-size': `${randomNumber()}px` };
+          return acc;
+        },
+        {}
+      );
 
-    //   const resolvedProps = typeof options.props === 'function' ? options.props() : options.props;
-    //   const { container } = render(() => <options.component {...resolvedProps} />, {
-    //     components: {
-    //       [options.providerName]: {
-    //         styles,
-    //         classNames,
-    //       },
-    //     },
-    //   });
+      const baseProps = getPropsValue(options.props);
+      const { container } = render(() => <options.component {...baseProps} />, {
+        components: {
+          [options.providerName]: {
+            styles,
+            classNames,
+          },
+        },
+      });
 
-    //   options.selectors.forEach((selector) => {
-    //     expect(container.querySelector(`.${classNames[selector]}`)).toHaveStyle({
-    //       ...styles[selector],
-    //     });
-    //   });
-    // });
+      options.selectors.forEach((selector) => {
+        expect(container.querySelector(`.${classNames[selector]}`)).toHaveStyle({
+          ...styles[selector],
+        });
+      });
+    });
 
-    // it(`${name}: styles (EmpoleonProvider function)`, () => {
-    //   const classNames = getTestObjectClassNames(options.selectors);
-    //   const styles = (theme: EmpoleonTheme, props: any) =>
-    //     options.selectors.reduce<Record<string, JSX.CSSProperties>>((acc, selector) => {
-    //       acc[selector] = {
-    //         'outline-color': props['data-test'],
-    //         'box-shadow': theme.shadows.xl,
-    //       };
-    //       return acc;
-    //     }, {});
+  //   it(`${name}: styles (EmpoleonProvider function)`, () => {
+  //     const classNames = getTestObjectClassNames(options.selectors);
+  //     const styles = (theme: EmpoleonTheme, props: any) =>
+  //       options.selectors.reduce<Record<string, JSX.CSSProperties>>((acc, selector) => {
+  //         acc[selector] = {
+  //           'outline-color': props['data-test'],
+  //           'box-shadow': theme.shadows.xl,
+  //         };
+  //         return acc;
+  //       }, {});
 
-    //   const { container } = render(() => {
-    //     const resolvedProps = typeof options.props === 'function' ? options.props() : options.props;
-    //     const propsWithDataTest = { ...resolvedProps, "data-test": "orange" } as Props & { "data-test": string };
-    //     return <options.component {...propsWithDataTest} data-test="orange" />;
-    //   }, {
-    //     components: {
-    //       [options.providerName]: {
-    //         styles: styles as any,
-    //         classNames: classNames as any,
-    //       },
-    //     },
-    //   });
+  //     const { container } = render(() => {
+  //       const baseProps = getPropsValue(options.props);
+  //       const propsWithDataTest = { ...baseProps, "data-test": "orange" } as Props & { "data-test": string };
+  //       return <options.component {...propsWithDataTest} data-test="orange" />;
+  //     }, {
+  //       components: {
+  //         [options.providerName]: {
+  //           styles: styles as any,
+  //           classNames: classNames as any,
+  //         },
+  //       },
+  //     });
 
-    //   options.selectors.forEach((selector) => {
-    //     try {
-    //       expect(container.querySelector(`.${classNames[selector]}`)).toHaveStyle({
-    //         ...styles(DEFAULT_THEME, { 'data-test': 'rgb(255, 165, 0)' })[selector],
-    //       });
-    //     } catch (e) {
-    //       throw new Error(`Missing selector: .test-${options.providerName}-${selector}`);
-    //     }
-    //   });
-    // });
+  //     options.selectors.forEach((selector) => {
+  //       try {
+  //         expect(container.querySelector(`.${classNames[selector]}`)).toHaveStyle({
+  //           ...styles(DEFAULT_THEME, { 'data-test': 'rgb(255, 165, 0)' })[selector],
+  //         });
+  //       } catch (e) {
+  //         throw new Error(`Missing selector: .test-${options.providerName}-${selector}`);
+  //       }
+  //     });
+  //   });
 
     it(`${name}: static classNames (EmpoleonProvider)`, () => {
       const { container } = render(
         () => {
-          const resolvedProps = typeof options.props === 'function' ? options.props() : options.props;
-          return <options.component {...resolvedProps} />;
+          const baseProps = getPropsValue(options.props);
+          return <options.component {...baseProps} />;
         },
         {},
         { classNamesPrefix: 'test' }

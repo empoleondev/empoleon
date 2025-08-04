@@ -6,15 +6,10 @@ interface GetStaticClassNamesInput {
 }
 
 /** Returns static component classes, for example, `.empoleon-Input-wrapper` */
-export function getStaticClassNames({
-  themeName,
-  classNamesPrefix,
-  selector,
-  withStaticClass,
-}: GetStaticClassNamesInput) {
-  if (withStaticClass === false) {
+export function getStaticClassNames(_props: GetStaticClassNamesInput) {
+  if (_props.withStaticClass === false) {
     return [];
   }
 
-  return themeName.map((n) => `${classNamesPrefix}-${n}-${selector}`);
+  return _props.themeName.map((n) => `${_props.classNamesPrefix}-${n}-${_props.selector}`);
 }

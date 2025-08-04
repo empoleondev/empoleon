@@ -35,7 +35,7 @@ export type HighlightFactory = PolymorphicFactory<{
 const defaultProps: Partial<HighlightProps> = {};
 
 export const Highlight = polymorphicFactory<HighlightFactory>(_props => {
-  const props = useProps('Highlight', defaultProps, _props);
+  const props = useProps('Highlight', null, _props);
   const [local, others] = splitProps(props, [
     'unstyled',
     'children',

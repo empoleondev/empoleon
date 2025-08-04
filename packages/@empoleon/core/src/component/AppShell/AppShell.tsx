@@ -105,7 +105,7 @@ const defaultProps: Partial<AppShellProps> = {
   transitionDuration: 200,
   transitionTimingFunction: 'ease',
   zIndex: getDefaultZIndex('app'),
-};
+} satisfies Partial<AppShellProps>;
 
 const varsResolver = createVarsResolver<AppShellFactory>(
   (_, { transitionDuration, transitionTimingFunction }) => ({
@@ -138,6 +138,7 @@ export const AppShell = factory<AppShellFactory>(_props => {
     'footer',
     'offsetScrollbars',
     'mod',
+    'attributes',
     'ref'
   ]);
 
@@ -152,6 +153,7 @@ export const AppShell = factory<AppShellFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
   });

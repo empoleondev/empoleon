@@ -163,7 +163,7 @@ export const ColorInput = factory<ColorInputFactory>(__props => {
     onChange: local.onChange,
   });
 
-  const { supported: eyeDropperSupported, open: openEyeDropper } = useEyeDropper();
+  const eyeDropperFuncs = useEyeDropper();
 
   const eyeDropper = (
     <ActionIcon
@@ -177,7 +177,7 @@ export const ColorInput = factory<ColorInputFactory>(__props => {
       size={local.inputProps.size}
       unstyled={local.unstyled}
       onClick={() =>
-        openEyeDropper()
+        eyeDropperFuncs.open()
           .then((payload: any) => {
             if (payload?.sRGBHex) {
               const color = convertHsvaTo(local.format!, parseColor(payload.sRGBHex));
@@ -280,7 +280,7 @@ export const ColorInput = factory<ColorInputFactory>(__props => {
               unstyled={local.unstyled}
               rightSection={
                 local.rightSection ||
-                (local.withEyeDropper && !local.disabled && !local.readOnly && eyeDropperSupported() ? eyeDropper : null)
+                (local.withEyeDropper && !local.disabled && !local.readOnly && eyeDropperFuncs.supported() ? eyeDropper : null)
               }
             />
             </div>
@@ -305,6 +305,7 @@ export const ColorInput = factory<ColorInputFactory>(__props => {
             styles={resolvedStyles}
             classNames={resolvedClassNames}
             onColorSwatchClick={() => local.closeOnColorSwatchClick && setDropdownOpened(false)}
+            attributes={local.wrapperProps.attributes}
           />
         </Popover.Dropdown>
       </Popover>

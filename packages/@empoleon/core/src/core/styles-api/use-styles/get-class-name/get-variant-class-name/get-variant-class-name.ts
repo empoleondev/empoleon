@@ -8,11 +8,6 @@ interface GetVariantClassNameInput {
 }
 
 /** Returns variant className, variant is always separated from selector with `--`, for example, `tab--default` */
-export function getVariantClassName({
-  options,
-  classes,
-  selector,
-  unstyled,
-}: GetVariantClassNameInput) {
-  return options?.variant && !unstyled ? classes[`${selector}--${options.variant}`] : undefined;
+export function getVariantClassName(_props: GetVariantClassNameInput) {
+  return _props.options?.variant && !_props.unstyled ? _props.classes[`${_props.selector}--${_props.options.variant}`] : undefined;
 }

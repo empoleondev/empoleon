@@ -7,21 +7,21 @@ interface ResolveStyleInput {
   theme: EmpoleonTheme;
 }
 
-export function resolveStyle({ style, theme }: ResolveStyleInput): JSX.CSSProperties {
-  if (Array.isArray(style)) {
-    return [...style].reduce<Record<string, any>>(
-      (acc, item) => ({ ...acc, ...resolveStyle({ style: item, theme }) }),
+export function resolveStyle(props: ResolveStyleInput): JSX.CSSProperties {
+  if (Array.isArray(props.style)) {
+    return [...props.style].reduce<Record<string, any>>(
+      (acc, item) => ({ ...acc, ...resolveStyle({ style: item, theme: props.theme }) }),
       {}
     );
   }
 
-  if (typeof style === 'function') {
-    return style(theme);
+  if (typeof props.style === 'function') {
+    return props.style(props.theme);
   }
 
-  if (style == null) {
+  if (props.style == null) {
     return {};
   }
 
-  return style;
+  return props.style;
 }

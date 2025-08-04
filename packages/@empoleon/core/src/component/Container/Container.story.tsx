@@ -39,8 +39,32 @@ export default {
 export function Usage() {
   return (
     <EmpoleonThemeProvider theme={theme}>
-      <Container size="xxs" h={50} bg="blue">
-        Container
+      <Container size="md" bg="gray.1" strategy="grid">
+        <div style={{ background: 'orange' }}>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo facilis quasi asperiores!
+          Adipisci dolorem cumque sunt maiores ullam alias rerum architecto voluptatibus reiciendis.
+          Nulla, maxime alias? Impedit dolore voluptatibus ducimus? Lorem ipsum dolor sit amet
+          consectetur adipisicing elit. Quo facilis quasi asperiores! Adipisci dolorem cumque sunt
+          maiores ullam alias rerum architecto voluptatibus reiciendis. Nulla, maxime alias? Impedit
+          dolore voluptatibus ducimus? Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo
+          facilis quasi asperiores! Adipisci dolorem cumque sunt maiores ullam alias rerum
+          architecto voluptatibus reiciendis. Nulla, maxime alias? Impedit dolore voluptatibus
+          ducimus?
+        </div>
+        <div data-breakout style={{ background: 'silver' }}>
+          <div>Breakout</div>
+          <div data-container style={{ background: 'cyan' }}>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo facilis quasi asperiores!
+            Adipisci dolorem cumque sunt maiores ullam alias rerum architecto voluptatibus
+            reiciendis. Nulla, maxime alias? Impedit dolore voluptatibus ducimus? Lorem ipsum dolor
+            sit amet consectetur adipisicing elit. Quo facilis quasi asperiores! Adipisci dolorem
+            cumque sunt maiores ullam alias rerum architecto voluptatibus reiciendis. Nulla, maxime
+            alias? Impedit dolore voluptatibus ducimus? Lorem ipsum dolor sit amet consectetur
+            adipisicing elit. Quo facilis quasi asperiores! Adipisci dolorem cumque sunt maiores
+            ullam alias rerum architecto voluptatibus reiciendis. Nulla, maxime alias? Impedit
+            dolore voluptatibus ducimus?
+          </div>
+        </div>
       </Container>
     </EmpoleonThemeProvider>
   );

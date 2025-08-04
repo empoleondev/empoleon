@@ -76,6 +76,7 @@ export const ColorSwatch = polymorphicFactory<ColorSwatchFactory>(_props => {
     'withShadow',
     'children',
     'variant',
+    'attributes',
     'ref'
   ]);
 

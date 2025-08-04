@@ -83,8 +83,6 @@ export type AvatarFactory = PolymorphicFactory<{
   };
 }>;
 
-const defaultProps: Partial<AvatarProps> = {};
-
 const varsResolver = createVarsResolver<AvatarFactory>(
   (
     theme,
@@ -116,7 +114,7 @@ const varsResolver = createVarsResolver<AvatarFactory>(
 );
 
 export const Avatar = polymorphicFactory<AvatarFactory>(_props => {
-  const props = useProps('Avatar', defaultProps, _props);
+  const props = useProps('Avatar', null, _props);
   const [local, others] = splitProps(props, [
     'classNames',
     'className',
@@ -135,6 +133,7 @@ export const Avatar = polymorphicFactory<AvatarFactory>(_props => {
     'mod',
     'name',
     'allowedInitialsColors',
+    'attributes',
     'ref'
   ]);
   const ctx = useAvatarGroupContext();
@@ -149,6 +148,7 @@ export const Avatar = polymorphicFactory<AvatarFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
   });

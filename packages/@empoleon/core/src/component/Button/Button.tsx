@@ -166,6 +166,7 @@ export const Button = polymorphicFactory<ButtonFactory>(_props => {
     'data-disabled',
     'autoContrast',
     'mod',
+    'attributes',
     'ref'
   ]);
 

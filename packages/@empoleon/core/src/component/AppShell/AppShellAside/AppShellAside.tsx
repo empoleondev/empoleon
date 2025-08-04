@@ -9,20 +9,16 @@ import {
   useProps,
 } from '../../../core';
 import { useAppShellContext } from '../AppShell.context';
+import { AppShellCompoundProps } from '../AppShell.types';
 import classes from '../AppShell.module.css';
 
 export type AppShellAsideStylesNames = 'aside';
 
 export interface AppShellAsideProps
   extends BoxProps,
+    AppShellCompoundProps,
     StylesApiProps<AppShellAsideFactory>,
-    ElementProps<'aside'> {
-  /** Determines whether component should have a border, overrides `withBorder` prop on `AppShell` component */
-  withBorder?: boolean;
-
-  /** Component `z-index`, by default inherited from the `AppShell` */
-  zIndex?: string | number;
-}
+    ElementProps<'aside'> {}
 
 export type AppShellAsideFactory = Factory<{
   props: AppShellAsideProps;

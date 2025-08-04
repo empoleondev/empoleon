@@ -1,5 +1,6 @@
 import { JSX } from 'solid-js';
 import { render } from '../render';
+import { getPropsValue } from './get-props-value';
 
 interface Options<Props = any> {
   component: (props: Props) => JSX.Element;
@@ -9,7 +10,8 @@ interface Options<Props = any> {
 
 export function itSupportsSize<Props>(options: Options<Props>, name = 'supports size') {
   it(name, () => {
-    const propsWithSize = { ...options.props, size: "__test-size" } as Props & { size: string };
+    const baseProps = getPropsValue(options.props);
+    const propsWithSize = { ...baseProps, size: "__test-size" } as Props & { size: string };
 
     const { container } = render(
       () => <options.component {...propsWithSize} size="__test-size" />

@@ -1,5 +1,6 @@
 import { ComponentProps, JSX } from 'solid-js';
 import { render } from '../render';
+import { getPropsValue } from './get-props-value';
 
 interface Options<Props = any> {
   component: (props: Props) => JSX.Element;
@@ -16,7 +17,8 @@ export function itIsPolymorphic<Props>(options: Options<Props>, name = 'is polym
     container.querySelector(options.selector || '*:not(style)')!;
 
   it(`${name}: html element`, () => {
-    const propsWithComponentAndHref = { ...options.props, component: "a", href: "#test-link" } as Props & { component: string; href: string };
+    const baseProps = getPropsValue(options.props);
+    const propsWithComponentAndHref = { ...baseProps, component: "a", href: "#test-link" } as Props & { component: string; href: string };
     const { container } = render(
       () => <options.component {...propsWithComponentAndHref} />
     );
@@ -27,7 +29,8 @@ export function itIsPolymorphic<Props>(options: Options<Props>, name = 'is polym
   });
 
   it(`${name}: React component`, () => {
-    const propsWithComponentAndDataAttribute = { ...options.props, component: TestComponent, "data-parent-prop": true } as Props & { component: typeof TestComponent; "data-parent-prop": boolean };
+    const baseProps = getPropsValue(options.props);
+    const propsWithComponentAndDataAttribute = { ...baseProps, component: TestComponent, "data-parent-prop": true } as Props & { component: typeof TestComponent; "data-parent-prop": boolean };
     const { container } = render(
       () => <options.component {...propsWithComponentAndDataAttribute} />
     );
@@ -39,7 +42,8 @@ export function itIsPolymorphic<Props>(options: Options<Props>, name = 'is polym
   });
 
   it(`${name}: renderRoot`, () => {
-    const propsWithRenderRoot = { ...options.props, renderRoot: (props: any) => <a href="#test-link" {...props} /> } as Props & { renderRoot: (props: any) => JSX.Element };
+    const baseProps = getPropsValue(options.props);
+    const propsWithRenderRoot = { ...baseProps, renderRoot: (props: any) => <a href="#test-link" {...props} /> } as Props & { renderRoot: (props: any) => JSX.Element };
     const { container } = render(
       () => <options.component {...propsWithRenderRoot} />
     );

@@ -1,0 +1,118 @@
+
+upgrade 8.20
+
+Core:
+
+Accordion (broken)
+ActionIcon - done
+Affix - done
+Alert - done
+Anchor - done
+AngleSlider - done
+AppShell - done
+AspectRatio - done
+Autocomplete - done
+Avatar - done
+BackgroundImage - done
+Badge - done
+Blockquote - done
+Breadcrumbs - done
+Burger - done
+Button - done
+Card - skip need to fix test first
+Center - done
+Checkbox - done
+Chip - done
+CloseButton - done
+Code - done
+Collapse - need to fix with accordion first
+ColorInput - done
+ColorPicker - done
+ColorSwatch - done
+Combobox
+Container - done
+CopyButton - done
+Dialog - done
+Divider - done
+Drawer
+Fieldset - done
+FileButton - done
+FileInput - done
+Flex - done
+FloatingIndicator - done
+FocusTrap - done
+Grid - done
+Group - done
+Highlight - done
+HoverCard - done
+Image
+Indicator
+Input
+InputBase
+JsonInput
+Kbd
+List
+Loader
+LoadingOverlay
+Mark
+Menu
+Modal
+ModalBase
+MultiSelect
+NativeSelect
+NavLink
+Notification
+NumberFormatter
+NumberInput
+Overlay
+Pagination
+Paper
+PasswordInput
+Pill
+PillsInput
+PinInput
+Popover - done
+Portal
+Progress
+Radio
+Rating
+RingProgress
+ScrollArea
+SegmentedControl
+Select
+SemiCircleProgress
+SimpleGrid
+Skeleton
+Slider
+Space
+Spoiler
+Stack
+Stepper
+Switch
+Table
+TableOfContents
+Tabs
+TagsInput
+Text
+Textarea
+TextInput
+ThemeIcon
+Timeline
+Title
+Tooltip
+Transition
+Tree
+TypographyStylesProvider
+UnstyledButton
+VisuallyHidden
+
+Others:
+
+Carousel
+Dropzone
+Form
+Modals Manager
+Notifications
+NavigationProgress
+Spotlight
+Tiptap

@@ -9,23 +9,23 @@ const defaultProps: TabsListProps = {
 };
 
 describe('@empoleon/core/TabsList', () => {
-  // tests.itSupportsSystemProps<TabsListProps, TabsListStylesNames>({
-  //   component: TestContainer,
-  //   props: () => defaultProps,
-  //   refType: HTMLDivElement,
-  //   displayName: '@empoleon/core/TabsList',
-  //   mod: true,
-  //   extend: true,
-  //   withProps: true,
-  //   styleProps: true,
-  //   children: true,
-  //   classes: true,
-  //   id: true,
-  //   selector: '[role="tablist"]',
-  //   stylesApiName: 'Tabs',
-  //   stylesApiSelectors: ['list'],
-  //   providerStylesApi: false,
-  // });
+  tests.itSupportsSystemProps<TabsListProps, TabsListStylesNames>({
+    component: TestContainer,
+    props: () => defaultProps,
+    refType: HTMLDivElement,
+    displayName: '@empoleon/core/TabsList',
+    mod: true,
+    extend: true,
+    withProps: true,
+    styleProps: true,
+    children: true,
+    classes: true,
+    id: true,
+    selector: '[role="tablist"]',
+    stylesApiName: 'Tabs',
+    stylesApiSelectors: ['list'],
+    providerStylesApi: false,
+  });
 
   tests.itThrowsContextError({
     component: TabsList,

@@ -64,6 +64,9 @@ export interface AutocompleteProps
 
   /** Determines whether the clear button should be displayed in the right section when the component has value, `false` by default */
   clearable?: boolean;
+
+  /** If set, the highlighted option is selected when the input loses focus @default `false` */
+  autoSelectOnBlur?: boolean;
 }
 
 export type AutocompleteFactory = Factory<{
@@ -112,6 +115,8 @@ export const Autocomplete = factory<AutocompleteFactory>(_props => {
     'error',
     'clearable',
     'rightSection',
+    'autoSelectOnBlur',
+    'attributes',
     'ref'
   ]);
 
@@ -171,12 +176,13 @@ export const Autocomplete = factory<AutocompleteFactory>(_props => {
       styles={resolvedStyles}
       unstyled={local.unstyled}
       readOnly={local.readOnly}
+      size={local.size}
+      attributes={local.attributes}
       onOptionSubmit={(val: any) => {
         local.onOptionSubmit?.(val);
         handleValueChange(optionsLockup()[val].label);
         combobox.closeDropdown();
       }}
-      size={local.size}
       {...local.comboboxProps}
     >
       <Combobox.Target autoComplete={local.autocomplete}>
@@ -205,6 +211,10 @@ export const Autocomplete = factory<AutocompleteFactory>(_props => {
             typeof local.onFocus === 'function' && local.onFocus?.(event);
           }}
           onBlur={(event) => {
+            if (local.autoSelectOnBlur) {
+              combobox.clickSelectedOption();
+            }
+
             combobox.closeDropdown();
             typeof local.onBlur === 'function' && local.onBlur?.(event);
           }}
@@ -215,6 +225,7 @@ export const Autocomplete = factory<AutocompleteFactory>(_props => {
           classNames={resolvedClassNames}
           styles={resolvedStyles}
           unstyled={local.unstyled}
+          attributes={local.attributes}
           id={_id}
         />
       </Combobox.Target>

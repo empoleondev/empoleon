@@ -1,5 +1,5 @@
 import { JSX } from 'solid-js';
-import { useInputWrapperContext } from '../Input';
+import { useInputWrapperContext } from '../../component/Input';
 
 interface InputsGroupFieldsetProps {
   children: JSX.Element;

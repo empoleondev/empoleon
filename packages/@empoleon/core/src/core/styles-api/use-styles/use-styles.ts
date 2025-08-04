@@ -39,31 +39,19 @@ export type GetStylesApi<Payload extends FactoryPayload> = (
   style: JSX.CSSProperties;
 };
 
-export function useStyles<Payload extends FactoryPayload>({
-  name,
-  classes,
-  props,
-  stylesCtx,
-  className,
-  style,
-  rootSelector = 'root' as NonNullable<Payload['stylesNames']>,
-  unstyled,
-  classNames,
-  styles,
-  vars,
-  varsResolver,
-  attributes,
-}: UseStylesInput<Payload>): GetStylesApi<Payload> {
+export function useStyles<Payload extends FactoryPayload>(_props: UseStylesInput<Payload>): GetStylesApi<Payload> {
   const theme = useEmpoleonTheme();
   const classNamesPrefix = useEmpoleonClassNamesPrefix();
   const withStaticClasses = useEmpoleonWithStaticClasses();
   const headless = useEmpoleonIsHeadless();
-  const themeName = (Array.isArray(name) ? name : [name]).filter((n) => n) as string[];
-  const stylesTransformProps = useStylesTransform({
-    props,
-    stylesCtx,
+  const themeName = (Array.isArray(_props.name) ? _props.name : [_props.name]).filter((n) => n) as string[];
+  const { withStylesTransform, getTransformedStyles } = useStylesTransform({
+    props: _props.props,
+    stylesCtx: _props.stylesCtx,
     themeName,
   });
+
+  const rootSelector = 'root' as NonNullable<Payload['stylesNames']>;
 
   return (selector, options) => ({
     className: getClassName({
@@ -72,16 +60,16 @@ export function useStyles<Payload extends FactoryPayload>({
       themeName,
       selector,
       classNamesPrefix,
-      classNames,
-      classes,
-      unstyled,
-      className,
+      classNames: _props.classNames,
+      classes: _props.classes,
+      unstyled: _props.unstyled,
+      className: _props.className,
       rootSelector,
-      props,
-      stylesCtx,
+      props: _props.props,
+      stylesCtx: _props.stylesCtx,
       withStaticClasses,
       headless,
-      transformedStyles: stylesTransformProps.getTransformedStyles([options?.styles, styles]),
+      transformedStyles: getTransformedStyles([options?.styles, _props.styles]),
     }),
 
     style: getStyle({
@@ -89,17 +77,17 @@ export function useStyles<Payload extends FactoryPayload>({
       themeName,
       selector,
       options,
-      props,
-      stylesCtx,
+      props: _props.props,
+      stylesCtx: _props.stylesCtx,
       rootSelector,
-      styles,
-      style,
-      vars,
-      varsResolver,
+      styles: _props.styles,
+      style: _props.style,
+      vars: _props.vars,
+      varsResolver: _props.varsResolver,
       headless,
-      withStylesTransform: stylesTransformProps.withStylesTransform,
+      withStylesTransform,
     }),
 
-    ...attributes?.[selector],
+    ..._props.attributes?.[selector],
   });
 }

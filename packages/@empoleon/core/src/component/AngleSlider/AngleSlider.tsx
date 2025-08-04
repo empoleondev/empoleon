@@ -1,4 +1,4 @@
-import { For, JSX, splitProps } from 'solid-js';
+import { createSignal, For, JSX, splitProps } from 'solid-js';
 import { normalizeRadialValue, useMergedRef, useRadialMove, useUncontrolled } from '@empoleon/hooks';
 import {
   Box,
@@ -83,7 +83,7 @@ export type AngleSliderFactory = Factory<{
 const defaultProps: Partial<AngleSliderProps> = {
   step: 1,
   withLabel: true,
-};
+} satisfies Partial<AngleSliderProps>;
 
 const varsResolver = createVarsResolver<AngleSliderFactory>((_, { size, thumbSize }) => ({
   root: {
@@ -120,8 +120,12 @@ export const AngleSlider = factory<AngleSliderFactory>(_props => {
     'tabIndex',
     'onScrubStart',
     'onScrubEnd',
+    'mod',
+    'attributes',
     'ref'
   ]);
+
+  const [rootRef, setRootRef] = createSignal<HTMLDivElement | null>(null);
 
   const [_value, setValue] = useUncontrolled({
     value: () => local.value,
@@ -131,18 +135,20 @@ export const AngleSlider = factory<AngleSliderFactory>(_props => {
   });
 
   const update = (val: number) => {
-    const newValue =
-      local.restrictToMarks && Array.isArray(local.marks)
-        ? findClosestNumber(
-            val,
-            local.marks.map((mark) => mark.value)
-          )
-        : val;
+    if (rootRef() && !local.disabled) {
+      const newValue =
+        local.restrictToMarks && Array.isArray(local.marks)
+          ? findClosestNumber(
+              val,
+              local.marks.map((mark) => mark.value)
+            )
+          : val;
 
-    setValue(newValue);
+      setValue(newValue);
+    }
   };
 
-  const { ref: rootRef } = useRadialMove(update, {
+  const { ref: radialMoveRef } = useRadialMove(update, {
     step: local.step,
     onChangeEnd: local.onChangeEnd,
     onScrubStart: local.onScrubStart,
@@ -158,6 +164,7 @@ export const AngleSlider = factory<AngleSliderFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
   });
@@ -167,31 +174,54 @@ export const AngleSlider = factory<AngleSliderFactory>(_props => {
       return;
     }
 
+    let newValue = _value();
+
     if (event.key === 'ArrowLeft' || event.key === 'ArrowDown') {
-      const normalized = normalizeRadialValue(_value() - local.step!, local.step!);
-      setValue(normalized);
-      local.onChangeEnd?.(normalized);
+      event.preventDefault();
+      newValue = normalizeRadialValue(_value() - local.step!, local.step!);
     }
 
     if (event.key === 'ArrowRight' || event.key === 'ArrowUp') {
-      const normalized = normalizeRadialValue(_value() + local.step!, local.step!);
-      setValue(normalized);
-      local.onChangeEnd?.(normalized);
+      event.preventDefault();
+      newValue = normalizeRadialValue(_value() + local.step!, local.step!);
     }
 
     if (event.key === 'Home') {
-      setValue(0);
-      local.onChangeEnd?.(0);
+      newValue = 0;
     }
 
     if (event.key === 'End') {
-      setValue(359);
-      local.onChangeEnd?.(359);
+      newValue = 359;
     }
+
+    if (local.restrictToMarks && Array.isArray(local.marks)) {
+      const markValues = local.marks.map((mark) => mark.value);
+      const currentIndex = markValues.indexOf(_value());
+
+      if (currentIndex !== -1) {
+        if (event.key === 'ArrowLeft' || event.key === 'ArrowDown') {
+          newValue = markValues[Math.max(0, currentIndex - 1)];
+        } else if (event.key === 'ArrowRight' || event.key === 'ArrowUp') {
+          newValue = markValues[Math.min(markValues.length - 1, currentIndex + 1)];
+        } else {
+          newValue = findClosestNumber(newValue, markValues);
+        }
+      } else {
+        newValue = findClosestNumber(newValue, markValues);
+      }
+    }
+
+    setValue(newValue);
+    local.onChangeEnd?.(newValue);
   };
 
   return (
-    <Box ref={useMergedRef(local.ref, rootRef)} {...getStyles('root', { focusable: true })} {...others}>
+    <Box
+      ref={useMergedRef(local.ref, setRootRef, radialMoveRef) as any}
+      {...getStyles('root', { focusable: true })}
+      mod={[{ disabled: local.disabled }, local.mod]}
+      {...others}
+    >
       {local.marks && local.marks.length > 0 && (
         <div {...getStyles('marks')}>
           <For each={local.marks}>{(mark) => (

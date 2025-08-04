@@ -13,60 +13,54 @@ interface AssignNavbarVariablesInput {
   theme: EmpoleonTheme;
 }
 
-export function assignNavbarVariables({
-  baseStyles,
-  minMediaStyles,
-  maxMediaStyles,
-  navbar,
-  theme,
-}: AssignNavbarVariablesInput) {
-  const navbarWidth = navbar?.width;
+export function assignNavbarVariables(props: AssignNavbarVariablesInput) {
+  const navbarWidth = props.navbar?.width;
   const collapsedNavbarTransform = 'translateX(calc(var(--app-shell-navbar-width) * -1))';
   const collapsedNavbarTransformRtl = 'translateX(var(--app-shell-navbar-width))';
 
-  if (navbar?.breakpoint && !navbar?.collapsed?.mobile) {
-    maxMediaStyles[navbar?.breakpoint] = maxMediaStyles[navbar?.breakpoint] || {};
-    maxMediaStyles[navbar?.breakpoint]['--app-shell-navbar-width'] = '100%';
-    maxMediaStyles[navbar?.breakpoint]['--app-shell-navbar-offset'] = '0px';
+  if (props.navbar?.breakpoint && !props.navbar?.collapsed?.mobile) {
+    props.maxMediaStyles[props.navbar?.breakpoint] = props.maxMediaStyles[props.navbar?.breakpoint] || {};
+    props.maxMediaStyles[props.navbar?.breakpoint]['--app-shell-navbar-width'] = '100%';
+    props.maxMediaStyles[props.navbar?.breakpoint]['--app-shell-navbar-offset'] = '0px';
   }
 
   if (isPrimitiveSize(navbarWidth)) {
     const baseSize = rem(getBaseSize(navbarWidth));
-    baseStyles['--app-shell-navbar-width'] = baseSize;
-    baseStyles['--app-shell-navbar-offset'] = baseSize;
+    props.baseStyles['--app-shell-navbar-width'] = baseSize;
+    props.baseStyles['--app-shell-navbar-offset'] = baseSize;
   }
 
   if (isResponsiveSize(navbarWidth)) {
     if (typeof navbarWidth.base !== 'undefined') {
-      baseStyles['--app-shell-navbar-width'] = rem(navbarWidth.base);
-      baseStyles['--app-shell-navbar-offset'] = rem(navbarWidth.base);
+      props.baseStyles['--app-shell-navbar-width'] = rem(navbarWidth.base);
+      props.baseStyles['--app-shell-navbar-offset'] = rem(navbarWidth.base);
     }
 
     keys(navbarWidth).forEach((key) => {
       if (key !== 'base') {
-        minMediaStyles[key] = minMediaStyles[key] || {};
-        minMediaStyles[key]['--app-shell-navbar-width'] = rem(navbarWidth![key]);
-        minMediaStyles[key]['--app-shell-navbar-offset'] = rem(navbarWidth![key]);
+        props.minMediaStyles[key] = props.minMediaStyles[key] || {};
+        props.minMediaStyles[key]['--app-shell-navbar-width'] = rem(navbarWidth![key]);
+        props.minMediaStyles[key]['--app-shell-navbar-offset'] = rem(navbarWidth![key]);
       }
     });
   }
 
-  if (navbar?.collapsed?.desktop) {
-    const breakpointValue = navbar!.breakpoint;
-    minMediaStyles[breakpointValue] = minMediaStyles[breakpointValue] || {};
-    minMediaStyles[breakpointValue]['--app-shell-navbar-transform'] = collapsedNavbarTransform;
-    minMediaStyles[breakpointValue]['--app-shell-navbar-transform-rtl'] =
+  if (props.navbar?.collapsed?.desktop) {
+    const breakpointValue = props.navbar!.breakpoint;
+    props.minMediaStyles[breakpointValue] = props.minMediaStyles[breakpointValue] || {};
+    props.minMediaStyles[breakpointValue]['--app-shell-navbar-transform'] = collapsedNavbarTransform;
+    props.minMediaStyles[breakpointValue]['--app-shell-navbar-transform-rtl'] =
       collapsedNavbarTransformRtl;
-    minMediaStyles[breakpointValue]['--app-shell-navbar-offset'] = '0px !important';
+    props.minMediaStyles[breakpointValue]['--app-shell-navbar-offset'] = '0px !important';
   }
 
-  if (navbar?.collapsed?.mobile) {
-    const breakpointValue = getBreakpointValue(navbar!.breakpoint, theme.breakpoints) - 0.1;
-    maxMediaStyles[breakpointValue] = maxMediaStyles[breakpointValue] || {};
-    maxMediaStyles[breakpointValue]['--app-shell-navbar-width'] = '100%';
-    maxMediaStyles[breakpointValue]['--app-shell-navbar-offset'] = '0px';
-    maxMediaStyles[breakpointValue]['--app-shell-navbar-transform'] = collapsedNavbarTransform;
-    maxMediaStyles[breakpointValue]['--app-shell-navbar-transform-rtl'] =
+  if (props.navbar?.collapsed?.mobile) {
+    const breakpointValue = getBreakpointValue(props.navbar!.breakpoint, props.theme.breakpoints) - 0.1;
+    props.maxMediaStyles[breakpointValue] = props.maxMediaStyles[breakpointValue] || {};
+    props.maxMediaStyles[breakpointValue]['--app-shell-navbar-width'] = '100%';
+    props.maxMediaStyles[breakpointValue]['--app-shell-navbar-offset'] = '0px';
+    props.maxMediaStyles[breakpointValue]['--app-shell-navbar-transform'] = collapsedNavbarTransform;
+    props.maxMediaStyles[breakpointValue]['--app-shell-navbar-transform-rtl'] =
       collapsedNavbarTransformRtl;
   }
 }

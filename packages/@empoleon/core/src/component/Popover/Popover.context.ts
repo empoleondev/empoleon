@@ -7,7 +7,7 @@ import {
   EmpoleonShadow,
   Styles,
 } from '../../core';
-import { ArrowPosition, FloatingPosition, FloatingStrategy } from '../Floating';
+import { ArrowPosition, FloatingPosition, FloatingStrategy } from '../../utils/Floating';
 import { PortalProps } from '../Portal';
 import { TransitionOverride } from '../Transition';
 import type { PopoverFactory } from './Popover';

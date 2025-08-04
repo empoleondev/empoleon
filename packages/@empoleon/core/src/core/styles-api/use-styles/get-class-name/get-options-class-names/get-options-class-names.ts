@@ -9,17 +9,11 @@ interface GetOptionsClassNamesInput extends Omit<ResolveClassNamesInput, 'classN
   options: GetStylesApiOptions | undefined;
 }
 
-export function getOptionsClassNames({
-  selector,
-  stylesCtx,
-  options,
-  props,
-  theme,
-}: GetOptionsClassNamesInput) {
+export function getOptionsClassNames(_props: GetOptionsClassNamesInput) {
   return resolveClassNames({
-    theme,
-    classNames: options?.classNames,
-    props: options?.props || props,
-    stylesCtx,
-  })[selector];
+    theme: _props.theme,
+    classNames: _props.options?.classNames,
+    props: _props.options?.props || _props.props,
+    stylesCtx: _props.stylesCtx,
+  })[_props.selector];
 }

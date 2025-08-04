@@ -98,6 +98,7 @@ export const Group = factory<GroupFactory>(_props => {
     'variant',
     '__size',
     'mod',
+    'attributes',
     'ref',
   ]);
 
@@ -120,6 +121,7 @@ export const Group = factory<GroupFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
   });

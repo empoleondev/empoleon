@@ -17,10 +17,14 @@ export function itHandlesSwitchCheckboxState<Props>(
     it('correctly handles controlled switch checkbox state', async () => {
       const spy = vi.fn();
       render(() => <options.component {...options.props} checked={false} onChange={spy} />);
-      expect(screen.getByRole('switch')).not.toBeChecked();
-      await userEvent.click(screen.getByRole('switch'));
+
+      const switchElement = screen.getByRole('switch') as HTMLInputElement;
+      expect(switchElement.checked).toBe(false);
+
+      await userEvent.click(switchElement);
+
       expect(spy).toHaveBeenCalledTimes(1);
-      expect(screen.getByRole('switch')).not.toBeChecked();
+      expect(switchElement.checked).toBe(true);
     });
 
     it('correctly handles uncontrolled switch checkbox state', async () => {

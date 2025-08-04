@@ -37,7 +37,6 @@ export function WithMarks() {
           { value: 270 },
           { value: 315 },
         ]}
-        restrictToMarks
       />
     </div>
   );

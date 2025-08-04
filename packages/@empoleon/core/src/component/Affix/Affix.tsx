@@ -1,4 +1,4 @@
-import { splitProps } from 'solid-js';
+import { JSX, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
@@ -13,7 +13,7 @@ import {
   useProps,
   useStyles,
 } from '../../core';
-import { OptionalPortal, PortalProps } from '../Portal';
+import { BasePortalProps, OptionalPortal } from '../Portal';
 import classes from './Affix.module.css';
 
 export type AffixStylesNames = 'root';
@@ -21,23 +21,25 @@ export type AffixCssVariables = {
   root: '--affix-z-index' | '--affix-top' | '--affix-left' | '--affix-bottom' | '--affix-right';
 };
 
+export interface AffixPosition {
+  top?: EmpoleonSize | (string & {}) | number;
+  left?: EmpoleonSize | (string & {}) | number;
+  bottom?: EmpoleonSize | (string & {}) | number;
+  right?: EmpoleonSize | (string & {}) | number;
+}
+
 export interface AffixBaseProps {
   /** Root element `z-index` property, `200` by default */
-  zIndex?: string | number;
+  zIndex?: JSX.CSSProperties['z-index'];
 
   /** Determines whether component should be rendered within portal, `true` by default */
   withinPortal?: boolean;
 
   /** Props to pass down to the `Portal` component when `withinPortal` is set */
-  portalProps?: Omit<PortalProps, 'children'>;
+  portalProps?: BasePortalProps;
 
   /** Affix position on screen, defaults value is `{ bottom: 0, right: 0 }` */
-  position?: {
-    top?: EmpoleonSize | (string & {}) | number;
-    left?: EmpoleonSize | (string & {}) | number;
-    bottom?: EmpoleonSize | (string & {}) | number;
-    right?: EmpoleonSize | (string & {}) | number;
-  };
+  position?: AffixPosition;
 }
 
 export interface AffixProps
@@ -57,7 +59,7 @@ const defaultProps: Partial<AffixProps> = {
   position: { bottom: 0, right: 0 },
   zIndex: getDefaultZIndex('modal'),
   withinPortal: true,
-};
+} satisfies Partial<AffixProps>;
 
 const varsResolver = createVarsResolver<AffixFactory>((_, { zIndex, position }) => ({
   root: {
@@ -82,6 +84,7 @@ export const Affix = factory<AffixFactory>(_props => {
     'zIndex',
     'withinPortal',
     'position',
+    'attributes',
     'ref'
   ]);
 

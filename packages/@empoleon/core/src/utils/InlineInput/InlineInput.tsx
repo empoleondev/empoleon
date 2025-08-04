@@ -10,7 +10,7 @@ import {
   StylesApiProps,
   useStyles,
 } from '../../core';
-import { Input } from '../Input';
+import { Input } from '../../component/Input';
 import classes from './InlineInput.module.css';
 
 export const InlineInputClasses = classes;

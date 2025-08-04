@@ -101,7 +101,8 @@ const defaultProps: Partial<ComboboxProps> = {
   resetSelectionOnOptionHover: false,
   width: 'target',
   transitionProps: { transition: 'fade', duration: 0 },
-};
+  size: 'sm',
+} satisfies Partial<ComboboxProps>;
 
 const varsResolver = createVarsResolver<ComboboxFactory>((_, { size, dropdownPadding }) => ({
   options: {
@@ -132,6 +133,7 @@ export function Combobox(_props: ComboboxProps) {
     'resetSelectionOnOptionHover',
     '__staticSelector',
     'readOnly',
+    'attributes',
   ]);
 
   const uncontrolledStore = useCombobox();
@@ -144,6 +146,7 @@ export function Combobox(_props: ComboboxProps) {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
   });
@@ -169,6 +172,7 @@ export function Combobox(_props: ComboboxProps) {
       <Popover
         opened={store.dropdownOpened()}
         {...others}
+        preventPositionChangeWhenVisible
         onChange={(_opened) => !_opened && onDropdownClose()}
         withRoles={false}
         unstyled={local.unstyled}

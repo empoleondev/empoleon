@@ -1,21 +1,7 @@
 import { screen, waitFor } from '@solidjs/testing-library';
 import { render } from '../render';
 import { JSX } from 'solid-js';
-
-// interface Options<Props = any> {
-//   component: (props: Props) => JSX.Element;
-//   props: Props;
-// }
-
-// export function itRendersChildren<Props>(options: Options<Props>, name = 'renders children') {
-//   it(name, async() => {
-//     render(() => <options.component {...options.props}>test-children</options.component>);
-
-//     await waitFor(() => {
-//       expect(screen.getByText('test-children')).toBeInTheDocument();
-//     })
-//   });
-// }
+import { getPropsValue } from './get-props-value';
 
 interface Options<Props = any> {
   component: (props: Props) => JSX.Element;
@@ -24,7 +10,8 @@ interface Options<Props = any> {
 
 export function itRendersChildren<Props>(options: Options<Props>, name = 'renders children') {
   it(name, async() => {
-    const propsWithChildren = { ...options.props, children: "test-children" } as Props & { children: string };
+    const baseProps = getPropsValue(options.props);
+    const propsWithChildren = { ...baseProps, children: "test-children" } as Props & { children: string };
 
     render(() =>
       <options.component {...propsWithChildren} children="test-children" />

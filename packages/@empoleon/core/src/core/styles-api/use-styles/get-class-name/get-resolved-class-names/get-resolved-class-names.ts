@@ -7,12 +7,6 @@ interface GetResolvedClassNamesOptions extends ResolveClassNamesInput {
   selector: string;
 }
 
-export function getResolvedClassNames({
-  selector,
-  stylesCtx,
-  theme,
-  classNames,
-  props,
-}: GetResolvedClassNamesOptions) {
-  return resolveClassNames({ theme, classNames, props, stylesCtx })[selector];
+export function getResolvedClassNames(_props: GetResolvedClassNamesOptions) {
+  return resolveClassNames({ theme: _props.theme, classNames: _props.classNames, props: _props.props, stylesCtx: _props.stylesCtx })[_props.selector];
 }

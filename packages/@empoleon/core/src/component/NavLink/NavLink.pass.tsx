@@ -11,7 +11,7 @@ const defaultProps = {
 describe('@empoleon/core/NavLink', () => {
   tests.itSupportsSystemProps<NavLinkProps, NavLinkStylesNames>({
     component: NavLink,
-    props: defaultProps,
+    props: () => defaultProps,
     mod: true,
     polymorphic: true,
     styleProps: true,
@@ -39,17 +39,17 @@ describe('@empoleon/core/NavLink', () => {
     expect(spy).toHaveBeenCalled();
   });
 
-  // it('sets correct data-expanded attribute on link (uncontrolled)', async () => {
-  //   render(
-  //     () => <NavLink {...defaultProps}>
-  //       <div>test-dropdown</div>
-  //     </NavLink>
-  //   );
+  it('sets correct data-expanded attribute on link (uncontrolled)', async () => {
+    render(
+      () => <NavLink {...defaultProps}>
+        <div>test-dropdown</div>
+      </NavLink>
+    );
 
-  //   expect(screen.getByRole('link')).not.toHaveAttribute('data-expanded');
-  //   await userEvent.click(screen.getByRole('link'));
-  //   expect(screen.getByRole('link')).toHaveAttribute('data-expanded');
-  // });
+    expect(screen.getByRole('link')).not.toHaveAttribute('data-expanded');
+    await userEvent.click(screen.getByRole('link'));
+    expect(screen.getByRole('link')).toHaveAttribute('data-expanded');
+  });
 
   it('sets correct data-expanded attribute on link based on defaultOpened prop (uncontrolled)', async () => {
     render(

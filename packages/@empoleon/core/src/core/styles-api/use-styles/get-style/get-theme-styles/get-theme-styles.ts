@@ -9,22 +9,16 @@ interface GetThemeStylesOptions {
   selector: string;
 }
 
-export function getThemeStyles({
-  theme,
-  themeName,
-  props,
-  stylesCtx,
-  selector,
-}: GetThemeStylesOptions) {
-  return themeName
+export function getThemeStyles(_props: GetThemeStylesOptions) {
+  return _props.themeName
     .map(
       (n) =>
         resolveStyles({
-          theme,
-          styles: theme.components[n]?.styles,
-          props,
-          stylesCtx,
-        })[selector]
+          theme: _props.theme,
+          styles: _props.theme.components[n]?.styles,
+          props: _props.props,
+          stylesCtx: _props.stylesCtx,
+        })[_props.selector]
     )
     .reduce((acc, val) => ({ ...acc, ...val }), {});
 }

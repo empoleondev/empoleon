@@ -5,6 +5,6 @@ interface GetSelectorClassNameInput {
 }
 
 /** Returns class for given selector from library styles (`*.module.css`) */
-export function getSelectorClassName({ selector, classes, unstyled }: GetSelectorClassNameInput) {
-  return unstyled ? undefined : classes[selector];
+export function getSelectorClassName(_props: GetSelectorClassNameInput) {
+  return _props.unstyled ? undefined : _props.classes[_props.selector];
 }

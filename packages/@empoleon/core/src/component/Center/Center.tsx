@@ -27,10 +27,8 @@ export type CenterFactory = PolymorphicFactory<{
   stylesNames: CenterStylesNames;
 }>;
 
-const defaultProps: Partial<CenterProps> = {};
-
 export const Center = polymorphicFactory<CenterFactory>(_props => {
-  const props = useProps('Center', defaultProps, _props);
+  const props = useProps('Center', null, _props);
   const [local, others] = splitProps(props, [
     'classNames',
     'className',
@@ -40,6 +38,7 @@ export const Center = polymorphicFactory<CenterFactory>(_props => {
     'vars',
     'inline',
     'mod',
+    'attributes',
     'ref'
   ]);
 
@@ -52,6 +51,7 @@ export const Center = polymorphicFactory<CenterFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
   });
 

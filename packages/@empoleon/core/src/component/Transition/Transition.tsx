@@ -5,25 +5,43 @@ import { getTransitionStyles } from './get-transition-styles/get-transition-styl
 import type { EmpoleonTransition } from './transitions';
 
 export interface TransitionProps {
-  /** If set element will not be unmounted when hidden */
+  /** If set, the element is not unmounted from the DOM when hidden, `display: none` styles are applied instead */
   keepMounted?: boolean;
+
   /** Transition name or object */
   transition?: EmpoleonTransition;
-  /** Enter transition duration in ms */
+
+  /** Transition duration in ms @default `250` */
   duration?: number;
-  /** Exit transition duration in ms */
+
+  /** Exit transition duration in ms @default `250` */
   exitDuration?: number;
-  /** CSS timing function */
+
+  /** Transition timing function @default `theme.transitionTimingFunction` */
   timingFunction?: string;
-  /** Controls mount state */
+
+  /** Determines whether component should be mounted to the DOM */
   mounted: boolean;
-  /** Render prop receiving CSS styles */
+
+  /** Render function with transition styles argument */
   children: (styles: JSX.CSSProperties) => JSX.Element;
+
+  /** Called when exit transition ends */
   onExited?: () => void;
+
+  /** Called when exit transition starts */
   onExit?: () => void;
+
+  /** Called when enter transition starts */
   onEnter?: () => void;
+
+  /** Called when enter transition ends */
   onEntered?: () => void;
+
+  /** Delay in ms before enter transition starts */
   enterDelay?: number;
+
+  /** Delay in ms before exit transition starts */
   exitDelay?: number;
 }
 
@@ -32,8 +50,19 @@ export type TransitionOverride = Partial<Omit<TransitionProps, 'mounted'>>;
 export function Transition(props: TransitionProps) {
   const env = useEmpoleonEnv();
   const [local] = splitProps(props, [
-    'keepMounted', 'transition', 'duration', 'exitDuration', 'timingFunction',
-    'mounted', 'children', 'onExited', 'onExit', 'onEnter', 'onEntered', 'enterDelay', 'exitDelay'
+    'keepMounted',
+    'transition',
+    'duration',
+    'exitDuration',
+    'timingFunction',
+    'mounted',
+    'children',
+    'onExited',
+    'onExit',
+    'onEnter',
+    'onEntered',
+    'enterDelay',
+    'exitDelay'
   ]);
 
   const duration = local.duration ?? 250;

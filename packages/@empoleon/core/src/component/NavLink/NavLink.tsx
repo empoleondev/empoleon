@@ -176,7 +176,7 @@ export const NavLink = polymorphicFactory<NavLinkFactory>(_props => {
 
     if (withChildren) {
       event.preventDefault();
-      setOpened(!_opened);
+      setOpened(!_opened());
     }
   };
 
@@ -192,11 +192,11 @@ export const NavLink = polymorphicFactory<NavLinkFactory>(_props => {
 
           if (event.code === 'Space' && withChildren) {
             event.preventDefault();
-            setOpened(!_opened);
+            setOpened(!_opened());
           }
         }}
         unstyled={local.unstyled}
-        mod={[{ disabled: local.disabled, active: local.active, expanded: _opened }, local.mod]}
+        mod={[{ disabled: local.disabled, active: local.active, expanded: _opened() }, local.mod]}
         {...others}
       >
         {local.leftSection && (

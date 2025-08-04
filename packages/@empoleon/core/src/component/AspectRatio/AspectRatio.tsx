@@ -32,8 +32,6 @@ export type AspectRatioFactory = Factory<{
   vars: AspectRatioCssVariables;
 }>;
 
-const defaultProps: Partial<AspectRatioProps> = {};
-
 const varsResolver = createVarsResolver<AspectRatioFactory>((_, { ratio }) => ({
   root: {
     '--ar-ratio': ratio?.toString(),
@@ -41,7 +39,7 @@ const varsResolver = createVarsResolver<AspectRatioFactory>((_, { ratio }) => ({
 }));
 
 export const AspectRatio = factory<AspectRatioFactory>(_props => {
-  const props = useProps('AspectRatio', defaultProps, _props);
+  const props = useProps('AspectRatio', null, _props);
   const [local, others] = splitProps(props, [
     'classNames',
     'className',
@@ -50,6 +48,7 @@ export const AspectRatio = factory<AspectRatioFactory>(_props => {
     'unstyled',
     'vars',
     'ratio',
+    'attributes',
     'ref'
   ]);
 
@@ -62,6 +61,7 @@ export const AspectRatio = factory<AspectRatioFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
   });

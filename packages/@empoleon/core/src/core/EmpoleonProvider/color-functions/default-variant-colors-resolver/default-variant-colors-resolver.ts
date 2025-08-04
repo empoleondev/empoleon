@@ -25,18 +25,12 @@ export type VariantColorsResolver = (
   input: VariantColorsResolverInput
 ) => VariantColorResolverResult;
 
-export const defaultVariantColorsResolver: VariantColorsResolver = ({
-  color,
-  theme,
-  variant,
-  gradient,
-  autoContrast,
-}) => {
-  const parsed = parseThemeColor({ color, theme });
+export const defaultVariantColorsResolver: VariantColorsResolver = (props) => {
+  const parsed = parseThemeColor({ color: props.color, theme: props.theme });
 
-  const _autoContrast = typeof autoContrast === 'boolean' ? autoContrast : theme.autoContrast;
+  const _autoContrast = typeof props.autoContrast === 'boolean' ? props.autoContrast : props.theme.autoContrast;
 
-  if (variant === 'none') {
+  if (props.variant === 'none') {
     return {
       background: 'transparent',
       hover: 'transparent',
@@ -45,7 +39,7 @@ export const defaultVariantColorsResolver: VariantColorsResolver = ({
     };
   }
 
-  if (variant === 'filled') {
+  if (props.variant === 'filled') {
     const textColor = _autoContrast
       ? parsed.isLight
         ? 'var(--empoleon-color-black)'
@@ -54,8 +48,8 @@ export const defaultVariantColorsResolver: VariantColorsResolver = ({
     if (parsed.isThemeColor) {
       if (parsed.shade === undefined) {
         return {
-          background: `var(--empoleon-color-${color}-filled)`,
-          hover: `var(--empoleon-color-${color}-filled-hover)`,
+          background: `var(--empoleon-color-${props.color}-filled)`,
+          hover: `var(--empoleon-color-${props.color}-filled-hover)`,
           color: textColor,
           border: `${rem(1)} solid transparent`,
         };
@@ -70,25 +64,25 @@ export const defaultVariantColorsResolver: VariantColorsResolver = ({
     }
 
     return {
-      background: color!,
-      hover: darken(color!, 0.1),
+      background: props.color!,
+      hover: darken(props.color!, 0.1),
       color: textColor,
       border: `${rem(1)} solid transparent`,
     };
   }
 
-  if (variant === 'light') {
+  if (props.variant === 'light') {
     if (parsed.isThemeColor) {
       if (parsed.shade === undefined) {
         return {
-          background: `var(--empoleon-color-${color}-light)`,
-          hover: `var(--empoleon-color-${color}-light-hover)`,
-          color: `var(--empoleon-color-${color}-light-color)`,
+          background: `var(--empoleon-color-${props.color}-light)`,
+          hover: `var(--empoleon-color-${props.color}-light-hover)`,
+          color: `var(--empoleon-color-${props.color}-light-color)`,
           border: `${rem(1)} solid transparent`,
         };
       }
 
-      const parsedColor = theme.colors[parsed.color][parsed.shade];
+      const parsedColor = props.theme.colors[parsed.color][parsed.shade];
 
       return {
         background: rgba(parsedColor, 0.1),
@@ -99,27 +93,27 @@ export const defaultVariantColorsResolver: VariantColorsResolver = ({
     }
 
     return {
-      background: rgba(color!, 0.1),
-      hover: rgba(color!, 0.12),
-      color: color!,
+      background: rgba(props.color!, 0.1),
+      hover: rgba(props.color!, 0.12),
+      color: props.color!,
       border: `${rem(1)} solid transparent`,
     };
   }
 
-  if (variant === 'outline') {
+  if (props.variant === 'outline') {
     if (parsed.isThemeColor) {
       if (parsed.shade === undefined) {
         return {
           background: 'transparent',
-          hover: `var(--empoleon-color-${color}-outline-hover)`,
-          color: `var(--empoleon-color-${color}-outline)`,
-          border: `${rem(1)} solid var(--empoleon-color-${color}-outline)`,
+          hover: `var(--empoleon-color-${props.color}-outline-hover)`,
+          color: `var(--empoleon-color-${props.color}-outline)`,
+          border: `${rem(1)} solid var(--empoleon-color-${props.color}-outline)`,
         };
       }
 
       return {
         background: 'transparent',
-        hover: rgba(theme.colors[parsed.color][parsed.shade], 0.05),
+        hover: rgba(props.theme.colors[parsed.color][parsed.shade], 0.05),
         color: `var(--empoleon-color-${parsed.color}-${parsed.shade})`,
         border: `${rem(1)} solid var(--empoleon-color-${parsed.color}-${parsed.shade})`,
       };
@@ -127,24 +121,24 @@ export const defaultVariantColorsResolver: VariantColorsResolver = ({
 
     return {
       background: 'transparent',
-      hover: rgba(color!, 0.05),
-      color: color!,
-      border: `${rem(1)} solid ${color}`,
+      hover: rgba(props.color!, 0.05),
+      color: props.color!,
+      border: `${rem(1)} solid ${props.color}`,
     };
   }
 
-  if (variant === 'subtle') {
+  if (props.variant === 'subtle') {
     if (parsed.isThemeColor) {
       if (parsed.shade === undefined) {
         return {
           background: 'transparent',
-          hover: `var(--empoleon-color-${color}-light-hover)`,
-          color: `var(--empoleon-color-${color}-light-color)`,
+          hover: `var(--empoleon-color-${props.color}-light-hover)`,
+          color: `var(--empoleon-color-${props.color}-light-color)`,
           border: `${rem(1)} solid transparent`,
         };
       }
 
-      const parsedColor = theme.colors[parsed.color][parsed.shade];
+      const parsedColor = props.theme.colors[parsed.color][parsed.shade];
 
       return {
         background: 'transparent',
@@ -156,19 +150,19 @@ export const defaultVariantColorsResolver: VariantColorsResolver = ({
 
     return {
       background: 'transparent',
-      hover: rgba(color!, 0.12),
-      color: color!,
+      hover: rgba(props.color!, 0.12),
+      color: props.color!,
       border: `${rem(1)} solid transparent`,
     };
   }
 
-  if (variant === 'transparent') {
+  if (props.variant === 'transparent') {
     if (parsed.isThemeColor) {
       if (parsed.shade === undefined) {
         return {
           background: 'transparent',
           hover: 'transparent',
-          color: `var(--empoleon-color-${color}-light-color)`,
+          color: `var(--empoleon-color-${props.color}-light-color)`,
           border: `${rem(1)} solid transparent`,
         };
       }
@@ -184,25 +178,25 @@ export const defaultVariantColorsResolver: VariantColorsResolver = ({
     return {
       background: 'transparent',
       hover: 'transparent',
-      color: color!,
+      color: props.color!,
       border: `${rem(1)} solid transparent`,
     };
   }
 
-  if (variant === 'white') {
+  if (props.variant === 'white') {
     if (parsed.isThemeColor) {
       if (parsed.shade === undefined) {
         return {
           background: 'var(--empoleon-color-white)',
-          hover: darken(theme.white, 0.01),
-          color: `var(--empoleon-color-${color}-filled)`,
+          hover: darken(props.theme.white, 0.01),
+          color: `var(--empoleon-color-${props.color}-filled)`,
           border: `${rem(1)} solid transparent`,
         };
       }
 
       return {
         background: 'var(--empoleon-color-white)',
-        hover: darken(theme.white, 0.01),
+        hover: darken(props.theme.white, 0.01),
         color: `var(--empoleon-color-${parsed.color}-${parsed.shade})`,
         border: `${rem(1)} solid transparent`,
       };
@@ -210,22 +204,22 @@ export const defaultVariantColorsResolver: VariantColorsResolver = ({
 
     return {
       background: 'var(--empoleon-color-white)',
-      hover: darken(theme.white, 0.01),
-      color: color!,
+      hover: darken(props.theme.white, 0.01),
+      color: props.color!,
       border: `${rem(1)} solid transparent`,
     };
   }
 
-  if (variant === 'gradient') {
+  if (props.variant === 'gradient') {
     return {
-      background: getGradient(gradient, theme),
-      hover: getGradient(gradient, theme),
+      background: getGradient(props.gradient, props.theme),
+      hover: getGradient(props.gradient, props.theme),
       color: 'var(--empoleon-color-white)',
       border: 'none',
     };
   }
 
-  if (variant === 'default') {
+  if (props.variant === 'default') {
     return {
       background: 'var(--empoleon-color-default)',
       hover: 'var(--empoleon-color-default-hover)',

@@ -35,8 +35,6 @@ export type AvatarGroupFactory = Factory<{
   vars: AvatarGroupCssVariables;
 }>;
 
-const defaultProps: Partial<AvatarGroupProps> = {};
-
 const varsResolver = createVarsResolver<AvatarGroupFactory>((_, { spacing }) => ({
   group: {
     '--ag-spacing': getSpacing(spacing),
@@ -44,13 +42,14 @@ const varsResolver = createVarsResolver<AvatarGroupFactory>((_, { spacing }) => 
 }));
 
 export const AvatarGroup = factory<AvatarGroupFactory>(_props => {
-  const props = useProps('AvatarGroup', defaultProps, _props);
+  const props = useProps('AvatarGroup', null, _props);
   const [local, others] = splitProps(props, [
     'classNames',
     'className',
     'style',
     'styles',
     'unstyled',
+    'attributes',
     'vars',
     'spacing',
     'ref'
@@ -65,6 +64,7 @@ export const AvatarGroup = factory<AvatarGroupFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
     rootSelector: 'group',

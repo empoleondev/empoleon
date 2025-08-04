@@ -68,8 +68,6 @@ export type AlertFactory = Factory<{
   variant: AlertVariant;
 }>;
 
-const defaultProps: Partial<AlertProps> = {};
-
 const varsResolver = createVarsResolver<AlertFactory>(
   (theme, { radius, color, variant, autoContrast }) => {
     const colors = theme.variantColorResolver({
@@ -91,7 +89,7 @@ const varsResolver = createVarsResolver<AlertFactory>(
 );
 
 export const Alert = factory<AlertFactory>(_props => {
-  const props = useProps('Alert', defaultProps, _props);
+  const props = useProps('Alert', null, _props);
   const [local, others] = splitProps(props, [
     'classNames',
     'className',
@@ -110,6 +108,7 @@ export const Alert = factory<AlertFactory>(_props => {
     'closeButtonLabel',
     'variant',
     'autoContrast',
+    'attributes',
     'ref'
   ]);
 
@@ -122,6 +121,7 @@ export const Alert = factory<AlertFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
   });

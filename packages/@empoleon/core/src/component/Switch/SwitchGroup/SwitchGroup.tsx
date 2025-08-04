@@ -2,7 +2,7 @@ import { splitProps, JSX } from 'solid-js';
 import { useUncontrolled } from '@empoleon/hooks';
 import { DataAttributes, factory, Factory, EmpoleonSize, useProps } from '../../../core';
 import { Input, InputWrapperProps, InputWrapperStylesNames } from '../../Input';
-import { InputsGroupFieldset } from '../../InputsGroupFieldset';
+import { InputsGroupFieldset } from '../../../utils/InputsGroupFieldset';
 import { SwitchGroupProvider } from '../SwitchGroup.context';
 
 export type SwitchGroupStylesNames = InputWrapperStylesNames;

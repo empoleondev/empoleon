@@ -1,3 +1,0 @@
-- fix all tests
-- fix stack with modals
-- fix !isElement with components that use it

@@ -1,6 +1,7 @@
 import { createMemo, createSignal, splitProps, JSX } from 'solid-js';
 import { useProps } from '../../../core';
 import { ChipGroupProvider } from '../ChipGroup.context';
+import { useUncontrolled } from '@empoleon/hooks';
 
 export interface ChipGroupProps<T extends boolean = false> {
   /** Determines whether it is allowed to select multiple values, `false` by default */
@@ -31,19 +32,16 @@ export function ChipGroup<T extends boolean>(_props: ChipGroupProps<T>) {
     'children',
   ]);
 
-  const [value, setValue] = createSignal<string | null | string[]>(
-    local.value !== undefined
-      ? local.value
-      : local.defaultValue !== undefined
-        ? local.defaultValue
-        : local.multiple
-          ? []
-          : null
-  );
+  const [_value, setValue] = useUncontrolled<string | null | string[]>({
+    value: () => local.value,
+    defaultValue: local.defaultValue!,
+    finalValue: local.multiple ? ([] as string[]) : null,
+    onChange: local.onChange as any,
+  });
 
   const isChipSelected = createMemo(() => {
     return (val: string) => {
-      const currentValue = value();
+      const currentValue = _value();
       return Array.isArray(currentValue)
         ? currentValue.includes(val)
         : val === currentValue;
@@ -51,9 +49,10 @@ export function ChipGroup<T extends boolean>(_props: ChipGroupProps<T>) {
   });
 
   const handleChange = createMemo(() => {
-    return (event: { currentTarget: { value: string } }) => {
-      const val = event.currentTarget.value;
-      const currentValue = value();
+    return (event: Event) => {
+      const target = event.currentTarget as HTMLInputElement;
+      const val = target.value;
+      const currentValue = _value();
 
       let newValue: string | string[] | null;
 
@@ -62,7 +61,7 @@ export function ChipGroup<T extends boolean>(_props: ChipGroupProps<T>) {
           ? currentValue.filter((v) => v !== val)
           : [...currentValue, val];
       } else {
-        newValue = val;
+        newValue = val === currentValue ? null : val;
       }
 
       setValue(newValue);
@@ -70,11 +69,12 @@ export function ChipGroup<T extends boolean>(_props: ChipGroupProps<T>) {
     };
   });
 
+
   return (
     <ChipGroupProvider value={{
       isChipSelected: isChipSelected(),
-      onChange: handleChange,
-      multiple: local.multiple
+      onChange: handleChange(),
+      multiple: !!local.multiple
     }}>
       {local.children}
     </ChipGroupProvider>

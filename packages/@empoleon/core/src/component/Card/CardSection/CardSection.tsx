@@ -54,13 +54,6 @@ export const CardSection = polymorphicFactory<CardSectionFactory>(_props => {
   const isFirst = () => idx() === 0;
   const isLast = () => idx() === ctx.totalItems() - 1;
 
-  const styles = ctx.getStyles('section', {
-    className: local.className,
-    style: local.style,
-    classNames: local.classNames,
-    styles: local.styles,
-  });
-
   return (
     <Box
       ref={local.ref}
@@ -70,7 +63,7 @@ export const CardSection = polymorphicFactory<CardSectionFactory>(_props => {
         'first-section': isFirst(),
         'last-section': isLast()
       }, local.mod]}
-      {...styles}
+      {...ctx.getStyles('section', {  className: local.className, style: local.style, styles: local.styles, classNames: local.classNames })}
       {...others}
     />
   );

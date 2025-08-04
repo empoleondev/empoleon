@@ -10,22 +10,22 @@ const defaultProps: TabsPanelProps = {
 };
 
 describe('@empoleon/core/TabsPanel', () => {
-  // tests.itSupportsSystemProps<TabsPanelProps, TabsPanelStylesNames>({
-  //   component: TestContainer,
-  //   props: () => defaultProps,
-  //   refType: HTMLDivElement,
-  //   displayName: '@empoleon/core/TabsPanel',
-  //   mod: true,
-  //   extend: true,
-  //   withProps: true,
-  //   styleProps: true,
-  //   children: true,
-  //   classes: true,
-  //   selector: '[role="tabpanel"]',
-  //   stylesApiName: 'Tabs',
-  //   stylesApiSelectors: ['panel'],
-  //   providerStylesApi: false,
-  // });
+  tests.itSupportsSystemProps<TabsPanelProps, TabsPanelStylesNames>({
+    component: TestContainer,
+    props: () => defaultProps,
+    refType: HTMLDivElement,
+    displayName: '@empoleon/core/TabsPanel',
+    mod: true,
+    extend: true,
+    withProps: true,
+    styleProps: true,
+    children: true,
+    classes: true,
+    selector: '[role="tabpanel"]',
+    stylesApiName: 'Tabs',
+    stylesApiSelectors: ['panel'],
+    providerStylesApi: false,
+  });
 
   tests.itThrowsContextError({
     component: TabsPanel,

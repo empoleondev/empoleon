@@ -1,9 +1,10 @@
 import { JSX } from 'solid-js';
 import { render } from '../render';
+import { getPropsValue } from './get-props-value';
 
 interface Options<Props = any> {
   component: (props: Props) => JSX.Element;
-  props: Props | (() => Props)
+  props: Props | (() => Props);
 }
 
 export function itSupportsClassName<Props>(
@@ -11,10 +12,11 @@ export function itSupportsClassName<Props>(
   name = 'supports className prop'
 ) {
   it(name, () => {
-    const propsWithClassName = { ...options.props, className: "test-class-name" } as Props & { className: string };
+    const baseProps = getPropsValue(options.props);
+    const propsWithClassName = { ...baseProps, className: "test-class-name" } as Props & { className: string };
 
     const { container } = render(
-      () => <options.component {...propsWithClassName} className="test-class-name" />
+      () => <options.component {...propsWithClassName} />
     );
 
     expect(container.querySelector('.test-class-name')).toBeInTheDocument();

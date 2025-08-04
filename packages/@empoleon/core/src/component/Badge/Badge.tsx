@@ -129,6 +129,7 @@ export const Badge = polymorphicFactory<BadgeFactory>(_props => {
     'autoContrast',
     'circle',
     'mod',
+    'attributes',
     'ref'
   ]);
 

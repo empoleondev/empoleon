@@ -115,7 +115,7 @@ export const CheckboxIndicator = factory<CheckboxIndicatorFactory>(_props => {
     'mod',
     'variant',
     'disabled',
-    'mod',
+    'attributes',
     'ref'
   ]);
 
@@ -130,6 +130,7 @@ export const CheckboxIndicator = factory<CheckboxIndicatorFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
     rootSelector: 'indicator',

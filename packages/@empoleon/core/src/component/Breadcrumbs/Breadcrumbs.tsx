@@ -7,7 +7,6 @@ import {
   factory,
   Factory,
   getSpacing,
-  isElement,
   EmpoleonSpacing,
   StylesApiProps,
   useProps,
@@ -63,6 +62,7 @@ export const Breadcrumbs = factory<BreadcrumbsFactory>(_props => {
     'children',
     'separator',
     'separatorMargin',
+    'attributes',
     'ref'
   ]);
 
@@ -75,6 +75,7 @@ export const Breadcrumbs = factory<BreadcrumbsFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
   });

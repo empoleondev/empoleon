@@ -98,6 +98,7 @@ export const ButtonGroupSection = factory<ButtonGroupSectionFactory>(_props => {
     'gradient',
     'radius',
     'autoContrast',
+    'attributes',
     'ref'
   ]);
 

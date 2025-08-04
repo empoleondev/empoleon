@@ -92,7 +92,7 @@ const defaultProps: Partial<ScrollAreaProps> = {
   scrollHideDelay: 1000,
   type: 'hover',
   scrollbars: 'xy',
-};
+} satisfies Partial<ScrollAreaProps>;
 
 const varsResolver = createVarsResolver<ScrollAreaFactory>(
   (_, { scrollbarSize, overscrollBehavior }) => ({
@@ -124,6 +124,7 @@ export const ScrollArea = factory<ScrollAreaFactory>(_props => {
     'onBottomReached',
     'onTopReached',
     'overscrollBehavior',
+    'attributes',
     'ref'
   ]);
 
@@ -140,6 +141,7 @@ export const ScrollArea = factory<ScrollAreaFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
   });
@@ -157,9 +159,9 @@ export const ScrollArea = factory<ScrollAreaFactory>(_props => {
     }
 
     const observer = new ResizeObserver(() => {
-      const { scrollHeight, clientHeight, scrollWidth, clientWidth } = (localViewportRef() as HTMLDivElement);
-      setVerticalThumbVisible(scrollHeight > clientHeight);
-      setHorizontalThumbVisible(scrollWidth > clientWidth);
+      const scrollProps = (localViewportRef() as HTMLDivElement);
+      setVerticalThumbVisible(scrollProps.scrollHeight > scrollProps.clientHeight);
+      setHorizontalThumbVisible(scrollProps.scrollWidth > scrollProps.clientWidth);
     });
 
     observer.observe((localViewportRef() as HTMLDivElement));
@@ -252,6 +254,8 @@ export const ScrollArea = factory<ScrollAreaFactory>(_props => {
 ScrollArea.displayName = '@empoleon/core/ScrollArea';
 
 export const ScrollAreaAutosize = factory<ScrollAreaFactory>(_props => {
+  console.log(_props.scrollbarSize);
+
   const props = useProps('ScrollAreaAutosize', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'children',
@@ -277,7 +281,7 @@ export const ScrollAreaAutosize = factory<ScrollAreaFactory>(_props => {
 
   return (
     <Box {...others} ref={local.ref} style={[{ display: 'flex', overflow: 'auto' }, local.style]}>
-      <Box style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+      <Box style={{ display: 'flex', 'flex-direction': 'column', flex: 1 }}>
         <ScrollArea
           classNames={local.classNames}
           styles={local.styles}

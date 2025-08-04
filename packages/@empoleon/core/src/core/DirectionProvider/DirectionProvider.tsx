@@ -1,5 +1,4 @@
 import { createContext, createEffect, createSignal, useContext } from 'solid-js';
-import { createStore } from 'solid-js/store';
 
 export type Direction = 'ltr' | 'rtl';
 
@@ -31,7 +30,8 @@ export interface DirectionProviderProps {
 }
 
 export function DirectionProvider(props: DirectionProviderProps) {
-  const { children, initialDirection = 'ltr', detectDirection = true } = props;
+  const initialDirection = props.initialDirection || 'ltr';
+  const detectDirection = props.detectDirection || true;
 
   const [dir, setDir] = createSignal<Direction>(initialDirection);
 
@@ -59,5 +59,5 @@ export function DirectionProvider(props: DirectionProviderProps) {
     setDirection,
   };
 
-  return <DirectionContext.Provider value={contextValue}>{children}</DirectionContext.Provider>;
+  return <DirectionContext.Provider value={contextValue}>{props.children}</DirectionContext.Provider>;
 }

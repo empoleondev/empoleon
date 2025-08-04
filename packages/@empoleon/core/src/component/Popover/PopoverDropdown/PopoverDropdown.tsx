@@ -11,7 +11,7 @@ import {
   rem,
   useProps,
 } from '../../../core';
-import { FloatingArrow } from '../../Floating';
+import { FloatingArrow } from '../../../utils/Floating';
 import { FocusTrap } from '../../FocusTrap';
 import { OptionalPortal } from '../../Portal';
 import { Transition } from '../../Transition';

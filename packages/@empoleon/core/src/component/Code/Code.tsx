@@ -55,6 +55,7 @@ export const Code = factory<CodeFactory>(_props => {
     'block',
     'variant',
     'mod',
+    'attributes',
     'ref'
   ]);
 
@@ -67,6 +68,7 @@ export const Code = factory<CodeFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
   });

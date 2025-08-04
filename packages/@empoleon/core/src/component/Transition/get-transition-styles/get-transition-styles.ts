@@ -10,43 +10,38 @@ const transitionStatuses = {
   'pre-entering': 'out',
 } as const;
 
-export function getTransitionStyles({
-  transition,
-  state,
-  duration,
-  timingFunction,
-}: {
+export function getTransitionStyles(props: {
   transition: EmpoleonTransition;
   state: keyof typeof transitionStatuses;
   duration: number;
   timingFunction: JSX.CSSProperties['transition-timing-function'];
 }): JSX.CSSProperties {
   const shared: JSX.CSSProperties = {
-    '--webkit-backface-visibility': 'hidden',
+    'backface-visibility': 'hidden',
     'will-change': 'transform, opacity',
-    'transition-duration': `${duration}ms`,
-    'transition-timing-function': timingFunction,
+    'transition-duration': `${props.duration}ms`,
+    'transition-timing-function': props.timingFunction,
   };
 
-  if (typeof transition === 'string') {
-    if (!(transition in transitions)) {
+  if (typeof props.transition === 'string') {
+    if (!(props.transition in transitions)) {
       return {};
     }
 
     return mergeProps(
       {
-        'transition-property': transitions[transition].transitionProperty,
-       ...shared,
+        'transition-property': transitions[props.transition].transitionProperty,
+        ...shared,
       },
-      transitions[transition].common,
-      transitions[transition][transitionStatuses[state]]
+      transitions[props.transition].common,
+      transitions[props.transition][transitionStatuses[props.state]]
     );
   }
 
   return mergeProps({
-    'transition-property': transition.transitionProperty,
+    'transition-property': props.transition.transitionProperty,
     ...shared,
-    ...transition.common,
-    ...transition[transitionStatuses[state]],
+    ...props.transition.common,
+    ...props.transition[transitionStatuses[props.state]],
   });
 }

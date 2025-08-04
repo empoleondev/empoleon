@@ -38,11 +38,7 @@ export interface FileButtonProps<Multiple extends boolean = false> {
 
 const defaultProps: Partial<FileButtonProps> = {
   multiple: false,
-};
-
-// type FileButtonComponent = (<Multiple extends boolean = false>(
-//   props: FileButtonProps<Multiple>
-// ) => JSX.Element) & { displayName?: string };
+} satisfies Partial<FileButtonProps>;
 
 export function FileButton (_props: FileButtonProps) {
   const props = useProps('FileButton', defaultProps, _props);
@@ -91,8 +87,6 @@ export function FileButton (_props: FileButtonProps) {
 
   return (
     <>
-      {local.children({ onClick, ...others })}
-
       <input
         style={{ display: 'none' }}
         type="file"
@@ -108,6 +102,8 @@ export function FileButton (_props: FileButtonProps) {
         capture={local.capture === true ? "environment" : local.capture || undefined}
         {...local.inputProps}
       />
+
+      {local.children({ onClick, ...others })}
     </>
   );
 };

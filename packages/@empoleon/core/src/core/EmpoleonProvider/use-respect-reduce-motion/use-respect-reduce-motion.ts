@@ -5,13 +5,10 @@ interface UseRespectReduceMotionOptions {
   getRootElement: () => HTMLElement | undefined;
 }
 
-export function useRespectReduceMotion({
-  respectReducedMotion,
-  getRootElement,
-}: UseRespectReduceMotionOptions) {
+export function useRespectReduceMotion(props: UseRespectReduceMotionOptions) {
   createEffect(() => {
-    if (respectReducedMotion) {
-      getRootElement()?.setAttribute('data-respect-reduced-motion', 'true');
+    if (props.respectReducedMotion) {
+      props.getRootElement()?.setAttribute('data-respect-reduced-motion', 'true');
     }
-  }, [respectReducedMotion]);
+  }, [props.respectReducedMotion]);
 }

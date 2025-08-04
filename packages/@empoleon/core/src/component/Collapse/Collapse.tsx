@@ -28,6 +28,9 @@ export interface CollapseProps
 
   /** Determines whether opacity should be animated, `true` by default */
   animateOpacity?: boolean;
+
+  /** Keep element in DOM when collapsed, useful for nested collapses */
+  keepMounted?: boolean;
 }
 
 export type CollapseFactory = Factory<{
@@ -51,6 +54,7 @@ export const Collapse = factory<CollapseFactory>(_props => {
     'style',
     'onTransitionEnd',
     'animateOpacity',
+    'keepMounted',
     'ref'
   ]);
 
@@ -65,6 +69,7 @@ export const Collapse = factory<CollapseFactory>(_props => {
     transitionDuration: duration,
     transitionTimingFunction: local.transitionTimingFunction,
     onTransitionEnd: local.onTransitionEnd,
+    // keepMounted: local.keepMounted
   });
 
   if (duration === 0) {

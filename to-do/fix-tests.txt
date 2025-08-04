@@ -2,6 +2,7 @@ Core:
 
 Accordion - component broken
 Autocomplete - fail
+Card - fail
 ColorInput - fail
 ColorPicker - fail
 Combobox - fail
@@ -14,12 +15,10 @@ Modal - fail
 ModalBase - fail
 MultiSelect - fail
 NativeSelect - fail
-NavLink - fail
 NumberInput - fail
 Select - fail
 Stepper - fail
-Switch - fail - itHandlesSwitchCheckboxState
-Tabs - fail - tabstab, tabsPanel, tabsList - itSupportsSystemProps
+Tabs - fail - tabstab, tabsPanel - itSupportsSystemProps
 TagsInput - fail
 Tooltip - fail
 

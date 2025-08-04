@@ -68,6 +68,7 @@ export const FloatingIndicator = factory<FloatingIndicatorFactory>(_props => {
     'transitionDuration',
     'mod',
     'displayAfterTransitionEnd',
+    'attributes',
     'ref'
   ]);
 
@@ -80,6 +81,7 @@ export const FloatingIndicator = factory<FloatingIndicatorFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
   });
@@ -92,12 +94,14 @@ export const FloatingIndicator = factory<FloatingIndicatorFactory>(_props => {
     displayAfterTransitionEnd: local.displayAfterTransitionEnd,
   });
 
+  const mergedRef = useMergedRef(local.ref, setInnerRef);
+
   if (!local.target || !parent) {
     return null;
   }
 
   return (
-    <Box ref={useMergedRef(local.ref, setInnerRef)} mod={[{ initialized, hidden }, local.mod]} {...getStyles('root')} {...others} />
+    <Box ref={mergedRef} mod={[{ initialized, hidden }, local.mod]} {...getStyles('root')} {...others} />
   );
 });
 

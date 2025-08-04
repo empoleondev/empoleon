@@ -21,7 +21,7 @@ import {
   FloatingPosition,
   FloatingStrategy,
   useFloatingAutoUpdate,
-} from '../Floating';
+} from '../../utils/Floating';
 import { type TooltipMiddlewares } from './Tooltip.types';
 import { useTooltipGroupContext } from './TooltipGroup/TooltipGroup.context';
 

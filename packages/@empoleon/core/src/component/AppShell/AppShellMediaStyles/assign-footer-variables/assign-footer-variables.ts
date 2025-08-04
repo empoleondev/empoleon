@@ -11,46 +11,42 @@ interface AssignFooterVariablesInput {
   footer: AppShellProps['footer'] | undefined;
 }
 
-export function assignFooterVariables({
-  baseStyles,
-  minMediaStyles,
-  footer,
-}: AssignFooterVariablesInput) {
-  const footerHeight = footer?.height;
+export function assignFooterVariables(props: AssignFooterVariablesInput) {
+  const footerHeight = props.footer?.height;
   const collapsedFooterTransform = 'translateY(var(--app-shell-footer-height))';
-  const shouldOffset = footer?.offset ?? true;
+  const shouldOffset = props.footer?.offset ?? true;
 
   if (isPrimitiveSize(footerHeight)) {
     const baseSize = rem(getBaseSize(footerHeight));
-    baseStyles['--app-shell-footer-height'] = baseSize;
+    props.baseStyles['--app-shell-footer-height'] = baseSize;
     if (shouldOffset) {
-      baseStyles['--app-shell-footer-offset'] = baseSize;
+      props.baseStyles['--app-shell-footer-offset'] = baseSize;
     }
   }
 
   if (isResponsiveSize(footerHeight)) {
     if (typeof footerHeight.base !== 'undefined') {
-      baseStyles['--app-shell-footer-height'] = rem(footerHeight.base);
+      props.baseStyles['--app-shell-footer-height'] = rem(footerHeight.base);
 
       if (shouldOffset) {
-        baseStyles['--app-shell-footer-offset'] = rem(footerHeight.base);
+        props.baseStyles['--app-shell-footer-offset'] = rem(footerHeight.base);
       }
     }
 
     keys(footerHeight).forEach((key) => {
       if (key !== 'base') {
-        minMediaStyles[key] = minMediaStyles[key] || {};
-        minMediaStyles[key]['--app-shell-footer-height'] = rem(footerHeight[key]);
+        props.minMediaStyles[key] = props.minMediaStyles[key] || {};
+        props.minMediaStyles[key]['--app-shell-footer-height'] = rem(footerHeight[key]);
 
         if (shouldOffset) {
-          minMediaStyles[key]['--app-shell-footer-offset'] = rem(footerHeight[key]);
+          props.minMediaStyles[key]['--app-shell-footer-offset'] = rem(footerHeight[key]);
         }
       }
     });
   }
 
-  if (footer?.collapsed) {
-    baseStyles['--app-shell-footer-transform'] = collapsedFooterTransform;
-    baseStyles['--app-shell-footer-offset'] = '0px !important';
+  if (props.footer?.collapsed) {
+    props.baseStyles['--app-shell-footer-transform'] = collapsedFooterTransform;
+    props.baseStyles['--app-shell-footer-offset'] = '0px !important';
   }
 }

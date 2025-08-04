@@ -1,5 +1,6 @@
 import { JSX } from 'solid-js';
 import { render } from '../render';
+import { getPropsValue } from '../shared/get-props-value';
 
 interface Options<Props = any> {
   component: (props: Props) => JSX.Element;
@@ -12,18 +13,19 @@ export function itSupportsBackgroundProps<Props>(
   name = 'supports bd, bgsz, bgp, bgr and bga props'
 ) {
   const selector = options.selector || '*:not(style)';
+  const baseProps = getPropsValue(options.props);
 
   it(name, () => {
-    const propsWithBgsz = { ...options.props, bgsz: 32 } as Props & { bgsz: number };
+    const propsWithBgsz = { ...baseProps, bgsz: 32 } as Props & { bgsz: number };
     const { container: bgsz } = render(() => <options.component {...propsWithBgsz} />);
 
-    const propsWithBgp = { ...options.props, bgp: "center" } as Props & { bgp: string };
+    const propsWithBgp = { ...baseProps, bgp: "center" } as Props & { bgp: string };
     const { container: bgp } = render(() => <options.component {...propsWithBgp} />);
 
-    const propsWithBgr = { ...options.props, bgr: "repeat" } as Props & { bgr: string };
+    const propsWithBgr = { ...baseProps, bgr: "repeat" } as Props & { bgr: string };
     const { container: bgr } = render(() => <options.component {...propsWithBgr} />);
 
-    const propsWithBga = { ...options.props, bga: "fixed" } as Props & { bga: string };
+    const propsWithBga = { ...baseProps, bga: "fixed" } as Props & { bga: string };
     const { container: bga } = render(() => <options.component {...propsWithBga} />);
 
 

@@ -1,4 +1,14 @@
+import { JSX } from 'solid-js';
 import type { EmpoleonBreakpoint } from '../../core';
+
+// Shared props of for Navbar, Aside, Header and Footer components
+export interface AppShellCompoundProps {
+  /** If set, component haves a border, overrides `withBorder` prop on `AppShell` component */
+  withBorder?: boolean;
+
+  /** Sets `z-index`. Inherited from the `AppShell` by default. */
+  zIndex?: JSX.CSSProperties['z-index'];
+}
 
 export type AppShellSize = number | (string & {});
 

@@ -11,27 +11,22 @@ export interface UseResolvedStylesApiInput<Payload extends FactoryPayload> {
   stylesCtx?: Record<string, any>;
 }
 
-export function useResolvedStylesApi<Payload extends FactoryPayload>({
-  classNames,
-  styles,
-  props,
-  stylesCtx,
-}: UseResolvedStylesApiInput<Payload>) {
+export function useResolvedStylesApi<Payload extends FactoryPayload>(_props: UseResolvedStylesApiInput<Payload>) {
   const theme = useEmpoleonTheme();
 
   return {
     resolvedClassNames: resolveClassNames({
       theme,
-      classNames,
-      props,
-      stylesCtx: stylesCtx || undefined,
+      classNames: _props.classNames,
+      props: _props.props,
+      stylesCtx: _props.stylesCtx || undefined,
     }),
 
     resolvedStyles: resolveStyles({
       theme,
-      styles,
-      props,
-      stylesCtx: stylesCtx || undefined,
+      styles: _props.styles,
+      props: _props.props,
+      stylesCtx: _props.stylesCtx || undefined,
     }),
   };
 }

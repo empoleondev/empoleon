@@ -18,7 +18,7 @@ interface GetVariablesInput {
   theme: EmpoleonTheme;
 }
 
-export function getVariables({ navbar, header, footer, aside, padding, theme }: GetVariablesInput) {
+export function getVariables(props: GetVariablesInput) {
   const minMediaStyles: MediaQueryVariables = {};
   const maxMediaStyles: MediaQueryVariables = {};
   const baseStyles: CSSVariables = {};
@@ -27,30 +27,30 @@ export function getVariables({ navbar, header, footer, aside, padding, theme }: 
     baseStyles,
     minMediaStyles,
     maxMediaStyles,
-    navbar,
-    theme,
+    navbar: props.navbar,
+    theme: props.theme,
   });
 
   assignAsideVariables({
     baseStyles,
     minMediaStyles,
     maxMediaStyles,
-    aside,
-    theme,
+    aside: props.aside,
+    theme: props.theme,
   });
 
-  assignHeaderVariables({ baseStyles, minMediaStyles, header });
-  assignFooterVariables({ baseStyles, minMediaStyles, footer });
-  assignPaddingVariables({ baseStyles, minMediaStyles, padding });
+  assignHeaderVariables({ baseStyles, minMediaStyles, header: props.header });
+  assignFooterVariables({ baseStyles, minMediaStyles, footer: props.footer });
+  assignPaddingVariables({ baseStyles, minMediaStyles, padding: props.padding });
 
-  const minMedia = getSortedBreakpoints(keys(minMediaStyles), theme.breakpoints).map(
+  const minMedia = getSortedBreakpoints(keys(minMediaStyles), props.theme.breakpoints).map(
     (breakpoint) => ({
       query: `(min-width: ${em(breakpoint.px)})`,
       styles: minMediaStyles[breakpoint.value],
     })
   );
 
-  const maxMedia = getSortedBreakpoints(keys(maxMediaStyles), theme.breakpoints).map(
+  const maxMedia = getSortedBreakpoints(keys(maxMediaStyles), props.theme.breakpoints).map(
     (breakpoint) => ({
       query: `(max-width: ${em(breakpoint.px)})`,
       styles: maxMediaStyles[breakpoint.value],

@@ -1,5 +1,6 @@
 import { JSX } from 'solid-js';
 import { render } from '../render';
+import { getPropsValue } from './get-props-value';
 
 interface Options<Props = any> {
   component: (props: Props) => JSX.Element;
@@ -11,14 +12,16 @@ export function itSupportsLightDarkHidden<Props>(
   name = 'supports lightHidden and darkHidden props'
 ) {
   it(`${name}: lightHidden`, () => {
-    const propsWithLightHidden = { ...options.props, lightHidden: true } as Props & { lightHidden: boolean };
+    const baseProps = getPropsValue(options.props);
+    const propsWithLightHidden = { ...baseProps, lightHidden: true } as Props & { lightHidden: boolean };
     const { container } = render(() => <options.component {...propsWithLightHidden} />);
 
     expect(container.querySelector('.empoleon-light-hidden')).not.toBe(null);
   });
 
   it(`${name}: darkHidden`, () => {
-    const propsWithDarkHidden = { ...options.props, darkHidden: true } as Props & { darkHidden: boolean };
+    const baseProps = getPropsValue(options.props);
+    const propsWithDarkHidden = { ...baseProps, darkHidden: true } as Props & { darkHidden: boolean };
     const { container } = render(() => <options.component {...propsWithDarkHidden} />);
 
     expect(container.querySelector('.empoleon-dark-hidden')).not.toBe(null);

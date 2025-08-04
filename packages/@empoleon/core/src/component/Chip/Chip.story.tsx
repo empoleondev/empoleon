@@ -3,6 +3,7 @@ import { Tooltip } from '../Tooltip';
 import { Chip } from './Chip';
 import { For, JSX } from 'solid-js';
 import { EmpoleonProvider } from '../../core';
+import { Group } from '../Group';
 
 export default {
   title: 'Chip',
@@ -19,9 +20,11 @@ export function WithTooltip() {
   return (
     <div style={{ 'padding': '40px' }}>
       <Tooltip label="Tooltip" refProp="rootRef" position="bottom-start">
-        <Chip defaultChecked color="red">
-          With tooltip
-        </Chip>
+        {(props) => (
+          <Chip defaultChecked color="red" {...props}>
+            With tooltip
+          </Chip>
+        )}
       </Tooltip>
     </div>
   );
@@ -108,6 +111,28 @@ export function CustomIcon() {
         XL chip
       </Chip>
     </div>
+  );
+}
+
+export function ChipGroup() {
+  return (
+    <>
+      <Chip.Group>
+        <Group justify="center">
+          <Chip value="1">Single chip</Chip>
+          <Chip value="2">Can be selected</Chip>
+          <Chip value="3">At a time</Chip>
+        </Group>
+      </Chip.Group>
+
+      <Chip.Group multiple>
+        <Group justify="center" mt="md">
+          <Chip value="1">Multiple chips</Chip>
+          <Chip value="2">Can be selected</Chip>
+          <Chip value="3">At a time</Chip>
+        </Group>
+      </Chip.Group>
+    </>
   );
 }
 

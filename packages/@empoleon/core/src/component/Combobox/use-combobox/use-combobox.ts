@@ -105,20 +105,12 @@ export interface UseComboboxOptions {
   scrollBehavior?: ScrollBehavior;
 }
 
-export function useCombobox({
-  defaultOpened,
-  opened,
-  onOpenedChange,
-  onDropdownClose,
-  onDropdownOpen,
-  loop = true,
-  scrollBehavior = 'instant',
-}: UseComboboxOptions = {}): ComboboxStore {
+export function useCombobox(props: UseComboboxOptions = {}): ComboboxStore {
   const [dropdownOpened, setDropdownOpened] = useUncontrolled({
-    value: opened,
-    defaultValue: defaultOpened!,
+    value: props.opened,
+    defaultValue: props.defaultOpened!,
     finalValue: false,
-    onChange: onOpenedChange,
+    onChange: props.onOpenedChange,
   });
 
   const [listId, setListId] = createSignal<string | null>(null);
@@ -132,14 +124,14 @@ export function useCombobox({
   const openDropdown: ComboboxStore['openDropdown'] = (eventSource = 'unknown') => {
     if (!dropdownOpened()) {
       setDropdownOpened(true);
-      onDropdownOpen?.(eventSource);
+      props.onDropdownOpen?.(eventSource);
     }
   };
 
   const closeDropdown: ComboboxStore['closeDropdown'] = (eventSource = 'unknown') => {
     if (dropdownOpened()) {
       setDropdownOpened(false);
-      onDropdownClose?.(eventSource);
+      props.onDropdownClose?.(eventSource);
     }
   }
 
@@ -172,7 +164,7 @@ export function useCombobox({
       clearSelectedItem();
       items[nextIndex].setAttribute('data-combobox-selected', 'true');
       items[nextIndex].setAttribute('aria-selected', 'true');
-      items[nextIndex].scrollIntoView({ block: 'nearest', behavior: scrollBehavior });
+      items[nextIndex].scrollIntoView({ block: 'nearest', behavior: props.scrollBehavior });
       return items[nextIndex].id;
     }
 
@@ -194,6 +186,8 @@ export function useCombobox({
 
     return selectOption(0);
   }
+
+  const loop = props.loop || true;
 
   const selectNextOption = () =>
     selectOption(
@@ -232,7 +226,7 @@ export function useCombobox({
       selectedOptionIndex.current = index;
 
       if (options?.scrollIntoView) {
-        items[index]?.scrollIntoView({ block: 'nearest', behavior: scrollBehavior });
+        items[index]?.scrollIntoView({ block: 'nearest', behavior: props.scrollBehavior });
       }
     }, 0);
   }

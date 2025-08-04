@@ -41,7 +41,7 @@ export type FieldsetFactory = Factory<{
 
 const defaultProps: Partial<FieldsetProps> = {
   variant: 'default',
-};
+} satisfies Partial<FieldsetProps>;
 
 const varsResolver = createVarsResolver<FieldsetFactory>((_, { radius }) => ({
   root: {
@@ -61,6 +61,7 @@ export const Fieldset = factory<FieldsetFactory>(_props => {
     'legend',
     'variant',
     'children',
+    'attributes',
     'ref'
   ]);
 
@@ -73,6 +74,7 @@ export const Fieldset = factory<FieldsetFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
   });

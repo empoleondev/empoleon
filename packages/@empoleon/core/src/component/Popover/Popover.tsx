@@ -23,7 +23,7 @@ import {
   FloatingPosition,
   FloatingStrategy,
   getFloatingPosition,
-} from '../Floating';
+} from '../../utils/Floating';
 import { Overlay, OverlayProps } from '../Overlay';
 import { OptionalPortal, PortalProps } from '../Portal';
 import { Transition, TransitionOverride } from '../Transition';
@@ -126,6 +126,9 @@ export interface __PopoverProps {
 
   /** If set, the dropdown is hidden when the element is hidden with styles or not visible on the screen, `true` by default */
   hideDetached?: boolean;
+
+  /** Prevents popover from flipping/shifting when it the dropdown is visible */
+  preventPositionChangeWhenVisible?: boolean;
 }
 
 export interface PopoverProps extends __PopoverProps, StylesApiProps<PopoverFactory> {
@@ -247,6 +250,8 @@ export function Popover(_props: PopoverProps) {
     'withOverlay',
     'overlayProps',
     'hideDetached',
+    'attributes',
+    'preventPositionChangeWhenVisible',
   ]);
 
   const getStyles = useStyles<PopoverFactory>({
@@ -263,6 +268,8 @@ export function Popover(_props: PopoverProps) {
 
   const { resolvedStyles } = useResolvedStylesApi<PopoverFactory>({ classNames: local.classNames, styles: local.styles, props });
 
+  const [dropdownVisible, setDropdownVisible] = createSignal(local.opened ?? local.defaultOpened ?? false);
+  let positionRef: FloatingPosition = local.position!;
   let arrowRef: HTMLElement | undefined = undefined;
   const [targetNode, setTargetNode] = createSignal<HTMLElement | null>(null);
   const [dropdownNode, setDropdownNode] = createSignal<HTMLElement | null>(null);
@@ -286,6 +293,12 @@ export function Popover(_props: PopoverProps) {
     onClose: local.onClose,
     onDismiss: local.onDismiss,
     strategy: local.floatingStrategy,
+    dropdownVisible: dropdownVisible(),
+    setDropdownVisible,
+    positionRef,
+    disabled: local.disabled,
+    preventPositionChangeWhenVisible: local.preventPositionChangeWhenVisible,
+    keepMounted: local.keepMounted,
   });
 
   createEffect(() => {

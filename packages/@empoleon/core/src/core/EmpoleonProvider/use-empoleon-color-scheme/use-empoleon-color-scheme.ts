@@ -19,7 +19,7 @@ function disableTransition(nonce: string | undefined) {
   return clear;
 }
 
-export function useEmpoleonColorScheme({ keepTransitions }: { keepTransitions?: boolean } = {}) {
+export function useEmpoleonColorScheme(props: { keepTransitions?: boolean } = {}) {
   let clearStylesRef = noop;
   let timeoutRef = -1;
   const ctx = useContext(EmpoleonContext);
@@ -32,7 +32,7 @@ export function useEmpoleonColorScheme({ keepTransitions }: { keepTransitions?: 
 
   const setColorScheme = (value: EmpoleonColorScheme) => {
     ctx.setColorScheme(value);
-    clearStylesRef = keepTransitions ? () => {} : disableTransition(nonceValue);
+    clearStylesRef = props.keepTransitions ? () => {} : disableTransition(nonceValue);
     window.clearTimeout(timeoutRef);
     timeoutRef = window.setTimeout(() => {
       clearStylesRef?.();
@@ -41,7 +41,7 @@ export function useEmpoleonColorScheme({ keepTransitions }: { keepTransitions?: 
 
   const clearColorScheme = () => {
     ctx.clearColorScheme();
-    clearStylesRef = keepTransitions ? () => {} : disableTransition(nonceValue);
+    clearStylesRef = props.keepTransitions ? () => {} : disableTransition(nonceValue);
     window.clearTimeout(timeoutRef);
     timeoutRef = window.setTimeout(() => {
       clearStylesRef?.();

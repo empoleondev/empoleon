@@ -1,7 +1,7 @@
 import { JSX } from 'solid-js';
 import type { FlipOptions, InlineOptions, ShiftOptions, SizeOptions } from '@empoleon/solid-floating-ui';
 import { BoxProps, ElementProps, EmpoleonColor, EmpoleonRadius, StylesApiProps } from '../../core';
-import { FloatingPosition } from '../Floating';
+import { FloatingPosition } from '../../utils/Floating';
 import { PortalProps } from '../Portal';
 import type { TooltipFactory } from './Tooltip';
 

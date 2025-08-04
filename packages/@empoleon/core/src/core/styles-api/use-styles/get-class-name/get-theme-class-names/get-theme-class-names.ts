@@ -9,20 +9,14 @@ interface GetThemeClassNamesOptions {
   stylesCtx: Record<string, any> | undefined;
 }
 
-export function getThemeClassNames({
-  themeName,
-  theme,
-  selector,
-  props,
-  stylesCtx,
-}: GetThemeClassNamesOptions) {
-  return themeName.map(
+export function getThemeClassNames(_props: GetThemeClassNamesOptions) {
+  return _props.themeName.map(
     (n) =>
       resolveClassNames({
-        theme,
-        classNames: theme.components[n]?.classNames,
-        props,
-        stylesCtx,
-      })?.[selector]
+        theme: _props.theme,
+        classNames: _props.theme.components[n]?.classNames,
+        props: _props.props,
+        stylesCtx: _props.stylesCtx,
+      })?.[_props.selector]
   );
 }

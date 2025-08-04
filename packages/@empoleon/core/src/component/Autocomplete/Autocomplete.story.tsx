@@ -41,6 +41,7 @@ export function Usage() {
   return (
     <div style={{ 'padding': '40px' }}>
       <Autocomplete
+      defaultDropdownOpened
         data={[
           'React',
           'Angular',

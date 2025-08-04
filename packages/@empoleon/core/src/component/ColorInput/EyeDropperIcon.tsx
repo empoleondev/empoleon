@@ -1,13 +1,15 @@
-import { JSX } from "solid-js";
+import { JSX, splitProps } from "solid-js";
 
-export function EyeDropperIcon({ style, ...others }: JSX.SvgSVGAttributes<SVGSVGElement>) {
+export function EyeDropperIcon(props: JSX.SvgSVGAttributes<SVGSVGElement>) {
+  const [local, others] = splitProps(props, ['style']);
+
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       style={{
         width: 'var(--ci-eye-dropper-icon-size)',
         height: 'var(--ci-eye-dropper-icon-size)',
-        ...(typeof style === 'object' && style !== null ? style : {}),
+        ...(typeof local.style === 'object' && local.style !== null ? local.style : {}),
       }}
       viewBox="0 0 24 24"
       stroke-width="1.5"

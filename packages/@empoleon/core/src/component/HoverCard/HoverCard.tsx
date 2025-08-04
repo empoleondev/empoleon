@@ -1,12 +1,14 @@
 import { useDisclosure } from '@empoleon/hooks';
 import { ExtendComponent, Factory, useProps } from '../../core';
-import { useDelayedHover } from '../Floating';
+import { useDelayedHover } from '../../utils/Floating';
 import { Popover, PopoverProps, PopoverStylesNames } from '../Popover';
 import { PopoverCssVariables } from '../Popover/Popover';
 import { HoverCardContextProvider } from './HoverCard.context';
 import { HoverCardDropdown } from './HoverCardDropdown/HoverCardDropdown';
 import { HoverCardTarget } from './HoverCardTarget/HoverCardTarget';
 import { splitProps } from 'solid-js';
+import { HoverCardGroup } from './HoverCardGroup/HoverCardGroup';
+import { useHoverCard } from './use-hover-card';
 
 export interface HoverCardProps extends Omit<PopoverProps, 'opened' | 'onChange'> {
   variant?: string;
@@ -49,12 +51,27 @@ export function HoverCard(_props: HoverCardProps) {
     'closeDelay',
     'initiallyOpened'
   ]);
-  const [opened, { open, close }] = useDisclosure(local.initiallyOpened, { onClose: local.onClose, onOpen: local.onOpen });
-  const { openDropdown, closeDropdown } = useDelayedHover({ open, close, openDelay: local.openDelay, closeDelay: local.closeDelay });
+
+  const hoverCard = useHoverCard({
+    openDelay: local.openDelay,
+    closeDelay: local.closeDelay,
+    defaultOpened: local.initiallyOpened,
+    onOpen: local.onOpen,
+    onClose: local.onClose,
+  });
 
   return (
-    <HoverCardContextProvider value={{ openDropdown, closeDropdown }}>
-      <Popover {...others} opened={opened()} keepMounted __staticSelector="HoverCard">
+    <HoverCardContextProvider
+      value={{
+        openDropdown: hoverCard.openDropdown,
+        closeDropdown: hoverCard.closeDropdown,
+        getReferenceProps: hoverCard.getReferenceProps,
+        getFloatingProps: hoverCard.getFloatingProps,
+        reference: hoverCard.reference,
+        floating: hoverCard.floating,
+      }}
+    >
+      <Popover {...others} opened={hoverCard.opened()} keepMounted __staticSelector="HoverCard">
         {local.children}
       </Popover>
     </HoverCardContextProvider>
@@ -64,4 +81,5 @@ export function HoverCard(_props: HoverCardProps) {
 HoverCard.displayName = '@empoleon/core/HoverCard';
 HoverCard.Target = HoverCardTarget;
 HoverCard.Dropdown = HoverCardDropdown;
+HoverCard.Group = HoverCardGroup;
 HoverCard.extend = (input: ExtendComponent<HoverCardFactory>) => input;

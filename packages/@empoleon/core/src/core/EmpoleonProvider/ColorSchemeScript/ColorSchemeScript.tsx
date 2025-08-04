@@ -6,16 +6,12 @@ export interface ColorSchemeScriptProps {
   localStorageKey?: string;
 }
 
-const getScript = ({
-  defaultColorScheme,
-  localStorageKey,
-  forceColorScheme,
-}: Pick<ColorSchemeScriptProps, 'defaultColorScheme' | 'localStorageKey' | 'forceColorScheme'>) =>
-  forceColorScheme
-    ? `document.documentElement.setAttribute("data-empoleon-color-scheme", '${forceColorScheme}');`
+const getScript = (props: Pick<ColorSchemeScriptProps, 'defaultColorScheme' | 'localStorageKey' | 'forceColorScheme'>) =>
+  props.forceColorScheme
+    ? `document.documentElement.setAttribute("data-empoleon-color-scheme", '${props.forceColorScheme}');`
     : `try {
-  var _colorScheme = window.localStorage.getItem("${localStorageKey}");
-  var colorScheme = _colorScheme === "light" || _colorScheme === "dark" || _colorScheme === "auto" ? _colorScheme : "${defaultColorScheme}";
+  var _colorScheme = window.localStorage.getItem("${props.localStorageKey}");
+  var colorScheme = _colorScheme === "light" || _colorScheme === "dark" || _colorScheme === "auto" ? _colorScheme : "${props.defaultColorScheme}";
   var computedColorScheme = colorScheme !== "auto" ? colorScheme : window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
   document.documentElement.setAttribute("data-empoleon-color-scheme", computedColorScheme);
 } catch (e) {}

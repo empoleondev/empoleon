@@ -16,19 +16,16 @@ function getColorSchemeCssVariables(selector: string) {
 `;
 }
 
-export function EmpoleonCssVariables({
-  cssVariablesSelector,
-  deduplicateCssVariables,
-}: EmpoleonCssVariablesProps) {
+export function EmpoleonCssVariables(props: EmpoleonCssVariablesProps) {
   const theme = useEmpoleonTheme();
   const nonce = useEmpoleonStyleNonce();
   const generator = useEmpoleonCssVariablesResolver();
   const mergedVariables = getMergedVariables({ theme, generator });
-  const shouldCleanVariables = cssVariablesSelector === ':root' && deduplicateCssVariables;
+  const shouldCleanVariables = props.cssVariablesSelector === ':root' && props.deduplicateCssVariables;
   const cleanedVariables = shouldCleanVariables
     ? removeDefaultVariables(mergedVariables)
     : mergedVariables;
-  const css = convertCssVariables(cleanedVariables, cssVariablesSelector);
+  const css = convertCssVariables(cleanedVariables, props.cssVariablesSelector);
 
   if (css) {
     return (
@@ -38,7 +35,7 @@ export function EmpoleonCssVariables({
         // @ts-ignore
         dangerouslySetInnerHTML={{
           __html: `${css}${
-            shouldCleanVariables ? '' : getColorSchemeCssVariables(cssVariablesSelector)
+            shouldCleanVariables ? '' : getColorSchemeCssVariables(props.cssVariablesSelector)
           }`,
         }}
       />

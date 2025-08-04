@@ -93,6 +93,7 @@ export const Dialog = factory<DialogFactory>(_props => {
     'children',
     'onClose',
     'portalProps',
+    'attributes',
     'ref'
   ]);
 
@@ -105,6 +106,7 @@ export const Dialog = factory<DialogFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
   });

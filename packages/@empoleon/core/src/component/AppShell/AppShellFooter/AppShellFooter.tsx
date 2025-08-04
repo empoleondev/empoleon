@@ -10,6 +10,7 @@ import {
   useProps,
 } from '../../../core';
 import { useAppShellContext } from '../AppShell.context';
+import { AppShellCompoundProps } from '../AppShell.types';
 import classes from '../AppShell.module.css';
 import { splitProps } from 'solid-js';
 
@@ -17,14 +18,9 @@ export type AppShellFooterStylesNames = 'footer';
 
 export interface AppShellFooterProps
   extends BoxProps,
+    AppShellCompoundProps,
     StylesApiProps<AppShellFooterFactory>,
-    ElementProps<'footer'> {
-  /** Determines whether component should have a border, overrides `withBorder` prop on `AppShell` component */
-  withBorder?: boolean;
-
-  /** Component `z-index`, by default inherited from the `AppShell` */
-  zIndex?: string | number;
-}
+    ElementProps<'footer'> {}
 
 export type AppShellFooterFactory = Factory<{
   props: AppShellFooterProps;

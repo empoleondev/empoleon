@@ -1,5 +1,6 @@
 import { JSX } from 'solid-js';
 import { render } from '../render';
+import { getPropsValue } from './get-props-value';
 
 interface Options<Props = any> {
   component: (props: Props) => JSX.Element;
@@ -12,7 +13,8 @@ export function itSupportsProviderDefaultProps<Props>(
   name = 'supports default props on EmpoleonProvider'
 ) {
   it(name, () => {
-    const { container } = render(() => <options.component {...(options.props as any)} />, {
+    const baseProps = getPropsValue(options.props);
+    const { container } = render(() => <options.component {...(baseProps as any)} />, {
       components: {
         [options.providerName]: {
           defaultProps: { 'data-provider-prop': 'test-provider-prop' },

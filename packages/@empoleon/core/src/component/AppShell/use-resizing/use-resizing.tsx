@@ -1,4 +1,4 @@
-import { createSignal, createEffect } from 'solid-js';
+import { createSignal, createEffect, startTransition } from 'solid-js';
 import { useWindowEvent } from '@empoleon/hooks';
 import { isServer } from 'solid-js/web';
 
@@ -16,22 +16,26 @@ export function useResizing({ transitionDuration, disabled }: UseResizingInput) 
     useWindowEvent('resize', () => {
       setResizing(true);
       clearTimeout(resizingTimeout);
-      resizingTimeout = window.setTimeout(() => {
-        setResizing(false);
-      }, 200);
+      resizingTimeout = window.setTimeout(
+        () =>
+          startTransition(() => {
+            setResizing(false);
+          }),
+        200
+      );
     });
   }
 
   createEffect(() => {
-    if (disabled) {
-      return;
-    }
-
     setResizing(true);
     clearTimeout(disabledTimeout);
-    disabledTimeout = window.setTimeout(() => {
-      setResizing(false);
-    }, transitionDuration || 0);
+    disabledTimeout = window.setTimeout(
+      () =>
+        startTransition(() => {
+          setResizing(false);
+        }),
+      transitionDuration || 0
+    );
   });
 
   return resizing;

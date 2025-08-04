@@ -1,7 +1,7 @@
 import { splitProps, JSX } from 'solid-js';
 import { DataAttributes, factory, Factory, EmpoleonSize, useProps } from '../../../core';
 import { Input, InputWrapperProps, InputWrapperStylesNames } from '../../Input';
-import { InputsGroupFieldset } from '../../InputsGroupFieldset';
+import { InputsGroupFieldset } from '../../../utils/InputsGroupFieldset';
 import { CheckboxGroupProvider } from '../CheckboxGroup.context';
 import { useUncontrolled } from '@empoleon/hooks';
 
@@ -36,10 +36,8 @@ export type CheckboxGroupFactory = Factory<{
   stylesNames: CheckboxGroupStylesNames;
 }>;
 
-const defaultProps: Partial<CheckboxGroupProps> = {};
-
 export const CheckboxGroup = factory<CheckboxGroupFactory>(_props => {
-  const props = useProps('Checkbox', defaultProps, _props);
+  const props = useProps('Checkbox', null, _props);
   const [local, others] = splitProps(props, [
     'value',
     'defaultValue',
@@ -78,6 +76,7 @@ export const CheckboxGroup = factory<CheckboxGroupFactory>(_props => {
       onChange: handleChange,
       size: () => local.size
     }}>
+      {/* @ts-ignore */}
       <Input.Wrapper
         size={local.size}
         ref={local.ref}

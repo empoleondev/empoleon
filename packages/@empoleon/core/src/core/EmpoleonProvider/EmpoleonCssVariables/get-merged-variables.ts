@@ -8,8 +8,8 @@ interface GetMergedVariablesInput {
   generator?: (theme: EmpoleonTheme) => ConvertCSSVariablesInput;
 }
 
-export function getMergedVariables({ theme, generator }: GetMergedVariablesInput) {
-  const defaultResolver = defaultCssVariablesResolver(theme);
-  const providerGenerator = generator?.(theme);
+export function getMergedVariables(props: GetMergedVariablesInput) {
+  const defaultResolver = defaultCssVariablesResolver(props.theme);
+  const providerGenerator = props.generator?.(props.theme);
   return providerGenerator ? deepMerge(defaultResolver, providerGenerator) : defaultResolver;
 }

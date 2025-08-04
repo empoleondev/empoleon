@@ -60,16 +60,7 @@ const radiusByFloatingSide: Record<
   top: 'border-bottom-right-radius',
 };
 
-export function getArrowPositionStyles({
-  position,
-  arrowSize,
-  arrowOffset,
-  arrowRadius,
-  arrowPosition,
-  arrowX,
-  arrowY,
-  dir,
-}: {
+export function getArrowPositionStyles(props: {
   position: FloatingPosition;
   arrowSize: number;
   arrowOffset: number;
@@ -79,21 +70,21 @@ export function getArrowPositionStyles({
   arrowY: number | undefined;
   dir: 'rtl' | 'ltr';
 }) {
-  const [side, placement = 'center'] = position.split('-') as [FloatingSide, FloatingPlacement];
+  const [side, placement = 'center'] = props.position.split('-') as [FloatingSide, FloatingPlacement];
   const baseStyles = {
-    width: `${arrowSize}px`,
-    height: `${arrowSize}px`,
+    width: `${props.arrowSize}px`,
+    height: `${props.arrowSize}px`,
     transform: 'rotate(45deg)',
     position: 'absolute',
-    [radiusByFloatingSide[side]]: arrowRadius,
+    [radiusByFloatingSide[side]]: props.arrowRadius,
   };
 
-  const arrowPlacement = -arrowSize / 2;
+  const arrowPlacement = -props.arrowSize / 2;
 
   if (side === 'left') {
     return {
       ...baseStyles,
-      ...horizontalSide(placement, arrowY, arrowOffset, arrowPosition),
+      ...horizontalSide(placement, props.arrowY, props.arrowOffset, props.arrowPosition),
       right: `${arrowPlacement}px`,
       'border-left-color': 'transparent',
       'border-bottom-color': 'transparent',
@@ -104,7 +95,7 @@ export function getArrowPositionStyles({
   if (side === 'right') {
     return {
       ...baseStyles,
-      ...horizontalSide(placement, arrowY, arrowOffset, arrowPosition),
+      ...horizontalSide(placement, props.arrowY, props.arrowOffset, props.arrowPosition),
       left: `${arrowPlacement}px`,
       'border-right-color': 'transparent',
       'border-top-color': 'transparent',
@@ -115,7 +106,7 @@ export function getArrowPositionStyles({
   if (side === 'top') {
     return {
       ...baseStyles,
-      ...verticalSide(placement, arrowX, arrowOffset, arrowPosition, dir),
+      ...verticalSide(placement, props.arrowX, props.arrowOffset, props.arrowPosition, props.dir),
       bottom: `${arrowPlacement}px`,
       'border-top-color': 'transparent',
       'border-left-color': 'transparent',
@@ -126,7 +117,7 @@ export function getArrowPositionStyles({
   if (side === 'bottom') {
     return {
       ...baseStyles,
-      ...verticalSide(placement, arrowX, arrowOffset, arrowPosition, dir),
+      ...verticalSide(placement, props.arrowX, props.arrowOffset, props.arrowPosition, props.dir),
       top: `${arrowPlacement}px`,
       'border-bottom-color': 'transparent',
       'border-right-color': 'transparent',

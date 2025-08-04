@@ -1,4 +1,4 @@
-import { mergeProps, splitProps } from 'solid-js';
+import { splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
@@ -12,7 +12,6 @@ import {
   EmpoleonSize,
   rem,
   StylesApiProps,
-  useEmpoleonTheme,
   useProps,
   useStyles,
 } from '../../core';
@@ -89,6 +88,7 @@ export const Burger = factory<BurgerFactory>(_props => {
     'transitionDuration',
     'transitionTimingFunction',
     'lineSize',
+    'attributes',
     'ref'
   ]);
 
@@ -101,6 +101,7 @@ export const Burger = factory<BurgerFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
   });

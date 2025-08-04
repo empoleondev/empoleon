@@ -25,47 +25,42 @@ interface UseProviderColorSchemeOptions {
   getRootElement: () => HTMLElement | undefined;
 }
 
-export function useProviderColorScheme({
-  manager,
-  defaultColorScheme,
-  getRootElement,
-  forceColorScheme,
-}: UseProviderColorSchemeOptions) {
+export function useProviderColorScheme(props: UseProviderColorSchemeOptions) {
   let media: MediaQueryList | null = null;
-  const [value, setValue] = createSignal(manager.get(defaultColorScheme));
-  const colorSchemeValue = () => forceColorScheme || value();
+  const [value, setValue] = createSignal(props.manager.get(props.defaultColorScheme));
+  const colorSchemeValue = () => props.forceColorScheme || value();
 
   const setColorScheme = (colorScheme: EmpoleonColorScheme) => {
-    if (!forceColorScheme) {
-      setColorSchemeAttribute(colorScheme, getRootElement);
+    if (!props.forceColorScheme) {
+      setColorSchemeAttribute(colorScheme, props.getRootElement);
       setValue(colorScheme);
-      manager.set(colorScheme);
+      props.manager.set(colorScheme);
     }
   };
 
   const clearColorScheme = () => {
-    setValue(defaultColorScheme);
-    setColorSchemeAttribute(defaultColorScheme, getRootElement);
-    manager.clear();
+    setValue(props.defaultColorScheme);
+    setColorSchemeAttribute(props.defaultColorScheme, props.getRootElement);
+    props.manager.clear();
   };
 
   createEffect(() => {
-    manager.subscribe(setColorScheme);
-    onCleanup(() => manager.unsubscribe());
+    props.manager.subscribe(setColorScheme);
+    onCleanup(() => props.manager.unsubscribe());
   });
 
   onMount(() => {
-    setColorSchemeAttribute(manager.get(defaultColorScheme), getRootElement);
+    setColorSchemeAttribute(props.manager.get(props.defaultColorScheme), props.getRootElement);
   });
 
   createEffect(() => {
-    if (forceColorScheme) {
-      setColorSchemeAttribute(forceColorScheme, getRootElement);
+    if (props.forceColorScheme) {
+      setColorSchemeAttribute(props.forceColorScheme, props.getRootElement);
       return;
     }
 
-    if (forceColorScheme === undefined) {
-      setColorSchemeAttribute(value(), getRootElement);
+    if (props.forceColorScheme === undefined) {
+      setColorSchemeAttribute(value(), props.getRootElement);
     }
 
     if (typeof window !== 'undefined' && 'matchMedia' in window) {
@@ -74,7 +69,7 @@ export function useProviderColorScheme({
 
     const listener: MediaQueryCallback = (event) => {
       if (value() === 'auto') {
-        setColorSchemeAttribute(event.matches ? 'dark' : 'light', getRootElement);
+        setColorSchemeAttribute(event.matches ? 'dark' : 'light', props.getRootElement);
       }
     };
 

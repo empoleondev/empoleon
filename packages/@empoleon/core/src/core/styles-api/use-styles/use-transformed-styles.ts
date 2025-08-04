@@ -6,7 +6,7 @@ interface UseTransformedStylesInput {
   themeName: string[];
 }
 
-export function useStylesTransform({ props, stylesCtx, themeName }: UseTransformedStylesInput) {
+export function useStylesTransform(_props: UseTransformedStylesInput) {
   const theme = useEmpoleonTheme();
   const stylesTransform = useEmpoleonStylesTransform()?.();
 
@@ -16,13 +16,13 @@ export function useStylesTransform({ props, stylesCtx, themeName }: UseTransform
     }
 
     const transformedStyles = styles.map((style) =>
-      stylesTransform(style, { props, theme, ctx: stylesCtx })
+      stylesTransform(style, { props: _props.props, theme, ctx: _props.stylesCtx })
     );
 
     return [
       ...transformedStyles,
-      ...themeName.map((n) =>
-        stylesTransform(theme.components[n]?.styles, { props, theme, ctx: stylesCtx })
+      ..._props.themeName.map((n) =>
+        stylesTransform(theme.components[n]?.styles, { props: _props.props, theme, ctx: _props.stylesCtx })
       ),
     ].filter(Boolean) as Record<string, string>[];
   };

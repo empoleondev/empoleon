@@ -9,20 +9,16 @@ import {
   useProps,
 } from '../../../core';
 import { useAppShellContext } from '../AppShell.context';
+import type { AppShellCompoundProps } from '../AppShell.types';
 import classes from '../AppShell.module.css';
 
 export type AppShellNavbarStylesNames = 'navbar';
 
 export interface AppShellNavbarProps
   extends BoxProps,
+    AppShellCompoundProps,
     StylesApiProps<AppShellNavbarFactory>,
-    ElementProps<'div'> {
-  /** Determines whether component should have a border, overrides `withBorder` prop on `AppShell` component */
-  withBorder?: boolean;
-
-  /** Component `z-index`, by default inherited from the `AppShell` */
-  zIndex?: string | number;
-}
+    ElementProps<'div'> {}
 
 export type AppShellNavbarFactory = Factory<{
   props: AppShellNavbarProps;
@@ -30,10 +26,8 @@ export type AppShellNavbarFactory = Factory<{
   stylesNames: AppShellNavbarStylesNames;
 }>;
 
-const defaultProps: Partial<AppShellNavbarProps> = {};
-
 export const AppShellNavbar = factory<AppShellNavbarFactory>(_props => {
-  const props = useProps('AppShellNavbar', defaultProps, _props);
+  const props = useProps('AppShellNavbar', null, _props);
   const [local, others] = splitProps(props, [
     'classNames',
     'className',

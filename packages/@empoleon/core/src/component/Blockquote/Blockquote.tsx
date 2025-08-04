@@ -53,7 +53,7 @@ export type BlockquoteFactory = Factory<{
 
 const defaultProps: Partial<BlockquoteProps> = {
   iconSize: 48,
-};
+} satisfies Partial<BlockquoteProps>;
 
 const varsResolver = createVarsResolver<BlockquoteFactory>((theme, { color, iconSize, radius }) => {
   const darkParsed = parseThemeColor({
@@ -92,6 +92,7 @@ export const Blockquote = factory<BlockquoteFactory>(_props => {
     'icon',
     'iconSize',
     'cite',
+    'attributes',
     'ref'
   ]);
 
@@ -104,6 +105,7 @@ export const Blockquote = factory<BlockquoteFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
   });

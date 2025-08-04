@@ -68,40 +68,24 @@ export interface GetClassNameOptions {
   transformedStyles?: Record<string, string>[];
 }
 
-export function getClassName({
-  theme,
-  options,
-  themeName,
-  selector,
-  classNamesPrefix,
-  classNames,
-  classes,
-  unstyled,
-  className,
-  rootSelector,
-  props,
-  stylesCtx,
-  withStaticClasses,
-  headless,
-  transformedStyles,
-}: GetClassNameOptions) {
+export function getClassName(_props: GetClassNameOptions) {
   return cx(
-    getGlobalClassNames({ theme, options, unstyled: unstyled || headless }),
-    getThemeClassNames({ theme, themeName, selector, props, stylesCtx }),
-    getVariantClassName({ options, classes, selector, unstyled }),
-    getResolvedClassNames({ selector, stylesCtx, theme, classNames, props }),
-    getResolvedClassNames({ selector, stylesCtx, theme, classNames: transformedStyles, props }),
-    getOptionsClassNames({ selector, stylesCtx, options, props, theme }),
-    getRootClassName({ rootSelector, selector, className }),
-    getSelectorClassName({ selector, classes, unstyled: unstyled || headless }),
-    withStaticClasses &&
-      !headless &&
+    getGlobalClassNames({ theme: _props.theme, options: _props.options, unstyled: _props.unstyled || _props.headless }),
+    getThemeClassNames({ theme: _props.theme, themeName: _props.themeName, selector: _props.selector, props: _props.props, stylesCtx: _props.stylesCtx }),
+    getVariantClassName({ options: _props.options, classes: _props.classes, selector: _props.selector, unstyled: _props.unstyled }),
+    getResolvedClassNames({ selector: _props.selector, stylesCtx: _props.stylesCtx, theme: _props.theme, classNames: _props.classNames, props: _props.props }),
+    getResolvedClassNames({ selector: _props.selector, stylesCtx: _props.stylesCtx, theme: _props.theme, classNames: _props.transformedStyles, props: _props.props }),
+    getOptionsClassNames({ selector: _props.selector, stylesCtx: _props.stylesCtx, options: _props.options, props: _props.props, theme: _props.theme }),
+    getRootClassName({ rootSelector: _props.rootSelector, selector: _props.selector, className: _props.className }),
+    getSelectorClassName({ selector: _props.selector, classes: _props.classes, unstyled: _props.unstyled || _props.headless }),
+    _props.withStaticClasses &&
+      !_props.headless &&
       getStaticClassNames({
-        themeName,
-        classNamesPrefix,
-        selector,
-        withStaticClass: options?.withStaticClass,
+        themeName: _props.themeName,
+        classNamesPrefix: _props.classNamesPrefix,
+        selector: _props.selector,
+        withStaticClass: _props.options?.withStaticClass,
       }),
-    options?.className
+    _props.options?.className
   );
 }

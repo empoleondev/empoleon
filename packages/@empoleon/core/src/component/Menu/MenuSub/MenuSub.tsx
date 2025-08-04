@@ -1,7 +1,7 @@
 import { JSX, splitProps } from 'solid-js';
 import { useDisclosure, useId } from '@empoleon/hooks';
 import { ExtendComponent, Factory, useProps } from '../../../core';
-import { useDelayedHover } from '../../Floating';
+import { useDelayedHover } from '../../../utils/Floating';
 import { __PopoverProps, Popover } from '../../Popover';
 import { MenuSubDropdown } from '../MenuSubDropdown/MenuSubDropdown';
 import { MenuSubItem } from '../MenuSubItem/MenuSubItem';

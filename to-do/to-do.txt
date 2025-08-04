@@ -1,0 +1,5 @@
+- upgrade to 8.20
+- fix stack with modals
+- fix !isElement with components that use it
+- fix hovercard/tooltip no longer delaying!
+- fix all tests

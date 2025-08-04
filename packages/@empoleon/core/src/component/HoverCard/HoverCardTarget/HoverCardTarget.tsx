@@ -2,6 +2,7 @@ import { JSX, splitProps, children as getChildren } from 'solid-js';
 import { createEventHandler, useProps } from '../../../core';
 import { Popover, PopoverTargetProps } from '../../Popover';
 import { useHoverCardContext } from '../HoverCard.context';
+import { useHoverCardGroupContext } from '../HoverCardGroup/HoverCardGroup.context';
 
 export interface HoverCardTargetProps extends Omit<PopoverTargetProps, 'children'> {
   children: JSX.Element;
@@ -21,38 +22,77 @@ export function HoverCardTarget(_props: HoverCardTargetProps) {
     'eventPropsWrapperName',
   ]);
 
-  // if (!isElement(props.children)) {
-  //   throw new Error(
-  //     'HoverCard.Target children must be a single element or component that accepts a ref'
-  //   );
-  // }
-
   const safe = getChildren(() => local.children);
   const resolved = safe();
 
-  // If more than one top‑level node, or primitive, reject
-  if (!resolved || Array.isArray(resolved) || typeof resolved === 'string' || typeof resolved === 'number') {
-    throw new Error(
-      'HoverCard.Target component children should be an element or a component that accepts ref. Fragments, strings, numbers and other primitive values are not supported'
+  let child;
+  if (Array.isArray(resolved)) {
+    child = resolved.find(item => item != null && typeof item === 'object');
+  } else {
+    child = resolved;
+  }
+
+  const ctx = useHoverCardContext();
+  const withinGroup = useHoverCardGroupContext();
+
+  if (withinGroup && ctx.getReferenceProps && ctx.reference) {
+    const referenceProps = ctx.getReferenceProps();
+
+    return (
+      <Popover.Target {...others}>
+        {(targetProps) => {
+          const wrapperProps = local.eventPropsWrapperName
+            ? { [local.eventPropsWrapperName]: { ...referenceProps, ref: ctx.reference } }
+            : { ...referenceProps, ref: ctx.reference };
+
+          return (
+            <span
+              {...wrapperProps}
+              {...targetProps}
+            >
+              {local.children}
+            </span>
+          );
+        }}
+      </Popover.Target>
     );
   }
 
-  const child = resolved as any;
-
-  const ctx = useHoverCardContext();
-  const onMouseEnter = createEventHandler(child.props?.onMouseEnter, ctx.openDropdown);
-  const onMouseLeave = createEventHandler(child.props?.onMouseLeave, ctx.closeDropdown);
+  const onMouseEnter = createEventHandler(undefined, ctx.openDropdown);
+  const onMouseLeave = createEventHandler(undefined, ctx.closeDropdown);
 
   const eventListeners = { onMouseEnter, onMouseLeave };
 
   return (
     <Popover.Target {...others}>
-      {(targetProps) => (
-        <span {...eventListeners} {...targetProps}>
-          {local.children}
-        </span>
-      )}
+      {(targetProps) => {
+        const wrapperProps = local.eventPropsWrapperName
+          ? { [local.eventPropsWrapperName]: eventListeners }
+          : eventListeners;
+
+        return (
+          <span
+            {...wrapperProps}
+            {...targetProps}
+            onMouseEnter={(e) => {
+              const handler = local.eventPropsWrapperName
+                ? (wrapperProps as any)[local.eventPropsWrapperName]?.onMouseEnter
+                : (wrapperProps as any).onMouseEnter;
+              handler?.(e);
+            }}
+            onMouseLeave={(e) => {
+              const handler = local.eventPropsWrapperName
+                ? (wrapperProps as any)[local.eventPropsWrapperName]?.onMouseLeave
+                : (wrapperProps as any).onMouseLeave;
+              handler?.(e);
+            }}
+          >
+            {local.children}
+          </span>
+        );
+      }}
     </Popover.Target>
   );
 }
+
 HoverCardTarget.displayName = '@empoleon/core/HoverCardTarget';

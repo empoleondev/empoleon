@@ -12,22 +12,22 @@ const defaultProps: TabsTabProps = {
 const TestContainer = createContextContainer(TabsTab, Tabs);
 
 describe('@empoleon/core/TabsTab', () => {
-  // tests.itSupportsSystemProps<TabsTabProps, TabsTabStylesNames>({
-  //   component: TestContainer,
-  //   props: () => defaultProps,
-  //   refType: HTMLButtonElement,
-  //   displayName: '@empoleon/core/TabsTab',
-  //   mod: true,
-  //   extend: true,
-  //   withProps: true,
-  //   styleProps: true,
-  //   children: true,
-  //   classes: true,
-  //   selector: '[role="tab"]',
-  //   stylesApiName: 'Tabs',
-  //   stylesApiSelectors: ['tab', 'tabLabel', 'tabSection'],
-  //   providerStylesApi: false,
-  // });
+  tests.itSupportsSystemProps<TabsTabProps, TabsTabStylesNames>({
+    component: TestContainer,
+    props: () => defaultProps,
+    refType: HTMLButtonElement,
+    displayName: '@empoleon/core/TabsTab',
+    mod: true,
+    extend: true,
+    withProps: true,
+    styleProps: true,
+    children: true,
+    classes: true,
+    selector: '[role="tab"]',
+    stylesApiName: 'Tabs',
+    stylesApiSelectors: ['tab', 'tabLabel', 'tabSection'],
+    providerStylesApi: false,
+  });
 
   tests.itSupportsFocusEvents({
     component: TestContainer,

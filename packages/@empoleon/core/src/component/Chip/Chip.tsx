@@ -1,4 +1,4 @@
-import { useId } from '@empoleon/hooks';
+import { useId, useUncontrolled } from '@empoleon/hooks';
 import {
   Box,
   BoxProps,
@@ -152,6 +152,7 @@ export const Chip = factory<ChipFactory>(_props => {
     'rootRef',
     'autoContrast',
     'mod',
+    'attributes',
     'ref'
   ]);
 
@@ -172,18 +173,13 @@ export const Chip = factory<ChipFactory>(_props => {
   const uuid = useId(local.id);
   const { styleProps, rest } = extractStyleProps(others);
 
-  const [internalValue, setInternalValue] = createSignal(local.defaultChecked || false);
-  const isControlled = () => local.checked !== undefined;
-  const _value = () => isControlled() ? local.checked! : internalValue();
+  const [_value, setValue] = useUncontrolled({
+    value: () => local.checked,
+    defaultValue: local.defaultChecked!,
+    finalValue: false,
+    onChange: local.onChange,
+  });
 
-  const setValue = (value: boolean) => {
-    if (!isControlled()) {
-      setInternalValue(value);
-    }
-    local.onChange?.(value);
-  };
-
-  // Context props for ChipGroup integration
   const contextProps = () => ctx
     ? {
         checked: ctx.isChipSelected(local.value as string),
@@ -228,7 +224,7 @@ export const Chip = factory<ChipFactory>(_props => {
 
       <label
         for={uuid}
-        data-checked={_checked || undefined}
+        data-checked={_checked() || undefined}
         data-disabled={local.disabled || undefined}
         {...getStyles('label', { variant: local.variant || 'filled' })}
       >

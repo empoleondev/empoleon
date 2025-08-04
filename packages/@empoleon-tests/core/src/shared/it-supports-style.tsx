@@ -1,6 +1,7 @@
 import { DEFAULT_THEME, EmpoleonTheme } from '@empoleon/core';
 import { render } from '../render';
 import { JSX } from 'solid-js';
+import { getPropsValue } from './get-props-value';
 
 interface Options<Props = any> {
   component: (props: Props) => JSX.Element;
@@ -10,7 +11,8 @@ interface Options<Props = any> {
 
 export function itSupportsStyle<Props>(options: Options<Props>, name = 'supports style') {
   it(`${name}: object`, () => {
-    const propsWithStyle = { ...options.props, style: { color: 'salmon' } } as Props & { style: any };
+    const baseProps = getPropsValue(options.props);
+    const propsWithStyle = { ...baseProps, style: { color: 'salmon' } } as Props & { style: any };
 
     const { container } = render(
       () => <options.component {...propsWithStyle} style={{ color: 'salmon' }} />
@@ -22,7 +24,8 @@ export function itSupportsStyle<Props>(options: Options<Props>, name = 'supports
   });
 
   it(`${name}: theme function`, () => {
-    const propsWithStyle = { ...options.props, style: (theme: EmpoleonTheme) => ({ color: theme.colors.pink[4] }) } as Props & { style: any };
+    const baseProps = getPropsValue(options.props);
+    const propsWithStyle = { ...baseProps, style: (theme: EmpoleonTheme) => ({ color: theme.colors.pink[4] }) } as Props & { style: any };
 
     const { container } = render(
       () => <options.component
@@ -37,7 +40,8 @@ export function itSupportsStyle<Props>(options: Options<Props>, name = 'supports
   });
 
   it(`${name}: array of objects`, () => {
-    const propsWithStyle = { ...options.props, style: [{ color: 'salmon' }, { background: 'olive' }] } as Props & { style: any };
+    const baseProps = getPropsValue(options.props);
+    const propsWithStyle = { ...baseProps, style: [{ color: 'salmon' }, { background: 'olive' }] } as Props & { style: any };
 
     const { container } = render(
       () => <options.component
@@ -53,7 +57,8 @@ export function itSupportsStyle<Props>(options: Options<Props>, name = 'supports
   });
 
   it(`${name}: array of theme functions`, () => {
-    const propsWithStyle = { ...options.props, style: [
+    const baseProps = getPropsValue(options.props);
+    const propsWithStyle = { ...baseProps, style: [
       (theme: EmpoleonTheme) => ({ color: theme.colors.pink[4] }),
       (theme: EmpoleonTheme) => ({ background: theme.colors.orange[9] }),
     ] } as Props & { style: any };

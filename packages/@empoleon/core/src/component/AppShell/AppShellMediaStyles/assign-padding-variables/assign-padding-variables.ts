@@ -12,24 +12,22 @@ interface AssignPaddingVariablesInput {
   padding: AppShellProps['padding'] | undefined;
 }
 
-export function assignPaddingVariables({
-  padding,
-  baseStyles,
-  minMediaStyles,
-}: AssignPaddingVariablesInput) {
-  if (isPrimitiveSize(padding)) {
-    baseStyles['--app-shell-padding'] = getPaddingValue(getBaseSize(padding));
+export function assignPaddingVariables(props: AssignPaddingVariablesInput) {
+  if (isPrimitiveSize(props.padding)) {
+    props.baseStyles['--app-shell-padding'] = getPaddingValue(getBaseSize(props.padding));
   }
 
-  if (isResponsiveSize(padding)) {
-    if (padding.base) {
-      baseStyles['--app-shell-padding'] = getPaddingValue(padding.base);
+  if (isResponsiveSize(props.padding)) {
+    const responsivePadding = props.padding;
+
+    if (responsivePadding.base) {
+      props.baseStyles['--app-shell-padding'] = getPaddingValue(responsivePadding.base);
     }
 
-    keys(padding).forEach((key) => {
+    keys(responsivePadding).forEach((key) => {
       if (key !== 'base') {
-        minMediaStyles[key] = minMediaStyles[key] || {};
-        minMediaStyles[key]['--app-shell-padding'] = getPaddingValue(padding![key]);
+        props.minMediaStyles[key] = props.minMediaStyles[key] || {};
+        props.minMediaStyles[key]['--app-shell-padding'] = getPaddingValue(responsivePadding![key]);
       }
     });
   }

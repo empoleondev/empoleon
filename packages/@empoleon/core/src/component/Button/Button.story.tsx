@@ -95,6 +95,12 @@ function Colors({ index, ...others }: ButtonProps & { index?: number }) {
   </div>;
 }
 
+export function Single() {
+  return (
+    <Button darkHidden>hello</Button>
+  );
+}
+
 export function Usage() {
   return (
     <>

@@ -1,4 +1,4 @@
-import { createSignal, onMount } from 'solid-js';
+import { createSignal, createEffect } from 'solid-js';
 
 interface EyeDropperOpenOptions {
   signal?: AbortSignal;
@@ -8,24 +8,44 @@ export interface EyeDropperOpenReturnType {
   sRGBHex: string;
 }
 
-function isOpera() {
-  return navigator.userAgent.includes('OPR');
+declare global {
+  interface Window {
+    EyeDropper?: {
+      new(): {
+        open(options?: EyeDropperOpenOptions): Promise<EyeDropperOpenReturnType>;
+      };
+    };
+  }
+}
+
+function checkSupport(): boolean {
+  return typeof window !== 'undefined' &&
+    !navigator.userAgent.includes('OPR') &&
+    'EyeDropper' in window &&
+    typeof window.EyeDropper === 'function' &&
+    window.isSecureContext;
 }
 
 export function useEyeDropper() {
-  const [supported, setSupported] = createSignal(false);
+  const [supported, setSupported] = createSignal(
+    typeof window !== 'undefined' ? checkSupport() : false
+  );
 
-  onMount(() => {
-    setSupported(typeof window !== 'undefined' && !isOpera() && 'EyeDropper' in window);
+  createEffect(() => {
+    if (typeof window !== 'undefined') {
+      setSupported(checkSupport());
+    }
   });
 
-  const open = (options: EyeDropperOpenOptions = {}): Promise<EyeDropperOpenReturnType | undefined> => {
-    if (supported()) {
-      const eyeDropper = new (window as any).EyeDropper();
-      return eyeDropper.open(options);
-    }
+  const open = async (options: EyeDropperOpenOptions = {}): Promise<EyeDropperOpenReturnType | undefined> => {
+    if (!supported()) return undefined;
 
-    return Promise.resolve(undefined);
+    try {
+      const eyeDropper = new window.EyeDropper!();
+      return await eyeDropper.open(options);
+    } catch {
+      return undefined;
+    }
   };
 
   return { supported, open };

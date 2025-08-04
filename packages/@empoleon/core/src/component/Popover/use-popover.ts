@@ -1,3 +1,4 @@
+import { Accessor, createEffect, createSignal } from 'solid-js';
 import {
   arrow,
   flip,
@@ -17,9 +18,9 @@ import {
   FloatingPosition,
   FloatingStrategy,
   useFloatingAutoUpdate,
-} from '../Floating';
+} from '../../utils/Floating';
 import { PopoverMiddlewares, PopoverWidth } from './Popover.types';
-import { Accessor, createEffect, createSignal } from 'solid-js';
+import { useEmpoleonEnv } from '../../core';
 
 interface UsePopoverOptions {
   offset: number | FloatingAxesOffsets;
@@ -37,6 +38,12 @@ interface UsePopoverOptions {
   arrowRef: Accessor<HTMLElement | undefined>;
   arrowOffset: number;
   strategy?: FloatingStrategy;
+  dropdownVisible: boolean;
+  setDropdownVisible: (visible: boolean) => void;
+  positionRef: FloatingPosition;
+  disabled: boolean | undefined;
+  preventPositionChangeWhenVisible: boolean | undefined;
+  keepMounted: boolean | undefined;
 }
 
 function getDefaultMiddlewares(middlewares: PopoverMiddlewares | undefined): PopoverMiddlewares {
@@ -58,10 +65,16 @@ function getDefaultMiddlewares(middlewares: PopoverMiddlewares | undefined): Pop
 
 function getPopoverMiddlewares(
   options: UsePopoverOptions,
-  getFloating: () => UseFloatingReturn
+  getFloating: () => UseFloatingReturn,
+  env: 'test' | 'default'
 ) {
   const middlewaresOptions = getDefaultMiddlewares(options.middlewares);
   const middlewares: Middleware[] = [offset(options.offset), hide()];
+
+  if (options.dropdownVisible && env !== 'test' && options.preventPositionChangeWhenVisible) {
+    middlewaresOptions.flip = false;
+    middlewaresOptions.shift = false;
+  }
 
   if (middlewaresOptions.shift) {
     middlewares.push(
@@ -125,6 +138,7 @@ function getPopoverMiddlewares(
 }
 
 export function usePopover(options: UsePopoverOptions) {
+  const env = useEmpoleonEnv();
   const [_opened, setOpened] = useUncontrolled({
     value: options.opened,
     defaultValue: options.defaultOpened!,
@@ -149,7 +163,7 @@ export function usePopover(options: UsePopoverOptions) {
   const floating: UseFloatingReturn = useFloating({
     strategy: options.strategy,
     placement: options.position,
-    middleware: getPopoverMiddlewares(options, () => floating),
+    middleware: getPopoverMiddlewares(options, () => floating, env),
     elements: () => ({
       reference: referenceElement(),
       floating: floatingElement()

@@ -5,6 +5,6 @@ interface GetRootClassNameInput {
 }
 
 /** Adds `className` to the list if given selector is root */
-export function getRootClassName({ rootSelector, selector, className }: GetRootClassNameInput) {
-  return rootSelector === selector ? className : undefined;
+export function getRootClassName(_props: GetRootClassNameInput) {
+  return _props.rootSelector === _props.selector ? _props.className : undefined;
 }
