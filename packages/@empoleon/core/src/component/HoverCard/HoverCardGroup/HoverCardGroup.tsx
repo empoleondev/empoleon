@@ -19,13 +19,13 @@ const defaultProps = {
   closeDelay: 0,
 } satisfies Partial<HoverCardGroupProps>;
 
-export function HoverCardGroup(props: HoverCardGroupProps) {
-  const { openDelay, closeDelay, children } = useProps('HoverCardGroup', defaultProps, props);
+export function HoverCardGroup(_props: HoverCardGroupProps) {
+  const props = useProps('HoverCardGroup', defaultProps, _props);
 
   return (
     <HoverCardGroupProvider value>
-      <FloatingDelayGroup delay={{ open: openDelay, close: closeDelay }}>
-        {children}
+      <FloatingDelayGroup delay={{ open: props.openDelay, close: props.closeDelay }}>
+        {props.children}
       </FloatingDelayGroup>
     </HoverCardGroupProvider>
   );

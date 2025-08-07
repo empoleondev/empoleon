@@ -49,10 +49,10 @@ export type SkeletonFactory = Factory<{
   vars: SkeletonCssVariables;
 }>;
 
-const defaultProps: Partial<SkeletonProps> = {
+const defaultProps = {
   visible: true,
   animate: true,
-};
+} satisfies Partial<SkeletonProps>;
 
 const varsResolver = createVarsResolver<SkeletonFactory>(
   (_, { width, height, radius, circle }) => ({
@@ -80,6 +80,7 @@ export const Skeleton = factory<SkeletonFactory>(_props => {
     'radius',
     'animate',
     'mod',
+    'attributes',
     'ref'
   ]);
 
@@ -92,6 +93,7 @@ export const Skeleton = factory<SkeletonFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
   });

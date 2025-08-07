@@ -26,7 +26,7 @@ export interface LoadingOverlayProps
   extends BoxProps,
     StylesApiProps<LoadingOverlayFactory>,
     ElementProps<'div'> {
-  /** Props passed down to `Transition` component, `{ transition: 'fade', duration: 0 }` by default */
+  /** Props passed down to `Transition` component @default `{ transition: 'fade', duration: 0 }` by default */
   transitionProps?: TransitionOverride;
 
   /** Props passed down to `Loader` component */
@@ -35,10 +35,10 @@ export interface LoadingOverlayProps
   /** Props passed down to `Overlay` component */
   overlayProps?: OverlayProps;
 
-  /** Determines whether the overlay should be visible, `false` by default */
+  /** Determines whether the overlay should be visible @default `false` */
   visible?: boolean;
 
-  /** Controls overlay `z-index`, `400` by default */
+  /** Controls overlay `z-index` @default `400` */
   zIndex?: string | number;
 }
 
@@ -49,11 +49,11 @@ export type LoadingOverlayFactory = Factory<{
   vars: LoadingOverlayCssVariables;
 }>;
 
-const defaultProps: Partial<LoadingOverlayProps> = {
+const defaultProps = {
   transitionProps: { transition: 'fade', duration: 0 },
   overlayProps: { backgroundOpacity: 0.75 },
   zIndex: getDefaultZIndex('overlay'),
-};
+} satisfies Partial<LoadingOverlayProps>;
 
 const varsResolver = createVarsResolver<LoadingOverlayFactory>((_, { zIndex }) => ({
   root: {
@@ -75,6 +75,7 @@ export const LoadingOverlay = factory<LoadingOverlayFactory>(_props => {
     'overlayProps',
     'visible',
     'zIndex',
+    'attributes',
     'ref'
   ]);
 
@@ -89,6 +90,7 @@ export const LoadingOverlay = factory<LoadingOverlayFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
   });

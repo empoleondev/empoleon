@@ -25,10 +25,8 @@ export type ProgressLabelFactory = Factory<{
   compound: true;
 }>;
 
-const defaultProps: Partial<ProgressLabelProps> = {};
-
 export const ProgressLabel = factory<ProgressLabelFactory>(_props => {
-  const props = useProps('ProgressLabel', defaultProps, _props);
+  const props = useProps('ProgressLabel', null, _props);
   const [local, others] = splitProps(props, [
     'classNames',
     'className',

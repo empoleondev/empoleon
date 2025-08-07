@@ -34,10 +34,8 @@ export type TabsListFactory = Factory<{
   compound: true;
 }>;
 
-const defaultProps: Partial<TabsListProps> = {};
-
 export const TabsList = factory<TabsListFactory>(_props => {
-  const props = useProps('TabsList', defaultProps, _props);
+  const props = useProps('TabsList', null, _props);
   const [local, others] = splitProps(props, [
     'children',
     'className',

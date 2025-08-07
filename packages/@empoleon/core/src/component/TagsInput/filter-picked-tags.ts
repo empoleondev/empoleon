@@ -5,10 +5,10 @@ interface FilterPickedTagsInput {
   value: string[];
 }
 
-export function filterPickedTags({ data, value }: FilterPickedTagsInput) {
-  const normalizedValue = value.map((item) => item.trim().toLowerCase());
+export function filterPickedTags(props: FilterPickedTagsInput) {
+  const normalizedValue = props.value.map((item) => item.trim().toLowerCase());
 
-  const filtered = data.reduce<ComboboxParsedItem[]>((acc, item) => {
+  const filtered = props.data.reduce<ComboboxParsedItem[]>((acc, item) => {
     if (isOptionsGroup(item)) {
       acc.push({
         group: item.group,

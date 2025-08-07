@@ -4,6 +4,7 @@ import { __InputStylesNames } from '../Input';
 import { InputBase } from '../InputBase';
 import { Textarea, TextareaProps } from '../Textarea';
 import { validateJson } from './validate-json/validate-json';
+import { useUncontrolled } from '@empoleon/hooks';
 
 export interface JsonInputProps extends Omit<TextareaProps, 'onChange'> {
   /** Value for controlled component */
@@ -56,35 +57,24 @@ export const JsonInput = factory<JsonInputFactory>(_props => {
     'ref'
   ]);
 
-  // Internal state management (controlled/uncontrolled)
-  const isControlled = () => local.value !== undefined;
-  const [internalValue, setInternalValue] = createSignal(local.defaultValue ?? '');
-  const _value = () => isControlled() ? local.value! : internalValue();
-
-  const setValue = (val: string) => {
-    if (!isControlled()) {
-      setInternalValue(val);
-    }
-    local.onChange?.(val);
-  };
+  const [_value, setValue] = useUncontrolled({
+    value: () => local.value,
+    defaultValue: local.defaultValue!,
+    finalValue: '',
+    onChange: local.onChange,
+  });
 
   const [valid, setValid] = createSignal(validateJson(_value(), local.deserialize!));
 
   const handleFocus: JSX.FocusEventHandler<HTMLTextAreaElement, FocusEvent> = (e) => {
-    const fn = local.onFocus;
-    if (typeof fn === "function") {
-      fn(e);
-    }
+    typeof local.onFocus === "function" && local.onFocus(e);
     setValid(true);
   };
 
   const handleBlur: JSX.FocusEventHandler<HTMLTextAreaElement, FocusEvent> = (e) => {
-    const fn = local.onBlur;
-    if (typeof fn === "function") {
-      fn(e);
-    }
-
+    typeof local.onBlur === "function" && local.onBlur(e);
     const isValid = validateJson(e.currentTarget.value, local.deserialize!);
+
     if (
       local.formatOnBlur &&
       !local.readOnly &&

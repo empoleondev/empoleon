@@ -38,10 +38,8 @@ export type TextareaFactory = Factory<{
   stylesNames: __InputStylesNames;
 }>;
 
-const defaultProps: Partial<TextareaProps> = {};
-
 export const Textarea = factory<TextareaFactory>(_props => {
-  const props = useProps('Textarea', defaultProps, _props);
+  const props = useProps('Textarea', null, _props);
   const [local, others] = splitProps(props, [
     'autosize',
     'maxRows',

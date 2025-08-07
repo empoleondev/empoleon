@@ -51,10 +51,8 @@ export type MenuSubItemFactory = PolymorphicFactory<{
   compound: true;
 }>;
 
-const defaultProps: Partial<MenuSubItemProps> = {};
-
 export const MenuSubItem = polymorphicFactory<MenuSubItemFactory>(_props => {
-  const props = useProps('MenuSubItem', defaultProps, _props);
+  const props = useProps('MenuSubItem', null, _props);
   const [local, others] = splitProps(props, [
     'classNames',
     'className',

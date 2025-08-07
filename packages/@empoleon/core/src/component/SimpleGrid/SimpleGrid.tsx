@@ -40,11 +40,11 @@ export type SimpleGridFactory = Factory<{
   stylesNames: SimpleGridStylesNames;
 }>;
 
-const defaultProps: Partial<SimpleGridProps> = {
+const defaultProps = {
   cols: 1,
   spacing: 'md',
   type: 'media',
-};
+} satisfies Partial<SimpleGridProps>;
 
 export const SimpleGrid = factory<SimpleGridFactory>(_props => {
   const props = useProps('SimpleGrid', defaultProps, _props);
@@ -59,6 +59,7 @@ export const SimpleGrid = factory<SimpleGridFactory>(_props => {
     'verticalSpacing',
     'spacing',
     'type',
+    'attributes',
     'ref'
   ]);
 
@@ -71,6 +72,7 @@ export const SimpleGrid = factory<SimpleGridFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
   });
 

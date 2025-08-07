@@ -101,7 +101,6 @@ export function useTooltip(settings: UseTooltip) {
   const withinGroup = useTooltipGroupContext();
   const uid = useId();
 
-  // Normalize `opened` to ALWAYS be an accessor, fixing the "not callable" error.
   const opened = createMemo<boolean>(() => settings.opened ? settings.opened() : uncontrolledOpened() || false);
 
   // console.log('use-tooltip - settings.defaultOpened:', settings.defaultOpened);

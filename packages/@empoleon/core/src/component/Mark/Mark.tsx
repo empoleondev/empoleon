@@ -31,9 +31,9 @@ export type MarkFactory = Factory<{
   vars: MarkCssVariables;
 }>;
 
-const defaultProps: Partial<MarkProps> = {
+const defaultProps = {
   color: 'yellow',
-};
+} satisfies Partial<MarkProps>;
 
 const varsResolver = createVarsResolver<MarkFactory>((theme, { color }) => ({
   root: {
@@ -53,6 +53,7 @@ export const Mark = factory<MarkFactory>(_props => {
     'vars',
     'color',
     'variant',
+    'attributes',
     'ref'
   ]);
 
@@ -65,6 +66,7 @@ export const Mark = factory<MarkFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
   });

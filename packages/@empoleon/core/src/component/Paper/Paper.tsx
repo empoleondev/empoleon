@@ -64,6 +64,7 @@ export const Paper = polymorphicFactory<PaperFactory>(_props => {
     'shadow',
     'variant',
     'mod',
+    'attributes',
     'ref'
   ]);
 
@@ -76,6 +77,7 @@ export const Paper = polymorphicFactory<PaperFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
   });

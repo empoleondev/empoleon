@@ -22,7 +22,7 @@ import {
 } from '../../../core';
 import { PaginationProvider } from '../Pagination.context';
 import classes from '../Pagination.module.css';
-import { createEffect, createMemo, splitProps } from 'solid-js';
+import { splitProps } from 'solid-js';
 
 export type PaginationRootStylesNames = 'root' | 'control' | 'dots';
 export type PaginationRootCssVariables = {
@@ -94,10 +94,10 @@ export type PaginationRootFactory = Factory<{
   vars: PaginationRootCssVariables;
 }>;
 
-const defaultProps: Partial<PaginationRootProps> = {
+const defaultProps = {
   siblings: 1,
   boundaries: 1,
-};
+} satisfies Partial<PaginationRootProps>;
 
 const varsResolver = createVarsResolver<PaginationRootFactory>(
   (theme, { size, radius, color, autoContrast }) => ({
@@ -137,6 +137,7 @@ export const PaginationRoot = factory<PaginationRootFactory>(_props => {
     'onLastPage',
     'getItemProps',
     'autoContrast',
+    'attributes',
     'ref'
   ]);
 
@@ -149,6 +150,7 @@ export const PaginationRoot = factory<PaginationRootFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
   });

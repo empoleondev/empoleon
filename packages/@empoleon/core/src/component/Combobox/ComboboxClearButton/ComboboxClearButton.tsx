@@ -18,19 +18,19 @@ export function ComboboxClearButton(props: ComboboxClearButtonProps) {
 
   return (
     <Input.ClearButton
-        ref={local.ref}
-        tabIndex={-1}
-        aria-hidden
-        {...others}
-        onMouseDown={(event) => {
-          event.preventDefault();
-          typeof local.onMouseDown === "function" && local.onMouseDown?.(event);
-        }}
-        onClick={(event) => {
-          local.onClear();
-          typeof local.onClick === "function" && local.onClick?.(event);
-        }}
-      />
+      ref={local.ref}
+      tabIndex={-1}
+      aria-hidden
+      {...others}
+      onMouseDown={(event) => {
+        event.preventDefault();
+        typeof local.onMouseDown === "function" && local.onMouseDown?.(event);
+      }}
+      onClick={(event) => {
+        local.onClear();
+        typeof local.onClick === "function" && local.onClick?.(event);
+      }}
+    />
   )
 }
 

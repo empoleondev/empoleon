@@ -34,6 +34,12 @@ export function ModalBaseContent(props: _ModalBaseContentProps) {
 
   const ctx = useModalBaseContext();
 
+  // console.log('Inner classes:', {
+  //   baseInner: classes.inner,
+  //   fromProps: local.innerProps.class,
+  //   unstyled: ctx.unstyled
+  // });
+
     return (
       <Transition
         mounted={ctx.opened()}
@@ -52,7 +58,11 @@ export function ModalBaseContent(props: _ModalBaseContentProps) {
         {(transitionStyles) => (
           <div
             {...local.innerProps}
-            class={cx({ [classes.inner]: !ctx.unstyled }, local.innerProps.class)}
+            class={cx(
+              { [classes.inner]: !ctx.unstyled },
+              local.innerProps.class,
+              (local.innerProps as any).className
+            )}
           >
             <FocusTrap active={ctx.opened() && ctx.trapFocus!} innerRef={local.ref}>
               {(focusTrapProps) => (

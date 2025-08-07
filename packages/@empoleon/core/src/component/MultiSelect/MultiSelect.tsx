@@ -113,12 +113,12 @@ export type MultiSelectFactory = Factory<{
   stylesNames: MultiSelectStylesNames;
 }>;
 
-const defaultProps: Partial<MultiSelectProps> = {
+const defaultProps = {
   maxValues: Infinity,
   withCheckIcon: true,
   checkIconPosition: 'left',
   hiddenInputValuesDivider: ',',
-};
+} satisfies Partial<MultiSelectProps>;
 
 export const MultiSelect = factory<MultiSelectFactory>(_props => {
   const props = useProps('MultiSelect', defaultProps, _props);
@@ -196,6 +196,7 @@ export const MultiSelect = factory<MultiSelectFactory>(_props => {
     'onClear',
     'scrollAreaProps',
     'chevronColor',
+    'attributes',
     'ref'
   ]);
 
@@ -244,6 +245,7 @@ export const MultiSelect = factory<MultiSelectFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
   });
 
   const { resolvedClassNames, resolvedStyles } = useResolvedStylesApi<MultiSelectFactory>({
@@ -317,6 +319,7 @@ export const MultiSelect = factory<MultiSelectFactory>(_props => {
         size={local.size}
         readOnly={local.readOnly}
         __staticSelector="MultiSelect"
+        attributes={local.attributes}
         onOptionSubmit={(val) => {
           local.onOptionSubmit?.(val);
           handleSearchChange('');
@@ -384,8 +387,14 @@ export const MultiSelect = factory<MultiSelectFactory>(_props => {
             id={_id}
             required={local.required}
             mod={local.mod}
+            attributes={local.attributes}
           >
-            <Pill.Group disabled={local.disabled} unstyled={local.unstyled} {...getStyles('pillsList')}>
+            <Pill.Group
+              attributes={local.attributes}
+              disabled={local.disabled}
+              unstyled={local.unstyled}
+              {...getStyles('pillsList')}
+            >
               {values}
               <Combobox.EventsTarget autoComplete={autocomplete}>
                 {/* @ts-ignore */}

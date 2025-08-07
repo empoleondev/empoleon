@@ -70,8 +70,6 @@ export const MenuItem = polymorphicFactory<MenuItemFactory>(_props => {
     'data-disabled',
   ]);
 
-  const dataDisabled = local['data-disabled'];
-
   const ctx = useMenuContext();
   const subCtx = useSubMenuContext();
   const theme = useEmpoleonTheme();
@@ -80,7 +78,7 @@ export const MenuItem = polymorphicFactory<MenuItemFactory>(_props => {
   const _others: any = others;
 
   const handleClick = createEventHandler(_others.onClick, () => {
-    if (dataDisabled) {
+    if (local['data-disabled']) {
       return;
     }
     if (typeof local.closeMenuOnClick === 'boolean') {
@@ -111,7 +109,7 @@ export const MenuItem = polymorphicFactory<MenuItemFactory>(_props => {
       role="menuitem"
       disabled={local.disabled}
       data-menu-item
-      data-disabled={local.disabled || dataDisabled || undefined}
+      data-disabled={local.disabled || local['data-disabled'] || undefined}
       data-empoleon-stop-propagation
       onClick={handleClick}
       onKeyDown={createScopedKeydownHandler({

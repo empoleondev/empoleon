@@ -180,7 +180,7 @@ export type NumberInputFactory = Factory<{
   variant: InputVariant;
 }>;
 
-const defaultProps: Partial<NumberInputProps> = {
+const defaultProps = {
   step: 1,
   clampBehavior: 'blur',
   allowDecimal: true,
@@ -189,13 +189,24 @@ const defaultProps: Partial<NumberInputProps> = {
   allowLeadingZeros: true,
   trimLeadingZeroesOnBlur: true,
   startValue: 0,
-};
+} satisfies Partial<NumberInputProps>;
 
 const varsResolver = createVarsResolver<NumberInputFactory>((_, { size }) => ({
   controls: {
     '--ni-chevron-size': getSize(size, 'ni-chevron-size'),
   },
 }));
+
+function clampAndSanitizeInput(sanitizedValue: string | number, max?: number, min?: number) {
+  const replaced = sanitizedValue.toString().replace(/^0+/, '');
+  const parsedValue = parseFloat(replaced);
+  if (Number.isNaN(parsedValue)) {
+    return replaced;
+  } else if (parsedValue > Number.MAX_SAFE_INTEGER) {
+    return max !== undefined ? String(max) : replaced;
+  }
+  return clamp(parsedValue, min, max);
+}
 
 export const NumberInput = factory<NumberInputFactory>(_props => {
   const props = useProps('NumberInput', defaultProps, _props);
@@ -234,6 +245,7 @@ export const NumberInput = factory<NumberInputFactory>(_props => {
     'allowLeadingZeros',
     'withKeyboardEvents',
     'trimLeadingZeroesOnBlur',
+    'attributes',
     'ref'
   ])
 
@@ -244,6 +256,7 @@ export const NumberInput = factory<NumberInputFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
   });
@@ -293,38 +306,6 @@ export const NumberInput = factory<NumberInputFactory>(_props => {
     }
   };
 
-  // const increment = () => {
-  //   if (!canIncrement(_value())) {
-  //     return;
-  //   }
-
-  //   let val: number;
-  //   const currentValuePrecision = getDecimalPlaces(_value());
-  //   const stepPrecision = getDecimalPlaces(local.step!);
-  //   const maxPrecision = Math.max(currentValuePrecision, stepPrecision);
-  //   const factor = 10 ** maxPrecision;
-
-  //   if (!isNumberString(_value()) && (typeof _value() !== 'number' || Number.isNaN(_value()))) {
-  //     val = clamp(local.startValue!, local.min, local.max);
-  //   } else if (local.max !== undefined) {
-  //     const incrementedValue =
-  //       (Math.round(Number(_value()) * factor) + Math.round(local.step! * factor)) / factor;
-  //     val = incrementedValue <= local.max ? incrementedValue : local.max;
-  //   } else {
-  //     val = (Math.round(Number(_value()) * factor) + Math.round(local.step! * factor)) / factor;
-  //   }
-
-  //   const formattedValue = val.toFixed(maxPrecision);
-  //   const finalValue = parseFloat(formattedValue);
-
-  //   setValue(finalValue);
-  //   local.onValueChange?.(
-  //     { floatValue: finalValue, formattedValue, value: formattedValue },
-  //     { source: 'increment' as any }
-  //   );
-  //   setTimeout(() => adjustCursor(inputRef()?.value.length), 0);
-  // };
-
   const increment = () => {
     if (!canIncrement(_value())) {
       return;
@@ -359,7 +340,6 @@ export const NumberInput = factory<NumberInputFactory>(_props => {
       { source: 'increment' as any }
     );
 
-    // If setValue didn't trigger onChange due to no value change, call it explicitly
     if (!valueChanged && local.onChange) {
       local.onChange(finalValue);
     }
@@ -403,7 +383,6 @@ export const NumberInput = factory<NumberInputFactory>(_props => {
     if (typeof local.handlersRef === 'function') {
       local.handlersRef({ increment, decrement });
     } else if (local.handlersRef) {
-      // For ref objects
       local.handlersRef = { increment, decrement };
     }
   });
@@ -439,12 +418,7 @@ export const NumberInput = factory<NumberInputFactory>(_props => {
       typeof sanitizedValue === 'string' &&
       getDecimalPlaces(sanitizedValue) < 15
     ) {
-      const replaced = sanitizedValue.toString().replace(/^0+/, '');
-      const parsedValue = parseFloat(replaced);
-      sanitizedValue =
-        Number.isNaN(parsedValue) || parsedValue > Number.MAX_SAFE_INTEGER
-          ? replaced
-          : clamp(parsedValue, local.min, local.max);
+      sanitizedValue = clampAndSanitizeInput(sanitizedValue, local.max, local.min);
     }
 
     if (_value() !== sanitizedValue) {
@@ -556,6 +530,7 @@ export const NumberInput = factory<NumberInputFactory>(_props => {
       rightSectionWidth={local.rightSectionWidth ?? `var(--ni-right-section-width-${local.size || 'sm'})`}
       allowLeadingZeros={local.allowLeadingZeros}
       onBlur={handleBlur}
+      attributes={local.attributes}
       isAllowed={(val: any) => {
         if (local.clampBehavior === 'strict') {
           if (local.isAllowed) {

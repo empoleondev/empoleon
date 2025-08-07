@@ -13,7 +13,7 @@ AppShell
 AspectRatio
 Autocomplete
 Avatar
-BackgroundImage (stopped here)
+BackgroundImage
 Badge
 Blockquote
 Breadcrumbs
@@ -34,7 +34,7 @@ Container
 CopyButton
 Dialog
 Divider
-Drawer (goes fullscreen and should not, stack does not work)
+Drawer
 Fieldset
 FileButton
 FileInput

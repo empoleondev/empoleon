@@ -25,12 +25,10 @@ export type MenuDividerFactory = Factory<{
   compound: true;
 }>;
 
-const defaultProps: Partial<MenuDividerProps> = {};
-
 export const MenuDivider = factory<MenuDividerFactory>(_props => {
   const props = useProps(
     'MenuDivider',
-    defaultProps,
+    null,
     _props
   );
   const [local, others] = splitProps(props, [

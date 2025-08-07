@@ -96,11 +96,11 @@ export type TableOfContentsFactory = Factory<{
   variant: TableOfContentsVariant;
 }>;
 
-const defaultProps: Partial<TableOfContentsProps> = {
+const defaultProps = {
   getControlProps: ({ data }) => ({
     children: data.value,
   }),
-};
+} satisfies Partial<TableOfContentsProps>;
 
 const varsResolver = createVarsResolver<TableOfContentsFactory>(
   (theme, { color, size, variant, autoContrast, depthOffset, radius }) => {
@@ -142,6 +142,7 @@ export const TableOfContents = factory<TableOfContentsFactory>(_props => {
     'variant',
     'radius',
     'reinitializeRef',
+    'attributes',
     'ref'
   ]);
 
@@ -154,6 +155,7 @@ export const TableOfContents = factory<TableOfContentsFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
   });
@@ -178,7 +180,6 @@ export const TableOfContents = factory<TableOfContentsFactory>(_props => {
 
     return (
       <UnstyledButton
-        // key={data.id || `${idBase}-${index}`}
         __vars={{ '--depth-offset': `${data.depth - (local.minDepthToOffset || 1)}` }}
         data-active={index === spy.active || undefined}
         variant={local.variant}

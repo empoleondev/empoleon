@@ -149,6 +149,7 @@ export const Tabs = factory<TabsFactory>(_props => {
     'vars',
     'autoContrast',
     'mod',
+    'attributes',
     'ref'
   ]);
 
@@ -170,6 +171,7 @@ export const Tabs = factory<TabsFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
   });

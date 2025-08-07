@@ -27,3 +27,5 @@ export function ScrollAreaViewport(props: ScrollAreaViewportProps) {
     </Box>
   );
 }
+
+ScrollAreaViewport.displayName = '@mantine/core/ScrollAreaViewport';

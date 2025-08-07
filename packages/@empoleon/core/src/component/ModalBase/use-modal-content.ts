@@ -7,7 +7,6 @@ export function useModalContentProps() {
     const shouldTrigger =
       (event.target as HTMLElement)?.getAttribute('data-empoleon-stop-propagation') !== 'true';
     shouldTrigger && event.key === 'Escape' && ctx.closeOnEscape && ctx.onClose();
-    // OnKeyDown?.(event);
   };
 
   return {

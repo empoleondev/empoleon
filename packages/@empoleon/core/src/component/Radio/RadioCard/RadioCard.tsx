@@ -49,9 +49,9 @@ export type RadioCardFactory = Factory<{
   vars: RadioCardCssVariables;
 }>;
 
-const defaultProps: Partial<RadioCardProps> = {
+const defaultProps = {
   withBorder: true,
-};
+} satisfies Partial<RadioCardProps>;
 
 const varsResolver = createVarsResolver<RadioCardFactory>((_, { radius }) => ({
   card: {
@@ -75,6 +75,7 @@ export const RadioCard = factory<RadioCardFactory>(_props => {
     'onClick',
     'name',
     'onKeyDown',
+    'attributes',
     'ref'
   ]);
 
@@ -87,6 +88,7 @@ export const RadioCard = factory<RadioCardFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
     rootSelector: 'card',

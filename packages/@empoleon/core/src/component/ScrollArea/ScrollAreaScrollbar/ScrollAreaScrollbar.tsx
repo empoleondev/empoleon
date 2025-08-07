@@ -44,7 +44,7 @@ export function ScrollAreaScrollbar(props: ScrollAreaScrollbarProps) {
         <ScrollAreaScrollbarAuto {...others} ref={local.ref} forceMount={local.forceMount} />
       </Match>
       <Match when={ctx.type === "always"}>
-        <ScrollAreaScrollbarVisible {...others} ref={local.ref} />
+        <ScrollAreaScrollbarHover {...others} ref={local.ref} />
       </Match>
     </Switch>
   );

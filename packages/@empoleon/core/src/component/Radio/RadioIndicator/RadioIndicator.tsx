@@ -117,6 +117,7 @@ export const RadioIndicator = factory<RadioIndicatorFactory>(_props => {
     'mod',
     'variant',
     'disabled',
+    'attributes',
     'ref'
   ]);
 
@@ -131,6 +132,7 @@ export const RadioIndicator = factory<RadioIndicatorFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
     rootSelector: 'indicator',

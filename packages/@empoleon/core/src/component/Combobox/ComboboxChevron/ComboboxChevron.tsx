@@ -37,9 +37,9 @@ export type ComboboxChevronFactory = Factory<{
   vars: ComboboxChevronCSSVariables;
 }>;
 
-const defaultProps: Partial<ComboboxChevronProps> = {
+const defaultProps = {
   error: null,
-};
+} satisfies Partial<ComboboxChevronProps>;
 
 const varsResolver = createVarsResolver<ComboboxChevronFactory>((theme, { size, color }) => ({
   chevron: {

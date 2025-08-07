@@ -92,13 +92,13 @@ export type RatingFactory = Factory<{
   vars: RatingCssVariables;
 }>;
 
-const defaultProps: Partial<RatingProps> = {
+const defaultProps = {
   size: 'sm',
   getSymbolLabel: (value) => `${value}`,
   count: 5,
   fractions: 1,
   color: 'yellow',
-};
+} satisfies Partial<RatingProps>;
 
 const varsResolver = createVarsResolver<RatingFactory>((theme, { size, color }) => ({
   root: {
@@ -137,6 +137,7 @@ export const Rating = factory<RatingFactory>(_props => {
     'emptySymbol',
     'fullSymbol',
     'highlightSelectedOnly',
+    'attributes',
     'ref'
   ]);
 

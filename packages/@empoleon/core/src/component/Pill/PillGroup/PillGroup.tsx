@@ -43,8 +43,6 @@ export type PillGroupFactory = Factory<{
   ctx: { size: EmpoleonSize | (string & {}) | undefined };
 }>;
 
-const defaultProps: Partial<PillGroupProps> = {};
-
 const varsResolver = createVarsResolver<PillGroupFactory>((_, { gap }, { size }) => ({
   group: {
     '--pg-gap': gap !== undefined ? getSize(gap) : getSize(size, 'pg-gap'),
@@ -52,7 +50,7 @@ const varsResolver = createVarsResolver<PillGroupFactory>((_, { gap }, { size })
 }));
 
 export const PillGroup = factory<PillGroupFactory>(_props => {
-  const props = useProps('PillGroup', defaultProps, _props);
+  const props = useProps('PillGroup', null, _props);
   const [local, others] = splitProps(props, [
     'classNames',
     'className',
@@ -62,6 +60,7 @@ export const PillGroup = factory<PillGroupFactory>(_props => {
     'vars',
     'size',
     'disabled',
+    'attributes',
     'ref'
   ]);
 
@@ -77,6 +76,7 @@ export const PillGroup = factory<PillGroupFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
     stylesCtx: { size: _size },

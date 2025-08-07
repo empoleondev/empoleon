@@ -126,7 +126,7 @@ export type SliderFactory = Factory<{
   vars: SliderCssVariables;
 }>;
 
-const defaultProps: Partial<SliderProps> = {
+const defaultProps = {
   radius: 'xl',
   min: 0,
   max: 100,
@@ -134,12 +134,11 @@ const defaultProps: Partial<SliderProps> = {
   marks: [],
   label: (f) => f,
   labelTransitionProps: { transition: 'fade', duration: 0 },
-  labelAlwaysOn: false,
   thumbLabel: '',
   showLabelOnHover: true,
-  disabled: false,
   scale: (v) => v,
-};
+  size: 'md',
+} satisfies Partial<SliderProps>;
 
 const varsResolver = createVarsResolver<SliderFactory>(
   (theme, { size, color, thumbSize, radius }) => ({
@@ -185,6 +184,7 @@ export const Slider = factory<SliderFactory>(_props => {
     'hiddenInputProps',
     'restrictToMarks',
     'thumbProps',
+    'attributes',
     'ref'
    ]);
 
@@ -221,9 +221,9 @@ export const Slider = factory<SliderFactory>(_props => {
   const root = null as HTMLDivElement | null;
   const thumb = null as HTMLDivElement | null;
   const position = createMemo(() => {
-  const pos = getPosition({ value: _value(), min: local.min!, max: local.max! });
-  return pos;
-});
+    const pos = getPosition({ value: _value(), min: local.min!, max: local.max! });
+    return pos;
+  });
   const scaledValue = createMemo(() => local.scale!(_value()));
   const _label = createMemo(() => typeof local.label === 'function' ? local.label(scaledValue()) : local.label);
   const precision = local.precision ?? getPrecision(local.step!);
@@ -263,7 +263,6 @@ export const Slider = factory<SliderFactory>(_props => {
     }
   };
 
-  let containerRef: HTMLDivElement;
   const { ref: container, active } = useMove(handleChange, { onScrubEnd: handleScrubEnd }, dir);
 
   const callOnChangeEnd = (value: number) => {
@@ -397,6 +396,7 @@ export const Slider = factory<SliderFactory>(_props => {
 
   return (
     <SliderProvider value={{ getStyles }}>
+      {/* @ts-ignore */}
       <SliderRoot
         {...others}
         ref={useMergedRef(local.ref, root)}
@@ -416,7 +416,6 @@ export const Slider = factory<SliderFactory>(_props => {
           disabled={local.disabled}
           containerProps={{
             ref: (el: any) => {
-              containerRef = el;
               container(el);
             },
             onMouseEnter: local.showLabelOnHover ? () => setHovered(true) : undefined,

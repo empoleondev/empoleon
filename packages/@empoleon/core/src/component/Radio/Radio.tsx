@@ -16,7 +16,6 @@ import {
   EmpoleonColor,
   EmpoleonRadius,
   EmpoleonSize,
-  EmpoleonStyleProp,
   parseThemeColor,
   StylesApiProps,
   useProps,
@@ -149,6 +148,7 @@ export const Radio = factory<RadioFactory>(_props => {
     'iconColor',
     'onChange',
     'mod',
+    'attributes',
     'ref'
   ]);
 
@@ -163,6 +163,7 @@ export const Radio = factory<RadioFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
   });

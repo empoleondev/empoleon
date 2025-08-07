@@ -27,10 +27,8 @@ export type MenuDropdownFactory = Factory<{
   compound: true;
 }>;
 
-const defaultProps: Partial<MenuDropdownProps> = {};
-
 export const MenuDropdown = factory<MenuDropdownFactory>(_props => {
-  const props = useProps('MenuDropdown', defaultProps, _props);
+  const props = useProps('MenuDropdown', null, _props);
   const [local, others] = splitProps(props, [
     'classNames',
     'className',

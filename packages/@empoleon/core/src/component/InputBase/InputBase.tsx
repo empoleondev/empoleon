@@ -39,10 +39,10 @@ export type InputBaseFactory = PolymorphicFactory<{
   variant: InputVariant;
 }>;
 
-const defaultProps: Partial<InputBaseProps> = {
+const defaultProps = {
   __staticSelector: 'InputBase',
   withAria: true,
-};
+} satisfies Partial<InputBaseProps>;
 
 export const InputBase = polymorphicFactory<InputBaseFactory>(_props => {
   const props = useInputProps('InputBase', defaultProps, _props);

@@ -6,15 +6,15 @@ interface GetMarkColorInput {
   defaultShade: number;
 }
 
-export function getMarkColor({ color, theme, defaultShade }: GetMarkColorInput) {
-  const parsed = parseThemeColor({ color, theme });
+export function getMarkColor(props: GetMarkColorInput) {
+  const parsed = parseThemeColor({ color: props.color, theme: props.theme });
 
   if (!parsed.isThemeColor) {
-    return color;
+    return props.color;
   }
 
   if (parsed.shade === undefined) {
-    return `var(--empoleon-color-${parsed.color}-${defaultShade})`;
+    return `var(--empoleon-color-${parsed.color}-${props.defaultShade})`;
   }
 
   return `var(${parsed.variable})`;

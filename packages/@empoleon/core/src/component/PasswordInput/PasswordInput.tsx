@@ -109,6 +109,7 @@ export const PasswordInput = factory<PasswordInputFactory>(_props => {
     'leftSectionPointerEvents',
     'withErrorStyles',
     'mod',
+    'attributes',
     'ref'
   ]);
 
@@ -132,6 +133,7 @@ export const PasswordInput = factory<PasswordInputFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
   });
@@ -144,6 +146,12 @@ export const PasswordInput = factory<PasswordInputFactory>(_props => {
 
   const { styleProps, rest } = extractStyleProps(others);
   const VisibilityToggleIcon = local.visibilityToggleIcon!;
+  const errorId = local.errorProps?.id || `${uuid}-error`;
+  const descriptionId = local.descriptionProps?.id || `${uuid}-description`;
+  const hasError = !!local.error && typeof local.error !== 'boolean';
+  const hasDescription = !!local.description;
+  const _describedBy = `${hasError ? errorId : ''} ${hasDescription ? descriptionId : ''}`;
+  const describedBy = _describedBy.trim().length > 0 ? _describedBy.trim() : undefined;
 
   const visibilityToggleButton = (
     <ActionIcon<'button'>
@@ -198,6 +206,7 @@ export const PasswordInput = factory<PasswordInputFactory>(_props => {
       variant={local.variant}
       labelProps={{ ...local.labelProps, htmlFor: uuid }}
       mod={local.mod}
+      attributes={local.attributes}
       {...getStyles('root')}
       {...styleProps}
       {...local.wrapperProps as any}
@@ -223,6 +232,7 @@ export const PasswordInput = factory<PasswordInputFactory>(_props => {
         leftSectionPointerEvents={local.leftSectionPointerEvents}
         withAria={false}
         withErrorStyles={local.withErrorStyles}
+        attributes={local.attributes}
       >
         <input
           required={local.required}
@@ -233,6 +243,7 @@ export const PasswordInput = factory<PasswordInputFactory>(_props => {
           id={uuid}
           ref={local.ref}
           {...rest}
+          aria-describedby={describedBy}
           auto-complete={rest.autocomplete || 'off'}
           type={_visible() ? 'text' : 'password'}
         />

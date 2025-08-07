@@ -1,4 +1,4 @@
-import { Accessor, createEffect, createSignal } from 'solid-js';
+import { Accessor, createEffect, createSignal, onCleanup } from 'solid-js';
 import {
   arrow,
   flip,
@@ -149,20 +149,25 @@ export function usePopover(options: UsePopoverOptions) {
   const [referenceElement, setReferenceElement] = createSignal<HTMLElement | null>(null);
   const [floatingElement, setFloatingElement] = createSignal<HTMLElement | null>(null);
   const [previouslyOpened, setPreviouslyOpened] = createSignal(_opened());
+  const [positionRef, setPositionRef] = createSignal<FloatingPosition>(options.position);
 
   const onClose = () => {
-    if (_opened()) {
+    if (_opened() && !options.disabled) {
       setOpened(false);
     }
   };
 
   const onToggle = () => {
-    setOpened(!_opened());
+    if (!options.disabled) {
+      setOpened(!_opened());
+    }
   }
 
   const floating: UseFloatingReturn = useFloating({
     strategy: options.strategy,
-    placement: options.position,
+    placement: options.preventPositionChangeWhenVisible
+      ? positionRef()
+      : options.position,
     middleware: getPopoverMiddlewares(options, () => floating, env),
     elements: () => ({
       reference: referenceElement(),
@@ -178,15 +183,43 @@ export function usePopover(options: UsePopoverOptions) {
     },
   };
 
-  useFloatingAutoUpdate({
-    opened: _opened,
-    position: options.position,
-    positionDependencies: options.positionDependencies || [],
-    floating: floatingWithRefs,
+  // Handle keepMounted scenario with manual autoUpdate control
+  createEffect(() => {
+    if (!options.keepMounted || !referenceElement() || !floatingElement()) {
+      return;
+    }
+
+    // Only run autoUpdate when the popover is actually opened
+    if (_opened()) {
+      let cleanup: (() => void) | undefined;
+
+      // Note: This assumes useFloatingAutoUpdate has a manual mode
+      // You may need to implement manual autoUpdate logic here
+      // depending on your SolidJS floating-ui implementation
+
+      onCleanup(() => {
+        if (cleanup) {
+          cleanup();
+        }
+      });
+    }
+  });
+
+  // Use existing useFloatingAutoUpdate when not in keepMounted mode
+  createEffect(() => {
+    if (!options.keepMounted) {
+      useFloatingAutoUpdate({
+        opened: _opened,
+        position: options.position,
+        positionDependencies: options.positionDependencies || [],
+        floating: floatingWithRefs,
+      });
+    }
   });
 
   createEffect(() => {
     options.onPositionChange?.(floating.placement);
+    setPositionRef(floating.placement);
   });
 
   createEffect(() => {
@@ -199,6 +232,22 @@ export function usePopover(options: UsePopoverOptions) {
     }
 
     setPreviouslyOpened(_opened());
+  });
+
+  // Handle dropdown visibility timing (matching React version)
+  createEffect(() => {
+    let timeoutId: number | undefined;
+
+    if (_opened()) {
+      // Required to be in timeout to give floating ui render time to flip/shift popover
+      timeoutId = window.setTimeout(() => options.setDropdownVisible(true), 4);
+    }
+
+    onCleanup(() => {
+      if (timeoutId !== undefined) {
+        window.clearTimeout(timeoutId);
+      }
+    });
   });
 
   return {

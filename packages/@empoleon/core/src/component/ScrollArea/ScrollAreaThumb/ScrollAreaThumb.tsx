@@ -13,7 +13,7 @@ export function Thumb(props: ThumbProps) {
 
   const scrollAreaContext = useScrollAreaContext();
   const scrollbarContext = useScrollbarContext();
-
+  const { onThumbPositionChange } = scrollbarContext;
   const composedRef = useMergedRef(local.ref, (el: HTMLDivElement) => scrollbarContext.onThumbChange(el));
 
   const removeListenerRef: { current?: () => void } = {};
@@ -24,22 +24,23 @@ export function Thumb(props: ThumbProps) {
 
   onMount(() => {
     const viewport = scrollAreaContext.viewport;
-    if (!viewport) return;
+    if (viewport) {
+      const handleScroll = () => {
+        debounceScrollEnd();
+        if (!removeListenerRef.current) {
+          const listener = addUnlinkedScrollListener(viewport, onThumbPositionChange);
+          removeListenerRef.current = listener;
+          onThumbPositionChange();
+        }
+      };
+      onThumbPositionChange();
+      viewport.addEventListener('scroll', handleScroll);
 
-    // initial position
-    scrollbarContext.onThumbPositionChange();
+      // cleanup
+      onCleanup(() => viewport.removeEventListener('scroll', handleScroll));
+    }
 
-    const handleScroll = () => {
-      debounceScrollEnd();
-      if (!removeListenerRef.current) {
-        removeListenerRef.current = addUnlinkedScrollListener(viewport, scrollbarContext.onThumbPositionChange);
-        scrollbarContext.onThumbPositionChange();
-      }
-    };
-
-    viewport.addEventListener('scroll', handleScroll);
-    // cleanup
-    onCleanup(() => viewport.removeEventListener('scroll', handleScroll));
+    return undefined;
   });
 
   return (
@@ -52,11 +53,11 @@ export function Thumb(props: ThumbProps) {
         composeEventHandlers(
           local.onPointerDown as (e: PointerEvent & { currentTarget: HTMLDivElement; target: Element }) => void,
           (event) => {
-            const rect = event.currentTarget.getBoundingClientRect();
-            scrollbarContext.onThumbPointerDown({
-              x: event.clientX - rect.left,
-              y: event.clientY - rect.top,
-            });
+            const thumb = event.target as HTMLElement;
+            const thumbRect = thumb.getBoundingClientRect();
+            const x = event.clientX - thumbRect.left;
+            const y = event.clientY - thumbRect.top;
+            scrollbarContext.onThumbPointerDown({ x, y });
           }
         )
       }

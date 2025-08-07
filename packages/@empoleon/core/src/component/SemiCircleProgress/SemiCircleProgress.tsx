@@ -74,13 +74,13 @@ export type SemiCircleProgressFactory = Factory<{
   vars: SemiCircleProgressCssVariables;
 }>;
 
-const defaultProps: Partial<SemiCircleProgressProps> = {
+const defaultProps = {
   size: 200,
   thickness: 12,
   orientation: 'up',
   fillDirection: 'left-to-right',
   labelPosition: 'bottom',
-};
+} satisfies Partial<SemiCircleProgressProps>;
 
 function getRotation(props: Pick<SemiCircleProgressProps, 'orientation' | 'fillDirection'>) {
   if (props.orientation === 'down') {
@@ -141,6 +141,7 @@ export const SemiCircleProgress = factory<SemiCircleProgressFactory>(_props => {
     'transitionDuration',
     'label',
     'labelPosition',
+    'attributes',
     'ref'
   ]);
 
@@ -153,6 +154,7 @@ export const SemiCircleProgress = factory<SemiCircleProgressFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
   });

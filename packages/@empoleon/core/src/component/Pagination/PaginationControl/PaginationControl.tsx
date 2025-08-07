@@ -31,9 +31,9 @@ export type PaginationControlFactory = Factory<{
   compound: true;
 }>;
 
-const defaultProps: Partial<PaginationControlProps> = {
+const defaultProps = {
   withPadding: true,
-};
+} satisfies Partial<PaginationControlProps>;
 
 export const PaginationControl = factory<PaginationControlFactory>(_props => {
   const props = useProps('PaginationControl', defaultProps, _props);

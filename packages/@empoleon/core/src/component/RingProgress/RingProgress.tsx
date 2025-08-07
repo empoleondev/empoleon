@@ -64,10 +64,10 @@ export type RingProgressFactory = Factory<{
   vars: RingProgressCssVariables;
 }>;
 
-const defaultProps: Partial<RingProgressProps> = {
+const defaultProps = {
   size: 120,
   thickness: 12,
-};
+} satisfies Partial<RingProgressProps>;
 
 const varsResolver = createVarsResolver<RingProgressFactory>(
   (_, { size, thickness, transitionDuration }) => ({
@@ -95,6 +95,7 @@ export const RingProgress = factory<RingProgressFactory>(_props => {
     'roundCaps',
     'rootColor',
     'transitionDuration',
+    'attributes',
     'ref'
   ]);
 
@@ -107,6 +108,7 @@ export const RingProgress = factory<RingProgressFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
   });

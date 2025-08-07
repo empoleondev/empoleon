@@ -18,11 +18,11 @@ export interface TrackProps {
     ref?: any;
     onMouseEnter?: () => void;
     onMouseLeave?: () => void;
-    onTouchStartCapture?: (event: TouchEvent) => void;
-    onTouchEndCapture?: (event: TouchEvent) => void;
-    onMouseDownCapture?: (event: MouseEvent) => void;
-    onMouseUpCapture?: (event: MouseEvent) => void;
-    onKeyDownCapture?: (event: KeyboardEvent) => void;
+    onTouchStart?: (event: TouchEvent) => void;
+    onTouchEnd?: (event: TouchEvent) => void;
+    onMouseDown?: (event: MouseEvent) => void;
+    onMouseUp?: (event: MouseEvent) => void;
+    onKeyDown?: (event: KeyboardEvent) => void;
   };
 }
 

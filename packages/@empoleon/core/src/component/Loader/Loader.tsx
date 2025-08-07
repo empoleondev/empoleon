@@ -63,10 +63,10 @@ export const defaultLoaders: EmpoleonLoadersRecord = {
   dots: Dots,
 };
 
-const defaultProps: Partial<LoaderProps> = {
+const defaultProps = {
   loaders: defaultLoaders,
   type: 'oval',
-};
+} satisfies Partial<LoaderProps>;
 
 const varsResolver = createVarsResolver<LoaderFactory>((theme, { size, color }) => ({
   root: {
@@ -78,18 +78,19 @@ const varsResolver = createVarsResolver<LoaderFactory>((theme, { size, color }) 
 export const Loader = factory<LoaderFactory>(_props => {
   const props = useProps('Loader', defaultProps, _props);
   const [local, others] = splitProps(props, [
-    'classNames',
-    'className',
-    'style',
-    'styles',
-    'unstyled',
-    'children',
     'size',
     'color',
     'type',
     'vars',
+    'className',
+    'style',
+    'classNames',
+    'styles',
+    'unstyled',
     'loaders',
     'variant',
+    'children',
+    'attributes',
     'ref'
   ]);
 
@@ -102,6 +103,7 @@ export const Loader = factory<LoaderFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
   });

@@ -11,7 +11,7 @@ import {
   useProps,
   useStyles,
 } from '../../core';
-import { ScrollArea } from '../ScrollArea';
+import { ScrollArea, ScrollAreaProps } from '../ScrollArea';
 import classes from './Table.module.css';
 
 export type TableScrollContainerStylesNames = 'scrollContainer' | 'scrollContainerInner';
@@ -30,6 +30,9 @@ export interface TableScrollContainerProps
 
   /** Type of the scroll container, `native` to use native scrollbars, `scrollarea` to use `ScrollArea` component, `scrollarea` by default */
   type?: 'native' | 'scrollarea';
+
+  /** Props passed down to `ScrollArea` component, not applicable with `type="native"` */
+  scrollAreaProps?: ScrollAreaProps;
 }
 
 export type TableScrollContainerFactory = Factory<{
@@ -39,9 +42,9 @@ export type TableScrollContainerFactory = Factory<{
   vars: TableScrollContainerCssVariables;
 }>;
 
-const defaultProps: Partial<TableScrollContainerProps> = {
+const defaultProps = {
   type: 'scrollarea',
-};
+} satisfies Partial<TableScrollContainerProps>;
 
 const varsResolver = createVarsResolver<TableScrollContainerFactory>(
   (_, { minWidth, maxHeight, type }) => ({
@@ -66,6 +69,8 @@ export const TableScrollContainer = factory<TableScrollContainerFactory>(_props 
     'minWidth',
     'maxHeight',
     'type',
+    'scrollAreaProps',
+    'attributes',
     'ref'
   ]);
 
@@ -78,6 +83,7 @@ export const TableScrollContainer = factory<TableScrollContainerFactory>(_props 
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
     rootSelector: 'scrollContainer',

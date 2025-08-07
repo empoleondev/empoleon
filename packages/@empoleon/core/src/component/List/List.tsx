@@ -63,9 +63,9 @@ export type ListFactory = Factory<{
   };
 }>;
 
-const defaultProps: Partial<ListProps> = {
+const defaultProps = {
   type: 'unordered',
-};
+} satisfies Partial<ListProps>;
 
 const varsResolver = createVarsResolver<ListFactory>((_, { size, spacing }) => ({
   root: {
@@ -92,6 +92,7 @@ export const List = factory<ListFactory>(_props => {
     'center',
     'listStyleType',
     'mod',
+    'attributes',
     'ref'
   ]);
 
@@ -104,6 +105,7 @@ export const List = factory<ListFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
   });

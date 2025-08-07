@@ -18,9 +18,9 @@ export interface UnstyledButtonProps
   __staticSelector?: string;
 }
 
-const defaultProps: Partial<UnstyledButtonProps> = {
+const defaultProps = {
   __staticSelector: 'UnstyledButton',
-};
+} satisfies Partial<UnstyledButtonProps>;
 
 export type UnstyledButtonFactory = PolymorphicFactory<{
   props: UnstyledButtonProps;
@@ -39,6 +39,7 @@ export const UnstyledButton = polymorphicFactory<UnstyledButtonFactory>((_props:
       'classNames',
       'styles',
       'style',
+      'attributes',
       'ref'
     ]);
 
@@ -51,6 +52,7 @@ export const UnstyledButton = polymorphicFactory<UnstyledButtonFactory>((_props:
       classNames: local.classNames,
       styles: local.styles,
       unstyled: local.unstyled,
+      attributes: local.attributes,
     });
 
     return (

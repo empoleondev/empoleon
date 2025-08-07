@@ -68,11 +68,10 @@ export type TimelineFactory = Factory<{
   };
 }>;
 
-const defaultProps: Partial<TimelineProps> = {
+const defaultProps = {
   active: -1,
   align: 'left',
-  reverseActive: false,
-};
+} satisfies Partial<TimelineProps>;
 
 const varsResolver = createVarsResolver<TimelineFactory>(
   (theme, { bulletSize, lineWidth, radius, color, autoContrast }) => ({
@@ -107,6 +106,7 @@ export const Timeline = factory<TimelineFactory>(_props => {
     'reverseActive',
     'mod',
     'autoContrast',
+    'attributes',
     'ref'
   ]);
 
@@ -119,6 +119,7 @@ export const Timeline = factory<TimelineFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
   });

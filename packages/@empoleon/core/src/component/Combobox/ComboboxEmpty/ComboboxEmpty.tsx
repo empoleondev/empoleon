@@ -25,10 +25,8 @@ export type ComboboxEmptyFactory = Factory<{
   compound: true;
 }>;
 
-const defaultProps: Partial<ComboboxEmptyProps> = {};
-
 export const ComboboxEmpty = factory<ComboboxEmptyFactory>(_props => {
-  const props = useProps('ComboboxEmpty', defaultProps, _props);
+  const props = useProps('ComboboxEmpty', null, _props);
   const [local, others] = splitProps(props, [
     'classNames',
     'className',

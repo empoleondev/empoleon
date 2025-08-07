@@ -19,13 +19,13 @@ const defaultProps: Partial<TooltipGroupProps> = {
   closeDelay: 0,
 };
 
-export function TooltipGroup(props: TooltipGroupProps) {
-  const { openDelay, closeDelay, children } = useProps('TooltipGroup', defaultProps, props);
+export function TooltipGroup(_props: TooltipGroupProps) {
+  const props = useProps('TooltipGroup', defaultProps, _props);
 
   return (
     <TooltipGroupProvider value>
-      <FloatingDelayGroup delay={{ open: openDelay, close: closeDelay }}>
-        {children}
+      <FloatingDelayGroup delay={{ open: props.openDelay, close: props.closeDelay }}>
+        {props.children}
       </FloatingDelayGroup>
     </TooltipGroupProvider>
   );

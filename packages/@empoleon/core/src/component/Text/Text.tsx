@@ -1,4 +1,4 @@
-import { onMount, splitProps } from 'solid-js';
+import { splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
@@ -111,6 +111,7 @@ export const Text = polymorphicFactory<TextFactory>((_props) => {
     'variant',
     'mod',
     'size',
+    'attributes',
     'ref'
   ]);
 
@@ -123,6 +124,7 @@ export const Text = polymorphicFactory<TextFactory>((_props) => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
   });

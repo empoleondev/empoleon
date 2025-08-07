@@ -109,10 +109,10 @@ export type SwitchFactory = Factory<{
   };
 }>;
 
-const defaultProps: Partial<SwitchProps> = {
+const defaultProps = {
   labelPosition: 'right',
   withThumbIndicator: true,
-};
+} satisfies Partial<SwitchProps>;
 
 const varsResolver = createVarsResolver<SwitchFactory>((theme, { radius, color, size }) => ({
   root: {
@@ -155,6 +155,7 @@ export const Switch = factory<SwitchFactory>(_props => {
     'rootRef',
     'mod',
     'withThumbIndicator',
+    'attributes',
     'ref'
   ]);
 
@@ -170,6 +171,7 @@ export const Switch = factory<SwitchFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
   });

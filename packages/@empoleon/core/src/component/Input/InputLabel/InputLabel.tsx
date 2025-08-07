@@ -43,9 +43,9 @@ export type InputLabelFactory = Factory<{
   vars: InputLabelCssVariables;
 }>;
 
-const defaultProps: Partial<InputLabelProps> = {
+const defaultProps = {
   labelElement: 'label',
-};
+} satisfies Partial<InputLabelProps>;
 
 const varsResolver = createVarsResolver<InputLabelFactory>((_, { size }) => ({
   label: {
@@ -72,6 +72,7 @@ export const InputLabel = factory<InputLabelFactory>(_props => {
     '__staticSelector',
     'variant',
     'mod',
+    'attributes',
     'ref'
   ]);
 
@@ -84,6 +85,7 @@ export const InputLabel = factory<InputLabelFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     rootSelector: 'label',
     vars: local.vars,
     varsResolver,
@@ -99,7 +101,7 @@ export const InputLabel = factory<InputLabelFactory>(_props => {
       variant={local.variant}
       size={local.size}
       ref={local.ref}
-      for={local.labelElement === 'label' ? local.for : undefined}
+      html-for={local.labelElement === 'label' ? local.for : undefined}
       mod={[{ required: local.required }, local.mod]}
       onMouseDown={(event) => {
         if (typeof local.onMouseDown === 'function') {

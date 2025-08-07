@@ -42,6 +42,7 @@ export function useInputProps<T extends BaseProps, U extends Partial<T>>(
     'variant',
     'vars',
     'mod',
+    'attributes',
   ]) as any;
 
   const { styleProps, rest } = extractStyleProps(others);
@@ -68,6 +69,7 @@ export function useInputProps<T extends BaseProps, U extends Partial<T>>(
     variant: local.variant,
     id: local.id,
     mod: local.mod,
+    attributes: local.attributes,
     ...local.wrapperProps,
   };
 

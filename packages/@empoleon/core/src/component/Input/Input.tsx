@@ -1,4 +1,4 @@
-import { splitProps, JSX, createEffect } from 'solid-js';
+import { splitProps, JSX } from 'solid-js';
 import {
   Box,
   BoxProps,
@@ -30,6 +30,9 @@ import {
   InputWrapperStylesNames,
 } from './InputWrapper/InputWrapper';
 import classes from './Input.module.css';
+
+// Required to be a separate type for docgen script
+type WrapperProps = JSX.HTMLAttributes<HTMLDivElement> & DataAttributes;
 
 export interface __BaseInputProps extends __InputWrapperProps, Omit<__InputProps, 'wrapperProps'> {
   /** Props passed down to the root element */
@@ -135,6 +138,9 @@ export interface InputProps extends BoxProps, __InputProps, StylesApiProps<Input
 
   /** Determines whether `aria-` and other accessibility attributes should be added to the input, `true` by default */
   withAria?: boolean;
+
+  /** Props passed down to the root element of the `Input` component */
+  wrapperProps?: WrapperProps;
 }
 
 export type InputFactory = PolymorphicFactory<{
@@ -155,13 +161,13 @@ export type InputFactory = PolymorphicFactory<{
   };
 }>;
 
-const defaultProps: Partial<InputProps> = {
+const defaultProps = {
   variant: 'default',
   leftSectionPointerEvents: 'none',
   rightSectionPointerEvents: 'none',
   withAria: true,
   withErrorStyles: true,
-};
+} satisfies Partial<InputProps>;
 
 const varsResolver = createVarsResolver<InputFactory>((_, props, ctx) => ({
   wrapper: {

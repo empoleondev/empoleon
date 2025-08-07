@@ -1,4 +1,4 @@
-import { createEffect, createSignal, JSX, splitProps } from 'solid-js';
+import { createEffect, createMemo, createSignal, JSX, splitProps } from 'solid-js';
 import { useMergedRef, useMove, useUncontrolled } from '@empoleon/hooks';
 import {
   BoxProps,
@@ -60,6 +60,9 @@ export interface RangeSliderProps
 
   /** Number by which value will be incremented/decremented with thumb drag and arrows, `1` by default */
   step?: number;
+
+  /** Domain of the slider, defines the full range of possible values @default `[min, max]` */
+  domain?: [number, number];
 
   /** Number of significant digits after the decimal point */
   precision?: number;
@@ -129,6 +132,9 @@ export interface RangeSliderProps
 
   /** Props passed down to thumb element based on the thumb index */
   thumbProps?: (index: 0 | 1) => JSX.HTMLAttributes<HTMLDivElement>;
+
+  /** Determines whether the other thumb should be pushed by the current thumb dragging when `minRange`/`maxRange` is reached @default `true` */
+  pushOnOverlap?: boolean;
 }
 
 export type RangeSliderFactory = Factory<{
@@ -150,7 +156,7 @@ const varsResolver = createVarsResolver<RangeSliderFactory>(
   })
 );
 
-const defaultProps: Partial<RangeSliderProps> = {
+const defaultProps = {
   min: 0,
   max: 100,
   minRange: 10,
@@ -161,8 +167,11 @@ const defaultProps: Partial<RangeSliderProps> = {
   labelAlwaysOn: false,
   showLabelOnHover: true,
   disabled: false,
+  pushOnOverlap: true,
   scale: (v) => v,
-};
+  size: 'md',
+  maxRange: Infinity,
+} satisfies Partial<RangeSliderProps>;
 
 export const RangeSlider = factory<RangeSliderFactory>(_props => {
   const props = useProps('RangeSlider', defaultProps, _props);
@@ -173,8 +182,12 @@ export const RangeSlider = factory<RangeSliderFactory>(_props => {
     'onChange',
     'onChangeEnd',
     'size',
+    'color',
+    'radius',
+    'thumbSize',
     'min',
     'max',
+    'domain',
     'minRange',
     'maxRange',
     'step',
@@ -199,6 +212,8 @@ export const RangeSlider = factory<RangeSliderFactory>(_props => {
     'hiddenInputProps',
     'restrictToMarks',
     'thumbProps',
+    'pushOnOverlap',
+    'attributes',
     'ref'
    ]);
 
@@ -211,6 +226,7 @@ export const RangeSlider = factory<RangeSliderFactory>(_props => {
     styles: local.styles,
     style: local.style,
     vars: local.vars,
+    attributes: local.attributes,
     varsResolver,
     unstyled: local.unstyled,
   });
@@ -228,10 +244,14 @@ export const RangeSlider = factory<RangeSliderFactory>(_props => {
   const thumbs = [] as HTMLDivElement[];
   const root = null as HTMLDivElement | null;
   let thumbIndex = undefined as number | undefined;
-  const positions = [
-    getPosition({ value: _value()[0], min: local.min!, max: local.max! }),
-    getPosition({ value: _value()[1], min: local.min!, max: local.max! }),
-  ];
+  const [domainMin, domainMax] = local.domain || [local.min!, local.max!];
+  const positions = createMemo(() => {
+    const [v0, v1] = _value();
+    return [
+      getPosition({ value: v0, min: domainMin, max: domainMax }),
+      getPosition({ value: v1, min: domainMin, max: domainMax }),
+    ];
+  });
 
   const precision = local.precision ?? getPrecision(local.step!);
 
@@ -247,6 +267,11 @@ export const RangeSlider = factory<RangeSliderFactory>(_props => {
     },
     Array.isArray(local.value) ? [local.value[0], local.value[1]] : [null, null]
   );
+
+  // Fix the valueRef synchronization
+  createEffect(() => {
+    valueRef = _value();
+  });
 
   const setRangedValue = (val: number, index: number, triggerChangeEnd: boolean) => {
     if (index === -1) {
@@ -284,7 +309,8 @@ export const RangeSlider = factory<RangeSliderFactory>(_props => {
 
       if (index === 0) {
         if (val > clone[1] - (local.minRange! - 0.000000001)) {
-          clone[1] = Math.min(val + local.minRange!, local.max!);
+          const newThumb1 = Math.min(val + local.minRange!, local.max!);
+          clone[1] = newThumb1;
         }
 
         if (val > (local.max! - (local.minRange! - 0.000000001) || local.min!)) {
@@ -298,7 +324,8 @@ export const RangeSlider = factory<RangeSliderFactory>(_props => {
 
       if (index === 1) {
         if (val < clone[0] + local.minRange!) {
-          clone[0] = Math.max(val - local.minRange!, local.min!);
+          const newThumb0 = Math.max(val - local.minRange!, local.min!);
+          clone[0] = newThumb0;
         }
 
         if (val < clone[0] + local.minRange!) {
@@ -331,8 +358,8 @@ export const RangeSlider = factory<RangeSliderFactory>(_props => {
     if (!local.disabled) {
       const nextValue = getChangeValue({
         value: val,
-        min: local.min!,
-        max: local.max!,
+        min: domainMin,
+        max: domainMax,
         step: local.step!,
         precision,
       });
@@ -346,7 +373,7 @@ export const RangeSlider = factory<RangeSliderFactory>(_props => {
     dir
   );
 
-  let containerRef = container(local.ref as any);
+  let containerRef: HTMLDivElement | null = null;
 
   function handleThumbMouseDown(index: number) {
     thumbIndex = index;
@@ -366,11 +393,24 @@ export const RangeSlider = factory<RangeSliderFactory>(_props => {
       containerWidth: rect!.width,
     });
 
-    const nearestHandle =
-      Math.abs(_value()[0] - changeValue) > Math.abs(_value()[1] - changeValue) ? 1 : 0;
-    const _nearestHandle = dir === 'ltr' ? nearestHandle : nearestHandle === 1 ? 0 : 1;
+    const [thumb0Value, thumb1Value] = _value();
 
-    thumbIndex = _nearestHandle;
+    let targetThumbIndex: number;
+
+    if (changeValue <= thumb0Value) {
+      targetThumbIndex = 0;
+    } else if (changeValue >= thumb1Value) {
+      targetThumbIndex = 1;
+    } else {
+      const distanceToThumb0 = Math.abs(thumb0Value - changeValue);
+      const distanceToThumb1 = Math.abs(thumb1Value - changeValue);
+      targetThumbIndex = distanceToThumb0 <= distanceToThumb1 ? 0 : 1;
+    }
+
+    const _targetThumbIndex = dir === 'ltr' ? targetThumbIndex : targetThumbIndex === 1 ? 0 : 1;
+    thumbIndex = _targetThumbIndex;
+
+    setRangedValue(changeValue, _targetThumbIndex, true);
   };
 
   const getFocusedThumbIndex = () => {
@@ -482,6 +522,9 @@ export const RangeSlider = factory<RangeSliderFactory>(_props => {
       <SliderRoot
         {...others}
         size={local.size!}
+        color={local.color}
+        radius={local.radius}
+        thumbSize={local.thumbSize}
         ref={useMergedRef(local.ref, root)}
         disabled={local.disabled}
         onMouseDownCapture={() => root?.focus()}
@@ -493,34 +536,37 @@ export const RangeSlider = factory<RangeSliderFactory>(_props => {
         }}
       >
         <Track
-          offset={positions[0]}
+          offset={positions()[0]}
           marksOffset={_value()[0]}
-          filled={positions[1] - positions[0]}
+          filled={positions()[1] - positions()[0]}
           marks={local.marks}
           inverted={local.inverted}
-          min={local.min!}
-          max={local.max!}
+          min={domainMin}
+          max={domainMax}
           value={_value()[1]}
           disabled={local.disabled}
           containerProps={{
-            ref: container as any,
+            ref: (el: HTMLDivElement) => {
+              container(el);
+              containerRef = el;
+            },
             onMouseEnter: local.showLabelOnHover ? () => setHovered(true) : undefined,
             onMouseLeave: local.showLabelOnHover ? () => setHovered(false) : undefined,
-            onTouchStartCapture: handleTrackMouseDownCapture,
-            onTouchEndCapture: () => {
+            onTouchStart: handleTrackMouseDownCapture,
+            onTouchEnd: () => {
               thumbIndex = -1;
             },
-            onMouseDownCapture: handleTrackMouseDownCapture,
-            onMouseUpCapture: () => {
+            onMouseDown: handleTrackMouseDownCapture,
+            onMouseUp: () => {
               thumbIndex = -1;
             },
-            onKeyDownCapture: handleTrackKeydownCapture,
+            onKeyDown: handleTrackKeydownCapture,
           }}
         >
           <Thumb
             {...sharedThumbProps}
             value={local.scale!(_value()[0])}
-            position={positions[0]}
+            position={positions()[0]}
             dragging={active()}
             label={
               typeof local.label === 'function'
@@ -547,7 +593,7 @@ export const RangeSlider = factory<RangeSliderFactory>(_props => {
             {...sharedThumbProps}
             thumbLabel={local.thumbToLabel}
             value={local.scale!(_value()[1])}
-            position={positions[1]}
+            position={positions()[1]}
             dragging={active()}
             label={
               typeof local.label === 'function'

@@ -17,17 +17,11 @@ interface GetSplittedTagsInput {
   currentTags: string[];
 }
 
-export function getSplittedTags({
-  splitChars,
-  allowDuplicates,
-  maxTags,
-  value,
-  currentTags,
-}: GetSplittedTagsInput) {
-  const splitted = splitTags(splitChars, value);
-  const merged = allowDuplicates
-    ? [...currentTags, ...splitted]
-    : [...new Set([...currentTags, ...splitted])];
+export function getSplittedTags(props: GetSplittedTagsInput) {
+  const splitted = splitTags(props.splitChars, props.value);
+  const merged = props.allowDuplicates
+    ? [...props.currentTags, ...splitted]
+    : [...new Set([...props.currentTags, ...splitted])];
 
-  return maxTags ? merged.slice(0, maxTags) : merged;
+  return props.maxTags ? merged.slice(0, props.maxTags) : merged;
 }

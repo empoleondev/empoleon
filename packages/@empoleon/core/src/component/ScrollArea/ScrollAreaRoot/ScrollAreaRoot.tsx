@@ -34,10 +34,10 @@ export type ScrollAreaRootFactory = Factory<{
   stylesNames: ScrollAreaRootStylesNames;
 }>;
 
-const defaultProps: Partial<ScrollAreaRootProps> = {
+const defaultProps = {
   scrollHideDelay: 1000,
   type: 'hover',
-};
+} satisfies Partial<ScrollAreaRootProps>;
 
 export function ScrollAreaRoot(_props: ScrollAreaRootProps) {
   const props = useProps('ScrollAreaRoot', defaultProps, _props);
@@ -56,27 +56,35 @@ export function ScrollAreaRoot(_props: ScrollAreaRootProps) {
   const [scrollbarYEnabled, setScrollbarYEnabled] = createSignal(false);
   const rootRef = useMergedRef(local.ref, (node: HTMLDivElement) => setScrollArea(node));
 
+  const contextValue = {
+    type: local.type!,
+    scrollHideDelay: local.scrollHideDelay!,
+    get scrollArea() { return scrollArea(); },
+    get viewport() { return viewport(); },
+    onViewportChange: (element: HTMLDivElement | null) => {
+      console.log('ScrollAreaRoot: viewport changed to', element);
+      setViewport(element);
+    },
+    get content() { return content(); },
+    onContentChange: (element: HTMLDivElement | null) => {
+      console.log('ScrollAreaRoot: content changed to', element);
+      setContent(element);
+    },
+    get scrollbarX() { return scrollbarX(); },
+    onScrollbarXChange: setScrollbarX,
+    get scrollbarXEnabled() { return scrollbarXEnabled(); },
+    onScrollbarXEnabledChange: setScrollbarXEnabled,
+    get scrollbarY() { return scrollbarY(); },
+    onScrollbarYChange: setScrollbarY,
+    get scrollbarYEnabled() { return scrollbarYEnabled(); },
+    onScrollbarYEnabledChange: setScrollbarYEnabled,
+    onCornerWidthChange: setCornerWidth,
+    onCornerHeightChange: setCornerHeight,
+    getStyles: local.getStyles,
+  };
+
   return (
-    <ScrollAreaProvider value={{
-      type: local.type!,
-      scrollHideDelay: local.scrollHideDelay!,
-      scrollArea: scrollArea(),
-      viewport: viewport(),
-      onViewportChange: setViewport,
-      content: content(),
-      onContentChange: setContent,
-      scrollbarX: scrollbarX(),
-      onScrollbarXChange: setScrollbarX,
-      scrollbarXEnabled: scrollbarXEnabled(),
-      onScrollbarXEnabledChange: setScrollbarXEnabled,
-      scrollbarY: scrollbarY(),
-      onScrollbarYChange: setScrollbarY,
-      scrollbarYEnabled: scrollbarYEnabled(),
-      onScrollbarYEnabledChange: setScrollbarYEnabled,
-      onCornerWidthChange: setCornerWidth,
-      onCornerHeightChange: setCornerHeight,
-      getStyles: local.getStyles,
-    }}>
+    <ScrollAreaProvider value={contextValue}>
       <Box
         {...others}
         ref={rootRef}

@@ -41,7 +41,7 @@ export const PopoverTarget = factory<PopoverTargetFactory>(_props => {
   const ctx = usePopoverContext();
   const isOpened = () => ctx.opened();
 
-  const wrapperTargetRef = useMergedRef(ctx.reference, getRefProp(local.children), local.ref);
+  const targetRef = useMergedRef(ctx.reference, getRefProp(local.children), local.ref);
 
   const accessibleProps = ctx.withRoles
     ? {
@@ -81,7 +81,7 @@ export const PopoverTarget = factory<PopoverTargetFactory>(_props => {
       {...accessibleProps}
       {...ctx.targetProps}
       class={clsx((ctx.targetProps as any).class, (others as any).class)}
-      {...{ [local.refProp!]: wrapperTargetRef }}
+      {...{ [local.refProp!]: targetRef }}
       onClick={!ctx.controlled ? ctx.onToggle : undefined}
     >
       {local.children}

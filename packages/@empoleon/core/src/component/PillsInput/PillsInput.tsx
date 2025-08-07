@@ -23,7 +23,9 @@ export type PillsInputFactory = Factory<{
   };
 }>;
 
-const defaultProps: Partial<PillsInputProps> = {};
+const defaultProps = {
+  size: 'sm',
+} satisfies Partial<PillsInputProps>;
 
 export const PillsInput = factory<PillsInputFactory>(_props => {
   const props = useProps('PillsInput', defaultProps, _props);

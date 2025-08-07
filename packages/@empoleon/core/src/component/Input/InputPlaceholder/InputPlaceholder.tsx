@@ -44,6 +44,7 @@ export const InputPlaceholder = factory<InputPlaceholderFactory>(_props => {
     'variant',
     'error',
     'mod',
+    'attributes',
     'ref'
   ]);
 
@@ -56,6 +57,7 @@ export const InputPlaceholder = factory<InputPlaceholderFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     rootSelector: 'placeholder',
   });
 

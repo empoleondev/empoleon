@@ -197,7 +197,8 @@ export const ScrollArea = factory<ScrollAreaFactory>(_props => {
           }
           local.onScrollPositionChange?.({ x: e.currentTarget.scrollLeft, y: e.currentTarget.scrollTop });
           const { scrollTop, scrollHeight, clientHeight } = e.currentTarget;
-          if (scrollTop - (scrollHeight - clientHeight) >= 0) {
+          // threshold of -0.6 is required for some browsers that use sub-pixel rendering
+          if (scrollTop - (scrollHeight - clientHeight) >= -0.6) {
             local.onBottomReached?.();
           }
           if (scrollTop === 0) {
@@ -213,7 +214,7 @@ export const ScrollArea = factory<ScrollAreaFactory>(_props => {
           {...getStyles('scrollbar')}
           orientation="horizontal"
           data-hidden={
-            local.type === 'never' || (local.offsetScrollbars === 'present' && !horizontalThumbVisible)
+            local.type === 'never' || (local.offsetScrollbars === 'present' && !horizontalThumbVisible())
               ? true
               : undefined
           }
@@ -230,7 +231,7 @@ export const ScrollArea = factory<ScrollAreaFactory>(_props => {
           {...getStyles('scrollbar')}
           orientation="vertical"
           data-hidden={
-            local.type === 'never' || (local.offsetScrollbars === 'present' && !verticalThumbVisible)
+            local.type === 'never' || (local.offsetScrollbars === 'present' && !verticalThumbVisible())
               ? true
               : undefined
           }

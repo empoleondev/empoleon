@@ -141,6 +141,7 @@ export const Tree = factory<TreeFactory>(_props => {
     'expandOnSpace',
     'levelOffset',
     'checkOnSpace',
+    'attributes',
     'ref'
   ]);
 

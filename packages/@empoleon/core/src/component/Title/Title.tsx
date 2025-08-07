@@ -46,9 +46,9 @@ export type TitleFactory = Factory<{
   vars: TitleCssVariables;
 }>;
 
-const defaultProps: Partial<TitleProps> = {
+const defaultProps = {
   order: 1,
-};
+} satisfies Partial<TitleProps>;
 
 const varsResolver = createVarsResolver<TitleFactory>((_, { order, size, lineClamp, textWrap }) => {
   const sizeVariables = getTitleSize(order!, size);
@@ -78,6 +78,7 @@ export const Title = factory<TitleFactory>(_props => {
     'lineClamp',
     'textWrap',
     'mod',
+    'attributes',
     'ref'
   ]);
 

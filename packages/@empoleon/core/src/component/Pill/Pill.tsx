@@ -58,9 +58,9 @@ export type PillFactory = Factory<{
   };
 }>;
 
-const defaultProps: Partial<PillProps> = {
+const defaultProps = {
   variant: 'default',
-};
+} satisfies Partial<PillProps>;
 
 const varsResolver = createVarsResolver<PillFactory>((_, { radius }, { size }) => ({
   root: {
@@ -88,6 +88,7 @@ export const Pill = factory<PillFactory>(_props => {
     'size',
     'disabled',
     'mod',
+    'attributes',
     'ref'
   ]);
 
@@ -105,6 +106,7 @@ export const Pill = factory<PillFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
     stylesCtx: { size: _size },

@@ -27,22 +27,22 @@ export function ScrollAreaScrollbarHover(props: ScrollAreaScrollbarHoverProps) {
 
     let hideTimer: number;
 
-    const onEnter = () => {
+    const handlePointerEnter = () => {
       window.clearTimeout(hideTimer);
       setVisible(true);
     };
 
-    const onLeave = () => {
+    const handlePointerLeave = () => {
       hideTimer = window.setTimeout(() => setVisible(false), ctx.scrollHideDelay);
     };
 
-    el.addEventListener('pointerenter', onEnter);
-    el.addEventListener('pointerleave', onLeave);
+    el.addEventListener('pointerenter', handlePointerEnter);
+    el.addEventListener('pointerleave', handlePointerLeave);
 
     onCleanup(() => {
       window.clearTimeout(hideTimer);
-      el.removeEventListener('pointerenter', onEnter);
-      el.removeEventListener('pointerleave', onLeave);
+      el.removeEventListener('pointerenter', handlePointerEnter);
+      el.removeEventListener('pointerleave', handlePointerLeave);
     });
   });
 

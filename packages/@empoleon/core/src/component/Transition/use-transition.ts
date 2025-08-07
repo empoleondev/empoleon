@@ -96,7 +96,6 @@ export function useTransition(props: UseTransition) {
 
   let isFirstRun = true;
   createEffect(() => {
-    // Access the mounted value to create dependency
     const isMounted = local.mounted();
 
     if (isFirstRun) {
@@ -109,7 +108,6 @@ export function useTransition(props: UseTransition) {
 
   onCleanup(() => {
     window.clearTimeout(transitionTimeoutRef);
-    // window.clearTimeout(delayTimeoutRef);
     cancelAnimationFrame(rafRef);
   });
 

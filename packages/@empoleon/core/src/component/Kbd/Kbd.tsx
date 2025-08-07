@@ -46,6 +46,7 @@ export const Kbd = factory<KbdFactory>(_props => {
     'styles',
     'unstyled',
     'vars',
+    'attributes',
     'ref'
   ]);
 
@@ -58,6 +59,7 @@ export const Kbd = factory<KbdFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
   });

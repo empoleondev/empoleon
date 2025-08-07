@@ -62,10 +62,8 @@ export type TimelineItemFactory = Factory<{
   compound: true;
 }>;
 
-const defaultProps: Partial<TimelineItemProps> = {};
-
 export const TimelineItem = factory<TimelineItemFactory>(_props => {
-  const props = useProps('TimelineItem', defaultProps, _props);
+  const props = useProps('TimelineItem', null, _props);
   const [local, others] = splitProps(props, [
     'classNames',
     'className',

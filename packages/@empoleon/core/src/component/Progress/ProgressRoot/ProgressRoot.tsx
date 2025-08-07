@@ -71,6 +71,7 @@ export const ProgressRoot = factory<ProgressRootFactory>(_props => {
     'vars',
     'autoContrast',
     'transitionDuration',
+    'attributes',
     'ref'
   ]);
 
@@ -83,6 +84,7 @@ export const ProgressRoot = factory<ProgressRootFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
   });

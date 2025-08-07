@@ -7,6 +7,7 @@ import {
 import { Sizes } from '../ScrollArea.types';
 import { useDebouncedCallback, useMergedRef } from '@empoleon/hooks';
 import { composeEventHandlers } from '../utils';
+import { useResizeObserver } from '../use-resize-observer';
 
 export interface ScrollbarPrivateProps {
   sizes: Sizes;
@@ -34,11 +35,12 @@ export function Scrollbar(props: ScrollbarPrivateProps & JSX.HTMLAttributes<HTML
     'ref',
   ]);
 
-  const ctx = useScrollAreaContext();
+  const context = useScrollAreaContext();
   const [scrollbar, setScrollbar] = createSignal<HTMLDivElement |  null>(null);
   const composeRefs = useMergedRef(local.ref, (node: HTMLDivElement) => setScrollbar(node));
   const [rectRef, setRect] = createSignal<DOMRect | null>(null);
   const [prevWebkitUserSelectRef, setPrevWebkitUserSelectRef] = createSignal('');
+  const { viewport } = context;
   const maxScrollPos = () => local.sizes.content - local.sizes.viewport;
   const handleResize = useDebouncedCallback(local.onResize, 10);
 
@@ -53,17 +55,18 @@ export function Scrollbar(props: ScrollbarPrivateProps & JSX.HTMLAttributes<HTML
   };
 
   createEffect(() => {
-    const wheelListener = (e: WheelEvent) => {
+    const handleWheel = (e: WheelEvent) => {
       const target = e.target as HTMLElement;
-      if (scrollbar()?.contains(target)) {
+      const isScrollWheel = scrollbar()?.contains(target);
+      if (isScrollWheel) {
         local.onWheelScroll(e, maxScrollPos());
       }
     };
 
-    document.addEventListener('wheel', wheelListener, { passive: false } as AddEventListenerOptions);
+    document.addEventListener('wheel', handleWheel, { passive: false } as AddEventListenerOptions);
 
     onCleanup(() => {
-      document.removeEventListener('wheel', wheelListener, { passive: false } as AddEventListenerOptions);
+      document.removeEventListener('wheel', handleWheel, { passive: false } as AddEventListenerOptions);
     });
   });
 
@@ -71,12 +74,8 @@ export function Scrollbar(props: ScrollbarPrivateProps & JSX.HTMLAttributes<HTML
   createEffect(() => local.onThumbPositionChange());
 
   // resize observer
-  onMount(() => {
-    const obs = new ResizeObserver(handleResize);
-    if (scrollbar()) obs.observe(scrollbar()!);
-    if (ctx.content) obs.observe(ctx.content);
-    onCleanup(() => obs.disconnect());
-  });
+  useResizeObserver(scrollbar, handleResize);
+  useResizeObserver(() => context.content, handleResize);
 
   return (
     <ScrollbarProvider value={{

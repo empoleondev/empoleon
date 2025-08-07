@@ -25,17 +25,15 @@ export type MenuLabelFactory = Factory<{
   compound: true;
 }>;
 
-const defaultProps: Partial<MenuLabelProps> = {};
-
 export const MenuLabel = factory<MenuLabelFactory>(_props => {
-  const props = useProps('MenuLabel', defaultProps, _props);
+  const props = useProps('MenuLabel', null, _props);
   const [local, others] = splitProps(props, [
     'classNames',
-      'className',
-      'style',
-      'styles',
-      'vars',
-      'ref'
+    'className',
+    'style',
+    'styles',
+    'vars',
+    'ref'
   ]);
   const ctx = useMenuContext();
 

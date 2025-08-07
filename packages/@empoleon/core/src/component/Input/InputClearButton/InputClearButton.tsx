@@ -26,10 +26,8 @@ export type InputClearButtonFactory = Factory<{
   stylesNames: CloseButtonStylesNames;
 }>;
 
-const defaultProps: Partial<InputClearButtonProps> = {};
-
 export const InputClearButton = factory<InputClearButtonFactory>(_props => {
-  const props = useProps('InputClearButton', defaultProps, _props);
+  const props = useProps('InputClearButton', null, _props);
   const [local, others] = splitProps(props, [
     'classNames',
     'styles',

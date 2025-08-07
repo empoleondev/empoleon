@@ -31,10 +31,8 @@ export type ListItemFactory = Factory<{
   compound: true;
 }>;
 
-const defaultProps: Partial<ListItemProps> = {};
-
 export const ListItem = factory<ListItemFactory>(_props => {
-  const props = useProps('ListItem', defaultProps, _props);
+  const props = useProps('ListItem', null, _props);
   const [local, others] = splitProps(props, [
     'classNames',
     'className',

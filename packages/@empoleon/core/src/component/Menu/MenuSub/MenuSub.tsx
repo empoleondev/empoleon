@@ -1,12 +1,13 @@
 import { JSX, splitProps } from 'solid-js';
 import { useDisclosure, useId } from '@empoleon/hooks';
 import { ExtendComponent, Factory, useProps } from '../../../core';
-import { useDelayedHover } from '../../../utils/Floating';
+import { FloatingAxesOffsets, FloatingPosition, useDelayedHover } from '../../../utils/Floating';
 import { __PopoverProps, Popover } from '../../Popover';
 import { MenuSubDropdown } from '../MenuSubDropdown/MenuSubDropdown';
 import { MenuSubItem } from '../MenuSubItem/MenuSubItem';
 import { MenuSubTarget } from '../MenuSubTarget/MenuSubTarget';
 import { SubMenuProvider, useSubMenuContext } from './MenuSub.context';
+import { TransitionOverride } from '../../Transition';
 
 export type MenuSubFactory = Factory<{
   props: MenuSubProps;
@@ -17,16 +18,25 @@ interface MenuSubProps extends __PopoverProps {
 
   /** Close delay in ms */
   closeDelay?: number;
+
+  /** Dropdown position relative to the target element @default `'right-start'` */
+  position?: FloatingPosition;
+
+  /** Offset of the dropdown element @default `0` */
+  offset?: number | FloatingAxesOffsets;
+
+  /** Props passed down to the `Transition` component that used to animate dropdown presence, use to configure duration and animation type @default `{ duration: 0 }` */
+  transitionProps?: TransitionOverride;
 }
 
-const defaultProps: Partial<MenuSubProps> = {
+const defaultProps = {
   offset: 0,
   position: 'right-start',
   transitionProps: { duration: 0 },
-};
+} satisfies Partial<MenuSubProps>;
 
 export function MenuSub(_props: MenuSubProps) {
-  const props = useProps('MenuSub', _props, defaultProps);
+  const props = useProps('MenuSub', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'children',
     'closeDelay'

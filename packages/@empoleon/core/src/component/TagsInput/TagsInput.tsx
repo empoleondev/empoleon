@@ -103,6 +103,9 @@ export interface TagsInputProps
 
   /** Determines whether the value typed in by the user but not submitted should be accepted when the input is blurred, `true` by default */
   acceptValueOnBlur?: boolean;
+
+  /** Custom function to determine if a tag is duplicate. Accepts tag value and array of current values. By default, checks if the tag exists case-insensitively. */
+  isDuplicate?: (value: string, currentValues: string[]) => boolean;
 }
 
 export type TagsInputFactory = Factory<{
@@ -111,13 +114,12 @@ export type TagsInputFactory = Factory<{
   stylesNames: TagsInputStylesNames;
 }>;
 
-const defaultProps: Partial<TagsInputProps> = {
+const defaultProps = {
   maxTags: Infinity,
-  allowDuplicates: false,
   acceptValueOnBlur: true,
   splitChars: [','],
   hiddenInputValuesDivider: ',',
-};
+} satisfies Partial<TagsInputProps>;
 
 export const TagsInput = factory<TagsInputFactory>(_props => {
   const props = useProps('TagsInput', defaultProps, _props);
@@ -192,6 +194,8 @@ export const TagsInput = factory<TagsInputFactory>(_props => {
     'onClear',
     'scrollAreaProps',
     'acceptValueOnBlur',
+    'isDuplicate',
+    'attributes',
     'ref'
   ]);
 
@@ -250,13 +254,15 @@ export const TagsInput = factory<TagsInputFactory>(_props => {
   });
 
   const handleValueSelect = (val: string) => {
-    const isDuplicate = _value().some((tag: any) => tag.toLowerCase() === val.toLowerCase());
+    const isDuplicated = local.isDuplicate
+      ? local.isDuplicate(val, _value())
+      : _value().some((tag) => tag.toLowerCase() === val.toLowerCase());
 
-    if (isDuplicate) {
+    if (isDuplicated) {
       local.onDuplicate?.(val);
     }
 
-    if ((!isDuplicate || (isDuplicate && local.allowDuplicates)) && _value().length < local.maxTags!) {
+    if ((!isDuplicated || (isDuplicated && local.allowDuplicates)) && _value().length < local.maxTags!) {
       local.onOptionSubmit?.(val);
       handleSearchChange('');
       if (val.length > 0) {
@@ -347,6 +353,7 @@ export const TagsInput = factory<TagsInputFactory>(_props => {
             }}
             unstyled={local.unstyled}
             disabled={local.disabled}
+            attributes={local.attributes}
             {...getStyles('pill')}
           >
             {item}
@@ -385,6 +392,7 @@ export const TagsInput = factory<TagsInputFactory>(_props => {
         size={local.size}
         readOnly={local.readOnly}
         __staticSelector="TagsInput"
+        attributes={local.attributes}
         onOptionSubmit={(val: any) => {
           local.onOptionSubmit?.(val);
           handleSearchChange('');
@@ -432,6 +440,7 @@ export const TagsInput = factory<TagsInputFactory>(_props => {
             __stylesApiProps={{ ...props, multiline: true }}
             id={_id}
             mod={local.mod}
+            attributes={local.attributes}
           >
             <Pill.Group disabled={local.disabled} unstyled={local.unstyled} {...getStyles('pillsList')}>
               {values}

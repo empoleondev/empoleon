@@ -1,4 +1,4 @@
-import { createEffect, createMemo, JSX, splitProps } from 'solid-js';
+import { createMemo, JSX, splitProps } from 'solid-js';
 import { useMergedRef, useReducedMotion } from '@empoleon/hooks';
 import {
   Box,
@@ -38,11 +38,11 @@ export type CollapseFactory = Factory<{
   ref: HTMLDivElement;
 }>;
 
-const defaultProps: Partial<CollapseProps> = {
+const defaultProps = {
   transitionDuration: 200,
   transitionTimingFunction: 'ease',
   animateOpacity: true,
-};
+} satisfies Partial<CollapseProps>;
 
 export const Collapse = factory<CollapseFactory>(_props => {
   const props = useProps('Collapse', defaultProps, _props);
@@ -55,7 +55,7 @@ export const Collapse = factory<CollapseFactory>(_props => {
     'onTransitionEnd',
     'animateOpacity',
     'keepMounted',
-    'ref'
+    'ref',
   ]);
 
   const opened = () => local.in;
@@ -69,30 +69,33 @@ export const Collapse = factory<CollapseFactory>(_props => {
     transitionDuration: duration,
     transitionTimingFunction: local.transitionTimingFunction,
     onTransitionEnd: local.onTransitionEnd,
-    // keepMounted: local.keepMounted
+    keepMounted: local.keepMounted,
   });
 
+  // If animations are disabled, render directly
   if (duration === 0) {
     return opened() ? <Box {...others}>{local.children}</Box> : null;
   }
 
   const collapseProps = createMemo(() => getCollapseProps());
-  const mergedRef = useMergedRef(collapseProps().ref, local.ref);
 
   return (
     <Box
-      {...collapseProps}
+      {...collapseProps()}
       {...others}
       style={{
         ...(collapseProps().style as Record<string, any>),
         ...getStyleObject(local.style, theme),
       }}
-      ref={mergedRef}
+      ref={useMergedRef(collapseProps().ref, local.ref)}
     >
       <div
+        data-collapse-content
         style={{
-          transition: `opacity ${duration}ms ${local.transitionTimingFunction || 'ease'}`,
-          opacity: opened() ? 1 : 0,
+          transition: local.animateOpacity
+            ? `opacity ${duration}ms ${local.transitionTimingFunction || 'ease'}`
+            : undefined,
+          opacity: local.animateOpacity ? (opened() ? 1 : 0) : 1,
         }}
       >
         {local.children}

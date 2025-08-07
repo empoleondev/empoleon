@@ -33,9 +33,9 @@ export type PillsInputFieldFactory = Factory<{
   stylesNames: PillsInputFieldStylesNames;
 }>;
 
-const defaultProps: Partial<PillsInputFieldProps> = {
+const defaultProps = {
   type: 'visible',
-};
+} satisfies Partial<PillsInputFieldProps>;
 
 export const PillsInputField = factory<PillsInputFieldFactory>(_props => {
   const props = useProps('PillsInputField', defaultProps, _props);
@@ -51,6 +51,7 @@ export const PillsInputField = factory<PillsInputFieldFactory>(_props => {
     'id',
     'pointer',
     'mod',
+    'attributes',
     'ref'
   ]);
 

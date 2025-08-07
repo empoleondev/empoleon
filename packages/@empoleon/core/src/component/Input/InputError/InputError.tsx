@@ -39,8 +39,6 @@ export type InputErrorFactory = Factory<{
   vars: InputErrorCssVariables;
 }>;
 
-const defaultProps: Partial<InputErrorProps> = {};
-
 const varsResolver = createVarsResolver<InputErrorFactory>((_, { size }) => ({
   error: {
     '--input-error-size': size === undefined ? undefined : `calc(${getFontSize(size)} - ${rem(2)})`,
@@ -48,7 +46,7 @@ const varsResolver = createVarsResolver<InputErrorFactory>((_, { size }) => ({
 }));
 
 export const InputError = factory<InputErrorFactory>(_props => {
-  const props = useProps('InputError', defaultProps, _props);
+  const props = useProps('InputError', null, _props);
   const [local, others] = splitProps(props, [
     'classNames',
     'className',

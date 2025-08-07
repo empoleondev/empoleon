@@ -22,6 +22,7 @@ export function PaginationItems(props: PaginationItemsProps) {
           ) : (
             <PaginationControl
               active={page() === ctx.active()}
+              aria-current={page() === ctx.active() ? 'page' : undefined}
               onClick={() => ctx.onChange(page() as number)}
               disabled={ctx.disabled()}
               {...ctx.getItemProps?.(page() as number)}

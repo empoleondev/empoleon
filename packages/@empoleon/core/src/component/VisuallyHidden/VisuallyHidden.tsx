@@ -24,10 +24,8 @@ export type VisuallyHiddenFactory = Factory<{
   stylesNames: VisuallyHiddenStylesNames;
 }>;
 
-const defaultProps: Partial<VisuallyHiddenProps> = {};
-
 export const VisuallyHidden = factory<VisuallyHiddenFactory>(_props => {
-  const props = useProps('VisuallyHidden', defaultProps, _props);
+  const props = useProps('VisuallyHidden', null, _props);
   const [local, others] = splitProps(props, [
     'classNames',
     'className',
@@ -35,6 +33,7 @@ export const VisuallyHidden = factory<VisuallyHiddenFactory>(_props => {
     'styles',
     'unstyled',
     'vars',
+    'attributes',
     'ref'
   ]);
 
@@ -47,6 +46,7 @@ export const VisuallyHidden = factory<VisuallyHiddenFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
   });
 
   return <Box component="span" ref={local.ref} {...getStyles('root')} {...others} />;

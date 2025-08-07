@@ -91,6 +91,9 @@ export interface SelectProps
 
   /** Controls color of the default chevron, by default depends on the color scheme */
   chevronColor?: EmpoleonColor;
+
+  /** If set, the highlighted option is selected when the input loses focus @default `false` */
+  autoSelectOnBlur?: boolean;
 }
 
 export type SelectFactory = Factory<{
@@ -100,12 +103,11 @@ export type SelectFactory = Factory<{
   variant: InputVariant;
 }>;
 
-const defaultProps: Partial<SelectProps> = {
-  searchable: false,
+const defaultProps = {
   withCheckIcon: true,
   allowDeselect: true,
   checkIconPosition: 'left',
-};
+} satisfies Partial<SelectProps>;
 
 export const Select = factory<SelectFactory>(_props => {
   const props = useProps('Select', defaultProps, _props);
@@ -160,6 +162,8 @@ export const Select = factory<SelectFactory>(_props => {
     '__clearSection',
     '__clearable',
     'chevronColor',
+    'autoSelectOnBlur',
+    'attributes',
     'ref'
   ]);
 
@@ -196,7 +200,8 @@ export const Select = factory<SelectFactory>(_props => {
     },
     onDropdownClose: () => {
       local.onDropdownClose?.();
-      combobox.resetSelectedOption();
+      // Required for autoSelectOnBlur to work correctly
+      setTimeout(combobox.resetSelectedOption, 0);
     },
   });
 
@@ -232,12 +237,10 @@ export const Select = factory<SelectFactory>(_props => {
 
     if (
       typeof local.value === 'string' &&
-      // Check the value 'currentOption' instead of the function 'selectedOption'
       currentOption &&
       (previousSelectedOption()?.value !== currentOption.value ||
         previousSelectedOption()?.label !== currentOption.label)
     ) {
-      // This is now type-safe
       handleSearchChange(currentOption.label);
     }
   });
@@ -271,6 +274,8 @@ export const Select = factory<SelectFactory>(_props => {
         styles={resolvedStyles}
         unstyled={local.unstyled}
         readOnly={local.readOnly}
+        size={local.size}
+        attributes={local.attributes}
         onOptionSubmit={(val) => {
           local.onOptionSubmit?.(val);
           const optionLockup = local.allowDeselect
@@ -286,7 +291,6 @@ export const Select = factory<SelectFactory>(_props => {
             handleSearchChange(typeof nextValue === 'string' ? optionLockup?.label || '' : '');
           combobox.closeDropdown();
         }}
-        size={local.size}
         {...local.comboboxProps}
       >
         <Combobox.Target targetType={local.searchable ? 'input' : 'button'} autoComplete={local.autocomplete}>
@@ -324,6 +328,10 @@ export const Select = factory<SelectFactory>(_props => {
               typeof local.onFocus === "function" && local.onFocus?.(event);
             }}
             onBlur={(event) => {
+              if (local.autoSelectOnBlur) {
+                combobox.clickSelectedOption();
+              }
+
               local.searchable && combobox.closeDropdown();
               handleSearchChange(_value() != null ? optionsLockup()[_value()!]?.label || '' : '');
               typeof local.onBlur === "function" &&  local.onBlur?.(event);
@@ -337,6 +345,7 @@ export const Select = factory<SelectFactory>(_props => {
             unstyled={local.unstyled}
             pointer={!local.searchable}
             error={local.error}
+            attributes={local.attributes}
           />
         </Combobox.Target>
         <OptionsDropdown

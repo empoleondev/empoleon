@@ -171,7 +171,7 @@ export type PopoverFactory = Factory<{
   vars: PopoverCssVariables;
 }>;
 
-const defaultProps: Partial<PopoverProps> = {
+const defaultProps = {
   position: 'bottom',
   offset: 8,
   positionDependencies: [],
@@ -193,7 +193,7 @@ const defaultProps: Partial<PopoverProps> = {
   zIndex: getDefaultZIndex('popover'),
   __staticSelector: 'Popover',
   width: 'max-content',
-};
+} satisfies Partial<PopoverProps>;
 
 const varsResolver = createVarsResolver<PopoverFactory>((_, { radius, shadow }) => ({
   dropdown: {
@@ -261,6 +261,7 @@ export function Popover(_props: PopoverProps) {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     rootSelector: 'dropdown',
     vars: local.vars,
     varsResolver,
@@ -336,6 +337,8 @@ export function Popover(_props: PopoverProps) {
   const onExited = () => {
     local.transitionProps?.onExited?.();
     local.onExitTransitionEnd?.();
+    setDropdownVisible(false);
+    positionRef = local.position;
   };
 
   const onEntered = () => {

@@ -20,31 +20,36 @@ export interface ScrollAreaScrollbarScrollProps
 
 export function ScrollAreaScrollbarScroll(props: ScrollAreaScrollbarScrollProps) {
   const [local, others] = splitProps(props, ['forceMount', 'ref', 'orientation']);
-  const ctx = useScrollAreaContext();
+  const context = useScrollAreaContext();
+  const isHorizontal = () => local.orientation === 'horizontal';
   const [state, setState] = createSignal<'hidden' | 'idle' | 'interacting' | 'scrolling'>('hidden');
   const debounceScrollEnd = useDebouncedCallback(() => setState('idle'), 100);
 
   createEffect(() => {
     if (state() === 'idle') {
-      const hideTimer = window.setTimeout(() => setState('hidden'), ctx.scrollHideDelay);
+      const hideTimer = window.setTimeout(() => setState('hidden'), context.scrollHideDelay);
       onCleanup(() => window.clearTimeout(hideTimer));
     }
   });
 
   createEffect(() => {
-    const el = ctx.viewport;
-    if (!el) return;
-    let prev = el[local.orientation === 'horizontal' ? 'scrollLeft' : 'scrollTop'];
-    const handleScroll = () => {
-      const pos = el[local.orientation === 'horizontal' ? 'scrollLeft' : 'scrollTop'];
-      if (pos !== prev) {
-        setState('scrolling');
-        debounceScrollEnd();
-        prev = pos;
-      }
-    };
-    el.addEventListener('scroll', handleScroll);
-    onCleanup(() => el.removeEventListener('scroll', handleScroll));
+    const { viewport } = context;
+    const scrollDirection = isHorizontal() ? 'scrollLeft' : 'scrollTop';
+
+    if (viewport) {
+      let prevScrollPos = viewport[scrollDirection];
+      const handleScroll = () => {
+        const scrollPos = viewport[scrollDirection];
+        const hasScrollInDirectionChanged = prevScrollPos !== scrollPos;
+        if (hasScrollInDirectionChanged) {
+          setState('scrolling');
+          debounceScrollEnd();
+        }
+        prevScrollPos = scrollPos;
+      };
+      viewport.addEventListener('scroll', handleScroll);
+      onCleanup(() => viewport.removeEventListener('scroll', handleScroll));
+    }
   });
 
   return (
@@ -53,8 +58,8 @@ export function ScrollAreaScrollbarScroll(props: ScrollAreaScrollbarScrollProps)
         data-state={state() === 'hidden' ? 'hidden' : 'visible'}
         {...others}
         ref={local.ref}
-        onPointerEnter={composeEventHandlers(props.onPointerEnter, () => setState('interacting'))}
-        onPointerLeave={composeEventHandlers(props.onPointerLeave, () => setState('idle'))}
+        onPointerEnter={composeEventHandlers(others.onPointerEnter as any, () => setState('interacting'))}
+        onPointerLeave={composeEventHandlers(others.onPointerLeave as any, () => setState('idle'))}
       />
     </Show>
   );

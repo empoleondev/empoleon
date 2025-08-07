@@ -4,6 +4,6 @@ interface NativeScrollAreaProps {
   children: JSX.Element;
 }
 
-export function NativeScrollArea({ children }: NativeScrollAreaProps) {
-  return <>{children}</>;
+export function NativeScrollArea(props: NativeScrollAreaProps) {
+  return <>{props.children}</>;
 }

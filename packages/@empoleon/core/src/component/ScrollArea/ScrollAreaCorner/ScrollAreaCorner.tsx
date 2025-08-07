@@ -5,15 +5,12 @@ import { useResizeObserver } from "../use-resize-observer";
 interface ScrollAreaCornerProps extends JSX.HTMLAttributes<HTMLDivElement> {}
 
 export function Corner(props: ScrollAreaCornerProps) {
-  // separate style and ref from other div‑props
   const [local, others] = splitProps(props, ["style", "ref"]);
   const store = useScrollAreaContext();
-
-  // width/height signals in place of React useState
   const [width, setWidth] = createSignal(0);
   const [height, setHeight] = createSignal(0);
+  const hasSize = () => Boolean(width() && height());
 
-  // effect to attach both resize observers once
   useResizeObserver(() => store.scrollbarX, () => {
     const h = store.scrollbarX?.offsetHeight || 0;
     store.onCornerHeightChange(h);
@@ -25,8 +22,6 @@ export function Corner(props: ScrollAreaCornerProps) {
     store.onCornerWidthChange(w);
     setWidth(w);
   });
-
-  const hasSize = () => width() > 0 && height() > 0;
 
   return (
     <Show when={hasSize()}>
@@ -47,8 +42,8 @@ export function Corner(props: ScrollAreaCornerProps) {
 
 export function ScrollAreaCorner(props: ScrollAreaCornerProps) {
   const ctx = useScrollAreaContext();
-  const hasBoth = () => ctx.scrollbarX && ctx.scrollbarY;
-  const hasCorner = () => ctx.type !== "scroll" && hasBoth();
+  const hasBothScrollbarsVisible = () => Boolean(ctx.scrollbarX && ctx.scrollbarY);
+  const hasCorner = () => ctx.type !== "scroll" && hasBothScrollbarsVisible();
 
   return (
     <Show when={hasCorner()}>

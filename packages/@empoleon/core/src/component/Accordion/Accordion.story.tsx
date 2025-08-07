@@ -481,7 +481,7 @@ export const WithIcon = () => (
       </Accordion.Item>
     </Accordion>
 
-    <Accordion style={{ maxWidth: 400 }} mx="auto" chevronPosition="left">
+    <Accordion style={{ 'max-width': '400px' }} mx="auto" chevronPosition="left">
       <Accordion.Item value="flex">
         <Accordion.Control icon={<IconPictureInPicture size={18} />}>Flexibility</Accordion.Control>
       </Accordion.Item>

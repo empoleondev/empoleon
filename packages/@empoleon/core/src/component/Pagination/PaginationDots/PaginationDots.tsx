@@ -29,9 +29,9 @@ export type PaginationDotsFactory = Factory<{
   compound: true;
 }>;
 
-const defaultProps: Partial<PaginationDotsProps> = {
+const defaultProps = {
   icon: PaginationDotsIcon,
-};
+} satisfies Partial<PaginationDotsProps>;
 
 export const PaginationDots = factory<PaginationDotsFactory>(_props => {
   const props = useProps('PaginationDots', defaultProps, _props);

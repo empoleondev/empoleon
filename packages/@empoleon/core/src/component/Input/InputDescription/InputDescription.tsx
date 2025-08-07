@@ -39,8 +39,6 @@ export type InputDescriptionFactory = Factory<{
   vars: InputDescriptionCssVariables;
 }>;
 
-const defaultProps: Partial<InputDescriptionProps> = {};
-
 const varsResolver = createVarsResolver<InputDescriptionFactory>((_, { size }) => ({
   description: {
     '--input-description-size':
@@ -49,7 +47,7 @@ const varsResolver = createVarsResolver<InputDescriptionFactory>((_, { size }) =
 }));
 
 export const InputDescription = factory<InputDescriptionFactory>(_props => {
-  const props = useProps('InputDescription', defaultProps, _props);
+  const props = useProps('InputDescription', null, _props);
   const [local, others] = splitProps(props, [
     'classNames',
     'className',
@@ -60,6 +58,7 @@ export const InputDescription = factory<InputDescriptionFactory>(_props => {
     'size',
     '__staticSelector',
     '__inheritStyles',
+    'attributes',
     'variant',
     'ref'
   ]);
@@ -80,7 +79,7 @@ export const InputDescription = factory<InputDescriptionFactory>(_props => {
     varsResolver,
   });
 
-  const getStyles = (local.__inheritStyles && ctx?.getStyles) || _getStyles;
+  const getStyles = ((local.__inheritStyles || true) && ctx?.getStyles) || _getStyles;
 
   return (
     <Box

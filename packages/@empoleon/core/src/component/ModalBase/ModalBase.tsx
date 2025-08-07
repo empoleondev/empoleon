@@ -132,7 +132,7 @@ export function ModalBase(props: ModalBaseProps) {
   ])
 
   createEffect(() => {
-     console.log('ModalBase shouldLockScroll:', modalProps.shouldLockScroll());
+    console.log('ModalBase shouldLockScroll:', modalProps.shouldLockScroll());
     console.log('ModalBase titleMounted:', modalProps.titleMounted());
     console.log('ModalBase bodyMounted:', modalProps.bodyMounted());
   })
@@ -161,10 +161,10 @@ export function ModalBase(props: ModalBaseProps) {
           unstyled: local.unstyled,
         }}
       >
-        {/* <RemoveScroll
+        <RemoveScroll
           enabled={modalProps.shouldLockScroll() && local.lockScroll}
           {...otherRemoveScrollProps}
-        > */}
+        >
           <Box
             ref={local.ref}
             {...others}
@@ -177,7 +177,7 @@ export function ModalBase(props: ModalBaseProps) {
           >
             {local.children}
           </Box>
-        {/* </RemoveScroll> */}
+        </RemoveScroll>
       </ModalBaseProvider>
     </OptionalPortal>
   );

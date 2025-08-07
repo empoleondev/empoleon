@@ -18,10 +18,8 @@ export type ComboboxDropdownFactory = Factory<{
   compound: true;
 }>;
 
-const defaultProps: Partial<ComboboxDropdownProps> = {};
-
 export const ComboboxDropdown = factory<ComboboxDropdownFactory>(_props => {
-  const props = useProps('ComboboxDropdown', defaultProps, _props);
+  const props = useProps('ComboboxDropdown', null, _props);
   const [local, others] = splitProps(props, [
     'classNames',
     'styles',

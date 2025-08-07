@@ -86,7 +86,7 @@ const rtlTransitions: Record<DrawerPosition, EmpoleonTransition> = {
   left: 'slide-left',
 };
 
-const defaultProps: Partial<DrawerRootProps> = {
+const defaultProps = {
   closeOnClickOutside: true,
   withinPortal: true,
   lockScroll: true,
@@ -96,7 +96,7 @@ const defaultProps: Partial<DrawerRootProps> = {
   keepMounted: false,
   zIndex: getDefaultZIndex('modal'),
   position: 'left',
-};
+} satisfies Partial<DrawerRootProps>;
 
 const varsResolver = createVarsResolver<DrawerRootFactory>((_, { position, size, offset }) => ({
   root: {
@@ -123,6 +123,7 @@ export const DrawerRoot = factory<DrawerRootFactory>(_props => {
     'position',
     'transitionProps',
     'radius',
+    'attributes',
     'ref'
   ]);
 
@@ -137,6 +138,7 @@ export const DrawerRoot = factory<DrawerRootFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
   });

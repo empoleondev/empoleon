@@ -39,10 +39,8 @@ export type NumberFormatterFactory = Factory<{
   ref: HTMLDivElement;
 }>;
 
-const defaultProps: Partial<NumberFormatterProps> = {};
-
 export function NumberFormatter(_props: NumberFormatterProps) {
-  const props = useProps('NumberFormatter', defaultProps, _props);
+  const props = useProps('NumberFormatter', null, _props);
   const [local, others] = splitProps(props, [
     'value',
     'defaultValue',

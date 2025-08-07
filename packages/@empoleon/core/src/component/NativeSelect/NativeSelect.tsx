@@ -20,9 +20,9 @@ export type NativeSelectFactory = Factory<{
   stylesNames: __InputStylesNames;
 }>;
 
-const defaultProps: Partial<NativeSelectProps> = {
+const defaultProps = {
   rightSectionPointerEvents: 'none',
-};
+} satisfies Partial<NativeSelectProps>;
 
 export const NativeSelect = factory<NativeSelectFactory>(_props => {
   const props = useProps('NativeSelect', defaultProps, _props);

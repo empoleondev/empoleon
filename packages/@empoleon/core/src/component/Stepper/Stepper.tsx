@@ -119,12 +119,12 @@ export type StepperFactory = Factory<{
   };
 }>;
 
-const defaultProps: Partial<StepperProps> = {
+const defaultProps = {
   orientation: 'horizontal',
   iconPosition: 'left',
   allowNextStepsSelect: true,
   wrap: true,
-};
+} satisfies Partial<StepperProps>;
 
 const varsResolver = createVarsResolver<StepperFactory>(
   (theme, { color, iconSize, size, contentPadding, radius, autoContrast }) => ({
@@ -168,6 +168,7 @@ export const Stepper = factory<StepperFactory>(_props => {
     'allowNextStepsSelect',
     'wrap',
     'autoContrast',
+    'attributes',
     'ref'
   ]);
 
@@ -180,6 +181,7 @@ export const Stepper = factory<StepperFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
   });
