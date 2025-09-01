@@ -18,75 +18,71 @@ interface ParseThemeColorResult {
   isLight: boolean;
 }
 
-export function parseThemeColor({
-  color,
-  theme,
-  colorScheme,
-}: ParseThemeColorOptions): ParseThemeColorResult {
-  if (typeof color !== 'string') {
+export function parseThemeColor(props: ParseThemeColorOptions): ParseThemeColorResult {
+  if (typeof props.color !== 'string') {
     throw new Error(
-      `[@empoleon/core] Failed to parse color. Expected color to be a string, instead got ${typeof color}`
+      `[@empoleon/core] Failed to parse color. Expected color to be a string, instead got ${typeof props.color}`
     );
   }
 
-  if (color === 'bright') {
+  if (props.color === 'bright') {
     return {
-      color,
-      value: colorScheme === 'dark' ? theme.white : theme.black,
+      color: props.color,
+      value: props.colorScheme === 'dark' ? props.theme.white : props.theme.black,
       shade: undefined,
       isThemeColor: false,
       isLight: isLightColor(
-        colorScheme === 'dark' ? theme.white : theme.black,
-        theme.luminanceThreshold
+        props.colorScheme === 'dark' ? props.theme.white : props.theme.black,
+        props.theme.luminanceThreshold
       ),
       variable: '--empoleon-color-bright',
     };
   }
 
-  if (color === 'dimmed') {
+  if (props.color === 'dimmed') {
     return {
-      color,
-      value: colorScheme === 'dark' ? theme.colors.dark[2] : theme.colors.gray[7],
+      color: props.color,
+      value: props.colorScheme === 'dark' ? props.theme.colors.dark[2] : props.theme.colors.gray[7],
       shade: undefined,
       isThemeColor: false,
       isLight: isLightColor(
-        colorScheme === 'dark' ? theme.colors.dark[2] : theme.colors.gray[6],
-        theme.luminanceThreshold
+        props.colorScheme === 'dark' ? props.theme.colors.dark[2] : props.theme.colors.gray[6],
+        props.theme.luminanceThreshold
       ),
       variable: '--empoleon-color-dimmed',
     };
   }
 
-  if (color === 'white' || color === 'black') {
+  if (props.color === 'white' || props.color === 'black') {
     return {
-      color,
-      value: color === 'white' ? theme.white : theme.black,
+      color: props.color,
+      value: props.color === 'white' ? props.theme.white : props.theme.black,
       shade: undefined,
       isThemeColor: false,
       isLight: isLightColor(
-        color === 'white' ? theme.white : theme.black,
-        theme.luminanceThreshold
+        props.color === 'white' ? props.theme.white : props.theme.black,
+        props.theme.luminanceThreshold
       ),
-      variable: `--empoleon-color-${color}`,
+      variable: `--empoleon-color-${props.color}`,
     };
   }
 
-  const [_color, shade] = color.split('.');
+  const [_color, shade] = props.color.split('.');
   const colorShade = shade ? (Number(shade) as EmpoleonColorShade) : undefined;
-  const isThemeColor = _color in theme.colors;
+  const isThemeColor = _color in props.theme.colors;
 
   if (isThemeColor) {
     const colorValue =
       colorShade !== undefined
-        ? theme.colors[_color][colorShade]
-        : theme.colors[_color][getPrimaryShade(theme, colorScheme || 'light')];
+        ? props.theme.colors[_color][colorShade]
+        : props.theme.colors[_color][getPrimaryShade(props.theme, props.colorScheme || 'light')];
 
     return {
       color: _color,
       value: colorValue,
       shade: colorShade,
       isThemeColor,
-      isLight: isLightColor(colorValue, theme.luminanceThreshold),
+      isLight: isLightColor(colorValue, props.theme.luminanceThreshold),
       variable: shade
         ? `--empoleon-color-${_color}-${colorShade}`
         : `--empoleon-color-${_color}-filled`,
@@ -94,10 +90,10 @@ export function parseThemeColor({
   }
 
   return {
-    color,
-    value: color,
+    color: props.color,
+    value: props.color,
     isThemeColor,
-    isLight: isLightColor(color, theme.luminanceThreshold),
+    isLight: isLightColor(props.color, props.theme.luminanceThreshold),
     shade: colorShade,
     variable: undefined,
   };

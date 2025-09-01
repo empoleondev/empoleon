@@ -30,10 +30,8 @@ export interface RichTextEditorColorPickerControlProps extends BoxProps, Element
   colors: string[];
 }
 
-const defaultProps: Partial<RichTextEditorColorPickerControlProps> = {};
-
 export function RichTextEditorColorPickerControl(_props: RichTextEditorColorPickerControlProps) {
-  const props = useProps('RichTextEditorColorPickerControl', defaultProps, _props);
+  const props = useProps('RichTextEditorColorPickerControl', null, _props);
   const [local, others] = splitProps(props, [
     'popoverProps',
     'colors',
@@ -41,18 +39,18 @@ export function RichTextEditorColorPickerControl(_props: RichTextEditorColorPick
     'ref'
   ]);
 
-  const { editor, labels, getStyles, variant } = useRichTextEditorContext();
+  const richTextEditorContext = useRichTextEditorContext();
   const [opened, { toggle, close }] = useDisclosure(false);
   const [state, setState] = createSignal<'palette' | 'colorPicker'>('palette');
-  const currentColor = editor?.getAttributes('textStyle').color || 'var(--empoleon-color-text)';
+  const currentColor = richTextEditorContext.editor?.getAttributes('textStyle').color || 'var(--empoleon-color-text)';
 
   const handleChange = (value: string, shouldClose = true) => {
-    (editor?.chain() as any).focus().setColor(value).run();
+    (richTextEditorContext.editor?.chain() as any).focus().setColor(value).run();
     shouldClose && close();
   };
 
   const handleClear = () => {
-    (editor?.chain() as any).focus().unsetColor().run();
+    (richTextEditorContext.editor?.chain() as any).focus().unsetColor().run();
     close();
   };
 
@@ -67,9 +65,9 @@ export function RichTextEditorColorPickerControl(_props: RichTextEditorColorPick
       <Popover.Target>
         <RichTextEditorControl
           {...others}
-          variant={variant}
-          aria-label={labels.colorPickerControlLabel}
-          title={labels.colorPickerControlLabel}
+          variant={richTextEditorContext.variant}
+          aria-label={richTextEditorContext.labels.colorPickerControlLabel}
+          title={richTextEditorContext.labels.colorPickerControlLabel}
           ref={local.ref}
           onClick={toggle}
         >
@@ -77,7 +75,7 @@ export function RichTextEditorColorPickerControl(_props: RichTextEditorColorPick
         </RichTextEditorControl>
       </Popover.Target>
 
-      <Popover.Dropdown {...getStyles('linkEditorDropdown')}>
+      <Popover.Dropdown {...richTextEditorContext.getStyles('linkEditorDropdown')}>
         {state() === 'palette' && (
           <SimpleGrid cols={7} spacing={2}>
             <For each={local.colors}>
@@ -89,8 +87,8 @@ export function RichTextEditorColorPickerControl(_props: RichTextEditorColorPick
                   size="26"
                   radius="xs"
                   style={{ cursor: 'pointer' }}
-                  title={labels.colorPickerColorLabel(color)}
-                  aria-label={labels.colorPickerColorLabel(color)}
+                  title={richTextEditorContext.labels.colorPickerColorLabel(color)}
+                  aria-label={richTextEditorContext.labels.colorPickerColorLabel(color)}
                 />
               )}
             </For>
@@ -111,8 +109,8 @@ export function RichTextEditorColorPickerControl(_props: RichTextEditorColorPick
               <ActionIcon
                 variant="default"
                 onClick={close}
-                title={labels.colorPickerCancel}
-                aria-label={labels.colorPickerCancel}
+                title={richTextEditorContext.labels.colorPickerCancel}
+                aria-label={richTextEditorContext.labels.colorPickerCancel}
               >
                 <IconX style={{ width: rem(16), height: rem(16) }} />
               </ActionIcon>
@@ -121,8 +119,8 @@ export function RichTextEditorColorPickerControl(_props: RichTextEditorColorPick
             <ActionIcon
               variant="default"
               onClick={handleClear}
-              title={labels.colorPickerClear}
-              aria-label={labels.colorPickerClear}
+              title={richTextEditorContext.labels.colorPickerClear}
+              aria-label={richTextEditorContext.labels.colorPickerClear}
             >
               <IconCircleOff style={{ width: rem(16), height: rem(16) }} />
             </ActionIcon>
@@ -131,8 +129,8 @@ export function RichTextEditorColorPickerControl(_props: RichTextEditorColorPick
               <ActionIcon
                 variant="default"
                 onClick={() => setState('colorPicker')}
-                title={labels.colorPickerColorPicker}
-                aria-label={labels.colorPickerColorPicker}
+                title={richTextEditorContext.labels.colorPickerColorPicker}
+                aria-label={richTextEditorContext.labels.colorPickerColorPicker}
               >
                 <IconColorPicker style={{ width: rem(16), height: rem(16) }} />
               </ActionIcon>
@@ -140,8 +138,8 @@ export function RichTextEditorColorPickerControl(_props: RichTextEditorColorPick
               <ActionIcon
                 variant="default"
                 onClick={() => setState('palette')}
-                aria-label={labels.colorPickerPalette}
-                title={labels.colorPickerPalette}
+                aria-label={richTextEditorContext.labels.colorPickerPalette}
+                title={richTextEditorContext.labels.colorPickerPalette}
               >
                 <IconPalette style={{ width: rem(16), height: rem(16) }} />
               </ActionIcon>
@@ -151,8 +149,8 @@ export function RichTextEditorColorPickerControl(_props: RichTextEditorColorPick
               <ActionIcon
                 variant="default"
                 onClick={close}
-                title={labels.colorPickerSave}
-                aria-label={labels.colorPickerSave}
+                title={richTextEditorContext.labels.colorPickerSave}
+                aria-label={richTextEditorContext.labels.colorPickerSave}
               >
                 <IconCheck style={{ width: rem(16), height: rem(16) }} />
               </ActionIcon>

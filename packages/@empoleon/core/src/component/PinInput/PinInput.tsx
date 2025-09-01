@@ -132,7 +132,7 @@ export type PinInputFactory = Factory<{
   vars: PinInputCssVariables;
 }>;
 
-const defaultProps: Partial<PinInputProps> = {
+const defaultProps = {
   gap: 'sm',
   length: 4,
   manageFocus: true,
@@ -140,7 +140,8 @@ const defaultProps: Partial<PinInputProps> = {
   placeholder: '○',
   type: 'alphanumeric',
   ariaLabel: 'PinInput',
-};
+  size: 'sm',
+} satisfies Partial<PinInputProps>;
 
 const varsResolver = createVarsResolver<PinInputFactory>((_, { size }) => ({
   root: {
@@ -184,6 +185,7 @@ export const PinInput = factory<PinInputFactory>(_props => {
     'hiddenInputProps',
     'rootRef',
     'getInputProps',
+    'attributes',
     'ref'
   ]);
 
@@ -198,6 +200,7 @@ export const PinInput = factory<PinInputFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
   });

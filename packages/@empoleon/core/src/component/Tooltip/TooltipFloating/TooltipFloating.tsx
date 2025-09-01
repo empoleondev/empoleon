@@ -109,10 +109,11 @@ export const TooltipFloating = factory<TooltipFloatingFactory>(_props => {
   // }
 
   const [wrapperElement, setWrapperElement] = createSignal<HTMLElement | null>(null);
+  const childRef = typeof local.children === 'function' ? undefined : getRefProp(local.children);
   const targetRef = useMergedRef(
     setWrapperElement,
     floating.boundaryRef,
-    getRefProp(local.children),
+    childRef,
     local.ref
   );
 
@@ -156,14 +157,23 @@ export const TooltipFloating = factory<TooltipFloatingFactory>(_props => {
         </Box>
       </OptionalPortal>
 
-      <Dynamic
-        component={componentType()}
-        ref={targetRef!}
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave}
-      >
-        {local.children}
-      </Dynamic>
+      {typeof local.children === 'function'
+        ? local.children({
+            [local.refProp!]: targetRef,
+            onMouseEnter: onMouseEnter,
+            onMouseLeave: onMouseLeave
+          })
+        : (
+          <Dynamic
+            component={componentType()}
+            ref={targetRef!}
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
+          >
+            {local.children}
+          </Dynamic>
+        )
+      }
     </>
   );
 });

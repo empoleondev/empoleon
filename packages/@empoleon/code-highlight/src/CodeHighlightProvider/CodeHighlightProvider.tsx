@@ -40,20 +40,17 @@ export interface CodeHighlightAdapterProviderProps {
   children: JSX.Element;
 }
 
-export function CodeHighlightAdapterProvider({
-  adapter,
-  children,
-}: CodeHighlightAdapterProviderProps) {
+export function CodeHighlightAdapterProvider(props: CodeHighlightAdapterProviderProps) {
   const [ctx, setCtx] = createSignal<any>(null);
-  const highlight = createMemo(() => adapter.getHighlighter(ctx));
+  const highlight = createMemo(() => props.adapter.getHighlighter(ctx));
 
   createEffect(() => {
-    if (adapter.loadContext) {
-      adapter.loadContext().then(setCtx);
+    if (props.adapter.loadContext) {
+      props.adapter.loadContext().then(setCtx);
     }
   });
 
-  return <CodeHighlightProvider value={{ adapter, highlight: highlight() }}>{children}</CodeHighlightProvider>;
+  return <CodeHighlightProvider value={{ adapter: props.adapter, highlight: highlight() }}>{props.children}</CodeHighlightProvider>;
 }
 
 export function useHighlight() {

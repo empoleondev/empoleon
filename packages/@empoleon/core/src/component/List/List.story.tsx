@@ -49,7 +49,7 @@ export function WithIcons() {
       size="sm"
       center
       icon={
-        <ThemeIcon color="teal" size={24} radius="xl">
+        () => <ThemeIcon color="teal" size={24} radius="xl">
           <IconCircleCheck size="1rem" />
         </ThemeIcon>
       }
@@ -60,7 +60,7 @@ export function WithIcons() {
       <List.Item>Run tests to make sure your changes do not break the build</List.Item>
       <List.Item
         icon={
-          <ThemeIcon color="blue" size={24} radius="xl">
+          () => <ThemeIcon color="blue" size={24} radius="xl">
             <IconCircleDashed size="1rem" />
           </ThemeIcon>
         }

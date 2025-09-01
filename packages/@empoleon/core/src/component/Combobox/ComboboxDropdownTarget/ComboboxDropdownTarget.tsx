@@ -31,11 +31,11 @@ export const ComboboxDropdownTarget = factory<ComboboxDropdownTargetFactory>(_pr
   ])
   useComboboxContext();
 
-  if (!isElement(local.children)) {
-    throw new Error(
-      'Combobox.DropdownTarget component children should be an element or a component that accepts ref. Fragments, strings, numbers and other primitive values are not supported'
-    );
-  }
+  // if (!isElement(local.children)) {
+  //   throw new Error(
+  //     'Combobox.DropdownTarget component children should be an element or a component that accepts ref. Fragments, strings, numbers and other primitive values are not supported'
+  //   );
+  // }
 
   return (
     <Popover.Target>

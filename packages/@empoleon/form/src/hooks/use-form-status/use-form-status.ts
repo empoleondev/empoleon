@@ -1,4 +1,4 @@
-import { createSignal, createMemo } from 'solid-js';
+import { createMemo, createSignal } from 'solid-js';
 import isEqual from 'fast-deep-equal';
 import { getStatus } from '../../get-status';
 import { clearListState } from '../../lists';
@@ -19,8 +19,8 @@ import type { $FormValues } from '../use-form-values/use-form-values';
 export interface $FormStatus<Values extends Record<string, any>> {
   touchedState: () => FormStatus;
   dirtyState: () => FormStatus;
-  touchedRef: FormStatus;
-  dirtyRef: FormStatus;
+  touchedRef: { current: FormStatus }; // Keep React-like interface
+  dirtyRef: { current: FormStatus }; // Keep React-like interface
   setTouched: (value: FormStatus | ((current: FormStatus) => FormStatus)) => void;
   setDirty: (value: FormStatus | ((current: FormStatus) => FormStatus), forceUpdate?: boolean) => void;
   resetDirty: ResetStatus;
@@ -44,32 +44,38 @@ interface UseFormStatusInput<Values extends Record<string, any>> {
   $values: $FormValues<Values>;
 }
 
-export function useFormStatus<Values extends Record<string, any>>({
-  initialDirty,
-  initialTouched,
-  mode,
-  $values,
-}: UseFormStatusInput<Values>): $FormStatus<Values> {
-  const [touchedState, setTouchedState] = createSignal(initialTouched);
-  const [dirtyState, setDirtyState] = createSignal(initialDirty);
+export function useFormStatus<Values extends Record<string, any>>(props: UseFormStatusInput<Values>): $FormStatus<Values> {
+  const [touchedState, setTouchedState] = createSignal(props.initialTouched);
+  const [dirtyState, setDirtyState] = createSignal(props.initialDirty);
 
-  let touchedRef = initialTouched;
-  let dirtyRef = initialDirty;
+  // Create reactive refs with React-like interface
+  let touchedRefData = props.initialTouched;
+  let dirtyRefData = props.initialDirty;
+
+  const touchedRef = {
+    get current() { return touchedRefData; },
+    set current(value: FormStatus) { touchedRefData = value; }
+  };
+
+  const dirtyRef = {
+    get current() { return dirtyRefData; },
+    set current(value: FormStatus) { dirtyRefData = value; }
+  };
 
   const setTouched = (values: FormStatus | ((current: FormStatus) => FormStatus)) => {
-    const resolvedValues = typeof values === 'function' ? values(touchedRef) : values;
-    touchedRef = resolvedValues;
+    const resolvedValues = typeof values === 'function' ? values(touchedRef.current) : values;
+    touchedRef.current = resolvedValues;
 
-    if (mode === 'controlled') {
+    if (props.mode === 'controlled') {
       setTouchedState(resolvedValues);
     }
   };
 
   const setDirty = (values: FormStatus | ((current: FormStatus) => FormStatus), forceUpdate = false) => {
-    const resolvedValues = typeof values === 'function' ? values(dirtyRef) : values;
-    dirtyRef = resolvedValues;
+    const resolvedValues = typeof values === 'function' ? values(dirtyRef.current) : values;
+    dirtyRef.current = resolvedValues;
 
-    if (mode === 'controlled' || forceUpdate) {
+    if (props.mode === 'controlled' || forceUpdate) {
       setDirtyState(resolvedValues);
     }
   };
@@ -78,9 +84,9 @@ export function useFormStatus<Values extends Record<string, any>>({
 
   const resetDirty: ResetDirty<Values> = (values) => {
     const newSnapshot = values
-      ? { ...$values.refValues.current, ...values }
-      : $values.refValues.current;
-    $values.setValuesSnapshot(newSnapshot);
+      ? { ...props.$values.refValues.current, ...values }
+      : props.$values.refValues.current;
+    props.$values.setValuesSnapshot(newSnapshot);
     setDirty({});
   };
 
@@ -105,14 +111,14 @@ export function useFormStatus<Values extends Record<string, any>>({
   };
 
   const setCalculatedFieldDirty: SetCalculatedFieldDirty<Values> = (path, value) => {
-    const currentDirty = getStatus(dirtyRef, path);
-    const dirty = !isEqual(getPath(path, $values.getValuesSnapshot()), value);
-    const clearedState = clearListState(path, dirtyRef);
+    const currentDirty = getStatus(dirtyRef.current, path);
+    const dirty = !isEqual(getPath(path, props.$values.getValuesSnapshot()), value);
+    const clearedState = clearListState(path, dirtyRef.current);
     clearedState[path as string] = dirty;
     setDirty(clearedState, currentDirty !== dirty);
   };
 
-  const isTouched: GetFieldStatus<Values> = (path) => getStatus(touchedRef, path);
+  const isTouched: GetFieldStatus<Values> = (path) => getStatus(touchedRef.current, path);
 
   const clearFieldDirty: ClearFieldDirty = (path) =>
     setDirty((current) => {
@@ -131,27 +137,34 @@ export function useFormStatus<Values extends Record<string, any>>({
     });
 
   const isDirty: GetFieldStatus<Values> = (path) => {
+    // Access the existing dirtyState signal to establish reactivity
+    dirtyState();
+
     if (path) {
       const overriddenValue = getPath(path, dirtyRef.current);
+
       if (typeof overriddenValue === 'boolean') {
         return overriddenValue;
       }
 
-      const sliceOfValues = getPath(path, $values.refValues.current);
-      const sliceOfInitialValues = getPath(path, $values.valuesSnapshot.current);
+      const sliceOfValues = getPath(path, props.$values.getValues());
+      const sliceOfInitialValues = getPath(path, props.$values.getValuesSnapshot());
       return !isEqual(sliceOfValues, sliceOfInitialValues);
     }
 
     const isOverridden = Object.keys(dirtyRef.current).length > 0;
+
     if (isOverridden) {
-      return getStatus(dirtyRef);
+      return getStatus(dirtyRef.current);
     }
 
-    return !isEqual($values.refValues.current, $values.valuesSnapshot.current);
+    const currentValues = props.$values.getValues();
+    const snapshotValues = props.$values.getValuesSnapshot();
+    return !isEqual(currentValues, snapshotValues);
   };
 
-  const getDirty = () => dirtyRef;
-  const getTouched = () => touchedRef;
+  const getDirty = () => dirtyRef.current;
+  const getTouched = () => touchedRef.current;
 
   return {
     touchedState,

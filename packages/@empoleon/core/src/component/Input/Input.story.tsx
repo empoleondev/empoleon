@@ -55,7 +55,7 @@ export function Sizes() {
       rightSection={size}
       mt="md"
       styles={{
-        section: { backgroundColor: 'pink' },
+        section: { 'background-color': 'pink' },
       }}
     />
   ));
@@ -71,8 +71,8 @@ export function WithSections() {
         rightSection="$"
         leftSection="$"
         defaultValue="asdasdnjknwebdkjwbjrbfkjberfhjbrefhberjfbjherbfjherbfjhb"
-        rightSectionWidth={40}
-        leftSectionWidth={100}
+        rightSectionWidth={'40px'}
+        leftSectionWidth={'100px'}
         styles={{
           section: { border: '1px solid pink' },
         }}
@@ -81,8 +81,8 @@ export function WithSections() {
         placeholder="Input with right section"
         rightSection="$"
         defaultValue="asdasdnjknwebdkjwbjrbfkjberfhjbrefhberjfbjherbfjherbfjhb"
-        rightSectionWidth={40}
-        leftSectionWidth={100}
+        rightSectionWidth={'40px'}
+        leftSectionWidth={'100px'}
         styles={{
           section: { border: '1px solid pink' },
         }}
@@ -91,8 +91,8 @@ export function WithSections() {
         placeholder="Input with right section"
         leftSection="$"
         defaultValue="asdasdnjknwebdkjwbjrbfkjberfhjbrefhberjfbjherbfjherbfjhb"
-        rightSectionWidth={40}
-        leftSectionWidth={100}
+        rightSectionWidth={'40px'}
+        leftSectionWidth={'100px'}
         styles={{
           section: { border: '1px solid pink' },
         }}

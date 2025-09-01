@@ -16,18 +16,22 @@ export default {
   decorators: [
     (Story: () => JSX.Element) => (
       <EmpoleonProvider>
-        <Story />
+        <ModalsProvider
+          labels={{ confirm: 'Confirm', cancel: 'Cancel' }}
+          modalProps={{ trapFocus: false }}
+        >
+          <Story />
+        </ModalsProvider>
       </EmpoleonProvider>
     ),
   ]
 };
 
-const ContextModal = ({ context, id, innerProps }: ContextModalProps<{ contextProp: string }>) => {
-  console.log(innerProps, id, context);
+const ContextModal = (props: ContextModalProps<{ contextProp: string }>) => {
   return (
     <div>
-      <div>Test custom modal: {innerProps.contextProp}</div>
-      <Button onClick={() => context.closeModal(id)}>Close</Button>
+      <div>Test custom modal: {props.innerProps.contextProp}</div>
+      <Button onClick={() => props.context.closeModal(props.id)}>Close</Button>
     </div>
   );
 };

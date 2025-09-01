@@ -1,7 +1,7 @@
 import { IconTrash } from '@tabler/icons-solidjs';
 import { ActionIcon, Button, Code, Group, EmpoleonProvider, Text, TextInput } from '@empoleon/core';
 import { useForm } from '../use-form';
-import { JSX } from 'solid-js';
+import { createEffect, JSX } from 'solid-js';
 
 export default {
    title: 'Form',
@@ -92,8 +92,6 @@ export function DirtyUncontrolled() {
       text: '1',
     },
   });
-
-  console.log('render');
 
   return (
     <div style={{ 'max-width': '500px', margin: 'auto', 'padding': '40px' }}>

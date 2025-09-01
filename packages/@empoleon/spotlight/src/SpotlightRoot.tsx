@@ -96,7 +96,7 @@ export type SpotlightRootFactory = Factory<{
   compound: true;
 }>;
 
-const defaultProps: Partial<SpotlightRootProps> = {
+const defaultProps = {
   size: 600,
   yOffset: '80px',
   zIndex: getDefaultZIndex('max'),
@@ -107,8 +107,7 @@ const defaultProps: Partial<SpotlightRootProps> = {
   closeOnActionTrigger: true,
   shortcut: 'mod + K',
   maxHeight: '400px',
-  scrollable: false,
-};
+} satisfies Partial<SpotlightRootProps>;
 
 export const SpotlightRoot = factory<SpotlightRootFactory>(_props => {
   const props = useProps('SpotlightRoot', defaultProps, _props);
@@ -135,6 +134,7 @@ export const SpotlightRoot = factory<SpotlightRootFactory>(_props => {
     'closeOnActionTrigger',
     'maxHeight',
     'scrollable',
+    'attributes',
     'ref'
   ]);
 
@@ -157,6 +157,7 @@ export const SpotlightRoot = factory<SpotlightRootFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
   });
 
   useHotkeys(getHotkeys(local.shortcut, local.store!), local.tagsToIgnore, local.triggerOnContentEditable);
@@ -164,6 +165,10 @@ export const SpotlightRoot = factory<SpotlightRootFactory>(_props => {
   createEffect(on(opened, (isOpened) => {
     isOpened ? local.onSpotlightOpen?.() : local.onSpotlightClose?.();
   }));
+
+  if (local.disabled) {
+    return null;
+  }
 
   return (
     <SpotlightProvider

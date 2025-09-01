@@ -51,7 +51,7 @@ export function useStyles<Payload extends FactoryPayload>(_props: UseStylesInput
     themeName,
   });
 
-  const rootSelector = 'root' as NonNullable<Payload['stylesNames']>;
+  const rootSelector = (_props.rootSelector || ('root' as NonNullable<Payload['stylesNames']>));
 
   return (selector, options) => ({
     className: getClassName({

@@ -151,11 +151,9 @@ export type DropzoneFactory = Factory<{
   };
 }>;
 
-const defaultProps: Partial<DropzoneProps> = {
-  loading: false,
+const defaultProps = {
   multiple: true,
   maxSize: Infinity,
-  autoFocus: false,
   activateOnClick: true,
   activateOnDrag: true,
   dragEventsBubbling: true,
@@ -163,7 +161,7 @@ const defaultProps: Partial<DropzoneProps> = {
   useFsAccessApi: true,
   variant: 'light',
   rejectColor: 'red',
-};
+} satisfies Partial<DropzoneProps>;
 
 const varsResolver = createVarsResolver<DropzoneFactory>(
   (theme, { radius, variant, acceptColor, rejectColor }) => {
@@ -233,6 +231,7 @@ export const Dropzone = factory<DropzoneFactory>(_props => {
     'loaderProps',
     'inputProps',
     'mod',
+    'attributes',
     'ref'
   ]);
 
@@ -245,6 +244,7 @@ export const Dropzone = factory<DropzoneFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
   });

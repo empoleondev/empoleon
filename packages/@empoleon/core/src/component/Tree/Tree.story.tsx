@@ -116,7 +116,7 @@ export function ExpandOnDoubleClick() {
         expandOnClick={false}
         style={{ userSelect: 'none' }}
         renderNode={({ node, expanded, hasChildren, elementProps }) => (
-          <Group gap="xs" {...elementProps} on-double-click={() => tree.toggleExpanded(node.value)}>
+          <Group gap="xs" {...elementProps} onDblClick={() => tree.toggleExpanded(node.value)}>
             <span>{node.label}</span>
             {hasChildren && (
               <IconChevronDown

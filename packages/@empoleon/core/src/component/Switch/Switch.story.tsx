@@ -138,12 +138,12 @@ export function Shrinking() {
         label="Same"
         description="Short description - No Issue"
         styles={{
-          labelWrapper: { backgroundColor: 'var(--empoleon-color-green-2)' },
+          labelWrapper: { 'background-color': 'var(--empoleon-color-green-2)' },
         }}
       />
       <Switch
         styles={{
-          labelWrapper: { backgroundColor: 'var(--empoleon-color-red-4)' },
+          labelWrapper: { 'background-color': 'var(--empoleon-color-red-4)' },
         }}
         bg="red"
         value="svelte"

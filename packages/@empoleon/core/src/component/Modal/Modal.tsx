@@ -123,25 +123,10 @@ const hasHeader = () => !!local.title || local.withCloseButton;
   );
 
   createEffect(() => {
-    console.log('overlayVisible debug:', {
-    withOverlay: local.withOverlay,
-    stackId: local.stackId,
-    hasCtx: !!ctx,
-    currentId: ctx?.currentId,
-    comparison: ctx?.currentId === local.stackId,
-    fallback: openedFn(),
-    final: overlayVisible()
-  });
-  })
-
-  createEffect(() => {
-    console.log('createEffect triggered:', { stackId: local.stackId, opened: openedFn(), hasCtx: !!ctx });
     if (ctx && local.stackId) {
       if (openedFn()) {
-        console.log('Adding modal to stack:', local.stackId);
         ctx.addModal(local.stackId, local.zIndex || getDefaultZIndex('modal'));
       } else {
-        console.log('Removing modal from stack:', local.stackId);
         ctx.removeModal(local.stackId);
       }
     }

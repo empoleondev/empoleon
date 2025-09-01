@@ -133,7 +133,7 @@ export function ScaledElement() {
             width: '200px',
             height: '200px',
             transition: 'transform 100ms',
-            transform: `scale(${scale})`,
+            transform: `scale(${scale()})`,
           }}
         >
           Resizable target

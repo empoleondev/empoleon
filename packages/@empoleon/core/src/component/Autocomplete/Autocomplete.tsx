@@ -186,48 +186,58 @@ export const Autocomplete = factory<AutocompleteFactory>(_props => {
       {...local.comboboxProps}
     >
       <Combobox.Target autoComplete={local.autocomplete}>
-        <InputBase
-          ref={local.ref}
-          {...others}
-          size={local.size}
-          __staticSelector="Autocomplete"
-          __clearSection={clearButton}
-          __clearable={local.clearable && !!_value() && !local.disabled && !local.readOnly}
-          rightSection={local.rightSection}
-          disabled={local.disabled}
-          readOnly={local.readOnly}
-          value={_value()}
-          error={local.error}
-          onInput={(event) => {
-            handleValueChange(event.currentTarget.value);
-            combobox.openDropdown();
-            local.selectFirstOptionOnChange && combobox.selectFirstOption();
-          }}
-          onChange={(event) => {
-            handleValueChange(_value() != null ? optionsLockup()[_value()]?.label || '' : '');
-          }}
-          onFocus={(event) => {
-            combobox.openDropdown();
-            typeof local.onFocus === 'function' && local.onFocus?.(event);
-          }}
-          onBlur={(event) => {
-            if (local.autoSelectOnBlur) {
-              combobox.clickSelectedOption();
-            }
+        {(props) => {
+          const inputRef = (el: HTMLInputElement | null) => {
+            (props.ref as ((n: HTMLElement | null) => void) | undefined)?.(el as unknown as HTMLElement | null);
+            (local.ref as ((n: HTMLInputElement | null) => void) | undefined)?.(el);
+          };
 
-            combobox.closeDropdown();
-            typeof local.onBlur === 'function' && local.onBlur?.(event);
-          }}
-          onClick={(event) => {
-            combobox.openDropdown();
-            typeof local.onClick === 'function' && local.onClick?.(event);
-          }}
-          classNames={resolvedClassNames}
-          styles={resolvedStyles}
-          unstyled={local.unstyled}
-          attributes={local.attributes}
-          id={_id}
-        />
+          return (
+            <InputBase
+              {...props}
+              {...others}
+              ref={inputRef}
+              size={local.size}
+              __staticSelector="Autocomplete"
+              __clearSection={clearButton}
+              __clearable={local.clearable && !!_value() && !local.disabled && !local.readOnly}
+              rightSection={local.rightSection}
+              disabled={local.disabled}
+              readOnly={local.readOnly}
+              value={_value()}
+              error={local.error}
+              onInput={(event) => {
+                handleValueChange(event.currentTarget.value);
+                combobox.openDropdown();
+                local.selectFirstOptionOnChange && combobox.selectFirstOption();
+              }}
+              onChange={(event) => {
+                handleValueChange(_value() != null ? optionsLockup()[_value()]?.label || '' : '');
+              }}
+              onFocus={(event) => {
+                combobox.openDropdown();
+                typeof local.onFocus === 'function' && local.onFocus?.(event);
+              }}
+              onBlur={(event) => {
+                if (local.autoSelectOnBlur) {
+                  combobox.clickSelectedOption();
+                }
+
+                combobox.closeDropdown();
+                typeof local.onBlur === 'function' && local.onBlur?.(event);
+              }}
+              onClick={(event) => {
+                combobox.openDropdown();
+                typeof local.onClick === 'function' && local.onClick?.(event);
+              }}
+              classNames={resolvedClassNames}
+              styles={resolvedStyles}
+              unstyled={local.unstyled}
+              attributes={local.attributes}
+              id={_id}
+            />
+          )}
+        }
       </Combobox.Target>
       <OptionsDropdown
         data={parsedData()}

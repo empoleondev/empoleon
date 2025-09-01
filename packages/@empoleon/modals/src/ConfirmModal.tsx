@@ -20,44 +20,35 @@ export interface ConfirmModalProps {
   labels?: ConfirmLabels;
 }
 
-export function ConfirmModal({
-  id,
-  cancelProps,
-  confirmProps,
-  labels = { cancel: '', confirm: '' },
-  closeOnConfirm = true,
-  closeOnCancel = true,
-  groupProps,
-  onCancel,
-  onConfirm,
-  children,
-}: ConfirmModalProps) {
+export function ConfirmModal(props: ConfirmModalProps) {
+  const labels = props.labels || { cancel: '', confirm: '' };
+
   const { cancel: cancelLabel, confirm: confirmLabel } = labels;
   const ctx = useModals();
 
   const handleCancel = (event: MouseEvent & { currentTarget: HTMLButtonElement; target: Element }) => {
-    typeof cancelProps?.onClick === 'function' && cancelProps?.onClick(event);
-    typeof onCancel === 'function' && onCancel();
-    closeOnCancel && ctx.closeModal(id!);
+    typeof props.cancelProps?.onClick === 'function' && props.cancelProps?.onClick(event);
+    typeof props.onCancel === 'function' && props.onCancel();
+    props.closeOnCancel && ctx.closeModal(props.id!);
   };
 
   const handleConfirm = (event: MouseEvent & { currentTarget: HTMLButtonElement; target: Element }) => {
-    typeof confirmProps?.onClick === 'function' && confirmProps?.onClick(event);
-    typeof onConfirm === 'function' && onConfirm();
-    closeOnConfirm && ctx.closeModal(id!);
+    typeof props.confirmProps?.onClick === 'function' && props.confirmProps?.onClick(event);
+    typeof props.onConfirm === 'function' && props.onConfirm();
+    props.closeOnConfirm && ctx.closeModal(props.id!);
   };
 
   return (
     <>
-      {children && <Box mb="md">{children}</Box>}
+      {props.children && <Box mb="md">{props.children}</Box>}
 
-      <Group mt={children ? 0 : 'md'} justify="flex-end" {...groupProps}>
-        <Button variant="default" {...cancelProps} onClick={handleCancel}>
-          {cancelProps?.children || cancelLabel}
+      <Group mt={props.children ? 0 : 'md'} justify="flex-end" {...props.groupProps}>
+        <Button variant="default" {...props.cancelProps} onClick={handleCancel}>
+          {props.cancelProps?.children || cancelLabel}
         </Button>
 
-        <Button {...confirmProps} onClick={handleConfirm}>
-          {confirmProps?.children || confirmLabel}
+        <Button {...props.confirmProps} onClick={handleConfirm}>
+          {props.confirmProps?.children || confirmLabel}
         </Button>
       </Group>
     </>

@@ -31,10 +31,8 @@ export type SpotlightActionsGroupFactory = Factory<{
   compound: true;
 }>;
 
-const defaultProps: Partial<SpotlightActionsGroupProps> = {};
-
 export const SpotlightActionsGroup = factory<SpotlightActionsGroupFactory>(_props => {
-  const props = useProps('SpotlightActionsGroup', defaultProps, _props);
+  const props = useProps('SpotlightActionsGroup', null, _props);
   const [local, others] = splitProps(props, [
     'className',
     'style',

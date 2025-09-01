@@ -1,4 +1,4 @@
-import { createMemo, createSignal, JSX } from 'solid-js';
+import { createMemo, createSignal, JSX, mergeProps } from 'solid-js';
 import { getInputOnChange } from './get-input-on-change';
 import { FormMode, GetInputPropsType } from './types';
 import { shouldValidateOnChange } from './validate';
@@ -100,10 +100,10 @@ export interface UseFieldReturnType<
   validate: () => Promise<JSX.Element | void>;
 
   /** Set to true when async validate function is called, stays true until the returned promise resolves */
-  isValidating: boolean;
+  isValidating: () => boolean;
 
   /** Current error message */
-  error: JSX.Element;
+  error: () => JSX.Element;
 
   /** Sets error message to the given react node */
   setError: (error: JSX.Element) => void;
@@ -118,86 +118,92 @@ export interface UseFieldReturnType<
   resetTouched: () => void;
 
   /** Key that should be added to the input when mode is uncontrolled */
-  key: number;
+  key: () => number;
 }
 
 export function useField<
   T,
   Mode extends FormMode = 'controlled',
   FieldType extends GetInputPropsType = 'input',
->({
-  mode = 'controlled' as Mode,
-  clearErrorOnChange = true,
-  initialValue,
-  initialError = null,
-  initialTouched = false,
-  onValueChange,
-  validateOnChange = false,
-  validateOnBlur = false,
-  validate,
-  resolveValidationError,
-  type = 'input' as FieldType,
-}: UseFieldInput<T, FieldType, Mode>): UseFieldReturnType<T, FieldType, Mode> {
-  const [valueState, setValueState] = createSignal(initialValue);
-  let valueRef = initialValue;
+>(
+  input: UseFieldInput<T, FieldType, Mode>
+): UseFieldReturnType<T, FieldType, Mode> {
+  const props = mergeProps(
+    {
+      mode: 'controlled' as Mode,
+      clearErrorOnChange: true,
+      initialError: null,
+      initialTouched: false,
+      validateOnChange: false,
+      validateOnBlur: false,
+      type: 'input' as FieldType,
+    },
+    input
+  );
+  const [valueState, setValueState] = createSignal(props.initialValue);
   const [key, setKey] = createSignal(0);
-  const [error, setError] = createSignal<JSX.Element>(initialError || null);
-  let touchedRef = initialTouched || false;
-  const [, setTouchedState] = createSignal(touchedRef);
+  const [error, setError] = createSignal<JSX.Element>(props.initialError || null);
+  const [touchedState, setTouchedState] = createSignal(props.initialTouched || false);
   const [isValidating, setIsValidating] = createSignal(false);
-  const errorResolver = () => resolveValidationError || ((err) => err as any);
 
-  const setTouched = (val: boolean, { updateState = mode === 'controlled' } = {}) => {
-    touchedRef = val;
-    updateState && setTouchedState(val);
+  const errorResolver = createMemo(() =>
+    props.resolveValidationError || ((err: any) => err as JSX.Element)
+  );
+
+  const setTouched = (val: boolean, { updateState = props.mode === 'controlled' } = {}) => {
+    if (updateState) {
+      setTouchedState(val);
+    }
   };
 
   const setValue = (
-      value: T,
-      {
-        updateKey = mode === 'uncontrolled',
-        updateState = mode === 'controlled',
-      }: SetValueOptions = {}
-    ) => {
-      if (valueRef === value) {
-        return;
-      }
+    value: T,
+    {
+      updateKey = props.mode === 'uncontrolled',
+      updateState = props.mode === 'controlled',
+    }: SetValueOptions = {}
+  ) => {
+    // For controlled mode, always update the signal
+    // For uncontrolled mode, only update when explicitly requested
+    const currentValue = props.mode === 'controlled' ? valueState() : valueState();
 
-      valueRef = value;
+    if (currentValue === value) {
+      return;
+    }
 
-      onValueChange?.(value);
+    props.onValueChange?.(value);
 
-      if (clearErrorOnChange && error() !== null) {
-        setError(null);
-      }
+    if (props.clearErrorOnChange && error() !== null) {
+      setError(null);
+    }
 
-      if (updateState) {
-        setValueState(() => value);
-      }
+    if (updateState || props.mode === 'controlled') {
+      setValueState(() => value);
+    }
 
-      if (updateKey) {
-        setKey(key() + 1);
-      }
+    if (updateKey) {
+      setKey(prev => prev + 1);
+    }
 
-      if (validateOnChange) {
-        _validate();
-      }
-    };
+    if (props.validateOnChange) {
+      _validate();
+    }
+  };
 
   const reset = () => {
-    setValue(initialValue);
+    setValue(props.initialValue);
     setError(null);
     setTouched(false);
   };
 
-  const getValue = () => valueRef;
+  const getValue = () => valueState();
 
-  const isTouched = () => touchedRef;
+  const isTouched = () => touchedState();
 
-  const isDirty = () => valueRef !== initialValue;
+  const isDirty = () => valueState() !== props.initialValue;
 
   const _validate = async () => {
-    const validationResult = validate?.(valueRef);
+    const validationResult = props.validate?.(valueState());
 
     if (validationResult instanceof Promise) {
       setIsValidating(true);
@@ -205,11 +211,12 @@ export function useField<
         const result = await validationResult;
         setIsValidating(false);
         setError(result);
+        return result;
       } catch (err) {
         setIsValidating(false);
         const resolvedError = errorResolver()(err);
-        setError(resolvedError());
-        return resolvedError();
+        setError(resolvedError);
+        return resolvedError;
       }
     } else {
       setError(validationResult);
@@ -226,10 +233,10 @@ export function useField<
       payload.error = error();
     }
 
-    if (type === 'checkbox') {
-      payload[mode === 'controlled' ? 'checked' : 'defaultChecked'] = valueRef;
+    if (props.type === 'checkbox') {
+      payload[props.mode === 'controlled' ? 'checked' : 'defaultChecked'] = valueState();
     } else {
-      payload[mode === 'controlled' ? 'value' : 'defaultValue'] = valueRef;
+      payload[props.mode === 'controlled' ? 'value' : 'defaultValue'] = valueState();
     }
 
     if (withFocus) {
@@ -238,7 +245,7 @@ export function useField<
       };
 
       payload.onBlur = () => {
-        if (shouldValidateOnChange('', !!validateOnBlur)) {
+        if (shouldValidateOnChange('', !!props.validateOnBlur)) {
           _validate();
         }
       };
@@ -250,16 +257,16 @@ export function useField<
   const resetTouched = () => setTouched(false);
 
   return {
-    key: key(),
+    key,
     getValue,
     setValue,
     reset,
     getInputProps,
 
-    isValidating: isValidating(),
+    isValidating,
     validate: _validate,
 
-    error: error(),
+    error,
     setError,
 
     isTouched,

@@ -68,6 +68,7 @@ export const InlineCodeHighlight = factory<InlineCodeHighlightFactory>(_props =>
     'styles',
     'unstyled',
     'vars',
+    'attributes',
     'ref'
   ]);
 
@@ -80,6 +81,7 @@ export const InlineCodeHighlight = factory<InlineCodeHighlightFactory>(_props =>
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
     rootSelector: 'inlineCodeHighlight',

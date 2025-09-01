@@ -73,7 +73,7 @@ export interface CarouselProps
   previousControlProps?: JSX.ButtonHTMLAttributes<HTMLButtonElement>;
 
   /** Controls size of the next and previous controls, `26` by default */
-  controlSize?: JSX.CSSProperties['width'];
+  controlSize?: JSX.CSSProperties['width'] | number;
 
   /** Controls position of the next and previous controls, key of `theme.spacing` or any valid CSS value, `'sm'` by default */
   controlsOffset?: EmpoleonSpacing;
@@ -128,8 +128,8 @@ export type CarouselFactory = Factory<{
   };
 }>;
 
-const defaultProps: Partial<CarouselProps> = {
-  controlSize: '26px',
+const defaultProps = {
+  controlSize: 26,
   controlsOffset: 'sm',
   slideSize: '100%',
   slideGap: 0,
@@ -140,7 +140,7 @@ const defaultProps: Partial<CarouselProps> = {
   withIndicators: false,
   withKeyboardEvents: true,
   type: 'media',
-};
+} satisfies Partial<CarouselProps>;
 
 const defaultEmblaOptions: EmblaOptionsType = {
   align: 'center',
@@ -196,6 +196,7 @@ export const Carousel = factory<CarouselFactory>(_props => {
     'mod',
     'type',
     'emblaOptions',
+    'attributes',
     'ref'
   ]);
 
@@ -208,6 +209,7 @@ export const Carousel = factory<CarouselFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
   });

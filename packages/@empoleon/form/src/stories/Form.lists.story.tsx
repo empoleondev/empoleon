@@ -60,7 +60,7 @@ export const Lists: Component = () => {
       )}
 
       <For each={form.values.employees}>
-        {(item: Employee, index) => (
+        {(_, index) => (
           <Group mt="xs">
             <TextInput
               placeholder="John Doe"
@@ -80,6 +80,7 @@ export const Lists: Component = () => {
 
       <Group justify="center" mt="md">
         <Button
+          type="button"
           onClick={() =>
             form.insertListItem('employees', { name: '', active: false, key: randomId() })
           }
@@ -127,7 +128,7 @@ export const ListsUncontrolled: Component = () => {
       )}
 
       <For each={form.values.employees}>
-        {(item: Employee, index) => (
+        {(_, index) => (
           <Group mt="xs">
             <TextInput
               placeholder="John Doe"
@@ -147,13 +148,17 @@ export const ListsUncontrolled: Component = () => {
 
       <Group justify="center" mt="md">
         <Button
+          type="button"
           onClick={() =>
             form.insertListItem('employees', { name: '', active: false, key: randomId() })
           }
         >
           Add employee
         </Button>
-        <Button onClick={() => form.reorderListItem('employees', { from: 0, to: 2 })}>
+        <Button
+          type="button"
+          onClick={() => form.reorderListItem('employees', { from: 0, to: 2 })}
+        >
           Reorder
         </Button>
       </Group>

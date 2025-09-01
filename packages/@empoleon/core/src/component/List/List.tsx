@@ -41,7 +41,7 @@ export interface ListProps
   size?: EmpoleonSize;
 
   /** Icon that replaces list item dot */
-  icon?: JSX.Element;
+  icon?: () => JSX.Element;
 
   /** Key of `theme.spacing` or any valid CSS value to set spacing between items, `0` by default */
   spacing?: EmpoleonSpacing;

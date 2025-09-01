@@ -7,6 +7,7 @@ import { Scrollbar } from './Scrollbar';
 
 export function ScrollAreaScrollbarX(props: ScrollAreaScrollbarAxisProps) {
   const [local, others] = splitProps(props, [
+    'children',
     'sizes',
     'onSizesChange',
     'style',
@@ -64,7 +65,9 @@ export function ScrollAreaScrollbarX(props: ScrollAreaScrollbarAxisProps) {
           });
         }
       }}
-    />
+    >
+      {local.children}
+    </Scrollbar>
   );
 }
 

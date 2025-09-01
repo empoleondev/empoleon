@@ -1,4 +1,4 @@
-import { Component, createEffect, splitProps, JSX } from 'solid-js';
+import { Component, createEffect, splitProps, JSX, createMemo } from 'solid-js';
 import { useId } from '@empoleon/hooks';
 import {
   Box,
@@ -81,6 +81,8 @@ export interface CheckboxProps
 
   /** Determines whether icon color with filled variant should depend on `background-color`. If luminosity of the `color` prop is less than `theme.luminosityThreshold`, then `theme.white` will be used for text color, otherwise `theme.black`. Overrides `theme.autoContrast`. */
   autoContrast?: boolean;
+
+  defaultChecked?: boolean;
 }
 
 export type CheckboxFactory = Factory<{
@@ -140,6 +142,7 @@ export const Checkbox = factory<CheckboxFactory>(_props => {
     'radius',
     'wrapperProps',
     'checked',
+    'defaultChecked',
     'labelPosition',
     'description',
     'error',
@@ -174,20 +177,29 @@ export const Checkbox = factory<CheckboxFactory>(_props => {
     varsResolver,
   });
 
-  const { styleProps, rest } = extractStyleProps(others);
+  const extracted = createMemo(() => extractStyleProps(others));
+  const styleProps = () => extracted().styleProps;
+  const rest = () => extracted().rest;
   const uuid = useId(local.id);
 
-  const contextProps = ctx
-    ? {
-        checked: ctx.value().includes(rest.value as string),
-        onChange: (event: Event) => {
-          ctx.onChange(event as any);
-          if (typeof local.onChange === 'function') {
-            local.onChange(event as any);
-          }
-        },
-      }
-    : {};
+  const contextProps = createMemo(() => {
+   if (ctx) {
+     return {
+       checked: ctx.value().includes(rest().value as string),
+       onChange: (event: Event) => {
+         ctx.onChange(event as any);
+         typeof local.onChange === 'function' && local.onChange(event as any);
+       },
+     };
+   }
+   if (local.checked !== undefined) {
+     return { checked: local.checked, onChange: local.onChange };
+   }
+   if (local.defaultChecked !== undefined) {
+     return { checked: !!local.defaultChecked, onChange: local.onChange };
+   }
+   return { onChange: local.onChange };
+ });
 
   const fallbackRef = null;
   const ref = local.ref || fallbackRef;
@@ -196,6 +208,11 @@ export const Checkbox = factory<CheckboxFactory>(_props => {
   createEffect(() => {
     if (inputRef) inputRef.indeterminate = local.indeterminate || false;
   });
+
+  const toolTipEvents = {
+    onmouseenter: others.onmouseenter,
+    onMouseLeave: others.onmouseleave
+  }
 
   return (
     <InlineInput
@@ -212,12 +229,13 @@ export const Checkbox = factory<CheckboxFactory>(_props => {
       classNames={local.classNames}
       styles={local.styles}
       unstyled={local.unstyled}
-      data-checked={contextProps.checked || local.checked || undefined}
+      data-checked={contextProps().checked || local.checked || undefined}
       variant={local.variant}
       ref={local.rootRef}
       mod={local.mod}
-      {...styleProps}
+      {...styleProps()}
       {...local.wrapperProps as any}
+      {...toolTipEvents}
     >
       <Box {...getStyles('inner')} mod={{ 'data-label-position': local.labelPosition }}>
         <Box
@@ -229,11 +247,11 @@ export const Checkbox = factory<CheckboxFactory>(_props => {
           }}
           checked={local.checked}
           disabled={local.disabled}
-          mod={{ error: !!local.error, indeterminate: local.indeterminate }}
+          mod={{ error: !!(local.error && (local.error as any)()), indeterminate: local.indeterminate }}
           {...getStyles('input', { focusable: true, variant: local.variant })}
+          {...rest()}
+          {...contextProps()}
           onChange={local.onChange}
-          {...rest}
-          {...contextProps}
           type="checkbox"
         />
 

@@ -98,6 +98,7 @@ export const CodeHighlightTabs = factory<CodeHighlightTabsFactory>(_props => {
     'background',
     'controls',
     'codeColorScheme',
+    'attributes',
     'ref'
   ]);
 
@@ -110,6 +111,7 @@ export const CodeHighlightTabs = factory<CodeHighlightTabsFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
   });
 

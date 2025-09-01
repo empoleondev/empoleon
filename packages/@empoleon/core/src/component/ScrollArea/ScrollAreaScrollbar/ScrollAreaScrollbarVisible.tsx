@@ -33,8 +33,6 @@ export function ScrollAreaScrollbarVisible(props: ScrollAreaScrollbarVisibleProp
   const { dir } = useDirection();
   const ctx = useScrollAreaContext();
 
-  const orientation = props.orientation || 'vertical';
-
   let thumbEl: HTMLDivElement | null;
   let pointerOffset = 0;
 
@@ -46,10 +44,10 @@ export function ScrollAreaScrollbarVisible(props: ScrollAreaScrollbarVisibleProp
 
   const thumbRatio = () => getThumbRatio(sizes().viewport, sizes().content);
 
-  const commonProps: Omit<
+  const commonProps = (): Omit<
     ScrollAreaScrollbarAxisPrivateProps,
     'onThumbPositionChange' | 'onDragScroll' | 'onWheelScroll'
-  > = {
+  > => ({
     ...scrollbarProps,
     sizes: sizes(),
     onSizesChange: setSizes,
@@ -63,23 +61,23 @@ export function ScrollAreaScrollbarVisible(props: ScrollAreaScrollbarVisibleProp
     onThumbPointerDown: (pointerPos) => {
       pointerOffset = pointerPos;
     },
-  };
+  });
 
   const getScrollPosition = (pointerPos: number, direction?: 'ltr' | 'rtl') =>
     getScrollPositionFromPointer(pointerPos, pointerOffset, sizes(), direction);
 
   return (
     <Switch fallback={null}>
-      <Match when={(orientation ?? 'vertical') === 'horizontal'}>
+      <Match when={(local.orientation ?? 'vertical') === 'horizontal'}>
         <ScrollAreaScrollbarX
-          {...commonProps}
+          {...commonProps()}
           ref={local.ref}
-          // sizes={sizes()}
-          // onSizesChange={setSizes}
-          // hasThumb={thumbRatio() > 0 && thumbRatio() < 1}
-          // onThumbChange={(el) => (thumbEl = el)}
-          // onThumbPointerUp={() => (pointerOffset = 0)}
-          // onThumbPointerDown={(pos) => (pointerOffset = pos)}
+          sizes={sizes()}
+          onSizesChange={setSizes}
+          hasThumb={thumbRatio() > 0 && thumbRatio() < 1}
+          onThumbChange={(el) => (thumbEl = el)}
+          onThumbPointerUp={() => (pointerOffset = 0)}
+          onThumbPointerDown={(pos) => (pointerOffset = pos)}
           onThumbPositionChange={() => {
             if (ctx.viewport && thumbEl) {
               const scrollPos = ctx.viewport.scrollLeft;
@@ -101,14 +99,14 @@ export function ScrollAreaScrollbarVisible(props: ScrollAreaScrollbarVisibleProp
 
       <Match when={(local.orientation ?? 'vertical') === 'vertical'}>
         <ScrollAreaScrollbarY
-          {...commonProps}
+          {...commonProps()}
           ref={local.ref}
-          // sizes={sizes()}
-          // onSizesChange={setSizes}
-          // hasThumb={thumbRatio() > 0 && thumbRatio() < 1}
-          // onThumbChange={(el) => (thumbEl = el)}
-          // onThumbPointerUp={() => (pointerOffset = 0)}
-          // onThumbPointerDown={(pos) => (pointerOffset = pos)}
+          sizes={sizes()}
+          onSizesChange={setSizes}
+          hasThumb={thumbRatio() > 0 && thumbRatio() < 1}
+          onThumbChange={(el) => (thumbEl = el)}
+          onThumbPointerUp={() => (pointerOffset = 0)}
+          onThumbPointerDown={(pos) => (pointerOffset = pos)}
           onThumbPositionChange={() => {
             if (ctx.viewport && thumbEl) {
               const scrollPos = ctx.viewport.scrollTop;

@@ -8,18 +8,16 @@ interface ExpandCodeButtonProps {
   expandCodeLabel?: string;
 }
 
-export function ExpandCodeButton({
-  expanded,
-  onExpand,
-  expandCodeLabel = 'Expand code',
-  collapseCodeLabel = 'Collapse code',
-}: ExpandCodeButtonProps) {
+export function ExpandCodeButton(props: ExpandCodeButtonProps) {
+  const expandCodeLabel = props.expandCodeLabel || 'Expand code';
+  const collapseCodeLabel = props.expandCodeLabel || 'Collapse code';
+
   return (
     <CodeHighlightControl
-      onClick={() => onExpand(!expanded)}
-      tooltipLabel={expanded ? collapseCodeLabel : expandCodeLabel}
+      onClick={() => props.onExpand(!props.expanded)}
+      tooltipLabel={props.expanded ? collapseCodeLabel : expandCodeLabel}
     >
-      <ExpandIcon expanded={expanded} />
+      <ExpandIcon expanded={props.expanded} />
     </CodeHighlightControl>
   );
 }

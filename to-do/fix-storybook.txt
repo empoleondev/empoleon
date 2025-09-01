@@ -3,8 +3,8 @@ compare storybooks
 
 Core:
 
-Accordion (nested does not work right)
-ActionIcon (usage does not work right)
+Accordion
+ActionIcon
 Affix
 Alert
 Anchor
@@ -21,7 +21,7 @@ Burger
 Button
 Card
 Center
-Checkbox (with tooltip doesn't quite match)
+Checkbox
 Chip
 CloseButton
 Code
@@ -29,7 +29,7 @@ Collapse
 ColorInput
 ColorPicker
 ColorSwatch
-Combobox (DifferentTargets, SearchWithScrollArea do not work)
+Combobox
 Container
 CopyButton
 Dialog
@@ -40,7 +40,7 @@ FileButton
 FileInput
 Flex
 Floating
-FloatingIndicator (scaled target does not work)
+FloatingIndicator
 FocusTrap
 Grid
 Group
@@ -54,57 +54,57 @@ InputBase
 InputsGroupFieldset
 JsonInput
 Kbd
-List (with icons, missing some)
-Loader (loader on provider, pulsar not working.  custom component, pulsar not working)
+List
+Loader
 LoadingOverlay
 Mark
-Menu (MenuTargetWithTooltip does not work)
-Modal (usage not quite right, select zindex not right, stack does not work, scrollarea does not work)
+Menu
+Modal
 ModalBase
-MultiSelect (hover doesn't cover full area)
+MultiSelect
 NativeSelect
-NavLink (nested does not work)
+NavLink
 Notification
 NumberFormatter
-NumberInput (external on change not quite right)
+NumberInput
 Overlay
 Pagination
 Paper
 PasswordInput
 Pill
 PillsInput
-PinInput (usage not working, InputRef not working, oncomplete not working, autofocus not working)
-Popover (scrollable not quite right, within group not working, PopoverTargetWithTooltip not working, withoverlay not working, reference hidden not working)
+PinInput
+Popover (reference hidden not working)
 Portal
 Progress
 Radio
 Rating
-RingProgress (totally broke)
-ScrollArea (totally broke)
-SegmentedControl (seleted item removal does not work, unselect does not work)
-Select (onhover not the same, scroll to selected not working)
+RingProgress
+ScrollArea
+SegmentedControl
+Select
 SemiCircleProgress
 SimpleGrid
 Skeleton
-Slider (range not working)
+Slider
 Space
 Spoiler
 Stack
-Stepper (vertical not the same as react)
-Switch (shrinking not the same)
+Stepper
+Switch
 Table
 TableOfContents
 Tabs
 TagsInput
 Text
 Textarea
-TextInput (breakpoints not working)
+TextInput
 ThemeIcon
 Timeline
 Title
 Tooltip
 Transition
-Tree (expand on double click not working)
+Tree
 TypographyStylesProvider
 UnstyledButton
 VisuallyHidden
@@ -115,7 +115,7 @@ Carousel
 Dropzone
 Form (lists uncontrolled does not work, nested object does not work, make sure all work)
 Modals Manager (does not work)
-Notifications (does not work)
+Notifications
 NavigationProgress
-Spotlight (on hover not full width and does not work)
+Spotlight
 Tiptap

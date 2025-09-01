@@ -2,10 +2,11 @@ import { splitProps, children as resolveChildren, JSX } from 'solid-js';
 import { createEventHandler, isElement, useProps } from '../../../core';
 import { Popover } from '../../Popover';
 import { useMenuContext } from '../Menu.context';
+import { Dynamic } from 'solid-js/web';
 
 export interface MenuTargetProps {
   /** Target element */
-  children: JSX.Element;
+  children: JSX.Element | ((triggerProps: any) => JSX.Element);
 
   /** Key of the prop that should be used to get element ref */
   refProp?: string;
@@ -33,7 +34,7 @@ export function MenuTarget(_props: MenuTargetProps) {
   // }
 
   const ctx = useMenuContext();
-  const childrenAccessor = resolveChildren(() => local.children);
+  const childrenAccessor = resolveChildren(() => local.children as any);
 
   const onClick = createEventHandler(undefined, () => {
     if (ctx.trigger === 'click') {
@@ -61,18 +62,39 @@ export function MenuTarget(_props: MenuTargetProps) {
 
   return (
     <Popover.Target refProp={local.refProp} popupType="menu" ref={local.ref} {...others}>
-      <div
-        onClick={(e) => {
-          e.stopPropagation();
-          onClick(e);
-        }}
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave}
-        data-expanded={ctx.opened ? true : undefined}
-        style={{ display: 'contents' }}
-      >
-        {childrenAccessor()}
-      </div>
+      {(popoverProps) => {
+        const triggerProps = {
+          ...popoverProps,
+          onClick: (e: MouseEvent) => {
+            popoverProps.onClick?.(e as any);
+            e.stopPropagation();
+            onClick(e);
+          },
+          onMouseEnter: (e: MouseEvent) => {
+            popoverProps.onMouseEnter?.(e as any);
+            onMouseEnter(e);
+          },
+          onMouseLeave: (e: MouseEvent) => {
+            popoverProps.onMouseLeave?.(e as any);
+            onMouseLeave(e);
+          },
+          'data-expanded': ctx.opened ? true : undefined,
+        };
+
+        const child = childrenAccessor();
+
+        if (typeof child === 'function') {
+          // asChild API: user spreads props onto their own element -> no extra div
+          return (child as (p: any) => JSX.Element)(triggerProps);
+        }
+
+        // fallback: render a chosen element as the trigger (no extra wrapper)
+        return (
+          <Dynamic component={'div'} {...triggerProps}>
+            {child}
+          </Dynamic>
+        );
+      }}
     </Popover.Target>
   );
 };

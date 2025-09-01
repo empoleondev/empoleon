@@ -1,4 +1,4 @@
-import { splitProps, JSX } from 'solid-js';
+import { splitProps, JSX, Show, createMemo, For, Switch, Match } from 'solid-js';
 import { useId } from '@empoleon/hooks';
 import {
   Box,
@@ -212,32 +212,6 @@ export const InputWrapper = factory<InputWrapperFactory>(_props => {
 
   const _input = <>{local.inputContainer!(local.children)}</>;
 
-  const _error = hasError && (
-    <InputError
-      {...local.errorProps}
-      {...sharedProps}
-      size={local.errorProps?.size || sharedProps.size}
-      id={local.errorProps?.id || errorId}
-    >
-      {local.error}
-    </InputError>
-  );
-
-  const content = local.inputWrapperOrder!.map((part) => {
-    switch (part) {
-      case 'label':
-        return _label;
-      case 'input':
-        return _input;
-      case 'description':
-        return _description;
-      case 'error':
-        return _error;
-      default:
-        return null;
-    }
-  });
-
   return (
     <InputWrapperProvider
       value={{
@@ -252,11 +226,35 @@ export const InputWrapper = factory<InputWrapperFactory>(_props => {
         ref={local.ref}
         variant={local.variant}
         size={local.size}
-        mod={[{ error: !!local.error }, local.mod]}
+        mod={[{ error: !!(local.error && (local.error as any)()) }, local.mod]}
         {...getStyles('root')}
         {...others}
       >
-        {content}
+        <For each={local.inputWrapperOrder}>
+          {(part) => (
+            <Switch>
+              <Match when={part === 'label'}>{_label}</Match>
+              <Match when={part === 'input'}>{_input}</Match>
+              <Match when={part === 'description'}>{_description}</Match>
+              <Match when={part === 'error'}>
+                <Show when={!!(local.error && (local.error as any)())}>
+                  {(errorValue) =>
+                    typeof errorValue !== 'boolean' && (
+                      <InputError
+                        {...local.errorProps}
+                        {...sharedProps}
+                        size={local.errorProps?.size || sharedProps.size}
+                        id={local.errorProps?.id || errorId}
+                      >
+                        {local.error}
+                      </InputError>
+                    )
+                  }
+                </Show>
+              </Match>
+            </Switch>
+          )}
+        </For>
       </Box>
     </InputWrapperProvider>
   );

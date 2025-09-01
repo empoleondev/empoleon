@@ -5,7 +5,7 @@ import { Group } from '../Group';
 import { Modal } from '../Modal';
 import { TextInput } from '../TextInput';
 import { SegmentedControl } from './SegmentedControl';
-import { JSX } from 'solid-js';
+import { createEffect, createMemo, JSX } from 'solid-js';
 import { createSignal } from 'solid-js';
 
 export default {
@@ -127,14 +127,20 @@ export function SelectedItemRemoved() {
   const [value, setValue] = createSignal('');
   const [breakingThings, setBreakingThings] = createSignal(false);
 
-  const dataList =
-    breakingThings() === true ? ['1', '2', '3'].filter((elem) => elem !== '3') : ['1', '2', '3'];
+  const dataList = createMemo(() =>
+    breakingThings() ? ['1', '2', '3'].filter((elem) => elem !== '3') : ['1', '2', '3']
+  );
+
+   createEffect(() => {
+    const data = dataList();
+    if (value() && !data.includes(value())) setValue(data[0] ?? '');
+  });
 
   return (
     <div style={{ 'padding': '40px' }}>
-      <SegmentedControl value={value()} onChange={setValue} data={dataList} />
+      <SegmentedControl value={value()} onChange={setValue} data={dataList()} />
 
-      <button type="button" onClick={() => setBreakingThings(!breakingThings)}>
+      <button type="button" onClick={() => setBreakingThings(!breakingThings())}>
         Click here to break things
       </button>
     </div>

@@ -20,7 +20,7 @@ export function EmpoleonClasses() {
       data-empoleon-styles="classes"
       nonce={nonce?.()}
       // @ts-ignore
-      dangerouslySetInnerHTML={{ __html: classes }}
+      innerHTML={classes}
     />
   );
 }

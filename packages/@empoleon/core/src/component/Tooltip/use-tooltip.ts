@@ -103,18 +103,13 @@ export function useTooltip(settings: UseTooltip) {
 
   const opened = createMemo<boolean>(() => settings.opened ? settings.opened() : uncontrolledOpened() || false);
 
-  // console.log('use-tooltip - settings.defaultOpened:', settings.defaultOpened);
-  // console.log('use-tooltip - uncontrolledOpened():', uncontrolledOpened());
-  // console.log('use-tooltip - opened():', opened());
-  // console.log('use-tooltip - controlled:', controlled);
-
   const onChange = (_opened: boolean) => {
     if (!controlled) {
       setUncontrolledOpened(_opened);
     }
 
     if (_opened) {
-      setCurrentId(uid);
+      delayGroup.setCurrentId(uid);
     }
   };
 
@@ -134,14 +129,18 @@ export function useTooltip(settings: UseTooltip) {
     whileElementsMounted: autoUpdate,
   });
 
-  const { delay: groupDelay, currentId, setCurrentId } = useDelayGroup(() => floating.context, { id: uid });
+  const delayGroup = useDelayGroup(() => floating.context, { id: uid });
 
   const interactions = useInteractions([
-    useHover(() => floating.context, () => ({
-      enabled: settings.events?.hover,
-      delay: withinGroup ? groupDelay : { open: settings.openDelay, close: settings.closeDelay },
-      mouseOnly: !settings.events?.touch,
-    }))(),
+    useHover(() => floating.context, () => {
+      const hoverOptions = {
+        enabled: settings.events?.hover,
+        delay: withinGroup ? delayGroup.delay : { open: settings.openDelay, close: settings.closeDelay },
+        mouseOnly: !settings.events?.touch,
+      };
+
+      return hoverOptions;
+    })(),
 
     useFocus(floating.context, {
       enabled: settings.events?.focus,
@@ -172,8 +171,7 @@ export function useTooltip(settings: UseTooltip) {
     settings.onPositionChange?.(floating.placement);
   });
 
-  // Correctly call the accessors to get their boolean/string values.
-  const isGroupPhase = opened() && currentId && currentId !== uid;
+  const isGroupPhase = opened() && delayGroup.currentId && delayGroup.currentId !== uid;
 
   return {
     get x() { return floating.x; },

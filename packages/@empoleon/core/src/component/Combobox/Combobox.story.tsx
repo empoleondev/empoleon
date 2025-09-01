@@ -59,17 +59,20 @@ export function Usage() {
         }}
       >
         <Combobox.Target>
-          <TextInput
-            placeholder="Pick a value"
-            onFocus={() => store.openDropdown()}
-            onBlur={() => store.closeDropdown()}
-            value={value()}
-            onChange={(event) => {
-              setValue(event.currentTarget.value);
-              store.openDropdown();
-            }}
-            onClick={() => store.openDropdown()}
-          />
+          {(props) => (
+            <TextInput
+              {...props}
+              placeholder="Pick a value"
+              onFocus={() => store.openDropdown()}
+              onBlur={() => store.closeDropdown()}
+              value={value()}
+              onChange={(event) => {
+                setValue(event.currentTarget.value);
+                store.openDropdown();
+              }}
+              onClick={() => store.openDropdown()}
+            />
+          )}
         </Combobox.Target>
         <Combobox.Dropdown>
           <Combobox.Header>Header</Combobox.Header>
@@ -107,17 +110,20 @@ export function DisabledFirstItem() {
         }}
       >
         <Combobox.Target>
-          <TextInput
-            placeholder="Pick a value"
-            onFocus={() => store.openDropdown()}
-            onBlur={() => store.closeDropdown()}
-            value={value()}
-            onChange={(event) => {
-              setValue(event.currentTarget.value);
-              store.openDropdown();
-            }}
-            onClick={() => store.openDropdown()}
-          />
+           {(props) => (
+              <TextInput
+                {...props}
+                placeholder="Pick a value"
+                onFocus={() => store.openDropdown()}
+                onBlur={() => store.closeDropdown()}
+                value={value()}
+                onChange={(event) => {
+                  setValue(event.currentTarget.value);
+                  store.openDropdown();
+                }}
+                onClick={() => store.openDropdown()}
+              />
+            )}
         </Combobox.Target>
         <Combobox.Dropdown>
           <Combobox.Header>Header</Combobox.Header>
@@ -155,17 +161,20 @@ export function AllItemsDisabled() {
         }}
       >
         <Combobox.Target>
-          <TextInput
-            placeholder="Pick a value"
-            onFocus={() => store.openDropdown()}
-            onBlur={() => store.closeDropdown()}
-            value={value()}
-            onChange={(event) => {
-              setValue(event.currentTarget.value);
-              store.openDropdown();
-            }}
-            onClick={() => store.openDropdown()}
-          />
+           {(props) =>
+            <TextInput
+              {...props}
+              placeholder="Pick a value"
+              onFocus={() => store.openDropdown()}
+              onBlur={() => store.closeDropdown()}
+              value={value()}
+              onChange={(event) => {
+                setValue(event.currentTarget.value);
+                store.openDropdown();
+              }}
+              onClick={() => store.openDropdown()}
+            />
+          }
         </Combobox.Target>
         <Combobox.Dropdown>
           <Combobox.Header>Header</Combobox.Header>
@@ -227,7 +236,7 @@ export function WithButtonTarget() {
         withArrow
       >
         <Combobox.Target targetType="button">
-          <Button onClick={() => store.toggleDropdown()}>Toggle Popover</Button>
+           {(props) => <Button onClick={() => store.toggleDropdown()} {...props}>Toggle Popover</Button>}
         </Combobox.Target>
         <Combobox.Dropdown>
           <Combobox.Search
@@ -268,13 +277,16 @@ export function WithScrollArea() {
       {scrollableContent}
       <Combobox store={store} withinPortal={false} onOptionSubmit={setValue}>
         <Combobox.Target>
-          <TextInput
-            placeholder="Pick a value"
-            onFocus={() => store.openDropdown()}
-            onBlur={() => store.closeDropdown()}
-            value={value()}
-            onChange={(event) => setValue(event.currentTarget.value)}
-          />
+          {(props) =>
+            <TextInput
+              {...props}
+              placeholder="Pick a value"
+              onFocus={() => store.openDropdown()}
+              onBlur={() => store.closeDropdown()}
+              value={value()}
+              onChange={(event) => setValue(event.currentTarget.value)}
+            />
+          }
         </Combobox.Target>
         <Combobox.Dropdown>
           <Combobox.Options>
@@ -320,15 +332,18 @@ export function WithActive() {
         }}
       >
         <Combobox.Target>
-          <TextInput
-            placeholder="Pick a value"
-            onFocus={() => store.openDropdown()}
-            onBlur={() => store.closeDropdown()}
-            value={value()}
-            onChange={(event) => {
-              setValue(event.currentTarget.value);
-            }}
-          />
+           {(props) =>
+            <TextInput
+              {...props}
+              placeholder="Pick a value"
+              onFocus={() => store.openDropdown()}
+              onBlur={() => store.closeDropdown()}
+              value={value()}
+              onChange={(event) => {
+                setValue(event.currentTarget.value);
+              }}
+            />
+          }
         </Combobox.Target>
         <Combobox.Dropdown>
           <Combobox.Options>
@@ -346,40 +361,40 @@ export function WithActive() {
   );
 }
 
-// export function Chevron() {
-//   return <Combobox.Chevron size="xl" style={{ color: 'red' }} />;
-// }
+export function Chevron() {
+  return <Combobox.Chevron size="xl" style={{ color: 'red' }} />;
+}
 
-// export function DifferentTargets() {
-//   const combobox = useCombobox();
+export function DifferentTargets() {
+  const combobox = useCombobox();
 
-//   return (
-//     <div style={{ padding: '40px', display: 'flex', gap: '20px' }}>
-//       <Combobox store={combobox}>
-//         <Combobox.EventsTarget>
-//           <TextInput
-//             placeholder="Focus me"
-//             onFocus={() => combobox.openDropdown()}
-//             onBlur={() => combobox.closeDropdown()}
-//           />
-//         </Combobox.EventsTarget>
+  return (
+    <div style={{ padding: '40px', display: 'flex', gap: '20px' }}>
+      <Combobox store={combobox}>
+        <Combobox.EventsTarget>
+          <TextInput
+            placeholder="Focus me"
+            onFocus={() => combobox.openDropdown()}
+            onBlur={() => combobox.closeDropdown()}
+          />
+        </Combobox.EventsTarget>
 
-//         <Combobox.Target>
-//           <Button>Dropdown target</Button>
-//         </Combobox.Target>
+        <Combobox.Target>
+           {(props) => <Button {...props}>Dropdown target</Button>}
+        </Combobox.Target>
 
-//         <Combobox.Dropdown>
-//           <Combobox.Options>
-//             <Combobox.Option value="react">React</Combobox.Option>
-//             <Combobox.Option value="vue">Vue</Combobox.Option>
-//             <Combobox.Option value="svelte">Svelte</Combobox.Option>
-//             <Combobox.Option value="angular">Angular</Combobox.Option>
-//           </Combobox.Options>
-//         </Combobox.Dropdown>
-//       </Combobox>
-//     </div>
-//   );
-// }
+        <Combobox.Dropdown>
+          <Combobox.Options>
+            <Combobox.Option value="react">React</Combobox.Option>
+            <Combobox.Option value="vue">Vue</Combobox.Option>
+            <Combobox.Option value="svelte">Svelte</Combobox.Option>
+            <Combobox.Option value="angular">Angular</Combobox.Option>
+          </Combobox.Options>
+        </Combobox.Dropdown>
+      </Combobox>
+    </div>
+  );
+}
 
 export function WithoutDropdown() {
   const combobox = useCombobox();
@@ -419,17 +434,20 @@ export function WithGroups() {
         }}
       >
         <Combobox.Target>
-          <TextInput
-            placeholder="Pick a value"
-            onFocus={() => store.openDropdown()}
-            onBlur={() => store.closeDropdown()}
-            value={value()}
-            onChange={(event) => {
-              setValue(event.currentTarget.value);
-              store.openDropdown();
-            }}
-            onClick={() => store.openDropdown()}
-          />
+           {(props) =>
+            <TextInput
+              {...props}
+              placeholder="Pick a value"
+              onFocus={() => store.openDropdown()}
+              onBlur={() => store.closeDropdown()}
+              value={value()}
+              onChange={(event) => {
+                setValue(event.currentTarget.value);
+                store.openDropdown();
+              }}
+              onClick={() => store.openDropdown()}
+            />
+          }
         </Combobox.Target>
         <Combobox.Dropdown>
           <Combobox.Header>Header</Combobox.Header>
@@ -473,15 +491,18 @@ export function InteractiveHeaderAndFooter() {
         }}
       >
         <Combobox.Target>
-          <TextInput
-            placeholder="Pick a value"
-            onFocus={() => store.openDropdown()}
-            onBlur={() => store.closeDropdown()}
-            value={value()}
-            onChange={(event) => {
-              setValue(event.currentTarget.value);
-            }}
-          />
+          {(props) =>
+            <TextInput
+              {...props}
+              placeholder="Pick a value"
+              onFocus={() => store.openDropdown()}
+              onBlur={() => store.closeDropdown()}
+              value={value()}
+              onChange={(event) => {
+                setValue(event.currentTarget.value);
+              }}
+            />
+          }
         </Combobox.Target>
         <Combobox.Dropdown>
           <Combobox.Header>
@@ -549,50 +570,52 @@ const groceries = [
   '🍓 Strawberries',
 ];
 
-// export function SearchWithScrollArea() {
-//   const combobox = useCombobox({
-//     onDropdownClose: () => combobox.resetSelectedOption(),
-//   });
+export function SearchWithScrollArea() {
+  const combobox = useCombobox({
+    onDropdownClose: () => combobox.resetSelectedOption(),
+  });
 
-//   const [value, setValue] = createSignal('');
-//   const filteredOptions = () => {
-//     const shouldFilterOptions = !groceries.some((item) => item === value());
-//     return shouldFilterOptions
-//       ? groceries.filter((item) => item.toLowerCase().includes(value().toLowerCase().trim()))
-//       : groceries;
-//   };
+  const [value, setValue] = createSignal('');
+  const filteredOptions = () => {
+    const shouldFilterOptions = !groceries.some((item) => item === value());
+    return shouldFilterOptions
+      ? groceries.filter((item) => item.toLowerCase().includes(value().toLowerCase().trim()))
+      : groceries;
+  };
 
-//   return (
-//     <Combobox
-//       onOptionSubmit={(optionValue) => {
-//         setValue(optionValue);
-//         combobox.closeDropdown();
-//       }}
-//       store={combobox}
-//       withinPortal={false}
-//     >
-//       <Combobox.Target>
-//         <Button onClick={() => combobox.openDropdown()}>{value() || 'Select an item'}</Button>
-//       </Combobox.Target>
+  return (
+    <Combobox
+      onOptionSubmit={(optionValue) => {
+        setValue(optionValue);
+        combobox.closeDropdown();
+      }}
+      store={combobox}
+      withinPortal={false}
+    >
+      <Combobox.Target>
+        {(props) =>
+          <Button onClick={() => combobox.openDropdown()} {...props}>{value() || 'Select an item'}</Button>
+        }
+      </Combobox.Target>
 
-//       <Combobox.Dropdown>
-//         <Combobox.Search />
-//         <Combobox.Options>
-//           <ScrollArea.Autosize mah={200} type="scroll">
-//             {filteredOptions().length === 0 ? (
-//               <Combobox.Empty>Nothing found</Combobox.Empty>
-//             ) : (
-//               <For each={filteredOptions()}>
-//                 {(item) => (
-//                   <Combobox.Option value={item}>
-//                     {item}
-//                   </Combobox.Option>
-//                 )}
-//               </For>
-//             )}
-//           </ScrollArea.Autosize>
-//         </Combobox.Options>
-//       </Combobox.Dropdown>
-//     </Combobox>
-//   );
-// }
+      <Combobox.Dropdown>
+        <Combobox.Search />
+        <Combobox.Options>
+          <ScrollArea.Autosize mah={200} type="scroll">
+            {filteredOptions().length === 0 ? (
+              <Combobox.Empty>Nothing found</Combobox.Empty>
+            ) : (
+              <For each={filteredOptions()}>
+                {(item) => (
+                  <Combobox.Option value={item}>
+                    {item}
+                  </Combobox.Option>
+                )}
+              </For>
+            )}
+          </ScrollArea.Autosize>
+        </Combobox.Options>
+      </Combobox.Dropdown>
+    </Combobox>
+  );
+}

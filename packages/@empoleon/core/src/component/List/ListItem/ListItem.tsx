@@ -1,4 +1,4 @@
-import { JSX, splitProps } from 'solid-js';
+import { createMemo, JSX, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
@@ -10,6 +10,7 @@ import {
 } from '../../../core';
 import { useListContext } from '../List.context';
 import classes from '../List.module.css';
+import { Dynamic } from 'solid-js/web';
 
 export type ListItemStylesNames = 'item' | 'itemWrapper' | 'itemIcon' | 'itemLabel';
 
@@ -18,7 +19,7 @@ export interface ListItemProps
     CompoundStylesApiProps<ListItemFactory>,
     ElementProps<'li'> {
   /** Icon to replace item bullet */
-  icon?: JSX.Element;
+  icon?: () => JSX.Element;
 
   /** Item content */
   children?: JSX.Element;
@@ -46,19 +47,27 @@ export const ListItem = factory<ListItemFactory>(_props => {
   ]);
 
   const ctx = useListContext();
-  const _icon = local.icon || ctx.icon;
+
+  const iconVal = () => local.icon ?? ctx.icon;
+  const iconEl = createMemo<JSX.Element | null>(() => {
+    const i = iconVal();
+    return typeof i === 'function' ? (i as () => JSX.Element)() : (i ?? null);
+  });
+
   const stylesApiProps = { classNames: local.classNames, styles: local.styles };
 
   return (
     <Box
       {...ctx.getStyles('item', { ...stylesApiProps, className: local.className, style: local.style })}
       component="li"
-      mod={[{ 'with-icon': !!_icon, centered: ctx.center }, local.mod]}
+      mod={[{ 'with-icon': !!iconEl(), centered: ctx.center }, local.mod]}
       ref={local.ref}
       {...others}
     >
       <div {...ctx.getStyles('itemWrapper', stylesApiProps)}>
-        {_icon && <span {...ctx.getStyles('itemIcon', stylesApiProps)}>{_icon}</span>}
+        {iconEl() && (
+          <span {...ctx.getStyles('itemIcon', stylesApiProps)}>{iconEl()}</span>
+        )}
         <span {...ctx.getStyles('itemLabel', stylesApiProps)}>{local.children}</span>
       </div>
     </Box>

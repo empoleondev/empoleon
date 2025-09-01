@@ -1,4 +1,4 @@
-import { splitProps, JSX } from 'solid-js';
+import { splitProps, JSX, createEffect, createMemo } from 'solid-js';
 import {
   Box,
   BoxProps,
@@ -141,6 +141,12 @@ export interface InputProps extends BoxProps, __InputProps, StylesApiProps<Input
 
   /** Props passed down to the root element of the `Input` component */
   wrapperProps?: WrapperProps;
+
+  /** Uncontrolled initial value for the input */
+  defaultValue?: string | number;
+
+  /** Uncontrolled initial value for the input */
+  value?: string | number;
 }
 
 export type InputFactory = PolymorphicFactory<{
@@ -244,7 +250,7 @@ export const Input = polymorphicFactory<InputFactory>(_props => {
     varsResolver,
   });
 
-  const ariaAttributes = local.withAria
+  const ariaAttributes = () => local.withAria
     ? {
         required: local.required,
         disabled: local.disabled,
@@ -255,6 +261,15 @@ export const Input = polymorphicFactory<InputFactory>(_props => {
     : {};
 
   const _rightSection: JSX.Element = local.rightSection || (local.__clearable && local.__clearSection) || local.__defaultRightSection;
+  const valueProp = (v: any, dv: any) =>
+      v !== undefined ? { value: v } : dv !== undefined ? { value: dv } : undefined;
+  const { value: v, defaultValue: dv } = rest;
+
+  const errorMod = createMemo(() => {
+    const errorValue = typeof local.error === 'function' ? (local.error as () => any)() : local.error;
+    const result = !!errorValue && local.withErrorStyles;
+    return result;
+  });
 
   return (
     <InputContext value={{ size: local.size || 'sm' }}>
@@ -264,7 +279,7 @@ export const Input = polymorphicFactory<InputFactory>(_props => {
         {...local.wrapperProps}
         mod={[
           {
-            error: !!local.error && local.withErrorStyles,
+            error: errorMod,
             pointer: local.pointer,
             disabled: local.disabled,
             multiline: local.multiline,
@@ -291,11 +306,15 @@ export const Input = polymorphicFactory<InputFactory>(_props => {
 
         <Box
           component="input"
+          {...valueProp(v, dv)}
           {...rest}
-          {...ariaAttributes}
+          {...ariaAttributes()}
           ref={local.ref}
           required={local.required}
-          mod={{ disabled: local.disabled, error: !!local.error && local.withErrorStyles }}
+          mod={{
+            disabled: local.disabled,
+            error: errorMod,
+          }}
           variant={local.variant}
           __size={local.inputSize}
           {...getStyles('input')}

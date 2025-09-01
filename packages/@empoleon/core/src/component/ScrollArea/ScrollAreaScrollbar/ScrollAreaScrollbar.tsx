@@ -35,16 +35,16 @@ export function ScrollAreaScrollbar(props: ScrollAreaScrollbarProps) {
   return (
     <Switch fallback={null}>
       <Match when={ctx.type === "hover"}>
-        <ScrollAreaScrollbarHover {...others} ref={local.ref} forceMount={local.forceMount} />
+        <ScrollAreaScrollbarHover {...others} ref={local.ref} forceMount={local.forceMount} orientation={local.orientation} />
       </Match>
       <Match when={ctx.type === "scroll"}>
-        <ScrollAreaScrollbarScroll {...others} ref={local.ref} forceMount={local.forceMount} />
+        <ScrollAreaScrollbarScroll {...others} ref={local.ref} forceMount={local.forceMount} orientation={local.orientation} />
       </Match>
       <Match when={ctx.type === "auto"}>
-        <ScrollAreaScrollbarAuto {...others} ref={local.ref} forceMount={local.forceMount} />
+        <ScrollAreaScrollbarAuto {...others} ref={local.ref} forceMount={local.forceMount} orientation={local.orientation} />
       </Match>
       <Match when={ctx.type === "always"}>
-        <ScrollAreaScrollbarHover {...others} ref={local.ref} />
+        <ScrollAreaScrollbarVisible {...others} ref={local.ref} />
       </Match>
     </Switch>
   );

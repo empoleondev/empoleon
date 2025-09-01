@@ -77,7 +77,7 @@ Progress - done
 Radio - done
 Rating - done
 RingProgress - done
-ScrollArea - not working
+ScrollArea - done
 SegmentedControl - done
 Select - done
 SemiCircleProgress - done
@@ -108,14 +108,14 @@ VisuallyHidden - done
 
 Others:
 
-Carousel
+Carousel - done
 Dates
-Dropzone
+Dropzone - done
 Form
 Hooks
-Modals Manager
-Notifications
-NavigationProgress
-Spotlight
-Store
-Tiptap
+Modals Manager - done
+Notifications - done
+NavigationProgress - done
+Spotlight - done
+Store - done
+Tiptap - done

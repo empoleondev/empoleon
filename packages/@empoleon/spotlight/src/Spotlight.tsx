@@ -71,7 +71,7 @@ export type SpotlightFactory = Factory<{
   };
 }>;
 
-const defaultProps: Partial<SpotlightProps> = {
+const defaultProps = {
   size: 600,
   yOffset: '80px',
   limit: Infinity,
@@ -83,8 +83,7 @@ const defaultProps: Partial<SpotlightProps> = {
   clearQueryOnClose: true,
   closeOnActionTrigger: true,
   shortcut: 'mod + K',
-  highlightQuery: false,
-};
+} satisfies Partial<SpotlightProps>;
 
 export const Spotlight = factory<SpotlightFactory>(_props => {
   const props = useProps('Spotlight', defaultProps, _props);

@@ -1,12 +1,14 @@
 import { JSX } from 'solid-js';
 import { Button, Group, EmpoleonProvider } from '@empoleon/core';
 import { showNotification } from './notifications.store';
+import { Notifications } from './Notifications';
 
 export default {
   title: 'Notifications',
   decorators: [
     (Story: () => JSX.Element) => (
       <EmpoleonProvider>
+        <Notifications zIndex={10000} />
         <Story />
       </EmpoleonProvider>
     ),

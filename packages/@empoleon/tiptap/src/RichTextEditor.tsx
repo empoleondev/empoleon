@@ -102,11 +102,11 @@ export type RichTextEditorFactory = Factory<{
   };
 }>;
 
-const defaultProps: Partial<RichTextEditorProps> = {
+const defaultProps = {
   withCodeHighlightStyles: true,
   withTypographyStyles: true,
   variant: 'default',
-};
+} satisfies Partial<RichTextEditorProps>;
 
 export const RichTextEditor = factory<RichTextEditorFactory>(_props => {
   const props = useProps('RichTextEditor', defaultProps, _props);
@@ -123,6 +123,7 @@ export const RichTextEditor = factory<RichTextEditorFactory>(_props => {
     'labels',
     'children',
     'variant',
+    'attributes',
     'ref'
   ]);
 
@@ -135,6 +136,7 @@ export const RichTextEditor = factory<RichTextEditorFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
   });
 

@@ -2,7 +2,7 @@ import { JSX, Setter } from 'solid-js';
 import type { FormPathValue, LooseKeys } from './paths.types';
 import type { formRootRule } from './validate/validate-values';
 
-export type GetInputPropsType = 'input' | 'checkbox';
+export type GetInputPropsType = 'input' | 'checkbox' | 'select';
 export type FormMode = 'controlled' | 'uncontrolled';
 
 export type FormStatus = Record<string, boolean>;

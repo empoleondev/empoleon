@@ -27,6 +27,7 @@ export function useFormErrors<Values extends Record<string, any>>(
   const clearFieldError: ClearFieldError = (path) => {
     const current = errorsState();
     if (current[path as string] === undefined) {
+      setErrors(current => current);
       return;
     }
 

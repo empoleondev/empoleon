@@ -82,9 +82,10 @@ export function ScrollAreaThumb(props: ScrollAreaThumbProps) {
     'ref'
   ]);
   const scrollbarContext = useScrollbarContext();
+  const hasThumb = () => scrollbarContext.hasThumb;
 
   return (
-    <Show when={local.forceMount || scrollbarContext.hasThumb}>
+    <Show when={local.forceMount || hasThumb()}>
       <Thumb ref={local.ref} {...thumbProps} />
     </Show>
   );

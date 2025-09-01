@@ -1,4 +1,4 @@
-import { createEffect, createSignal, JSX, Show, splitProps } from 'solid-js';
+import { createEffect, createMemo, createSignal, For, Index, JSX, Show, splitProps } from 'solid-js';
 import {
   useId,
   useMergedRef,
@@ -178,16 +178,23 @@ export const SegmentedControl = factory<SegmentedControlFactory>(_props => {
 
   const theme = useEmpoleonTheme();
 
-  const _data = local.data.map((item) =>
-    typeof item === 'string' ? { label: item, value: item } : item
-  );
-
-  const [key, setKey] = createSignal(Math.random().toString());
-
   createEffect(() => {
-    local.data.length; // Track data length
-    setKey(Math.random().toString());
+    const d = local.data;            // read prop to create dependency
+    const len = Array.isArray(d) ? d.length : undefined;
+    const values = Array.isArray(d) ? d.map((x: any) => (typeof x === 'string' ? x : x?.value)) : d;
+    console.log('[SC] data changed', { ref: d, len, values });
   });
+
+  // React to value changes
+  createEffect(() => {
+    console.log('[SC] value changed', local.value);
+  });
+
+  const _data = createMemo(() =>
+    (local.data ?? []).map((item) =>
+      typeof item === 'string' ? { label: item, value: item } : item
+    )
+  );
 
   const initialized = useMounted();
   const [parent, setParent] = createSignal<HTMLElement | null>(null);
@@ -200,55 +207,20 @@ export const SegmentedControl = factory<SegmentedControlFactory>(_props => {
     value: () => local.value,
     defaultValue: local.defaultValue!,
     finalValue: Array.isArray(local.data)
-      ? (_data.find((item) => !item.disabled)?.value ?? (local.data[0] as any)?.value ?? null)
+      ? (_data().find((item) => !item.disabled)?.value ?? (local.data[0] as any)?.value ?? null)
       : null,
     onChange: local.onChange,
   });
 
   const uuid = useId(local.name);
 
-  const controls = _data.map((item) => (
-    <Box
-      {...getStyles('control')}
-      mod={{ active: _value() === item.value, orientation: local.orientation }}
-    >
-      <input
-        {...getStyles('input')}
-        disabled={local.disabled || item.disabled}
-        type="radio"
-        name={uuid}
-        value={item.value}
-        id={`${uuid}-${item.value}`}
-        checked={_value() === item.value}
-        onChange={() => !local.readOnly && handleValueChange(item.value)}
-        data-focus-ring={theme.focusRing}
-      />
-
-      <Box
-        component="label"
-        {...getStyles('label')}
-        mod={{
-          active: _value() === item.value && !(local.disabled || item.disabled),
-          disabled: local.disabled || item.disabled,
-          'read-only': local.readOnly,
-        }}
-        for={`${uuid}-${item.value}`}
-        ref={(node) => setElementRef(node, item.value)}
-        __vars={{
-          '--sc-label-color':
-            local.color !== undefined ? getContrastColor({ color: local.color, theme, autoContrast: local.autoContrast }) : undefined,
-        }}
-      >
-        <span {...getStyles('innerLabel')}>{item.label}</span>
-      </Box>
-    </Box>
-  ));
-
   const mergedRef = useMergedRef(local.ref, (node: any) => setParent(node));
 
   if (local.data.length === 0) {
     return null;
   }
+
+  const targetEl = createMemo(() => refs()[_value()] ?? null);
 
   return (
     <Box
@@ -260,7 +232,7 @@ export const SegmentedControl = factory<SegmentedControlFactory>(_props => {
         {
           'full-width': local.fullWidth,
           orientation: local.orientation,
-          initialized,
+          initialized: initialized(),
           'with-items-borders': local.withItemsBorders,
         },
         local.mod,
@@ -269,19 +241,55 @@ export const SegmentedControl = factory<SegmentedControlFactory>(_props => {
       role="radiogroup"
       data-disabled={local.disabled}
     >
-      {typeof _value() === 'string' && (
-        <Show when={key()}>
-          <FloatingIndicator
-            target={refs()[_value()]}
-            parent={parent()}
-            component="span"
-            transitionDuration="var(--sc-transition-duration)"
-            {...getStyles('indicator')}
-          />
-        </Show>
-      )}
+      <Show when={initialized() && parent() && targetEl()}>
+        <FloatingIndicator
+          target={targetEl()}
+          parent={parent()}
+          component="span"
+          transitionDuration="var(--sc-transition-duration)"
+          {...getStyles('indicator')}
+        />
+      </Show>
 
-      {controls}
+      <For each={_data()}>
+        {(item) => (
+          <Box
+            {...getStyles('control')}
+            mod={{ active: _value() === item.value, orientation: local.orientation }}
+          >
+            <input
+              {...getStyles('input')}
+              disabled={local.disabled || item.disabled}
+              type="radio"
+              name={uuid}
+              value={item.value}
+              id={`${uuid}-${item.value}`}
+              checked={_value() === item.value}
+              onChange={() => !local.readOnly && handleValueChange(item.value)}
+              data-focus-ring={theme.focusRing}
+            />
+            <Box
+              component="label"
+              {...getStyles('label')}
+              mod={{
+                active: _value() === item.value && !(local.disabled || item.disabled),
+                disabled: local.disabled || item.disabled,
+                'read-only': local.readOnly,
+              }}
+              for={`${uuid}-${item.value}`}
+              ref={(node) => setElementRef(node, item.value)}
+              __vars={{
+                '--sc-label-color':
+                  local.color !== undefined
+                    ? getContrastColor({ color: local.color, theme, autoContrast: local.autoContrast })
+                    : undefined,
+              }}
+            >
+              <span {...getStyles('innerLabel')}>{item.label}</span>
+            </Box>
+          </Box>
+        )}
+      </For>
     </Box>
   );
 });

@@ -62,12 +62,10 @@ export function ScrollAreaRoot(_props: ScrollAreaRootProps) {
     get scrollArea() { return scrollArea(); },
     get viewport() { return viewport(); },
     onViewportChange: (element: HTMLDivElement | null) => {
-      console.log('ScrollAreaRoot: viewport changed to', element);
       setViewport(element);
     },
     get content() { return content(); },
     onContentChange: (element: HTMLDivElement | null) => {
-      console.log('ScrollAreaRoot: content changed to', element);
       setContent(element);
     },
     get scrollbarX() { return scrollbarX(); },

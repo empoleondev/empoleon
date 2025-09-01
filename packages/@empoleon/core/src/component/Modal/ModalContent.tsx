@@ -37,8 +37,6 @@ export const ModalContent = factory<ModalContentFactory>(_props => {
   const ctx = useModalContext();
   const Scroll = ctx.scrollAreaComponent || NativeScrollArea;
 
-  // console.log('hi', ctx.getStyles('inner', { className: local.className, style: local.style, styles: local.styles, classNames: local.classNames }));
-
   return (
     <ModalBaseContent
       {...ctx.getStyles('content', { className: local.className, style: local.style, styles: local.styles, classNames: local.classNames })}
@@ -49,13 +47,11 @@ export const ModalContent = factory<ModalContentFactory>(_props => {
       ref={local.ref}
       {...others}
     >
-      <div style={{
+      <Scroll style={{
         'max-height': ctx.fullScreen ? '100dvh' : `calc(100dvh - (${rem(ctx.yOffset)} * 2))`,
       }}>
-        <Scroll>
-          {local.children}
-        </Scroll>
-      </div>
+        {local.children}
+      </Scroll>
     </ModalBaseContent>
   );
 });

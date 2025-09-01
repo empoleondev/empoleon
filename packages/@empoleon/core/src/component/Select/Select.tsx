@@ -187,7 +187,7 @@ export const Select = factory<SelectFactory>(_props => {
   const [search, setSearch] = useUncontrolled({
     value: () => local.searchValue,
     defaultValue: local.defaultSearchValue!,
-    finalValue: selectedOption() ? selectedOption()!.label : '',
+    finalValue: local.searchable ? (selectedOption() ? selectedOption()!.label : '') : '',
     onChange: local.onSearchChange,
   });
 
@@ -294,59 +294,69 @@ export const Select = factory<SelectFactory>(_props => {
         {...local.comboboxProps}
       >
         <Combobox.Target targetType={local.searchable ? 'input' : 'button'} autoComplete={local.autocomplete}>
-          <InputBase
-            id={_id}
-            ref={local.ref}
-            __defaultRightSection={
-              <Combobox.Chevron
-                size={local.size}
-                error={local.error}
-                unstyled={local.unstyled}
-                color={local.chevronColor}
-              />
-            }
-            __clearSection={clearButton}
-            __clearable={_clearable}
-            rightSection={local.rightSection}
-            rightSectionPointerEvents={local.rightSectionPointerEvents || (_clearable ? 'all' : 'none')}
-            {...others}
-            size={local.size}
-            __staticSelector="Select"
-            disabled={local.disabled}
-            readOnly={local.readOnly || !local.searchable}
-            value={search()}
-            onInput={(event) => {
-              handleSearchChange(event.currentTarget.value);
-              combobox.openDropdown();
-              local.selectFirstOptionOnChange && combobox.selectFirstOption();
-            }}
-            onChange={(event) => {
-              handleSearchChange(_value() != null ? optionsLockup()[_value()!]?.label || '' : '');
-            }}
-            onFocus={(event) => {
-              local.searchable && combobox.openDropdown();
-              typeof local.onFocus === "function" && local.onFocus?.(event);
-            }}
-            onBlur={(event) => {
-              if (local.autoSelectOnBlur) {
-                combobox.clickSelectedOption();
-              }
+          {(props) => {
+            const inputRef = (el: HTMLInputElement | null) => {
+              (props.ref as ((n: HTMLElement | null) => void) | undefined)?.(el as unknown as HTMLElement | null);
+              (local.ref as ((n: HTMLInputElement | null) => void) | undefined)?.(el);
+            };
 
-              local.searchable && combobox.closeDropdown();
-              handleSearchChange(_value() != null ? optionsLockup()[_value()!]?.label || '' : '');
-              typeof local.onBlur === "function" &&  local.onBlur?.(event);
-            }}
-            onClick={(event) => {
-              local.searchable ? combobox.openDropdown() : combobox.toggleDropdown();
-              typeof local.onClick === "function" &&  local.onClick?.(event);
-            }}
-            classNames={resolvedClassNames}
-            styles={resolvedStyles}
-            unstyled={local.unstyled}
-            pointer={!local.searchable}
-            error={local.error}
-            attributes={local.attributes}
-          />
+            return (
+              <InputBase
+                {...props}
+                id={_id}
+                ref={inputRef}
+                __defaultRightSection={
+                  <Combobox.Chevron
+                    size={local.size}
+                    error={local.error}
+                    unstyled={local.unstyled}
+                    color={local.chevronColor}
+                  />
+                }
+                __clearSection={clearButton}
+                __clearable={_clearable}
+                rightSection={local.rightSection}
+                rightSectionPointerEvents={local.rightSectionPointerEvents || (_clearable ? 'all' : 'none')}
+                {...others}
+                size={local.size}
+                __staticSelector="Select"
+                disabled={local.disabled}
+                readOnly={local.readOnly || !local.searchable}
+                value={search()}
+                onInput={(event) => {
+                  handleSearchChange(event.currentTarget.value);
+                  combobox.openDropdown();
+                  local.selectFirstOptionOnChange && combobox.selectFirstOption();
+                }}
+                onChange={(event) => {
+                  handleSearchChange(_value() != null ? optionsLockup()[_value()!]?.label || '' : '');
+                }}
+                onFocus={(event) => {
+                  local.searchable && combobox.openDropdown();
+                  typeof local.onFocus === "function" && local.onFocus?.(event);
+                }}
+                onBlur={(event) => {
+                  if (local.autoSelectOnBlur) {
+                    combobox.clickSelectedOption();
+                  }
+
+                  local.searchable && combobox.closeDropdown();
+                  handleSearchChange(_value() != null ? optionsLockup()[_value()!]?.label || '' : '');
+                  typeof local.onBlur === "function" &&  local.onBlur?.(event);
+                }}
+                onClick={(event) => {
+                  local.searchable ? combobox.openDropdown() : combobox.toggleDropdown();
+                  typeof local.onClick === "function" &&  local.onClick?.(event);
+                }}
+                classNames={resolvedClassNames}
+                styles={resolvedStyles}
+                unstyled={local.unstyled}
+                pointer={!local.searchable}
+                error={local.error}
+                attributes={local.attributes}
+              />
+            );
+          }}
         </Combobox.Target>
         <OptionsDropdown
           data={parsedData()}
@@ -357,7 +367,7 @@ export const Select = factory<SelectFactory>(_props => {
           hiddenWhenEmpty={!local.nothingFoundMessage}
           withScrollArea={local.withScrollArea}
           maxDropdownHeight={local.maxDropdownHeight}
-          filterOptions={local.searchable && selectedOption()?.label !== search()}
+          filterOptions={local.searchable && selectedOption()?.label !== search() && search().length > 0}
           value={_value()}
           checkIconPosition={local.checkIconPosition}
           withCheckIcon={local.withCheckIcon}

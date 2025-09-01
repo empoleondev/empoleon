@@ -1,4 +1,4 @@
-import { createSignal, createMemo, JSX } from 'solid-js';
+import { createSignal, createMemo, JSX, splitProps } from 'solid-js';
 import { getDefaultZIndex, Modal } from '@empoleon/core';
 import { randomId } from '@empoleon/hooks';
 import { ConfirmModal } from './ConfirmModal';
@@ -33,41 +33,40 @@ function separateConfirmModalProps(props: OpenConfirmModal) {
     return { confirmProps: {}, modalProps: {} };
   }
 
-  const {
-    id,
-    children,
-    onCancel,
-    onConfirm,
-    closeOnConfirm,
-    closeOnCancel,
-    cancelProps,
-    confirmProps,
-    groupProps,
-    labels,
-    ...others
-  } = props;
+  const [local, others] = splitProps(props, [
+    'id',
+    'children',
+    'onCancel',
+    'onConfirm',
+    'closeOnConfirm',
+    'closeOnCancel',
+    'cancelProps',
+    'confirmProps',
+    'groupProps',
+    'labels',
+  ]);
 
   return {
     confirmProps: {
-      id,
-      children,
-      onCancel,
-      onConfirm,
-      closeOnConfirm,
-      closeOnCancel,
-      cancelProps,
-      confirmProps,
-      groupProps,
-      labels,
+      id: local.id,
+      children: local.children,
+      onCancel: local.onCancel,
+      onConfirm: local.onConfirm,
+      closeOnConfirm: local.closeOnConfirm,
+      closeOnCancel: local.closeOnCancel,
+      cancelProps: local.cancelProps,
+      confirmProps: local.confirmProps,
+      groupProps: local.groupProps,
+      labels: local.labels,
     },
     modalProps: {
-      id,
+      id: local.id,
       ...others,
     },
   };
 }
 
-export function ModalsProvider({ children, modalProps, labels, modals }: ModalsProviderProps) {
+export function ModalsProvider(props: ModalsProviderProps) {
   const [state, setState] = createSignal<ModalsState>({ modals: [], current: null });
 
   const closeAll = (canceled?: boolean) => {
@@ -143,7 +142,7 @@ export function ModalsProvider({ children, modalProps, labels, modals }: ModalsP
   });
 
   const ctx: ModalsContextProps = {
-    modalProps: modalProps || {},
+    modalProps: props.modalProps || {},
     modals: state().modals,
     openModal,
     openConfirmModal,
@@ -160,7 +159,7 @@ export function ModalsProvider({ children, modalProps, labels, modals }: ModalsP
     switch (currentModal?.type) {
       case 'context': {
         const { innerProps, ...rest } = currentModal.props;
-        const ContextModal = modals![currentModal.ctx];
+        const ContextModal = props.modals![currentModal.ctx];
 
         return {
           modalProps: rest,
@@ -177,7 +176,7 @@ export function ModalsProvider({ children, modalProps, labels, modals }: ModalsP
             <ConfirmModal
               {...separatedConfirmProps}
               id={currentModal.id}
-              labels={currentModal.props.labels || labels}
+              labels={currentModal.props.labels || props.labels}
             />
           ),
         };
@@ -205,7 +204,7 @@ export function ModalsProvider({ children, modalProps, labels, modals }: ModalsP
     <ModalsContext.Provider value={ctx}>
       <Modal
         zIndex={getDefaultZIndex('modal') + 1}
-        {...modalProps}
+        {...props.modalProps}
         {...currentModalProps}
         opened={state().modals.length > 0}
         onClose={() => closeModal(state().current?.id as any)}
@@ -213,7 +212,7 @@ export function ModalsProvider({ children, modalProps, labels, modals }: ModalsP
         {content}
       </Modal>
 
-      {children}
+      {props.children}
     </ModalsContext.Provider>
   );
 }

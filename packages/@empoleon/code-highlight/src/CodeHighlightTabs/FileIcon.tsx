@@ -8,19 +8,19 @@ interface FileIconProps {
   style?: JSX.CSSProperties;
 }
 
-export function FileIcon({ fileIcon, fileName, getFileIcon, className, style }: FileIconProps) {
-  if (fileIcon) {
+export function FileIcon(props: FileIconProps) {
+  if (props.fileIcon) {
     return (
-      <span class={className} style={style}>
-        {fileIcon}
+      <span class={props.className} style={props.style}>
+        {props.fileIcon}
       </span>
     );
   }
 
-  if (getFileIcon && fileName) {
+  if (props.getFileIcon && props.fileName) {
     return (
-      <span class={className} style={style}>
-        {getFileIcon(fileName)}
+      <span class={props.className} style={props.style}>
+        {props.getFileIcon(props.fileName)}
       </span>
     );
   }

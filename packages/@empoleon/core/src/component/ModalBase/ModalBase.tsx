@@ -110,7 +110,6 @@ export function ModalBase(props: ModalBaseProps) {
 
   const openedFn = () => {
     const result = typeof local.opened === 'function' ? local.opened() : local.opened;
-    console.log('ModalBase opened check:', result);
     return result;
   };
 
@@ -130,12 +129,6 @@ export function ModalBase(props: ModalBaseProps) {
     'setTitleMounted',
     'setBodyMounted'
   ])
-
-  createEffect(() => {
-    console.log('ModalBase shouldLockScroll:', modalProps.shouldLockScroll());
-    console.log('ModalBase titleMounted:', modalProps.titleMounted());
-    console.log('ModalBase bodyMounted:', modalProps.bodyMounted());
-  })
 
   const { ...otherRemoveScrollProps } = local.removeScrollProps || {};
 

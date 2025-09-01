@@ -25,10 +25,8 @@ export type SpotlightFooterFactory = Factory<{
   compound: true;
 }>;
 
-const defaultProps: Partial<SpotlightFooterProps> = {};
-
 export const SpotlightFooter = factory<SpotlightFooterFactory>(_props => {
-  const props = useProps('SpotlightFooter', defaultProps, _props);
+  const props = useProps('SpotlightFooter', null, _props);
   const [local, others] = splitProps(props, [
     'className',
     'style',

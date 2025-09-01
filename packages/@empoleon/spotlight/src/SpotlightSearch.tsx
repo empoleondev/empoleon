@@ -16,6 +16,7 @@ import { createSignal, splitProps } from 'solid-js';
 
 export type SpotlightSearchStylesNames = InputStylesNames;
 
+// @ts-ignore
 export interface SpotlightSearchProps
   extends BoxProps,
     Omit<InputProps, 'classNames' | 'styles' | 'vars' | 'variant'>,

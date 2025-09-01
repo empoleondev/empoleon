@@ -36,6 +36,7 @@
   --switch-track-label-padding: var(--switch-track-label-padding-sm);
   --switch-radius: 1000px;
   --switch-color: var(--empoleon-primary-color-filled);
+  --switch-disabled-color: var(--empoleon-color-disabled);
 
   position: relative;
 }
@@ -98,13 +99,11 @@
   @mixin light {
     --switch-bg: var(--empoleon-color-gray-3);
     --switch-text-color: var(--empoleon-color-gray-6);
-    --switch-disabled-color: var(--empoleon-color-gray-2);
   }
 
   @mixin dark {
     --switch-bg: var(--empoleon-color-dark-5);
     --switch-text-color: var(--empoleon-color-dark-1);
-    --switch-disabled-color: var(--empoleon-color-dark-4);
   }
 
   &[data-label-position='left'] {
@@ -130,7 +129,8 @@
     background-color: var(--switch-bg);
     position: absolute;
     border-radius: var(--switch-radius);
-    inset: 50%;
+    top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%);
   }
 

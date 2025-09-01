@@ -7,6 +7,7 @@ import { Text } from '../Text';
 import { Tooltip } from '../Tooltip';
 import { Menu } from './Menu';
 import { EmpoleonProvider } from '../../core';
+import { Group } from '../Group';
 
 export default {
   title: 'Menu',
@@ -23,7 +24,7 @@ export function DisabledFirstItem() {
   return (
     <Menu>
       <Menu.Target>
-        <Button>Toggle menu</Button>
+        {(props) => <Button {...props}>Toggle menu</Button>}
       </Menu.Target>
 
       <Menu.Dropdown>
@@ -44,7 +45,7 @@ export function FormTab() {
 
       <Menu keepMounted>
         <Menu.Target>
-          <Button>Hey</Button>
+          {(props) => <Button {...props}>Hey</Button>}
         </Menu.Target>
         <Menu.Dropdown>
           <Menu.Item>Item 2</Menu.Item>
@@ -64,7 +65,7 @@ export function Unstyled() {
   return (
     <Menu unstyled>
       <Menu.Target>
-        <Button>Toggle menu</Button>
+        {(props) => <Button {...props}>Toggle menu</Button>}
       </Menu.Target>
 
       <Menu.Dropdown>
@@ -80,7 +81,7 @@ export function KeepMounted() {
   return (
     <Menu keepMounted>
       <Menu.Target>
-        <Button>Toggle menu</Button>
+        {(props) => <Button {...props}>Toggle menu</Button>}
       </Menu.Target>
 
       <Menu.Dropdown>
@@ -97,7 +98,7 @@ export function Usage() {
     <div style={{ padding: '40px', display: 'flex', 'justify-content': 'center' }}>
       <Menu width='200px' shadow="md">
         <Menu.Target>
-          <Button>Toggle menu</Button>
+          {(props) => <Button {...props}>Toggle menu</Button>}
         </Menu.Target>
 
         <Menu.Dropdown>
@@ -133,35 +134,37 @@ export function Usage() {
 export function MenuTargetWithTooltip() {
   return (
     <div style={{ padding: '40px' }}>
-      <Menu>
-        <Tooltip label="Tooltip first">
-          {(props) => (
-            <Menu.Target {...props}>
-              <Button>Tooltip first</Button>
-            </Menu.Target>
-          )}
-        </Tooltip>
-
-        <Menu.Dropdown>
-          <Menu.Item>Item 1</Menu.Item>
-          <Menu.Item>Item 2</Menu.Item>
-        </Menu.Dropdown>
-      </Menu>
-
-      <Menu>
-        <Menu.Target>
-          <Tooltip label="Tooltip last">
+      <Group>
+        <Menu>
+          <Tooltip label="Tooltip first">
             {(props) => (
-              <Button ml="xl" {...props}>Tooltip last</Button>
+              <Menu.Target {...props}>
+                {(props) => <Button {...props}>Tooltip first</Button>}
+              </Menu.Target>
             )}
           </Tooltip>
-        </Menu.Target>
 
-        <Menu.Dropdown>
-          <Menu.Item>Item 1</Menu.Item>
-          <Menu.Item>Item 2</Menu.Item>
-        </Menu.Dropdown>
-      </Menu>
+          <Menu.Dropdown>
+            <Menu.Item>Item 1</Menu.Item>
+            <Menu.Item>Item 2</Menu.Item>
+          </Menu.Dropdown>
+        </Menu>
+
+        <Menu>
+          <Menu.Target>
+            <Tooltip label="Tooltip last">
+              {(props) => (
+                <Button ml="xl" {...props}>Tooltip last</Button>
+              )}
+            </Tooltip>
+          </Menu.Target>
+
+          <Menu.Dropdown>
+            <Menu.Item>Item 1</Menu.Item>
+            <Menu.Item>Item 2</Menu.Item>
+          </Menu.Dropdown>
+        </Menu>
+      </Group>
     </div>
   );
 }
@@ -172,7 +175,7 @@ export function Controlled() {
     <div style={{ padding: '100px' }}>
       <Menu opened={opened()} onChange={setOpened}>
         <Menu.Target>
-          <Button>Toggle controlled menu</Button>
+          {(props) => <Button {...props}>Toggle controlled menu</Button>}
         </Menu.Target>
         <Menu.Dropdown>
           <Menu.Item>Item 1</Menu.Item>
@@ -190,7 +193,7 @@ export function WithUseDisclosure() {
     <div style={{ padding: '40px' }}>
       <Menu opened={opened()} onChange={() => handle.toggle()}>
         <Menu.Target>
-          <Button>UseDisclosureToggle controlled menu</Button>
+          {(props) => <Button {...props}>UseDisclosureToggle controlled menu</Button>}
         </Menu.Target>
         <Menu.Dropdown>
           <Menu.Item>Item 1</Menu.Item>
@@ -208,7 +211,7 @@ export function WithKeepMounted() {
         {/* Menu without keepMounted will let you 'TAB' through form-fields */}
         {/* <Menu> */}
         <Menu.Target>
-          <Button>Hey</Button>
+          {(props) => <Button {...props}>Hey</Button>}
         </Menu.Target>
         <Menu.Dropdown>
           <Menu.Item>Baby</Menu.Item>
@@ -228,7 +231,7 @@ export function WithSubMenu() {
     <div style={{ padding: '400px' }}>
       <Menu width='200px' position="bottom-start">
         <Menu.Target>
-          <Button>Toggle menu</Button>
+          {(props) => <Button {...props}>Toggle menu</Button>}
         </Menu.Target>
         <Menu.Dropdown>
           <Menu.Item>Item 1</Menu.Item>

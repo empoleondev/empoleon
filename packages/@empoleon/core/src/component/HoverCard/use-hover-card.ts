@@ -44,7 +44,7 @@ export function useHoverCard(settings: UseHoverCard) {
     }
 
     if (_opened) {
-      setCurrentId(uid);
+      delayGroup.setCurrentId(uid);
       settings.onOpen?.();
     } else {
       settings.onClose?.();
@@ -64,12 +64,12 @@ export function useHoverCard(settings: UseHoverCard) {
     whileElementsMounted: autoUpdate,
   });
 
-  const { delay: groupDelay, setCurrentId } = useDelayGroup(() => floating.context, { id: uid });
+  const delayGroup = useDelayGroup(() => floating.context, { id: uid });
 
   const interactions = useInteractions([
     useHover(() => floating.context, () => ({
       enabled: true,
-      delay: withinGroup ? groupDelay : { open: settings.openDelay, close: settings.closeDelay },
+      delay: withinGroup ? delayGroup.delay : { open: settings.openDelay, close: settings.closeDelay },
     }))(),
 
     useRole(floating.context, { role: 'dialog' }),

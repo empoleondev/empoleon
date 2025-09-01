@@ -129,7 +129,7 @@ export function DynamicNestedItems() {
   return (
     <div style={{ 'padding': '40px', 'max-width': '320px' }}>
       <NavLink label="With nested links" leftSection={<IconHome2 size={16} stroke='1.5' />}>
-        <For each={Array(count).fill(() => 0)}>
+        <For each={Array(count()).fill(() => 0)}>
           {() => (
             <NavLink
               label="Child link 1"

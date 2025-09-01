@@ -27,7 +27,7 @@ export function WithinDisabledFieldset() {
 export function Usage() {
   return (
     <div style={{ padding: '40px' }}>
-      <NativeSelect data={['React', 'Angular', 'Vue']} />
+      <NativeSelect data={['React', 'Angular', 'Vue']} value={undefined} />
     </div>
   );
 }

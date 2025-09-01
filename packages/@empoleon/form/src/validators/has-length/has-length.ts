@@ -12,14 +12,13 @@ function isLengthValid(payload: HasLengthPayload, value: any) {
     return value.length === payload;
   }
 
-  const { max, min } = payload;
   let valid = true;
 
-  if (typeof max === 'number' && value.length > max) {
+  if (typeof payload.max === 'number' && value.length > payload.max) {
     valid = false;
   }
 
-  if (typeof min === 'number' && value.length < min) {
+  if (typeof payload.min === 'number' && value.length < payload.min) {
     valid = false;
   }
 

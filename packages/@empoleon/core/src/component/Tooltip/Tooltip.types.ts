@@ -21,9 +21,9 @@ export interface TooltipMiddlewares {
 export interface TooltipBaseProps
   extends BoxProps,
     StylesApiProps<TooltipFactory>,
-    ElementProps<'div'> {
+    Omit<ElementProps<'div'>, 'children'> {
   /** Target element, must support `ref` prop and `...others` */
-  children: JSX.Element;
+  children: JSX.Element | ((refProps: Record<string, any>) => JSX.Element);
 
   /** Tooltip position relative to target element (`Tooltip` component) or mouse (`Tooltip.Floating` component) */
   position?: FloatingPosition;

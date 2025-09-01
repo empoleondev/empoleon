@@ -19,9 +19,9 @@ function Colors({ index, ...others }: ActionIconProps & { index?: number }) {
 
   return <div style={{ display: 'flex', 'gap': '20px', 'padding': '40px' }}>
     <For each={colors}>
-      {(color, index) => (
+      {(color) => (
         <ActionIcon
-          color={`${color}${typeof index() === 'number' ? `.${index()}` : ''}`}
+          color={`${color}${typeof index === 'number' ? `.${index}` : ''}`}
           {...others}
           size="lg"
         >

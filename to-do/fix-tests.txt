@@ -1,6 +1,6 @@
 Core:
 
-Accordion - component broken
+Accordion - component works but not tested test
 Autocomplete - fail
 Card - fail
 ColorInput - fail

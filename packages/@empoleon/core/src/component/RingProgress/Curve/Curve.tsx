@@ -34,15 +34,18 @@ export function Curve(props: CurveProps) {
 
   return (
     <Tooltip.Floating disabled={!local.tooltip} label={local.tooltip}>
-      <Box
-        component="circle"
-        {...others}
-        {...local.getStyles('curve')}
-        __vars={{ '--curve-color': local.color ? getThemeColor(local.color, theme) : undefined }}
-        fill="none"
-        stroke-linecap={local.lineRoundCaps ? 'round' : 'butt'}
-        {...getCurveProps({ sum: local.sum, size: local.size, thickness: local.thickness, value: local.value, offset: local.offset, root: local.root })}
-      />
+      {(refProps) => (
+        <Box
+          component="circle"
+          {...refProps}
+          {...others}
+          {...local.getStyles('curve')}
+          __vars={{ '--curve-color': local.color ? getThemeColor(local.color, theme) : undefined }}
+          fill="none"
+          stroke-linecap={local.lineRoundCaps ? 'round' : 'butt'}
+          {...getCurveProps({ sum: local.sum, size: local.size, thickness: local.thickness, value: local.value, offset: local.offset, root: local.root })}
+        />
+      )}
     </Tooltip.Floating>
   );
 }

@@ -47,11 +47,6 @@ export function useModal(props: UseModalInput) {
 
   useFocusReturn({ opened: () => local.opened(), shouldReturnFocus: () => !!(local.trapFocus && local.returnFocus) });
 
-  createEffect(() => {
-    console.log('useModal opened:', local.opened());
-    console.log('useModal shouldLockScroll:', shouldLockScroll());
-  })
-
   return {
     _id,
     titleMounted,

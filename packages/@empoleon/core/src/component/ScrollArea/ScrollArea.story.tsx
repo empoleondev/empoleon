@@ -1,9 +1,10 @@
-import { createSignal, Index, JSX } from 'solid-js';
+import { batch, createEffect, createSignal, Index, JSX, on } from 'solid-js';
 import { Box, EmpoleonProvider } from '../../core';
 import { Code } from '../Code';
 import { Paper } from '../Paper';
 import { Stack } from '../Stack';
 import { ScrollArea } from './ScrollArea';
+import { NumberInput } from '../NumberInput';
 
 export default {
   title: 'ScrollArea',
@@ -115,5 +116,77 @@ export function NeverType() {
     <ScrollArea h={200} type="never">
       <div style={{ 'width': '600px' }}>{content}</div>
     </ScrollArea>
+  );
+}
+
+
+export function OnBottomReached() {
+  const [scrollPosition, onScrollPositionChange] = createSignal({ x: 0, y: 0 });
+  const [hasReachedBottom, setHasReachedBottom] = createSignal(false);
+  const [customReachedBottom, setCustomReachedBottom] = createSignal(false);
+  const [suppressBottomEvent, setSuppressBottomEvent] = createSignal(false);
+  const setViewport = (el: HTMLDivElement) => (viewportEl = el);
+
+  const [fsize, setFsize] = createSignal<string | number>(16);
+  let viewportEl: HTMLDivElement | undefined;
+
+  createEffect(
+   on(
+     fsize,
+     () => {
+       batch(() => {
+         setSuppressBottomEvent(true);
+         setHasReachedBottom(false);
+         setCustomReachedBottom(false);
+       });
+       requestAnimationFrame(() => {
+         requestAnimationFrame(() => {
+           if (viewportEl) viewportEl.scrollTop = 0;
+           setSuppressBottomEvent(false);
+         });
+       });
+     },
+     { defer: true }
+   )
+ );
+
+  return (
+    <Stack mt={16} w="100%" align="center" justify="center">
+      <Paper withBorder h={100} w={200}>
+        <ScrollArea
+          w="100%"
+          h={100}
+          onScrollPositionChange={onScrollPositionChange}
+          onBottomReached={() => {
+            if (!suppressBottomEvent()) setHasReachedBottom(true);
+          }}
+          viewportRef={setViewport as unknown as HTMLDivElement}
+          viewportProps={{
+            ref: (el) => (viewportEl = el),
+            onScroll: (e) => {
+              const { scrollTop, scrollHeight, clientHeight } = e.currentTarget;
+              const atBottom = scrollTop + clientHeight >= scrollHeight - 1;
+              if (customReachedBottom() !== atBottom) setCustomReachedBottom(atBottom);
+            },
+          }}
+        >
+          {Array.from({ length: 7 }).map((_k, i) => (
+            <Box h={40.5}>
+              <h1 style={{ 'font-size': `${fsize()}px` }}>My Example</h1>
+            </Box>
+          ))}
+        </ScrollArea>
+      </Paper>
+      <NumberInput value={fsize()} onChange={setFsize} label="Font size (px)" />
+      <div>
+        Scroll position: <Code>{`{ x: ${scrollPosition().x}, y: ${scrollPosition().y} }`}</Code>
+      </div>
+      <div>
+        Has Reached Bottom: <Code>{`{ ${hasReachedBottom()} }`}</Code>
+      </div>
+      <div>
+        Custom Has Reached Bottom: <Code>{`{ ${customReachedBottom()} }`}</Code>
+      </div>
+    </Stack>
   );
 }

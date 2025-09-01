@@ -32,6 +32,7 @@ export function Scrollbar(props: ScrollbarPrivateProps & JSX.HTMLAttributes<HTML
     'onDragScroll',
     'onWheelScroll',
     'onResize',
+    'children',
     'ref',
   ]);
 
@@ -80,7 +81,7 @@ export function Scrollbar(props: ScrollbarPrivateProps & JSX.HTMLAttributes<HTML
   return (
     <ScrollbarProvider value={{
       scrollbar: scrollbar(),
-      hasThumb: local.hasThumb,
+      get hasThumb() { return local.hasThumb },
       onThumbChange: local.onThumbChange,
       onThumbPointerUp: local.onThumbPointerUp,
       onThumbPositionChange: local.onThumbPositionChange,
@@ -117,7 +118,9 @@ export function Scrollbar(props: ScrollbarPrivateProps & JSX.HTMLAttributes<HTML
           document.body.style.webkitUserSelect = prevWebkitUserSelectRef();
           setRect(null);
         }}
-      />
+      >
+        {local.children}
+      </div>
     </ScrollbarProvider>
   );
 }

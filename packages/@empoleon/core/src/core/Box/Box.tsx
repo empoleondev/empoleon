@@ -1,6 +1,6 @@
 import cx from 'clsx';
 import { createMemo, Show, splitProps, JSX, children, createEffect } from 'solid-js';
-import { Ref } from "@solid-primitives/refs";
+import { mergeRefs, Ref } from "@solid-primitives/refs";
 import { Dynamic } from 'solid-js/web';
 import { createPolymorphicComponent } from '../factory';
 import { InlineStyles } from '../InlineStyles';
@@ -97,6 +97,12 @@ const _Box = <T extends HTMLElement = HTMLDivElement>(
   const transformedSx = createMemo(() => useSxTransform?.()?.(styleProps.sx));
   const responsiveClassName = useRandomClassName();
 
+  let _innerEl: HTMLElement | undefined;
+  const forwardedRef = local.ref as Ref<HTMLElement> | undefined;
+  const refToPass = mergeRefs(forwardedRef, (el?: HTMLElement) => {
+    _innerEl = el;
+  });
+
   const parsedStyleProps = createMemo(() =>
     parseStyleProps({
       styleProps,
@@ -107,7 +113,7 @@ const _Box = <T extends HTMLElement = HTMLDivElement>(
 
   const elementProps = createMemo(() => {
     return {
-      ref: local.ref,
+      ref: refToPass,
       style: getBoxStyle({
         theme,
         style: local.style,
@@ -127,6 +133,37 @@ const _Box = <T extends HTMLElement = HTMLDivElement>(
       ...getBoxMod(local.mod),
       ...rest,
     };
+  });
+
+  // Needed otherwise disabled is not reactive
+  createEffect(() => {
+  //   console.log('🔍 BOX EFFECT: local.mod changed:', local.mod);
+  // console.log('🔍 BOX EFFECT: elementProps:', elementProps());
+
+    const p = elementProps();
+    const el = _innerEl as HTMLElement | null;
+    if (!el) return;
+
+    // data-* attributes (clear then set)
+    for (const name of el.getAttributeNames()) {
+      if (name.startsWith('data-')) el.removeAttribute(name);
+    }
+    for (const k of Object.keys(p)) {
+      if (k.startsWith('data-')) {
+        const v = (p as any)[k];
+        if (v != null && v !== false) el.setAttribute(k, String(v));
+      }
+    }
+
+    // disabled (prop + attr)
+    if ('disabled' in p) {
+      try { (el as any).disabled = !!(p as any).disabled; } catch {}
+      if ((p as any).disabled) el.setAttribute('disabled', '');
+      else el.removeAttribute('disabled');
+    } else {
+      el.removeAttribute('disabled');
+      try { (el as any).disabled = false; } catch {}
+    }
   });
 
   return (

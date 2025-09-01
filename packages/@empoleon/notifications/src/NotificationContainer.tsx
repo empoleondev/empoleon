@@ -43,7 +43,6 @@ export function NotificationContainer(props: NotificationContainerProps) {
   });
 
   createEffect(() => {
-    // Access autoCloseDuration to create reactivity
     autoCloseDuration;
     handleAutoClose();
 
@@ -52,7 +51,6 @@ export function NotificationContainer(props: NotificationContainerProps) {
     });
   });
 
-  // Cleanup on component unmount
   onCleanup(() => {
     cancelAutoClose();
   });

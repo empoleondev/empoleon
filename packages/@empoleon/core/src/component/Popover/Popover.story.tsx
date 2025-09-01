@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import { createSignal } from 'solid-js';
+import { createSignal, For } from 'solid-js';
 import { Box, EmpoleonProvider, EmpoleonThemeProvider } from '../../core';
 import { Group } from '../Group';
 import { Tooltip } from '../Tooltip';
@@ -21,9 +21,7 @@ export default {
 const lorem =
   'Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, facilis rerum molestias voluptatem, quidem sunt, omnis iste ipsa corporis itaque optio. Amet fugiat explicabo, molestias exercitationem consequatur quis dicta unde?';
 
-const content = Array(10)
-  .fill(0)
-  .map((_, index) => <p>{lorem}</p>);
+const createSection = (count = 10) => Array(count).fill(lorem);
 
 export function Uncontrolled() {
   return (
@@ -46,7 +44,7 @@ export function Uncontrolled() {
           onEnterTransitionEnd={() => console.log('entered')}
         >
           <Popover.Target>
-            <button type="button">Toggle popover</button>
+            {(props) => <button type="button" {...props}>Toggle popover</button>}
           </Popover.Target>
 
           <Popover.Dropdown>Dropdown</Popover.Dropdown>
@@ -59,15 +57,27 @@ export function Uncontrolled() {
 export function Scrollable() {
   return (
     <div>
-      {content}
-      {content}
-      {content}
+      <For each={createSection()}>
+        {(text) => <p>{text}</p>}
+      </For>
+      <For each={createSection()}>
+        {(text) => <p>{text}</p>}
+      </For>
+      <For each={createSection()}>
+        {(text) => <p>{text}</p>}
+      </For>
 
       <Uncontrolled />
 
-      {content}
-      {content}
-      {content}
+      <For each={createSection()}>
+        {(text) => <p>{text}</p>}
+      </For>
+      <For each={createSection()}>
+        {(text) => <p>{text}</p>}
+      </For>
+      <For each={createSection()}>
+        {(text) => <p>{text}</p>}
+      </For>
     </div>
   );
 }
@@ -77,7 +87,7 @@ export function AtTheEdge() {
     <div style={{ display: 'flex', 'justify-content': 'flex-end' }}>
       <Popover position="bottom-end" middlewares={{ shift: { padding: 20 } }}>
         <Popover.Target>
-          <button type="button">Toggle popover</button>
+          {(props) => <button type="button" {...props}>Toggle popover</button>}
         </Popover.Target>
 
         <Popover.Dropdown>Dropdown</Popover.Dropdown>
@@ -91,7 +101,7 @@ export function Disabled() {
     <div style={{ padding: '40px' }}>
       <Popover disabled>
         <Popover.Target>
-          <button type="button">Toggle popover</button>
+          {(props) => <button type="button" {...props}>Toggle popover</button>}
         </Popover.Target>
 
         <Popover.Dropdown>Dropdown</Popover.Dropdown>
@@ -105,7 +115,7 @@ export function WithArrow() {
     <div style={{ padding: '40px' }}>
       <Popover withArrow width='400px'>
         <Popover.Target>
-          <button type="button">arrow popover</button>
+          {(props) => <button type="button" {...props}>arrow popover</button>}
         </Popover.Target>
 
         <Popover.Dropdown>Dropdown with arrow</Popover.Dropdown>
@@ -119,7 +129,7 @@ export function WithArrowRadius() {
     <div style={{ padding: '40px' }}>
       <Popover withArrow width='400px' arrowRadius={4}>
         <Popover.Target>
-          <button type="button">arrow popover</button>
+          {(props) => <button type="button" {...props}>arrow popover</button>}
         </Popover.Target>
 
         <Popover.Dropdown>Dropdown with arrow radius</Popover.Dropdown>
@@ -146,9 +156,7 @@ export function Controlled() {
         onOpen={() => console.log('opened')}
       >
         <Popover.Target>
-          <button type="button" onClick={() => setState((c) => !c)}>
-            Toggle popover
-          </button>
+          {(props) => <button type="button" onClick={() => setState((c) => !c)} {...props}>Toggle popover</button>}
         </Popover.Target>
 
         <Popover.Dropdown>
@@ -168,9 +176,7 @@ export function KeepMounted() {
     <div style={{ padding: '100px', display: 'flex', 'align-items': 'center', 'justify-content': 'center' }}>
       <Popover opened={opened()} onChange={setState} keepMounted>
         <Popover.Target>
-          <button type="button" onClick={() => setState((c) => !c)}>
-            Toggle popover
-          </button>
+          {(props) => <button type="button" onClick={() => setState((c) => !c)} {...props}>Toggle popover</button>}
         </Popover.Target>
 
         <Popover.Dropdown>
@@ -190,9 +196,7 @@ export function SameWidth() {
     <div style={{ padding: '40px' }}>
       <Popover opened={opened()} width="target" onChange={setState}>
         <Popover.Target>
-          <button type="button" onClick={() => setState((c) => !c)}>
-            Toggle popover
-          </button>
+          {(props) => <button type="button" onClick={() => setState((c) => !c)} {...props}>Toggle popover</button>}
         </Popover.Target>
 
         <Popover.Dropdown>Dropdown</Popover.Dropdown>
@@ -205,9 +209,7 @@ export function WithinGroup() {
   return (
     <Group grow>
       <Popover>
-        <Popover.Target>
-          <button type="button">Toggle popover</button>
-        </Popover.Target>
+        <Popover.Target>{(props) => <button type="button" {...props}>Toggle popover</button>}</Popover.Target>
 
         <Popover.Dropdown>Dropdown</Popover.Dropdown>
       </Popover>
@@ -221,9 +223,9 @@ export function PopoverTargetWithTooltip() {
     <div style={{ padding: '40px' }}>
       <Popover>
         <Tooltip label="Tooltip first">
-          <Popover.Target>
-            <button type="button">Tooltip first</button>
-          </Popover.Target>
+          {(props) => <Popover.Target>
+            <button type="button" {...props}>Tooltip first</button>
+          </Popover.Target>}
         </Tooltip>
 
         <Popover.Dropdown>Dropdown</Popover.Dropdown>
@@ -249,7 +251,7 @@ export function Inline() {
       quas neque{' '}
       <Popover middlewares={{ shift: true, flip: true, inline: true }} position="top">
         <Popover.Target>
-          <span style={{ background: 'pink' }}>aliquid laboriosam dolorum</span>
+          {(props) => <span style={{ background: 'pink' }} {...props}>aliquid laboriosam dolorum</span>}
         </Popover.Target>
         <Popover.Dropdown>Inline popover</Popover.Dropdown>
       </Popover>
@@ -270,9 +272,7 @@ export function Size() {
         onChange={setState}
       >
         <Popover.Target>
-          <button type="button" onClick={() => setState((c) => !c)}>
-            Toggle popover
-          </button>
+          {(props) => <button type="button" onClick={() => setState((c) => !c)} {...props}>Toggle popover</button>}
         </Popover.Target>
 
         <Popover.Dropdown style={{ overflow: 'auto' }}>
@@ -304,13 +304,13 @@ export function PopoverEvents() {
           returnFocus
         >
           <Popover.Target>
-            <Box>
+            {(props) => <Box {...props}>
               <button type="button" onClick={() => setState((c) => !c)}>
                 Toggle controlled popover
               </button>
               <br />
               <div>Controlled State: {toggle1() ? 'Open' : 'Closed'}</div>
-            </Box>
+            </Box>}
           </Popover.Target>
 
           <Popover.Dropdown>
@@ -321,11 +321,13 @@ export function PopoverEvents() {
         </Popover>
         <Popover onOpen={() => setToggle2(true)} onClose={() => setToggle2(false)}>
           <Popover.Target>
-            <Box>
-              <button type="button">Toggle uncontrolled popover</button>
-              <br />
-              <div>Uncontrolled State: {toggle2() ? 'Open' : 'Closed'}</div>
-            </Box>
+            {(props) =>
+              <Box {...props}>
+                <button type="button">Toggle uncontrolled popover</button>
+                <br />
+                <div>Uncontrolled State: {toggle2() ? 'Open' : 'Closed'}</div>
+              </Box>
+            }
           </Popover.Target>
 
           <Popover.Dropdown>Dropdown</Popover.Dropdown>
@@ -340,7 +342,7 @@ export function AxisOffset() {
     <div style={{ padding: '40px' }}>
       <Popover offset={{ mainAxis: 50, crossAxis: 50 }}>
         <Popover.Target>
-          <button type="button">Toggle popover</button>
+          {(props) => <button type="button" {...props}>Toggle popover</button>}
         </Popover.Target>
 
         <Popover.Dropdown>Dropdown</Popover.Dropdown>
@@ -359,9 +361,7 @@ export function WithOverlay() {
       </p>
       <Popover withOverlay overlayProps={{ blur: '8px', zIndex: 100 }}>
         <Popover.Target>
-          <button type="button" style={{ position: 'relative', 'z-index': 101 }}>
-            Toggle popover
-          </button>
+          {(props) => <button type="button" style={{ position: 'relative', 'z-index': 101 }} {...props}>Toggle popover</button>}
         </Popover.Target>
         <Popover.Dropdown>Dropdown</Popover.Dropdown>
       </Popover>
@@ -377,7 +377,7 @@ export function ReferenceHidden() {
       onClick={() => setState((o) => !o)}
     >
       <div style={{ padding: '40px', width: '1000px', height: '1000px' }}>
-        <Popover position="top" withArrow opened hideDetached={false}>
+        <Popover position="top" withArrow opened hideDetached={false} floatingStrategy="fixed">
           <Popover.Target>
             <button type="button" style={{ display: opened() ? 'block' : 'none' }}>
               Toggle popover

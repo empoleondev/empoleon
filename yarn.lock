@@ -1443,10 +1443,11 @@ __metadata:
   dependencies:
     "@empoleon-tests/core": "workspace:*"
     "@empoleon/hooks": "workspace:*"
-    "@empoleon/solid-floating-ui": "npm:0.0.4"
+    "@empoleon/solid-floating-ui": "npm:0.0.5"
     "@empoleon/solid-number-format": "npm:0.0.4"
     "@empoleon/solid-remove-scroll": "npm:^0.0.4-0"
     "@solid-primitives/presence": "npm:0.1.1"
+    "@solid-primitives/props": "npm:^3.2.2"
     "@solid-primitives/refs": "npm:1.1.1"
     "@solid-primitives/resize-observer": "npm:2.1.1"
     "@solid-primitives/utils": "npm:6.3.1"
@@ -1511,6 +1512,7 @@ __metadata:
     "@empoleon/core": "workspace:*"
     "@empoleon/hooks": "workspace:*"
     "@empoleon/store": "npm:8.0.0"
+    "@solid-primitives/transition-group": "npm:^1.1.2"
     solid-transition-group: "npm:0.3.0"
   languageName: unknown
   linkType: soft
@@ -1546,14 +1548,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@empoleon/solid-floating-ui@npm:0.0.4":
-  version: 0.0.4
-  resolution: "@empoleon/solid-floating-ui@npm:0.0.4"
+"@empoleon/solid-floating-ui@npm:0.0.5":
+  version: 0.0.5
+  resolution: "@empoleon/solid-floating-ui@npm:0.0.5"
   dependencies:
     "@floating-ui/dom": "npm:1.7.1"
     "@floating-ui/utils": "npm:0.2.8"
     solid-js: "npm:^1.9.7"
-  checksum: 10c0/324bbf6b26210e298fbd6c1c8ec2ad80c9a1755a6ab76f64b941283eee47af8b1ab287fd7b10da73447f55d1799c60f4dddcad1b43a3d98557adea6c62a1d1c1
+  checksum: 10c0/daf9a8eddb2cc78ab952923ed618984b7e8a76c0eb4ed3a5c5cf43f984d13cbfd9b553746d502c61d9667303a1a54d81492b7481dbb892ff5bac902cd97c0225
   languageName: node
   linkType: hard
 
@@ -3243,6 +3245,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@solid-primitives/props@npm:^3.2.2":
+  version: 3.2.2
+  resolution: "@solid-primitives/props@npm:3.2.2"
+  dependencies:
+    "@solid-primitives/utils": "npm:^6.3.2"
+  peerDependencies:
+    solid-js: ^1.6.12
+  checksum: 10c0/711e6ef1a5721165e9d7c8443aa499aafd2a9c4f128132e72386022a4808646cd73c813dbb9acb9980dd20c1c621d8993d919e6157f4484a2029f672247044d7
+  languageName: node
+  linkType: hard
+
 "@solid-primitives/refs@npm:1.1.1":
   version: 1.1.1
   resolution: "@solid-primitives/refs@npm:1.1.1"
@@ -3301,7 +3314,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@solid-primitives/transition-group@npm:^1.1.0":
+"@solid-primitives/transition-group@npm:^1.1.0, @solid-primitives/transition-group@npm:^1.1.2":
   version: 1.1.2
   resolution: "@solid-primitives/transition-group@npm:1.1.2"
   peerDependencies:

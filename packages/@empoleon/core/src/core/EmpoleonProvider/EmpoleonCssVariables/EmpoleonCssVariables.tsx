@@ -33,11 +33,9 @@ export function EmpoleonCssVariables(props: EmpoleonCssVariablesProps) {
         data-empoleon-styles
         nonce={nonce?.()}
         // @ts-ignore
-        dangerouslySetInnerHTML={{
-          __html: `${css}${
-            shouldCleanVariables ? '' : getColorSchemeCssVariables(props.cssVariablesSelector)
-          }`,
-        }}
+        innerHTML={`${css}${
+          shouldCleanVariables ? '' : getColorSchemeCssVariables(props.cssVariablesSelector)
+        }`}
       />
     );
   }

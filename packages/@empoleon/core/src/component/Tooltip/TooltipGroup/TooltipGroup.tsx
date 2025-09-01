@@ -14,10 +14,10 @@ export interface TooltipGroupProps {
   closeDelay?: number;
 }
 
-const defaultProps: Partial<TooltipGroupProps> = {
+const defaultProps = {
   openDelay: 0,
   closeDelay: 0,
-};
+} satisfies Partial<TooltipGroupProps>;
 
 export function TooltipGroup(_props: TooltipGroupProps) {
   const props = useProps('TooltipGroup', defaultProps, _props);

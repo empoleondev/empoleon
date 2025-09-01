@@ -24,10 +24,8 @@ export type RichTextEditorControlsGroupFactory = Factory<{
   compound: true;
 }>;
 
-const defaultProps: Partial<RichTextEditorControlsGroupProps> = {};
-
 export const RichTextEditorControlsGroup = factory<RichTextEditorControlsGroupFactory>(_props => {
-  const props = useProps('RichTextEditorControlsGroup', defaultProps, _props);
+  const props = useProps('RichTextEditorControlsGroup', null, _props);
   const [local, others] = splitProps(props, [
     'classNames',
     'className',

@@ -69,11 +69,11 @@ export const PopoverTarget = factory<PopoverTargetFactory>(_props => {
   const resolved = safe();
 
   // If more than one top‑level node, or primitive, reject
-  if (!resolved || Array.isArray(resolved) || typeof resolved === 'string' || typeof resolved === 'number') {
-    throw new Error(
-      'Popover.Target component children should be an element or a component that accepts ref. Fragments, strings, numbers and other primitive values are not supported'
-    );
-  }
+  // if (!resolved || Array.isArray(resolved) || typeof resolved === 'string' || typeof resolved === 'number') {
+  //   throw new Error(
+  //     'Popover.Target component children should be an element or a component that accepts ref. Fragments, strings, numbers and other primitive values are not supported'
+  //   );
+  // }
 
   return (
     <span

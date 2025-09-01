@@ -53,7 +53,7 @@ export function Usage() {
       <NativeSelect
         label="native select"
         data={['React', 'Angular']}
-        {...form.getInputProps('select')}
+        {...form.getInputProps('select', { type: "select" })}
       />
 
       <Button onClick={() => form.setValues({ name: 'test' })}>Set values</Button>
@@ -112,7 +112,7 @@ export function Initialize() {
       <NativeSelect
         label="native select"
         data={['React', 'Angular']}
-        {...form.getInputProps('select')}
+        {...form.getInputProps('select', { type: "select" })}
       />
 
       <Button
@@ -148,7 +148,7 @@ export function ControlMode() {
         label="select"
         defaultDropdownOpened
         data={['React', 'Angular']}
-        {...form.getInputProps('select')}
+        {...form.getInputProps('select', { type: "select" })}
       />
 
       <TextInput label="Name" {...form.getInputProps('name')} />
@@ -220,7 +220,7 @@ export function FocusOnError() {
       <NativeSelect
         label="native select"
         data={['React', 'Angular']}
-        {...form.getInputProps('select')}
+        {...form.getInputProps('select', { type: "select" })}
       />
 
       <Button onClick={() => form.setValues({ name: 'test' })}>Set values</Button>

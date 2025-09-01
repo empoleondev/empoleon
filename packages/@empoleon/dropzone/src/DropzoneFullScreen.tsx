@@ -19,6 +19,7 @@ import classes from './Dropzone.module.css';
 
 export type DropzoneFullScreenStylesNames = DropzoneStylesNames | 'fullScreen';
 
+// @ts-ignore
 export interface DropzoneFullScreenProps
   extends BoxProps,
     Omit<DropzoneProps, 'styles' | 'classNames' | 'vars' | 'variant'>,
@@ -44,17 +45,16 @@ export type DropzoneFullScreenFactory = Factory<{
   variant: DropzoneVariant;
 }>;
 
-const defaultProps: Partial<DropzoneFullScreenProps> = {
-  loading: false,
+const defaultProps = {
   maxSize: Infinity,
-  activateOnClick: false,
   activateOnDrag: true,
   dragEventsBubbling: true,
   activateOnKeyboard: true,
   active: true,
   zIndex: getDefaultZIndex('max'),
   withinPortal: true,
-};
+} satisfies Partial<DropzoneFullScreenProps>;
+
 
 export const DropzoneFullScreen = factory<DropzoneFullScreenFactory>(_props => {
   const props = useProps('DropzoneFullScreen', defaultProps, _props);
@@ -71,6 +71,7 @@ export const DropzoneFullScreen = factory<DropzoneFullScreenFactory>(_props => {
     'zIndex',
     'withinPortal',
     'portalProps',
+    'attributes',
     'ref'
   ]);
 
@@ -83,6 +84,7 @@ export const DropzoneFullScreen = factory<DropzoneFullScreenFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     rootSelector: 'fullScreen',
   });
 

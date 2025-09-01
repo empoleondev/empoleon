@@ -50,7 +50,7 @@ export const InputBase = polymorphicFactory<InputBaseFactory>(_props => {
   const [local, others] = splitProps(props, [
     'inputProps',
     'wrapperProps',
-    'ref'
+    'ref',
   ]);
 
   return (

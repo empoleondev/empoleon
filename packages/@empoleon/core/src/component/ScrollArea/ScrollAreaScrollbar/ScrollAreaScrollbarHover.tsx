@@ -50,6 +50,7 @@ export function ScrollAreaScrollbarHover(props: ScrollAreaScrollbarHoverProps) {
     <Show when={local.forceMount || visible()} fallback={null}>
       <ScrollAreaScrollbarAuto
         data-state={visible() ? 'visible' : 'hidden'}
+        orientation={local.orientation}
         {...others}
         ref={local.ref}
       />

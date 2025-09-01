@@ -2,7 +2,7 @@ import { Button, Checkbox, EmpoleonProvider, NativeSelect, Textarea, TextInput }
 import { createFormActions } from '../actions';
 import { useForm } from '../use-form';
 import { FormBase } from './_base';
-import { JSX } from 'solid-js';
+import { createEffect, JSX, Show } from 'solid-js';
 
 export default {
    title: 'Form',
@@ -45,14 +45,14 @@ export function FormActions() {
       <NativeSelect
         label="native select"
         data={['React', 'Angular']}
-        {...form.getInputProps('select')}
+        {...form.getInputProps('select', { type: "select" })}
       />
 
-      <Button onClick={() => formActions.setValues({ name: 'test-name', area: 'test-area' })}>
+      <Button type="button" onClick={() => formActions.setValues({ name: 'test-name', area: 'test-area' })}>
         Set values
       </Button>
-      <Button onClick={() => formActions.setFieldValue('terms', true)}>Set field value</Button>
-      <Button onClick={() => formActions.validate()}>Validate</Button>
+      <Button type="button" onClick={() => formActions.setFieldValue('terms', true)}>Set field value</Button>
+      <Button type="button" onClick={() => formActions.validate()}>Validate</Button>
     </FormBase>
   );
 }

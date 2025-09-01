@@ -7,6 +7,7 @@ import { Scrollbar } from './Scrollbar';
 
 export function ScrollAreaScrollbarY(props: ScrollAreaScrollbarAxisProps) {
   const [local, others] = splitProps(props, [
+    'children',
     'sizes',
     'onSizesChange',
     'style',
@@ -40,7 +41,7 @@ export function ScrollAreaScrollbarY(props: ScrollAreaScrollbarAxisProps) {
         props.onDragScroll(pointerPos.y)
       }
       onWheelScroll={(
-        event: WheelEvent,                                                         // :contentReference[oaicite:16]{index=16}
+        event: WheelEvent,
         maxScrollPos: number
       ) => {
         if (ctx.viewport) {
@@ -64,7 +65,9 @@ export function ScrollAreaScrollbarY(props: ScrollAreaScrollbarAxisProps) {
           });
         }
       }}
-    />
+    >
+      {local.children}
+    </Scrollbar>
   );
 }
 

@@ -1,12 +1,12 @@
-import { createSignal, createMemo } from 'solid-js';
+import { createSignal } from 'solid-js';
 import { getPath, setPath } from '../../paths';
 import { FormMode } from '../../types';
 
 export interface $FormValues<Values extends Record<PropertyKey, any>> {
   initialized: boolean;
   stateValues: () => Values;
-  refValues: Values;
-  valuesSnapshot: Values;
+  refValues: { current: Values }; // Keep React-like interface for compatibility
+  valuesSnapshot: { current: Values }; // Keep React-like interface for compatibility
   setValues: (payload: SetValuesInput<Values>) => void;
   setFieldValue: (payload: SetFieldValueInput<Values>) => void;
   resetValues: () => void;
@@ -44,15 +44,28 @@ interface UseFormValuesInput<Values extends Record<PropertyKey, any>> {
   onValuesChange?: ((values: Values, previousValues: Values) => void) | undefined;
 }
 
-export function useFormValues<Values extends Record<PropertyKey, any>>({
-  initialValues,
-  onValuesChange,
-  mode,
-}: UseFormValuesInput<Values>): $FormValues<Values> {
+export function useFormValues<Values extends Record<PropertyKey, any>>(props: UseFormValuesInput<Values>): $FormValues<Values> {
   let initialized = false;
-  const [stateValues, setStateValues] = createSignal<Values>(initialValues || ({} as Values));
-  let refValues = stateValues();
-  let valuesSnapshot = stateValues();
+  const [stateValues, setStateValues] = createSignal<Values>(props.initialValues || ({} as Values));
+
+  let refValuesData = stateValues();
+  let valuesSnapshotData = stateValues();
+
+  const [refValuesSignal, setRefValuesSignal] = createSignal(refValuesData);
+
+  const refValues = {
+    get current() { return refValuesData; },
+    set current(value: Values) {
+      refValuesData = value;
+      setRefValuesSignal(() => value);
+    }
+  };
+
+
+  const valuesSnapshot = {
+    get current() { return valuesSnapshotData; },
+    set current(value: Values) { valuesSnapshotData = value; }
+  };
 
   const setValues = ({
     values,
@@ -65,9 +78,15 @@ export function useFormValues<Values extends Record<PropertyKey, any>>({
     const updatedValues = mergeWithPreviousValues
       ? { ...previousValues, ...resolvedValues }
       : (resolvedValues as Values);
-    refValues = updatedValues;
-    updateState && setStateValues(updatedValues);
-    onValuesChange?.(updatedValues, previousValues);
+
+    refValues.current = updatedValues;
+
+    if (updateState) {
+      setStateValues(() => updatedValues);
+    }
+
+    props.onValuesChange?.(updatedValues, previousValues);
+
     subscribers
       ?.filter(Boolean)
       .forEach((subscriber) => subscriber!({ updatedValues, previousValues }));
@@ -92,13 +111,13 @@ export function useFormValues<Values extends Record<PropertyKey, any>>({
   };
 
   const setValuesSnapshot = (payload: Values) => {
-    valuesSnapshot = payload;
+    valuesSnapshot.current = payload;
   };
 
   const initialize = (values: Values, onInitialize: () => void) => {
     if (!initialized) {
       initialized = true;
-      setValues({ values, updateState: mode === 'controlled' });
+      setValues({ values, updateState: props.mode === 'controlled' });
       setValuesSnapshot(values);
       onInitialize();
     }
@@ -112,7 +131,7 @@ export function useFormValues<Values extends Record<PropertyKey, any>>({
     });
   };
 
-  const getValues = () => refValues;
+  const getValues = () => refValuesSignal();
   const getValuesSnapshot = () => valuesSnapshot.current;
 
   return {

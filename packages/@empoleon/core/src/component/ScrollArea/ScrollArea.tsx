@@ -255,8 +255,6 @@ export const ScrollArea = factory<ScrollAreaFactory>(_props => {
 ScrollArea.displayName = '@empoleon/core/ScrollArea';
 
 export const ScrollAreaAutosize = factory<ScrollAreaFactory>(_props => {
-  console.log(_props.scrollbarSize);
-
   const props = useProps('ScrollAreaAutosize', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'children',

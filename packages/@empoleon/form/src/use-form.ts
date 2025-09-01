@@ -1,4 +1,4 @@
-import { createSignal, createMemo, batch } from 'solid-js';
+import { createSignal, mergeProps } from 'solid-js';
 import { useFormActions } from './actions';
 import { getInputOnChange } from './get-input-on-change';
 import { useFormErrors } from './hooks/use-form-errors/use-form-errors';
@@ -30,26 +30,38 @@ import { shouldValidateOnChange, validateFieldValue, validateValues } from './va
 export function useForm<
   Values extends Record<string, any> = Record<string, any>,
   TransformValues extends _TransformValues<Values> = (values: Values) => Values,
->({
-  name,
-  mode = 'controlled',
-  initialValues,
-  initialErrors = {},
-  initialDirty = {},
-  initialTouched = {},
-  clearInputErrorOnChange = true,
-  validateInputOnChange = false,
-  validateInputOnBlur = false,
-  onValuesChange,
-  transformValues = ((values: Values) => values) as any,
-  enhanceGetInputProps,
-  validate: rules,
-  onSubmitPreventDefault = 'always',
-  touchTrigger = 'change',
-}: UseFormInput<Values, TransformValues> = {}): UseFormReturnType<Values, TransformValues> {
-  const $errors = useFormErrors<Values>(initialErrors);
-  const $values = useFormValues<Values>({ initialValues, onValuesChange, mode });
-  const $status = useFormStatus<Values>({ initialDirty, initialTouched, $values, mode });
+>(
+  input: UseFormInput<Values, TransformValues> = {}
+): UseFormReturnType<Values, TransformValues> {
+  // Use mergeProps to preserve reactivity
+  const props = mergeProps(
+    {
+      mode: 'controlled' as const,
+      initialErrors: {},
+      initialDirty: {},
+      initialTouched: {},
+      clearInputErrorOnChange: true,
+      validateInputOnChange: false,
+      validateInputOnBlur: false,
+      transformValues: ((values: Values) => values) as any,
+      onSubmitPreventDefault: 'always' as const,
+      touchTrigger: 'change' as const,
+    },
+    input
+  );
+
+  const $errors = useFormErrors<Values>(props.initialErrors);
+  const $values = useFormValues<Values>({
+    initialValues: props.initialValues,
+    onValuesChange: props.onValuesChange,
+    mode: props.mode
+  });
+  const $status = useFormStatus<Values>({
+    initialDirty: props.initialDirty,
+    initialTouched: props.initialTouched,
+    $values,
+    mode: props.mode
+  });
   const $list = useFormList<Values>({ $values, $errors, $status });
   const $watch = useFormWatch<Values>({ $status });
   const [formKey, setFormKey] = createSignal(0);
@@ -61,55 +73,58 @@ export function useForm<
     $errors.clearErrors();
     $status.resetDirty();
     $status.resetTouched();
-    mode === 'uncontrolled' && setFormKey((key) => key + 1);
+    props.mode === 'uncontrolled' && setFormKey((key) => key + 1);
   };
 
   const handleValuesChanges = (previousValues: Values) => {
-    clearInputErrorOnChange && $errors.clearErrors();
-    mode === 'uncontrolled' && setFormKey((key) => key + 1);
+    props.clearInputErrorOnChange && $errors.clearErrors();
+    props.mode === 'uncontrolled' && setFormKey((key) => key + 1);
 
-    Object.keys($watch.subscribers.current).forEach((path) => {
-      const value = getPath(path, $values.refValues.current);
-      const previousValue = getPath(path, previousValues);
+    const subscribers = $watch.subscribers.current;
+    if (subscribers) {
+      Object.keys($watch.subscribers.current).forEach((path) => {
+        const value = getPath(path, $values.refValues.current);
+        const previousValue = getPath(path, previousValues);
 
-      if (value !== previousValue) {
-        $watch
-          .getFieldSubscribers(path)
-          .forEach((cb) => cb({ previousValues, updatedValues: $values.refValues.current }));
-      }
-    });
+        if (value !== previousValue) {
+          $watch
+            .getFieldSubscribers(path)
+            .forEach((cb) => cb({ previousValues, updatedValues: $values.refValues.current }));
+        }
+      });
+    }
   };
 
   const initialize: Initialize<Values> = (values) => {
     const previousValues = $values.refValues.current;
-    $values.initialize(values, () => mode === 'uncontrolled' && setFormKey(prev => prev + 1));
+    $values.initialize(values, () => props.mode === 'uncontrolled' && setFormKey(prev => prev + 1));
     handleValuesChanges(previousValues);
   };
 
   const setFieldValue: SetFieldValue<Values> = (path, value, options) => {
-    const shouldValidate = shouldValidateOnChange(path, validateInputOnChange);
+    const shouldValidate = shouldValidateOnChange(path, props.validateInputOnChange);
     const resolvedValue =
       value instanceof Function ? value(getPath(path, $values.refValues.current) as any) : value;
 
     $status.setCalculatedFieldDirty(path, resolvedValue);
-    touchTrigger === 'change' && $status.setFieldTouched(path, true);
-    !shouldValidate && clearInputErrorOnChange && $errors.clearFieldError(path);
+    props.touchTrigger === 'change' && $status.setFieldTouched(path, true);
+    !shouldValidate && props.clearInputErrorOnChange && $errors.clearFieldError(path);
 
     $values.setFieldValue({
       path,
       value,
-      updateState: mode === 'controlled',
+      updateState: props.mode === 'controlled',
       subscribers: [
         ...$watch.getFieldSubscribers(path),
         shouldValidate
           ? (payload) => {
-              const validationResults = validateFieldValue(path, rules, payload.updatedValues);
+              const validationResults = validateFieldValue(path, props.validate, payload.updatedValues);
               validationResults.hasError
                 ? $errors.setFieldError(path, validationResults.error)
                 : $errors.clearFieldError(path);
             }
           : null,
-        options?.forceUpdate !== false && mode !== 'controlled'
+        options?.forceUpdate !== false && props.mode !== 'controlled'
           ? () =>
               setFieldKeys(prev => ({
                 ...prev,
@@ -122,53 +137,62 @@ export function useForm<
 
   const setValues: SetValues<Values> = (values) => {
     const previousValues = $values.refValues.current;
-    $values.setValues({ values, updateState: mode === 'controlled' });
+    $values.setValues({ values, updateState: props.mode === 'controlled' });
     handleValuesChanges(previousValues);
   };
 
   const validate: Validate = () => {
-    const results = validateValues(rules, $values.refValues.current);
+    const results = validateValues(props.validate, $values.refValues.current);
     $errors.setErrors(results.errors);
     return results;
   };
 
   const validateField: ValidateField<Values> = (path) => {
-    const results = validateFieldValue(path, rules, $values.refValues.current);
+    const results = validateFieldValue(path, props.validate, $values.refValues.current);
     results.hasError ? $errors.setFieldError(path, results.error) : $errors.clearFieldError(path);
     return results;
   };
 
   const getInputProps: GetInputProps<Values> = (
     path,
-    { type = 'input', withError = true, withFocus = true, ...otherOptions } = {}
+    options = {}
   ) => {
-    const onChange = getInputOnChange((value) =>
+    const { type = 'input', withError = true, withFocus = true, ...otherOptions } = options;
+
+    const handler = getInputOnChange((value) =>
       setFieldValue(path, value as any, { forceUpdate: false })
     );
 
-    const payload: any = { onChange, 'data-path': getDataPath(name, path) };
+    const payload: any = { 'data-path': getDataPath(props.name, path) };
+    payload.onInput = handler;
+    payload.onChange = handler;
 
     if (withError) {
-      payload.error = $errors.errorsState()[path];
+      payload.error = () => $errors.errorsState()[path];
     }
 
     if (type === 'checkbox') {
-      payload[mode === 'controlled' ? 'checked' : 'defaultChecked'] = getPath(
+      payload[props.mode === 'controlled' ? 'checked' : 'defaultChecked'] = getPath(
         path,
-        $values.refValues.current
+        $values.stateValues()
       );
+    } else if (type === 'select') {
+      const fieldValue = getPath(path, $values.stateValues());
+      // For select elements, convert empty string to undefined to show first option (React compatibility)
+      const selectValue = fieldValue === '' ? undefined : fieldValue;
+      payload[props.mode === 'controlled' ? 'value' : 'defaultValue'] = selectValue;
     } else {
-      payload[mode === 'controlled' ? 'value' : 'defaultValue'] = getPath(
+      payload[props.mode === 'controlled' ? 'value' : 'defaultValue'] = getPath(
         path,
-        $values.refValues.current
+        $values.stateValues()
       );
     }
 
     if (withFocus) {
       payload.onFocus = () => $status.setFieldTouched(path, true);
       payload.onBlur = () => {
-        if (shouldValidateOnChange(path, validateInputOnBlur)) {
-          const validationResults = validateFieldValue(path, rules, $values.refValues.current);
+        if (shouldValidateOnChange(path, props.validateInputOnBlur)) {
+          const validationResults = validateFieldValue(path, props.validate, $values.refValues.current);
 
           validationResults.hasError
             ? $errors.setFieldError(path, validationResults.error)
@@ -179,7 +203,7 @@ export function useForm<
 
     return Object.assign(
       payload,
-      enhanceGetInputProps?.({
+      props.enhanceGetInputProps?.({
         inputProps: payload,
         field: path,
         options: { type, withError, withFocus, ...otherOptions },
@@ -190,21 +214,26 @@ export function useForm<
 
   const onSubmit: OnSubmit<Values, TransformValues> =
     (handleSubmit, handleValidationFailure) => (event) => {
-      if (onSubmitPreventDefault === 'always') {
+      // Don't handle non-submit events
+      if (event && event.type !== 'submit') {
+        return;
+      }
+
+      if (props.onSubmitPreventDefault === 'always') {
         event?.preventDefault();
       }
 
       const results = validate();
 
       if (results.hasErrors) {
-        if (onSubmitPreventDefault === 'validation-failed') {
+        if (props.onSubmitPreventDefault === 'validation-failed') {
           event?.preventDefault();
         }
 
         handleValidationFailure?.(results.errors, $values.refValues.current, event);
       } else {
         const submitResult = handleSubmit?.(
-          transformValues($values.refValues.current) as any,
+          props.transformValues($values.refValues.current) as any,
           event
         );
 
@@ -216,7 +245,7 @@ export function useForm<
     };
 
   const getTransformedValues: GetTransformedValues<Values, TransformValues> = (input) =>
-    (transformValues as any)(input || $values.refValues.current);
+    (props.transformValues as any)(input || $values.refValues.current);
 
   const onReset: OnReset = (event) => {
     event.preventDefault();
@@ -225,13 +254,14 @@ export function useForm<
 
   const isValid: IsValid<Values> = (path) =>
     path
-      ? !validateFieldValue(path, rules, $values.refValues.current).hasError
-      : !validateValues(rules, $values.refValues.current).hasErrors;
+      ? !validateFieldValue(path, props.validate, $values.refValues.current).hasError
+      : !validateValues(props.validate, $values.refValues.current).hasErrors;
 
   const key: Key<Values> = (path) =>
     `${formKey()}-${path as string}-${fieldKeys()[path as string] || 0}`;
 
-  const getInputNode: GetInputNode<Values> = (path) => document.querySelector(`[data-path="${getDataPath(name, path)}"]`);
+  const getInputNode: GetInputNode<Values> = (path) =>
+    document.querySelector(`[data-path="${getDataPath(props.name, path)}"]`);
 
   const form: UseFormReturnType<Values, TransformValues> = {
     watch: $watch.watch,
@@ -281,7 +311,7 @@ export function useForm<
     getInputNode,
   };
 
-  useFormActions(name, form);
+  useFormActions(props.name, form);
 
   return form;
 }
