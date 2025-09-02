@@ -34,16 +34,10 @@ interface UpdateAction {
 
 function handleCloseModal(modal: ModalState, canceled?: boolean) {
   if (canceled && modal.type === 'confirm') {
-    const onCancel = modal.props.onCancel;
-    if (typeof onCancel === 'function') {
-      onCancel();
-    }
+    modal.props.onCancel?.();
   }
 
-  const onClose = modal.props.onClose;
-  if (typeof onClose === 'function') {
-    onClose();
-  }
+  modal.props.onClose?.();
 }
 
 export function modalsReducer(
@@ -105,7 +99,7 @@ export function modalsReducer(
               ...modal.props,
               ...newProps,
             },
-          } as ModalState;
+          } as ModalState;;
         }
 
         if (modal.type === 'context') {
@@ -119,7 +113,7 @@ export function modalsReducer(
                 ...(newProps as Partial<OpenContextModal<any>>).innerProps,
               },
             },
-          } as ModalState;
+          } as ModalState;;
         }
 
         return modal;

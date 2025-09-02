@@ -113,7 +113,7 @@ Others:
 
 Carousel
 Dropzone
-Form (lists uncontrolled does not work, nested object does not work, make sure all work)
+Form
 Modals Manager (does not work)
 Notifications
 NavigationProgress

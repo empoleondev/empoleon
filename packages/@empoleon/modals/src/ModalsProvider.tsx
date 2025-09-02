@@ -156,25 +156,29 @@ export function ModalsProvider(props: ModalsProviderProps) {
 
   const getCurrentModal = () => {
     const currentModal = state().current;
+    if (!currentModal) {
+      return {
+        modalProps: {},
+        content: null,
+      };
+    }
+
     switch (currentModal?.type) {
       case 'context': {
-        const { innerProps, ...rest } = currentModal.props;
+        const [local, rest] = splitProps(currentModal.props, ['innerProps']);
         const ContextModal = props.modals![currentModal.ctx];
-
         return {
           modalProps: rest,
-          content: <ContextModal innerProps={innerProps} context={ctx} id={currentModal.id} />,
+          content: <ContextModal innerProps={local.innerProps} context={ctx} id={currentModal.id} />,
         };
       }
       case 'confirm': {
-        const { modalProps: separatedModalProps, confirmProps: separatedConfirmProps } =
-          separateConfirmModalProps(currentModal.props);
-
+        const confirmModalProps = separateConfirmModalProps(currentModal.props);
         return {
-          modalProps: separatedModalProps,
+          modalProps: confirmModalProps.modalProps,
           content: (
             <ConfirmModal
-              {...separatedConfirmProps}
+              {...confirmModalProps.confirmProps}
               id={currentModal.id}
               labels={currentModal.props.labels || props.labels}
             />
@@ -182,11 +186,10 @@ export function ModalsProvider(props: ModalsProviderProps) {
         };
       }
       case 'content': {
-        const { children: currentModalChildren, ...rest } = currentModal.props;
-
+        const [local, rest] = splitProps(currentModal.props, ['children']);
         return {
           modalProps: rest,
-          content: currentModalChildren,
+          content: local.children,
         };
       }
       default: {
@@ -198,18 +201,16 @@ export function ModalsProvider(props: ModalsProviderProps) {
     }
   };
 
-  const { modalProps: currentModalProps, content } = getCurrentModal();
-
   return (
     <ModalsContext.Provider value={ctx}>
       <Modal
         zIndex={getDefaultZIndex('modal') + 1}
         {...props.modalProps}
-        {...currentModalProps}
+        {...getCurrentModal().modalProps}
         opened={state().modals.length > 0}
         onClose={() => closeModal(state().current?.id as any)}
       >
-        {content}
+        {getCurrentModal().content}
       </Modal>
 
       {props.children}

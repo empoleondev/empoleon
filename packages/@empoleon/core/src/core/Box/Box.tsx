@@ -145,25 +145,25 @@ const _Box = <T extends HTMLElement = HTMLDivElement>(
     if (!el) return;
 
     // data-* attributes (clear then set)
-    for (const name of el.getAttributeNames()) {
-      if (name.startsWith('data-')) el.removeAttribute(name);
-    }
-    for (const k of Object.keys(p)) {
-      if (k.startsWith('data-')) {
-        const v = (p as any)[k];
-        if (v != null && v !== false) el.setAttribute(k, String(v));
-      }
-    }
+    // for (const name of el.getAttributeNames()) {
+    //   if (name.startsWith('data-')) el.removeAttribute(name);
+    // }
+    // for (const k of Object.keys(p)) {
+    //   if (k.startsWith('data-')) {
+    //     const v = (p as any)[k];
+    //     if (v != null && v !== false) el.setAttribute(k, String(v));
+    //   }
+    // }
 
-    // disabled (prop + attr)
-    if ('disabled' in p) {
-      try { (el as any).disabled = !!(p as any).disabled; } catch {}
-      if ((p as any).disabled) el.setAttribute('disabled', '');
-      else el.removeAttribute('disabled');
-    } else {
-      el.removeAttribute('disabled');
-      try { (el as any).disabled = false; } catch {}
-    }
+    // // disabled (prop + attr)
+    // if ('disabled' in p) {
+    //   try { (el as any).disabled = !!(p as any).disabled; } catch {}
+    //   if ((p as any).disabled) el.setAttribute('disabled', '');
+    //   else el.removeAttribute('disabled');
+    // } else {
+    //   el.removeAttribute('disabled');
+    //   try { (el as any).disabled = false; } catch {}
+    // }
   });
 
   return (

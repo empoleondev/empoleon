@@ -11,22 +11,6 @@ import {
   useModals,
 } from './index';
 
-export default {
-  title: 'Modals manager',
-  decorators: [
-    (Story: () => JSX.Element) => (
-      <EmpoleonProvider>
-        <ModalsProvider
-          labels={{ confirm: 'Confirm', cancel: 'Cancel' }}
-          modalProps={{ trapFocus: false }}
-        >
-          <Story />
-        </ModalsProvider>
-      </EmpoleonProvider>
-    ),
-  ]
-};
-
 const ContextModal = (props: ContextModalProps<{ contextProp: string }>) => {
   return (
     <div>
@@ -34,6 +18,23 @@ const ContextModal = (props: ContextModalProps<{ contextProp: string }>) => {
       <Button onClick={() => props.context.closeModal(props.id)}>Close</Button>
     </div>
   );
+};
+
+export default {
+  title: 'Modals manager',
+  decorators: [
+    (Story: () => JSX.Element) => (
+      <EmpoleonProvider>
+        <ModalsProvider
+          labels={{ confirm: 'Confirm', cancel: 'Cancel' }}
+          modalProps={{ trapFocus: false, centered: true }}
+          modals={{ hello: ContextModal }}
+        >
+          <Story />
+        </ModalsProvider>
+      </EmpoleonProvider>
+    ),
+  ]
 };
 
 export function Usage() {
@@ -54,9 +55,11 @@ export function Usage() {
       modalId: 'content-modal',
       title: 'Hello there',
       children: (
-        <Text c="blue" onClick={() => closeModal('content-modal')}>
-          My content modal
-        </Text>
+        <div>
+          <span style={{ color: 'blue' }} onClick={() => closeModal('content-modal')}>
+            My content modal
+          </span>
+        </div>
       ),
       onClose: () => console.log('content modal 1 closed'),
     });
@@ -83,11 +86,11 @@ export function Usage() {
       confirmProps: { color: 'red' },
       closeOnConfirm: false,
       children: (
-        <Text size="sm" c="dimmed">
+        <div style={{ 'font-size': '14px', color: '#666', "margin-bottom": "1rem" }}>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione magnam modi vitae
           molestias unde tempora exercitationem fugit, ex repellat doloribus maiores facilis quo
           quis, itaque temporibus obcaecati vel iusto praesentium.
-        </Text>
+        </div>
       ),
       onCancel: () => console.log('Cancel'),
       onConfirm: showNestedModal,
@@ -95,24 +98,18 @@ export function Usage() {
     });
 
   return (
-    <ModalsProvider
-      modalProps={{ centered: true }}
-      modals={{ hello: ContextModal }}
-      labels={{ confirm: 'Confirm', cancel: 'Cancel' }}
-    >
-      <Group p={40}>
-        <Button onClick={showContextModal}>Open context modal</Button>
-        <Button onClick={showConfirmModal} color="red">
-          Open nested confirm modal
-        </Button>
-        <Button onClick={showSingleConfirmModal} color="cyan">
-          Open single confirm modal
-        </Button>
-        <Button onClick={showContentModal} color="violet">
-          Open content modal
-        </Button>
-      </Group>
-    </ModalsProvider>
+    <Group p={40}>
+      <Button onClick={showContextModal}>Open context modal</Button>
+      <Button onClick={showConfirmModal} color="red">
+        Open nested confirm modal
+      </Button>
+      <Button onClick={showSingleConfirmModal} color="cyan">
+        Open single confirm modal
+      </Button>
+      <Button onClick={showContentModal} color="violet">
+        Open content modal
+      </Button>
+    </Group>
   );
 }
 

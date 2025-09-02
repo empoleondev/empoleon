@@ -29,18 +29,19 @@ export function ConfirmModal(props: ConfirmModalProps) {
   const handleCancel = (event: MouseEvent & { currentTarget: HTMLButtonElement; target: Element }) => {
     typeof props.cancelProps?.onClick === 'function' && props.cancelProps?.onClick(event);
     typeof props.onCancel === 'function' && props.onCancel();
-    props.closeOnCancel && ctx.closeModal(props.id!);
+    (props.closeOnCancel !== false) && ctx.closeModal(props.id!);
   };
 
   const handleConfirm = (event: MouseEvent & { currentTarget: HTMLButtonElement; target: Element }) => {
     typeof props.confirmProps?.onClick === 'function' && props.confirmProps?.onClick(event);
     typeof props.onConfirm === 'function' && props.onConfirm();
-    props.closeOnConfirm && ctx.closeModal(props.id!);
+    (props.closeOnConfirm !== false) && ctx.closeModal(props.id!);
   };
 
+  // No styling with children otherwise on transition will hide the content
   return (
     <>
-      {props.children && <Box mb="md">{props.children}</Box>}
+      {props.children && <>{props.children}</>}
 
       <Group mt={props.children ? 0 : 'md'} justify="flex-end" {...props.groupProps}>
         <Button variant="default" {...props.cancelProps} onClick={handleCancel}>
