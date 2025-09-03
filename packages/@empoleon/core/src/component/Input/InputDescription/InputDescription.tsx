@@ -63,6 +63,8 @@ export const InputDescription = factory<InputDescriptionFactory>(_props => {
     'ref'
   ]);
 
+  const __inheritStyles = local.__inheritStyles || true;
+
   const ctx = useInputWrapperContext();
 
   const _getStyles = useStyles<InputDescriptionFactory>({
@@ -79,7 +81,7 @@ export const InputDescription = factory<InputDescriptionFactory>(_props => {
     varsResolver,
   });
 
-  const getStyles = ((local.__inheritStyles || true) && ctx?.getStyles) || _getStyles;
+  const getStyles = ((__inheritStyles || true) && ctx?.getStyles) || _getStyles;
 
   return (
     <Box

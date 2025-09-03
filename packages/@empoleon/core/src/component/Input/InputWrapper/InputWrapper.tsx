@@ -186,32 +186,6 @@ export const InputWrapper = factory<InputWrapperFactory>(_props => {
   const describedBy = _describedBy.trim().length > 0 ? _describedBy.trim() : undefined;
   const labelId = local.labelProps?.id || `${idBase}-label`;
 
-  const _label = local.label && (
-    <InputLabel
-      labelElement={local.labelElement}
-      id={labelId}
-      for={inputId}
-      required={isRequired}
-      {...sharedProps}
-      {...local.labelProps}
-    >
-      {local.label}
-    </InputLabel>
-  );
-
-  const _description = hasDescription && (
-    <InputDescription
-      {...local.descriptionProps}
-      {...sharedProps}
-      size={local.descriptionProps?.size || sharedProps.size}
-      id={local.descriptionProps?.id || descriptionId}
-    >
-      {local.description}
-    </InputDescription>
-  );
-
-  const _input = <>{local.inputContainer!(local.children)}</>;
-
   return (
     <InputWrapperProvider
       value={{
@@ -226,30 +200,51 @@ export const InputWrapper = factory<InputWrapperFactory>(_props => {
         ref={local.ref}
         variant={local.variant}
         size={local.size}
-        mod={[{ error: !!(local.error && (local.error as any)()) }, local.mod]}
+        mod={[{ error: !!(local.error && (typeof (local.error as any) === 'function' ? (local.error as any)() : local.error)) }, local.mod]}
         {...getStyles('root')}
         {...others}
       >
         <For each={local.inputWrapperOrder}>
           {(part) => (
             <Switch>
-              <Match when={part === 'label'}>{_label}</Match>
-              <Match when={part === 'input'}>{_input}</Match>
-              <Match when={part === 'description'}>{_description}</Match>
+              <Match when={part === 'label'}>{
+                local.label && (
+                  <InputLabel
+                    labelElement={local.labelElement}
+                    id={labelId}
+                    for={inputId}
+                    required={isRequired}
+                    {...sharedProps}
+                    {...local.labelProps}
+                  >
+                    {local.label}
+                  </InputLabel>
+                )
+              }</Match>
+              <Match when={part === 'input'}><>{local.inputContainer!(local.children)}</></Match>
+              <Match when={part === 'description'}>{
+                hasDescription && (
+                  <InputDescription
+                    {...local.descriptionProps}
+                    {...sharedProps}
+                    size={local.descriptionProps?.size || sharedProps.size}
+                    id={local.descriptionProps?.id || descriptionId}
+                  >
+                    {local.description}
+                  </InputDescription>
+                )
+              }
+              </Match>
               <Match when={part === 'error'}>
-                <Show when={!!(local.error && (local.error as any)())}>
-                  {(errorValue) =>
-                    typeof errorValue !== 'boolean' && (
-                      <InputError
-                        {...local.errorProps}
-                        {...sharedProps}
-                        size={local.errorProps?.size || sharedProps.size}
-                        id={local.errorProps?.id || errorId}
-                      >
-                        {local.error}
-                      </InputError>
-                    )
-                  }
+                <Show when={!!(local.error && typeof local.error !== 'boolean')}>
+                  <InputError
+                    {...local.errorProps}
+                    {...sharedProps}
+                    size={local.errorProps?.size || sharedProps.size}
+                    id={local.errorProps?.id || errorId}
+                  >
+                    {local.error}
+                  </InputError>
                 </Show>
               </Match>
             </Switch>

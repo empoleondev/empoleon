@@ -75,8 +75,10 @@ export const InputError = factory<InputErrorFactory>(_props => {
     varsResolver,
   });
 
+  const __inheritStyles = local.__inheritStyles || true;
+
   const ctx = useInputWrapperContext();
-  const getStyles = (local.__inheritStyles && ctx?.getStyles) || _getStyles;
+  const getStyles = (__inheritStyles && ctx?.getStyles) || _getStyles;
 
   return (
     <Box

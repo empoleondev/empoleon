@@ -2,13 +2,10 @@ Core:
 
 Accordion - component works but not tested test
 Autocomplete - fail
-Card - fail
-ColorInput - fail
 ColorPicker - fail
 Combobox - fail
 Drawer - fail
 InlineInput - fail
-Input - fail
 InputsGroupFieldset - fail
 JsonInput - fail
 Modal - fail

@@ -125,31 +125,31 @@ describe('@empoleon/core/Input', () => {
     expect(screen.getByRole('textbox')).toHaveAttribute('data-variant', 'unstyled');
   });
 
-  // it('has aria-describedby attribute with id of description element', () => {
-  //   render(
-  //     () => <Input.Wrapper label="test" description="test-description" id="test-id">
-  //       <Input id="test-id" />
-  //     </Input.Wrapper>
-  //   );
+  it('has aria-describedby attribute with id of description element', () => {
+    render(
+      () => <Input.Wrapper label="test" description="test-description" id="test-id">
+        <Input id="test-id" />
+      </Input.Wrapper>
+    );
 
-  //   expect(screen.getByRole('textbox')).toHaveAttribute(
-  //     'aria-describedby',
-  //     screen.getByText('test-description').id
-  //   );
-  // });
+    expect(screen.getByRole('textbox')).toHaveAttribute(
+      'aria-describedby',
+      screen.getByText('test-description').id
+    );
+  });
 
-  // it('has aria-describedby attribute with id of error element', () => {
-  //   render(
-  //     () => <Input.Wrapper label="test" error="test-error" id="test-id">
-  //       <Input id="test-id" />
-  //     </Input.Wrapper>
-  //   );
+  it('has aria-describedby attribute with id of error element', () => {
+    render(
+      () => <Input.Wrapper label="test" error="test-error" id="test-id">
+        <Input id="test-id" />
+      </Input.Wrapper>
+    );
 
-  //   expect(screen.getByRole('textbox')).toHaveAttribute(
-  //     'aria-describedby',
-  //     screen.getByText('test-error').id
-  //   );
-  // });
+    expect(screen.getByRole('textbox')).toHaveAttribute(
+      'aria-describedby',
+      screen.getByText('test-error').id
+    );
+  });
 
   it('sets disabled attribute based on disabled prop', () => {
     const { rerender } = render(() => <Input disabled />);

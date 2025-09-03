@@ -17,7 +17,7 @@ describe('@empoleon/core/ColorInput', () => {
 
   tests.itSupportsSystemProps<ColorInputProps, __InputStylesNames>({
     component: ColorInput,
-    props: defaultProps,
+    props: () => defaultProps,
     mod: true,
     styleProps: true,
     extend: true,

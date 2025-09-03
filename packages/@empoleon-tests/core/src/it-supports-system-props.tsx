@@ -63,8 +63,6 @@ export function itSupportsSystemProps<
     const providerName = options.providerName || predictedProviderName;
     const stylesApiName = options.stylesApiName || providerName;
 
-    const getProps = () => typeof options.props === 'function' ? options.props() : options.props;
-
     itSupportsClassName({ ...options, props: options.props });
     itSupportsHiddenVisible({ ...options, props: options.props });
     itSupportsLightDarkHidden({ ...options, props: options.props });
