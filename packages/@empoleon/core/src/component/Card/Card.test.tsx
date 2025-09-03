@@ -7,7 +7,7 @@ describe('@empoleon/core/Card', () => {
   tests.itSupportsSystemProps<CardProps, CardStylesNames>({
     component: Card,
     props: () => ({
-      children: <Card.Section />,
+      children: () => <Card.Section />,
     }),
     mod: true,
     polymorphic: true,

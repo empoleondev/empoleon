@@ -65,38 +65,36 @@ export function itSupportsSystemProps<
 
     const getProps = () => typeof options.props === 'function' ? options.props() : options.props;
 
-    console.log('getProps', getProps);
+    itSupportsClassName({ ...options, props: options.props });
+    itSupportsHiddenVisible({ ...options, props: options.props });
+    itSupportsLightDarkHidden({ ...options, props: options.props });
+    itSupportsStyle({ ...options, props: options.props });
+    itSupportsOthers({ ...options, props: options.props });
+    options.refType && itSupportsRef({ ...options, props: options.props, refType: options.refType });
+    options.polymorphic &&
+      itIsPolymorphic({ ...options, props: options.props, selector: options.polymorphicSelector || options.selector });
+    options.children && itRendersChildren({ ...options, props: options.props });
+    typeof providerName === 'string' &&
+      options.providerName !== null &&
+      itSupportsProviderDefaultProps({ ...options, props: options.props, providerName });
 
-    // itSupportsClassName({ ...options, props: options.props });
-    // itSupportsHiddenVisible({ ...options, props: options.props });
-    // itSupportsLightDarkHidden({ ...options, props: options.props });
-    // itSupportsStyle({ ...options, props: options.props });
-    // itSupportsOthers({ ...options, props: options.props });
-    // options.refType && itSupportsRef({ ...options, props: options.props, refType: options.refType });
-    // options.polymorphic &&
-    //   itIsPolymorphic({ ...options, props: options.props, selector: options.polymorphicSelector || options.selector });
-    // options.children && itRendersChildren({ ...options, props: options.props });
-    // typeof providerName === 'string' &&
-    //   options.providerName !== null &&
-    //   itSupportsProviderDefaultProps({ ...options, props: options.props, providerName });
+    if (options.styleProps) {
+      itSupportsMarginsProps(options);
+      itSupportsPaddingsProps(options);
+      itSupportsColorsProps(options);
+      itSupportsFontsProps(options);
+      itSupportsSizeProps(options);
+      itSupportsBackgroundProps(options);
+      itSupportsPositionProps(options);
+    }
 
-    // if (options.styleProps) {
-    //   itSupportsMarginsProps(options);
-    //   itSupportsPaddingsProps(options);
-    //   itSupportsColorsProps(options);
-    //   itSupportsFontsProps(options);
-    //   itSupportsSizeProps(options);
-    //   itSupportsBackgroundProps(options);
-    //   itSupportsPositionProps(options);
-    // }
+    if (options.variant) {
+      itSupportsVariant({ ...options, props: options.props, selector: options.variantSelector || options.selector });
+    }
 
-    // if (options.variant) {
-    //   itSupportsVariant({ ...options, props: options.props, selector: options.variantSelector || options.selector });
-    // }
-
-    // if (options.size) {
-    //   itSupportsSize({ ...options, props: options.props, selector: options.sizeSelector || options.selector });
-    // }
+    if (options.size) {
+      itSupportsSize({ ...options, props: options.props, selector: options.sizeSelector || options.selector });
+    }
 
     if (options.mod) {
       itSupportsMod({ ...options, props: options.props, selector: options.sizeSelector || options.selector });
@@ -111,26 +109,26 @@ export function itSupportsSystemProps<
       });
     }
 
-    // if (options.extend) {
-    //   itHasExtend(options);
-    // }
+    if (options.extend) {
+      itHasExtend(options);
+    }
 
-    // if (options.classes) {
-    //   itHasClasses(options);
-    // }
+    if (options.classes) {
+      itHasClasses(options);
+    }
 
-    // if (options.withProps) {
-    //   itHasWithProps(options);
-    // }
+    if (options.withProps) {
+      itHasWithProps(options);
+    }
 
-    // if (options.id) {
-    //   itSupportsId(options);
-    // }
+    if (options.id) {
+      itSupportsId(options);
+    }
 
-    // if (options.displayName) {
-    //   it('has correct displayName', () => {
-    //     expect((options.component as any).displayName).toBe(options.displayName);
-    //   });
-    // }
+    if (options.displayName) {
+      it('has correct displayName', () => {
+        expect((options.component as any).displayName).toBe(options.displayName);
+      });
+    }
   });
 }

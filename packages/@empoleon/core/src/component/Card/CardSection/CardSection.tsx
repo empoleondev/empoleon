@@ -46,6 +46,8 @@ export const CardSection = polymorphicFactory<CardSectionFactory>(_props => {
 
   const ctx = useCardContext();
 
+  if (!ctx) return <div>Loading...</div>;
+
   const [idx, setIdx] = createSignal<number>(-1);
   onMount(() => {
     setIdx(ctx.registerItem());
