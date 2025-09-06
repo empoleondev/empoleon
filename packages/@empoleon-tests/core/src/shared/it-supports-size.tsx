@@ -11,20 +11,21 @@ interface Options<Props = any> {
 export function itSupportsSize<Props>(options: Options<Props>, name = 'supports size') {
   it(name, () => {
     const baseProps = getPropsValue(options.props);
-    const propsWithSize = { ...baseProps, size: "__test-size" } as Props & { size: string };
 
+    // First test: size="__test-size" should have data-size
+    const propsWithSize = { ...baseProps, size: "__test-size" } as Props & { size: string };
     const { container } = render(
-      () => <options.component {...propsWithSize} size="__test-size" />
+      () => <options.component {...propsWithSize} />
     );
     expect(container.querySelector(options.selector || '*:not(style)')!).toHaveAttribute(
       'data-size',
       '__test-size'
     );
 
-    const propsWithRemSize = { ...options.props, size: "5rem" } as Props & { size: string };
-
+    // Second test: size="5rem" should NOT have data-size
+    const propsWithRemSize = { ...baseProps, size: "5rem" } as Props & { size: string };
     const { container: container2 } = render(
-      () => <options.component {...propsWithRemSize} size="5rem" />
+      () => <options.component {...propsWithRemSize} />
     );
     expect(container2.querySelector(options.selector || '*:not(style)')!).not.toHaveAttribute(
       'data-size'

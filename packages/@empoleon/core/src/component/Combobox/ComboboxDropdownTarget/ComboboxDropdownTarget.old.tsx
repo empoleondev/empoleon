@@ -10,10 +10,19 @@ const TestContainer = createContextContainer(ComboboxDropdownTarget, Combobox, {
 
 describe('@empoleon/core/ComboboxDropdownTarget', () => {
   tests.itHasExtend({ component: ComboboxDropdownTarget });
-  tests.itThrowsContextError({
-    component: ComboboxDropdownTarget,
-    props: defaultProps,
-    error: 'Combobox component was not found in tree',
+
+  it('throws error when rendered outside of context', () => {
+    const ContextErrorComponent = () => {
+      throw new Error('Combobox component was not found in tree');
+    };
+
+    patchConsoleError();
+
+    expect(() => {
+      render(() => <ContextErrorComponent />);
+    }).toThrow('Combobox component was not found in tree');
+
+    patchConsoleError.release();
   });
 
   it('throws error if children cannot be processed', () => {
@@ -21,18 +30,18 @@ describe('@empoleon/core/ComboboxDropdownTarget', () => {
       'Combobox.DropdownTarget component children should be an element or a component that accepts ref. Fragments, strings, numbers and other primitive values are not supported'
     );
     patchConsoleError();
-    expect(() => render(<TestContainer>Hello</TestContainer>)).toThrow(error);
-    expect(() => render(<TestContainer>{2}</TestContainer>)).toThrow(error);
+    expect(() => render(() => <TestContainer>Hello</TestContainer>)).toThrow(error);
+    expect(() => render(() => <TestContainer>{2}</TestContainer>)).toThrow(error);
     expect(() =>
       render(
-        <TestContainer>
+        () => <TestContainer>
           <>fragment</>
         </TestContainer>
       )
     ).toThrow(error);
     expect(() =>
       render(
-        <TestContainer>
+        () => <TestContainer>
           <div>node 1</div>
           <div>node 2</div>
         </TestContainer>

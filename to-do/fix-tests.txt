@@ -1,24 +1,3 @@
-Core:
-
-Accordion - component works but not tested test
-Autocomplete - fail
-ColorPicker - fail
-Combobox - fail
-Drawer - fail
-InlineInput - fail
-InputsGroupFieldset - fail
-JsonInput - fail
-Modal - fail
-ModalBase - fail
-MultiSelect - fail
-NativeSelect - fail
-NumberInput - fail
-Select - fail
-Stepper - fail
-Tabs - fail - tabstab, tabsPanel - itSupportsSystemProps
-TagsInput - fail
-Tooltip - fail
-
 Others:
 
 Carousel

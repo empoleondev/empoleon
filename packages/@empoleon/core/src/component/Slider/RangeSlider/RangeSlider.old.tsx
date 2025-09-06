@@ -17,7 +17,7 @@ const expectInputValue = (value: string, container: HTMLElement, index: 0 | 1) =
   expect(getInput(container, index)).toHaveValue(value);
 
 describe('@empoleon/core/RangeSlider', () => {
-  tests.axe([<RangeSlider {...defaultProps} key="1" />]);
+  tests.axe([() => <RangeSlider {...defaultProps} />]);
   tests.itSupportsSystemProps<RangeSliderProps, SliderStylesNames>({
     component: RangeSlider,
     props: defaultProps,
@@ -46,7 +46,7 @@ describe('@empoleon/core/RangeSlider', () => {
   });
 
   it('provides name and value to hidden inputs', () => {
-    const { container } = render(<RangeSlider name="test-input" value={[10, 20]} />);
+    const { container } = render(() => <RangeSlider name="test-input" value={[10, 20]} />);
     expectInputValue('10', container, 0);
     expectInputValue('20', container, 1);
     expect(getInput(container, 0)).toHaveAttribute('name', 'test-input_from');

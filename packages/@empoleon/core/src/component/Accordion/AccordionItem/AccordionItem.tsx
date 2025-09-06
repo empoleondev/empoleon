@@ -10,7 +10,7 @@ import {
 import { useAccordionContext } from '../Accordion.context';
 import { AccordionItemProvider } from '../AccordionItem.context';
 import classes from '../Accordion.module.css';
-import { createEffect, splitProps } from 'solid-js';
+import { splitProps } from 'solid-js';
 
 export type AccordionItemStylesNames = 'item';
 

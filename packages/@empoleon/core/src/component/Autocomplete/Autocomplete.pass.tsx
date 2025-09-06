@@ -8,21 +8,19 @@ const defaultProps: AutocompleteProps = {
 
 describe('@empoleon/core/Autocomplete', () => {
   tests.axe([
-    <Autocomplete aria-label="test-label" data={['test-1', 'test-2']} key="1" />,
-    <Autocomplete label="test-label" data={['test-1', 'test-2']} key="2" />,
-    <Autocomplete label="test-label" error data={['test-1', 'test-2']} key="3" />,
-    <Autocomplete
+    () => <Autocomplete aria-label="test-label" data={['test-1', 'test-2']} />,
+    () => <Autocomplete label="test-label" data={['test-1', 'test-2']} />,
+    () => <Autocomplete label="test-label" error data={['test-1', 'test-2']} />,
+    () => <Autocomplete
       label="test-label"
       error="test-error"
       id="test"
       data={['test-1', 'test-2']}
-      key="4"
     />,
-    <Autocomplete
+    () => <Autocomplete
       label="test-label"
       description="test-description"
       data={['test-1', 'test-2']}
-      key="5"
     />,
   ]);
 

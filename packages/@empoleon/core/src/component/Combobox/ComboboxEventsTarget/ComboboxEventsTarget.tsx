@@ -58,11 +58,11 @@ export const ComboboxEventsTarget = factory<ComboboxEventsTargetFactory>(_props 
     'ref',
   ])
 
-  // if (!isElement(local.children)) {
-  //   throw new Error(
-  //     'Combobox.EventsTarget component children should be an element or a component that accepts ref. Fragments, strings, numbers and other primitive values are not supported'
-  //   );
-  // }
+  if (!isElement(local.children)) {
+    throw new Error(
+      'Combobox.EventsTarget component children should be an element or a component that accepts ref. Fragments, strings, numbers and other primitive values are not supported'
+    );
+  }
 
   const ctx = useComboboxContext();
   const targetProps = useComboboxTargetProps({

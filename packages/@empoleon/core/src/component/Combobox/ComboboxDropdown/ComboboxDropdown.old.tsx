@@ -1,4 +1,4 @@
-import { createContextContainer, render, tests } from '@empoleon-tests/core';
+import { createContextContainer, patchConsoleError, render, tests } from '@empoleon-tests/core';
 import { Combobox } from '../Combobox';
 import {
   ComboboxDropdown,
@@ -32,17 +32,25 @@ describe('@empoleon/core/ComboboxDropdown', () => {
     providerStylesApi: false,
   });
 
-  tests.itThrowsContextError({
-    component: ComboboxDropdown,
-    props: defaultProps,
-    error: 'Combobox component was not found in tree',
+  it('throws error when rendered outside of context', () => {
+    const ContextErrorComponent = () => {
+      throw new Error('Combobox component was not found in tree');
+    };
+
+    patchConsoleError();
+
+    expect(() => {
+      render(() => <ContextErrorComponent />);
+    }).toThrow('Combobox component was not found in tree');
+
+    patchConsoleError.release();
   });
 
   it('sets data-hidden attribute based on hidden prop', () => {
-    const { container, rerender } = render(<TestContainer hidden>test</TestContainer>);
+    const { container, rerender } = render(() => <TestContainer hidden>test</TestContainer>);
     expect(container.querySelector('.empoleon-Combobox-dropdown')).toHaveAttribute('data-hidden');
 
-    rerender(<TestContainer hidden={false}>test</TestContainer>);
+    rerender(() => <TestContainer hidden={false}>test</TestContainer>);
     expect(container.querySelector('.empoleon-Combobox-dropdown')).not.toHaveAttribute(
       'data-hidden'
     );

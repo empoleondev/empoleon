@@ -60,11 +60,11 @@ export const ComboboxTarget = factory<ComboboxTargetFactory>(_props => {
     'ref'
   ]);
 
-  // if (!isElement(local.children)) {
-  //   throw new Error(
-  //     'Combobox.Target component children should be an element or a component that accepts ref. Fragments, strings, numbers and other primitive values are not supported'
-  //   );
-  // }
+  if (!isElement(local.children)) {
+    throw new Error(
+      'Combobox.Target component children should be an element or a component that accepts ref. Fragments, strings, numbers and other primitive values are not supported'
+    );
+  }
 
   const ctx = useComboboxContext();
 
@@ -82,28 +82,28 @@ export const ComboboxTarget = factory<ComboboxTargetFactory>(_props => {
   const mergedProps = mergeProps(targetProps, others);
 
   return (
-  <Popover.Target>
-    {(popoverProps) => {
-      const ref = useMergedRef(popoverProps.ref, ctx.store.targetRef, local.ref);
-      const allProps = mergeProps(mergedProps, popoverProps);
+    <Popover.Target>
+      {(popoverProps) => {
+        const ref = useMergedRef(popoverProps.ref, ctx.store.targetRef, local.ref);
+        const allProps = mergeProps(mergedProps, popoverProps);
 
-      // Wrapper-free path: function child gets all props + ref
-      if (typeof local.children === 'function') {
-        return (local.children as any)({
-          ...allProps,
-          [local.refProp!]: ref,
-        });
-      }
+        // Wrapper-free path: function child gets all props + ref
+        if (typeof local.children === 'function') {
+          return (local.children as any)({
+            ...allProps,
+            [local.refProp!]: ref,
+          });
+        }
 
-      // Fallback for plain JSX element children: minimal wrapper as the measured target
-      return (
-        <div {...allProps} {...{ [local.refProp!]: ref }}>
-          <Dynamic component={local.children as any} {...mergedProps} />
-        </div>
-      );
-    }}
-  </Popover.Target>
-);
+        // Fallback for plain JSX element children: minimal wrapper as the measured target
+        return (
+          <div {...allProps} {...{ [local.refProp!]: ref }}>
+            <Dynamic component={local.children as any} {...mergedProps} />
+          </div>
+        );
+      }}
+    </Popover.Target>
+  );
 });
 
 ComboboxTarget.displayName = '@empoleon/core/ComboboxTarget';

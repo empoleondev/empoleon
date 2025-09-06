@@ -11,18 +11,18 @@ export interface MenuSubTargetProps {
   refProp?: string;
 }
 
-export function MenuSubTarget({ children, refProp }: MenuSubTargetProps) {
-  // if (!isElement(children)) {
-  //   throw new Error(
-  //     'Menu.Sub.Target component children should be an element or a component that accepts ref. Fragments, strings, numbers and other primitive values are not supported'
-  //   );
-  // }
+export function MenuSubTarget(props: MenuSubTargetProps) {
+  if (!isElement(props.children)) {
+    throw new Error(
+      'Menu.Sub.Target component children should be an element or a component that accepts ref. Fragments, strings, numbers and other primitive values are not supported'
+    );
+  }
 
   useMenuContext();
 
   return (
-    <Popover.Target refProp={refProp} popupType="menu">
-      {children}
+    <Popover.Target refProp={props.refProp} popupType="menu">
+      {props.children}
     </Popover.Target>
   );
 }

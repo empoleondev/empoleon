@@ -417,6 +417,12 @@ export const MultiSelect = factory<MultiSelectFactory>(_props => {
                   }}
                   onKeyDown={handleInputKeydown}
                   value={_searchValue()}
+                  onInput={(event) => {
+                    const newValue = event.currentTarget.value;
+                    handleSearchChange(newValue);
+                    local.searchable && combobox.openDropdown();
+                    local.selectFirstOptionOnChange && combobox.selectFirstOption();
+                  }}
                   onChange={(event) => {
                     handleSearchChange(event.currentTarget.value);
                     local.searchable && combobox.openDropdown();

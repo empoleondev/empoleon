@@ -13,6 +13,7 @@ import { UnstyledButton } from '../../UnstyledButton';
 import { useAccordionContext } from '../Accordion.context';
 import { useAccordionItemContext } from '../AccordionItem.context';
 import classes from '../Accordion.module.css';
+import { Dynamic } from 'solid-js/web';
 
 export type AccordionControlStylesNames = 'control' | 'chevron' | 'label' | 'itemTitle' | 'icon';
 
@@ -64,12 +65,9 @@ export const AccordionControl = factory<AccordionControlFactory>(_props => {
   const ctx = useAccordionContext();
   const isActive = () => ctx.isItemActive(value);
   const shouldWrapWithHeading = typeof ctx.order === 'number';
-  const Heading = `h${ctx.order!}` as const;
+  const headingTag = `h${ctx.order!}` as const;
   const raw = local.chevron || ctx.chevron;
-  const Chevron: Component<{}> =
-  typeof raw === 'function'
-    ? (raw as Component<{}>)
-    : () => raw as JSX.Element;
+  const Chevron = typeof raw === 'function' ? raw : () => raw as JSX.Element;
 
   const content = (
     <UnstyledButton<'button'>
@@ -126,7 +124,7 @@ export const AccordionControl = factory<AccordionControlFactory>(_props => {
   );
 
   return shouldWrapWithHeading ? (
-    <Heading {...ctx.getStyles('itemTitle', { classNames: local.classNames, styles: local.styles })}>{content}</Heading>
+    <Dynamic component={headingTag} {...ctx.getStyles('itemTitle', { classNames: local.classNames, styles: local.styles })}>{content}</Dynamic>
   ) : (
     content
   );

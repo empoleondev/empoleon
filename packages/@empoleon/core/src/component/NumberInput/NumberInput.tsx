@@ -358,6 +358,7 @@ export const NumberInput = factory<NumberInputFactory>(_props => {
     const stepPrecision = getDecimalPlaces(local.step!);
     const maxPrecision = Math.max(currentValuePrecision, stepPrecision);
     const factor = 10 ** maxPrecision;
+    const currentValue = _value();
 
     if ((!isNumberString(_value()) && typeof _value() !== 'number') || Number.isNaN(_value())) {
       val = clamp(local.startValue!, minValue, local.max);
@@ -368,7 +369,9 @@ export const NumberInput = factory<NumberInputFactory>(_props => {
     }
 
     const formattedValue = val.toFixed(maxPrecision);
-    const finalValue = parseFloat(formattedValue)
+    const finalValue = parseFloat(formattedValue);
+    const currentNumericValue = typeof currentValue === 'number' ? currentValue : Number(currentValue);
+    const valueChanged = finalValue !== currentNumericValue;
 
     setValue(finalValue);
 
@@ -376,6 +379,12 @@ export const NumberInput = factory<NumberInputFactory>(_props => {
       { floatValue: finalValue, formattedValue, value: formattedValue },
       { source: 'decrement' as any }
     );
+
+    // Add this missing logic that exists in the increment function
+    if (!valueChanged && local.onChange) {
+      local.onChange(finalValue);
+    }
+
     setTimeout(() => adjustCursor(inputRef()?.value.length), 0);
   };
 

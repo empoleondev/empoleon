@@ -27,11 +27,11 @@ export function MenuTarget(_props: MenuTargetProps) {
     'ref'
   ])
 
-  // if (!isElement(local.children)) {
-  //   throw new Error(
-  //     'Menu.Target component children should be an element or a component that accepts ref. Fragments, strings, numbers and other primitive values are not supported'
-  //   );
-  // }
+  if (!isElement(local.children)) {
+    throw new Error(
+      'Menu.Target component children should be an element or a component that accepts ref. Fragments, strings, numbers and other primitive values are not supported'
+    );
+  }
 
   const ctx = useMenuContext();
   const childrenAccessor = resolveChildren(() => local.children as any);

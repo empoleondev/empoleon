@@ -8,13 +8,12 @@ const defaultProps: ColorPickerProps = {
 
 describe('@empoleon/core/ColorPicker', () => {
   tests.axe([
-    <ColorPicker
+    () => <ColorPicker
       {...defaultProps}
       format="rgba"
       saturationLabel="Saturation"
       alphaLabel="Alpha"
       hueLabel="Hue"
-      key="1"
     />,
   ]);
 
@@ -46,33 +45,33 @@ describe('@empoleon/core/ColorPicker', () => {
   });
 
   it('renders swatches based on swatches prop', () => {
-    const { rerender, container } = render(<ColorPicker swatches={['#fff']} />);
+    const { rerender, container } = render(() => <ColorPicker swatches={['#fff']} />);
     expect(container.querySelector('.empoleon-ColorPicker-swatches')).toBeInTheDocument();
 
-    rerender(<ColorPicker />);
+    rerender(() => <ColorPicker />);
     expect(container.querySelector('.empoleon-ColorPicker-swatches')).not.toBeInTheDocument();
   });
 
   it('renders AlphaSlider based on format prop', () => {
-    const { rerender, container } = render(<ColorPicker format="rgba" />);
+    const { rerender, container } = render(() => <ColorPicker format="rgba" />);
     expect(container.querySelector('[data-alpha]')).toBeInTheDocument();
 
-    rerender(<ColorPicker format="hex" />);
+    rerender(() => <ColorPicker format="hex" />);
     expect(container.querySelector('[data-alpha]')).not.toBeInTheDocument();
   });
 
   it('renders picker based on withPicker prop', () => {
-    const { rerender, container } = render(<ColorPicker withPicker />);
+    const { rerender, container } = render(() => <ColorPicker withPicker />);
     expect(container.querySelector('.empoleon-ColorPicker-saturation')).toBeInTheDocument();
 
-    rerender(<ColorPicker withPicker={false} />);
+    rerender(() => <ColorPicker withPicker={false} />);
     expect(container.querySelector('.empoleon-ColorPicker-saturation')).not.toBeInTheDocument();
   });
 
   it('calls onChangeEnd when swatch is clicked', async () => {
     const spy = vi.fn();
     const { container } = render(
-      <ColorPicker onChangeEnd={spy} format="hex" swatches={['#ffffff', '#000000']} />
+      () => <ColorPicker onChangeEnd={spy} format="hex" swatches={['#ffffff', '#000000']} />
     );
     await userEvent.click(container.querySelectorAll('.empoleon-ColorSwatch-root')[0]);
     expect(spy).toHaveBeenCalledWith('#ffffff');
@@ -81,7 +80,7 @@ describe('@empoleon/core/ColorPicker', () => {
   it('calls onColorSwatchClick when swatch is clicked', async () => {
     const spy = vi.fn();
     const { container } = render(
-      <ColorPicker onColorSwatchClick={spy} format="hex" swatches={['#ffffff', '#000000']} />
+      () => <ColorPicker onColorSwatchClick={spy} format="hex" swatches={['#ffffff', '#000000']} />
     );
     await userEvent.click(container.querySelectorAll('.empoleon-ColorSwatch-root')[0]);
     expect(spy).toHaveBeenCalledWith('#ffffff');

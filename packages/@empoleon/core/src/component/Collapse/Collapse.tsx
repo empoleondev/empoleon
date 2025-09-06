@@ -1,4 +1,4 @@
-import { createMemo, JSX, splitProps } from 'solid-js';
+import { createMemo, JSX, Show, splitProps } from 'solid-js';
 import { useMergedRef, useReducedMotion } from '@empoleon/hooks';
 import {
   Box,
@@ -74,7 +74,15 @@ export const Collapse = factory<CollapseFactory>(_props => {
 
   // If animations are disabled, render directly
   if (duration === 0) {
-    return opened() ? <Box {...others}>{local.children}</Box> : null;
+    return (
+      <Show when={opened()} fallback={local.keepMounted ?
+        <Box {...others} style={{ display: 'none', ...getStyleObject(local.style, theme) }}>
+          <div data-collapse-content>{local.children}</div>
+        </Box> : null
+      }>
+        <Box {...others}><div data-collapse-content>{local.children}</div></Box>
+      </Show>
+    );
   }
 
   const collapseProps = createMemo(() => getCollapseProps());

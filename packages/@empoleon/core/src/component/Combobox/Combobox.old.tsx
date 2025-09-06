@@ -9,7 +9,7 @@ function AxeTest() {
   });
 
   return (
-    <div style={{ padding: 40 }}>
+    <div style={{ padding: '40px' }}>
       <Combobox store={store} withinPortal={false}>
         <Combobox.Target>
           <TextInput
@@ -30,5 +30,5 @@ function AxeTest() {
 }
 
 describe('@empoleon/core/Combobox', () => {
-  tests.axe([<AxeTest key="1" />]);
+  tests.axe([() => <AxeTest />]);
 });

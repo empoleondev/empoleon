@@ -1,6 +1,7 @@
 import { type Component, type JSX, splitProps, type Ref as SolidRef } from 'solid-js';
 import { useFocusTrap, useMergedRef } from '@empoleon/hooks';
 import { VisuallyHidden, VisuallyHiddenProps } from '../VisuallyHidden';
+import { isElement } from '../../core';
 
 export interface FocusTrapProps {
   /** Element to trap focus at, must support ref prop */
@@ -21,6 +22,10 @@ export const FocusTrap: Component<FocusTrapProps> = (props) => {
 
   const focusTrapRef = useFocusTrap(() => local.active);
   const combinedRef = useMergedRef(focusTrapRef, local.innerRef as any);
+
+  if (!isElement(local.children)) {
+    return local.children as unknown as JSX.Element;
+  }
 
   return local.children({ ref: combinedRef });
 };

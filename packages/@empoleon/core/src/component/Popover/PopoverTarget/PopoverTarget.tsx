@@ -43,6 +43,12 @@ export const PopoverTarget = factory<PopoverTargetFactory>(_props => {
 
   const targetRef = useMergedRef(ctx.reference, getRefProp(local.children), local.ref);
 
+  if (!isElement(local.children)) {
+    throw new Error(
+      'Popover.Target component children should be an element or a component that accepts ref. Fragments, strings, numbers and other primitive values are not supported'
+    );
+  }
+
   const accessibleProps = ctx.withRoles
     ? {
         'aria-haspopup': local.popupType,
@@ -63,17 +69,6 @@ export const PopoverTarget = factory<PopoverTargetFactory>(_props => {
       onClick: !ctx.controlled ? ctx.onToggle : undefined,
     });
   }
-
-  // Validate children for non-function case
-  const safe = getChildren(() => local.children as JSX.Element);
-  const resolved = safe();
-
-  // If more than one top‑level node, or primitive, reject
-  // if (!resolved || Array.isArray(resolved) || typeof resolved === 'string' || typeof resolved === 'number') {
-  //   throw new Error(
-  //     'Popover.Target component children should be an element or a component that accepts ref. Fragments, strings, numbers and other primitive values are not supported'
-  //   );
-  // }
 
   return (
     <span

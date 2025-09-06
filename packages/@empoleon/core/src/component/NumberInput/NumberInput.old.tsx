@@ -58,21 +58,39 @@ describe('@empoleon/core/NumberInput', () => {
     selector: '.empoleon-NumberInput-input',
   });
 
-  // it('exposes increment/decrement handlers with handlersRef prop', () => {
-  //   const ref = createRef<NumberInputHandlers>();
-  //   const spy = vi.fn();
-  //   render(() => <NumberInput {...defaultProps} step={2} onChange={spy} handlersRef={ref} />);
+  it('exposes increment/decrement handlers with handlersRef prop', async () => {
+    let handlersRef: NumberInputHandlers | undefined;
+    const spy = vi.fn();
 
-  //   expect(typeof ref.current?.decrement).toBe('function');
-  //   expect(typeof ref.current?.increment).toBe('function');
+    render(() => (
+      <NumberInput
+        {...defaultProps}
+        step={2}
+        onChange={spy}
+        handlersRef={(handlers) => {
+          handlersRef = handlers;
+        }}
+      />
+    ));
 
-  //   act(() => ref.current?.increment());
-  //   expect(spy).toHaveBeenLastCalledWith(0);
-  //   act(() => ref.current?.increment());
-  //   expect(spy).toHaveBeenLastCalledWith(2);
-  //   act(() => ref.current?.decrement());
-  //   expect(spy).toHaveBeenLastCalledWith(0);
-  // });
+    // Wait a tick for the ref to be set
+    await new Promise(resolve => setTimeout(resolve, 0));
+
+    expect(typeof handlersRef?.decrement).toBe('function');
+    expect(typeof handlersRef?.increment).toBe('function');
+
+    handlersRef?.increment();
+    await new Promise(resolve => setTimeout(resolve, 0));
+    expect(spy).toHaveBeenLastCalledWith(0);
+
+    handlersRef?.increment();
+    await new Promise(resolve => setTimeout(resolve, 0));
+    expect(spy).toHaveBeenLastCalledWith(2);
+
+    handlersRef?.decrement();
+    await new Promise(resolve => setTimeout(resolve, 0));
+    expect(spy).toHaveBeenLastCalledWith(0);
+  });
 
   it('returns empty string when input is empty', async () => {
     const spy = vi.fn();

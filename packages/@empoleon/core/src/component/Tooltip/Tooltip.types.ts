@@ -1,6 +1,6 @@
 import { JSX } from 'solid-js';
 import type { FlipOptions, InlineOptions, ShiftOptions, SizeOptions } from '@empoleon/solid-floating-ui';
-import { BoxProps, ElementProps, EmpoleonColor, EmpoleonRadius, StylesApiProps } from '../../core';
+import { BoxComponentProps, ElementProps, EmpoleonColor, EmpoleonRadius, StylesApiProps } from '../../core';
 import { FloatingPosition } from '../../utils/Floating';
 import { PortalProps } from '../Portal';
 import type { TooltipFactory } from './Tooltip';
@@ -19,7 +19,7 @@ export interface TooltipMiddlewares {
 }
 
 export interface TooltipBaseProps
-  extends BoxProps,
+  extends BoxComponentProps,
     StylesApiProps<TooltipFactory>,
     Omit<ElementProps<'div'>, 'children'> {
   /** Target element, must support `ref` prop and `...others` */

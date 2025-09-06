@@ -28,21 +28,21 @@ describe('@empoleon/core/Select', () => {
     />,
   ]);
 
-  // tests.itSupportsSystemProps<SelectProps, SelectStylesNames>({
-  //   component: Select,
-  //   props: () => defaultProps,
-  //   mod: true,
-  //   styleProps: true,
-  //   extend: true,
-  //   withProps: true,
-  //   size: true,
-  //   variant: true,
-  //   classes: true,
-  //   id: true,
-  //   refType: HTMLInputElement,
-  //   displayName: '@empoleon/core/Select',
-  //   stylesApiSelectors: [...inputStylesApiSelectors],
-  // });
+  tests.itSupportsSystemProps<SelectProps, SelectStylesNames>({
+    component: Select,
+    props: () => defaultProps,
+    mod: true,
+    styleProps: true,
+    extend: true,
+    withProps: true,
+    size: true,
+    variant: true,
+    classes: true,
+    id: true,
+    refType: HTMLInputElement,
+    displayName: '@empoleon/core/Select',
+    stylesApiSelectors: [...inputStylesApiSelectors],
+  });
 
   tests.itSupportsInputProps<SelectProps>({
     component: Select,
@@ -71,15 +71,15 @@ describe('@empoleon/core/Select', () => {
     expect(screen.getByRole('textbox')).toHaveValue('test-1');
   });
 
-  // it('supports controlled state', async () => {
-  //   const spy = vi.fn();
-  //   render(() => <Select {...defaultProps} value="test-1" onChange={spy} />);
-  //   expect(screen.getByRole('textbox')).toHaveValue('test-1');
-  //   await userEvent.click(screen.getByRole('textbox'));
-  //   await userEvent.click(screen.getByRole('option', { name: 'test-2' }));
-  //   expect(screen.getByRole('textbox')).toHaveValue('test-1');
-  //   expect(spy).toHaveBeenCalledWith('test-2', { label: 'test-2', value: 'test-2' });
-  // });
+  it('supports controlled state', async () => {
+    const spy = vi.fn();
+    render(() => <Select {...defaultProps} value="test-1" onChange={spy} />);
+    expect(screen.getByRole('textbox')).toHaveValue('test-1');
+    await userEvent.click(screen.getByRole('textbox'));
+    await userEvent.click(screen.getByRole('option', { name: 'test-2' }));
+    expect(screen.getByRole('textbox')).toHaveValue('test-1');
+    expect(spy).toHaveBeenCalledWith('test-2', { label: 'test-2', value: 'test-2' });
+  });
 
   it('opens/closes dropdown on input click', async () => {
     render(() => <Select {...defaultProps} />);
@@ -138,14 +138,14 @@ describe('@empoleon/core/Select', () => {
     expect(spy).toHaveBeenCalledWith('test-1');
   });
 
-  // it('sets input value on the hidden input', async () => {
-  //   render(() => <Select {...defaultProps} name="test-select" />);
-  //   expect(document.querySelector('input[name="test-select"]')).toHaveValue('');
-  //   await userEvent.click(screen.getByRole('textbox'));
-  //   await userEvent.click(screen.getByRole('option', { name: 'test-1' }));
-  //   expect(screen.getByRole('textbox')).toHaveValue('test-1');
-  //   expect(document.querySelector('input[name="test-select"]')).toHaveValue('test-1');
-  // });
+  it('sets input value on the hidden input', async () => {
+    render(() => <Select {...defaultProps} name="test-select" />);
+    expect(document.querySelector('input[name="test-select"]')).toHaveValue('');
+    await userEvent.click(screen.getByRole('textbox'));
+    await userEvent.click(screen.getByRole('option', { name: 'test-1' }));
+    expect(screen.getByRole('textbox')).toHaveValue('test-1');
+    expect(document.querySelector('input[name="test-select"]')).toHaveValue('test-1');
+  });
 
   it('allows selecting multiple Selects with react testing library', async () => {
     render(() =>

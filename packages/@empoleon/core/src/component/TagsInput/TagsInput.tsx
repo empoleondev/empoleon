@@ -219,6 +219,11 @@ export const TagsInput = factory<TagsInputFactory>(_props => {
     rest: { type, autocomplete, ...rest },
   } = extractStyleProps(others);
 
+  const finalStyleProps = {
+    ...styleProps,
+    style: local.style
+  };
+
   const [_value, setValue] = useUncontrolled({
     value: () => local.value,
     defaultValue: local.defaultValue!,
@@ -339,48 +344,11 @@ export const TagsInput = factory<TagsInputFactory>(_props => {
     }
   };
 
-  const values = (
-    <span>
-      <For each={_value()}>
-        {(item, index) => (
-          <Pill
-            withRemoveButton={!local.readOnly}
-            onRemove={() => {
-              const next_value = _value().slice();
-              next_value.splice(index(), 1);
-              setValue(next_value);
-              local.onRemove?.(item);
-            }}
-            unstyled={local.unstyled}
-            disabled={local.disabled}
-            attributes={local.attributes}
-            {...getStyles('pill')}
-          >
-            {item}
-          </Pill>
-        )}
-      </For>
-    </span>
-  );
-
   createEffect(() => {
     if (local.selectFirstOptionOnChange) {
       combobox.selectFirstOption();
     }
   });
-
-  const clearButton = (
-    <Combobox.ClearButton
-      {...local.clearButtonProps}
-      onClear={() => {
-        setValue([]);
-        handleSearchChange('');
-        inputRef?.focus();
-        combobox.openDropdown();
-        local.onClear?.();
-      }}
-    />
-  );
 
   return (
     <>
@@ -416,7 +384,18 @@ export const TagsInput = factory<TagsInputFactory>(_props => {
             disabled={local.disabled}
             radius={local.radius}
             rightSection={local.rightSection}
-            __clearSection={clearButton}
+            __clearSection={
+              <Combobox.ClearButton
+                {...local.clearButtonProps}
+                onClear={() => {
+                  setValue([]);
+                  handleSearchChange('');
+                  inputRef?.focus();
+                  combobox.openDropdown();
+                  local.onClear?.();
+                }}
+              />
+            }
             __clearable={local.clearable && _value().length > 0 && !local.disabled && !local.readOnly}
             rightSectionWidth={local.rightSectionWidth}
             rightSectionPointerEvents={local.rightSectionPointerEvents}
@@ -443,11 +422,34 @@ export const TagsInput = factory<TagsInputFactory>(_props => {
             attributes={local.attributes}
           >
             <Pill.Group disabled={local.disabled} unstyled={local.unstyled} {...getStyles('pillsList')}>
-              {values}
+              {
+                <span>
+                  <For each={_value()}>
+                    {(item, index) => (
+                      <Pill
+                        withRemoveButton={!local.readOnly}
+                        onRemove={() => {
+                          const next_value = _value().slice();
+                          next_value.splice(index(), 1);
+                          setValue(next_value);
+                          local.onRemove?.(item);
+                        }}
+                        unstyled={local.unstyled}
+                        disabled={local.disabled}
+                        attributes={local.attributes}
+                        {...getStyles('pill')}
+                      >
+                        {item}
+                      </Pill>
+                    )}
+                  </For>
+                </span>
+              }
               <Combobox.EventsTarget autoComplete={autocomplete}>
                 {/* @ts-ignore */}
                 <PillsInput.Field
                   {...rest}
+                  {...finalStyleProps}
                   ref={useMergedRef(local.ref, inputRef)}
                   {...getStyles('inputField')}
                   unstyled={local.unstyled}

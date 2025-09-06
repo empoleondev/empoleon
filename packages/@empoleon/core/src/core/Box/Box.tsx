@@ -137,9 +137,6 @@ const _Box = <T extends HTMLElement = HTMLDivElement>(
 
   // Needed otherwise disabled is not reactive
   createEffect(() => {
-  //   console.log('🔍 BOX EFFECT: local.mod changed:', local.mod);
-  // console.log('🔍 BOX EFFECT: elementProps:', elementProps());
-
     const p = elementProps();
     const el = _innerEl as HTMLElement | null;
     if (!el) return;
@@ -155,7 +152,7 @@ const _Box = <T extends HTMLElement = HTMLDivElement>(
     //   }
     // }
 
-    // // disabled (prop + attr)
+    // disabled (prop + attr)
     // if ('disabled' in p) {
     //   try { (el as any).disabled = !!(p as any).disabled; } catch {}
     //   if ((p as any).disabled) el.setAttribute('disabled', '');

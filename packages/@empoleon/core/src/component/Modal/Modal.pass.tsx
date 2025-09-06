@@ -8,15 +8,13 @@ import { ModalOverlay, ModalOverlayProps } from './ModalOverlay';
 import { ModalRoot, ModalRootProps } from './ModalRoot';
 import { ModalTitle, ModalTitleProps } from './ModalTitle';
 
-const defaultProps: ModalProps = {
-  opened: true,
-  onClose: () => {},
-  title: 'test-title',
-  withinPortal: false,
-};
-
 const createModalContextContainer = (component: any) =>
-  createContextContainer(component, ModalRoot, defaultProps);
+  createContextContainer(component, ModalRoot, {
+    opened: true,
+    onClose: () => {},
+    title: 'test-title',
+    withinPortal: false,
+  });
 
 const BodyContainer = createModalContextContainer(ModalBody);
 const CloseButtonContainer = createModalContextContainer(ModalCloseButton);
@@ -25,10 +23,19 @@ const HeaderContainer = createModalContextContainer(ModalHeader);
 const OverlayContainer = createModalContextContainer(ModalOverlay);
 const TitleContainer = createModalContextContainer(ModalTitle);
 
+beforeEach(() => {
+    window.scrollTo = vi.fn();
+  });
+
 describe('@empoleon/core/Modal', () => {
   tests.itSupportsSystemProps<ModalProps, ModalStylesNames>({
     component: Modal,
-    props: defaultProps,
+    props: () => ({
+      opened: true,
+      onClose: () => {},
+      title: 'test-title',
+      withinPortal: false,
+    }),
     mod: true,
     styleProps: true,
     children: true,
@@ -46,45 +53,84 @@ describe('@empoleon/core/Modal', () => {
   });
 
   it('sets data-centered attribute when centered prop is passed', () => {
-    const { container, rerender } = render(<Modal {...defaultProps} centered />);
+    const { container, rerender } = render(() => <Modal
+      opened={true}
+      onClose={() => {}}
+      title='test-title'
+      withinPortal={false}
+      centered
+    />);
     expect(container.querySelector('.empoleon-Modal-root')).toHaveAttribute('data-centered');
 
-    rerender(<Modal {...defaultProps} centered={false} />);
+    rerender(() => <Modal opened={true}
+      onClose={() => {}}
+      title='test-title'
+      withinPortal={false}
+      centered={false} />);
     expect(container.querySelector('.empoleon-Modal-root')).not.toHaveAttribute('data-centered');
   });
 
   it('sets data-full-screen attribute when fullScreen prop is passed', () => {
-    const { container, rerender } = render(<Modal {...defaultProps} fullScreen />);
+    const { container, rerender } = render(() => <Modal opened={true}
+      onClose={() => {}}
+      title='test-title'
+      withinPortal={false}
+      centered fullScreen />);
     expect(container.querySelector('.empoleon-Modal-root')).toHaveAttribute('data-full-screen');
 
-    rerender(<Modal {...defaultProps} fullScreen={false} />);
+    rerender(() => <Modal opened={true}
+      onClose={() => {}}
+      title='test-title'
+      withinPortal={false}
+      centered fullScreen={false} />);
     expect(container.querySelector('.empoleon-Modal-root')).not.toHaveAttribute('data-full-screen');
   });
 
   it('does not render overlay when withOverlay is false', () => {
-    const { container, rerender } = render(<Modal {...defaultProps} withOverlay={false} />);
+    const { container, rerender } = render(() => <Modal opened={true}
+      onClose={() => {}}
+      title='test-title'
+      withinPortal={false}
+      centered withOverlay={false} />);
     expect(container.querySelector('.empoleon-Modal-overlay')).not.toBeInTheDocument();
 
-    rerender(<Modal {...defaultProps} withOverlay />);
+    rerender(() => <Modal opened={true}
+      onClose={() => {}}
+      title='test-title'
+      withinPortal={false}
+      centered withOverlay />);
     expect(container.querySelector('.empoleon-Modal-overlay')).toBeInTheDocument();
   });
 
   it('does not render header if title and withCloseButton are not provided', () => {
     const { container, rerender } = render(
-      <Modal {...defaultProps} title={null} withCloseButton />
+      () => <Modal opened={true}
+      onClose={() => {}}
+      withinPortal={false}
+      centered title={null} withCloseButton />
     );
     expect(container.querySelector('.empoleon-Modal-header')).toBeInTheDocument();
 
-    rerender(<Modal {...defaultProps} withCloseButton={false} title="test-title" />);
+    rerender(() => <Modal opened={true}
+      onClose={() => {}}
+      withinPortal={false}
+      centered withCloseButton={false} title="test-title" />);
     expect(container.querySelector('.empoleon-Modal-header')).toBeInTheDocument();
 
-    rerender(<Modal {...defaultProps} withCloseButton={false} title={null} />);
+    rerender(() => <Modal opened={true}
+      onClose={() => {}}
+      withinPortal={false}
+      centered withCloseButton={false} title={null} />);
     expect(container.querySelector('.empoleon-Modal-header')).not.toBeInTheDocument();
   });
 
   it('renders given title', () => {
-    const { container } = render(<Modal {...defaultProps} title="test-title" />);
-    expect(container.querySelector('.empoleon-Modal-title')).toHaveTextContent('test-title');
+    const { container } = render(() => <Modal opened={true}
+      onClose={() => {}}
+      title='test-title'
+      withinPortal={false}
+      centered />);
+    expect(container.querySelector('.empoleon-Modal-title')?.textContent).toBe('test-title');
   });
 
   it('exposes compound components', () => {
@@ -101,7 +147,12 @@ describe('@empoleon/core/Modal', () => {
 describe('@empoleon/core/ModalRoot', () => {
   tests.itSupportsSystemProps<ModalRootProps, 'root'>({
     component: ModalRoot,
-    props: defaultProps,
+    props: () => ({
+      opened: true,
+      onClose: () => {},
+      title: 'test-title',
+      withinPortal: false,
+    }),
     mod: true,
     styleProps: true,
     children: true,

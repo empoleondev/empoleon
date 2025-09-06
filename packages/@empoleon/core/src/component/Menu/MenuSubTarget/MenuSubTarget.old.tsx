@@ -1,16 +1,14 @@
 import { createContextContainer, patchConsoleError, render, tests } from '@empoleon-tests/core';
-import { Combobox } from '../Combobox';
-import { ComboboxEventsTarget, ComboboxEventsTargetProps } from './ComboboxEventsTarget';
+import { Menu } from '../Menu';
+import { MenuSubTarget, MenuSubTargetProps } from './MenuSubTarget';
 
-const defaultProps: ComboboxEventsTargetProps = {
+const defaultProps: MenuSubTargetProps = {
   children: <div>test</div>,
 };
 
-const TestContainer = createContextContainer(ComboboxEventsTarget, Combobox, {});
+const TestContainer = createContextContainer(MenuSubTarget, Menu, { opened: true });
 
-describe('@empoleon/core/ComboboxEventsTarget', () => {
-  tests.itHasExtend({ component: ComboboxEventsTarget });
-
+describe('@empoleon/core/MenuSubTarget', () => {
   it('throws error when rendered outside of context', () => {
     const ContextErrorComponent = () => {
       throw new Error('Combobox component was not found in tree');
@@ -27,7 +25,7 @@ describe('@empoleon/core/ComboboxEventsTarget', () => {
 
   it('throws error if children cannot be processed', () => {
     const error = new Error(
-      'Combobox.EventsTarget component children should be an element or a component that accepts ref. Fragments, strings, numbers and other primitive values are not supported'
+      'Menu.Sub.Target component children should be an element or a component that accepts ref. Fragments, strings, numbers and other primitive values are not supported'
     );
     patchConsoleError();
     expect(() => render(() => <TestContainer>Hello</TestContainer>)).toThrow(error);
@@ -41,7 +39,7 @@ describe('@empoleon/core/ComboboxEventsTarget', () => {
     ).toThrow(error);
     expect(() =>
       render(
-       () => <TestContainer>
+        () => <TestContainer>
           <div>node 1</div>
           <div>node 2</div>
         </TestContainer>
@@ -51,6 +49,6 @@ describe('@empoleon/core/ComboboxEventsTarget', () => {
   });
 
   it('has correct displayName', () => {
-    expect(ComboboxEventsTarget.displayName).toBe('@empoleon/core/ComboboxEventsTarget');
+    expect(MenuSubTarget.displayName).toEqual('@empoleon/core/MenuSubTarget');
   });
 });

@@ -1,5 +1,5 @@
 import { JSX, splitProps, children as getChildren } from 'solid-js';
-import { createEventHandler, useProps } from '../../../core';
+import { createEventHandler, isElement, useProps } from '../../../core';
 import { Popover, PopoverTargetProps } from '../../Popover';
 import { useHoverCardContext } from '../HoverCard.context';
 import { useHoverCardGroupContext } from '../HoverCardGroup/HoverCardGroup.context';
@@ -22,14 +22,10 @@ export function HoverCardTarget(_props: HoverCardTargetProps) {
     'eventPropsWrapperName',
   ]);
 
-  const safe = getChildren(() => local.children);
-  const resolved = safe();
-
-  let child;
-  if (Array.isArray(resolved)) {
-    child = resolved.find(item => item != null && typeof item === 'object');
-  } else {
-    child = resolved;
+  if (!isElement(local.children)) {
+    throw new Error(
+      'HoverCard.Target component children should be an element or a component that accepts ref. Fragments, strings, numbers and other primitive values are not supported'
+    );
   }
 
   const ctx = useHoverCardContext();

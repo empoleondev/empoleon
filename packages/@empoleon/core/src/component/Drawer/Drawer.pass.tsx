@@ -46,29 +46,34 @@ describe('@empoleon/core/Drawer', () => {
   });
 
   it('does not render overlay when withOverlay is false', () => {
-    const { container, rerender } = render(<Drawer {...defaultProps} withOverlay={false} />);
+    const { container, rerender } = render(() => <Drawer {...defaultProps} withOverlay={false} />);
     expect(container.querySelector('.empoleon-Drawer-overlay')).not.toBeInTheDocument();
 
-    rerender(<Drawer {...defaultProps} withOverlay />);
+    rerender(() => <Drawer {...defaultProps} withOverlay />);
     expect(container.querySelector('.empoleon-Drawer-overlay')).toBeInTheDocument();
   });
 
   it('does not render header if title and withCloseButton are not provided', () => {
     const { container, rerender } = render(
-      <Drawer {...defaultProps} title={null} withCloseButton />
+      () => <Drawer {...defaultProps} title={null} withCloseButton />
     );
     expect(container.querySelector('.empoleon-Drawer-header')).toBeInTheDocument();
 
-    rerender(<Drawer {...defaultProps} withCloseButton={false} title="test-title" />);
+    rerender(() => <Drawer {...defaultProps} withCloseButton={false} title="test-title" />);
     expect(container.querySelector('.empoleon-Drawer-header')).toBeInTheDocument();
 
-    rerender(<Drawer {...defaultProps} withCloseButton={false} title={null} />);
+    rerender(() => <Drawer {...defaultProps} withCloseButton={false} title={null} />);
     expect(container.querySelector('.empoleon-Drawer-header')).not.toBeInTheDocument();
   });
 
+  // mock otherwise will get an error
+  beforeEach(() => {
+    window.scrollTo = vi.fn();
+  });
   it('renders given title', () => {
-    const { container } = render(<Drawer {...defaultProps} title="test-title" />);
-    expect(container.querySelector('.empoleon-Drawer-title')).toHaveTextContent('test-title');
+    const { container } = render(() => <Drawer {...defaultProps} title="test-title" />);
+    const titleElement = container.querySelector('.empoleon-Drawer-title');
+    expect(titleElement?.textContent).toBe('test-title');
   });
 
   it('exposes compound components', () => {

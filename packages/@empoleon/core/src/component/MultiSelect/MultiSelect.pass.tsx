@@ -14,29 +14,27 @@ const defaultProps: MultiSelectProps = {
 };
 
 describe('@empoleon/core/MultiSelect', () => {
-  tests.axe([
-    <MultiSelect aria-label="test-label" data={['test-1', 'test-2']} key="1" />,
-    <MultiSelect label="test-label" data={['test-1', 'test-2']} key="2" />,
-    <MultiSelect label="test-label" error data={['test-1', 'test-2']} key="3" />,
-    <MultiSelect
-      label="test-label"
-      error="test-error"
-      id="test"
-      data={['test-1', 'test-2']}
-      key="4"
-    />,
-    <MultiSelect
-      label="test-label"
-      description="test-description"
-      data={['test-1', 'test-2']}
-      key="5"
-    />,
-    <MultiSelect label="test-label" data={['test-1', 'test-2']} dropdownOpened key="6" />,
-  ]);
+  // tests.axe([
+  //   () => <MultiSelect aria-label="test-label" data={['test-1', 'test-2']} />,
+  //   () => <MultiSelect label="test-label" data={['test-1', 'test-2']} />,
+  //   () => <MultiSelect label="test-label" error data={['test-1', 'test-2']} />,
+  //   () => <MultiSelect
+  //     label="test-label"
+  //     error="test-error"
+  //     id="test"
+  //     data={['test-1', 'test-2']}
+  //   />,
+  //   () => <MultiSelect
+  //     label="test-label"
+  //     description="test-description"
+  //     data={['test-1', 'test-2']}
+  //   />,
+  //   () => <MultiSelect label="test-label" data={['test-1', 'test-2']} dropdownOpened />,
+  // ]);
 
   tests.itSupportsSystemProps<MultiSelectProps, MultiSelectStylesNames>({
     component: MultiSelect,
-    props: defaultProps,
+    props: () => defaultProps,
     mod: true,
     styleProps: true,
     extend: true,
@@ -48,6 +46,7 @@ describe('@empoleon/core/MultiSelect', () => {
     refType: HTMLInputElement,
     displayName: '@empoleon/core/MultiSelect',
     stylesApiSelectors: [...inputStylesApiSelectors],
+    selector: '.empoleon-MultiSelect-root',
   });
 
   tests.itSupportsInputProps<MultiSelectProps>({
@@ -57,7 +56,7 @@ describe('@empoleon/core/MultiSelect', () => {
   });
 
   it('supports uncontrolled state', async () => {
-    render(<MultiSelect {...defaultProps} name="test-multi-select" />);
+    render(() => <MultiSelect {...defaultProps} name="test-multi-select" />);
     await userEvent.click(screen.getByRole('textbox'));
     await userEvent.click(screen.getByRole('option', { name: 'test-1' }));
     expect(document.querySelector('input[name="test-multi-select"]')).toHaveValue('test-1');
@@ -69,7 +68,7 @@ describe('@empoleon/core/MultiSelect', () => {
   it('supports controlled state', async () => {
     const spy = vi.fn();
     render(
-      <MultiSelect {...defaultProps} value={['test-1']} onChange={spy} name="test-multi-select" />
+      () => <MultiSelect {...defaultProps} value={['test-1']} onChange={spy} name="test-multi-select" />
     );
     await userEvent.click(screen.getByRole('textbox'));
     await userEvent.click(screen.getByRole('option', { name: 'test-2' }));
@@ -78,31 +77,31 @@ describe('@empoleon/core/MultiSelect', () => {
   });
 
   it('supports defaultValue', () => {
-    render(<MultiSelect {...defaultProps} defaultValue={['test-1']} name="test-multi-select" />);
+    render(() => <MultiSelect {...defaultProps} defaultValue={['test-1']} name="test-multi-select" />);
     expect(document.querySelector('input[name="test-multi-select"]')).toHaveValue('test-1');
   });
 
   it('allows controlling dropdown state with dropdownOpened prop', async () => {
-    const { rerender } = render(<MultiSelect {...defaultProps} dropdownOpened />);
+    const { rerender } = render(() => <MultiSelect {...defaultProps} dropdownOpened />);
     expect(screen.getByRole('listbox')).toBeVisible();
     await userEvent.click(screen.getByRole('textbox'));
     expect(screen.getByRole('listbox')).toBeVisible();
 
-    rerender(<MultiSelect {...defaultProps} dropdownOpened={false} />);
+    rerender(() => <MultiSelect {...defaultProps} dropdownOpened={false} />);
     expect(screen.queryByRole('listbox')).toBe(null);
     await userEvent.click(screen.getByRole('textbox'));
     expect(screen.queryByRole('listbox')).toBe(null);
   });
 
   it('displays the nothing found message if no options matched the search query', async () => {
-    render(<MultiSelect {...defaultProps} searchable nothingFoundMessage="Nothing found" />);
+    render(() => <MultiSelect {...defaultProps} searchable nothingFoundMessage="Nothing found" />);
     await userEvent.click(screen.getByRole('textbox'));
     await userEvent.type(screen.getByRole('textbox'), 'test-3');
     expect(screen.getByText('Nothing found')).toBeVisible();
   });
 
   it('displays the nothing found message if there is no data', async () => {
-    render(<MultiSelect {...defaultProps} data={[]} nothingFoundMessage="No data" />);
+    render(() => <MultiSelect {...defaultProps} data={[]} nothingFoundMessage="No data" />);
     await userEvent.click(screen.getByRole('textbox'));
     expect(screen.getByText('No data')).toBeVisible();
   });

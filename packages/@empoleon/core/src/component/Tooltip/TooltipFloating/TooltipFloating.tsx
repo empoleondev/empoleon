@@ -102,11 +102,11 @@ export const TooltipFloating = factory<TooltipFloatingFactory>(_props => {
     defaultOpened: local.defaultOpened!,
   });
 
-  // if (!isElement(local.children)) {
-  //   throw new Error(
-  //     '[@empoleon/core] Tooltip.Floating component children should be an element or a component that accepts ref, fragments, strings, numbers and other primitive values are not supported'
-  //   );
-  // }
+  if (!isElement(local.children)) {
+    throw new Error(
+      '[@empoleon/core] Tooltip.Floating component children should be an element or a component that accepts ref, fragments, strings, numbers and other primitive values are not supported'
+    );
+  }
 
   const [wrapperElement, setWrapperElement] = createSignal<HTMLElement | null>(null);
   const childRef = typeof local.children === 'function' ? undefined : getRefProp(local.children);

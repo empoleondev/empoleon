@@ -24,21 +24,22 @@ describe('@empoleon/core/TagsInput', () => {
     />,
   ]);
 
-  // tests.itSupportsSystemProps<TagsInputProps, TagsInputStylesNames>({
-  //   component: TagsInput,
-  //   props: defaultProps,
-  //   mod: true,
-  //   styleProps: true,
-  //   extend: true,
-  //   withProps: true,
-  //   size: true,
-  //   variant: true,
-  //   classes: true,
-  //   id: true,
-  //   refType: HTMLInputElement,
-  //   displayName: '@empoleon/core/TagsInput',
-  //   stylesApiSelectors: [...inputStylesApiSelectors],
-  // });
+  tests.itSupportsSystemProps<TagsInputProps, TagsInputStylesNames>({
+    component: TagsInput,
+    props: defaultProps,
+    mod: true,
+    styleProps: true,
+    extend: true,
+    withProps: true,
+    size: true,
+    variant: true,
+    classes: true,
+    id: true,
+    refType: HTMLInputElement,
+    displayName: '@empoleon/core/TagsInput',
+    stylesApiSelectors: [...inputStylesApiSelectors],
+    selector: '.empoleon-TagsInput-root',
+  });
 
   tests.itSupportsInputProps<TagsInputProps>({
     component: TagsInput,

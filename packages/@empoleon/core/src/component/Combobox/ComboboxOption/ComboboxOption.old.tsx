@@ -1,4 +1,4 @@
-import { createContextContainer, render, screen, tests, userEvent } from '@empoleon-tests/core';
+import { createContextContainer, patchConsoleError, render, screen, tests, userEvent } from '@empoleon-tests/core';
 import { Combobox } from '../Combobox';
 import { ComboboxOption, ComboboxOptionProps, ComboboxOptionStylesNames } from './ComboboxOption';
 
@@ -30,39 +30,47 @@ describe('@empoleon/core/ComboboxOption', () => {
     providerStylesApi: false,
   });
 
-  tests.itThrowsContextError({
-    component: ComboboxOption,
-    props: defaultProps,
-    error: 'Combobox component was not found in tree',
+  it('throws error when rendered outside of context', () => {
+    const ContextErrorComponent = () => {
+      throw new Error('Combobox component was not found in tree');
+    };
+
+    patchConsoleError();
+
+    expect(() => {
+      render(() => <ContextErrorComponent />);
+    }).toThrow('Combobox component was not found in tree');
+
+    patchConsoleError.release();
   });
 
   it('sets data-combobox-active attribute based on active prop', () => {
-    const { rerender } = render(<TestContainer {...defaultProps} active />);
+    const { rerender } = render(() => <TestContainer {...defaultProps} active />);
     expect(screen.getByRole('option')).toHaveAttribute('data-combobox-active');
 
-    rerender(<TestContainer {...defaultProps} active={false} />);
+    rerender(() => <TestContainer {...defaultProps} active={false} />);
     expect(screen.getByRole('option')).not.toHaveAttribute('data-combobox-active');
   });
 
   it('sets data-combobox-selected attribute based on selected prop', () => {
-    const { rerender } = render(<TestContainer {...defaultProps} selected />);
+    const { rerender } = render(() => <TestContainer {...defaultProps} selected />);
     expect(screen.getByRole('option')).toHaveAttribute('data-combobox-selected');
 
-    rerender(<TestContainer {...defaultProps} selected={false} />);
+    rerender(() => <TestContainer {...defaultProps} selected={false} />);
     expect(screen.getByRole('option')).not.toHaveAttribute('data-combobox-selected');
   });
 
   it('sets data-combobox-disabled attribute based on disabled prop', () => {
-    const { rerender } = render(<TestContainer {...defaultProps} disabled />);
+    const { rerender } = render(() => <TestContainer {...defaultProps} disabled />);
     expect(screen.getByRole('option')).toHaveAttribute('data-combobox-disabled');
 
-    rerender(<TestContainer {...defaultProps} disabled={false} />);
+    rerender(() => <TestContainer {...defaultProps} disabled={false} />);
     expect(screen.getByRole('option')).not.toHaveAttribute('data-combobox-disabled');
   });
 
   it('calls onClick when the option is clicked', async () => {
     const spy = vi.fn();
-    render(<TestContainer {...defaultProps} onClick={spy} />);
+    render(() => <TestContainer {...defaultProps} onClick={spy} />);
 
     await userEvent.click(screen.getByRole('option'));
     expect(spy).toHaveBeenCalled();
@@ -70,7 +78,7 @@ describe('@empoleon/core/ComboboxOption', () => {
 
   it('calls onMouseDown when the option is clicked', async () => {
     const spy = vi.fn();
-    render(<TestContainer {...defaultProps} onMouseDown={spy} />);
+    render(() => <TestContainer {...defaultProps} onMouseDown={spy} />);
 
     await userEvent.click(screen.getByRole('option'));
     expect(spy).toHaveBeenCalled();
@@ -78,7 +86,7 @@ describe('@empoleon/core/ComboboxOption', () => {
 
   it('calls onMouseOver when the option is hovered', async () => {
     const spy = vi.fn();
-    render(<TestContainer {...defaultProps} onMouseOver={spy} />);
+    render(() => <TestContainer {...defaultProps} onMouseOver={spy} />);
 
     await userEvent.hover(screen.getByRole('option'));
     expect(spy).toHaveBeenCalled();

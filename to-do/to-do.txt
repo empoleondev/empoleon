@@ -1,6 +1,3 @@
 - upgrade to 8.20
-- fix stack with modals (done)
-- fix !isElement with components that use it
-- fix hovercard/tooltip no longer delaying! (done)
 - fix all tests
 - find all cloneElement with React and change to Solid alternative

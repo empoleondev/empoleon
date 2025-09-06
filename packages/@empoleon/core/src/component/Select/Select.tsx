@@ -184,12 +184,21 @@ export const Select = factory<SelectFactory>(_props => {
   });
   const previousSelectedOption = usePrevious(selectedOption);
 
+  // const [search, setSearch] = useUncontrolled({
+  //   value: () => local.searchValue,
+  //   defaultValue: local.defaultSearchValue!,
+  //   finalValue: local.searchable ? (selectedOption() ? selectedOption()!.label : '') : '',
+  //   onChange: local.onSearchChange,
+  // });
   const [search, setSearch] = useUncontrolled({
     value: () => local.searchValue,
     defaultValue: local.defaultSearchValue!,
     finalValue: local.searchable ? (selectedOption() ? selectedOption()!.label : '') : '',
     onChange: local.onSearchChange,
   });
+
+  // For non-searchable selects, override search to be empty when dropdown is open
+  const effectiveSearch = () => local.searchable ? search() : '';
 
   const combobox = useCombobox({
     opened: () => local.dropdownOpened!,
@@ -252,17 +261,6 @@ export const Select = factory<SelectFactory>(_props => {
     }
   });
 
-  const clearButton = (
-    <Combobox.ClearButton
-      {...local.clearButtonProps}
-      onClear={() => {
-        setValue(null, null);
-        handleSearchChange('');
-        local.onClear?.();
-      }}
-    />
-  );
-
   const _clearable = local.clearable && !!_value() && !local.disabled && !local.readOnly;
 
   return (
@@ -313,7 +311,16 @@ export const Select = factory<SelectFactory>(_props => {
                     color={local.chevronColor}
                   />
                 }
-                __clearSection={clearButton}
+                __clearSection={
+                  <Combobox.ClearButton
+                    {...local.clearButtonProps}
+                    onClear={() => {
+                      setValue(null, null);
+                      handleSearchChange('');
+                      local.onClear?.();
+                    }}
+                  />
+                }
                 __clearable={_clearable}
                 rightSection={local.rightSection}
                 rightSectionPointerEvents={local.rightSectionPointerEvents || (_clearable ? 'all' : 'none')}
@@ -362,7 +369,7 @@ export const Select = factory<SelectFactory>(_props => {
           data={parsedData()}
           hidden={local.readOnly || local.disabled}
           filter={local.filter}
-          search={search()}
+          search={effectiveSearch()}
           limit={local.limit}
           hiddenWhenEmpty={!local.nothingFoundMessage}
           withScrollArea={local.withScrollArea}

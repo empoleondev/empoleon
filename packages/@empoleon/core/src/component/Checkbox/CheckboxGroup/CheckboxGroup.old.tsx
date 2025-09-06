@@ -16,7 +16,7 @@ const defaultProps: CheckboxGroupProps = {
 
 describe('@empoleon/core/CheckboxGroup', () => {
   tests.axe([
-    <CheckboxGroup>
+    () => <CheckboxGroup>
       <Checkbox value="test-1" label="test-1" />
       <Checkbox value="test-2" label="test-2" />
       <Checkbox value="test-3" label="test-3" />

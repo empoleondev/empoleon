@@ -5,8 +5,8 @@ const defaultProps: CheckboxCardProps = {};
 
 describe('@empoleon/core/CheckboxCard', () => {
   tests.axe([
-    <CheckboxCard key="1">Label</CheckboxCard>,
-    <CheckboxCard checked key="2">
+    () => <CheckboxCard>Label</CheckboxCard>,
+    () => <CheckboxCard checked>
       Label
     </CheckboxCard>,
   ]);
@@ -27,26 +27,26 @@ describe('@empoleon/core/CheckboxCard', () => {
   });
 
   it('sets aria-checked attribute based on checked prop', () => {
-    const { rerender } = render(<CheckboxCard checked />);
+    const { rerender } = render(() => <CheckboxCard checked />);
     expect(screen.getByRole('checkbox')).toHaveAttribute('aria-checked', 'true');
 
-    rerender(<CheckboxCard checked={false} />);
+    rerender(() => <CheckboxCard checked={false} />);
     expect(screen.getByRole('checkbox')).toHaveAttribute('aria-checked', 'false');
   });
 
   it('sets data-checked attribute based on checked prop', () => {
-    const { rerender } = render(<CheckboxCard checked />);
+    const { rerender } = render(() => <CheckboxCard checked />);
     expect(screen.getByRole('checkbox')).toHaveAttribute('data-checked', 'true');
 
-    rerender(<CheckboxCard checked={false} />);
+    rerender(() => <CheckboxCard checked={false} />);
     expect(screen.getByRole('checkbox')).not.toHaveAttribute('data-checked');
   });
 
   it('sets data-with-border attribute based on withBorder prop', () => {
-    const { rerender } = render(<CheckboxCard withBorder />);
+    const { rerender } = render(() => <CheckboxCard withBorder />);
     expect(screen.getByRole('checkbox')).toHaveAttribute('data-with-border', 'true');
 
-    rerender(<CheckboxCard withBorder={false} />);
+    rerender(() => <CheckboxCard withBorder={false} />);
     expect(screen.getByRole('checkbox')).not.toHaveAttribute('data-with-border');
   });
 });

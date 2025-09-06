@@ -256,13 +256,25 @@ export const Input = polymorphicFactory<InputFactory>(_props => {
         disabled: local.disabled,
         'aria-invalid': !!local.error,
         'aria-describedby': ctx?.describedBy,
+        'aria-labelledby': ctx?.labelId, // for solidjs
         id: ctx?.inputId || local.id,
       }
     : {};
 
   const _rightSection: JSX.Element = local.rightSection || (local.__clearable && local.__clearSection) || local.__defaultRightSection;
-  const valueProp = (v: any, dv: any) =>
-      v !== undefined ? { value: v } : dv !== undefined ? { value: dv } : undefined;
+  const valueProp = (v: any, dv: any) => {
+    if (v !== undefined) {
+      return {
+        value: v,
+        onInput: (e: Event) => {
+          (rest as any).onChange?.(e);
+          (e.target as any).value = v;
+        }
+      };
+    }
+    return dv !== undefined ? { defaultValue: dv } : undefined;
+    };
+
   const { value: v, defaultValue: dv } = rest;
 
   const errorMod = createMemo(() => {

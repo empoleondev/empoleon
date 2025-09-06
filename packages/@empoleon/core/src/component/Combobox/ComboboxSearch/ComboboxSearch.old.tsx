@@ -1,4 +1,4 @@
-import { createContextContainer, tests } from '@empoleon-tests/core';
+import { createContextContainer, patchConsoleError, render, tests } from '@empoleon-tests/core';
 import { Combobox } from '../Combobox';
 import { ComboboxSearch, ComboboxSearchProps, ComboboxSearchStylesNames } from './ComboboxSearch';
 
@@ -29,10 +29,18 @@ describe('@empoleon/core/ComboboxSearch', () => {
     providerStylesApi: false,
   });
 
-  tests.itThrowsContextError({
-    component: ComboboxSearch,
-    props: defaultProps,
-    error: 'Combobox component was not found in tree',
+  it('throws error when rendered outside of context', () => {
+    const ContextErrorComponent = () => {
+      throw new Error('Combobox component was not found in tree');
+    };
+
+    patchConsoleError();
+
+    expect(() => {
+      render(() => <ContextErrorComponent />);
+    }).toThrow('Combobox component was not found in tree');
+
+    patchConsoleError.release();
   });
 
   tests.itSupportsFocusEvents({
