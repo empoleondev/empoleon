@@ -1,4 +1,4 @@
-import { splitProps, JSX } from 'solid-js';
+import { splitProps, JSX, createEffect, createMemo } from 'solid-js';
 import { useId, useUncontrolled } from '@empoleon/hooks';
 import {
   Box,
@@ -180,16 +180,21 @@ export const Switch = factory<SwitchFactory>(_props => {
   const uuid = useId(local.id);
 
   const contextProps = ctx
-    ? {
-        checked: ctx.value.includes(rest.value as string),
-        onChange: ctx.onChange,
-      }
-    : {};
+  ? {
+      checked: () => ctx.value.includes(rest.value as string),
+      onChange: ctx.onChange,
+    }
+  : { checked: undefined };
 
   const [_checked, handleChange] = useUncontrolled({
     value: () => contextProps.checked ?? local.checked,
     defaultValue: local.defaultChecked,
     finalValue: false,
+  });
+
+  const dataChecked = createMemo(() => {
+    const isChecked = ctx ? contextProps.checked?.() : _checked();
+    return isChecked ? true : undefined;
   });
 
   return (
@@ -209,7 +214,7 @@ export const Switch = factory<SwitchFactory>(_props => {
       classNames={local.classNames}
       styles={local.styles}
       unstyled={local.unstyled}
-      data-checked={contextProps.checked || local.checked || undefined}
+      data-checked={dataChecked()}
       variant={local.variant}
       ref={local.rootRef}
       mod={local.mod}
@@ -219,8 +224,8 @@ export const Switch = factory<SwitchFactory>(_props => {
       <input
         {...rest}
         disabled={local.disabled}
-        checked={_checked()}
-        data-checked={contextProps.checked || local.checked || undefined}
+        checked={dataChecked()}
+        data-checked={dataChecked()}
         onChange={(event) => {
           ctx ? contextProps.onChange?.(event) : typeof local.onChange === "function" && local.onChange?.(event);
           handleChange(event.currentTarget.checked);

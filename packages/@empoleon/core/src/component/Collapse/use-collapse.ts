@@ -27,8 +27,6 @@ export function useCollapse(props: UseCollapseParams) {
   let timeoutId: ReturnType<typeof setTimeout> | undefined;
   let lastKnownHeight = 0;
 
-  // console.log('[useCollapse] Hook initialized');
-
   const measureContentHeight = (): number => {
     const element = elementRef();
     if (!element) return 0;
@@ -40,9 +38,7 @@ export function useCollapse(props: UseCollapseParams) {
   };
 
   const updateHeight = (newHeight: number, immediate = false) => {
-    if (Math.abs(newHeight - lastKnownHeight) <= 1) return; // Skip tiny changes
-
-    // console.log(`[useCollapse] Height update: ${lastKnownHeight}px → ${newHeight}px ${immediate ? '(immediate)' : ''}`);
+    if (Math.abs(newHeight - lastKnownHeight) <= 1) return;
 
     batch(() => {
       lastKnownHeight = newHeight;
@@ -50,11 +46,9 @@ export function useCollapse(props: UseCollapseParams) {
       const element = elementRef();
       if (element) {
         if (immediate) {
-          // Disable transition temporarily for immediate updates
           const originalTransition = element.style.transition;
           element.style.transition = 'none';
           element.style.height = `${newHeight}px`;
-          // Force reflow
           element.offsetHeight;
           element.style.transition = originalTransition;
         } else {
@@ -71,28 +65,20 @@ export function useCollapse(props: UseCollapseParams) {
     const contentElement = element.querySelector('[data-collapse-content]');
     if (!contentElement) return;
 
-    // console.log('[useCollapse] Setting up ResizeObserver');
-
     resizeObserver = new ResizeObserver((entries) => {
       if (isAnimating() || !local.opened()) return;
 
-      // Only process entries that are DIRECT children of our content
-      // This prevents sibling accordion changes from affecting us
       for (const entry of entries) {
         const target = entry.target as HTMLElement;
 
-        // ONLY handle our direct content element
         if (target === contentElement) {
-          // console.log('[useCollapse] Direct content element resized');
           const newHeight = measureContentHeight();
           updateHeight(newHeight);
-          break; // Only process the first relevant entry
+          break;
         }
 
-        // ONLY handle direct accordion children (not nested ones from siblings)
         else if (target.parentElement === contentElement &&
                  target.getAttribute('role') === 'region') {
-          // console.log('[useCollapse] Direct child accordion resized');
           const newHeight = measureContentHeight();
           updateHeight(newHeight);
           break;
@@ -100,36 +86,26 @@ export function useCollapse(props: UseCollapseParams) {
       }
     });
 
-    // ONLY observe the direct content element
     resizeObserver.observe(contentElement);
 
-    // Find and observe ONLY direct children that are accordion panels
     const directChildren = Array.from(contentElement.children);
     directChildren.forEach(child => {
-      // Only observe if it's a direct accordion panel child
       if (child.getAttribute('role') === 'region') {
-        // console.log('[useCollapse] Observing direct child accordion panel');
         resizeObserver!.observe(child);
       }
     });
-
-    // console.log(`[useCollapse] Observing ${1 + directChildren.filter(c => c.getAttribute('role') === 'region').length} elements`);
   };
 
   const cleanupObserver = () => {
     if (resizeObserver) {
       resizeObserver.disconnect();
       resizeObserver = undefined;
-      // console.log('[useCollapse] ResizeObserver cleaned up');
     }
   };
 
-  // Handle open/close state changes
   createEffect(() => {
     const element = elementRef();
     const isOpened = local.opened();
-
-    // console.log(`[useCollapse] State change - opened: ${isOpened}, element: ${!!element}`);
 
     if (!element) return;
 
@@ -142,30 +118,31 @@ export function useCollapse(props: UseCollapseParams) {
       setIsAnimating(true);
 
       if (isOpened) {
-        // Opening: measure and animate to target height
         const targetHeight = measureContentHeight();
         lastKnownHeight = targetHeight;
-        element.style.height = `${targetHeight}px`;
 
-        // console.log(`[useCollapse] Opening to height: ${targetHeight}px`);
+        // If no content height, use auto to allow external height props
+        if (targetHeight > 0) {
+          element.style.height = `${targetHeight}px`;
+        }
 
-        // Setup observer after a short delay to avoid initial transition conflicts
         setTimeout(() => {
           if (local.opened() && !isAnimating()) {
             setupResizeObserver();
           }
         }, transitionDuration + 50);
       } else {
-        // Closing: cleanup and animate to 0
         cleanupObserver();
-        element.style.height = '0px';
-        // console.log('[useCollapse] Closing accordion');
+
+        const inlineHeight = element.style.height;
+
+        if (!inlineHeight || inlineHeight === 'auto' || inlineHeight.endsWith('px')) {
+          element.style.height = '0px';
+        }
       }
 
-      // Mark animation as complete after duration
       const animationTimeout = setTimeout(() => {
         setIsAnimating(false);
-        // console.log('[useCollapse] Animation completed');
         local.onTransitionEnd?.();
       }, transitionDuration + 20);
 
@@ -174,7 +151,6 @@ export function useCollapse(props: UseCollapseParams) {
   });
 
   onCleanup(() => {
-    // console.log('[useCollapse] Cleaning up');
     cleanupObserver();
     if (timeoutId) {
       clearTimeout(timeoutId);
@@ -185,28 +161,26 @@ export function useCollapse(props: UseCollapseParams) {
     ref: (el: HTMLDivElement) => {
       if (!el || elementRef() === el) return;
 
-      // console.log('[useCollapse] Ref callback called');
       setElementRef(el);
 
-      // Setup base styles
       el.style.overflow = 'hidden';
       el.style.transition = `height ${transitionDuration}ms ${transitionTimingFunction}`;
 
-      // Set initial height
       if (local.opened()) {
         setTimeout(() => {
           const initialHeight = measureContentHeight();
           lastKnownHeight = initialHeight;
-          el.style.height = `${initialHeight}px`;
-          // console.log(`[useCollapse] Initial height set to ${initialHeight}px (open)`);
 
-          // Setup observer immediately for initially open panels
+          // If no content, use auto to allow external height props
+          if (initialHeight > 0) {
+            el.style.height = `${initialHeight}px`;
+          }
+
           setTimeout(() => setupResizeObserver(), 100);
         }, 0);
       } else {
         el.style.height = '0px';
         lastKnownHeight = 0;
-        // console.log('[useCollapse] Initial height set to 0px (closed)');
       }
     },
     style: {
@@ -215,12 +189,9 @@ export function useCollapse(props: UseCollapseParams) {
     },
     onTransitionEnd: (e: TransitionEvent) => {
       const element = elementRef();
-      // Only handle our own height transitions
       if (e.target === element && e.propertyName === 'height') {
-        // console.log('[useCollapse] DOM transition ended');
         setIsAnimating(false);
 
-        // If we just opened, setup the observer now that animation is done
         if (local.opened() && !resizeObserver) {
           setupResizeObserver();
         }

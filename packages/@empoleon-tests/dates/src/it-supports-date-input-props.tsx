@@ -10,7 +10,7 @@ import {
   expectValue,
   getInputValue,
 } from './date-input-test-helpers';
-import { JSX } from 'solid-js/jsx-runtime';
+import { JSX } from 'solid-js';
 import { vi } from 'vitest';
 
 interface Options {

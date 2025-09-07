@@ -1,6 +1,6 @@
 import { DEFAULT_THEME, EmpoleonTheme } from '@empoleon/core';
 import { render } from '../render';
-import { JSX } from 'solid-js/jsx-runtime';
+import { JSX } from 'solid-js';
 import { getPropsValue } from './get-props-value';
 
 const randomNumber = (min = 10, max = 100) => Math.floor(Math.random() * (max - min + 1) + min);

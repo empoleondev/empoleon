@@ -286,30 +286,7 @@ function StepNodes(props: StepNodeProps) {
     return acc;
   });
 
-  return <>
-    {steps()}
-    {/* Hidden elements for testing when no children are present */}
-    <div
-      style={{ ...props.style, display: 'none' }}
-      class={props.className}
-      data-orientation={props.orientation}
-    />
-    <button
-      {...props.getStyles('step')}
-      style={{ ...props.getStyles('step').style, display: 'none' }}
-      data-type="step"
-    >
-      <span {...props.getStyles('stepWrapper')} style={{ ...props.getStyles('stepWrapper').style, display: 'none' }}>
-        <span {...props.getStyles('stepIcon')} style={{ ...props.getStyles('stepIcon').style, display: 'none' }}>
-          <span {...props.getStyles('stepCompletedIcon')} style={{ ...props.getStyles('stepCompletedIcon').style, display: 'none' }} />
-        </span>
-      </span>
-      <span {...props.getStyles('stepBody')} style={{ ...props.getStyles('stepBody').style, display: 'none' }}>
-        <span {...props.getStyles('stepLabel')} style={{ ...props.getStyles('stepLabel').style, display: 'none' }} />
-        <span {...props.getStyles('stepDescription')} style={{ ...props.getStyles('stepDescription').style, display: 'none' }} />
-      </span>
-    </button>
-  </>
+  return steps()
 }
 
 interface CompletedProps {
@@ -360,7 +337,6 @@ function CompletedNode(props: CompletedProps) {
     }
   });
 
-  // return <>{content() && <div style={props.style} class={props.className}>{content()}</div>}</>
   return <div style={props.style} class={props.className}>{content()}</div>
 }
 

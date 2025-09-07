@@ -151,18 +151,48 @@ export function Menu(_props: MenuProps) {
   const [openedViaClick, setOpenedViaClick] = createSignal(false);
 
   const close = () => {
+    const wasOpened = _opened();
     setOpened(false);
     setOpenedViaClick(false);
-    _opened() && local.onClose?.();
+    wasOpened && local.onClose?.();
   };
 
   const open = () => {
+    const wasOpened = _opened();
     setOpened(true);
-    !_opened() && local.onOpen?.();
+    !wasOpened && local.onOpen?.();
   };
 
   const toggleDropdown = () => {
-    _opened() ? close() : open();
+    if (_opened()) {
+      close();
+    } else {
+      open();
+      if (local.trigger === 'click-hover') {
+        setOpenedViaClick(true);
+      }
+    }
+  };
+
+  const getCloseDropdown = () => {
+    if (local.trigger === 'click') {
+      return close;
+    }
+    if (local.trigger === 'click-hover') {
+      return () => {
+        if (!openedViaClick()) {
+          closeDropdown();
+        }
+      };
+    }
+    return closeDropdown;
+  };
+
+  const getOpenDropdown = () => {
+    if (local.trigger === 'click') {
+      return open;
+    }
+    return openDropdown;
   };
 
   const { openDropdown, closeDropdown } = useDelayedHover({ open, close, closeDelay: local.closeDelay, openDelay: local.openDelay });
@@ -186,8 +216,8 @@ export function Menu(_props: MenuProps) {
         openedViaClick: openedViaClick(),
         setOpenedViaClick,
         closeOnItemClick: local.closeOnItemClick,
-        closeDropdown: local.trigger === 'click' ? close : closeDropdown,
-        openDropdown: local.trigger === 'click' ? open : openDropdown,
+        closeDropdown: getCloseDropdown(),
+        openDropdown: getOpenDropdown(),
         closeDropdownImmediately: close,
         loop: local.loop,
         trigger: local.trigger,

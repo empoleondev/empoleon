@@ -1,0 +1,129 @@
+import { renderHook } from '@solidjs/testing-library';
+import { useInterval } from './use-interval';
+
+const defaultTimeout = 2000;
+
+const callback = vi.fn();
+
+const setupTimer = (timeout: number = defaultTimeout) => ({
+  timeout,
+  advanceTimerToNextTick: () => vi.advanceTimersByTime(timeout),
+});
+
+const setupHook = (cb: (...args: any[]) => void = callback, timeout: number = defaultTimeout) =>
+  renderHook(() => useInterval(cb, timeout));
+
+describe('@empoleon/hooks/use-interval', () => {
+  beforeAll(() => {
+    vi.useFakeTimers();
+    vi.spyOn(global, 'setInterval');
+    vi.spyOn(global, 'clearInterval');
+  });
+
+  afterEach(() => {
+    vi.clearAllMocks();
+    vi.clearAllTimers();
+  });
+
+  afterAll(() => {
+    vi.useRealTimers();
+  });
+
+  it('initialize', () => {
+    const { result } = setupHook();
+    const { start, stop, toggle, active } = result;
+
+    expect(typeof active).toBe('boolean');
+    expect(typeof start).toBe('function');
+    expect(typeof stop).toBe('function');
+    expect(typeof toggle).toBe('function');
+  });
+
+  it('should run after timeout exceeded', () => {
+    const { advanceTimerToNextTick } = setupTimer();
+    const { result } = setupHook();
+
+    advanceTimerToNextTick();
+    expect(callback).not.toHaveBeenCalled();
+    expect(result.active).toBe(false);
+
+    result.start();
+
+    expect(setInterval).toHaveBeenCalledWith(expect.any(Function), defaultTimeout);
+
+    expect(result.active).toBe(true);
+
+    advanceTimerToNextTick();
+    expect(callback).toHaveBeenCalledTimes(1);
+
+    advanceTimerToNextTick();
+    expect(callback).toHaveBeenCalledTimes(2);
+
+    advanceTimerToNextTick();
+    expect(callback).toHaveBeenCalledTimes(3);
+  });
+
+  it('should stop after stop fn call', () => {
+    const { advanceTimerToNextTick } = setupTimer();
+
+    const { result } = setupHook();
+
+    advanceTimerToNextTick();
+    expect(callback).not.toHaveBeenCalled();
+    expect(result.active).toBe(false);
+
+    result.start();
+    expect(setInterval).toHaveBeenCalledWith(expect.any(Function), defaultTimeout);
+
+    advanceTimerToNextTick();
+    expect(callback).toHaveBeenCalledTimes(1);
+    expect(result.active).toBe(true);
+
+    result.stop();
+
+    expect(clearInterval).toHaveBeenCalled();
+
+    expect(result.active).toBe(false);
+
+    advanceTimerToNextTick();
+    expect(callback).toHaveBeenCalledTimes(1);
+  });
+
+  it('should toggle between active states', () => {
+    const { advanceTimerToNextTick } = setupTimer();
+
+    const { result } = setupHook();
+    advanceTimerToNextTick();
+    expect(callback).not.toHaveBeenCalled();
+    expect(result.active).toBe(false);
+
+    result.toggle();
+    expect(setInterval).toHaveBeenCalledWith(expect.any(Function), defaultTimeout);
+
+    advanceTimerToNextTick();
+    expect(callback).toHaveBeenCalledTimes(1);
+    expect(result.active).toBe(true);
+
+    result.toggle();
+
+    expect(clearInterval).toHaveBeenCalled();
+
+    expect(result.active).toBe(false);
+
+    advanceTimerToNextTick();
+    expect(callback).toHaveBeenCalledTimes(1);
+
+    advanceTimerToNextTick();
+    expect(callback).toHaveBeenCalledTimes(1);
+
+    result.toggle();
+
+    expect(setInterval).toHaveBeenCalledWith(expect.any(Function), defaultTimeout);
+
+    advanceTimerToNextTick();
+    expect(callback).toHaveBeenCalledTimes(2);
+
+    advanceTimerToNextTick();
+    expect(callback).toHaveBeenCalledTimes(3);
+  });
+});

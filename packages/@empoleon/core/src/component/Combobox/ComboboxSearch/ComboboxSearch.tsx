@@ -8,6 +8,7 @@ import classes from '../Combobox.module.css';
 
 export type ComboboxSearchStylesNames = InputStylesNames;
 
+// @ts-ignore
 export interface ComboboxSearchProps extends InputProps, ElementProps<'input', 'size'> {
   /** Determines whether the search input should have `aria-` attribute, `true` by default */
   withAriaAttributes?: boolean;

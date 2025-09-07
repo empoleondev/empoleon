@@ -70,7 +70,7 @@ export const SwitchGroup = factory<SwitchGroupFactory>(_props => {
   };
 
   return (
-    <SwitchGroupProvider value={{ value: _value(), onChange: handleChange, size: local.size }}>
+    <SwitchGroupProvider value={{ get value() { return _value(); }, onChange: handleChange, size: local.size }}>
       <Input.Wrapper
         size={local.size}
         ref={local.ref}

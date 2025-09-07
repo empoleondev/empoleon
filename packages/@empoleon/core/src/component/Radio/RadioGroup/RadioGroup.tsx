@@ -53,7 +53,7 @@ export const RadioGroup = factory<RadioGroupFactory>(_props => {
     'children',
     'name',
     'readOnly',
-    'ref'
+    'ref',
   ]);
 
   const _name = useId(local.name);
@@ -75,6 +75,10 @@ export const RadioGroup = factory<RadioGroupFactory>(_props => {
         ref={local.ref}
         {...local.wrapperProps}
         {...others}
+        label={(props.classNames as any)?.label}
+        description={(props.classNames as any)?.description}
+        error={(props.classNames as any)?.error}
+        required={true}
         labelElement="div"
         __staticSelector="RadioGroup"
       >

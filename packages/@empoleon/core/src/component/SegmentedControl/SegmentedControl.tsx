@@ -179,15 +179,9 @@ export const SegmentedControl = factory<SegmentedControlFactory>(_props => {
   const theme = useEmpoleonTheme();
 
   createEffect(() => {
-    const d = local.data;            // read prop to create dependency
+    const d = local.data;
     const len = Array.isArray(d) ? d.length : undefined;
     const values = Array.isArray(d) ? d.map((x: any) => (typeof x === 'string' ? x : x?.value)) : d;
-    console.log('[SC] data changed', { ref: d, len, values });
-  });
-
-  // React to value changes
-  createEffect(() => {
-    console.log('[SC] value changed', local.value);
   });
 
   const _data = createMemo(() =>

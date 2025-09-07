@@ -17,7 +17,7 @@ export function getTransitionStyles(props: {
   timingFunction: JSX.CSSProperties['transition-timing-function'];
 }): JSX.CSSProperties {
   const shared: JSX.CSSProperties = {
-    'backface-visibility': 'hidden',
+    '--webkit-backface-visibility': 'hidden',
     'will-change': 'transform, opacity',
     'transition-duration': `${props.duration}ms`,
     'transition-timing-function': props.timingFunction,

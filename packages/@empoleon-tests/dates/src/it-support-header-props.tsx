@@ -1,7 +1,7 @@
 import { screen } from '@solidjs/testing-library';
 import userEvent from '@testing-library/user-event';
 import { render } from '@empoleon-tests/core';
-import { JSX } from 'solid-js/jsx-runtime';
+import { JSX } from 'solid-js';
 import { vi } from 'vitest';
 
 interface Options {

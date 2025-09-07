@@ -37,7 +37,7 @@ export type CheckboxGroupFactory = Factory<{
 }>;
 
 export const CheckboxGroup = factory<CheckboxGroupFactory>(_props => {
-  const props = useProps('Checkbox', null, _props);
+  const props = useProps('CheckboxGroup', null, _props);
   const [local, others] = splitProps(props, [
     'value',
     'defaultValue',

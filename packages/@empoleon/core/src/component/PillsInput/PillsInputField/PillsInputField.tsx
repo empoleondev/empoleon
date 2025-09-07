@@ -75,7 +75,15 @@ export const PillsInputField = factory<PillsInputFieldFactory>(_props => {
   return (
     <Box
       component="input"
-      ref={useMergedRef(local.ref, ctx?.fieldRef)}
+      ref={
+        useMergedRef(local.ref, ctx?.fieldRef ? (el: HTMLInputElement) => {
+          if (typeof ctx.fieldRef === 'function') {
+            ctx.fieldRef(el);
+          } else if (ctx.fieldRef && 'current' in ctx.fieldRef) {
+            ctx.fieldRef.current = el;
+          }
+        } : undefined)
+      }
       data-type={local.type}
       disabled={_disabled}
       mod={[{ disabled: _disabled, pointer: local.pointer }, local.mod]}

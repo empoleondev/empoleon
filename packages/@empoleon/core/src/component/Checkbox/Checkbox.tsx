@@ -182,24 +182,43 @@ export const Checkbox = factory<CheckboxFactory>(_props => {
   const rest = () => extracted().rest;
   const uuid = useId(local.id);
 
-  const contextProps = createMemo(() => {
-   if (ctx) {
-     return {
-       checked: ctx.value().includes(rest().value as string),
-       onChange: (event: Event) => {
-         ctx.onChange(event as any);
-         typeof local.onChange === 'function' && local.onChange(event as any);
-       },
-     };
-   }
-   if (local.checked !== undefined) {
-     return { checked: local.checked, onChange: local.onChange };
-   }
-   if (local.defaultChecked !== undefined) {
-     return { checked: !!local.defaultChecked, onChange: local.onChange };
-   }
-   return { onChange: local.onChange };
- });
+//   const contextProps = createMemo(() => {
+//    if (ctx) {
+//      return {
+//        checked: ctx.value().includes(rest().value as string),
+//        onChange: (event: Event) => {
+//          ctx.onChange(event as any);
+//          typeof local.onChange === 'function' && local.onChange(event as any);
+//        },
+//      };
+//    }
+//    if (local.checked !== undefined) {
+//      return { checked: local.checked, onChange: local.onChange };
+//    }
+//    if (local.defaultChecked !== undefined) {
+//      return { checked: !!local.defaultChecked, onChange: local.onChange };
+//    }
+//    return { onChange: local.onChange };
+//  });
+
+const contextProps = createMemo(() => {
+  if (ctx) {
+    return {
+      checked: ctx.value().includes(rest().value as string),
+      onChange: (event: Event) => {
+        ctx.onChange(event as any);
+        typeof local.onChange === 'function' && local.onChange(event as any);
+      },
+    };
+  }
+  if (local.checked !== undefined) {
+    return { checked: local.checked, onChange: local.onChange };
+  }
+  if (local.defaultChecked !== undefined) {
+    return { checked: !!local.defaultChecked, onChange: local.onChange };
+  }
+  return { onChange: local.onChange };
+});
 
   const fallbackRef = null;
   const ref = local.ref || fallbackRef;
@@ -245,13 +264,14 @@ export const Checkbox = factory<CheckboxFactory>(_props => {
             inputRef = el;
             if (typeof ref === 'function') ref(el);
           }}
-          checked={local.checked}
+          checked={contextProps().checked}
+          data-checked={contextProps().checked || undefined}
           disabled={local.disabled}
-          mod={{ error: !!(local.error && (local.error as any)()), indeterminate: local.indeterminate }}
+          mod={{ error: !!(local.error && (typeof (local.error as any) === 'function' ? (local.error as any)() : local.error)), indeterminate: local.indeterminate }}
           {...getStyles('input', { focusable: true, variant: local.variant })}
           {...rest()}
           {...contextProps()}
-          onChange={local.onChange}
+          onChange={contextProps().onChange}
           type="checkbox"
         />
 

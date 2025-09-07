@@ -1,4 +1,5 @@
 import { splitProps, JSX } from 'solid-js';
+// @ts-ignore
 import TextareaAutosize from 'solid-textarea-autosize';
 import {
   BoxProps,

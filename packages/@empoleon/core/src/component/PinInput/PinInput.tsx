@@ -1,4 +1,5 @@
 import { createSignal, createEffect, JSX, For, splitProps } from "solid-js";
+import { Ref } from "@solid-primitives/refs";
 import { useId, useUncontrolled } from '@empoleon/hooks';
 import {
   BoxProps,
@@ -20,7 +21,6 @@ import { Input, InputProps } from '../Input';
 import { InputBase } from '../InputBase';
 import { createPinArray } from './create-pin-array/create-pin-array';
 import classes from './PinInput.module.css';
-import { mergeRefs, Ref } from "@solid-primitives/refs";
 
 const regex = {
   number: /^[0-9]+$/,
@@ -340,6 +340,15 @@ export const PinInput = factory<PinInputFactory>(_props => {
     (event.target as HTMLInputElement)?.select();
     setFocusedIndex(index);
   };
+
+  createEffect(() => {
+    if (local.autoFocus) {
+      const refs = inputsRef();
+      if (refs[0]) {
+        refs[0].focus();
+      }
+    }
+  });
 
   const handleBlur = () => {
     setFocusedIndex(-1);

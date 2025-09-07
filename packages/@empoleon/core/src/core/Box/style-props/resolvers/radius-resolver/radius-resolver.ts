@@ -3,7 +3,7 @@ import { rem } from '../../../../utils';
 
 export function radiusResolver(value: unknown, theme: EmpoleonTheme) {
   if (typeof value === 'string' && value in theme.radius) {
-    return `var(--mantine-radius-${value})`;
+    return `var(--empoleon-radius-${value})`;
   }
 
   if (typeof value === 'number') {
