@@ -2,14 +2,7 @@ Need to fix
 
 components:
 Card - Fucksup section
-**/Table.components.test.tsx - 98 failed | 112 passed (210)
 
-// libs
-**/use-color-scheme.test.tsx - 3 failed | 2 passed
-**/use-interval.test.ts - 4 failed
-**/use-pagination.test.ts
-// modals
-**/use-modals.test.tsx
 // form
 **/use-field/**
 **/use-form/**

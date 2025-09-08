@@ -1,3 +1,4 @@
+import { splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
@@ -124,6 +125,18 @@ export function tableElement<Factory extends FactoryPayload>(
   const Component = factory<Factory>(_props => {
     const props = useProps(name, {}, _props);
 
+    // Split props to separate known props from others (same pattern as Affix and other components)
+    const [local, others] = splitProps(props, [
+      'classNames',
+      'className',
+      'style',
+      'styles',
+      'children',
+      'ref',
+      'unstyled',
+      'vars'
+    ]);
+
     const ctx = useTableContext();
 
     return (
@@ -131,8 +144,14 @@ export function tableElement<Factory extends FactoryPayload>(
         component={element}
         ref={props.ref}
         {...getDataAttributes(ctx, options)}
-        {...ctx.getStyles(element, { className: props.className, classNames: props.classNames, style: props.style, styles: props.styles, props })}
-        {...props.others}
+        {...ctx.getStyles(element, {
+          className: props.className,
+          classNames: props.classNames,
+          style: props.style,
+          styles: props.styles,
+          props
+        })}
+        {...others}
       >
         {props.children}
       </Box>

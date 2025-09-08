@@ -1,20 +1,25 @@
-import { PropsWithChildren, useEffect } from 'react';
-import { render, renderHook, screen } from '@testing-library/react';
+import { createEffect, onMount, ParentProps } from 'solid-js';
+import { render, renderHook, screen } from '@solidjs/testing-library';
 import { EmpoleonProvider } from '@empoleon/core';
 import { ContextModalProps } from '../context';
 import { ModalsProvider } from '../ModalsProvider';
 import { useModals } from './use-modals';
 
 describe('@empoleon/modals/use-modals', () => {
+  // mock otherwise will get an error
+  beforeEach(() => {
+    window.scrollTo = vi.fn();
+  });
+
   it('returns context value of ModalsProvider', () => {
-    const wrapper = ({ children }: PropsWithChildren<unknown>) => (
+    const wrapper = (props: ParentProps) => (
       <EmpoleonProvider>
-        <ModalsProvider>{children}</ModalsProvider>
+        <ModalsProvider>{props.children}</ModalsProvider>
       </EmpoleonProvider>
     );
 
     const hook = renderHook(() => useModals(), { wrapper });
-    const { current } = hook.result;
+    const current = hook.result;
 
     expect(current.closeAll).toBeDefined();
     expect(current.closeModal).toBeDefined();
@@ -30,92 +35,85 @@ describe('@empoleon/modals/use-modals', () => {
       <div>{innerProps.text}</div>
     );
 
-    const wrapper = ({ children }: any) => (
-      <EmpoleonProvider>
-        <ModalsProvider modals={{ contextTest: ContextModal }}>{children}</ModalsProvider>
-      </EmpoleonProvider>
-    );
-
     const testContent = 'context-modal-test-content';
     const Component = () => {
       const modals = useModals();
 
-      useEffect(() => {
+      onMount(() => {
         modals.openContextModal('contextTest', {
           innerProps: { text: testContent },
           transitionProps: { duration: 0 },
         });
-      }, []);
+      });
 
       return <div>Empty</div>;
     };
 
-    render(<Component />, { wrapper });
+    render(() => (
+      <EmpoleonProvider>
+        <ModalsProvider modals={{ contextTest: ContextModal }}>
+          <Component />
+        </ModalsProvider>
+      </EmpoleonProvider>
+    ));
+
     expect(screen.getByText(testContent)).toBeInTheDocument();
   });
 
   it('correctly renders a confirm modal with labels from the provider', () => {
-    const wrapper = ({ children }: any) => (
-      <EmpoleonProvider>
-        <ModalsProvider labels={{ cancel: 'ProviderCancel', confirm: 'ProviderConfirm' }}>
-          {children}
-        </ModalsProvider>
-      </EmpoleonProvider>
-    );
-
     const Component = () => {
       const modals = useModals();
 
-      useEffect(() => {
+      onMount(() => {
         modals.openConfirmModal({ transitionProps: { duration: 0 } });
-      }, []);
+      });
 
       return <div>Empty</div>;
     };
 
-    render(<Component />, { wrapper });
+    render(() => (
+      <EmpoleonProvider>
+        <ModalsProvider labels={{ cancel: 'ProviderCancel', confirm: 'ProviderConfirm' }}>
+          <Component />
+        </ModalsProvider>
+      </EmpoleonProvider>
+    ));
+
     expect(screen.getByText('ProviderCancel')).toBeInTheDocument();
     expect(screen.getByText('ProviderConfirm')).toBeInTheDocument();
   });
 
   it('correctly renders a confirm modal with overwritten provider labels', () => {
-    const wrapper = ({ children }: any) => (
-      <EmpoleonProvider>
-        <ModalsProvider labels={{ cancel: 'ProviderCancel', confirm: 'ProviderConfirm' }}>
-          {children}
-        </ModalsProvider>
-      </EmpoleonProvider>
-    );
-
     const Component = () => {
       const modals = useModals();
 
-      useEffect(() => {
+      onMount(() => {
         modals.openConfirmModal({
           labels: { confirm: 'Confirm', cancel: 'Cancel' },
           transitionProps: { duration: 0 },
         });
-      }, []);
+      });
 
       return <div>Empty</div>;
     };
 
-    render(<Component />, { wrapper });
+    render(() => (
+      <EmpoleonProvider>
+        <ModalsProvider labels={{ cancel: 'ProviderCancel', confirm: 'ProviderConfirm' }}>
+          <Component />
+        </ModalsProvider>
+      </EmpoleonProvider>
+    ));
+
     expect(screen.getByText('Confirm')).toBeInTheDocument();
     expect(screen.getByText('Cancel')).toBeInTheDocument();
   });
 
   it('correctly renders a confirm modal with labels as HTMLElement', () => {
-    const wrapper = ({ children }: any) => (
-      <EmpoleonProvider>
-        <ModalsProvider>{children}</ModalsProvider>
-      </EmpoleonProvider>
-    );
-
     const Component = () => {
       const modals = useModals();
 
-      useEffect(() => {
+      onMount(() => {
         modals.openConfirmModal({
           labels: {
             confirm: <span>Confirm</span>,
@@ -123,39 +121,46 @@ describe('@empoleon/modals/use-modals', () => {
           },
           transitionProps: { duration: 0 },
         });
-      }, []);
+      });
 
       return <div>Empty</div>;
     };
 
-    render(<Component />, { wrapper });
+    render(() => (
+      <EmpoleonProvider>
+        <ModalsProvider>
+          <Component />
+        </ModalsProvider>
+      </EmpoleonProvider>
+    ));
 
     expect(screen.getByText('Confirm')).toContainHTML('span');
     expect(screen.getByText('Cancel')).toContainHTML('span');
   });
 
   it('correctly renders a regular modal with children and a title', () => {
-    const wrapper = ({ children }: any) => (
-      <EmpoleonProvider>
-        <ModalsProvider>{children}</ModalsProvider>
-      </EmpoleonProvider>
-    );
-
     const Component = () => {
       const modals = useModals();
 
-      useEffect(() => {
+      onMount(() => {
         modals.openModal({
           title: 'Test title',
           children: <h1>Children</h1>,
           transitionProps: { duration: 0 },
         });
-      }, []);
+      });
 
       return <div>Empty</div>;
     };
 
-    render(<Component />, { wrapper });
+    render(() => (
+      <EmpoleonProvider>
+        <ModalsProvider>
+          <Component />
+        </ModalsProvider>
+      </EmpoleonProvider>
+    ));
+
     expect(screen.getByText('Test title')).toBeInTheDocument();
     expect(screen.getByText('Children')).toBeInTheDocument();
   });

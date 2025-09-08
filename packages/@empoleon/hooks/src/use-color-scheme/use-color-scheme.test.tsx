@@ -1,7 +1,9 @@
 import { render } from '@solidjs/testing-library';
 import { useColorScheme } from './use-color-scheme';
+import { createEffect } from 'solid-js';
 
 describe('@empoleon/hooks/use-color-scheme', () => {
+  // @ts-ignore
   let trace = vi.fn<(colorScheme: string) => void, string[]>();
   const mockMatchMedia = vi.fn().mockImplementation(() => ({
     matches: true,
@@ -15,6 +17,7 @@ describe('@empoleon/hooks/use-color-scheme', () => {
     trace = vi.fn();
     window.matchMedia = retainMatchMedia;
   });
+
   function WrapperComponent({
     initialValue,
     getInitialValueInEffect = true,
@@ -25,8 +28,23 @@ describe('@empoleon/hooks/use-color-scheme', () => {
     const colorScheme = useColorScheme(initialValue, {
       getInitialValueInEffect,
     });
-    trace(colorScheme);
-    return colorScheme;
+
+    // Always trace the initial value
+    const initialColorScheme = colorScheme();
+    trace(initialColorScheme);
+
+    // Only create effect if getInitialValueInEffect is true
+    if (getInitialValueInEffect) {
+      createEffect(() => {
+        const current = colorScheme();
+        // Only trace if the value actually changed from the initial value
+        if (current !== initialColorScheme) {
+          trace(current);
+        }
+      });
+    }
+
+    return colorScheme();
   }
 
   it('correctly returns initial dark state state without useEffect', () => {
@@ -42,6 +60,7 @@ describe('@empoleon/hooks/use-color-scheme', () => {
     expect(trace.mock.calls[0][0]).toBe('dark');
     expect(trace.mock.calls[1][0]).toBe('light');
   });
+
   it('correctly returns initial dark state with useEffect', () => {
     window.matchMedia = mockMatchMedia;
     render(() => <WrapperComponent initialValue="dark" getInitialValueInEffect />);

@@ -18,23 +18,15 @@ export default defineConfig({
     testTimeout: 10000,
     pool: 'forks',
     isolate: true,
-    include: [
-      '**/Card.test.tsx'
-    ],
+    // include: [
+    //   '**/Table.components.test.tsx'
+    // ],
     exclude: [
       '**/dates/**',
       '**/default-css-variables-resolver.test.ts',
       '**/Carousel.test.tsx',
       '**/Dropzone.test.tsx',
       '**/Spotlight.test.tsx',
-      //table
-      '**/Table.components.test.tsx',
-      // libs
-      '**/use-color-scheme.test.tsx',
-      '**/use-interval.test.ts',
-      '**/use-pagination.test.ts',
-      // modals
-      '**/use-modals.test.tsx',
       // form
       '**/use-field/**',
       '**/use-form/**',

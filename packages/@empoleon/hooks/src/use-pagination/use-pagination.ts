@@ -41,8 +41,8 @@ export function usePagination(props: PaginationParams) {
   const siblings = createMemo(() => local.siblings?.() ?? 1);
   const boundaries = createMemo(() => local.boundaries?.() ?? 1);
   const initialPage = createMemo(() => local.initialPage?.() ?? 1);
-
   const _total = createMemo(() => Math.max(Math.trunc(local.total()), 0));
+
   const [activePage, setActivePage] = useUncontrolled({
     value: local.page,
     onChange: local.onChange,
@@ -50,13 +50,7 @@ export function usePagination(props: PaginationParams) {
     finalValue: initialPage(),
   });
 
-  // createEffect(() => {
-  //   console.log(`[usePagination Hook] Active page state is now: ${activePage()}`);
-  // });
-
   const setPage = (pageNumber: number) => {
-    // console.log(`[usePagination Hook] setPage called with: ${pageNumber}`);
-
     if (pageNumber <= 0) {
       setActivePage(1);
     } else if (pageNumber > _total()) {

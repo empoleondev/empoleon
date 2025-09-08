@@ -33,7 +33,7 @@ describe('@empoleon/hooks/use-interval', () => {
     const { result } = setupHook();
     const { start, stop, toggle, active } = result;
 
-    expect(typeof active).toBe('boolean');
+    expect(typeof active()).toBe('boolean');
     expect(typeof start).toBe('function');
     expect(typeof stop).toBe('function');
     expect(typeof toggle).toBe('function');
@@ -45,13 +45,13 @@ describe('@empoleon/hooks/use-interval', () => {
 
     advanceTimerToNextTick();
     expect(callback).not.toHaveBeenCalled();
-    expect(result.active).toBe(false);
+    expect(result.active()).toBe(false);
 
     result.start();
 
     expect(setInterval).toHaveBeenCalledWith(expect.any(Function), defaultTimeout);
 
-    expect(result.active).toBe(true);
+    expect(result.active()).toBe(true);
 
     advanceTimerToNextTick();
     expect(callback).toHaveBeenCalledTimes(1);
@@ -70,20 +70,20 @@ describe('@empoleon/hooks/use-interval', () => {
 
     advanceTimerToNextTick();
     expect(callback).not.toHaveBeenCalled();
-    expect(result.active).toBe(false);
+    expect(result.active()).toBe(false);
 
     result.start();
     expect(setInterval).toHaveBeenCalledWith(expect.any(Function), defaultTimeout);
 
     advanceTimerToNextTick();
     expect(callback).toHaveBeenCalledTimes(1);
-    expect(result.active).toBe(true);
+    expect(result.active()).toBe(true);
 
     result.stop();
 
     expect(clearInterval).toHaveBeenCalled();
 
-    expect(result.active).toBe(false);
+    expect(result.active()).toBe(false);
 
     advanceTimerToNextTick();
     expect(callback).toHaveBeenCalledTimes(1);
@@ -95,20 +95,20 @@ describe('@empoleon/hooks/use-interval', () => {
     const { result } = setupHook();
     advanceTimerToNextTick();
     expect(callback).not.toHaveBeenCalled();
-    expect(result.active).toBe(false);
+    expect(result.active()).toBe(false);
 
     result.toggle();
     expect(setInterval).toHaveBeenCalledWith(expect.any(Function), defaultTimeout);
 
     advanceTimerToNextTick();
     expect(callback).toHaveBeenCalledTimes(1);
-    expect(result.active).toBe(true);
+    expect(result.active()).toBe(true);
 
     result.toggle();
 
     expect(clearInterval).toHaveBeenCalled();
 
-    expect(result.active).toBe(false);
+    expect(result.active()).toBe(false);
 
     advanceTimerToNextTick();
     expect(callback).toHaveBeenCalledTimes(1);
