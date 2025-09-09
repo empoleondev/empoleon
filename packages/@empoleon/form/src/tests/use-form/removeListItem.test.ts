@@ -1,4 +1,4 @@
-import { act, renderHook } from '@testing-library/react';
+import { renderHook } from '@solidjs/testing-library';
 import { FormMode } from '../../types';
 import { useForm } from '../../use-form';
 
@@ -8,8 +8,8 @@ function tests(mode: FormMode) {
       useForm({ mode, initialValues: { a: [{ b: 1 }, { b: 2 }, { b: 3 }] } })
     );
 
-    act(() => hook.result.current.removeListItem('a', 1));
-    expect(hook.result.current.getValues()).toStrictEqual({ a: [{ b: 1 }, { b: 3 }] });
+    hook.result.removeListItem('a', 1);
+    expect(hook.result.getValues()).toStrictEqual({ a: [{ b: 1 }, { b: 3 }] });
   });
 
   it('does not change values if given path does not exist', () => {
@@ -17,8 +17,8 @@ function tests(mode: FormMode) {
       useForm({ mode, initialValues: { a: [{ b: 1 }, { b: 2 }, { b: 3 }] } })
     );
 
-    act(() => hook.result.current.removeListItem('does.not.exist', 1));
-    expect(hook.result.current.getValues()).toStrictEqual({ a: [{ b: 1 }, { b: 2 }, { b: 3 }] });
+    hook.result.removeListItem('does.not.exist', 1);
+    expect(hook.result.getValues()).toStrictEqual({ a: [{ b: 1 }, { b: 2 }, { b: 3 }] });
   });
 
   it('removes list item with given index (nested list)', () => {
@@ -33,8 +33,8 @@ function tests(mode: FormMode) {
       })
     );
 
-    act(() => hook.result.current.removeListItem('a.0.b.1.c', 1));
-    expect(hook.result.current.getValues()).toStrictEqual({
+    hook.result.removeListItem('a.0.b.1.c', 1);
+    expect(hook.result.getValues()).toStrictEqual({
       a: [{ b: [{ c: [{ d: 1 }, { d: 2 }, { d: 3 }] }, { c: [{ d: 1 }, { d: 3 }] }] }],
     });
   });
@@ -56,15 +56,15 @@ function tests(mode: FormMode) {
       })
     );
 
-    expect(hook.result.current.errors).toStrictEqual({
+    expect(hook.result.errors).toStrictEqual({
       name: 'name-error',
       'a.0.b': 'error-1',
       'a.1.b': 'error-2',
       'a.2.b': 'error-3',
     });
 
-    act(() => hook.result.current.removeListItem('a', 1));
-    expect(hook.result.current.errors).toStrictEqual({
+    hook.result.removeListItem('a', 1);
+    expect(hook.result.errors).toStrictEqual({
       name: 'name-error',
       'a.0.b': 'error-1',
       'a.1.b': 'error-3',
@@ -83,7 +83,7 @@ function tests(mode: FormMode) {
       })
     );
 
-    act(() => hook.result.current.removeListItem('a', 1));
+    hook.result.removeListItem('a', 1);
     expect(spy).toHaveBeenCalledWith(
       { a: [{ b: 1 }, { b: 3 }] },
       { a: [{ b: 1 }, { b: 2 }, { b: 3 }] }

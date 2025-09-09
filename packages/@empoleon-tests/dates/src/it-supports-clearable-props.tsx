@@ -10,7 +10,7 @@ interface Options {
 export function itSupportsClearableProps(options: Options, name = 'supports clearable props') {
   it(`${name}: renders given rightSection instead of clear button`, () => {
     render(
-      <options.component
+      () => <options.component
         {...options.props}
         clearable
         clearButtonProps={{ 'aria-label': 'test-clear' }}
@@ -24,7 +24,7 @@ export function itSupportsClearableProps(options: Options, name = 'supports clea
 
   it(`${name}: supports clearButtonProps`, () => {
     render(
-      <options.component
+      () => <options.component
         {...options.props}
         clearable
         clearButtonProps={{ 'aria-label': 'test-clear', 'data-test-attr': true } as any}

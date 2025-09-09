@@ -272,8 +272,8 @@ export const Input = polymorphicFactory<InputFactory>(_props => {
         }
       };
     }
-    return dv !== undefined ? { defaultValue: dv } : undefined;
-    };
+    return dv !== undefined ? { value: dv } : undefined;
+  };
 
   const { value: v, defaultValue: dv } = rest;
 

@@ -6,7 +6,6 @@ export function validateFieldValue<T>(
   rules: FormValidateInput<T> | undefined,
   values: T
 ): FormFieldValidationResult {
-  console.log('2');
   if (typeof path !== 'string') {
     return { hasError: false, error: null };
   }

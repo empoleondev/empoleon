@@ -91,10 +91,8 @@ export type PickerInputBaseFactory = Factory<{
   variant: InputVariant;
 }>;
 
-const defaultProps: Partial<PickerInputBaseProps> = {};
-
 export const PickerInputBase = factory<PickerInputBaseFactory>(_props => {
-  const props = useInputProps('PickerInputBase', defaultProps, _props);
+  const props = useInputProps('PickerInputBase', null, _props);
   const [local, others] = splitProps(props, [
     'inputProps',
     'wrapperProps',

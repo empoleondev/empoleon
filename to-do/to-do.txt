@@ -1,3 +1,2 @@
-- upgrade to 8.20
 - fix all tests
 - find all cloneElement with React and change to Solid alternative

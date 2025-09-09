@@ -1,7 +1,17 @@
-import { For } from 'solid-js';
+import { For, JSX } from 'solid-js';
 import { CalendarHeader } from './CalendarHeader';
+import { EmpoleonProvider } from '@empoleon/core';
 
-export default { title: 'CalendarHeader' };
+export default {
+  title: 'CalendarHeader',
+  decorators: [
+    (Story: () => JSX.Element) => (
+      <EmpoleonProvider>
+        <Story />
+      </EmpoleonProvider>
+    ),
+  ],
+};
 
 export function Usage() {
   return (

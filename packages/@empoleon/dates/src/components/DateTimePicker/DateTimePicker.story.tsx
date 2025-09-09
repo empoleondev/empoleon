@@ -1,8 +1,17 @@
-import { Button, Group } from '@empoleon/core';
+import { Button, EmpoleonProvider, Group } from '@empoleon/core';
 import { DateTimePicker } from './DateTimePicker';
-import { createSignal } from 'solid-js';
+import { createSignal, JSX } from 'solid-js';
 
-export default { title: 'DateTimePicker' };
+export default {
+  title: 'DateTimePicker',
+  decorators: [
+    (Story: () => JSX.Element) => (
+      <EmpoleonProvider>
+        <Story />
+      </EmpoleonProvider>
+    ),
+  ],
+};
 
 export function Usage() {
   return (

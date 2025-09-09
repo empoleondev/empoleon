@@ -20,7 +20,7 @@ import { MonthLevelGroup, MonthLevelGroupStylesNames } from '../MonthLevelGroup'
 import { YearLevelSettings } from '../YearLevel';
 import { YearLevelGroup, YearLevelGroupStylesNames } from '../YearLevelGroup';
 import { clampLevel } from './clamp-level/clamp-level';
-import { splitProps } from 'solid-js';
+import { Ref, Show, splitProps } from 'solid-js';
 
 export type CalendarStylesNames =
   | MonthLevelGroupStylesNames
@@ -88,6 +88,12 @@ export interface CalendarBaseProps {
   /** Determines whether date should be updated when month control is clicked */
   __updateDateOnMonthSelect?: boolean;
 
+  /** Assigns function to set date to the given ref */
+  __setDateRef?: Ref<((date: DateStringValue) => void) | null>;
+
+  /** Assigns function to set level to the given ref */
+  __setLevelRef?: Ref<((level: CalendarLevel) => void) | null>;
+
   /** Initial displayed date in uncontrolled mode */
   defaultDate?: DateStringValue | Date;
 
@@ -153,12 +159,12 @@ export type CalendarFactory = Factory<{
   stylesNames: CalendarStylesNames;
 }>;
 
-const defaultProps: Partial<CalendarProps> = {
+const defaultProps = {
   maxLevel: 'decade',
   minLevel: 'month',
   __updateDateOnYearSelect: true,
   __updateDateOnMonthSelect: true,
-};
+} satisfies Partial<CalendarProps>;;
 
 export const Calendar = factory<CalendarFactory>(_props  => {
   const props = useProps('Calendar', defaultProps, _props);
@@ -182,8 +188,11 @@ export const Calendar = factory<CalendarFactory>(_props  => {
     'onMonthSelect',
     'onYearMouseEnter',
     'onMonthMouseEnter',
+    'headerControlsOrder',
     '__updateDateOnYearSelect',
     '__updateDateOnMonthSelect',
+    '__setDateRef',
+    '__setLevelRef',
 
     // MonthLevelGroup props
     'firstDayOfWeek',
@@ -232,6 +241,7 @@ export const Calendar = factory<CalendarFactory>(_props  => {
     'onNextMonth',
     'onPreviousMonth',
     'static',
+    'attributes',
     'ref'
   ]);
 
@@ -261,6 +271,7 @@ export const Calendar = factory<CalendarFactory>(_props  => {
     classNames: resolvedClassNames,
     unstyled: local.unstyled,
     size: local.size,
+    attributes: local.attributes
   };
 
   const _columnsToScroll = local.columnsToScroll || local.numberOfColumns || 1;
@@ -268,7 +279,7 @@ export const Calendar = factory<CalendarFactory>(_props  => {
   const now = new Date();
   const fallbackDate =
     local.minDate && dayjs(now).isAfter(local.minDate) ? local.minDate : dayjs(now).format('YYYY-MM-DD');
-  const currentDate = _date() || fallbackDate;
+  const currentDate = () => _date() || fallbackDate;
 
   const handleNextMonth = () => {
     const nextDate = dayjs(currentDate()).add(_columnsToScroll, 'month').format('YYYY-MM-DD');
@@ -312,7 +323,7 @@ export const Calendar = factory<CalendarFactory>(_props  => {
 
   return (
     <Box ref={local.ref} size={local.size} data-calendar {...others}>
-      {_level() === 'month' && (
+      <Show when={_level() === 'month'}>
         <MonthLevelGroup
           month={currentDate()}
           minDate={local.minDate}
@@ -346,11 +357,11 @@ export const Calendar = factory<CalendarFactory>(_props  => {
           withCellSpacing={local.withCellSpacing}
           highlightToday={local.highlightToday}
           withWeekNumbers={local.withWeekNumbers}
+          headerControlsOrder={local.headerControlsOrder}
           {...stylesApiProps}
         />
-      )}
-
-      {_level() === 'year' && (
+      </Show>
+      <Show when={_level() === 'year'}>
         <YearLevelGroup
           year={currentDate()}
           numberOfColumns={local.numberOfColumns}
@@ -378,11 +389,12 @@ export const Calendar = factory<CalendarFactory>(_props  => {
           __preventFocus={local.__preventFocus}
           __stopPropagation={local.__stopPropagation}
           withCellSpacing={local.withCellSpacing}
+          headerControlsOrder={local.headerControlsOrder}
+
           {...stylesApiProps}
         />
-      )}
-
-      {_level() === 'decade' && (
+      </Show>
+      <Show when={_level() === 'decade'}>
         <DecadeLevelGroup
           decade={currentDate()}
           minDate={local.minDate}
@@ -407,9 +419,11 @@ export const Calendar = factory<CalendarFactory>(_props  => {
           __preventFocus={local.__preventFocus}
           __stopPropagation={local.__stopPropagation}
           withCellSpacing={local.withCellSpacing}
+          headerControlsOrder={local.headerControlsOrder}
+
           {...stylesApiProps}
         />
-      )}
+      </Show>
     </Box>
   );
 });

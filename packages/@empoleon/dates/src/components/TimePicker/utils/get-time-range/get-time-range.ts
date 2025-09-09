@@ -6,11 +6,11 @@ interface GetTimeRangeInput {
   interval: string;
 }
 
-export function getTimeRange({ startTime, endTime, interval }: GetTimeRangeInput): string[] {
+export function getTimeRange(props: GetTimeRangeInput): string[] {
   const timeRange: string[] = [];
-  const startInSeconds = timeToSeconds(startTime);
-  const endInSeconds = timeToSeconds(endTime);
-  const intervalInSeconds = timeToSeconds(interval);
+  const startInSeconds = timeToSeconds(props.startTime);
+  const endInSeconds = timeToSeconds(props.endTime);
+  const intervalInSeconds = timeToSeconds(props.interval);
 
   for (let current = startInSeconds; current <= endInSeconds; current += intervalInSeconds) {
     timeRange.push(secondsToTime(current).timeString);

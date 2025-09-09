@@ -3,16 +3,25 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/ru';
 
 import customParseFormat from 'dayjs/plugin/customParseFormat';
-import { Button, Group, TextInput } from '@empoleon/core';
+import { Button, EmpoleonProvider, Group, TextInput } from '@empoleon/core';
 import { DateStringValue } from '../../types';
 import { DatePickerInput } from '../DatePickerInput';
 import { DatesProvider } from '../DatesProvider';
 import { DateInput } from './DateInput';
-import { createSignal } from 'solid-js';
+import { createSignal, JSX } from 'solid-js';
 
 dayjs.extend(customParseFormat);
 
-export default { title: 'DateInput' };
+export default {
+  title: 'DateInput',
+  decorators: [
+    (Story: () => JSX.Element) => (
+      <EmpoleonProvider>
+        <Story />
+      </EmpoleonProvider>
+    ),
+  ],
+};
 
 export function Usage() {
   return (

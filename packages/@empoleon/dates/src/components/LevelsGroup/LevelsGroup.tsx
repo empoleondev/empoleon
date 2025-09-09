@@ -40,6 +40,7 @@ export const LevelsGroup = factory<LevelsGroupFactory>(_props => {
     'unstyled',
     'vars',
     '__staticSelector',
+    'attributes',
     'ref'
   ]);
 
@@ -52,6 +53,7 @@ export const LevelsGroup = factory<LevelsGroupFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     rootSelector: 'levelsGroup',
   });

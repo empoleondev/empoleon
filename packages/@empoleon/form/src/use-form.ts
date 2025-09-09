@@ -80,7 +80,7 @@ export function useForm<
     props.clearInputErrorOnChange && $errors.clearErrors();
     props.mode === 'uncontrolled' && setFormKey((key) => key + 1);
 
-    const subscribers = $watch.subscribers.current;
+    const subscribers = $watch.subscribers;
     if (subscribers) {
       Object.keys($watch.subscribers.current).forEach((path) => {
         const value = getPath(path, $values.refValues.current);
@@ -266,7 +266,7 @@ export function useForm<
   const form: UseFormReturnType<Values, TransformValues> = {
     watch: $watch.watch,
 
-    initialized: $values.initialized,
+    get initialized() { return $values.initialized(); },
     get values() { return $values.stateValues(); },
     getValues: $values.getValues,
     getInitialValues: $values.getValuesSnapshot,
@@ -275,7 +275,7 @@ export function useForm<
     setValues,
     setFieldValue,
 
-    submitting: submitting(),
+    get submitting() { return submitting(); },
     setSubmitting,
 
     get errors() { return $errors.errorsState(); },

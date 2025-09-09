@@ -7,16 +7,16 @@ interface IsYearDisabledInput {
   maxDate: DateStringValue | Date | undefined;
 }
 
-export function isYearDisabled({ year, minDate, maxDate }: IsYearDisabledInput): boolean {
-  if (!minDate && !maxDate) {
+export function isYearDisabled(props: IsYearDisabledInput): boolean {
+  if (!props.minDate && !props.maxDate) {
     return false;
   }
 
-  if (minDate && dayjs(year).isBefore(minDate, 'year')) {
+  if (props.minDate && dayjs(props.year).isBefore(props.minDate, 'year')) {
     return true;
   }
 
-  if (maxDate && dayjs(year).isAfter(maxDate, 'year')) {
+  if (props.maxDate && dayjs(props.year).isAfter(props.maxDate, 'year')) {
     return true;
   }
 

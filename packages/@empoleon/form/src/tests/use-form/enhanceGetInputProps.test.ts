@@ -1,4 +1,4 @@
-import { act, renderHook } from '@testing-library/react';
+import { renderHook } from '@solidjs/testing-library';
 import { FormMode } from '../../types';
 import { useForm } from '../../use-form';
 
@@ -7,9 +7,10 @@ function getInputProps(mode: FormMode, input: Record<string, any>) {
   const result = {
     ...others,
     [mode === 'controlled' ? 'value' : 'defaultValue']: value,
-    error,
+    error: expect.any(Function),
     onBlur: expect.any(Function),
     onChange: expect.any(Function),
+    onInput: expect.any(Function),
     onFocus: expect.any(Function),
     'data-path': expect.any(String),
   };
@@ -33,11 +34,11 @@ function tests(mode: FormMode) {
       })
     );
 
-    expect(hook.result.current.getInputProps('fruit')).toStrictEqual(
+    expect(hook.result.getInputProps('fruit')).toStrictEqual(
       getInputProps(mode, { value: 'banana', test: 'apple' })
     );
 
-    expect(hook.result.current.getInputProps('vegetable')).toStrictEqual(
+    expect(hook.result.getInputProps('vegetable')).toStrictEqual(
       getInputProps(mode, { value: 'carrot' })
     );
   });
@@ -51,11 +52,11 @@ function tests(mode: FormMode) {
       })
     );
 
-    expect(hook.result.current.getInputProps('fruit')).toStrictEqual(
+    expect(hook.result.getInputProps('fruit')).toStrictEqual(
       getInputProps(mode, { value: 'banana', readOnly: true })
     );
 
-    expect(hook.result.current.getInputProps('vegetable')).toStrictEqual(
+    expect(hook.result.getInputProps('vegetable')).toStrictEqual(
       getInputProps(mode, { value: 'carrot', readOnly: true })
     );
   });
@@ -71,21 +72,21 @@ function tests(mode: FormMode) {
       })
     );
 
-    expect(hook.result.current.getInputProps('fruit')).toStrictEqual(
+    expect(hook.result.getInputProps('fruit')).toStrictEqual(
       getInputProps(mode, { value: 'banana', readOnly: true })
     );
 
-    expect(hook.result.current.getInputProps('vegetable')).toStrictEqual(
+    expect(hook.result.getInputProps('vegetable')).toStrictEqual(
       getInputProps(mode, { value: 'carrot', readOnly: true })
     );
 
-    act(() => hook.result.current.initialize({ fruit: 'apple', vegetable: 'carrot' }));
+    hook.result.initialize({ fruit: 'apple', vegetable: 'carrot' });
 
-    expect(hook.result.current.getInputProps('fruit')).toStrictEqual(
+    expect(hook.result.getInputProps('fruit')).toStrictEqual(
       getInputProps(mode, { value: 'apple', readOnly: false })
     );
 
-    expect(hook.result.current.getInputProps('vegetable')).toStrictEqual(
+    expect(hook.result.getInputProps('vegetable')).toStrictEqual(
       getInputProps(mode, { value: 'carrot', readOnly: false })
     );
   });
@@ -101,11 +102,11 @@ function tests(mode: FormMode) {
       })
     );
 
-    expect(hook.result.current.getInputProps('fruit')).toStrictEqual(
+    expect(hook.result.getInputProps('fruit')).toStrictEqual(
       getInputProps(mode, { value: 'banana', readOnly: undefined })
     );
 
-    expect(hook.result.current.getInputProps('vegetable', { readOnly: true })).toStrictEqual(
+    expect(hook.result.getInputProps('vegetable', { readOnly: true })).toStrictEqual(
       getInputProps(mode, { value: 'carrot', readOnly: true })
     );
   });
@@ -122,11 +123,11 @@ function tests(mode: FormMode) {
       })
     );
 
-    expect(hook.result.current.getInputProps('fruit')).toStrictEqual(
+    expect(hook.result.getInputProps('fruit')).toStrictEqual(
       getInputProps(mode, { value: 'banana', readOnly: true })
     );
 
-    expect(hook.result.current.getInputProps('vegetable', { readOnly: true })).toStrictEqual(
+    expect(hook.result.getInputProps('vegetable', { readOnly: true })).toStrictEqual(
       getInputProps(mode, { value: 'carrot', readOnly: false })
     );
   });

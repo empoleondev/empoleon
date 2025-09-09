@@ -1,12 +1,21 @@
 import 'dayjs/locale/ru';
 
 import dayjs from 'dayjs';
-import { Button, Stack } from '@empoleon/core';
+import { Button, EmpoleonProvider, Stack } from '@empoleon/core';
 import { DatesRangeValue, DateStringValue } from '../../types';
 import { DatePicker } from './DatePicker';
-import { createSignal, For } from 'solid-js';
+import { createSignal, For, JSX } from 'solid-js';
 
-export default { title: 'DatePicker' };
+export default {
+  title: 'DatePicker',
+  decorators: [
+    (Story: () => JSX.Element) => (
+      <EmpoleonProvider>
+        <Story />
+      </EmpoleonProvider>
+    ),
+  ],
+};
 
 export function Usage() {
   return (

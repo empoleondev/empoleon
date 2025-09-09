@@ -128,6 +128,7 @@ export const defaultCssVariablesResolver: CSSVariablesResolver = (theme) => {
       getCSSColorVariables({
         theme,
         color,
+        name: color,
         colorScheme: 'light',
         withColorValues: false,
       })
@@ -138,6 +139,7 @@ export const defaultCssVariablesResolver: CSSVariablesResolver = (theme) => {
       getCSSColorVariables({
         theme,
         color,
+        name: color,
         colorScheme: 'dark',
         withColorValues: false,
       })

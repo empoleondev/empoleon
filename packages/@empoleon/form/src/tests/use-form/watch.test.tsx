@@ -1,4 +1,4 @@
-import { act, render, renderHook, screen } from '@testing-library/react';
+import { render, renderHook, screen } from '@solidjs/testing-library';
 import userEvent from '@testing-library/user-event';
 import type { FormFieldSubscriber } from '../../types';
 import { useForm } from '../../use-form';
@@ -18,7 +18,7 @@ function TestComponent({ watch }: { watch: FormFieldSubscriber<any, any> }) {
 describe('@empoleon/form/watch', () => {
   it('allows observing field changes', async () => {
     const spy = vi.fn();
-    render(<TestComponent watch={spy} />);
+    render(() => <TestComponent watch={spy} />);
     expect(spy).not.toHaveBeenCalled();
 
     await userEvent.type(screen.getByLabelText('name'), '1');
@@ -42,7 +42,7 @@ describe('@empoleon/form/watch', () => {
 
   it('does not call subscriber function when other field changes', async () => {
     const spy = vi.fn();
-    render(<TestComponent watch={spy} />);
+    render(() => <TestComponent watch={spy} />);
     expect(spy).not.toHaveBeenCalled();
 
     await userEvent.type(screen.getByLabelText('area'), '1');
@@ -56,10 +56,10 @@ describe('@empoleon/form/watch', () => {
     );
     const spy = vi.fn();
 
-    act(() => renderHook(() => hook.result.current.watch('a', spy)));
+    renderHook(() => hook.result.watch('a', spy));
     expect(spy).not.toHaveBeenCalled();
 
-    act(() => hook.result.current.initialize({ a: 'c', b: '' }));
+    hook.result.initialize({ a: 'c', b: '' });
 
     expect(spy).toHaveBeenCalledWith({
       previousValue: '',
@@ -75,10 +75,10 @@ describe('@empoleon/form/watch', () => {
     );
     const spy = vi.fn();
 
-    act(() => renderHook(() => hook.result.current.watch('a', spy)));
+    renderHook(() => hook.result.watch('a', spy));
     expect(spy).not.toHaveBeenCalled();
 
-    act(() => hook.result.current.initialize({ a: '', b: 'd' }));
+    hook.result.initialize({ a: '', b: 'd' });
 
     expect(spy).not.toHaveBeenCalled();
   });

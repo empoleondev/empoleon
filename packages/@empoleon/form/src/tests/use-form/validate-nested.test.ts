@@ -1,4 +1,4 @@
-import { act, renderHook } from '@testing-library/react';
+import { renderHook } from '@solidjs/testing-library';
 import { FormMode } from '../../types';
 import { useForm } from '../../use-form';
 
@@ -17,27 +17,23 @@ function tests(mode: FormMode) {
       })
     );
 
-    expect(hook.result.current.errors).toStrictEqual({});
+    expect(hook.result.errors).toStrictEqual({});
 
-    act(() => {
-      expect(hook.result.current.validate()).toStrictEqual({
-        hasErrors: true,
-        errors: { 'a.b.c': 'error-c' },
-      });
+    expect(hook.result.validate()).toStrictEqual({
+      hasErrors: true,
+      errors: { 'a.b.c': 'error-c' },
     });
 
-    expect(hook.result.current.errors).toStrictEqual({ 'a.b.c': 'error-c' });
+    expect(hook.result.errors).toStrictEqual({ 'a.b.c': 'error-c' });
 
-    act(() => hook.result.current.setFieldValue('a.b.c', 2));
-    expect(hook.result.current.errors).toStrictEqual({ 'a.b.c': 'error-c' });
+    hook.result.setFieldValue('a.b.c', 2);
+    expect(hook.result.errors).toStrictEqual({ 'a.b.c': 'error-c' });
 
-    act(() => {
-      expect(hook.result.current.validate()).toStrictEqual({
-        hasErrors: false,
-        errors: {},
-      });
+    expect(hook.result.validate()).toStrictEqual({
+      hasErrors: false,
+      errors: {},
     });
-    expect(hook.result.current.errors).toStrictEqual({});
+    expect(hook.result.errors).toStrictEqual({});
   });
 
   it('validates array with nested values', () => {
@@ -50,32 +46,26 @@ function tests(mode: FormMode) {
       })
     );
 
-    expect(hook.result.current.errors).toStrictEqual({});
+    expect(hook.result.errors).toStrictEqual({});
 
-    act(() => {
-      expect(hook.result.current.validate()).toStrictEqual({
-        hasErrors: true,
-        errors: { 'a.0.b': 'error-b', 'a.1.b': 'error-b' },
-      });
+    expect(hook.result.validate()).toStrictEqual({
+      hasErrors: true,
+      errors: { 'a.0.b': 'error-b', 'a.1.b': 'error-b' },
     });
 
-    expect(hook.result.current.errors).toStrictEqual({ 'a.0.b': 'error-b', 'a.1.b': 'error-b' });
+    expect(hook.result.errors).toStrictEqual({ 'a.0.b': 'error-b', 'a.1.b': 'error-b' });
 
-    act(() => {
-      hook.result.current.setFieldValue('a.0.b', 4);
-      hook.result.current.setFieldValue('a.1.b', 5);
+    hook.result.setFieldValue('a.0.b', 4);
+    hook.result.setFieldValue('a.1.b', 5);
+
+    expect(hook.result.errors).toStrictEqual({ 'a.0.b': 'error-b', 'a.1.b': 'error-b' });
+
+    expect(hook.result.validate()).toStrictEqual({
+      hasErrors: false,
+      errors: {},
     });
 
-    expect(hook.result.current.errors).toStrictEqual({ 'a.0.b': 'error-b', 'a.1.b': 'error-b' });
-
-    act(() => {
-      expect(hook.result.current.validate()).toStrictEqual({
-        hasErrors: false,
-        errors: {},
-      });
-    });
-
-    expect(hook.result.current.errors).toStrictEqual({});
+    expect(hook.result.errors).toStrictEqual({});
   });
 }
 

@@ -14,38 +14,33 @@ interface ConvertTimeTo12HourFormatInput {
   amPmLabels: TimePickerAmPmLabels;
 }
 
-export function convertTimeTo12HourFormat({
-  hours,
-  minutes,
-  seconds,
-  amPmLabels,
-}: ConvertTimeTo12HourFormatInput) {
-  if (hours === null) {
+export function convertTimeTo12HourFormat(props: ConvertTimeTo12HourFormatInput) {
+  if (props.hours === null) {
     return { hours: null, minutes: null, seconds: null, amPm: null };
   }
 
-  const amPm = hours >= 12 ? amPmLabels.pm : amPmLabels.am;
-  const hour12 = hours % 12 === 0 ? 12 : hours % 12;
+  const amPm = props.hours >= 12 ? props.amPmLabels.pm : props.amPmLabels.am;
+  const hour12 = props.hours % 12 === 0 ? 12 : props.hours % 12;
 
   return {
     hours: hour12,
-    minutes: typeof minutes === 'number' ? minutes : null,
-    seconds: typeof seconds === 'number' ? seconds : null,
+    minutes: typeof props.minutes === 'number' ? props.minutes : null,
+    seconds: typeof props.seconds === 'number' ? props.seconds : null,
     amPm,
   };
 }
 
-export function getParsedTime({ time, format, amPmLabels }: GetParsedTimeInput) {
-  if (time === '') {
+export function getParsedTime(props: GetParsedTimeInput) {
+  if (props.time === '') {
     return { hours: null, minutes: null, seconds: null, amPm: null };
   }
 
-  const { hours, minutes, seconds } = splitTimeString(time);
+  const { hours, minutes, seconds } = splitTimeString(props.time);
 
   const parsed = { hours, minutes, seconds };
 
-  if (format === '12h') {
-    return convertTimeTo12HourFormat({ ...parsed, amPmLabels });
+  if (props.format === '12h') {
+    return convertTimeTo12HourFormat({ ...parsed, amPmLabels: props.amPmLabels });
   }
 
   return { ...parsed, amPm: null };

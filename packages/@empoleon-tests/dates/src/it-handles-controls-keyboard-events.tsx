@@ -13,7 +13,7 @@ export function itHandlesControlsKeyboardEvents(
   name = 'handles arrow keyboard events correctly'
 ) {
   it(`${name} (numberOfColumns=1)`, async () => {
-    const { container } = render(<options.component {...options.props} numberOfColumns={1} />);
+    const { container } = render(() => <options.component {...options.props} numberOfColumns={1} />);
     const controls = container.querySelectorAll('table button');
 
     await userEvent.click(controls[0]);
@@ -33,7 +33,7 @@ export function itHandlesControlsKeyboardEvents(
   });
 
   it(`${name} (numberOfColumns=2)`, async () => {
-    const { container } = render(<options.component {...options.props} numberOfColumns={2} />);
+    const { container } = render(() => <options.component {...options.props} numberOfColumns={2} />);
     const columns = container.querySelectorAll(options.listSelector);
     const firstColumnControls = columns[0].querySelectorAll('button');
     const secondColumnControls = columns[1].querySelectorAll('button');
@@ -61,7 +61,7 @@ export function itHandlesControlsKeyboardEvents(
   });
 
   it(`${name} at edges`, async () => {
-    const { container } = render(<options.component {...options.props} numberOfColumns={1} />);
+    const { container } = render(() => <options.component {...options.props} numberOfColumns={1} />);
     const controls = container.querySelectorAll('table button');
 
     await userEvent.type(controls[2], '{ArrowRight}');

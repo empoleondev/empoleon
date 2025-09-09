@@ -29,24 +29,24 @@ describe('@empoleon/dates/Month', () => {
   datesTests.itSupportsMonthProps({ component: Month, props: defaultProps });
 
   it('has correct default __staticSelector', () => {
-    const { container } = render(<Month {...defaultProps} />);
+    const { container } = render(() => <Month {...defaultProps} />);
     expect(container.querySelector('table')).toHaveClass('empoleon-Month-month');
     expect(container.querySelector('thead tr')).toHaveClass('empoleon-Month-weekdaysRow');
     expect(container.querySelector('tbody tr td button')).toHaveClass('empoleon-Month-day');
   });
 
   it('supports __staticSelector', () => {
-    const { container } = render(<Month {...defaultProps} __staticSelector="Calendar" />);
+    const { container } = render(() => <Month {...defaultProps} __staticSelector="Calendar" />);
     expect(container.querySelector('table')).toHaveClass('empoleon-Calendar-month');
     expect(container.querySelector('thead tr')).toHaveClass('empoleon-Calendar-weekdaysRow');
     expect(container.querySelector('tbody tr td button')).toHaveClass('empoleon-Calendar-day');
   });
 
   it('supports static prop', () => {
-    const { container, rerender } = render(<Month {...defaultProps} />);
+    const { container, rerender } = render(() => <Month {...defaultProps} />);
     expect((container.querySelector('td')!.firstChild as HTMLElement).tagName).toBe('BUTTON');
 
-    rerender(<Month {...defaultProps} static />);
+    rerender(() => <Month {...defaultProps} static />);
     expect((container.querySelector('td')!.firstChild as HTMLElement).tagName).toBe('DIV');
   });
 });

@@ -21,6 +21,10 @@ const defaultProps: SpotlightProps = {
   ],
 };
 
+beforeEach(() => {
+  window.scrollTo = vi.fn();
+});
+
 describe('@empoleon/core/Spotlight', () => {
   tests.itSupportsSystemProps<SpotlightProps, SpotlightStylesNames>({
     component: Spotlight,

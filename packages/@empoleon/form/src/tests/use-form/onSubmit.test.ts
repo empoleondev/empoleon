@@ -1,8 +1,9 @@
-import { act, renderHook } from '@testing-library/react';
+import { renderHook } from '@solidjs/testing-library';
 import { FormMode } from '../../types';
 import { useForm } from '../../use-form';
 
-const getFormEvent = () => ({ preventDefault: vi.fn() }) as any;
+// const getFormEvent = () => ({ preventDefault: vi.fn() }) as any;
+const getFormEvent = () => ({ preventDefault: vi.fn(), type: 'submit' }) as any;
 
 function tests(mode: FormMode) {
   it('calls handleSubmit with values and event when all values are valid', () => {
@@ -14,7 +15,7 @@ function tests(mode: FormMode) {
     const handleSubmit = vi.fn();
     const handleValidationFailure = vi.fn();
 
-    act(() => hook.result.current.onSubmit(handleSubmit, handleValidationFailure)(event));
+    hook.result.onSubmit(handleSubmit, handleValidationFailure)(event);
 
     expect(event.preventDefault).toHaveBeenCalled();
 
@@ -45,7 +46,7 @@ function tests(mode: FormMode) {
     const handleSubmit = vi.fn();
     const handleValidationFailure = vi.fn();
 
-    act(() => hook.result.current.onSubmit(handleSubmit, handleValidationFailure)(event));
+    hook.result.onSubmit(handleSubmit, handleValidationFailure)(event);
     expect(handleSubmit).not.toHaveBeenCalled();
     expect(handleValidationFailure).toHaveBeenCalledWith(
       {
@@ -58,13 +59,13 @@ function tests(mode: FormMode) {
       },
       event
     );
-    expect(hook.result.current.errors).toStrictEqual({
+    expect(hook.result.errors).toStrictEqual({
       banana: 'invalid banana',
       orange: 'invalid orange',
     });
 
-    act(() => hook.result.current.setValues({ banana: 'test-banana', orange: 'test-orange' }));
-    act(() => hook.result.current.onSubmit(handleSubmit)(event));
+    hook.result.setValues({ banana: 'test-banana', orange: 'test-orange' });
+    hook.result.onSubmit(handleSubmit)(event);
     expect(handleSubmit).toHaveBeenCalledWith(
       { banana: 'test-banana', orange: 'test-orange' },
       event
@@ -74,7 +75,7 @@ function tests(mode: FormMode) {
   it('allows to call onSubmit without event', () => {
     const hook = renderHook(() => useForm({ mode, initialValues: { a: 1 } }));
     const handleSubmit = vi.fn();
-    act(() => hook.result.current.onSubmit(handleSubmit)());
+    hook.result.onSubmit(handleSubmit)();
     expect(handleSubmit).toHaveBeenCalledWith({ a: 1 }, undefined);
   });
 }

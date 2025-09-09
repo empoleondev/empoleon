@@ -1,9 +1,18 @@
 import dayjs from 'dayjs';
-import { Button } from '@empoleon/core';
+import { Button, EmpoleonProvider } from '@empoleon/core';
 import { YearPickerInput } from './YearPickerInput';
-import { For } from 'solid-js';
+import { For, JSX } from 'solid-js';
 
-export default { title: 'YearPickerInput' };
+export default {
+  title: 'YearPickerInput',
+  decorators: [
+    (Story: () => JSX.Element) => (
+      <EmpoleonProvider>
+        <Story />
+      </EmpoleonProvider>
+    ),
+  ],
+};
 
 export function Usage() {
   return (

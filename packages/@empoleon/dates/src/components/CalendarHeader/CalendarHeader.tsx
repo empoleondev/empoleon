@@ -1,4 +1,4 @@
-import { JSX, splitProps } from 'solid-js';
+import { For, JSX, Match, splitProps, Switch } from 'solid-js';
 import {
   AccordionChevron,
   Box,
@@ -70,6 +70,9 @@ export interface CalendarHeaderSettings {
 
   /** Component size */
   size?: EmpoleonSize;
+
+  /** Controls order @default `['previous', 'level', 'next']` */
+  headerControlsOrder?: ('previous' | 'next' | 'level')[];
 }
 
 export interface CalendarHeaderProps
@@ -99,7 +102,8 @@ const defaultProps: Partial<CalendarHeaderProps> = {
   hasNextLevel: true,
   withNext: true,
   withPrevious: true,
-};
+  headerControlsOrder: ['previous', 'level', 'next'],
+} satisfies Partial<CalendarHeaderProps>;
 
 const varsResolver = createVarsResolver<CalendarHeaderFactory>((_, { size }) => ({
   calendarHeader: {
@@ -131,9 +135,11 @@ export const CalendarHeader = factory<CalendarHeaderFactory>(_props => {
     'levelControlAriaLabel',
     'withNext',
     'withPrevious',
+    'headerControlsOrder',
     '__staticSelector',
     '__preventFocus',
     '__stopPropagation',
+    'attributes',
     'ref'
   ]);
 
@@ -155,68 +161,80 @@ export const CalendarHeader = factory<CalendarHeaderFactory>(_props => {
     ? (event: MouseEvent) => event.preventDefault()
     : undefined;
 
+  const previousControl = local.withPrevious && (
+    <UnstyledButton
+      {...getStyles('calendarHeaderControl')}
+      data-direction="previous"
+      aria-label={local.previousLabel}
+      onClick={local.onPrevious}
+      unstyled={local.unstyled}
+      onMouseDown={preventFocus}
+      disabled={local.previousDisabled}
+      data-disabled={local.previousDisabled || undefined}
+      tabIndex={local.__preventFocus || local.previousDisabled ? -1 : 0}
+      data-empoleon-stop-propagation={local.__stopPropagation || undefined}
+    >
+      {local.previousIcon || (
+        <AccordionChevron
+          {...getStyles('calendarHeaderControlIcon')}
+          data-direction="previous"
+          size="45%"
+        />
+      )}
+    </UnstyledButton>
+  );
+
+  const levelControl = (
+    <UnstyledButton
+      component={local.hasNextLevel ? 'button' : 'div'}
+      {...getStyles('calendarHeaderLevel')}
+      onClick={local.hasNextLevel ? local.onLevelClick : undefined}
+      unstyled={local.unstyled}
+      onMouseDown={local.hasNextLevel ? preventFocus : undefined}
+      disabled={!local.hasNextLevel}
+      data-static={!local.hasNextLevel || undefined}
+      aria-label={local.levelControlAriaLabel}
+      tabIndex={local.__preventFocus || !local.hasNextLevel ? -1 : 0}
+      data-empoleon-stop-propagation={local.__stopPropagation || undefined}
+    >
+      {local.label}
+    </UnstyledButton>
+  );
+
+  const nextControl = local.withNext && (
+    <UnstyledButton
+      {...getStyles('calendarHeaderControl')}
+      data-direction="next"
+      aria-label={local.nextLabel}
+      onClick={local.onNext}
+      unstyled={local.unstyled}
+      onMouseDown={preventFocus}
+      disabled={local.nextDisabled}
+      data-disabled={local.nextDisabled || undefined}
+      tabIndex={local.__preventFocus || local.nextDisabled ? -1 : 0}
+      data-empoleon-stop-propagation={local.__stopPropagation || undefined}
+    >
+      {local.nextIcon || (
+        <AccordionChevron
+          {...getStyles('calendarHeaderControlIcon')}
+          data-direction="next"
+          size="45%"
+        />
+      )}
+    </UnstyledButton>
+  );
+
   return (
     <Box {...getStyles('calendarHeader')} ref={local.ref} {...others}>
-      {local.withPrevious && (
-        <UnstyledButton
-          {...getStyles('calendarHeaderControl')}
-          data-direction="previous"
-          aria-label={local.previousLabel}
-          onClick={local.onPrevious}
-          unstyled={local.unstyled}
-          onMouseDown={preventFocus}
-          disabled={local.previousDisabled}
-          data-disabled={local.previousDisabled || undefined}
-          tabIndex={local.__preventFocus || local.previousDisabled ? -1 : 0}
-          data-empoleon-stop-propagation={local.__stopPropagation || undefined}
-        >
-          {local.previousIcon || (
-            <AccordionChevron
-              {...getStyles('calendarHeaderControlIcon')}
-              data-direction="previous"
-              size="45%"
-            />
-          )}
-        </UnstyledButton>
-      )}
-
-      <UnstyledButton
-        component={local.hasNextLevel ? 'button' : 'div'}
-        {...getStyles('calendarHeaderLevel')}
-        onClick={local.hasNextLevel ? local.onLevelClick : undefined}
-        unstyled={local.unstyled}
-        onMouseDown={local.hasNextLevel ? preventFocus : undefined}
-        disabled={!local.hasNextLevel}
-        data-static={!local.hasNextLevel || undefined}
-        aria-label={local.levelControlAriaLabel}
-        tabIndex={local.__preventFocus || !local.hasNextLevel ? -1 : 0}
-        data-empoleon-stop-propagation={local.__stopPropagation || undefined}
-      >
-        {local.label}
-      </UnstyledButton>
-
-      {local.withNext && (
-        <UnstyledButton
-          {...getStyles('calendarHeaderControl')}
-          data-direction="next"
-          aria-label={local.nextLabel}
-          onClick={local.onNext}
-          unstyled={local.unstyled}
-          onMouseDown={preventFocus}
-          disabled={local.nextDisabled}
-          data-disabled={local.nextDisabled || undefined}
-          tabIndex={local.__preventFocus || local.nextDisabled ? -1 : 0}
-          data-empoleon-stop-propagation={local.__stopPropagation || undefined}
-        >
-          {local.nextIcon || (
-            <AccordionChevron
-              {...getStyles('calendarHeaderControlIcon')}
-              data-direction="next"
-              size="45%"
-            />
-          )}
-        </UnstyledButton>
-      )}
+      <For each={local.headerControlsOrder}>
+        {(control) => (
+          <Switch>
+            <Match when={control === 'previous'}>{previousControl}</Match>
+            <Match when={control === 'level'}>{levelControl}</Match>
+            <Match when={control === 'next'}>{nextControl}</Match>
+          </Switch>
+        )}
+      </For>
     </Box>
   );
 });

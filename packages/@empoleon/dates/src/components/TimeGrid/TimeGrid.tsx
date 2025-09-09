@@ -1,4 +1,4 @@
-import { JSX, splitProps } from 'solid-js';
+import { For, JSX, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
@@ -90,11 +90,11 @@ export type TimeGridFactory = Factory<{
   vars: TimeGridCssVariables;
 }>;
 
-const defaultProps: Partial<TimeGridProps> = {
+const defaultProps = {
   simpleGridProps: { cols: 3, spacing: 'xs' },
   format: '24h',
   amPmLabels: { am: 'AM', pm: 'PM' },
-};
+} satisfies Partial<TimeGridProps>;
 
 const varsResolver = createVarsResolver<TimeGridFactory>((_theme, { size, radius }) => ({
   root: {
@@ -126,6 +126,7 @@ export const TimeGrid = factory<TimeGridFactory>(_props => {
     'maxTime',
     'disableTime',
     'disabled',
+    'attributes',
     'ref'
   ]);
 
@@ -140,6 +141,7 @@ export const TimeGrid = factory<TimeGridFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
   });
@@ -149,37 +151,6 @@ export const TimeGrid = factory<TimeGridFactory>(_props => {
     defaultValue: local.defaultValue!,
     finalValue: null,
     onChange: local.onChange,
-  });
-
-  const controls = local.data.map((time) => {
-    const isDisabled =
-      local.disabled ||
-      (!!local.minTime && isTimeBefore(time, local.minTime)) ||
-      (!!local.maxTime && isTimeAfter(time, local.maxTime)) ||
-      (Array.isArray(local.disableTime)
-        ? !!local.disableTime.find((t) => isSameTime({ time, compare: t, withSeconds }))
-        : !!local.disableTime?.(time));
-
-    return (
-      <TimeGridControl
-        active={isSameTime({ time, compare: _value() || '', withSeconds })}
-        time={time}
-        onClick={() => {
-          const nextValue =
-            local.allowDeselect &&
-            (_value() === null ? time === _value() : isSameTime({ time, compare: _value()!, withSeconds }))
-              ? null
-              : time;
-          nextValue !== _value() && setValue(nextValue);
-        }}
-        format={local.format!}
-        amPmLabels={local.amPmLabels!}
-        disabled={isDisabled}
-        data-disabled={isDisabled || undefined}
-        withSeconds={withSeconds}
-        {...local.getControlProps?.(time)}
-      />
-    );
   });
 
   return (
@@ -192,7 +163,38 @@ export const TimeGrid = factory<TimeGridFactory>(_props => {
             style: local.simpleGridProps?.style,
           })}
         >
-          {controls}
+          <For each={local.data}>
+            {time => {
+              const isDisabled =
+                local.disabled ||
+                (!!local.minTime && isTimeBefore(time, local.minTime)) ||
+                (!!local.maxTime && isTimeAfter(time, local.maxTime)) ||
+                (Array.isArray(local.disableTime)
+                  ? !!local.disableTime.find((t) => isSameTime({ time, compare: t, withSeconds }))
+                  : !!local.disableTime?.(time));
+
+              return (
+                <TimeGridControl
+                  active={isSameTime({ time, compare: _value() || '', withSeconds })}
+                  time={time}
+                  onClick={() => {
+                    const nextValue =
+                      local.allowDeselect &&
+                      (_value() === null ? time === _value() : isSameTime({ time, compare: _value()!, withSeconds }))
+                        ? null
+                        : time;
+                    nextValue !== _value() && setValue(nextValue);
+                  }}
+                  format={local.format!}
+                  amPmLabels={local.amPmLabels!}
+                  disabled={isDisabled}
+                  data-disabled={isDisabled || undefined}
+                  withSeconds={withSeconds}
+                  {...local.getControlProps?.(time)}
+                />
+              );
+            }}
+          </For>
         </SimpleGrid>
       </Box>
     </TimeGridProvider>

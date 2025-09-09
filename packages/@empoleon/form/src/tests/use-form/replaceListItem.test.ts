@@ -1,4 +1,4 @@
-import { act, renderHook } from '@testing-library/react';
+import { renderHook } from '@solidjs/testing-library';
 import { FormMode } from '../../types';
 import { useForm } from '../../use-form';
 
@@ -8,8 +8,8 @@ function tests(mode: FormMode) {
       useForm({ mode, initialValues: { a: [{ b: 1 }, { b: 2 }, { b: 3 }] } })
     );
 
-    act(() => hook.result.current.replaceListItem('a', 0, { b: 100 }));
-    expect(hook.result.current.getValues()).toStrictEqual({ a: [{ b: 100 }, { b: 2 }, { b: 3 }] });
+    hook.result.replaceListItem('a', 0, { b: 100 });
+    expect(hook.result.getValues()).toStrictEqual({ a: [{ b: 100 }, { b: 2 }, { b: 3 }] });
   });
 }
 

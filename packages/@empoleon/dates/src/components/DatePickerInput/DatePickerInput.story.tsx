@@ -1,10 +1,10 @@
 import dayjs from 'dayjs';
-import { useState } from 'react';
 import {
   Autocomplete,
   Button,
   Checkbox,
   ColorInput,
+  EmpoleonProvider,
   Group,
   Input,
   MultiSelect,
@@ -18,12 +18,22 @@ import {
 } from '@empoleon/core';
 import { DatesProvider } from '../DatesProvider';
 import { DatePickerInput } from './DatePickerInput';
+import { createSignal, JSX } from 'solid-js';
 
-export default { title: 'DatePickerInput' };
+export default {
+  title: 'DatePickerInput',
+  decorators: [
+    (Story: () => JSX.Element) => (
+      <EmpoleonProvider>
+        <Story />
+      </EmpoleonProvider>
+    ),
+  ],
+};
 
 export function Usage() {
   return (
-    <div style={{ padding: 40, maxWidth: 400 }}>
+    <div style={{ padding: '40px', 'max-width': '400px' }}>
       <DatePickerInput placeholder="Date picker input" />
     </div>
   );
@@ -31,7 +41,7 @@ export function Usage() {
 
 export function Unstyled() {
   return (
-    <div style={{ padding: 40, maxWidth: 400 }}>
+    <div style={{ padding: '40px', 'max-width': '400px' }}>
       <DatePickerInput
         label="Date picker input"
         placeholder="Pick date"
@@ -45,7 +55,7 @@ export function Unstyled() {
 
 export function MaxDateBeforeToday() {
   return (
-    <div style={{ padding: 40, maxWidth: 400 }}>
+    <div style={{ padding: '40px', 'max-width': '400px' }}>
       <DatePickerInput label="Date picker input" placeholder="Pick date" maxDate="2020-01-11" />
     </div>
   );
@@ -53,7 +63,7 @@ export function MaxDateBeforeToday() {
 
 export function MinDateBeforeToday() {
   return (
-    <div style={{ padding: 40, maxWidth: 400 }}>
+    <div style={{ padding: '40px', 'max-width': '400px' }}>
       <DatePickerInput label="Date picker input" placeholder="Pick date" minDate="2028-01-11" />
     </div>
   );
@@ -63,7 +73,7 @@ export function DisabledCurrentDate() {
   const nextMonth = dayjs().add(1, 'month').format('YYYY-MM-DD');
 
   return (
-    <div style={{ padding: 40, maxWidth: 400 }}>
+    <div style={{ padding: '40px', 'max-width': '400px' }}>
       <DatePickerInput
         label="Date picker input"
         placeholder="Pick date"
@@ -75,10 +85,10 @@ export function DisabledCurrentDate() {
 }
 
 export function LocaleChanges() {
-  const [locale, setLocale] = useState('en');
+  const [locale, setLocale] = createSignal('en');
   return (
-    <div style={{ padding: 40, maxWidth: 400 }}>
-      <DatePickerInput label="Date picker input" placeholder="Pick date" locale={locale} />
+    <div style={{ padding: '40px', 'max-width': '400px' }}>
+      <DatePickerInput label="Date picker input" placeholder="Pick date" locale={locale()} />
       <Group mt="md">
         <Button onClick={() => setLocale('en')}>En locale</Button>
         <Button onClick={() => setLocale('ru')}>Ru locale</Button>
@@ -88,10 +98,10 @@ export function LocaleChanges() {
 }
 
 export function LocaleChangesDatesProvider() {
-  const [locale, setLocale] = useState('en');
+  const [locale, setLocale] = createSignal('en');
   return (
-    <DatesProvider settings={{ locale }}>
-      <div style={{ padding: 40, maxWidth: 400 }}>
+    <DatesProvider settings={{ locale: locale() }}>
+      <div style={{ padding: '40px', 'max-width': '400px' }}>
         <DatePickerInput label="Date picker input" placeholder="Pick date" />
         <Group mt="md">
           <Button onClick={() => setLocale('en')}>En locale</Button>
@@ -103,16 +113,16 @@ export function LocaleChangesDatesProvider() {
 }
 
 export function ControlledValues() {
-  const [value, setValue] = useState<string | null>(dayjs().format('YYYY-MM-DD'));
+  const [value, setValue] = createSignal<string | null>(dayjs().format('YYYY-MM-DD'));
   const incrementDate = () =>
     setValue((current) => dayjs(current!).add(1, 'month').format('YYYY-MM-DD'));
 
   return (
-    <div style={{ padding: 40, maxWidth: 400 }}>
+    <div style={{ padding: '40px', 'max-width': '400px' }}>
       <DatePickerInput
         label="Date picker input"
         placeholder="Pick date"
-        value={value}
+        value={value()}
         onChange={setValue}
       />
       <Group mt="md">
@@ -125,7 +135,7 @@ export function ControlledValues() {
 
 export function ReadOnly() {
   return (
-    <div style={{ padding: 40, maxWidth: 400 }}>
+    <div style={{ padding: '40px', 'max-width': '400px' }}>
       <DatePickerInput label="Default read only" placeholder="Pick date" readOnly />
       <DatePickerInput
         mt="md"
@@ -148,7 +158,7 @@ export function ReadOnly() {
 
 export function Disabled() {
   return (
-    <div style={{ padding: 40, maxWidth: 400 }}>
+    <div style={{ padding: '40px', 'max-width': '400px' }}>
       <DatePickerInput label="Date picker input" placeholder="Pick date" disabled />
     </div>
   );
@@ -156,7 +166,7 @@ export function Disabled() {
 
 export function DropdownModal() {
   return (
-    <div style={{ padding: 40, maxWidth: 400 }}>
+    <div style={{ padding: '40px', 'max-width': '400px' }}>
       <DatePickerInput label="Date picker input" placeholder="Pick date" dropdownType="modal" />
     </div>
   );
@@ -164,7 +174,7 @@ export function DropdownModal() {
 
 export function Range() {
   return (
-    <div style={{ padding: 40 }}>
+    <div style={{ padding: '40px' }}>
       <DatePickerInput type="range" label="Date picker input" />
       <DatePickerInput type="range" label="Custom labelSeparator" labelSeparator="~" />
     </div>
@@ -173,7 +183,7 @@ export function Range() {
 
 export function Multiple() {
   return (
-    <div style={{ padding: 40 }}>
+    <div style={{ padding: '40px' }}>
       <DatePickerInput type="multiple" label="Date picker input" />
     </div>
   );
@@ -181,7 +191,7 @@ export function Multiple() {
 
 export function SelectedDisabledDate() {
   return (
-    <div style={{ padding: 40 }}>
+    <div style={{ padding: '40px' }}>
       <DatePickerInput
         label="Date picker input"
         defaultValue={dayjs().format('YYYY-MM-DD')}
@@ -195,7 +205,7 @@ export function SelectedDisabledDate() {
 
 export function WithMaxDate() {
   return (
-    <div style={{ padding: 40 }}>
+    <div style={{ padding: '40px' }}>
       <DatePickerInput label="Date picker input" maxDate={dayjs().format('YYYY-MM-DD')} />
     </div>
   );
@@ -203,7 +213,7 @@ export function WithMaxDate() {
 
 export function Clearable() {
   return (
-    <div style={{ padding: 40 }}>
+    <div style={{ padding: '40px' }}>
       <DatePickerInput label="Default" clearable />
       <DatePickerInput label="Multiple" type="multiple" clearable />
       <DatePickerInput label="Range" type="range" clearable />
@@ -215,19 +225,18 @@ export function Sizes() {
   const sizes = (['xs', 'sm', 'md', 'lg', 'xl'] as const).map((size) => (
     <DatePickerInput
       size={size}
-      key={size}
       placeholder={size}
       label={size}
       mt="xl"
       dropdownType="modal"
     />
   ));
-  return <div style={{ padding: 40 }}>{sizes}</div>;
+  return <div style={{ padding: '40px' }}>{sizes}</div>;
 }
 
 export function DefaultDate() {
   return (
-    <div style={{ padding: 40 }}>
+    <div style={{ padding: '40px' }}>
       <DatePickerInput defaultDate="1990-01-01" />
       <DatePickerInput defaultDate={dayjs().format('YYYY-MM-DD')} />
     </div>

@@ -50,6 +50,7 @@ export const TimeInput = factory<TimeInputFactory>(_props => {
     'value',
     'onChange',
     'onBlur',
+    'step',
     'ref'
   ]);
 
@@ -129,8 +130,8 @@ export const TimeInput = factory<TimeInputFactory>(_props => {
       unstyled={local.unstyled}
       ref={local.ref}
       value={local.value}
+      step={local.step ?? (local.withSeconds ? 1 : 60)}
       {...others}
-      step={local.withSeconds ? 1 : 60}
       onChange={local.onChange}
       onBlur={onTimeBlur}
       type="time"

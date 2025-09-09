@@ -76,6 +76,7 @@ export const DecadeLevelGroup = factory<DecadeLevelGroupFactory>(_props  => {
     'decadeLabelFormat',
     'size',
     'vars',
+    'attributes',
     'ref'
   ]);
 
@@ -142,6 +143,7 @@ export const DecadeLevelGroup = factory<DecadeLevelGroupFactory>(_props  => {
           styles={local.styles}
           unstyled={local.unstyled}
           withCellSpacing={local.withCellSpacing}
+          attributes={local.attributes}
         />
       );
     });
@@ -154,6 +156,7 @@ export const DecadeLevelGroup = factory<DecadeLevelGroupFactory>(_props  => {
       ref={local.ref}
       size={local.size}
       unstyled={local.unstyled}
+      attributes={local.attributes}
       {...others}
     >
       {decades}

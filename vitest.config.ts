@@ -18,20 +18,11 @@ export default defineConfig({
     testTimeout: 10000,
     pool: 'forks',
     isolate: true,
-    // include: [
-    //   '**/Table.components.test.tsx'
-    // ],
+    include: [
+      '**/dates/**/Month/*.test.{ts,tsx}',
+    ],
     exclude: [
-      '**/dates/**',
-      '**/default-css-variables-resolver.test.ts',
-      '**/Carousel.test.tsx',
-      '**/Dropzone.test.tsx',
-      '**/Spotlight.test.tsx',
-      // form
-      '**/use-field/**',
-      '**/use-form/**',
-      '**/clearErrors.test.ts',
-      '**/clearFieldError.test.ts',
+      '**/Card.test.tsx',
       // Exclude all node_modules test files
       'node_modules/**',
     ]

@@ -6,11 +6,11 @@ interface IsSameTimeInput {
   withSeconds: boolean;
 }
 
-export function isSameTime({ time, compare, withSeconds }: IsSameTimeInput) {
-  const timeParts = splitTimeString(time);
-  const compareParts = splitTimeString(compare);
+export function isSameTime(props: IsSameTimeInput) {
+  const timeParts = splitTimeString(props.time);
+  const compareParts = splitTimeString(props.compare);
 
-  if (withSeconds) {
+  if (props.withSeconds) {
     return (
       timeParts.hours === compareParts.hours &&
       timeParts.minutes === compareParts.minutes &&

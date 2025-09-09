@@ -6,6 +6,7 @@ const config: StorybookConfig = {
   stories: [
     '../packages/@empoleon/core/src/component/**/*.story.@(js|jsx|ts|tsx)',
     '../packages/@empoleon/carousel/src/*.story.@(ts|tsx)',
+    '../packages/@empoleon/dates/src/**/*.story.@(ts|tsx)',
     '../packages/@empoleon/dropzone/src/*.story.@(ts|tsx)',
     '../packages/@empoleon/form/src/stories/*.story.@(ts|tsx)',
     '../packages/@empoleon/modals/src/*.story.@(ts|tsx)',

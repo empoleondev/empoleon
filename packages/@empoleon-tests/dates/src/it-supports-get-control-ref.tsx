@@ -15,7 +15,7 @@ interface Options {
 export function itSupportsGetControlRef(options: Options, name = 'supports __getControlRef') {
   it(name, () => {
     const spy = vi.fn();
-    render(<options.component {...options.props} __getControlRef={spy} />);
+    render(() => <options.component {...options.props} __getControlRef={spy} />);
     expect(spy).toHaveBeenCalledTimes(options.numberOfControls);
     expect(spy).toHaveBeenCalledWith(
       expect.any(Number),

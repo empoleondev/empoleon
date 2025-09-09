@@ -23,9 +23,9 @@ export function itSupportsMonthProps(options: Options, name = 'supports month pr
     itSupportsWeekdaysProps(options);
 
     it('renders correct days', () => {
-      const { container } = render(<options.component {...options.props} />);
+      const { container } = render(() => <options.component {...options.props} />);
 
-      const days = getDays(container);
+      const days = getDays(container as any);
       expect(days).toHaveLength(35);
 
       // First week of April 2022 (with outside dates)
@@ -43,9 +43,9 @@ export function itSupportsMonthProps(options: Options, name = 'supports month pr
     });
 
     it('renders correct days when firstDayOfWeek is set', () => {
-      const { container } = render(<options.component {...options.props} firstDayOfWeek={6} />);
+      const { container } = render(() => <options.component {...options.props} firstDayOfWeek={6} />);
 
-      const days = getDays(container);
+      const days = getDays(container as any);
       expect(days).toHaveLength(42);
 
       expect(days[0].textContent).toBe('26');
@@ -62,12 +62,12 @@ export function itSupportsMonthProps(options: Options, name = 'supports month pr
 
     it('renders correct days when firstDayOfWeek is set on DatesProvider', () => {
       const { container } = render(
-        <DatesProvider settings={{ firstDayOfWeek: 6 }}>
+        () => <DatesProvider settings={{ firstDayOfWeek: 6 }}>
           <options.component {...options.props} />
         </DatesProvider>
       );
 
-      const days = getDays(container);
+      const days = getDays(container as any);
       expect(days).toHaveLength(42);
 
       expect(days[0].textContent).toBe('26');
@@ -83,8 +83,8 @@ export function itSupportsMonthProps(options: Options, name = 'supports month pr
     });
 
     it('detects outside days correctly', () => {
-      const { container } = render(<options.component {...options.props} />);
-      const days = getDays(container);
+      const { container } = render(() => <options.component {...options.props} />);
+      const days = getDays(container as any);
 
       // First week of April 2022 (with outside dates)
       expect(days[0]).toHaveAttribute('data-outside');
@@ -101,8 +101,8 @@ export function itSupportsMonthProps(options: Options, name = 'supports month pr
     });
 
     it('detects weekends correctly with default weekendDays value', () => {
-      const { container } = render(<options.component {...options.props} />);
-      const days = getDays(container);
+      const { container } = render(() => <options.component {...options.props} />);
+      const days = getDays(container as any);
 
       expect(days[0]).not.toHaveAttribute('data-weekend');
       expect(days[4]).not.toHaveAttribute('data-weekend');
@@ -113,8 +113,8 @@ export function itSupportsMonthProps(options: Options, name = 'supports month pr
     });
 
     it('detects weekends correctly with custom weekendDays value', () => {
-      const { container } = render(<options.component {...options.props} weekendDays={[3, 4]} />);
-      const days = getDays(container);
+      const { container } = render(() => <options.component {...options.props} weekendDays={[3, 4]} />);
+      const days = getDays(container as any);
 
       expect(days[7]).not.toHaveAttribute('data-weekend');
       expect(days[8]).not.toHaveAttribute('data-weekend');
@@ -124,11 +124,11 @@ export function itSupportsMonthProps(options: Options, name = 'supports month pr
 
     it('detects weekends correctly with custom weekendDays value on DatesProvider', () => {
       const { container } = render(
-        <DatesProvider settings={{ weekendDays: [3, 4] }}>
+        () => <DatesProvider settings={{ weekendDays: [3, 4] }}>
           <options.component {...options.props} />
         </DatesProvider>
       );
-      const days = getDays(container);
+      const days = getDays(container as any);
 
       expect(days[7]).not.toHaveAttribute('data-weekend');
       expect(days[8]).not.toHaveAttribute('data-weekend');
@@ -139,7 +139,7 @@ export function itSupportsMonthProps(options: Options, name = 'supports month pr
     it('supports getDayProps', async () => {
       const spy = vi.fn();
       const { container } = render(
-        <options.component
+        () => <options.component
           {...options.props}
           getDayProps={(date: string) => ({
             selected: dayjs(date).isSame('2022-04-15'),
@@ -148,7 +148,7 @@ export function itSupportsMonthProps(options: Options, name = 'supports month pr
         />
       );
 
-      const days = getDays(container);
+      const days = getDays(container as any);
 
       expect(days[18]).toHaveAttribute('data-selected');
       expect(days[0]).not.toHaveAttribute('data-selected');
@@ -160,12 +160,12 @@ export function itSupportsMonthProps(options: Options, name = 'supports month pr
 
     it('adds disabled prop to Day components based on excludeDate callback', () => {
       const { container } = render(
-        <options.component
+        () => <options.component
           {...options.props}
           excludeDate={(date: string) => dayjs(date).day() === 0}
         />
       );
-      const days = getDays(container);
+      const days = getDays(container as any);
 
       expect(days[5]).not.toHaveAttribute('data-disabled');
       expect(days[6]).toHaveAttribute('data-disabled');
@@ -173,8 +173,8 @@ export function itSupportsMonthProps(options: Options, name = 'supports month pr
     });
 
     it('supports minDate', () => {
-      const { container } = render(<options.component {...options.props} minDate="2022-04-10" />);
-      const days = getDays(container);
+      const { container } = render(() => <options.component {...options.props} minDate="2022-04-10" />);
+      const days = getDays(container as any);
 
       expect(days[0]).toHaveAttribute('data-disabled');
       expect(days[1]).toHaveAttribute('data-disabled');
@@ -185,8 +185,8 @@ export function itSupportsMonthProps(options: Options, name = 'supports month pr
     });
 
     it('supports maxDate', () => {
-      const { container } = render(<options.component {...options.props} maxDate="2022-04-22" />);
-      const days = getDays(container);
+      const { container } = render(() => <options.component {...options.props} maxDate="2022-04-22" />);
+      const days = getDays(container as any);
 
       expect(days[34]).toHaveAttribute('data-disabled');
       expect(days[33]).toHaveAttribute('data-disabled');
@@ -199,9 +199,9 @@ export function itSupportsMonthProps(options: Options, name = 'supports month pr
 
     it('supports renderDay', () => {
       const { container } = render(
-        <options.component {...options.props} renderDay={(date: string) => dayjs(date).year()} />
+        () => <options.component {...options.props} renderDay={(date: string) => dayjs(date).year()} />
       );
-      const days = getDays(container);
+      const days = getDays(container as any);
 
       days.forEach((day) => {
         expect(day.textContent).toBe('2022');
@@ -209,8 +209,8 @@ export function itSupportsMonthProps(options: Options, name = 'supports month pr
     });
 
     it('supports hideOutsideDates', () => {
-      const { container } = render(<options.component {...options.props} hideOutsideDates />);
-      const days = getDays(container);
+      const { container } = render(() => <options.component {...options.props} hideOutsideDates />);
+      const days = getDays(container as any);
 
       expect(days).toHaveLength(35);
       expect(days[0]).toHaveAttribute('data-hidden');
@@ -220,44 +220,44 @@ export function itSupportsMonthProps(options: Options, name = 'supports month pr
     });
 
     it('supports hideWeekdays', () => {
-      render(<options.component {...options.props} hideWeekdays />);
+      render(() => <options.component {...options.props} hideWeekdays />);
       expect(screen.queryAllByRole('columnheader')).toHaveLength(0);
     });
 
     it('sets correct default aria-label on days without getDayAriaLabel', () => {
-      const { container } = render(<options.component {...options.props} />);
-      const days = getDays(container);
+      const { container } = render(() => <options.component {...options.props} />);
+      const days = getDays(container as any);
       expect(days[0]).toHaveAttribute('aria-label', '28 March 2022');
       expect(days[4]).toHaveAttribute('aria-label', '1 April 2022');
     });
 
     it('supports default days aria-label localization with locale prop', () => {
-      const { container } = render(<options.component {...options.props} locale="ru" />);
-      const days = getDays(container);
+      const { container } = render(() => <options.component {...options.props} locale="ru" />);
+      const days = getDays(container as any);
       expect(days[0]).toHaveAttribute('aria-label', '28 марта 2022');
       expect(days[4]).toHaveAttribute('aria-label', '1 апреля 2022');
     });
 
     it('allows changing days aria-label with getDayAriaLabel prop', () => {
       const { container } = render(
-        <options.component
+        () => <options.component
           {...options.props}
           getDayAriaLabel={(date: string) => dayjs(date).format('DD/MM/YYYY')}
         />
       );
 
-      const days = getDays(container);
+      const days = getDays(container as any);
       expect(days[0]).toHaveAttribute('aria-label', '28/03/2022');
       expect(days[4]).toHaveAttribute('aria-label', '01/04/2022');
     });
 
     it('supports default days aria-label localization with DatesProvider', () => {
       const { container } = render(
-        <DatesProvider settings={{ locale: 'ru' }}>
+        () => <DatesProvider settings={{ locale: 'ru' }}>
           <options.component {...options.props} />
         </DatesProvider>
       );
-      const days = getDays(container);
+      const days = getDays(container as any);
       expect(days[0]).toHaveAttribute('aria-label', '28 марта 2022');
       expect(days[4]).toHaveAttribute('aria-label', '1 апреля 2022');
     });

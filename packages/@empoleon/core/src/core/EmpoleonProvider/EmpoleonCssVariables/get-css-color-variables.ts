@@ -10,7 +10,7 @@ interface GetColorVariablesInput {
 }
 
 export function getCSSColorVariables(props: GetColorVariablesInput) {
-  const withColorValues = props.withColorValues || true;
+  const withColorValues = props.withColorValues ?? false;
 
   if (!props.theme.colors[props.color]) {
     return {};

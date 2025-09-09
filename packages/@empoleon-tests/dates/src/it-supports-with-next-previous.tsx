@@ -10,18 +10,18 @@ interface Options {
 export function itSupportsWithNextPrevious(options: Options, name = 'supports with next/previous') {
   describe(name, () => {
     it('supports withNext prop', () => {
-      const { rerender } = render(<options.component {...options.props} withNext />);
+      const { rerender } = render(() => <options.component {...options.props} withNext />);
       expect(screen.getByLabelText('next')).toBeInTheDocument();
 
-      rerender(<options.component {...options.props} withNext={false} />);
+      rerender(() => <options.component {...options.props} withNext={false} />);
       expect(screen.queryAllByLabelText('next')).toHaveLength(0);
     });
 
     it('supports withPrevious prop', () => {
-      const { rerender } = render(<options.component {...options.props} withPrevious />);
+      const { rerender } = render(() => <options.component {...options.props} withPrevious />);
       expect(screen.getByLabelText('prev')).toBeInTheDocument();
 
-      rerender(<options.component {...options.props} withPrevious={false} />);
+      rerender(() => <options.component {...options.props} withPrevious={false} />);
       expect(screen.queryAllByLabelText('prev')).toHaveLength(0);
     });
   });

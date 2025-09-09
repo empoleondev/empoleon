@@ -1,10 +1,19 @@
 import dayjs from 'dayjs';
-import { Group } from '@empoleon/core';
+import { EmpoleonProvider, Group } from '@empoleon/core';
 import { DateInput } from '../DateInput';
 import { MonthPickerInput } from './MonthPickerInput';
-import { For } from 'solid-js';
+import { For, JSX } from 'solid-js';
 
-export default { title: 'MonthPickerInput' };
+export default {
+  title: 'MonthPickerInput',
+  decorators: [
+    (Story: () => JSX.Element) => (
+      <EmpoleonProvider>
+        <Story />
+      </EmpoleonProvider>
+    ),
+  ],
+};
 
 export function Usage() {
   return (

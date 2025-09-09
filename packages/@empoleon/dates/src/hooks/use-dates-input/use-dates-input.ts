@@ -18,59 +18,48 @@ interface UseDatesInput<Type extends DatePickerType = 'default'> {
   valueFormatter: DateFormatter | undefined;
 }
 
-export function useDatesInput<Type extends DatePickerType = 'default'>({
-  type,
-  value,
-  defaultValue,
-  onChange,
-  locale,
-  format,
-  closeOnChange,
-  sortDates,
-  labelSeparator,
-  valueFormatter,
-}: UseDatesInput<Type>) {
+export function useDatesInput<Type extends DatePickerType = 'default'>(props: UseDatesInput<Type>) {
   const ctx = useDatesContext();
 
   const [dropdownOpened, dropdownHandlers] = useDisclosure(false);
 
   const [_value, _setValue] = useUncontrolledDates({
-    type,
-    value,
-    defaultValue,
-    onChange,
+    type: props.type,
+    value: props.value,
+    defaultValue: props.defaultValue,
+    onChange: props.onChange,
   });
 
   const formattedValue = getFormattedDate({
-    type,
+    type: props.type,
     date: _value(),
-    locale: ctx.getLocale(locale),
-    format: format!,
-    labelSeparator: ctx.getLabelSeparator(labelSeparator),
-    formatter: valueFormatter,
+    locale: ctx.getLocale(props.locale),
+    format: props.format!,
+    labelSeparator: ctx.getLabelSeparator(props.labelSeparator),
+    formatter: props.valueFormatter,
   });
 
   const setValue = (val: any) => {
-    if (closeOnChange) {
-      if (type === 'default') {
+    if (props.closeOnChange) {
+      if (props.type === 'default') {
         dropdownHandlers.close();
       }
 
-      if (type === 'range' && val[0] && val[1]) {
+      if (props.type === 'range' && val[0] && val[1]) {
         dropdownHandlers.close();
       }
     }
 
-    if (sortDates && type === 'multiple') {
+    if (props.sortDates && props.type === 'multiple') {
       _setValue([...val].sort((a, b) => (dayjs(a).isAfter(dayjs(b)) ? 1 : -1)));
     } else {
       _setValue(val);
     }
   };
 
-  const onClear = () => setValue(type === 'range' ? [null, null] : type === 'multiple' ? [] : null);
+  const onClear = () => setValue(props.type === 'range' ? [null, null] : props.type === 'multiple' ? [] : null);
   const shouldClear =
-    type === 'range' ? !!_value()[0] : type === 'multiple' ? _value().length > 0 : _value() !== null;
+    props.type === 'range' ? !!_value()[0] : props.type === 'multiple' ? _value().length > 0 : _value() !== null;
 
   return {
     _value,

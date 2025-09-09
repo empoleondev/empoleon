@@ -56,36 +56,36 @@ function expectYearNames(container: HTMLElement, monthNames: string[]) {
 export function itSupportsYearsListProps(options: Options, name = 'supports years list props') {
   describe(name, () => {
     it('renders correct years list', () => {
-      const { container } = render(<options.component {...options.props} />);
-      expectYearNames(container, defaultYearsNames);
+      const { container } = render(() => <options.component {...options.props} />);
+      expectYearNames(container as any, defaultYearsNames);
     });
 
     it('supports locale prop with custom yearsListFormat', () => {
       const { container } = render(
-        <options.component {...options.props} locale="ru" yearsListFormat="MMM YYYY" />
+        () => <options.component {...options.props} locale="ru" yearsListFormat="MMM YYYY" />
       );
-      expectYearNames(container, ruYearsNames);
+      expectYearNames(container as any, ruYearsNames);
     });
 
     it('supports years list localization with DatesProvider', () => {
       const { container } = render(
-        <DatesProvider settings={{ locale: 'ru' }}>
+        () => <DatesProvider settings={{ locale: 'ru' }}>
           <options.component {...options.props} yearsListFormat="MMM YYYY" />
         </DatesProvider>
       );
-      expectYearNames(container, ruYearsNames);
+      expectYearNames(container as any, ruYearsNames);
     });
 
     it('supports custom yearsListFormat format', () => {
       const { container } = render(
-        <options.component {...options.props} yearsListFormat="MMM YY" />
+        () => <options.component {...options.props} yearsListFormat="MMM YY" />
       );
-      expectYearNames(container, customFormatYearsNames);
+      expectYearNames(container as any, customFormatYearsNames);
     });
 
     it('disables years if they are before minDate', () => {
       const { container } = render(
-        <options.component {...options.props} decade="2022-04-11" minDate="2023-05-11" />
+        () => <options.component {...options.props} decade="2022-04-11" minDate="2023-05-11" />
       );
       const years = container.querySelectorAll('table button');
       expect(years[0]).toBeDisabled();
@@ -97,7 +97,7 @@ export function itSupportsYearsListProps(options: Options, name = 'supports year
 
     it('disables years if they are after minDate', () => {
       const { container } = render(
-        <options.component {...options.props} decade="2022-04-11" maxDate="2023-05-11" />
+        () => <options.component {...options.props} decade="2022-04-11" maxDate="2023-05-11" />
       );
       const years = container.querySelectorAll('[data-picker-control]');
       expect(years[0]).not.toBeDisabled();
@@ -108,7 +108,7 @@ export function itSupportsYearsListProps(options: Options, name = 'supports year
 
     it('supports getYearControlProps', () => {
       const { container } = render(
-        <options.component
+        () => <options.component
           {...options.props}
           getYearControlProps={(date: string) => ({
             selected: dayjs(date).isSame('2022-04-11', 'year'),

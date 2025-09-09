@@ -6,7 +6,7 @@
 
     "declaration": true,
     "declarationDir": "lib",
-    "types": ["node"],
+    "types": ["node", "vitest/globals", "@testing-library/jest-dom", "vitest-axe"],
     "target": "ES2015",
     "lib": ["DOM", "ESNext"],
     "module": "ESNext",

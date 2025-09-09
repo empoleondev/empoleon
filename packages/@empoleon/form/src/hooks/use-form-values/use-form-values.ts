@@ -3,7 +3,7 @@ import { getPath, setPath } from '../../paths';
 import { FormMode } from '../../types';
 
 export interface $FormValues<Values extends Record<PropertyKey, any>> {
-  initialized: boolean;
+  initialized: () => boolean;
   stateValues: () => Values;
   refValues: { current: Values }; // Keep React-like interface for compatibility
   valuesSnapshot: { current: Values }; // Keep React-like interface for compatibility
@@ -45,7 +45,7 @@ interface UseFormValuesInput<Values extends Record<PropertyKey, any>> {
 }
 
 export function useFormValues<Values extends Record<PropertyKey, any>>(props: UseFormValuesInput<Values>): $FormValues<Values> {
-  let initialized = false;
+  const [initialized, setInitialized] = createSignal(false);
   const [stateValues, setStateValues] = createSignal<Values>(props.initialValues || ({} as Values));
 
   let refValuesData = stateValues();
@@ -115,9 +115,9 @@ export function useFormValues<Values extends Record<PropertyKey, any>>(props: Us
   };
 
   const initialize = (values: Values, onInitialize: () => void) => {
-    if (!initialized) {
-      initialized = true;
-      setValues({ values, updateState: props.mode === 'controlled' });
+    if (!initialized()) {
+      setInitialized(true);
+      setValues({ values, updateState: true });
       setValuesSnapshot(values);
       onInitialize();
     }

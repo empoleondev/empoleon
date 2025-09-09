@@ -1,4 +1,4 @@
-import { act, renderHook } from '@testing-library/react';
+import { renderHook } from '@solidjs/testing-library';
 import { FormMode } from '../../types';
 import { useForm } from '../../use-form';
 
@@ -16,20 +16,18 @@ function tests(mode: FormMode) {
       })
     );
 
-    expect(hook.result.current.errors).toStrictEqual({});
+    expect(hook.result.errors).toStrictEqual({});
 
-    act(() => hook.result.current.setFieldValue('a', '1'));
-    expect(hook.result.current.errors).toStrictEqual({ a: 'error-a' });
+    hook.result.setFieldValue('a', '1');
+    expect(hook.result.errors).toStrictEqual({ a: 'error-a' });
 
-    act(() => hook.result.current.setFieldValue('b', '1'));
-    expect(hook.result.current.errors).toStrictEqual({ a: 'error-a', b: 'error-b' });
+    hook.result.setFieldValue('b', '1');
+    expect(hook.result.errors).toStrictEqual({ a: 'error-a', b: 'error-b' });
 
-    act(() => {
-      hook.result.current.setFieldValue('a', 'valid');
-      hook.result.current.setFieldValue('b', 'valid');
-    });
+    hook.result.setFieldValue('a', 'valid');
+    hook.result.setFieldValue('b', 'valid');
 
-    expect(hook.result.current.errors).toStrictEqual({});
+    expect(hook.result.errors).toStrictEqual({});
   });
 
   it('validates only specified fields', () => {
@@ -45,20 +43,18 @@ function tests(mode: FormMode) {
       })
     );
 
-    expect(hook.result.current.errors).toStrictEqual({});
+    expect(hook.result.errors).toStrictEqual({});
 
-    act(() => hook.result.current.setFieldValue('a', '1'));
-    expect(hook.result.current.errors).toStrictEqual({ a: 'error-a' });
+    hook.result.setFieldValue('a', '1');
+    expect(hook.result.errors).toStrictEqual({ a: 'error-a' });
 
-    act(() => hook.result.current.setFieldValue('b', '1'));
-    expect(hook.result.current.errors).toStrictEqual({ a: 'error-a' });
+    hook.result.setFieldValue('b', '1');
+    expect(hook.result.errors).toStrictEqual({ a: 'error-a' });
 
-    act(() => {
-      hook.result.current.setFieldValue('a', 'valid');
-      hook.result.current.setFieldValue('b', 'valid');
-    });
+    hook.result.setFieldValue('a', 'valid');
+    hook.result.setFieldValue('b', 'valid');
 
-    expect(hook.result.current.errors).toStrictEqual({});
+    expect(hook.result.errors).toStrictEqual({});
   });
 
   it('validates nested property on change', () => {
@@ -76,23 +72,21 @@ function tests(mode: FormMode) {
       })
     );
 
-    expect(hook.result.current.errors).toStrictEqual({});
+    expect(hook.result.errors).toStrictEqual({});
 
-    act(() => hook.result.current.setFieldValue('nested.a', '1'));
-    expect(hook.result.current.errors).toStrictEqual({ 'nested.a': 'error-a' });
+    hook.result.setFieldValue('nested.a', '1');
+    expect(hook.result.errors).toStrictEqual({ 'nested.a': 'error-a' });
 
-    act(() => hook.result.current.setFieldValue('nested.b', '1'));
-    expect(hook.result.current.errors).toStrictEqual({
+    hook.result.setFieldValue('nested.b', '1');
+    expect(hook.result.errors).toStrictEqual({
       'nested.a': 'error-a',
       'nested.b': 'error-b',
     });
 
-    act(() => {
-      hook.result.current.setFieldValue('nested.a', 'valid');
-      hook.result.current.setFieldValue('nested.b', 'valid');
-    });
+    hook.result.setFieldValue('nested.a', 'valid');
+    hook.result.setFieldValue('nested.b', 'valid');
 
-    expect(hook.result.current.errors).toStrictEqual({});
+    expect(hook.result.errors).toStrictEqual({});
   });
 }
 

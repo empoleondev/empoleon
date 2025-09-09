@@ -1,9 +1,18 @@
-import { ActionIcon, Button, Group, Stack } from '@empoleon/core';
+import { ActionIcon, Button, EmpoleonProvider, Group, Stack } from '@empoleon/core';
 import { TimePicker } from './TimePicker';
 import { getTimeRange } from './utils/get-time-range/get-time-range';
-import { createSignal, For } from 'solid-js';
+import { createSignal, For, JSX } from 'solid-js';
 
-export default { title: 'TimePicker' };
+export default {
+  title: 'TimePicker',
+  decorators: [
+    (Story: () => JSX.Element) => (
+      <EmpoleonProvider>
+        <Story />
+      </EmpoleonProvider>
+    ),
+  ],
+};
 
 export function Usage() {
   return (

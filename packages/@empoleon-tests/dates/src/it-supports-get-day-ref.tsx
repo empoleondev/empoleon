@@ -1,7 +1,8 @@
 import { render } from '@empoleon-tests/core';
+import { Component } from 'solid-js';
 
 interface Options {
-  component: React.ComponentType<any>;
+  component: Component<any>;
   props: Record<string, any>;
 }
 
@@ -9,7 +10,7 @@ export function itSupportsGetDayRef(options: Options, name = 'supports __getDayR
   it(name, () => {
     const daysRefs: Record<string, HTMLButtonElement> = {};
     render(
-      <options.component
+      () => <options.component
         {...options.props}
         __getDayRef={(rowIndex: number, cellIndex: number, node: HTMLButtonElement) => {
           daysRefs[`${rowIndex}.${cellIndex}`] = node;

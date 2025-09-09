@@ -10,20 +10,15 @@ interface GetYearInTabOrderInput {
   getYearControlProps: ((year: DateStringValue) => Partial<PickerControlProps>) | undefined;
 }
 
-export function getYearInTabOrder({
-  years,
-  minDate,
-  maxDate,
-  getYearControlProps,
-}: GetYearInTabOrderInput) {
-  const enabledYears = years
+export function getYearInTabOrder(props: GetYearInTabOrderInput) {
+  const enabledYears = props.years
     .flat()
     .filter(
       (year) =>
-        !isYearDisabled({ year, minDate, maxDate }) && !getYearControlProps?.(year)?.disabled
+        !isYearDisabled({ year, minDate: props.minDate, maxDate: props.maxDate }) && !props.getYearControlProps?.(year)?.disabled
     );
 
-  const selectedYear = enabledYears.find((year) => getYearControlProps?.(year)?.selected);
+  const selectedYear = enabledYears.find((year) => props.getYearControlProps?.(year)?.selected);
 
   if (selectedYear) {
     return selectedYear;

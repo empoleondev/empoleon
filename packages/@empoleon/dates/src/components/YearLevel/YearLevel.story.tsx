@@ -1,8 +1,18 @@
 import dayjs from 'dayjs';
 import { YearLevel } from './YearLevel';
-import { createSignal, For } from 'solid-js';
+import { createSignal, For, JSX } from 'solid-js';
+import { EmpoleonProvider } from '@empoleon/core';
 
-export default { title: 'YearLevel' };
+export default {
+  title: 'YearLevel',
+  decorators: [
+    (Story: () => JSX.Element) => (
+      <EmpoleonProvider>
+        <Story />
+      </EmpoleonProvider>
+    ),
+  ],
+};
 
 export function Usage() {
   return (

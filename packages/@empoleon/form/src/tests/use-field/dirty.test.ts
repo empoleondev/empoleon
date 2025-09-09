@@ -1,20 +1,20 @@
-import { act, renderHook } from '@testing-library/react';
+import { renderHook } from '@solidjs/testing-library';
 import { useField } from '../../use-field';
 
 describe('@empoleon/form/use-field/dirty', () => {
   it('detects correct dirty state', () => {
     const hook = renderHook(() => useField({ initialValue: 'test' }));
-    expect(hook.result.current.isDirty()).toBe(false);
-    act(() => hook.result.current.getInputProps().onChange('new value'));
-    expect(hook.result.current.isDirty()).toBe(true);
+    expect(hook.result.isDirty()).toBe(false);
+    hook.result.getInputProps().onChange('new value');
+    expect(hook.result.isDirty()).toBe(true);
   });
 
   it('resets dirty state with reset handler', () => {
     const hook = renderHook(() => useField({ initialValue: 'test' }));
-    expect(hook.result.current.isDirty()).toBe(false);
-    act(() => hook.result.current.getInputProps().onChange('new value'));
-    expect(hook.result.current.isDirty()).toBe(true);
-    act(() => hook.result.current.reset());
-    expect(hook.result.current.isDirty()).toBe(false);
+    expect(hook.result.isDirty()).toBe(false);
+    hook.result.getInputProps().onChange('new value');
+    expect(hook.result.isDirty()).toBe(true);
+    hook.result.reset();
+    expect(hook.result.isDirty()).toBe(false);
   });
 });

@@ -1,4 +1,4 @@
-import { JSX, splitProps } from 'solid-js';
+import { For, JSX, splitProps } from 'solid-js';
 import dayjs from 'dayjs';
 import { BoxProps, ElementProps, factory, Factory, StylesApiProps, useProps } from '@empoleon/core';
 import { DateStringValue } from '../../types';
@@ -36,9 +36,9 @@ export type MonthLevelGroupFactory = Factory<{
   stylesNames: MonthLevelGroupStylesNames;
 }>;
 
-const defaultProps: Partial<MonthLevelGroupProps> = {
+const defaultProps = {
   numberOfColumns: 1,
-};
+} satisfies Partial<MonthLevelGroupProps>;
 
 export const MonthLevelGroup = factory<MonthLevelGroupFactory>(_props => {
   const props = useProps('MonthLevelGroup', defaultProps, _props);
@@ -88,85 +88,11 @@ export const MonthLevelGroup = factory<MonthLevelGroupFactory>(_props => {
     'size',
     'static',
     'vars',
+    'attributes',
     'ref'
   ]);
 
   let daysRefs: HTMLButtonElement[][][] = [];
-
-  const months = Array(local.numberOfColumns)
-    .fill(0)
-    .map((_, monthIndex) => {
-      const currentMonth = dayjs(local.month).add(monthIndex, 'months').format('YYYY-MM-DD');
-
-      return (
-        <MonthLevel
-          month={currentMonth}
-          withNext={monthIndex === local.numberOfColumns! - 1}
-          withPrevious={monthIndex === 0}
-          monthLabelFormat={local.monthLabelFormat}
-          __stopPropagation={local.__stopPropagation}
-          __onDayClick={local.__onDayClick}
-          __onDayMouseEnter={local.__onDayMouseEnter}
-          __onDayKeyDown={(event, payload) =>
-            handleControlKeyDown({
-              levelIndex: monthIndex,
-              rowIndex: payload.rowIndex,
-              cellIndex: payload.cellIndex,
-              event,
-              controlsRef: daysRefs,
-            })
-          }
-          __getDayRef={(rowIndex, cellIndex, node) => {
-            if (!Array.isArray(daysRefs[monthIndex])) {
-              daysRefs[monthIndex] = [];
-            }
-
-            if (!Array.isArray(daysRefs[monthIndex][rowIndex])) {
-              daysRefs[monthIndex][rowIndex] = [];
-            }
-
-            daysRefs[monthIndex][rowIndex][cellIndex] = node;
-          }}
-          levelControlAriaLabel={
-            typeof local.levelControlAriaLabel === 'function'
-              ? local.levelControlAriaLabel(currentMonth)
-              : local.levelControlAriaLabel
-          }
-          locale={local.locale}
-          firstDayOfWeek={local.firstDayOfWeek}
-          weekdayFormat={local.weekdayFormat}
-          weekendDays={local.weekendDays}
-          getDayProps={local.getDayProps}
-          excludeDate={local.excludeDate}
-          minDate={local.minDate}
-          maxDate={local.maxDate}
-          renderDay={local.renderDay}
-          hideOutsideDates={local.hideOutsideDates}
-          hideWeekdays={local.hideWeekdays}
-          getDayAriaLabel={local.getDayAriaLabel}
-          __preventFocus={local.__preventFocus}
-          nextIcon={local.nextIcon}
-          previousIcon={local.previousIcon}
-          nextLabel={local.nextLabel}
-          previousLabel={local.previousLabel}
-          onNext={local.onNext}
-          onPrevious={local.onPrevious}
-          onLevelClick={local.onLevelClick}
-          nextDisabled={local.nextDisabled}
-          previousDisabled={local.previousDisabled}
-          hasNextLevel={local.hasNextLevel}
-          classNames={local.classNames}
-          styles={local.styles}
-          unstyled={local.unstyled}
-          __staticSelector={local.__staticSelector || 'MonthLevelGroup'}
-          size={local.size}
-          static={local.static}
-          withCellSpacing={local.withCellSpacing}
-          highlightToday={local.highlightToday}
-          withWeekNumbers={local.withWeekNumbers}
-        />
-      );
-    });
 
   return (
     <LevelsGroup
@@ -175,9 +101,84 @@ export const MonthLevelGroup = factory<MonthLevelGroupFactory>(_props => {
       __staticSelector={local.__staticSelector || 'MonthLevelGroup'}
       ref={local.ref}
       size={local.size}
+      attributes={local.attributes}
       {...others}
     >
-      {months}
+      <For each={Array(local.numberOfColumns).fill(0)}>
+        {(_, monthIndex) => {
+          const currentMonth = dayjs(local.month).add(monthIndex(), 'months').format('YYYY-MM-DD');
+
+          return (
+            <MonthLevel
+              month={currentMonth}
+              withNext={monthIndex() === local.numberOfColumns! - 1}
+              withPrevious={monthIndex() === 0}
+              monthLabelFormat={local.monthLabelFormat}
+              __stopPropagation={local.__stopPropagation}
+              __onDayClick={local.__onDayClick}
+              __onDayMouseEnter={local.__onDayMouseEnter}
+              __onDayKeyDown={(event, payload) =>
+                handleControlKeyDown({
+                  levelIndex: monthIndex(),
+                  rowIndex: payload.rowIndex,
+                  cellIndex: payload.cellIndex,
+                  event,
+                  controlsRef: daysRefs,
+                })
+              }
+              __getDayRef={(rowIndex, cellIndex, node) => {
+                if (!Array.isArray(daysRefs[monthIndex()])) {
+                  daysRefs[monthIndex()] = [];
+                }
+
+                if (!Array.isArray(daysRefs[monthIndex()][rowIndex])) {
+                  daysRefs[monthIndex()][rowIndex] = [];
+                }
+
+                daysRefs[monthIndex()][rowIndex][cellIndex] = node;
+              }}
+              levelControlAriaLabel={
+                typeof local.levelControlAriaLabel === 'function'
+                  ? local.levelControlAriaLabel(currentMonth)
+                  : local.levelControlAriaLabel
+              }
+              locale={local.locale}
+              firstDayOfWeek={local.firstDayOfWeek}
+              weekdayFormat={local.weekdayFormat}
+              weekendDays={local.weekendDays}
+              getDayProps={local.getDayProps}
+              excludeDate={local.excludeDate}
+              minDate={local.minDate}
+              maxDate={local.maxDate}
+              renderDay={local.renderDay}
+              hideOutsideDates={local.hideOutsideDates}
+              hideWeekdays={local.hideWeekdays}
+              getDayAriaLabel={local.getDayAriaLabel}
+              __preventFocus={local.__preventFocus}
+              nextIcon={local.nextIcon}
+              previousIcon={local.previousIcon}
+              nextLabel={local.nextLabel}
+              previousLabel={local.previousLabel}
+              onNext={local.onNext}
+              onPrevious={local.onPrevious}
+              onLevelClick={local.onLevelClick}
+              nextDisabled={local.nextDisabled}
+              previousDisabled={local.previousDisabled}
+              hasNextLevel={local.hasNextLevel}
+              classNames={local.classNames}
+              styles={local.styles}
+              unstyled={local.unstyled}
+              __staticSelector={local.__staticSelector || 'MonthLevelGroup'}
+              size={local.size}
+              static={local.static}
+              withCellSpacing={local.withCellSpacing}
+              highlightToday={local.highlightToday}
+              withWeekNumbers={local.withWeekNumbers}
+              attributes={local.attributes}
+            />
+          );
+        }}
+      </For>
     </LevelsGroup>
   );
 });

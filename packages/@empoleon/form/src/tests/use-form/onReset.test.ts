@@ -1,4 +1,4 @@
-import { act, renderHook } from '@testing-library/react';
+import { renderHook } from '@solidjs/testing-library';
 import { FormMode } from '../../types';
 import { useForm } from '../../use-form';
 
@@ -16,13 +16,13 @@ function tests(mode: FormMode) {
       })
     );
 
-    act(() => hook.result.current.setValues({ a: 10, b: 20 }));
-    expect(hook.result.current.getValues()).toStrictEqual({ a: 10, b: 20 });
-    expect(hook.result.current.errors).toStrictEqual({ a: 'error-a', b: 'error-b' });
+    hook.result.setValues({ a: 10, b: 20 });
+    expect(hook.result.getValues()).toStrictEqual({ a: 10, b: 20 });
+    expect(hook.result.errors).toStrictEqual({ a: 'error-a', b: 'error-b' });
 
-    act(() => hook.result.current.onReset(event));
-    expect(hook.result.current.getValues()).toStrictEqual({ a: 1, b: 2 });
-    expect(hook.result.current.errors).toStrictEqual({});
+    hook.result.onReset(event);
+    expect(hook.result.getValues()).toStrictEqual({ a: 1, b: 2 });
+    expect(hook.result.errors).toStrictEqual({});
   });
 }
 

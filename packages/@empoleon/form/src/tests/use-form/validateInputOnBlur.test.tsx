@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen } from '@solidjs/testing-library';
 import userEvent from '@testing-library/user-event';
 import { FormMode } from '../../types';
 import { useForm } from '../../use-form';
@@ -28,7 +28,7 @@ function TestComponent({ mode }: any) {
 
 function tests(mode: FormMode) {
   it('validates specified field on blur', async () => {
-    render(<TestComponent mode={mode} />);
+    render(() => <TestComponent mode={mode} />);
     expect(screen.getByTestId('errors').textContent).toBe('{}');
 
     await userEvent.type(screen.getByTestId('firstName'), 'a');

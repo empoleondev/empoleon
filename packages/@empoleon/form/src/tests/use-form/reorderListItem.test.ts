@@ -1,4 +1,4 @@
-import { act, renderHook } from '@testing-library/react';
+import { renderHook } from '@solidjs/testing-library';
 import { FormMode } from '../../types';
 import { useForm } from '../../use-form';
 
@@ -8,8 +8,8 @@ function tests(mode: FormMode) {
       useForm({ mode, initialValues: { a: [{ b: 1 }, { b: 2 }, { b: 3 }] } })
     );
 
-    act(() => hook.result.current.reorderListItem('a', { from: 2, to: 0 }));
-    expect(hook.result.current.getValues()).toStrictEqual({ a: [{ b: 3 }, { b: 1 }, { b: 2 }] });
+    hook.result.reorderListItem('a', { from: 2, to: 0 });
+    expect(hook.result.getValues()).toStrictEqual({ a: [{ b: 3 }, { b: 1 }, { b: 2 }] });
   });
 
   it('reorders items at given nested list', () => {
@@ -26,8 +26,8 @@ function tests(mode: FormMode) {
       })
     );
 
-    act(() => hook.result.current.reorderListItem('a.1.b', { from: 1, to: 0 }));
-    expect(hook.result.current.getValues()).toStrictEqual({
+    hook.result.reorderListItem('a.1.b', { from: 1, to: 0 });
+    expect(hook.result.getValues()).toStrictEqual({
       a: [
         { b: [{ c: 1 }, { c: 2 }, { c: 3 }] },
         { b: [{ c: 5 }, { c: 4 }, { c: 6 }] },
@@ -52,7 +52,7 @@ function tests(mode: FormMode) {
       })
     );
 
-    act(() => hook.result.current.reorderListItem('a.1.b', { from: 1, to: 0 }));
+    hook.result.reorderListItem('a.1.b', { from: 1, to: 0 });
     expect(spy).toHaveBeenCalledWith(
       {
         a: [

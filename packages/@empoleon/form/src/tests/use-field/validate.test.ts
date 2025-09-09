@@ -1,4 +1,4 @@
-import { act, renderHook } from '@testing-library/react';
+import { renderHook } from '@solidjs/testing-library';
 import { useField } from '../../use-field';
 import { isNotEmpty } from '../../validators';
 
@@ -23,30 +23,27 @@ describe('@empoleon/form/use-field/validate', () => {
     const hook = renderHook(() =>
       useField({ initialValue: 'test', validate: (value) => (value === 'test' ? 'error' : null) })
     );
-    await act(() => hook.result.current.validate());
-    expect(hook.result.current.error).toBe('error');
+    hook.result.validate();
+    expect(hook.result.error()).toBe('error');
 
-    await act(() => hook.result.current.setValue('new value'));
-    await act(() => hook.result.current.validate());
-    expect(hook.result.current.error).toBe(null);
+    hook.result.setValue('new value');
+    await hook.result.validate();
+    expect(hook.result.error()).toBe(null);
   });
 
   it('supports async validation', async () => {
     const hook = renderHook(() => useField({ initialValue: 'test', validate: validateAsync }));
-    await act(() => {
-      const validate = hook.result.current.validate();
-      vi.advanceTimersByTime(1000);
-      return validate;
-    });
-    expect(hook.result.current.error).toBe('error');
 
-    await act(() => hook.result.current.setValue('new value'));
-    await act(() => {
-      const validate = hook.result.current.validate();
-      vi.advanceTimersByTime(1000);
-      return validate;
-    });
-    expect(hook.result.current.error).toBe(null);
+    const validate1 = hook.result.validate();
+    vi.advanceTimersByTime(1000);
+    await validate1;
+    expect(hook.result.error()).toBe('error');
+
+    hook.result.setValue('new value');
+    const validate2 = hook.result.validate();
+    vi.advanceTimersByTime(1000);
+    await validate2;
+    expect(hook.result.error()).toBe(null);
   });
 
   it('works correctly with validators', async () => {
@@ -54,12 +51,12 @@ describe('@empoleon/form/use-field/validate', () => {
       useField({ initialValue: '', validate: isNotEmpty('test error') })
     );
 
-    await act(() => hook.result.current.validate());
-    expect(hook.result.current.error).toBe('test error');
+    await hook.result.validate();
+    expect(hook.result.error()).toBe('test error');
 
-    await act(() => hook.result.current.setValue('test'));
-    await act(() => hook.result.current.validate());
-    expect(hook.result.current.error).toBe(null);
+    hook.result.setValue('test');
+    await hook.result.validate();
+    expect(hook.result.error()).toBe(null);
   });
 
   it('validates field on value change if validateOnChange is set to true', async () => {
@@ -71,11 +68,11 @@ describe('@empoleon/form/use-field/validate', () => {
       })
     );
 
-    await act(() => hook.result.current.getInputProps().onChange('new value'));
-    expect(hook.result.current.error).toBe(null);
+    hook.result.getInputProps().onChange('new value');
+    expect(hook.result.error()).toBe(null);
 
-    act(() => hook.result.current.getInputProps().onChange('test'));
-    expect(hook.result.current.error).toBe('error');
+    hook.result.getInputProps().onChange('test');
+    expect(hook.result.error()).toBe('error');
   });
 
   it('validate filed on blur if validateOnBlur is set to true', async () => {
@@ -87,11 +84,11 @@ describe('@empoleon/form/use-field/validate', () => {
       })
     );
 
-    await act(() => hook.result.current.getInputProps().onBlur());
-    expect(hook.result.current.error).toBe('error');
+    hook.result.getInputProps().onBlur();
+    expect(hook.result.error()).toBe('error');
 
-    act(() => hook.result.current.getInputProps().onChange('new value'));
-    await act(() => hook.result.current.getInputProps().onBlur());
-    expect(hook.result.current.error).toBe(null);
+    hook.result.getInputProps().onChange('new value');
+    hook.result.getInputProps().onBlur();
+    expect(hook.result.error()).toBe(null);
   });
 });

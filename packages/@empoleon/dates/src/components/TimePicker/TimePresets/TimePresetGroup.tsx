@@ -14,29 +14,22 @@ interface TimePresetGroupProps {
   withSeconds: boolean;
 }
 
-export function TimePresetGroup({
-  value,
-  data,
-  onChange,
-  format,
-  amPmLabels,
-  withSeconds,
-}: TimePresetGroupProps) {
+export function TimePresetGroup(props: TimePresetGroupProps) {
   const ctx = useTimePickerContext();
 
   return (
     <div {...ctx.getStyles('presetsGroup')}>
-      <div {...ctx.getStyles('presetsGroupLabel')}>{data.label}</div>
-      <SimpleGrid cols={withSeconds ? 2 : 3} spacing={4}>
-        <For each={data.values}>
+      <div {...ctx.getStyles('presetsGroupLabel')}>{props.data.label}</div>
+      <SimpleGrid cols={props.withSeconds ? 2 : 3} spacing={4}>
+        <For each={props.data.values}>
           {(item) => (
             <TimePresetControl
               value={item}
-              format={format}
-              amPmLabels={amPmLabels}
-              withSeconds={withSeconds}
-              active={isSameTime({ time: item, compare: value, withSeconds })}
-              onChange={onChange}
+              format={props.format}
+              amPmLabels={props.amPmLabels}
+              withSeconds={props.withSeconds}
+              active={isSameTime({ time: item, compare: props.value, withSeconds: props.withSeconds })}
+              onChange={props.onChange}
             />
           )}
         </For>

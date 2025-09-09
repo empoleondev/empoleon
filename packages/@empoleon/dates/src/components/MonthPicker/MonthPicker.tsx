@@ -54,9 +54,9 @@ export type MonthPickerFactory = Factory<{
   stylesNames: MonthPickerStylesNames;
 }>;
 
-const defaultProps: Partial<MonthPickerProps> = {
+const defaultProps = {
   type: 'default',
-};
+} satisfies Partial<MonthPickerProps>;
 
 type MonthPickerComponent = (<Type extends DatePickerType = 'default'>(
   props: MonthPickerProps<Type> & { ref?: HTMLDivElement | ((el: HTMLDivElement) => void) }

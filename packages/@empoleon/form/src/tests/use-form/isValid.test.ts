@@ -1,4 +1,4 @@
-import { act, renderHook } from '@testing-library/react';
+import { renderHook } from '@solidjs/testing-library';
 import { FormMode } from '../../types';
 import { useForm } from '../../use-form';
 
@@ -14,11 +14,11 @@ function tests(mode: FormMode) {
       })
     );
 
-    expect(hook.result.current.isValid()).toBe(false);
-    expect(hook.result.current.errors).toStrictEqual({});
+    expect(hook.result.isValid()).toBe(false);
+    expect(hook.result.errors).toStrictEqual({});
 
-    act(() => hook.result.current.setFieldValue('a', 2));
-    expect(hook.result.current.isValid()).toBe(true);
+    hook.result.setFieldValue('a', 2);
+    expect(hook.result.isValid()).toBe(true);
   });
 
   it('returns correct field validation state', () => {
@@ -32,13 +32,13 @@ function tests(mode: FormMode) {
       })
     );
 
-    expect(hook.result.current.isValid('a')).toBe(false);
-    expect(hook.result.current.isValid('b')).toBe(true);
-    expect(hook.result.current.errors).toStrictEqual({});
+    expect(hook.result.isValid('a')).toBe(false);
+    expect(hook.result.isValid('b')).toBe(true);
+    expect(hook.result.errors).toStrictEqual({});
 
-    act(() => hook.result.current.setFieldValue('a', 2));
-    expect(hook.result.current.isValid('a')).toBe(true);
-    expect(hook.result.current.isValid('b')).toBe(true);
+    hook.result.setFieldValue('a', 2);
+    expect(hook.result.isValid('a')).toBe(true);
+    expect(hook.result.isValid('b')).toBe(true);
   });
 }
 

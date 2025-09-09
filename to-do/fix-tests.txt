@@ -3,19 +3,38 @@ Need to fix
 components:
 Card - Fucksup section
 
-// form
-**/use-field/**
-**/use-form/**
-**/clearErrors.test.ts
-**/clearFieldError.test.ts
+components: dates
+- Calendar
+- CalendarHeader
+- DateInput
+- DateInputMask
+- DatePicker
+- DatePickerInput
+- DatesProvider
+- DateTimePicker
+- Day done
+- DecadeLevel
+- DecadeLevelGroup
+- HiddenDatesInput
+- LevelsGroup
+- Month
+- MonthLevel
+- MonthLevelGroup
+- MonthPicker
+- MonthPickerInput
+- MonthsList
+- PickerControl
+- PickerInputBase
+- SpinInput
+- TimeGrid
+- TimeInput
+- TimePicker
+- TimeValue
+- WeekdaysRow
+- YearLevel
+- YearLevelGroup
+- YearPicker
+- YearPickerInput
+- YearsList
 
-Others:
 
-Carousel
-Dropzone
-Form
-Modals Manager
-Notifications
-NavigationProgress
-Spotlight
-Tiptap

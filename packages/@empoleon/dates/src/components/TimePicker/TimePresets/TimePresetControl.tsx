@@ -12,23 +12,16 @@ interface TimePresetControlProps {
   withSeconds: boolean;
 }
 
-export function TimePresetControl({
-  value,
-  active,
-  onChange,
-  format,
-  amPmLabels,
-  withSeconds,
-}: TimePresetControlProps) {
+export function TimePresetControl(props: TimePresetControlProps) {
   const ctx = useTimePickerContext();
 
   return (
     <UnstyledButton
-      mod={{ active }}
-      onClick={() => onChange(value)}
+      mod={{ active: props.active }}
+      onClick={() => props.onChange(props.value)}
       {...ctx.getStyles('presetControl')}
     >
-      <TimeValue withSeconds={withSeconds} value={value} format={format} amPmLabels={amPmLabels} />
+      <TimeValue withSeconds={props.withSeconds} value={props.value} format={props.format} amPmLabels={props.amPmLabels} />
     </UnstyledButton>
   );
 }

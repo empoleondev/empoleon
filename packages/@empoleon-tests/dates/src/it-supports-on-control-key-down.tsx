@@ -12,7 +12,7 @@ export function itSupportsOnControlKeydown(options: Options, name = 'supports __
   it(name, async () => {
     const spy = vi.fn();
     const { container } = render(
-      <options.component
+      () => <options.component
         {...options.props}
         __onControlKeyDown={(_event: any, payload: any) => {
           spy(payload);

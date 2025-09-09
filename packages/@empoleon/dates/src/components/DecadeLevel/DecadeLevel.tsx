@@ -54,9 +54,9 @@ export type DecadeLevelFactory = Factory<{
   stylesNames: DecadeLevelStylesNames;
 }>;
 
-const defaultProps: Partial<DecadeLevelProps> = {
+const defaultProps = {
   decadeLabelFormat: 'YYYY',
-};
+} satisfies Partial<DecadeLevelProps>;
 
 export const DecadeLevel = factory<DecadeLevelFactory>(_props => {
   const props = useProps('DecadeLevel', defaultProps, _props);
@@ -96,6 +96,7 @@ export const DecadeLevel = factory<DecadeLevelFactory>(_props => {
     '__staticSelector',
     '__stopPropagation',
     'size',
+    'attributes',
     'ref'
   ]);
 
@@ -108,6 +109,7 @@ export const DecadeLevel = factory<DecadeLevelFactory>(_props => {
     styles: local.styles,
     unstyled: local.unstyled,
     size: local.size,
+    attributes: local.attributes,
   };
 
   const _nextDisabled =

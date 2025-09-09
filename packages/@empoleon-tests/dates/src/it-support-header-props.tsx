@@ -12,7 +12,7 @@ interface Options {
 export function itSupportsHeaderProps(options: Options, name = 'supports header props') {
   it(`${name}: supports nextIcon and previousIcon props`, () => {
     render(
-      <options.component
+      () => <options.component
         {...options.props}
         nextIcon="test-next-icon"
         previousIcon="test-previous-icon"
@@ -25,7 +25,7 @@ export function itSupportsHeaderProps(options: Options, name = 'supports header 
 
   it(`${name}: supports nextLabel and previousLabel props`, () => {
     const { container } = render(
-      <options.component
+      () => <options.component
         {...options.props}
         nextLabel="test-next-label"
         previousLabel="test-previous-label"
@@ -45,7 +45,7 @@ export function itSupportsHeaderProps(options: Options, name = 'supports header 
   it(`${name}: supports onNext and onPrevious props`, async () => {
     const onNext = vi.fn();
     const onPrevious = vi.fn();
-    render(<options.component {...options.props} onNext={onNext} onPrevious={onPrevious} />);
+    render(() => <options.component {...options.props} onNext={onNext} onPrevious={onPrevious} />);
 
     await userEvent.click(screen.getByLabelText('next'));
     expect(onNext).toHaveBeenCalledTimes(1);
@@ -59,7 +59,7 @@ export function itSupportsHeaderProps(options: Options, name = 'supports header 
   it(`${name}: calls onLevelClick when level control is clicked`, async () => {
     const spy = vi.fn();
     render(
-      <options.component {...options.props} levelControlAriaLabel="click me" onLevelClick={spy} />
+      () => <options.component {...options.props} levelControlAriaLabel="click me" onLevelClick={spy} />
     );
 
     await userEvent.click(screen.getByLabelText('click me'));
@@ -67,33 +67,33 @@ export function itSupportsHeaderProps(options: Options, name = 'supports header 
   });
 
   it(`${name}: supports nextDisabled prop`, () => {
-    const { rerender } = render(<options.component {...options.props} nextDisabled />);
+    const { rerender } = render(() => <options.component {...options.props} nextDisabled />);
     expect(screen.getByLabelText('next')).toHaveAttribute('data-disabled');
     expect(screen.getByLabelText('next')).toHaveAttribute('disabled');
 
-    rerender(<options.component {...options.props} nextDisabled={false} />);
+    rerender(() => <options.component {...options.props} nextDisabled={false} />);
     expect(screen.getByLabelText('next')).not.toHaveAttribute('data-disabled');
     expect(screen.getByLabelText('next')).not.toHaveAttribute('disabled');
   });
 
   it(`${name}: supports previousDisabled prop`, () => {
-    const { rerender } = render(<options.component {...options.props} previousDisabled />);
+    const { rerender } = render(() => <options.component {...options.props} previousDisabled />);
     expect(screen.getByLabelText('prev')).toHaveAttribute('data-disabled');
     expect(screen.getByLabelText('prev')).toHaveAttribute('disabled');
 
-    rerender(<options.component {...options.props} previousDisabled={false} />);
+    rerender(() => <options.component {...options.props} previousDisabled={false} />);
     expect(screen.getByLabelText('prev')).not.toHaveAttribute('data-disabled');
     expect(screen.getByLabelText('prev')).not.toHaveAttribute('disabled');
   });
 
   it(`${name}: supports hasNextLevel prop`, () => {
     const { rerender } = render(
-      <options.component {...options.props} levelControlAriaLabel="test-level" hasNextLevel />
+      () => <options.component {...options.props} levelControlAriaLabel="test-level" hasNextLevel />
     );
     expect(screen.getByLabelText('test-level')).not.toHaveAttribute('data-static');
 
     rerender(
-      <options.component
+      () => <options.component
         {...options.props}
         levelControlAriaLabel="test-level"
         hasNextLevel={false}
@@ -105,7 +105,7 @@ export function itSupportsHeaderProps(options: Options, name = 'supports header 
   it(`${name}: does not call onLevelClick when level is clicked and hasNextLevel is false`, async () => {
     const spy = vi.fn();
     const { rerender } = render(
-      <options.component
+      () => <options.component
         {...options.props}
         levelControlAriaLabel="test-level"
         hasNextLevel
@@ -117,7 +117,7 @@ export function itSupportsHeaderProps(options: Options, name = 'supports header 
     expect(spy).toHaveBeenCalledTimes(1);
 
     rerender(
-      <options.component
+      () => <options.component
         {...options.props}
         levelControlAriaLabel="test-level"
         hasNextLevel={false}
@@ -131,7 +131,7 @@ export function itSupportsHeaderProps(options: Options, name = 'supports header 
 
   it(`${name}: handles focus as usual when __preventFocus is set to false`, async () => {
     render(
-      <options.component
+      () => <options.component
         {...options.props}
         __preventFocus={false}
         levelControlAriaLabel="test-level"
@@ -149,7 +149,7 @@ export function itSupportsHeaderProps(options: Options, name = 'supports header 
 
   it(`${name}: does not focus controls on click when __preventFocus is set to true`, async () => {
     render(
-      <options.component {...options.props} __preventFocus levelControlAriaLabel="test-level" />
+      () => <options.component {...options.props} __preventFocus levelControlAriaLabel="test-level" />
     );
 
     await userEvent.click(screen.getByLabelText('next'));

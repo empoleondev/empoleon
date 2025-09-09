@@ -1,8 +1,18 @@
-import { createSignal } from 'solid-js';
+import { createSignal, JSX } from 'solid-js';
 import { getTimeRange } from '../TimePicker';
 import { TimeGrid } from './TimeGrid';
+import { EmpoleonProvider } from '@empoleon/core';
 
-export default { title: 'TimeGrid' };
+export default {
+  title: 'TimeGrid',
+  decorators: [
+    (Story: () => JSX.Element) => (
+      <EmpoleonProvider>
+        <Story />
+      </EmpoleonProvider>
+    ),
+  ],
+};
 
 export function Usage() {
   const [value, setValue] = createSignal<string | null>(null);

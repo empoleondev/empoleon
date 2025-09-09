@@ -1,4 +1,4 @@
-import { createSignal, createMemo } from 'solid-js';
+import { createSignal, createMemo, mergeProps } from 'solid-js';
 import { DatePickerType, DatePickerValue, DateStringValue } from '../../types';
 import { toDateString, toDateTimeString } from '../../utils';
 
@@ -18,35 +18,33 @@ export const convertDatesValue = (value: any, withTime: boolean) => {
   return Array.isArray(value) ? value.map(converter) : converter(value);
 };
 
-export function useUncontrolledDates<Type extends DatePickerType = 'default'>({
-  type,
-  value,
-  defaultValue,
-  onChange,
-  withTime = false,
-}: UseUncontrolledDates<Type>) {
-  let storedType = type;
-  const controlled = value !== undefined;
+export function useUncontrolledDates<Type extends DatePickerType = 'default'>(props: UseUncontrolledDates<Type>) {
+  const mergedProps = mergeProps({
+    withTime: false
+  }, props);
+
+  let storedType = props.type;
+  const controlled = props.value !== undefined;
 
   const initialValue = convertDatesValue(
-    value !== undefined ? value :
-    defaultValue !== undefined ? defaultValue :
-    getEmptyValue(type),
-    withTime
+    props.value !== undefined ? props.value :
+    props.defaultValue !== undefined ? props.defaultValue :
+    getEmptyValue(props.type),
+    mergedProps.withTime
   );
 
   const [_value, _setValue] = createSignal<any>(initialValue);
 
   const finalValue = createMemo(() => {
-    const currentValue = controlled ? convertDatesValue(value, withTime) : _value();
+    const currentValue = controlled ? convertDatesValue(props.value, mergedProps.withTime) : _value();
 
-    if (storedType !== type) {
-      storedType = type;
+    if (storedType !== props.type) {
+      storedType = props.type;
 
       if (!controlled) {
-        const newValue = defaultValue !== undefined ? defaultValue : getEmptyValue(type);
-        _setValue(convertDatesValue(newValue, withTime));
-        return convertDatesValue(newValue, withTime);
+        const newValue = props.defaultValue !== undefined ? props.defaultValue : getEmptyValue(props.type);
+        _setValue(convertDatesValue(newValue, mergedProps.withTime));
+        return convertDatesValue(newValue, mergedProps.withTime);
       }
     }
 
@@ -54,9 +52,9 @@ export function useUncontrolledDates<Type extends DatePickerType = 'default'>({
   });
 
   const setValue = (newValue: any) => {
-    const convertedValue = convertDatesValue(newValue, withTime);
+    const convertedValue = convertDatesValue(newValue, mergedProps.withTime);
     _setValue(convertedValue);
-    onChange?.(convertedValue as DatePickerValue<Type, DateStringValue>);
+    props.onChange?.(convertedValue as DatePickerValue<Type, DateStringValue>);
   };
 
   return [finalValue, setValue, controlled] as const;

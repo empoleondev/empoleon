@@ -35,13 +35,13 @@ export type DatePickerInputFactory = Factory<{
   variant: InputVariant;
 }>;
 
-const defaultProps: Partial<DatePickerInputProps> = {
+const defaultProps = {
   type: 'default',
   valueFormat: 'MMMM D, YYYY',
   closeOnChange: true,
   sortDates: true,
   dropdownType: 'popover',
-};
+} satisfies Partial<DatePickerInputProps>;
 
 type DatePickerInputComponent = (<Type extends DatePickerType = 'default'>(
   props: DatePickerInputProps<Type> & { ref?: HTMLButtonElement | ((el: HTMLButtonElement) => void) }
@@ -72,6 +72,8 @@ export const DatePickerInput: DatePickerInputComponent = factory<DatePickerInput
     'vars',
     'defaultDate',
     'valueFormatter',
+    'presets',
+    'attributes',
     'ref'
   ]);
 
@@ -83,15 +85,7 @@ export const DatePickerInput: DatePickerInputComponent = factory<DatePickerInput
 
   const { calendarProps, others } = pickCalendarProps(rest);
 
-  const {
-    _value,
-    setValue,
-    formattedValue,
-    dropdownHandlers,
-    dropdownOpened,
-    onClear,
-    shouldClear,
-  } = useDatesInput({
+  const datesInput = useDatesInput({
     type: local.type as any,
     value: local.value,
     defaultValue: local.defaultValue,
@@ -104,20 +98,20 @@ export const DatePickerInput: DatePickerInputComponent = factory<DatePickerInput
     valueFormatter: local.valueFormatter,
   });
 
-  const _defaultDate = Array.isArray(_value) ? _value[0] || local.defaultDate : _value || local.defaultDate;
+  const _defaultDate = Array.isArray(datesInput._value()) ? datesInput._value()[0] || local.defaultDate : datesInput._value() || local.defaultDate;
 
   return (
     <PickerInputBase
-      formattedValue={formattedValue}
-      dropdownOpened={dropdownOpened()}
-      dropdownHandlers={dropdownHandlers}
+      formattedValue={datesInput.formattedValue}
+      dropdownOpened={datesInput.dropdownOpened()}
+      dropdownHandlers={datesInput.dropdownHandlers}
       classNames={resolvedClassNames}
       styles={resolvedStyles}
       unstyled={local.unstyled}
       ref={local.ref}
-      onClear={onClear}
-      shouldClear={shouldClear}
-      value={_value()}
+      onClear={datesInput.onClear}
+      shouldClear={datesInput.shouldClear}
+      value={datesInput._value()}
       size={local.size!}
       variant={local.variant}
       dropdownType={local.dropdownType}
@@ -130,9 +124,9 @@ export const DatePickerInput: DatePickerInputComponent = factory<DatePickerInput
         size={local.size}
         variant={local.variant}
         type={local.type}
-        value={_value()}
+        value={datesInput._value()}
         defaultDate={_defaultDate || getDefaultClampedDate({ maxDate: local.maxDate, minDate: local.minDate })}
-        onChange={setValue}
+        onChange={datesInput.setValue}
         locale={local.locale}
         classNames={resolvedClassNames}
         styles={resolvedStyles}

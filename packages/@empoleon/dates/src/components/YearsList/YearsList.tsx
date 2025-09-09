@@ -62,10 +62,10 @@ export type YearsListFactory = Factory<{
   stylesNames: YearsListStylesNames;
 }>;
 
-const defaultProps: Partial<YearsListProps> = {
+const defaultProps = {
   yearsListFormat: 'YYYY',
   withCellSpacing: true,
-};
+} satisfies Partial<YearsListProps>;
 
 export const YearsList = factory<YearsListFactory>(_props => {
   const props = useProps('YearsList', defaultProps, _props);
@@ -91,6 +91,7 @@ export const YearsList = factory<YearsListFactory>(_props => {
     '__stopPropagation',
     'withCellSpacing',
     'size',
+    'attributes',
     'ref'
   ]);
 
@@ -104,6 +105,7 @@ export const YearsList = factory<YearsListFactory>(_props => {
     styles: local.styles,
     unstyled: local.unstyled,
     vars: local.vars,
+    attributes: local.attributes,
     rootSelector: 'yearsList',
   });
 

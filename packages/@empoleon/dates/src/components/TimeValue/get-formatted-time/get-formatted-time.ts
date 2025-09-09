@@ -13,28 +13,23 @@ export interface GetFormattedTimeInput {
   withSeconds: boolean;
 }
 
-export function getFormattedTime({
-  value,
-  format,
-  amPmLabels,
-  withSeconds,
-}: GetFormattedTimeInput) {
+export function getFormattedTime(props: GetFormattedTimeInput) {
   const splitted = splitTimeString(
-    typeof value === 'string' ? value : getTimeFromDate(value, withSeconds)
+    typeof props.value === 'string' ? props.value : getTimeFromDate(props.value, props.withSeconds)
   );
 
   if (splitted.hours === null || splitted.minutes === null) {
     return null;
   }
 
-  if (format === '24h') {
-    return `${padTime(splitted.hours)}:${padTime(splitted.minutes)}${withSeconds ? `:${padTime(splitted.seconds || 0)}` : ''}`;
+  if (props.format === '24h') {
+    return `${padTime(splitted.hours)}:${padTime(splitted.minutes)}${props.withSeconds ? `:${padTime(splitted.seconds || 0)}` : ''}`;
   }
 
   const isPm = splitted.hours >= 12;
   const hours = splitted.hours % 12 === 0 ? 12 : splitted.hours % 12;
 
-  return `${hours}:${padTime(splitted.minutes)}${withSeconds ? `:${padTime(splitted.seconds || 0)}` : ''} ${
-    isPm ? amPmLabels.pm : amPmLabels.am
+  return `${hours}:${padTime(splitted.minutes)}${props.withSeconds ? `:${padTime(splitted.seconds || 0)}` : ''} ${
+    isPm ? props.amPmLabels.pm : props.amPmLabels.am
   }`;
 }

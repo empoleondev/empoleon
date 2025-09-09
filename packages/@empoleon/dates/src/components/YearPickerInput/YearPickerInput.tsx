@@ -35,13 +35,13 @@ export type YearPickerInputFactory = Factory<{
   variant: InputVariant;
 }>;
 
-const defaultProps: Partial<YearPickerInputProps> = {
+const defaultProps = {
   type: 'default',
   valueFormat: 'YYYY',
   closeOnChange: true,
   sortDates: true,
   dropdownType: 'popover',
-};
+} satisfies Partial<YearPickerInputProps>;
 
 type YearPickerInputComponent = (<Type extends DatePickerType = 'default'>(
   props: YearPickerInputProps<Type> & { ref?: HTMLButtonElement | ((el: HTMLButtonElement) => void) }
@@ -71,6 +71,7 @@ export const YearPickerInput: YearPickerInputComponent = factory<YearPickerInput
     'maxDate',
     'vars',
     'valueFormatter',
+    'attributes',
     'ref'
   ]);
 
@@ -121,6 +122,7 @@ export const YearPickerInput: YearPickerInputComponent = factory<YearPickerInput
       {...others}
       type={local.type as any}
       __staticSelector="YearPickerInput"
+      attributes={local.attributes}
     >
       <YearPicker
         {...calendarProps}
@@ -143,6 +145,7 @@ export const YearPickerInput: YearPickerInputComponent = factory<YearPickerInput
         __stopPropagation={local.dropdownType === 'popover'}
         minDate={local.minDate}
         maxDate={local.maxDate}
+        attributes={local.attributes}
       />
     </PickerInputBase>
   );

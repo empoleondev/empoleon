@@ -55,8 +55,6 @@ export type PickerControlFactory = Factory<{
   vars: PickerControlCssVariables;
 }>;
 
-const defaultProps: Partial<PickerControlProps> = {};
-
 const varsResolver = createVarsResolver<PickerControlFactory>((_, { size }) => ({
   pickerControl: {
     '--dpc-fz': getFontSize(size),
@@ -65,7 +63,7 @@ const varsResolver = createVarsResolver<PickerControlFactory>((_, { size }) => (
 }));
 
 export const PickerControl = factory<PickerControlFactory>(_props => {
-  const props = useProps('PickerControl', defaultProps, _props);
+  const props = useProps('PickerControl', null, _props);
   const [local, others] = splitProps(props, [
     'classNames',
     'className',
@@ -79,6 +77,7 @@ export const PickerControl = factory<PickerControlFactory>(_props => {
     '__staticSelector',
     'selected',
     'disabled',
+    'attributes',
     'ref'
   ]);
 
@@ -91,6 +90,7 @@ export const PickerControl = factory<PickerControlFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
     rootSelector: 'pickerControl',

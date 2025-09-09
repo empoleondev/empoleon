@@ -1,4 +1,3 @@
-import { createRef } from 'react';
 import { render, tests } from '@empoleon-tests/core';
 import { DropzoneFullScreen } from './DropzoneFullScreen';
 import { DropzoneAccept, DropzoneIdle, DropzoneReject } from './DropzoneStatus';
@@ -27,25 +26,25 @@ describe('@empoleon/dropzone/Dropzone', () => {
   });
 
   it('displays LoadingOverlay based on loading prop', () => {
-    const { rerender, container } = render(<Dropzone {...defaultProps} loading={false} />);
+    const { rerender, container } = render(() => <Dropzone {...defaultProps} loading={false} />);
     expect(container.querySelectorAll('.empoleon-LoadingOverlay-root')).toHaveLength(0);
 
-    rerender(<Dropzone {...defaultProps} loading />);
+    rerender(() => <Dropzone {...defaultProps} loading />);
     expect(container.querySelectorAll('.empoleon-LoadingOverlay-root')).toHaveLength(1);
   });
 
   it('has a name attribute on the internal input element', () => {
-    const { rerender, container } = render(<Dropzone {...defaultProps} />);
+    const { rerender, container } = render(() => <Dropzone {...defaultProps} />);
     expect(container.querySelector('input')).not.toHaveAttribute('name');
 
-    rerender(<Dropzone {...defaultProps} name="a-custom-name" />);
+    rerender(() => <Dropzone {...defaultProps} name="a-custom-name" />);
     expect(container.querySelector('input')).toHaveAttribute('name', 'a-custom-name');
   });
 
   it('assigns open function to given openRef', () => {
-    const ref = createRef<any>();
-    render(<Dropzone {...defaultProps} openRef={ref} />);
-    expect(ref.current).toBeInstanceOf(Function);
+    let ref;
+    render(() => <Dropzone {...defaultProps} openRef={(el) => ref = el} />);
+    expect(ref).toBeInstanceOf(Function);
   });
 
   it('exposes static components', () => {

@@ -17,6 +17,7 @@ import { useDatesContext } from '../DatesProvider';
 import { getWeekdayNames } from './get-weekdays-names/get-weekdays-names';
 import classes from './WeekdaysRow.module.css';
 import { For, splitProps } from 'solid-js';
+import { Dynamic } from 'solid-js/web';
 
 export type WeekdaysRowStylesNames = 'weekday' | 'weekdaysRow';
 export type WeekdaysRowCssVariables = {
@@ -79,6 +80,7 @@ export const WeekdaysRow = factory<WeekdaysRowFactory>(_props => {
     'cellComponent',
     '__staticSelector',
     'withWeekNumbers',
+    'attributes',
     'ref'
   ]);
 
@@ -93,6 +95,7 @@ export const WeekdaysRow = factory<WeekdaysRowFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
     rootSelector: 'weekdaysRow',
@@ -110,10 +113,10 @@ export const WeekdaysRow = factory<WeekdaysRowFactory>(_props => {
     <Box component="tr" ref={local.ref} {...getStyles('weekdaysRow')} {...others}>
       {local.withWeekNumbers && <CellComponent {...getStyles('weekday')}>#</CellComponent>}
       <For each={weekdayNames}>
-        {(weekday, index) => (
-          <CellComponent {...getStyles('weekday')}>
+        {weekday => (
+          <Dynamic component={CellComponent} {...getStyles('weekday')}>
             {weekday}
-          </CellComponent>
+          </Dynamic>
         )}
       </For>
     </Box>

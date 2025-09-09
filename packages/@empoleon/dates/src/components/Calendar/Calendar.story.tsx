@@ -1,8 +1,18 @@
-import { For } from 'solid-js';
+import { For, JSX } from 'solid-js';
 import { DatesProvider } from '../DatesProvider';
 import { Calendar } from './Calendar';
+import { EmpoleonProvider } from '@empoleon/core';
 
-export default { title: 'Calendar' };
+export default {
+  title: 'Calendar',
+  decorators: [
+    (Story: () => JSX.Element) => (
+      <EmpoleonProvider>
+        <Story />
+      </EmpoleonProvider>
+    ),
+  ],
+};
 
 export function Usage() {
   return (

@@ -1,26 +1,26 @@
-import { act, renderHook } from '@testing-library/react';
+import { renderHook } from '@solidjs/testing-library';
 import { useField } from '../../use-field';
 
 describe('@empoleon/form/use-field/error', () => {
   it('correctly sets initial error', () => {
     const hook = renderHook(() => useField({ initialValue: 'test', initialError: 'test-error' }));
-    expect(hook.result.current.error).toBe('test-error');
+    expect(hook.result.error()).toBe('test-error');
   });
 
   it('changes error with setError handler', () => {
     const hook = renderHook(() => useField({ initialValue: 'test', initialError: 'test-error' }));
-    expect(hook.result.current.error).toBe('test-error');
-    act(() => hook.result.current.setError('new error'));
-    expect(hook.result.current.error).toBe('new error');
+    expect(hook.result.error()).toBe('test-error');
+    hook.result.setError('new error');
+    expect(hook.result.error()).toBe('new error');
   });
 
   it('resets error to null with reset handler', () => {
     const hook = renderHook(() => useField({ initialValue: 'test', initialError: 'test-error' }));
-    expect(hook.result.current.error).toBe('test-error');
-    act(() => hook.result.current.setError('new error'));
-    expect(hook.result.current.error).toBe('new error');
-    act(() => hook.result.current.reset());
-    expect(hook.result.current.error).toBe(null);
+    expect(hook.result.error()).toBe('test-error');
+    hook.result.setError('new error');
+    expect(hook.result.error()).toBe('new error');
+    hook.result.reset();
+    expect(hook.result.error()).toBe(null);
   });
 
   it('handles resolveValidationError error function', async () => {
@@ -32,9 +32,9 @@ describe('@empoleon/form/use-field/error', () => {
       })
     );
 
-    expect(hook.result.current.error).toBe(null);
-    await act(() => hook.result.current.validate());
-    expect(hook.result.current.error).toBe('test-error');
+    expect(hook.result.error()).toBe(null);
+    await hook.result.validate();
+    expect(hook.result.error()).toBe('test-error');
   });
 
   it('clears error when value is set if clearErrorOnChange is set to true', async () => {
@@ -42,13 +42,13 @@ describe('@empoleon/form/use-field/error', () => {
       useField({ initialValue: 'test', validate: (value) => (value === 'test' ? 'error' : null) })
     );
 
-    expect(hook.result.current.error).toBe(null);
-    await act(() => hook.result.current.setValue('test'));
-    await act(() => hook.result.current.validate());
-    expect(hook.result.current.error).toBe('error');
+    expect(hook.result.error()).toBe(null);
+    hook.result.setValue('test');
+    await hook.result.validate();
+    expect(hook.result.error()).toBe('error');
 
-    await act(() => hook.result.current.setValue('new value'));
-    expect(hook.result.current.error).toBe(null);
+    hook.result.setValue('new value');
+    expect(hook.result.error()).toBe(null);
   });
 
   it('does not clear error when value is set if clearErrorOnChange is set to false', async () => {
@@ -60,12 +60,12 @@ describe('@empoleon/form/use-field/error', () => {
       })
     );
 
-    expect(hook.result.current.error).toBe(null);
-    await act(() => hook.result.current.setValue('test'));
-    await act(() => hook.result.current.validate());
-    expect(hook.result.current.error).toBe('error');
+    expect(hook.result.error()).toBe(null);
+    hook.result.setValue('test');
+    await hook.result.validate();
+    expect(hook.result.error()).toBe('error');
 
-    await act(() => hook.result.current.setValue('new value'));
-    expect(hook.result.current.error).toBe('error');
+    hook.result.setValue('new value');
+    expect(hook.result.error()).toBe('error');
   });
 });

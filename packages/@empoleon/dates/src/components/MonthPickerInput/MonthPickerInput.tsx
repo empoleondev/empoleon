@@ -74,6 +74,7 @@ export const MonthPickerInput: MonthPickerInputComponent = factory<MonthPickerIn
     'maxDate',
     'vars',
     'valueFormatter',
+    'attributes',
     'ref'
   ]);
 
@@ -122,6 +123,7 @@ export const MonthPickerInput: MonthPickerInputComponent = factory<MonthPickerIn
       variant={local.variant}
       dropdownType={local.dropdownType}
       {...others}
+      attributes={local.attributes}
       type={local.type as any}
       __staticSelector="MonthPickerInput"
     >
@@ -146,6 +148,7 @@ export const MonthPickerInput: MonthPickerInputComponent = factory<MonthPickerIn
         __stopPropagation={local.dropdownType === 'popover'}
         minDate={local.minDate}
         maxDate={local.maxDate}
+        attributes={local.attributes}
       />
     </PickerInputBase>
   );

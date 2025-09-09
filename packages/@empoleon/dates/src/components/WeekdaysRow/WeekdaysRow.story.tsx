@@ -1,9 +1,19 @@
 import 'dayjs/locale/ru';
 
 import { WeekdaysRow, WeekdaysRowProps } from './WeekdaysRow';
-import { For } from 'solid-js';
+import { For, JSX } from 'solid-js';
+import { EmpoleonProvider } from '@empoleon/core';
 
-export default { title: 'WeekdaysRow' };
+export default {
+  title: 'WeekdaysRow',
+  decorators: [
+    (Story: () => JSX.Element) => (
+      <EmpoleonProvider>
+        <Story />
+      </EmpoleonProvider>
+    ),
+  ],
+};
 
 function Wrapper(props: WeekdaysRowProps) {
   return (

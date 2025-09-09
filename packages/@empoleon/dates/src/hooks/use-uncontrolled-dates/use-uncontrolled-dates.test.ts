@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { renderHook } from '@testing-library/react';
+import { renderHook } from '@solidjs/testing-library';
 import { useUncontrolledDates } from './use-uncontrolled-dates';
 
 type HookConfig = Parameters<typeof useUncontrolledDates>[0];

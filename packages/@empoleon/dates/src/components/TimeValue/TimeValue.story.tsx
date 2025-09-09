@@ -1,6 +1,17 @@
+import { JSX } from 'solid-js';
 import { TimeValue } from './TimeValue';
+import { EmpoleonProvider } from '@empoleon/core';
 
-export default { title: 'TimeValue' };
+export default {
+  title: 'TimeValue',
+  decorators: [
+    (Story: () => JSX.Element) => (
+      <EmpoleonProvider>
+        <Story />
+      </EmpoleonProvider>
+    ),
+  ],
+};
 
 export function Usage() {
   return (

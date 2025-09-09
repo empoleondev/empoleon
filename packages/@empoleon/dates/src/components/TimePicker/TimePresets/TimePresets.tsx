@@ -20,21 +20,14 @@ interface TimePresetsProps {
   onChange: (value: string) => void;
 }
 
-export function TimePresets({
-  presets,
-  format,
-  amPmLabels,
-  withSeconds,
-  value,
-  onChange,
-}: TimePresetsProps) {
+export function TimePresets(props: TimePresetsProps) {
   const ctx = useTimePickerContext();
 
-  if (presets.length === 0) {
+  if (props.presets.length === 0) {
     return null;
   }
 
-  if (typeof presets[0] === 'string') {
+  if (typeof props.presets[0] === 'string') {
     return (
       <ScrollArea.Autosize
         mah={ctx.maxDropdownContentHeight}
@@ -43,16 +36,16 @@ export function TimePresets({
         {...ctx.scrollAreaProps}
       >
         <div {...ctx.getStyles('presetsRoot')}>
-          <SimpleGrid cols={withSeconds ? 2 : 3} spacing={4}>
-            <For each={presets as string[]}>
-              {(item) => (
+          <SimpleGrid cols={props.withSeconds ? 2 : 3} spacing={4}>
+            <For each={props.presets as string[]}>
+              {item => (
                 <TimePresetControl
                   value={item}
-                  format={format}
-                  amPmLabels={amPmLabels}
-                  withSeconds={withSeconds}
-                  active={isSameTime({ time: item, compare: value, withSeconds })}
-                  onChange={onChange}
+                  format={props.format}
+                  amPmLabels={props.amPmLabels}
+                  withSeconds={props.withSeconds}
+                  active={isSameTime({ time: item, compare: props.value, withSeconds: props.withSeconds })}
+                  onChange={props.onChange}
                 />
               )}
               </For>
@@ -70,15 +63,15 @@ export function TimePresets({
       {...ctx.scrollAreaProps}
     >
       <div {...ctx.getStyles('presetsRoot')}>
-        <For each={presets as TimePickerPresetGroup[]}>
-          {(group, index) => (
+        <For each={props.presets as TimePickerPresetGroup[]}>
+          {group => (
             <TimePresetGroup
               data={group}
-              value={value}
-              format={format}
-              amPmLabels={amPmLabels}
-              withSeconds={withSeconds}
-              onChange={onChange}
+              value={props.value}
+              format={props.format}
+              amPmLabels={props.amPmLabels}
+              withSeconds={props.withSeconds}
+              onChange={props.onChange}
             />
           )}
         </For>

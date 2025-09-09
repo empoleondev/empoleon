@@ -1,9 +1,10 @@
 import dayjs from 'dayjs';
 import { DatesProvider } from '@empoleon/dates';
 import { render } from '@empoleon-tests/core';
+import { Component } from 'solid-js';
 
 interface Options {
-  component: React.ComponentType<any>;
+  component: Component<any>
   props: Record<string, any>;
 }
 
@@ -61,34 +62,34 @@ function expectMonthNames(container: HTMLElement, monthNames: string[]) {
 export function itSupportsMonthsListProps(options: Options, name = 'supports months list props') {
   describe(name, () => {
     it('renders correct months list', () => {
-      const { container } = render(<options.component {...options.props} />);
-      expectMonthNames(container, defaultMonthNames);
+      const { container } = render(() => <options.component {...options.props} />);
+      expectMonthNames(container as any, defaultMonthNames);
     });
 
     it('supports months list localization', () => {
-      const { container } = render(<options.component {...options.props} locale="ru" />);
-      expectMonthNames(container, ruMonthsNames);
+      const { container } = render(() => <options.component {...options.props} locale="ru" />);
+      expectMonthNames(container as any, ruMonthsNames);
     });
 
     it('supports months list localization with DatesProvider', () => {
       const { container } = render(
-        <DatesProvider settings={{ locale: 'ru' }}>
+        () => <DatesProvider settings={{ locale: 'ru' }}>
           <options.component {...options.props} />
         </DatesProvider>
       );
-      expectMonthNames(container, ruMonthsNames);
+      expectMonthNames(container as any, ruMonthsNames);
     });
 
     it('supports custom monthsListFormat format', () => {
       const { container } = render(
-        <options.component {...options.props} monthsListFormat="MMM YY" />
+        () => <options.component {...options.props} monthsListFormat="MMM YY" />
       );
-      expectMonthNames(container, customFormatMonthsNames);
+      expectMonthNames(container as any, customFormatMonthsNames);
     });
 
     it('disables months if they are before minDate', () => {
       const { container } = render(
-        <options.component {...options.props} year="2022-04-11" minDate="2022-05-11" />
+        () => <options.component {...options.props} year="2022-04-11" minDate="2022-05-11" />
       );
       const months = container.querySelectorAll('table button');
       expect(months[0]).toBeDisabled();
@@ -100,7 +101,7 @@ export function itSupportsMonthsListProps(options: Options, name = 'supports mon
 
     it('disables months if they are after minDate', () => {
       const { container } = render(
-        <options.component {...options.props} year="2022-04-11" maxDate="2022-05-11" />
+        () => <options.component {...options.props} year="2022-04-11" maxDate="2022-05-11" />
       );
       const months = container.querySelectorAll('table button');
       expect(months[0]).not.toBeDisabled();
@@ -111,7 +112,7 @@ export function itSupportsMonthsListProps(options: Options, name = 'supports mon
 
     it('supports getMonthControlProps', () => {
       const { container } = render(
-        <options.component
+        () => <options.component
           {...options.props}
           getMonthControlProps={(date: string) => ({
             selected: dayjs(date).isSame('2022-04-11', 'month'),

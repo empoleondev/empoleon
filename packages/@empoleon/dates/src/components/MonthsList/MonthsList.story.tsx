@@ -1,8 +1,18 @@
 import dayjs from 'dayjs';
 import { MonthsList } from './MonthsList';
-import { createSignal, For } from 'solid-js';
+import { createSignal, For, JSX } from 'solid-js';
+import { EmpoleonProvider } from '@empoleon/core';
 
-export default { title: 'MonthsList' };
+export default {
+  title: 'MonthsList',
+  decorators: [
+    (Story: () => JSX.Element) => (
+      <EmpoleonProvider>
+        <Story />
+      </EmpoleonProvider>
+    ),
+  ],
+};
 
 export function Usage() {
   return (

@@ -2,9 +2,19 @@ import 'dayjs/locale/ru';
 
 import dayjs from 'dayjs';
 import { MonthLevel, MonthLevelProps } from './MonthLevel';
-import { createSignal, For } from 'solid-js';
+import { createSignal, For, JSX } from 'solid-js';
+import { EmpoleonProvider } from '@empoleon/core';
 
-export default { title: 'MonthLevel' };
+export default {
+  title: 'MonthLevel',
+  decorators: [
+    (Story: () => JSX.Element) => (
+      <EmpoleonProvider>
+        <Story />
+      </EmpoleonProvider>
+    ),
+  ],
+};
 
 function Wrapper(props: Partial<MonthLevelProps>) {
   const [month, setMonth] = createSignal('2022-04-11');

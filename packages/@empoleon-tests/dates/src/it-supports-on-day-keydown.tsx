@@ -12,7 +12,7 @@ export function itSupportsOnDayKeydown(options: Options, name = 'supports __onDa
   it(name, async () => {
     const spy = vi.fn();
     const { container } = render(
-      <options.component
+      () => <options.component
         {...options.props}
         month="2022-04-11"
         __onDayKeyDown={(_event: any, payload: any) => {

@@ -1,9 +1,18 @@
 import dayjs from 'dayjs';
-import { Code, Indicator } from '@empoleon/core';
+import { Code, EmpoleonProvider, Indicator } from '@empoleon/core';
 import { Month, MonthProps } from './Month';
-import { createSignal, For } from 'solid-js';
+import { createSignal, For, JSX } from 'solid-js';
 
-export default { title: 'Month' };
+export default {
+  title: 'Month',
+  decorators: [
+    (Story: () => JSX.Element) => (
+      <EmpoleonProvider>
+        <Story />
+      </EmpoleonProvider>
+    ),
+  ],
+};
 
 function Wrapper(props: Partial<MonthProps>) {
   return (

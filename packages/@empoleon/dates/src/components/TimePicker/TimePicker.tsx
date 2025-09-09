@@ -191,7 +191,7 @@ export type TimePickerFactory = Factory<{
   variant: InputVariant;
 }>;
 
-const defaultProps: Partial<TimePickerProps> = {
+const defaultProps = {
   hoursStep: 1,
   minutesStep: 1,
   secondsStep: 1,
@@ -200,7 +200,7 @@ const defaultProps: Partial<TimePickerProps> = {
   withDropdown: false,
   pasteSplit: getParsedTime,
   maxDropdownContentHeight: 200,
-};
+} satisfies Partial<TimePickerProps>;
 
 const varsResolver = createVarsResolver<TimePickerFactory>((_theme, { size }) => ({
   dropdown: {
@@ -262,6 +262,7 @@ export const TimePicker = factory<TimePickerFactory>(_props => {
     'presets',
     'maxDropdownContentHeight',
     'scrollAreaProps',
+    'attributes',
     'ref'
   ]);
 
@@ -280,6 +281,7 @@ export const TimePicker = factory<TimePickerFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
   });

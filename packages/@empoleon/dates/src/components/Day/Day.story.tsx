@@ -1,7 +1,17 @@
-import { For } from 'solid-js';
+import { For, JSX } from 'solid-js';
 import { Day } from './Day';
+import { EmpoleonProvider } from '@empoleon/core';
 
-export default { title: 'Day' };
+export default {
+  title: 'Day',
+  decorators: [
+    (Story: () => JSX.Element) => (
+      <EmpoleonProvider>
+        <Story />
+      </EmpoleonProvider>
+    ),
+  ],
+};
 
 function dateToSting(date: Date) {
   return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;

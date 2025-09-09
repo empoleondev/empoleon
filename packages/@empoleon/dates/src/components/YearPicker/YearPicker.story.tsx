@@ -1,8 +1,18 @@
-import { createSignal, For } from 'solid-js';
+import { createSignal, For, JSX } from 'solid-js';
 import { DatesRangeValue, DateStringValue } from '../../types';
 import { YearPicker } from './YearPicker';
+import { EmpoleonProvider } from '@empoleon/core';
 
-export default { title: 'YearPicker' };
+export default {
+  title: 'YearPicker',
+  decorators: [
+    (Story: () => JSX.Element) => (
+      <EmpoleonProvider>
+        <Story />
+      </EmpoleonProvider>
+    ),
+  ],
+};
 
 export function Usage() {
   return (

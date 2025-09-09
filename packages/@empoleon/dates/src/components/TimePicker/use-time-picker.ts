@@ -75,19 +75,21 @@ export function useTimePicker(props: UseTimePickerInput) {
 
     if (timeString.valid) {
       acceptChange = false;
+
+      if (field === 'hours') {
+        setHours(val);
+      }
+      if (field === 'minutes') {
+        setMinutes(val);
+      }
+      if (field === 'seconds') {
+        setSeconds(val);
+      }
+      if (field === 'amPm') {
+        setAmPm(val);
+      }
+
       const clamped = clampTime(timeString.value, props.min || '00:00:00', props.max || '23:59:59');
-      const converted =
-        props.format === '12h'
-          ? convertTimeTo12HourFormat({
-              hours: clamped.hours,
-              minutes: clamped.minutes,
-              seconds: clamped.seconds,
-              amPmLabels: props.amPmLabels,
-            })
-          : clamped;
-      setHours(converted.hours);
-      setMinutes(converted.minutes);
-      setSeconds(converted.seconds);
       props.onChange?.(clamped.timeString);
     } else {
       acceptChange = false;
@@ -171,8 +173,19 @@ export function useTimePicker(props: UseTimePickerInput) {
   });
 
   createEffect(() => {
+    if (props.value === '') {
+      acceptChange = false;
+
+      setHours(null);
+      setMinutes(null);
+      setSeconds(null);
+      setAmPm(null);
+      return;
+    }
+
     if (acceptChange && typeof props.value === 'string') {
       const parsedTime = getParsedTime({ time: props.value || '', amPmLabels: props.amPmLabels, format: props.format });
+
       setHours(parsedTime.hours);
       setMinutes(parsedTime.minutes);
       setSeconds(parsedTime.seconds);

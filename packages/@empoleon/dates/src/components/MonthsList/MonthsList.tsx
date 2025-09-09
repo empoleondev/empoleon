@@ -63,10 +63,10 @@ export type MonthsListFactory = Factory<{
   stylesNames: MonthsListStylesNames;
 }>;
 
-const defaultProps: Partial<MonthsListProps> = {
+const defaultProps = {
   monthsListFormat: 'MMM',
   withCellSpacing: true,
-};
+} satisfies Partial<MonthsListProps>;
 
 export const MonthsList = factory<MonthsListFactory>(_props => {
   const props = useProps('MonthsList', defaultProps, _props);
@@ -92,6 +92,7 @@ export const MonthsList = factory<MonthsListFactory>(_props => {
     '__stopPropagation',
     'withCellSpacing',
     'size',
+    'attributes',
     'ref'
   ]);
 
@@ -104,6 +105,7 @@ export const MonthsList = factory<MonthsListFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     rootSelector: 'monthsList',
   });

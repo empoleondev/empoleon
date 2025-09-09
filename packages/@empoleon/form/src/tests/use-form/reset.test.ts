@@ -1,4 +1,4 @@
-import { act, renderHook } from '@testing-library/react';
+import { renderHook } from '@solidjs/testing-library';
 import { FormMode } from '../../types';
 import { useForm } from '../../use-form';
 
@@ -7,17 +7,17 @@ function tests(mode: FormMode) {
     const hook = renderHook(() =>
       useForm({ mode, initialErrors: { a: 1, b: 2 }, initialValues: { c: 3, d: 4 } })
     );
-    expect(hook.result.current.errors).toStrictEqual({ a: 1, b: 2 });
-    expect(hook.result.current.getValues()).toStrictEqual({ c: 3, d: 4 });
+    expect(hook.result.errors).toStrictEqual({ a: 1, b: 2 });
+    expect(hook.result.getValues()).toStrictEqual({ c: 3, d: 4 });
 
-    act(() => hook.result.current.setValues({ c: 5, d: 6 }));
-    act(() => hook.result.current.setErrors({ a: 7, b: 8 }));
-    expect(hook.result.current.getValues()).toStrictEqual({ c: 5, d: 6 });
-    expect(hook.result.current.errors).toStrictEqual({ a: 7, b: 8 });
+    hook.result.setValues({ c: 5, d: 6 });
+    hook.result.setErrors({ a: 7, b: 8 });
+    expect(hook.result.getValues()).toStrictEqual({ c: 5, d: 6 });
+    expect(hook.result.errors).toStrictEqual({ a: 7, b: 8 });
 
-    act(() => hook.result.current.reset());
-    expect(hook.result.current.errors).toStrictEqual({});
-    expect(hook.result.current.getValues()).toStrictEqual({ c: 3, d: 4 });
+    hook.result.reset();
+    expect(hook.result.errors).toStrictEqual({});
+    expect(hook.result.getValues()).toStrictEqual({ c: 3, d: 4 });
   });
 
   it('resets touched and dirty state', () => {
@@ -30,12 +30,12 @@ function tests(mode: FormMode) {
       })
     );
 
-    expect(hook.result.current.isDirty()).toBe(true);
-    expect(hook.result.current.isTouched()).toBe(true);
+    expect(hook.result.isDirty()).toBe(true);
+    expect(hook.result.isTouched()).toBe(true);
 
-    act(() => hook.result.current.reset());
-    expect(hook.result.current.isDirty()).toBe(false);
-    expect(hook.result.current.isTouched()).toBe(false);
+    hook.result.reset();
+    expect(hook.result.isDirty()).toBe(false);
+    expect(hook.result.isTouched()).toBe(false);
   });
 
   it('resets values without keeping added values', () => {
@@ -43,24 +43,24 @@ function tests(mode: FormMode) {
       useForm<{ a: number; b?: number; c?: number }>({ mode, initialValues: { a: 1, b: 2 } })
     );
 
-    act(() => hook.result.current.setFieldValue('c', 3));
-    expect(hook.result.current.isDirty()).toBe(true);
-    expect(hook.result.current.getValues()).toStrictEqual({ a: 1, b: 2, c: 3 });
+    hook.result.setFieldValue('c', 3);
+    expect(hook.result.isDirty()).toBe(true);
+    expect(hook.result.getValues()).toStrictEqual({ a: 1, b: 2, c: 3 });
 
-    act(() => hook.result.current.reset());
-    expect(hook.result.current.isDirty()).toBe(false);
-    expect(hook.result.current.getValues()).toStrictEqual({ a: 1, b: 2 });
+    hook.result.reset();
+    expect(hook.result.isDirty()).toBe(false);
+    expect(hook.result.getValues()).toStrictEqual({ a: 1, b: 2 });
   });
 
   it('resets values correctly after updating initial values', () => {
     const hook = renderHook(() => useForm({ mode, initialValues: { a: 1, b: 2 } }));
     const newInitialState = { a: 3, b: 4 };
 
-    act(() => hook.result.current.setValues({ a: 100, b: 200 }));
-    act(() => hook.result.current.setInitialValues(newInitialState));
-    act(() => hook.result.current.reset());
+    hook.result.setValues({ a: 100, b: 200 });
+    hook.result.setInitialValues(newInitialState);
+    hook.result.reset();
 
-    expect(hook.result.current.getValues()).toStrictEqual(newInitialState);
+    expect(hook.result.getValues()).toStrictEqual(newInitialState);
   });
 }
 

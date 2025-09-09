@@ -10,23 +10,16 @@ interface Time12HourFormat {
   amPmLabels: TimePickerAmPmLabels;
 }
 
-function convertTo24HourFormat({
-  hours,
-  minutes,
-  seconds,
-  amPm,
-  amPmLabels,
-  withSeconds,
-}: Time12HourFormat): string {
-  let _hours = hours;
+function convertTo24HourFormat(props: Time12HourFormat): string {
+  let _hours = props.hours;
 
-  if (amPm === amPmLabels.pm && hours !== 12) {
+  if (props.amPm === props.amPmLabels.pm && props.hours !== 12) {
     _hours += 12;
-  } else if (amPm === amPmLabels.am && hours === 12) {
+  } else if (props.amPm === props.amPmLabels.am && props.hours === 12) {
     _hours = 0;
   }
 
-  return `${padTime(_hours)}:${padTime(minutes)}${withSeconds ? `:${padTime(seconds || 0)}` : ''}`;
+  return `${padTime(_hours)}:${padTime(props.minutes)}${props.withSeconds ? `:${padTime(props.seconds || 0)}` : ''}`;
 }
 
 interface GetTimeStringInput {
@@ -39,34 +32,26 @@ interface GetTimeStringInput {
   amPmLabels: TimePickerAmPmLabels;
 }
 
-export function getTimeString({
-  hours,
-  minutes,
-  seconds,
-  format,
-  withSeconds,
-  amPm,
-  amPmLabels,
-}: GetTimeStringInput) {
-  if (hours === null || minutes === null) {
+export function getTimeString(props: GetTimeStringInput) {
+  if (props.hours === null || props.minutes === null) {
     return { valid: false, value: '' };
   }
 
-  if (withSeconds && seconds === null) {
+  if (props.withSeconds && props.seconds === null) {
     return { valid: false, value: '' };
   }
 
-  if (format === '24h') {
-    const value = `${padTime(hours)}:${padTime(minutes)}${withSeconds ? `:${padTime(seconds!)}` : ''}`;
+  if (props.format === '24h') {
+    const value = `${padTime(props.hours)}:${padTime(props.minutes)}${props.withSeconds ? `:${padTime(props.seconds!)}` : ''}`;
     return { valid: true, value };
   }
 
-  if (amPm === null) {
+  if (props.amPm === null) {
     return { valid: false, value: '' };
   }
 
   return {
     valid: true,
-    value: convertTo24HourFormat({ hours, minutes, seconds, amPm, amPmLabels, withSeconds }),
+    value: convertTo24HourFormat({ hours: props.hours, minutes: props.minutes, seconds: props.seconds, amPm: props.amPm, amPmLabels: props.amPmLabels, withSeconds: props.withSeconds }),
   };
 }

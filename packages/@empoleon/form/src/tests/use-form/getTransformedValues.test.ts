@@ -1,4 +1,4 @@
-import { renderHook } from '@testing-library/react';
+import { renderHook } from '@solidjs/testing-library';
 import { FormMode } from '../../types';
 import { useForm } from '../../use-form';
 
@@ -15,7 +15,7 @@ function tests(mode: FormMode) {
       })
     );
 
-    expect(hook.result.current.getTransformedValues({ a: 2, b: '3' })).toStrictEqual({
+    expect(hook.result.getTransformedValues({ a: 2, b: '3' })).toStrictEqual({
       a: '2',
       b: 3,
     });
@@ -33,7 +33,7 @@ function tests(mode: FormMode) {
       })
     );
 
-    expect(hook.result.current.getTransformedValues()).toStrictEqual({
+    expect(hook.result.getTransformedValues()).toStrictEqual({
       a: '1',
       b: 2,
     });
@@ -41,11 +41,11 @@ function tests(mode: FormMode) {
 
   it('returns provided values or form values if transformValues function is not set', () => {
     const hook = renderHook(() => useForm({ mode, initialValues: { a: 1, b: '2' } }));
-    expect(hook.result.current.getTransformedValues({ a: 2, b: '3' })).toStrictEqual({
+    expect(hook.result.getTransformedValues({ a: 2, b: '3' })).toStrictEqual({
       a: 2,
       b: '3',
     });
-    expect(hook.result.current.getTransformedValues()).toStrictEqual({
+    expect(hook.result.getTransformedValues()).toStrictEqual({
       a: 1,
       b: '2',
     });

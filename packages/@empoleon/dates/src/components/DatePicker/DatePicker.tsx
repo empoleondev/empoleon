@@ -1,22 +1,45 @@
-import { JSX, splitProps } from 'solid-js';
+import { createSignal, JSX, splitProps } from 'solid-js';
+import dayjs from 'dayjs';
 import {
+  Box,
   BoxProps,
+  createVarsResolver,
   ElementProps,
   factory,
   Factory,
+  getFontSize,
   EmpoleonComponentStaticProperties,
   StylesApiProps,
   useProps,
   useResolvedStylesApi,
+  useStyles,
+  UnstyledButton,
 } from '@empoleon/core';
 import { useDatesState } from '../../hooks';
-import { CalendarLevel, DatePickerType, PickerBaseProps } from '../../types';
-import { Calendar, CalendarBaseProps, CalendarSettings, CalendarStylesNames } from '../Calendar';
+import { CalendarLevel, DatePickerType, DateStringValue, DateValue, PickerBaseProps } from '../../types';
+import { Calendar, CalendarBaseProps, CalendarSettings, CalendarStylesNames, pickCalendarProps, } from '../Calendar';
 import { DecadeLevelBaseSettings } from '../DecadeLevel';
+import { isSameMonth } from '../Month';
 import { MonthLevelBaseSettings } from '../MonthLevel';
 import { YearLevelBaseSettings } from '../YearLevel';
+import classes from './DatePicker.module.css';
 
-export type DatePickerStylesNames = CalendarStylesNames;
+export interface DatePickerPreset<Type extends DatePickerType> {
+  value: Type extends 'range'
+    ? [DateStringValue | null, DateStringValue | null]
+    : DateStringValue | null;
+  label: JSX.Element;
+}
+
+export type DatePickerCssVariables = {
+  datePickerRoot: '--preset-font-size';
+};
+
+export type DatePickerStylesNames =
+  | CalendarStylesNames
+  | 'presetsList'
+  | 'presetButton'
+  | 'datePickerRoot';
 
 export interface DatePickerBaseProps<Type extends DatePickerType = 'default'>
   extends PickerBaseProps<Type>,
@@ -36,6 +59,16 @@ export interface DatePickerBaseProps<Type extends DatePickerType = 'default'>
 
   /** Called when level changes */
   onLevelChange?: (level: CalendarLevel) => void;
+
+  /** Predefined values to pick from */
+  presets?: DatePickerPreset<Type>[];
+
+  /** If defined, called with preset value, suppresses `onChange` call */
+  __onPresetSelect?: (
+    preset: Type extends 'range'
+      ? [DateStringValue | null, DateStringValue | null]
+      : DateStringValue | null
+  ) => void;
 }
 
 export interface DatePickerProps<Type extends DatePickerType = 'default'>
@@ -50,11 +83,17 @@ export type DatePickerFactory = Factory<{
   stylesNames: DatePickerStylesNames;
 }>;
 
-const defaultProps: Partial<DatePickerProps> = {
+const varsResolver = createVarsResolver<DatePickerFactory>((_, { size }) => ({
+  datePickerRoot: {
+    '--preset-font-size': getFontSize(size),
+  },
+}));
+
+const defaultProps = {
   type: 'default',
   defaultLevel: 'month',
   numberOfColumns: 1,
-};
+} satisfies Partial<DatePickerProps>;
 
 type DatePickerComponent = (<Type extends DatePickerType = 'default'>(
   props: DatePickerProps<Type> & { ref?: HTMLDivElement | ((el: HTMLDivElement) => void) }
@@ -64,28 +103,51 @@ type DatePickerComponent = (<Type extends DatePickerType = 'default'>(
 
 export const DatePicker: DatePickerComponent = factory<DatePickerFactory>(_props => {
   const props = useProps('DatePicker', defaultProps, _props);
-  const [local, others] = splitProps(props, [
+  const [local, rest] = splitProps(props, [
+    'allowDeselect',
+    'allowSingleDateInRange',
+    'value',
+    'defaultValue',
+    'onChange',
+    'onMouseLeave',
     'classNames',
     'styles',
-    'vars',
-    'type',
-    'defaultValue',
-    'value',
-    'onChange',
     '__staticSelector',
-    'getDayProps',
-    'allowSingleDateInRange',
-    'allowDeselect',
-    'onMouseLeave',
-    'numberOfColumns',
-    'hideOutsideDates',
-    '__onDayMouseEnter',
     '__onDayClick',
+    '__onDayMouseEnter',
+    '__onPresetSelect',
+    '__stopPropagation',
+    'presets',
+    'className',
+    'style',
+    'unstyled',
+    'size',
+    'vars',
+    'attributes',
     'ref'
   ]);
 
-  const { onDateChange, onRootMouseLeave, onHoveredDateChange, getControlProps } = useDatesState({
-    type: local.type as any,
+  const { calendarProps, others } = pickCalendarProps(rest);
+  const [setDateRef, setSetDateRef] = createSignal<((date: DateValue) => void) | null>(null);
+  const [setLevelRef, setSetLevelRef] = createSignal<((level: CalendarLevel) => void) | null>(null);
+
+  const getStyles = useStyles<DatePickerFactory>({
+    name: local.__staticSelector || 'DatePicker',
+    classes,
+    props,
+    className: local.className,
+    style: local.style,
+    classNames: local.classNames,
+    styles: local.styles,
+    unstyled: local.unstyled,
+    attributes: local.attributes,
+    rootSelector: local.presets ? 'datePickerRoot' : undefined,
+    varsResolver,
+    vars: local.vars,
+  });
+
+  const datesState = useDatesState({
+    type: others.type as any,
     level: 'day',
     allowDeselect: local.allowDeselect,
     allowSingleDateInRange: local.allowSingleDateInRange,
@@ -101,30 +163,78 @@ export const DatePicker: DatePickerComponent = factory<DatePickerFactory>(_props
     props,
   });
 
-  return (
+  const calendar = (
     <Calendar
       ref={local.ref}
-      minLevel="month"
       classNames={resolvedClassNames}
       styles={resolvedStyles}
       __staticSelector={local.__staticSelector || 'DatePicker'}
-      onMouseLeave={onRootMouseLeave}
-      numberOfColumns={local.numberOfColumns}
-      hideOutsideDates={local.hideOutsideDates ?? local.numberOfColumns !== 1}
+      onMouseLeave={datesState.onRootMouseLeave}
+      size={local.size}
+      {...calendarProps}
+      {...(!local.presets ? others : {})}
+      __stopPropagation={local.__stopPropagation}
+      __setDateRef={setSetDateRef}
+      __setLevelRef={setSetLevelRef}
+      minLevel={calendarProps.minLevel || 'month'}
       __onDayMouseEnter={(_event, date) => {
-        onHoveredDateChange(date);
+        datesState.onHoveredDateChange(date);
         local.__onDayMouseEnter?.(_event, date);
       }}
       __onDayClick={(_event, date) => {
-        onDateChange(date);
+        datesState.onDateChange(date);
         local.__onDayClick?.(_event, date);
       }}
       getDayProps={(date) => ({
-        ...getControlProps(date),
-        ...local.getDayProps?.(date),
+        ...datesState.getControlProps(date),
+        ...calendarProps.getDayProps?.(date),
       })}
-      {...others}
+      getMonthControlProps={(date) => ({
+        selected: typeof datesState._value() === 'string' ? isSameMonth(date, datesState._value()) : false,
+        ...calendarProps.getMonthControlProps?.(date),
+      })}
+      getYearControlProps={(date) => ({
+        selected: typeof datesState._value() === 'string' ? dayjs(date).isSame(datesState._value(), 'year') : false,
+        ...calendarProps.getYearControlProps?.(date),
+      })}
+      hideOutsideDates={calendarProps.hideOutsideDates ?? calendarProps.numberOfColumns !== 1}
+      {...(!local.presets ? { className: local.className, style: local.style, attributes: local.attributes } : {})}
+
     />
+  );
+
+  if (!local.presets) {
+    return calendar;
+  }
+
+  const handlePresetSelect = (
+    val: DateStringValue | null | [DateStringValue | null, DateStringValue | null]
+  ) => {
+    const _val = Array.isArray(val) ? val[0] : val;
+
+    if (_val !== undefined) {
+      setDateRef()?.(_val);
+      setLevelRef()?.('month');
+      local.__onPresetSelect ? local.__onPresetSelect(_val) : datesState.setValue(val);
+    }
+  };
+
+  const presetButtons = local.presets.map((preset, index) => (
+    <UnstyledButton
+      {...getStyles('presetButton')}
+      onClick={() => handlePresetSelect(preset.value)}
+      onMouseDown={(event) => event.preventDefault()}
+      data-mantine-stop-propagation={local.__stopPropagation || undefined}
+    >
+      {preset.label}
+    </UnstyledButton>
+  ));
+
+  return (
+    <Box {...getStyles('datePickerRoot')} size={local.size} {...others}>
+      <div {...getStyles('presetsList')}>{presetButtons}</div>
+      {calendar}
+    </Box>
   );
 }) as any;
 

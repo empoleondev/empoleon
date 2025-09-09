@@ -15,7 +15,7 @@ export function itSupportsOnControlMouseEnter(
   it(name, async () => {
     const spy = vi.fn();
     const { container } = render(
-      <options.component
+      () => <options.component
         {...options.props}
         __onControlMouseEnter={(_event: any, date: any) => {
           spy(date);

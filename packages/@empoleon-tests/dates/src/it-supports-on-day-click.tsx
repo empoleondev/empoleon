@@ -12,7 +12,7 @@ export function itSupportsOnDayClick(options: Options, name = 'supports __onDayC
   it(name, async () => {
     const spy = vi.fn();
     const { container } = render(
-      <options.component
+      () => <options.component
         {...options.props}
         __onDayClick={(_event: any, date: any) => {
           spy(date);

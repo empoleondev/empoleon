@@ -1,7 +1,17 @@
-import { For } from 'solid-js';
+import { For, JSX } from 'solid-js';
 import { DecadeLevelGroup } from './DecadeLevelGroup';
+import { EmpoleonProvider } from '@empoleon/core';
 
-export default { title: 'DecadeLevelGroup' };
+export default {
+  title: 'DecadeLevelGroup',
+  decorators: [
+    (Story: () => JSX.Element) => (
+      <EmpoleonProvider>
+        <Story />
+      </EmpoleonProvider>
+    ),
+  ],
+};
 
 export function Usage() {
   return (

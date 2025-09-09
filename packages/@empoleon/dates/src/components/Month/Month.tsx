@@ -26,7 +26,7 @@ import { isAfterMinDate } from './is-after-min-date/is-after-min-date';
 import { isBeforeMaxDate } from './is-before-max-date/is-before-max-date';
 import { isSameMonth } from './is-same-month/is-same-month';
 import classes from './Month.module.css';
-import { splitProps } from 'solid-js';
+import { For, splitProps } from 'solid-js';
 
 export type MonthStylesNames =
   | 'month'
@@ -133,9 +133,9 @@ export type MonthFactory = Factory<{
   stylesNames: MonthStylesNames;
 }>;
 
-const defaultProps: Partial<MonthProps> = {
+const defaultProps = {
   withCellSpacing: true,
-};
+} satisfies Partial<MonthProps>;
 
 const varsResolver = createVarsResolver<MonthFactory>((_, { size }) => ({
   weekNumber: {
@@ -178,6 +178,7 @@ export const Month = factory<MonthFactory>(_props => {
     'size',
     'highlightToday',
     'withWeekNumbers',
+    'attributes',
     'ref'
   ]);
 
@@ -190,6 +191,7 @@ export const Month = factory<MonthFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
     rootSelector: 'month',
@@ -312,7 +314,83 @@ export const Month = factory<MonthFactory>(_props => {
           />
         </thead>
       )}
-      <tbody {...getStyles('monthTbody')}>{rows}</tbody>
+      <tbody {...getStyles('monthTbody')}>
+        <For each={dates}>
+          {(row, rowIndex) => (
+            <tr>
+              <For each={row}>
+                {(date, cellIndex) => {
+                  const outside = !isSameMonth(date, local.month);
+                  const ariaLabel =
+                    local.getDayAriaLabel?.(date) ||
+                    dayjs(date)
+                      .locale(local.locale || ctx.locale)
+                      .format('D MMMM YYYY');
+                  const dayProps = local.getDayProps?.(date);
+                  const isDateInTabOrder = dayjs(date).isSame(dateInTabOrder, 'date');
+
+                  return (
+                    <td
+                      {...getStyles('monthCell')}
+                      data-with-spacing={local.withCellSpacing || undefined}
+                    >
+                      <Day
+                        __staticSelector={local.__staticSelector || 'Month'}
+                        classNames={resolvedClassNames}
+                        styles={resolvedStyles}
+                        unstyled={local.unstyled}
+                        data-empoleon-stop-propagation={local.__stopPropagation || undefined}
+                        highlightToday={local.highlightToday}
+                        renderDay={local.renderDay}
+                        date={date}
+                        size={local.size}
+                        weekend={ctx.getWeekendDays(local.weekendDays).includes(dayjs(date).get('day') as DayOfWeek)}
+                        outside={outside}
+                        hidden={local.hideOutsideDates ? outside : false}
+                        aria-label={ariaLabel}
+                        static={local.static}
+                        disabled={
+                          local.excludeDate?.(date) ||
+                          !isBeforeMaxDate(date, toDateString(local.maxDate)!) ||
+                          !isAfterMinDate(date, toDateString(local.minDate)!)
+                        }
+                        ref={(node) => local.__getDayRef?.(rowIndex(), cellIndex(), node!)}
+                        {...dayProps}
+                        onKeyDown={(event) => {
+                          if (typeof dayProps?.onKeyDown === 'function') {
+                            dayProps?.onKeyDown?.(event);
+                          }
+                          local.__onDayKeyDown?.(event, { rowIndex: rowIndex(), cellIndex: cellIndex(), date });
+                        }}
+                        onMouseEnter={(event) => {
+                          if (typeof dayProps?.onMouseEnter === 'function') {
+                            dayProps?.onMouseEnter?.(event);
+                          }
+                          local.__onDayMouseEnter?.(event, date);
+                        }}
+                        onClick={(event) => {
+                          if (typeof dayProps?.onClick === 'function') {
+                            dayProps?.onClick?.(event);
+                          }
+
+                          local.__onDayClick?.(event, date);
+                        }}
+                        onMouseDown={(event) => {
+                          if (typeof dayProps?.onMouseDown === 'function') {
+                            dayProps?.onMouseDown?.(event);
+                          }
+                          local.__preventFocus && event.preventDefault();
+                        }}
+                        tabIndex={local.__preventFocus || !isDateInTabOrder ? -1 : 0}
+                      />
+                    </td>
+                  );
+                }}
+              </For>
+            </tr>
+          )}
+        </For>
+      </tbody>
     </Box>
   );
 });

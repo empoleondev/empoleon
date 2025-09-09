@@ -12,7 +12,7 @@ export function itSupportsOnControlClick(options: Options, name = 'supports __on
   it(name, async () => {
     const spy = vi.fn();
     const { container } = render(
-      <options.component
+      () => <options.component
         {...options.props}
         __onControlClick={(_event: any, date: any) => {
           spy(date);
