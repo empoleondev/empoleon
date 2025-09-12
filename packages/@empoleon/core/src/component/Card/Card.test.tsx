@@ -1,6 +1,6 @@
 import { render, tests } from '@empoleon-tests/core';
-import { Card, CardProps, CardStylesNames } from './Card';
-import { CardSection } from './CardSection/CardSection';
+import { Card, CardSection, CardProps, CardStylesNames } from './Card';
+// import { CardSection } from './CardSection/CardSection';
 import { DEFAULT_THEME, EmpoleonProvider } from '../../core';
 import { waitFor } from '@solidjs/testing-library';
 
@@ -36,23 +36,18 @@ describe('@empoleon/core/Card', () => {
       </Card>
     );
 
-    console.log('HTML:', container.innerHTML);
-
     const sections = container.querySelectorAll('.empoleon-Card-section');
 
-    // console.log('Found sections:', sections.length);
-  // console.log('First section attributes:', sections[0]?.attributes);
+    await waitFor(() => {
+      expect(sections[0]).toHaveAttribute('data-first-section');
+      expect(sections[0]).not.toHaveAttribute('data-last-section');
 
-  await waitFor(() => {
-    expect(sections[0]).toHaveAttribute('data-first-section');
-    expect(sections[0]).not.toHaveAttribute('data-last-section');
+      expect(sections[1]).not.toHaveAttribute('data-first-section');
+      expect(sections[1]).not.toHaveAttribute('data-last-section');
 
-    expect(sections[1]).not.toHaveAttribute('data-first-section');
-    expect(sections[1]).not.toHaveAttribute('data-last-section');
-
-    expect(sections[2]).not.toHaveAttribute('data-first-section');
-    expect(sections[2]).toHaveAttribute('data-last-section');
-  });
+      expect(sections[2]).not.toHaveAttribute('data-first-section');
+      expect(sections[2]).toHaveAttribute('data-last-section');
+    });
   });
 
   it('exports Card.Section component', () => {

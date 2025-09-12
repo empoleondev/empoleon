@@ -1,5 +1,4 @@
-export { Card } from './Card';
-export { CardSection } from './CardSection/CardSection';
+export { Card, CardSection } from './Card';
+export {  } from './CardSection/CardSection';
 
-export type { CardCssVariables, CardFactory, CardProps, CardStylesNames } from './Card';
-export type { CardSectionProps } from './CardSection/CardSection';
+export type { CardCssVariables, CardFactory, CardProps, CardSectionProps, CardStylesNames } from './Card';

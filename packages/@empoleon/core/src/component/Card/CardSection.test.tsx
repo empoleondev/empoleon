@@ -1,6 +1,5 @@
 import { createContextContainer, render, tests } from '@empoleon-tests/core';
-import { Card } from '../Card';
-import { CardSection, CardSectionProps, CardSectionStylesNames } from './CardSection';
+import { Card, CardSection, CardSectionProps, CardSectionStylesNames } from './Card';
 
 const TestContainer = createContextContainer<any>(CardSection, Card, {});
 
