@@ -2,7 +2,7 @@ import 'dayjs/locale/ru';
 
 import dayjs from 'dayjs';
 import { screen } from '@solidjs/testing-library';
-import { DatesProvider } from '@empoleon/dates';
+import { DatesProvider, useDatesContext } from '@empoleon/dates';
 import { render } from '@empoleon-tests/core';
 import { JSX } from 'solid-js';
 
@@ -28,11 +28,16 @@ export function itSupportsWeekdaysProps(options: Options, name = 'supports weekd
     });
 
     it('supports weekdays names localization with DatesProvider', () => {
-      render(
-        () => <DatesProvider settings={{ locale: 'ru' }}>
-          <options.component {...options.props} />
+      const TestConsumer = () => {
+        const ctx = useDatesContext();
+        return <options.component {...options.props} locale={ctx.locale} />;
+      };
+
+      render(() => (
+        <DatesProvider settings={{ locale: 'ru' }}>
+          <TestConsumer />
         </DatesProvider>
-      );
+      ));
 
       expectWeekdaysNames(['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс']);
     });
@@ -69,11 +74,17 @@ export function itSupportsWeekdaysProps(options: Options, name = 'supports weekd
     });
 
     it('changes weekdays order based on firstDayOfWeek defined on DatesProvider', () => {
-      render(
-        () => <DatesProvider settings={{ firstDayOfWeek: 4 }}>
-          <options.component {...options.props} />
+      const TestConsumer = () => {
+        const ctx = useDatesContext();
+
+        return <options.component {...options.props} firstDayOfWeek={ctx.firstDayOfWeek} />;
+      };
+
+      render(() => (
+        <DatesProvider settings={{ firstDayOfWeek: 4 }}>
+          <TestConsumer />
         </DatesProvider>
-      );
+      ));
 
       expectWeekdaysNames(['Th', 'Fr', 'Sa', 'Su', 'Mo', 'Tu', 'We']);
     });

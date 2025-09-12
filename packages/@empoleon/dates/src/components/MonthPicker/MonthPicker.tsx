@@ -85,7 +85,7 @@ export const MonthPicker: MonthPickerComponent = factory<MonthPickerFactory>(_pr
     'ref'
   ]);
 
-  const { onDateChange, onRootMouseLeave, onHoveredDateChange, getControlProps } = useDatesState({
+  const dateState = useDatesState({
     type: local.type as any,
     level: 'month',
     allowDeselect: local.allowDeselect,
@@ -108,14 +108,14 @@ export const MonthPicker: MonthPickerComponent = factory<MonthPickerFactory>(_pr
       minLevel="year"
       __updateDateOnMonthSelect={local.__updateDateOnMonthSelect ?? false}
       __staticSelector={local.__staticSelector || 'MonthPicker'}
-      onMouseLeave={onRootMouseLeave}
-      onMonthMouseEnter={(_event, date) => onHoveredDateChange(date)}
+      onMouseLeave={dateState.onRootMouseLeave}
+      onMonthMouseEnter={(_event, date) => dateState.onHoveredDateChange(date)}
       onMonthSelect={(date) => {
-        onDateChange(date);
+        dateState.onDateChange(date);
         local.onMonthSelect?.(date);
       }}
       getMonthControlProps={(date) => ({
-        ...getControlProps(date),
+        ...dateState.getControlProps(date),
         ...local.getMonthControlProps?.(date),
       })}
       classNames={resolvedClassNames}

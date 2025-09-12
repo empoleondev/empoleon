@@ -8,19 +8,26 @@ interface TimeControlProps {
   onSelect: (value: any) => void;
 }
 
-export function TimeControl({ value, active, onSelect }: TimeControlProps) {
+export function TimeControl(props: TimeControlProps) {
   const ctx = useTimePickerContext();
 
   return (
     <UnstyledButton
-      mod={{ active }}
-      onClick={() => onSelect(value)}
-      onMouseDown={(event) => event.preventDefault()}
-      data-value={value}
+      mod={{ active: props.active }}
+      onClick={() => props.onSelect(props.value)}
+      onMouseDown={(event) => {
+        event.preventDefault();
+        event.stopPropagation();
+      }}
+      onBlur={(event) => {
+        event.preventDefault();
+        event.stopPropagation();
+      }}
+      data-value={props.value}
       tabIndex={-1}
       {...ctx.getStyles('control')}
     >
-      {typeof value === 'number' ? padTime(value) : value}
+      {typeof props.value === 'number' ? padTime(props.value) : props.value}
     </UnstyledButton>
   );
 }

@@ -18,9 +18,9 @@ export default defineConfig({
     testTimeout: 10000,
     pool: 'forks',
     isolate: true,
-    include: [
-      '**/dates/**/Month/*.test.{ts,tsx}',
-    ],
+    // include: [
+    //   '**/dates/**/DateTimePicker/**/*.test.{ts,tsx}',
+    // ],
     exclude: [
       '**/Card.test.tsx',
       // Exclude all node_modules test files

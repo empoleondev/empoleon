@@ -198,14 +198,14 @@ export const Month = factory<MonthFactory>(_props => {
   });
 
   const ctx = useDatesContext();
-  const dates = getMonthDays({
+  const dates = () => getMonthDays({
     month: local.month,
     firstDayOfWeek: ctx.getFirstDayOfWeek(local.firstDayOfWeek),
     consistentWeeks: ctx.consistentWeeks,
   });
 
   const dateInTabOrder = getDateInTabOrder({
-    dates,
+    dates: dates(),
     minDate: toDateString(local.minDate) as DateStringValue,
     maxDate: toDateString(local.maxDate) as DateStringValue,
     getDayProps: local.getDayProps,
@@ -218,83 +218,6 @@ export const Month = factory<MonthFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     props,
-  });
-
-  const rows = dates.map((row, rowIndex) => {
-    const cells = row.map((date, cellIndex) => {
-      const outside = !isSameMonth(date, local.month);
-      const ariaLabel =
-        local.getDayAriaLabel?.(date) ||
-        dayjs(date)
-          .locale(local.locale || ctx.locale)
-          .format('D MMMM YYYY');
-      const dayProps = local.getDayProps?.(date);
-      const isDateInTabOrder = dayjs(date).isSame(dateInTabOrder, 'date');
-
-      return (
-        <td
-          {...getStyles('monthCell')}
-          data-with-spacing={local.withCellSpacing || undefined}
-        >
-          <Day
-            __staticSelector={local.__staticSelector || 'Month'}
-            classNames={resolvedClassNames}
-            styles={resolvedStyles}
-            unstyled={local.unstyled}
-            data-empoleon-stop-propagation={local.__stopPropagation || undefined}
-            highlightToday={local.highlightToday}
-            renderDay={local.renderDay}
-            date={date}
-            size={local.size}
-            weekend={ctx.getWeekendDays(local.weekendDays).includes(dayjs(date).get('day') as DayOfWeek)}
-            outside={outside}
-            hidden={local.hideOutsideDates ? outside : false}
-            aria-label={ariaLabel}
-            static={local.static}
-            disabled={
-              local.excludeDate?.(date) ||
-              !isBeforeMaxDate(date, toDateString(local.maxDate)!) ||
-              !isAfterMinDate(date, toDateString(local.minDate)!)
-            }
-            ref={(node) => local.__getDayRef?.(rowIndex, cellIndex, node!)}
-            {...dayProps}
-            onKeyDown={(event) => {
-              if (typeof dayProps?.onKeyDown === 'function') {
-                dayProps?.onKeyDown?.(event);
-              }
-              local.__onDayKeyDown?.(event, { rowIndex, cellIndex, date });
-            }}
-            onMouseEnter={(event) => {
-              if (typeof dayProps?.onMouseEnter === 'function') {
-                dayProps?.onMouseEnter?.(event);
-              }
-              local.__onDayMouseEnter?.(event, date);
-            }}
-            onClick={(event) => {
-              if (typeof dayProps?.onClick === 'function') {
-                dayProps?.onClick?.(event);
-              }
-
-              local.__onDayClick?.(event, date);
-            }}
-            onMouseDown={(event) => {
-              if (typeof dayProps?.onMouseDown === 'function') {
-                dayProps?.onMouseDown?.(event);
-              }
-              local.__preventFocus && event.preventDefault();
-            }}
-            tabIndex={local.__preventFocus || !isDateInTabOrder ? -1 : 0}
-          />
-        </td>
-      );
-    });
-
-    return (
-      <tr {...getStyles('monthRow')}>
-        {local.withWeekNumbers && <td {...getStyles('weekNumber')}>{getWeekNumber(row)}</td>}
-        {cells}
-      </tr>
-    );
   });
 
   return (
@@ -315,9 +238,12 @@ export const Month = factory<MonthFactory>(_props => {
         </thead>
       )}
       <tbody {...getStyles('monthTbody')}>
-        <For each={dates}>
+        <For each={dates()}>
           {(row, rowIndex) => (
-            <tr>
+            <tr {...getStyles('monthRow')}>
+              {local.withWeekNumbers && (
+                <td {...getStyles('weekNumber')}>{getWeekNumber(row)}</td>
+              )}
               <For each={row}>
                 {(date, cellIndex) => {
                   const outside = !isSameMonth(date, local.month);
@@ -326,7 +252,7 @@ export const Month = factory<MonthFactory>(_props => {
                     dayjs(date)
                       .locale(local.locale || ctx.locale)
                       .format('D MMMM YYYY');
-                  const dayProps = local.getDayProps?.(date);
+                  const dayProps = () => local.getDayProps?.(date);
                   const isDateInTabOrder = dayjs(date).isSame(dateInTabOrder, 'date');
 
                   return (
@@ -355,29 +281,32 @@ export const Month = factory<MonthFactory>(_props => {
                           !isAfterMinDate(date, toDateString(local.minDate)!)
                         }
                         ref={(node) => local.__getDayRef?.(rowIndex(), cellIndex(), node!)}
-                        {...dayProps}
+                        {...dayProps()}
                         onKeyDown={(event) => {
-                          if (typeof dayProps?.onKeyDown === 'function') {
-                            dayProps?.onKeyDown?.(event);
+                          const props = dayProps();
+                          if (props?.onKeyDown) {
+                            (props.onKeyDown as any)(event);
                           }
                           local.__onDayKeyDown?.(event, { rowIndex: rowIndex(), cellIndex: cellIndex(), date });
                         }}
                         onMouseEnter={(event) => {
-                          if (typeof dayProps?.onMouseEnter === 'function') {
-                            dayProps?.onMouseEnter?.(event);
+                          const props = dayProps();
+                          if (props?.onMouseEnter) {
+                            (props.onMouseEnter as any)(event);
                           }
                           local.__onDayMouseEnter?.(event, date);
                         }}
                         onClick={(event) => {
-                          if (typeof dayProps?.onClick === 'function') {
-                            dayProps?.onClick?.(event);
+                          const props = dayProps();
+                          if (props?.onClick) {
+                            (props.onClick as any)(event);
                           }
-
                           local.__onDayClick?.(event, date);
                         }}
                         onMouseDown={(event) => {
-                          if (typeof dayProps?.onMouseDown === 'function') {
-                            dayProps?.onMouseDown?.(event);
+                          const props = dayProps();
+                          if (props?.onMouseDown) {
+                            (props.onMouseDown as any)(event);
                           }
                           local.__preventFocus && event.preventDefault();
                         }}

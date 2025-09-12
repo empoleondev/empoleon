@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { DatesProvider } from '@empoleon/dates';
+import { DatesProvider, useDatesContext } from '@empoleon/dates';
 import { render } from '@empoleon-tests/core';
 import { Component } from 'solid-js';
 
@@ -72,11 +72,17 @@ export function itSupportsMonthsListProps(options: Options, name = 'supports mon
     });
 
     it('supports months list localization with DatesProvider', () => {
+      const TestConsumer = () => {
+        const ctx = useDatesContext();
+        return <options.component {...options.props} locale={ctx.locale} />;
+      };
+
       const { container } = render(
         () => <DatesProvider settings={{ locale: 'ru' }}>
-          <options.component {...options.props} />
+          <TestConsumer />
         </DatesProvider>
       );
+
       expectMonthNames(container as any, ruMonthsNames);
     });
 

@@ -70,7 +70,7 @@ export const YearPicker: YearPickerComponent = factory<YearPickerFactory>(_props
     'ref'
   ]);
 
-  const { onDateChange, onRootMouseLeave, onHoveredDateChange, getControlProps } = useDatesState({
+  const dateState = useDatesState({
     type: local.type as any,
     level: 'year',
     allowDeselect: local.allowDeselect,
@@ -81,7 +81,7 @@ export const YearPicker: YearPickerComponent = factory<YearPickerFactory>(_props
     onMouseLeave: local.onMouseLeave,
   });
 
-  const { resolvedClassNames, resolvedStyles } = useResolvedStylesApi<YearPickerFactory>({
+  const stylesApi = useResolvedStylesApi<YearPickerFactory>({
     classNames: local.classNames,
     styles: local.styles,
     props,
@@ -93,18 +93,18 @@ export const YearPicker: YearPickerComponent = factory<YearPickerFactory>(_props
       minLevel="decade"
       __updateDateOnYearSelect={local.__updateDateOnYearSelect ?? false}
       __staticSelector={local.__staticSelector || 'YearPicker'}
-      onMouseLeave={onRootMouseLeave}
-      onYearMouseEnter={(_event, date) => onHoveredDateChange(date)}
+      onMouseLeave={dateState.onRootMouseLeave}
+      onYearMouseEnter={(_event, date) => dateState.onHoveredDateChange(date)}
       onYearSelect={(date) => {
-        onDateChange(date);
+        dateState.onDateChange(date);
         local.onYearSelect?.(date);
       }}
       getYearControlProps={(date) => ({
-        ...getControlProps(date),
+        ...dateState.getControlProps(date),
         ...local.getYearControlProps?.(date),
       })}
-      classNames={resolvedClassNames}
-      styles={resolvedStyles}
+      classNames={stylesApi.resolvedClassNames}
+      styles={stylesApi.resolvedStyles}
       {...others}
     />
   );

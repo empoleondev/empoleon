@@ -33,13 +33,13 @@ describe('@empoleon/dates/MonthsList', () => {
   datesTests.itSupportsOnControlMouseEnter({ component: MonthsList, props: defaultProps });
 
   it('has correct default __staticSelector', () => {
-    render(<MonthsList {...defaultProps} />);
+    render(() => <MonthsList {...defaultProps} />);
     expect(screen.getByRole('table')).toHaveClass('empoleon-MonthsList-monthsList');
     expect(screen.getAllByRole('button')[0]).toHaveClass('empoleon-MonthsList-monthsListControl');
   });
 
   it('supports custom __staticSelector', () => {
-    render(<MonthsList {...defaultProps} __staticSelector="Calendar" />);
+    render(() => <MonthsList {...defaultProps} __staticSelector="Calendar" />);
     expect(screen.getByRole('table')).toHaveClass('empoleon-Calendar-monthsList');
     expect(screen.getAllByRole('button')[0]).toHaveClass('empoleon-Calendar-monthsListControl');
   });

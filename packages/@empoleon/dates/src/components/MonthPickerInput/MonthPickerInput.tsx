@@ -86,15 +86,7 @@ export const MonthPickerInput: MonthPickerInputComponent = factory<MonthPickerIn
 
   const { calendarProps, others } = pickCalendarProps(rest);
 
-  const {
-    _value,
-    setValue,
-    formattedValue,
-    dropdownHandlers,
-    dropdownOpened,
-    onClear,
-    shouldClear,
-  } = useDatesInput({
+  const datesInput = useDatesInput({
     type: local.type as any,
     value: local.value,
     defaultValue: local.defaultValue,
@@ -109,16 +101,16 @@ export const MonthPickerInput: MonthPickerInputComponent = factory<MonthPickerIn
 
   return (
     <PickerInputBase
-      formattedValue={formattedValue}
-      dropdownOpened={dropdownOpened()}
-      dropdownHandlers={dropdownHandlers}
+      formattedValue={datesInput.formattedValue()}
+      dropdownOpened={datesInput.dropdownOpened()}
+      dropdownHandlers={datesInput.dropdownHandlers}
       classNames={resolvedClassNames}
       styles={resolvedStyles}
       unstyled={local.unstyled}
       ref={local.ref}
-      onClear={onClear}
-      shouldClear={shouldClear}
-      value={_value()}
+      onClear={datesInput.onClear}
+      shouldClear={datesInput.shouldClear}
+      value={datesInput._value()}
       size={local.size!}
       variant={local.variant}
       dropdownType={local.dropdownType}
@@ -132,14 +124,14 @@ export const MonthPickerInput: MonthPickerInputComponent = factory<MonthPickerIn
         size={local.size}
         variant={local.variant}
         type={local.type}
-        value={_value()}
+        value={datesInput._value()}
         defaultDate={
           calendarProps.defaultDate ||
-          (Array.isArray(_value)
-            ? _value[0] || getDefaultClampedDate({ maxDate: local.maxDate, minDate: local.minDate })
-            : _value || getDefaultClampedDate({ maxDate: local.maxDate, minDate: local.minDate }))
+          (Array.isArray(datesInput._value())
+            ? datesInput._value()[0] || getDefaultClampedDate({ maxDate: local.maxDate, minDate: local.minDate })
+            : datesInput._value() || getDefaultClampedDate({ maxDate: local.maxDate, minDate: local.minDate }))
         }
-        onChange={setValue}
+        onChange={datesInput.setValue}
         locale={local.locale}
         classNames={resolvedClassNames}
         styles={resolvedStyles}

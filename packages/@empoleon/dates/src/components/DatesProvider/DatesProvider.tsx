@@ -1,4 +1,4 @@
-import { createContext, JSX } from 'solid-js';
+import { createContext, createMemo, JSX } from 'solid-js';
 import { DayOfWeek } from '../../types';
 
 export interface DatesProviderValue {
@@ -26,10 +26,12 @@ export interface DatesProviderProps {
   children?: JSX.Element;
 }
 
-export function DatesProvider({ settings, children }: DatesProviderProps) {
+export function DatesProvider(props: DatesProviderProps) {
+  const contextValue = { ...DATES_PROVIDER_DEFAULT_SETTINGS, ...props.settings };
+
   return (
-    <DatesProviderContext.Provider value={{ ...DATES_PROVIDER_DEFAULT_SETTINGS, ...settings }}>
-      {children}
+    <DatesProviderContext.Provider value={contextValue}>
+      {props.children}
     </DatesProviderContext.Provider>
   );
 }

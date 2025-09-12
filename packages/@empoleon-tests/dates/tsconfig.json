@@ -1,5 +1,5 @@
 {
-  "include": ["./src", "../../../@types"],
+  "include": ["./src", "../../../@types", "../../../vitest.d.ts"],
   "exclude": ["./lib", "./esm", "./cjs"],
   "compilerOptions": {
     "rootDir": "src",

@@ -14,11 +14,15 @@ const defaultPropsWithInputProps = {
 };
 
 describe('@empoleon/dates/YearPickerInput', () => {
+  beforeEach(() => {
+    window.scrollTo = vi.fn();
+  });
+
   tests.axe([
-    <YearPickerInput aria-label="test-label" key="1" />,
-    <YearPickerInput aria-label="test-label" error key="2" />,
-    <YearPickerInput aria-label="test-label" error="test-error" id="test" key="3" />,
-    <YearPickerInput aria-label="test-label" description="test-description" key="4" />,
+    () => <YearPickerInput aria-label="test-label" />,
+    () => <YearPickerInput aria-label="test-label" error />,
+    () => <YearPickerInput aria-label="test-label" error="test-error" id="test" />,
+    () => <YearPickerInput aria-label="test-label" description="test-description" />,
   ]);
 
   tests.itSupportsSystemProps<YearPickerInputProps, __InputStylesNames>({
@@ -58,12 +62,12 @@ describe('@empoleon/dates/YearPickerInput', () => {
 
   it('supports valueFormat prop', () => {
     const { container, rerender } = render(
-      <YearPickerInput {...defaultProps} valueFormat="YY" value="2022-04-11" />
+      () => <YearPickerInput {...defaultProps} valueFormat="YY" value="2022-04-11" />
     );
     expectValue(container, '22');
 
     rerender(
-      <YearPickerInput
+      () => <YearPickerInput
         {...defaultProps}
         type="multiple"
         valueFormat="YY"
@@ -73,7 +77,7 @@ describe('@empoleon/dates/YearPickerInput', () => {
     expectValue(container, '22, 24');
 
     rerender(
-      <YearPickerInput
+      () => <YearPickerInput
         {...defaultProps}
         type="range"
         valueFormat="YY"
@@ -85,7 +89,7 @@ describe('@empoleon/dates/YearPickerInput', () => {
 
   it('has correct default __staticSelector', () => {
     const { container } = render(
-      <YearPickerInput
+      () => <YearPickerInput
         {...defaultProps}
         popoverProps={{ opened: true, withinPortal: false, transitionProps: { duration: 0 } }}
       />

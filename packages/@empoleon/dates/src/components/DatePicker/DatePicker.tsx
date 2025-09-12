@@ -1,4 +1,4 @@
-import { createSignal, JSX, splitProps } from 'solid-js';
+import { createSignal, For, JSX, Show, splitProps } from 'solid-js';
 import dayjs from 'dayjs';
 import {
   Box,
@@ -203,10 +203,6 @@ export const DatePicker: DatePickerComponent = factory<DatePickerFactory>(_props
     />
   );
 
-  if (!local.presets) {
-    return calendar;
-  }
-
   const handlePresetSelect = (
     val: DateStringValue | null | [DateStringValue | null, DateStringValue | null]
   ) => {
@@ -219,22 +215,28 @@ export const DatePicker: DatePickerComponent = factory<DatePickerFactory>(_props
     }
   };
 
-  const presetButtons = local.presets.map((preset, index) => (
-    <UnstyledButton
-      {...getStyles('presetButton')}
-      onClick={() => handlePresetSelect(preset.value)}
-      onMouseDown={(event) => event.preventDefault()}
-      data-mantine-stop-propagation={local.__stopPropagation || undefined}
-    >
-      {preset.label}
-    </UnstyledButton>
-  ));
-
   return (
-    <Box {...getStyles('datePickerRoot')} size={local.size} {...others}>
-      <div {...getStyles('presetsList')}>{presetButtons}</div>
-      {calendar}
-    </Box>
+    <Show
+      when={local.presets}
+      fallback={calendar}
+    >
+      <Box {...getStyles('datePickerRoot')} size={local.size} {...others}>
+        <div {...getStyles('presetsList')}>
+          <For each={local.presets}>
+            {preset => (
+              <button
+                onClick={() => handlePresetSelect(preset.value)}
+                onMouseDown={(event) => event.preventDefault()}
+                data-mantine-stop-propagation={local.__stopPropagation || undefined}
+              >
+                {preset.label}
+              </button>
+            )}
+          </For>
+        </div>
+        {calendar}
+      </Box>
+    </Show>
   );
 }) as any;
 

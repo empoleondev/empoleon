@@ -20,7 +20,7 @@ import { MonthLevelGroup, MonthLevelGroupStylesNames } from '../MonthLevelGroup'
 import { YearLevelSettings } from '../YearLevel';
 import { YearLevelGroup, YearLevelGroupStylesNames } from '../YearLevelGroup';
 import { clampLevel } from './clamp-level/clamp-level';
-import { Ref, Show, splitProps } from 'solid-js';
+import { createEffect, createMemo, Ref, Show, splitProps } from 'solid-js';
 
 export type CalendarStylesNames =
   | MonthLevelGroupStylesNames
@@ -279,7 +279,7 @@ export const Calendar = factory<CalendarFactory>(_props  => {
   const now = new Date();
   const fallbackDate =
     local.minDate && dayjs(now).isAfter(local.minDate) ? local.minDate : dayjs(now).format('YYYY-MM-DD');
-  const currentDate = () => _date() || fallbackDate;
+  const currentDate = createMemo(() => _date() || fallbackDate);
 
   const handleNextMonth = () => {
     const nextDate = dayjs(currentDate()).add(_columnsToScroll, 'month').format('YYYY-MM-DD');
@@ -382,8 +382,11 @@ export const Calendar = factory<CalendarFactory>(_props  => {
           yearLabelFormat={local.yearLabelFormat}
           __onControlMouseEnter={local.onMonthMouseEnter}
           __onControlClick={(_event, payload) => {
-            local.__updateDateOnMonthSelect && setDate(payload);
-            setLevel(clampLevel('month', local.minLevel, local.maxLevel));
+            // Only update if level is uncontrolled or will actually change
+            if (local.level === undefined) {
+              local.__updateDateOnMonthSelect && setDate(payload);
+              setLevel(clampLevel('month', local.minLevel, local.maxLevel));
+            }
             local.onMonthSelect?.(payload);
           }}
           __preventFocus={local.__preventFocus}
@@ -412,8 +415,11 @@ export const Calendar = factory<CalendarFactory>(_props  => {
           decadeLabelFormat={local.decadeLabelFormat}
           __onControlMouseEnter={local.onYearMouseEnter}
           __onControlClick={(_event, payload) => {
-            local.__updateDateOnYearSelect && setDate(payload);
-            setLevel(clampLevel('year', local.minLevel, local.maxLevel));
+            // Only update if level is uncontrolled or will actually change
+            if (local.level === undefined) {
+              local.__updateDateOnYearSelect && setDate(payload);
+              setLevel(clampLevel('year', local.minLevel, local.maxLevel));
+            }
             local.onYearSelect?.(payload);
           }}
           __preventFocus={local.__preventFocus}

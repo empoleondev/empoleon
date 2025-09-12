@@ -53,28 +53,31 @@ describe('@empoleon/dates/MonthLevel', () => {
   datesTests.itSupportsOnDayClick({ component: MonthLevel, props: defaultProps });
 
   it('renders correct CalendarHeader label', () => {
-    render(<MonthLevel {...defaultProps} />);
-    expectLabel('April 2022');
+    render(() => <MonthLevel {...defaultProps} />);
+    const button = screen.getByRole('button', { name: /level-control/i });
+    expect(button.textContent).toBe('April 2022');
   });
 
   it('supports changing month label format', () => {
-    render(<MonthLevel {...defaultProps} monthLabelFormat="MM/YY" />);
-    expectLabel('04/22');
+    render(() => <MonthLevel {...defaultProps} monthLabelFormat="MM/YY" />);
+    const button = screen.getByRole('button', { name: /level-control/i });
+    expect(button.textContent).toBe('04/22');
   });
 
   it('supports changing month label with callback', () => {
     render(
-      <MonthLevel
+      () => <MonthLevel
         {...defaultProps}
         monthLabelFormat={(date) => `${new Date(date).getMonth()}/${new Date(date).getFullYear()}`}
       />
     );
 
-    expectLabel('3/2022');
+    const button = screen.getByRole('button', { name: /level-control/i });
+    expect(button.textContent).toBe('3/2022');
   });
 
   it('has correct default __staticSelector', () => {
-    const { container } = render(<MonthLevel {...defaultProps} />);
+    const { container } = render(() =><MonthLevel {...defaultProps} />);
     expect(container.querySelector('table td button')).toHaveClass('empoleon-MonthLevel-day');
     expect(screen.getByLabelText('level-control')).toHaveClass(
       'empoleon-MonthLevel-calendarHeaderLevel'
@@ -82,7 +85,7 @@ describe('@empoleon/dates/MonthLevel', () => {
   });
 
   it('supports custom __staticSelector', () => {
-    const { container } = render(<MonthLevel {...defaultProps} __staticSelector="Calendar" />);
+    const { container } = render(() =><MonthLevel {...defaultProps} __staticSelector="Calendar" />);
     expect(container.querySelector('table td button')).toHaveClass('empoleon-Calendar-day');
     expect(screen.getByLabelText('level-control')).toHaveClass(
       'empoleon-Calendar-calendarHeaderLevel'
@@ -90,12 +93,12 @@ describe('@empoleon/dates/MonthLevel', () => {
   });
 
   it('disables next control if maxDate is before end of month', () => {
-    render(<MonthLevel {...defaultProps} maxDate="2022-04-11" />);
+    render(() =><MonthLevel {...defaultProps} maxDate="2022-04-11" />);
     expect(screen.getByLabelText('next')).toBeDisabled();
   });
 
   it('disables previous control if minDate is after start of month', () => {
-    render(<MonthLevel {...defaultProps} minDate="2022-04-11" />);
+    render(() =><MonthLevel {...defaultProps} minDate="2022-04-11" />);
     expect(screen.getByLabelText('prev')).toBeDisabled();
   });
 });

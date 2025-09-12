@@ -17,7 +17,7 @@ import {
 import { useDatesContext } from '../DatesProvider';
 import { YearsList, YearsListSettings, YearsListStylesNames } from '../YearsList';
 import { getDecadeRange } from './get-decade-range/get-decade-range';
-import { JSX, splitProps } from 'solid-js';
+import { createMemo, JSX, splitProps } from 'solid-js';
 
 export type DecadeLevelStylesNames = YearsListStylesNames | CalendarHeaderStylesNames;
 
@@ -101,7 +101,9 @@ export const DecadeLevel = factory<DecadeLevelFactory>(_props => {
   ]);
 
   const ctx = useDatesContext();
-  const [startOfDecade, endOfDecade] = getDecadeRange(local.decade);
+  const decadeRange = createMemo(() => getDecadeRange(local.decade));
+  const startOfDecade = () => decadeRange()[0];
+  const endOfDecade = () => decadeRange()[1];
 
   const stylesApiProps = {
     __staticSelector: local.__staticSelector || 'DecadeLevel',
@@ -116,14 +118,14 @@ export const DecadeLevel = factory<DecadeLevelFactory>(_props => {
     typeof local.nextDisabled === 'boolean'
       ? local.nextDisabled
       : local.maxDate
-        ? !dayjs(endOfDecade).endOf('year').isBefore(local.maxDate)
+        ? !dayjs(endOfDecade()).endOf('year').isBefore(local.maxDate)
         : false;
 
   const _previousDisabled =
     typeof local.previousDisabled === 'boolean'
       ? local.previousDisabled
       : local.minDate
-        ? !dayjs(startOfDecade).startOf('year').isAfter(local.minDate)
+        ? !dayjs(startOfDecade()).startOf('year').isAfter(local.minDate)
         : false;
 
   const formatDecade = (date: DateStringValue, format: string) =>
@@ -136,9 +138,9 @@ export const DecadeLevel = factory<DecadeLevelFactory>(_props => {
       <CalendarHeader
         label={
           typeof local.decadeLabelFormat === 'function'
-            ? local.decadeLabelFormat(startOfDecade, endOfDecade)
-            : `${formatDecade(startOfDecade, local.decadeLabelFormat!)} – ${formatDecade(
-                endOfDecade,
+            ? local.decadeLabelFormat(startOfDecade(), endOfDecade())
+            : `${formatDecade(startOfDecade(), local.decadeLabelFormat!)} – ${formatDecade(
+                endOfDecade(),
                 local.decadeLabelFormat!
               )}`
         }

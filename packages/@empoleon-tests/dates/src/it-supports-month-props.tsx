@@ -3,7 +3,7 @@ import 'dayjs/locale/ru';
 import dayjs from 'dayjs';
 import { screen } from '@solidjs/testing-library';
 import userEvent from '@testing-library/user-event';
-import { DatesProvider } from '@empoleon/dates';
+import { DatesProvider, useDatesContext } from '@empoleon/dates';
 import { render } from '@empoleon-tests/core';
 import { itSupportsWeekdaysProps } from './it-supports-weekdays-props';
 import { JSX } from 'solid-js';
@@ -61,9 +61,14 @@ export function itSupportsMonthProps(options: Options, name = 'supports month pr
     });
 
     it('renders correct days when firstDayOfWeek is set on DatesProvider', () => {
+      const TestConsumer = () => {
+        const ctx = useDatesContext();
+        return <options.component {...options.props} firstDayOfWeek={ctx.firstDayOfWeek} />;
+      };
+
       const { container } = render(
         () => <DatesProvider settings={{ firstDayOfWeek: 6 }}>
-          <options.component {...options.props} />
+          <TestConsumer />
         </DatesProvider>
       );
 
@@ -123,13 +128,18 @@ export function itSupportsMonthProps(options: Options, name = 'supports month pr
     });
 
     it('detects weekends correctly with custom weekendDays value on DatesProvider', () => {
+      const TestConsumer = () => {
+        const ctx = useDatesContext();
+        return <options.component {...options.props} weekendDays={ctx.weekendDays} />;
+      };
+
       const { container } = render(
         () => <DatesProvider settings={{ weekendDays: [3, 4] }}>
-          <options.component {...options.props} />
+          <TestConsumer />
         </DatesProvider>
       );
-      const days = getDays(container as any);
 
+      const days = getDays(container as any);
       expect(days[7]).not.toHaveAttribute('data-weekend');
       expect(days[8]).not.toHaveAttribute('data-weekend');
       expect(days[9]).toHaveAttribute('data-weekend');
@@ -252,11 +262,17 @@ export function itSupportsMonthProps(options: Options, name = 'supports month pr
     });
 
     it('supports default days aria-label localization with DatesProvider', () => {
+      const TestConsumer = () => {
+        const ctx = useDatesContext();
+        return <options.component {...options.props} locale={ctx.locale} />;
+      };
+
       const { container } = render(
         () => <DatesProvider settings={{ locale: 'ru' }}>
-          <options.component {...options.props} />
+          <TestConsumer />
         </DatesProvider>
       );
+
       const days = getDays(container as any);
       expect(days[0]).toHaveAttribute('aria-label', '28 марта 2022');
       expect(days[4]).toHaveAttribute('aria-label', '1 апреля 2022');

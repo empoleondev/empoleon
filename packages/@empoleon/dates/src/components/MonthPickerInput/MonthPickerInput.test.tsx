@@ -14,11 +14,15 @@ const defaultPropsWithInputProps = {
 };
 
 describe('@empoleon/dates/MonthPickerInput', () => {
+  beforeEach(() => {
+    window.scrollTo = vi.fn();
+  });
+
   tests.axe([
-    <MonthPickerInput aria-label="test-label" key="1" />,
-    <MonthPickerInput aria-label="test-label" error key="2" />,
-    <MonthPickerInput aria-label="test-label" error="test-error" id="test" key="3" />,
-    <MonthPickerInput aria-label="test-label" description="test-description" key="4" />,
+    () => <MonthPickerInput aria-label="test-label" key="1" />,
+    () => <MonthPickerInput aria-label="test-label" error key="2" />,
+    () => <MonthPickerInput aria-label="test-label" error="test-error" id="test" key="3" />,
+    () => <MonthPickerInput aria-label="test-label" description="test-description" key="4" />,
   ]);
 
   tests.itSupportsSystemProps<MonthPickerInputProps, __InputStylesNames>({
@@ -68,12 +72,12 @@ describe('@empoleon/dates/MonthPickerInput', () => {
 
   it('supports valueFormat prop', () => {
     const { container, rerender } = render(
-      <MonthPickerInput {...defaultProps} valueFormat="MMMM" value="2022-04-11" />
+      () => <MonthPickerInput {...defaultProps} valueFormat="MMMM" value="2022-04-11" />
     );
     expectValue(container, 'April');
 
     rerender(
-      <MonthPickerInput
+      () => <MonthPickerInput
         {...defaultProps}
         type="multiple"
         valueFormat="MMMM"
@@ -83,7 +87,7 @@ describe('@empoleon/dates/MonthPickerInput', () => {
     expectValue(container, 'April, May');
 
     rerender(
-      <MonthPickerInput
+      () => <MonthPickerInput
         {...defaultProps}
         type="range"
         valueFormat="MMMM"
@@ -95,7 +99,7 @@ describe('@empoleon/dates/MonthPickerInput', () => {
 
   it('has correct default __staticSelector', () => {
     const { container } = render(
-      <MonthPickerInput
+      () => <MonthPickerInput
         {...defaultProps}
         popoverProps={{ opened: true, withinPortal: false, transitionProps: { duration: 0 } }}
       />

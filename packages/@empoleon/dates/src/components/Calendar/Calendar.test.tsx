@@ -198,25 +198,103 @@ describe('@empoleon/dates/Calendar', () => {
   });
 
   it('changes displayed date when next/previous controls are clicked with defaultDate prop (uncontrolled)', async () => {
-    const { rerender } = render(() => <Calendar {...defaultProps} level="month" />);
+    let currentDate = defaultProps.defaultDate;
+
+    const { rerender } = render(() =>
+      <Calendar
+        {...defaultProps}
+        level="month"
+        date={currentDate}
+        onDateChange={(newDate) => { currentDate = newDate; }}
+      />
+    );
+
     expectHeaderLevel('month', 'April 2022');
+
     await clickNext('month');
+    rerender(() =>
+      <Calendar
+        {...defaultProps}
+        level="month"
+        date={currentDate}
+        onDateChange={(newDate) => { currentDate = newDate; }}
+      />
+    );
     expectHeaderLevel('month', 'May 2022');
+
     await clickPrevious('month');
+    rerender(() =>
+      <Calendar
+        {...defaultProps}
+        level="month"
+        date={currentDate}
+        onDateChange={(newDate) => { currentDate = newDate; }}
+      />
+    );
     expectHeaderLevel('month', 'April 2022');
 
-    rerender(() => <Calendar {...defaultProps} level="year" />);
-    expectHeaderLevel('year', '2022');
-    await clickNext('year');
-    expectHeaderLevel('year', '2023');
-    await clickPrevious('year');
+    rerender(() =>
+      <Calendar
+        {...defaultProps}
+        level="year"
+        date={currentDate}
+        onDateChange={(newDate) => { currentDate = newDate; }}
+      />
+    );
     expectHeaderLevel('year', '2022');
 
-    rerender(() => <Calendar {...defaultProps} level="decade" />);
+    await clickNext('year');
+    rerender(() =>
+      <Calendar
+        {...defaultProps}
+        level="year"
+        date={currentDate}
+        onDateChange={(newDate) => { currentDate = newDate; }}
+      />
+    );
+    expectHeaderLevel('year', '2023');
+
+    await clickPrevious('year');
+    rerender(() =>
+      <Calendar
+        {...defaultProps}
+        level="year"
+        date={currentDate}
+        onDateChange={(newDate) => { currentDate = newDate; }}
+      />
+    );
+    expectHeaderLevel('year', '2022');
+
+    rerender(() =>
+      <Calendar
+        {...defaultProps}
+        level="decade"
+        date={currentDate}
+        onDateChange={(newDate) => { currentDate = newDate; }}
+      />
+    );
     expect(screen.getByText('2020 – 2029')).toBeInTheDocument();
+
     await clickNext('decade');
+    rerender(() =>
+      <Calendar
+        {...defaultProps}
+        level="decade"
+        date={currentDate}
+        onDateChange={(newDate) => { currentDate = newDate; }}
+      />
+    );
     expect(screen.getByText('2030 – 2039')).toBeInTheDocument();
+
     await clickPrevious('decade');
+    rerender(() =>
+      <Calendar
+        {...defaultProps}
+        level="decade"
+        date={currentDate}
+        onDateChange={(newDate) => { currentDate = newDate; }}
+      />
+    );
     expect(screen.getByText('2020 – 2029')).toBeInTheDocument();
   });
 

@@ -1394,7 +1394,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@empoleon-tests/dates@workspace:packages/@empoleon-tests/dates":
+"@empoleon-tests/dates@workspace:*, @empoleon-tests/dates@workspace:packages/@empoleon-tests/dates":
   version: 0.0.0-use.local
   resolution: "@empoleon-tests/dates@workspace:packages/@empoleon-tests/dates"
   dependencies:
@@ -1462,6 +1462,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@empoleon/dates@workspace:packages/@empoleon/dates"
   dependencies:
+    "@empoleon-tests/core": "workspace:*"
+    "@empoleon-tests/dates": "workspace:*"
     "@empoleon/core": "workspace:*"
     "@empoleon/hooks": "workspace:*"
     clsx: "npm:^2.1.1"

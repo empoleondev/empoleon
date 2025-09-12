@@ -7,13 +7,13 @@ const defaultProps: PickerControlProps = {};
 function validateDataAttribute(prop: string) {
   const attr = `data-${lodash.kebabCase(prop)}`;
   it(`sets ${attr} prop when ${prop} prop is set`, () => {
-    const { rerender } = render(<PickerControl {...defaultProps} />);
+    const { rerender } = render(() => <PickerControl {...defaultProps} />);
     expect(screen.getByRole('button')).not.toHaveAttribute(attr);
 
-    rerender(<PickerControl {...defaultProps} {...{ [prop]: true }} />);
+    rerender(() => <PickerControl {...defaultProps} {...{ [prop]: true }} />);
     expect(screen.getByRole('button')).toHaveAttribute(attr);
 
-    rerender(<PickerControl {...defaultProps} {...{ [prop]: true }} disabled />);
+    rerender(() => <PickerControl {...defaultProps} {...{ [prop]: true }} disabled />);
     expect(screen.getByRole('button')).not.toHaveAttribute(attr);
   });
 }
@@ -40,33 +40,33 @@ describe('@empoleon/dates/PickerControl', () => {
   validateDataAttribute('lastInRange');
 
   it('sets correct attributes when disabled prop is set', () => {
-    const { rerender } = render(<PickerControl {...defaultProps} />);
+    const { rerender } = render(() => <PickerControl {...defaultProps} />);
     expect(screen.getByRole('button')).not.toHaveAttribute('disabled');
     expect(screen.getByRole('button')).not.toHaveAttribute('data-disabled');
 
-    rerender(<PickerControl {...defaultProps} disabled />);
+    rerender(() => <PickerControl {...defaultProps} disabled />);
     expect(screen.getByRole('button')).toHaveAttribute('disabled');
     expect(screen.getByRole('button')).toHaveAttribute('data-disabled');
   });
 
   it('correctly handles selected attribute', () => {
-    const { rerender } = render(<PickerControl {...defaultProps} />);
+    const { rerender } = render(() => <PickerControl {...defaultProps} />);
     expect(screen.getByRole('button')).not.toHaveAttribute('data-selected');
 
-    rerender(<PickerControl {...defaultProps} selected />);
+    rerender(() => <PickerControl {...defaultProps} selected />);
     expect(screen.getByRole('button')).toHaveAttribute('data-selected');
 
-    rerender(<PickerControl {...defaultProps} selected disabled />);
+    rerender(() => <PickerControl {...defaultProps} selected disabled />);
     expect(screen.getByRole('button')).not.toHaveAttribute('data-selected');
   });
 
   it('has correct default __staticSelector', () => {
-    render(<PickerControl {...defaultProps} />);
+    render(() => <PickerControl {...defaultProps} />);
     expect(screen.getByRole('button')).toHaveClass('empoleon-PickerControl-pickerControl');
   });
 
   it('supports custom __staticSelector', () => {
-    render(<PickerControl {...defaultProps} __staticSelector="Calendar" />);
+    render(() => <PickerControl {...defaultProps} __staticSelector="Calendar" />);
     expect(screen.getByRole('button')).toHaveClass('empoleon-Calendar-pickerControl');
   });
 });

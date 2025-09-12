@@ -27,14 +27,13 @@ export const SpinInput = (props: SpinInputProps) => {
     'onNextInput',
     'onPreviousInput',
     'onFocus',
-    'readOnly',
     'ref'
   ]);
 
   const maxDigit = getMaxDigit(local.max);
 
   const handleChange = (value: string) => {
-    if (local.readOnly) {
+    if (props.readOnly) {
       return;
     }
 
@@ -42,14 +41,18 @@ export const SpinInput = (props: SpinInputProps) => {
     if (clearValue !== '') {
       const parsedValue = clamp(parseInt(clearValue, 10), local.min, local.max);
       local.onChange(parsedValue);
-      if (parsedValue > maxDigit) {
+
+      // If value starts with 00 it means that the user started typing with 0
+      // for example 01 or 02, in this case, next input should be focused
+      // 00 only case is handled separately in handleKeyDown
+      if (parsedValue > maxDigit || value.startsWith('00')) {
         local.onNextInput?.();
       }
     }
   };
 
   const handleKeyDown = (event: KeyboardEvent) => {
-    if (local.readOnly) {
+    if (others.readOnly) {
       return;
     }
 
@@ -108,6 +111,7 @@ export const SpinInput = (props: SpinInputProps) => {
       ref={local.ref}
       type="text"
       role="spinbutton"
+      auto-complete="off"
       aria-valuemin={local.min}
       aria-valuemax={local.max}
       aria-valuenow={local.value === null ? 0 : local.value}
@@ -115,7 +119,7 @@ export const SpinInput = (props: SpinInputProps) => {
       inputMode="numeric"
       placeholder="--"
       value={local.value === null ? '' : padTime(local.value)}
-      onChange={(event) => handleChange(event.currentTarget.value)}
+      onInput={(event) => handleChange(event.currentTarget.value)}
       onKeyDown={handleKeyDown}
       onFocus={(event) => {
         event.currentTarget.select();

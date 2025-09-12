@@ -44,18 +44,6 @@ export function TimeControlsList(props: TimeControlsListProps) {
   const ctx = useTimePickerContext();
   let refElement: HTMLDivElement | undefined;
   const range = getValuesRange(props.min, props.max, props.step);
-  const controls = (
-    <For each={range}>
-      {(control) => (
-        <TimeControl
-          value={control}
-          active={props.value === control}
-          onSelect={props.onSelect}
-        />
-      )}
-    </For>
-  );
-
   createEffect(() => {
     if (props.value) {
       const target = refElement?.querySelector<HTMLButtonElement>(`[data-value="${props.value}"]`);
@@ -73,7 +61,17 @@ export function TimeControlsList(props: TimeControlsListProps) {
       {...ctx.getStyles('scrollarea')}
       {...ctx.scrollAreaProps}
     >
-      <div {...ctx.getStyles('controlsList')}>{controls}</div>
+      <div {...ctx.getStyles('controlsList')}>
+        <For each={range}>
+          {(control) => (
+            <TimeControl
+              value={control}
+              active={props.value === control}
+              onSelect={props.onSelect}
+            />
+          )}
+     </For>
+      </div>
     </ScrollArea>
   );
 }

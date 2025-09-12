@@ -190,6 +190,7 @@ export const DateInputMask = factory<DateInputMaskFactory>(_props => {
       {...local.popoverProps}
     >
       <Popover.Target>
+        {/* @ts-ignore */}
         <InputBase
           component="div"
           ref={local.ref}

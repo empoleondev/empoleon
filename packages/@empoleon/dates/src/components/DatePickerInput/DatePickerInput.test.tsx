@@ -14,11 +14,15 @@ const defaultPropsWithInputProps = {
 };
 
 describe('@empoleon/dates/DatePickerInput', () => {
+  beforeEach(() => {
+    window.scrollTo = vi.fn();
+  });
+
   tests.axe([
-    <DatePickerInput aria-label="test-label" key="1" />,
-    <DatePickerInput aria-label="test-label" error key="2" />,
-    <DatePickerInput aria-label="test-label" error="test-error" id="test" key="3" />,
-    <DatePickerInput aria-label="test-label" description="test-description" key="4" />,
+    () => <DatePickerInput aria-label="test-label" />,
+    () => <DatePickerInput aria-label="test-label" error />,
+    () => <DatePickerInput aria-label="test-label" error="test-error" id="test" />,
+    () => <DatePickerInput aria-label="test-label" description="test-description" />,
   ]);
 
   tests.itSupportsSystemProps<DatePickerInputProps, __InputStylesNames>({
@@ -69,12 +73,12 @@ describe('@empoleon/dates/DatePickerInput', () => {
 
   it('supports valueFormat prop', () => {
     const { container, rerender } = render(
-      <DatePickerInput {...defaultProps} valueFormat="MMMM" value="2022-04-11" />
+      () => <DatePickerInput {...defaultProps} valueFormat="MMMM" value="2022-04-11" />
     );
     expectValue(container, 'April');
 
     rerender(
-      <DatePickerInput
+      () => <DatePickerInput
         {...defaultProps}
         type="multiple"
         valueFormat="MMMM"
@@ -84,7 +88,7 @@ describe('@empoleon/dates/DatePickerInput', () => {
     expectValue(container, 'April, May');
 
     rerender(
-      <DatePickerInput
+      () => <DatePickerInput
         {...defaultProps}
         type="range"
         valueFormat="MMMM"
@@ -96,7 +100,7 @@ describe('@empoleon/dates/DatePickerInput', () => {
 
   it('has correct default __staticSelector', () => {
     const { container } = render(
-      <DatePickerInput
+      () => <DatePickerInput
         {...defaultProps}
         popoverProps={{ opened: true, withinPortal: false, transitionProps: { duration: 0 } }}
       />
@@ -111,7 +115,7 @@ describe('@empoleon/dates/DatePickerInput', () => {
   it('supports controlled state (dropdown click)', async () => {
     const spy = vi.fn();
     const { container } = render(
-      <DatePickerInput {...defaultProps} value="2022-04-11" onChange={spy} />
+      () => <DatePickerInput {...defaultProps} value="2022-04-11" onChange={spy} />
     );
     await clickInput(container);
     await clickControl(container, 4);

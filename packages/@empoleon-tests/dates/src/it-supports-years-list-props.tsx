@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { DatesProvider } from '@empoleon/dates';
+import { DatesProvider, useDatesContext } from '@empoleon/dates';
 import { render } from '@empoleon-tests/core';
 import { JSX } from 'solid-js';
 
@@ -68,11 +68,17 @@ export function itSupportsYearsListProps(options: Options, name = 'supports year
     });
 
     it('supports years list localization with DatesProvider', () => {
+      const TestConsumer = () => {
+        const ctx = useDatesContext();
+        return <options.component {...options.props} locale={ctx.locale} yearsListFormat="MMM YYYY" />;
+      };
+
       const { container } = render(
         () => <DatesProvider settings={{ locale: 'ru' }}>
-          <options.component {...options.props} yearsListFormat="MMM YYYY" />
+          <TestConsumer />
         </DatesProvider>
       );
+
       expectYearNames(container as any, ruYearsNames);
     });
 

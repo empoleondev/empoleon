@@ -20,11 +20,9 @@ export function Usage() {
       <TimePicker
         label="Enter time"
         withSeconds
+        minutesStep={5}
         secondsStep={5}
-        clearable
-        name="time-picker"
-        form="my-form"
-        format="12h"
+        withDropdown
       />
     </div>
   );

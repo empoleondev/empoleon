@@ -55,25 +55,28 @@ describe('@empoleon/dates/YearLevel', () => {
   datesTests.itSupportsOnControlMouseEnter({ component: YearLevel, props: defaultProps });
 
   it('renders correct CalendarHeader label', () => {
-    render(<YearLevel {...defaultProps} />);
-    expectLabel('2022');
+    render(() => <YearLevel {...defaultProps} />);
+    const button = screen.getByRole('button', { name: /level-control/i });
+    expect(button.textContent).toBe('2022');
   });
 
   it('supports changing year label format', () => {
-    render(<YearLevel {...defaultProps} yearLabelFormat="MM/YY" />);
-    expectLabel('04/22');
+    render(() => <YearLevel {...defaultProps} yearLabelFormat="MM/YY" />);
+    const button = screen.getByRole('button', { name: /level-control/i });
+    expect(button.textContent).toBe('04/22');
   });
 
   it('supports changing year label with callback', () => {
     render(
-      <YearLevel {...defaultProps} yearLabelFormat={(date) => `${dayjs(date).format('MM/YYYY')}`} />
+      () => <YearLevel {...defaultProps} yearLabelFormat={(date) => `${dayjs(date).format('MM/YYYY')}`} />
     );
 
-    expectLabel('04/2022');
+    const button = screen.getByRole('button', { name: /level-control/i });
+    expect(button.textContent).toBe('04/2022');
   });
 
   it('has correct default __staticSelector', () => {
-    const { container } = render(<YearLevel {...defaultProps} />);
+    const { container } = render(() => <YearLevel {...defaultProps} />);
     expect(container.querySelector('table td button')).toHaveClass(
       'empoleon-YearLevel-monthsListControl'
     );
@@ -83,7 +86,7 @@ describe('@empoleon/dates/YearLevel', () => {
   });
 
   it('supports custom __staticSelector', () => {
-    const { container } = render(<YearLevel {...defaultProps} __staticSelector="Calendar" />);
+    const { container } = render(() => <YearLevel {...defaultProps} __staticSelector="Calendar" />);
     expect(container.querySelector('table td button')).toHaveClass(
       'empoleon-Calendar-monthsListControl'
     );
@@ -93,12 +96,12 @@ describe('@empoleon/dates/YearLevel', () => {
   });
 
   it('disables next control if maxDate is before end of month', () => {
-    render(<YearLevel {...defaultProps} maxDate="2022-04-11" />);
+    render(() => <YearLevel {...defaultProps} maxDate="2022-04-11" />);
     expect(screen.getByLabelText('next')).toBeDisabled();
   });
 
   it('disables previous control if minDate is after start of month', () => {
-    render(<YearLevel {...defaultProps} minDate="2022-04-11" />);
+    render(() => <YearLevel {...defaultProps} minDate="2022-04-11" />);
     expect(screen.getByLabelText('prev')).toBeDisabled();
   });
 });

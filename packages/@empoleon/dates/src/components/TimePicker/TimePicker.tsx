@@ -1,4 +1,4 @@
-import { createSignal, JSX, splitProps } from 'solid-js';
+import { createEffect, createSignal, JSX, onCleanup, onMount, Show, splitProps } from 'solid-js';
 import {
   __BaseInputProps,
   __InputStylesNames,
@@ -171,7 +171,7 @@ export interface TimePickerProps
   secondsRef?: HTMLInputElement | ((el: HTMLInputElement) => void);
 
   /** A ref object to get node reference of the am/pm select */
-  amPmRef?: HTMLInputElement | HTMLSelectElement | undefined;
+  amPmRef?: HTMLInputElement | HTMLSelectElement | ((el: HTMLInputElement | HTMLSelectElement) => void);
 
   /** Time presets to display in the dropdown */
   presets?: TimePickerPresets;
@@ -266,6 +266,8 @@ export const TimePicker = factory<TimePickerFactory>(_props => {
     'ref'
   ]);
 
+  let timePickerRef: HTMLDivElement | undefined;
+
   const { resolvedClassNames, resolvedStyles } = useResolvedStylesApi<TimePickerFactory>({
     classNames: local.classNames,
     styles: local.styles,
@@ -307,258 +309,325 @@ export const TimePicker = factory<TimePickerFactory>(_props => {
   const _amPmRef = useMergedRef(controller.refs.amPm, local.amPmRef);
 
   const hoursInputId = useId();
-  let hasFocus = false;
+  const [hasFocus, setHasFocus] = createSignal(false);
   const [dropdownOpened, setDropdownOpened] = createSignal(false);
 
   const handleFocus = (event: FocusEvent) => {
-    if (!hasFocus) {
-      hasFocus = true;
+    if (!hasFocus()) {
+      setHasFocus(true);
       local.onFocus?.(event);
     }
   };
 
   const handleBlur = (event: FocusEvent) => {
     if (!(event.currentTarget as Node)?.contains(event.relatedTarget as Node)) {
-      hasFocus = false;
+      setHasFocus(false);
       local.onBlur?.(event);
     }
   };
 
+  createEffect(() => {
+    setDropdownOpened(hasFocus);
+  });
+
+  // Blur detection for InputBase
+  onMount(() => {
+    if (!timePickerRef) return;
+
+    const handleClickOutside = (event: Event) => {
+      const target = event.target as Element;
+
+      if (!timePickerRef.contains(target as Node) &&
+          !target.closest('.empoleon-TimePicker-controlsList')) {
+        setHasFocus(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    onCleanup(() => document.removeEventListener('mousedown', handleClickOutside));
+  });
+
+  // createEffect(() => {
+  //   controller.isClearable()
+  // })
+
+  const ClearButtonSection = () => {
+  console.log('ClearButtonSection render: isClearable =', controller.isClearable());
+
+  return controller.isClearable() ? (
+    <CloseButton
+      {...local.clearButtonProps}
+      size={local.size}
+      onClick={(event) => {
+        controller.clear();
+        typeof local.clearButtonProps?.onClick === "function" && local.clearButtonProps?.onClick?.(event);
+      }}
+      onMouseDown={(event) => {
+        event.preventDefault();
+        typeof local.clearButtonProps?.onMouseDown === "function" && local.clearButtonProps?.onMouseDown?.(event);
+      }}
+    />
+  ) : null;
+};
+
   return (
-    <TimePickerProvider
-      value={{ getStyles, scrollAreaProps: local.scrollAreaProps, maxDropdownContentHeight: local.maxDropdownContentHeight! }}
-    >
-      <Popover
-        opened={local.withDropdown && !local.readOnly && dropdownOpened()}
-        transitionProps={{ duration: 0 }}
-        position="bottom-start"
-        withRoles={false}
-        {...local.popoverProps}
+    <div ref={timePickerRef}>
+      <TimePickerProvider
+        value={{
+          getStyles,
+          scrollAreaProps: local.scrollAreaProps,
+          maxDropdownContentHeight: local.maxDropdownContentHeight!
+        }}
       >
-        <Popover.Target>
-          <InputBase
-            component="div"
-            size={local.size}
-            disabled={local.disabled}
-            ref={local.ref}
-            onClick={(event) => {
-              typeof local.onClick === "function" && local.onClick?.(event);
-              controller.focus('hours');
-            }}
-            onMouseDown={(event) => {
-              event.preventDefault();
-              typeof local.onMouseDown === "function" && local.onMouseDown?.(event);
-            }}
-            onFocusCapture={(event) => {
-              setDropdownOpened(true);
-              typeof local.onFocusCapture === "function" && local.onFocusCapture?.(event);
-            }}
-            onBlurCapture={(event) => {
-              setDropdownOpened(false);
-              local.onBlurCapture?.(event);
-            }}
-            rightSection={
-              local.rightSection ||
-              (controller.isClearable && (
-                <CloseButton
-                  {...local.clearButtonProps}
+        <Popover
+          opened={dropdownOpened()}
+          transitionProps={{ duration: 0 }}
+          position="bottom-start"
+          withRoles={false}
+          disabled={local.disabled || local.readOnly || !local.withDropdown}
+          {...local.popoverProps}
+        >
+          <Popover.Target>
+            {(popoverProps) => (
+              <div ref={popoverProps.ref}>
+                <InputBase
+                  component="div"
                   size={local.size}
+                  disabled={local.disabled}
+                  ref={local.ref}
                   onClick={(event) => {
-                    controller.clear();
-                    typeof local.clearButtonProps?.onClick === "function" && local.clearButtonProps?.onClick?.(event);
+                    typeof local.onClick === "function" && local.onClick?.(event);
+
+                    // Only force focus to hours if clicking the container, not a SpinInput
+                    if (!event.target.closest('[role="spinbutton"]')) {
+                      controller.focus('hours');
+                      setTimeout(() => controller.focus('hours'), 0);
+                    }
                   }}
                   onMouseDown={(event) => {
                     event.preventDefault();
-                    typeof local.clearButtonProps?.onMouseDown === "function" && local.clearButtonProps?.onMouseDown?.(event);
+                    typeof local.onMouseDown === "function" && local.onMouseDown?.(event);
                   }}
-                />
-              ))
-            }
-            labelProps={{ htmlFor: hoursInputId, ...local.labelProps }}
-            style={local.style}
-            className={local.className}
-            classNames={resolvedClassNames}
-            styles={resolvedStyles}
-            __staticSelector="TimePicker"
-            {...others}
+                  rightSection={
+                    local.rightSection || (
+                      <Show when={controller.isClearable()}>
+                        <CloseButton
+                          {...local.clearButtonProps}
+                          size={local.size}
+                          onClick={(event) => {
+                            controller.clear();
+                            setTimeout(() => {
+                              controller.focus('hours');
+                            }, 0);
+                            typeof local.clearButtonProps?.onClick === "function" && local.clearButtonProps?.onClick?.(event);
+                          }}
+                          onMouseDown={(event) => {
+                            event.preventDefault();
+                            typeof local.clearButtonProps?.onMouseDown === "function" && local.clearButtonProps?.onMouseDown?.(event);
+                          }}
+                        />
+                      </Show>
+                    )
+                  }
+                  labelProps={{ htmlFor: hoursInputId, ...local.labelProps }}
+                  style={local.style}
+                  className={local.className}
+                  classNames={resolvedClassNames}
+                  styles={resolvedStyles}
+                  __staticSelector="TimePicker"
+                  {...others}
+                >
+                  <div {...getStyles('fieldsRoot')} dir="ltr">
+                    <div {...getStyles('fieldsGroup')} onBlur={handleBlur}>
+                      <SpinInput
+                        id={hoursInputId}
+                        {...local.hoursInputProps}
+                        {...getStyles('field', {
+                          className: local.hoursInputProps?.class,
+                          style: local.hoursInputProps?.style as any,
+                        })}
+                        value={controller.values.hours()}
+                        onChange={controller.setHours}
+                        onNextInput={() => controller.focus('minutes')}
+                        min={local.format === '12h' ? 1 : 0}
+                        max={local.format === '12h' ? 12 : 23}
+                        focusable
+                        step={local.hoursStep!}
+                        ref={_hoursRef}
+                        aria-label={local.hoursInputLabel}
+                        readOnly={local.readOnly}
+                        disabled={local.disabled}
+                        onPaste={controller.onPaste}
+                        onFocus={(event) => {
+                          handleFocus(event);
+                          typeof local.hoursInputProps?.onFocus === "function" && local.hoursInputProps?.onFocus?.(event);
+                        }}
+                      />
+                      <span>:</span>
+                      <SpinInput
+                        {...local.minutesInputProps}
+                        {...getStyles('field', {
+                          className: local.minutesInputProps?.class,
+                          style: local.minutesInputProps?.style as any,
+                        })}
+                        value={controller.values.minutes()}
+                        onChange={controller.setMinutes}
+                        min={0}
+                        max={59}
+                        focusable
+                        step={local.minutesStep!}
+                        ref={_minutesRef}
+                        onPreviousInput={() => controller.focus('hours')}
+                        onNextInput={() =>
+                          local.withSeconds ? controller.focus('seconds') : controller.focus('amPm')
+                        }
+                        aria-label={local.minutesInputLabel}
+                        tabIndex={-1}
+                        readOnly={local.readOnly}
+                        disabled={local.disabled}
+                        onPaste={controller.onPaste}
+                        onFocus={(event) => {
+                          handleFocus(event);
+                          typeof local.minutesInputProps?.onFocus === "function" && local.minutesInputProps?.onFocus?.(event);
+                        }}
+                      />
+
+                      {local.withSeconds && (
+                        <>
+                          <span>:</span>
+                          <SpinInput
+                            {...local.secondsInputProps}
+                            {...getStyles('field', {
+                              className: local.secondsInputProps?.class,
+                              style: local.secondsInputProps?.style as any,
+                            })}
+                            value={controller.values.seconds()}
+                            onChange={controller.setSeconds}
+                            min={0}
+                            max={59}
+                            focusable
+                            step={local.secondsStep!}
+                            ref={_secondsRef}
+                            onPreviousInput={() => controller.focus('minutes')}
+                            onNextInput={() => controller.focus('amPm')}
+                            aria-label={local.secondsInputLabel}
+                            tabIndex={-1}
+                            readOnly={local.readOnly}
+                            disabled={local.disabled}
+                            onPaste={controller.onPaste}
+                            onFocus={(event) => {
+                              handleFocus(event);
+
+                              const onFocus = local.secondsInputProps?.onFocus;
+                              if (typeof onFocus === 'function') {
+                                onFocus(event);
+                              }
+                            }}
+                          />
+                        </>
+                      )}
+
+                      {local.format === '12h' && (
+                        <AmPmInput
+                          {...local.amPmSelectProps}
+                          inputType={local.withDropdown ? 'input' : 'select'}
+                          labels={local.amPmLabels!}
+                          value={controller.values.amPm()}
+                          onChange={controller.setAmPm}
+                          ref={_amPmRef}
+                          aria-label={local.amPmInputLabel}
+                          onPreviousInput={() =>
+                            local.withSeconds ? controller.focus('seconds') : controller.focus('minutes')
+                          }
+                          readOnly={local.readOnly}
+                          disabled={local.disabled}
+                          tabIndex={-1}
+                          onPaste={controller.onPaste}
+                          onFocus={(event) => {
+                            handleFocus(event);
+                            const userOnFocus = local.amPmSelectProps?.onFocus;
+                            if (typeof userOnFocus === 'function') {
+                              userOnFocus(event as any);
+                            }
+                          }}
+                          onBlur={(event) => {
+                            // Only call handleBlur if relatedTarget is null (focus leaving component entirely)
+                            // or relatedTarget is outside the TimePicker component
+                            if (!event.relatedTarget || !timePickerRef?.contains(event.relatedTarget as Node)) {
+                              handleBlur(event);
+                            }
+                            const userOnBlur = local.amPmSelectProps?.onBlur;
+                            if (typeof userOnBlur === 'function') {
+                              userOnBlur(event as any);
+                            }
+                          }}
+                        />
+                      )}
+                    </div>
+                  </div>
+
+                  <input
+                    type="hidden"
+                    name={local.name}
+                    form={local.form}
+                    value={controller.hiddenInputValue}
+                    {...local.hiddenInputProps}
+                  />
+                </InputBase>
+              </div>
+            )}
+          </Popover.Target>
+          <Popover.Dropdown
+            {...getStyles('dropdown')}
+            onMouseDown={(event) => event.preventDefault()}
           >
-            <div {...getStyles('fieldsRoot')} dir="ltr">
-              <div {...getStyles('fieldsGroup')} onBlur={handleBlur}>
-                <SpinInput
-                  id={hoursInputId}
-                  {...local.hoursInputProps}
-                  {...getStyles('field', {
-                    className: local.hoursInputProps?.class,
-                    style: local.hoursInputProps?.style as any,
-                  })}
-                  value={controller.values.hours()}
-                  onChange={controller.setHours}
-                  onNextInput={() => controller.focus('minutes')}
+            {local.presets ? (
+              <TimePresets
+                value={controller.hiddenInputValue}
+                onChange={controller.setTimeString}
+                format={local.format!}
+                presets={local.presets}
+                amPmLabels={local.amPmLabels!}
+                withSeconds={local.withSeconds || false}
+              />
+            ) : (
+              <div {...getStyles('controlsListGroup')}>
+                <TimeControlsList
                   min={local.format === '12h' ? 1 : 0}
                   max={local.format === '12h' ? 12 : 23}
-                  focusable
                   step={local.hoursStep!}
-                  ref={_hoursRef}
-                  aria-label={local.hoursInputLabel}
-                  readOnly={local.readOnly}
-                  disabled={local.disabled}
-                  onPaste={controller.onPaste}
-                  onFocus={(event) => {
-                    handleFocus(event);
-                    typeof local.hoursInputProps?.onFocus === "function" && local.hoursInputProps?.onFocus?.(event);
-                  }}
+                  value={controller.values.hours()}
+                  onSelect={controller.setHours}
                 />
-                <span>:</span>
-                <SpinInput
-                  {...local.minutesInputProps}
-                  {...getStyles('field', {
-                    className: local.minutesInputProps?.class,
-                    style: local.minutesInputProps?.style as any,
-                  })}
-                  value={controller.values.minutes()}
-                  onChange={controller.setMinutes}
-                  min={0}
-                  max={59}
-                  focusable
-                  step={local.minutesStep!}
-                  ref={_minutesRef}
-                  onPreviousInput={() => controller.focus('hours')}
-                  onNextInput={() =>
-                    local.withSeconds ? controller.focus('seconds') : controller.focus('amPm')
-                  }
-                  aria-label={local.minutesInputLabel}
-                  tabIndex={-1}
-                  readOnly={local.readOnly}
-                  disabled={local.disabled}
-                  onPaste={controller.onPaste}
-                  onFocus={(event) => {
-                    handleFocus(event);
-                    typeof local.minutesInputProps?.onFocus === "function" && local.minutesInputProps?.onFocus?.(event);
-                  }}
-                />
-
-                {local.withSeconds && (
-                  <>
-                    <span>:</span>
-                    <SpinInput
-                      {...local.secondsInputProps}
-                      {...getStyles('field', {
-                        className: local.secondsInputProps?.class,
-                        style: local.secondsInputProps?.style as any,
-                      })}
-                      value={controller.values.seconds()}
-                      onChange={controller.setSeconds}
-                      min={0}
-                      max={59}
-                      focusable
-                      step={local.secondsStep!}
-                      ref={_secondsRef}
-                      onPreviousInput={() => controller.focus('minutes')}
-                      onNextInput={() => controller.focus('amPm')}
-                      aria-label={local.secondsInputLabel}
-                      tabIndex={-1}
-                      readOnly={local.readOnly}
-                      disabled={local.disabled}
-                      onPaste={controller.onPaste}
-                      onFocus={(event) => {
-                        handleFocus(event);
-
-                        const onFocus = local.secondsInputProps?.onFocus;
-                        if (typeof onFocus === 'function') {
-                          onFocus(event);
-                        }
-                      }}
-                    />
-                  </>
-                )}
-
-                {local.format === '12h' && (
-                  <AmPmInput
-                    {...local.amPmSelectProps}
-                    inputType={local.withDropdown ? 'input' : 'select'}
-                    labels={local.amPmLabels!}
-                    value={controller.values.amPm()}
-                    onChange={controller.setAmPm}
-                    ref={_amPmRef}
-                    aria-label={local.amPmInputLabel}
-                    onPreviousInput={() =>
-                      local.withSeconds ? controller.focus('seconds') : controller.focus('minutes')
-                    }
-                    readOnly={local.readOnly}
-                    disabled={local.disabled}
-                    tabIndex={-1}
-                    onPaste={controller.onPaste}
-                    onFocus={(event) => {
-                      handleFocus(event);
-                      const userOnFocus = local.amPmSelectProps?.onFocus;
-                      if (typeof userOnFocus === 'function') {
-                        userOnFocus(event as any);
-                      }
-                    }}
-                  />
-                )}
-              </div>
-            </div>
-
-            <input
-              type="hidden"
-              name={local.name}
-              form={local.form}
-              value={controller.hiddenInputValue}
-              {...local.hiddenInputProps}
-            />
-          </InputBase>
-        </Popover.Target>
-        <Popover.Dropdown
-          {...getStyles('dropdown')}
-          onMouseDown={(event) => event.preventDefault()}
-        >
-          {local.presets ? (
-            <TimePresets
-              value={controller.hiddenInputValue}
-              onChange={controller.setTimeString}
-              format={local.format!}
-              presets={local.presets}
-              amPmLabels={local.amPmLabels!}
-              withSeconds={local.withSeconds || false}
-            />
-          ) : (
-            <div {...getStyles('controlsListGroup')}>
-              <TimeControlsList
-                min={local.format === '12h' ? 1 : 0}
-                max={local.format === '12h' ? 12 : 23}
-                step={local.hoursStep!}
-                value={controller.values.hours()}
-                onSelect={controller.setHours}
-              />
-              <TimeControlsList
-                min={0}
-                max={59}
-                step={local.minutesStep!}
-                value={controller.values.minutes()}
-                onSelect={controller.setMinutes}
-              />
-              {local.withSeconds && (
                 <TimeControlsList
                   min={0}
                   max={59}
-                  step={local.secondsStep!}
-                  value={controller.values.seconds()}
-                  onSelect={controller.setSeconds}
+                  step={local.minutesStep!}
+                  value={controller.values.minutes()}
+                  onSelect={controller.setMinutes}
                 />
-              )}
-              {local.format === '12h' && (
-                <AmPmControlsList
-                  labels={local.amPmLabels!}
-                  value={controller.values.amPm()}
-                  onSelect={controller.setAmPm}
-                />
-              )}
-            </div>
-          )}
-        </Popover.Dropdown>
-      </Popover>
-    </TimePickerProvider>
+                {local.withSeconds && (
+                  <TimeControlsList
+                    min={0}
+                    max={59}
+                    step={local.secondsStep!}
+                    value={controller.values.seconds()}
+                    onSelect={controller.setSeconds}
+                  />
+                )}
+                {local.format === '12h' && (
+                  <AmPmControlsList
+                    labels={local.amPmLabels!}
+                    value={controller.values.amPm()}
+                    onSelect={controller.setAmPm}
+                  />
+                )}
+              </div>
+            )}
+          </Popover.Dropdown>
+        </Popover>
+      </TimePickerProvider>
+    </div>
   );
 });
 

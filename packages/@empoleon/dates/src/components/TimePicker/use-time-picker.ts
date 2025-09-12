@@ -39,32 +39,35 @@ export function useTimePicker(props: UseTimePickerInput) {
   const [seconds, setSeconds] = createSignal<number | null>(parsedTime.seconds);
   const [amPm, setAmPm] = createSignal<string | null>(parsedTime.amPm);
 
-  const isClearable =
-    props.clearable &&
-    !props.readOnly &&
-    !props.disabled &&
-    (hours !== null || minutes !== null || seconds !== null || amPm !== null);
+  const isClearable = createMemo(() => {
+    const hasValue = hours() !== null || minutes() !== null || (withSeconds && seconds() !== null) || (props.format === '12h' && amPm() !== null);
 
-  let hoursRef: HTMLInputElement | undefined;
-  let minutesRef: HTMLInputElement | undefined;
-  let secondsRef: HTMLInputElement | undefined;
-  let amPmRef: HTMLSelectElement | undefined;
+    return props.clearable &&
+      !props.readOnly &&
+      !props.disabled &&
+      hasValue;
+  });
+
+  const [hoursRef, setHoursRef] = createSignal<HTMLInputElement | undefined>();
+  const [minutesRef, setMinutesRef] = createSignal<HTMLInputElement | undefined>();
+  const [secondsRef, setSecondsRef] = createSignal<HTMLInputElement | undefined>();
+  const [amPmRef, setAmPmRef] = createSignal<HTMLInputElement | HTMLSelectElement | undefined>();
 
   const focus = (field: 'hours' | 'minutes' | 'seconds' | 'amPm') => {
     if (field === 'hours') {
-      hoursRef?.focus();
+      hoursRef()?.focus();
     }
 
     if (field === 'minutes') {
-      minutesRef?.focus();
+      minutesRef()?.focus();
     }
 
     if (field === 'seconds') {
-      secondsRef?.focus();
+      secondsRef()?.focus();
     }
 
     if (field === 'amPm') {
-      amPmRef?.focus();
+      amPmRef()?.focus();
     }
   };
 
@@ -195,7 +198,7 @@ export function useTimePicker(props: UseTimePickerInput) {
   });
 
   return {
-    refs: { hours: hoursRef, minutes: minutesRef, seconds: secondsRef, amPm: amPmRef },
+    refs: { hours: setHoursRef, minutes: setMinutesRef, seconds: setSecondsRef, amPm: setAmPmRef },
     values: { hours, minutes, seconds, amPm },
     setHours: onHoursChange,
     setMinutes: onMinutesChange,

@@ -48,31 +48,31 @@ describe('@empoleon/dates/YearLevelGroup', () => {
   });
 
   it('renders correct number of columns based on numberOfColumns prop', () => {
-    const { rerender } = render(<YearLevelGroup {...defaultProps} numberOfColumns={1} />);
+    const { rerender } = render(() => <YearLevelGroup {...defaultProps} numberOfColumns={1} />);
     expect(screen.getAllByLabelText('level-control')).toHaveLength(1);
 
-    rerender(<YearLevelGroup {...defaultProps} numberOfColumns={2} />);
+    rerender(() => <YearLevelGroup {...defaultProps} numberOfColumns={2} />);
     expect(screen.getAllByLabelText('level-control')).toHaveLength(2);
 
-    rerender(<YearLevelGroup {...defaultProps} numberOfColumns={3} />);
+    rerender(() => <YearLevelGroup {...defaultProps} numberOfColumns={3} />);
     expect(screen.getAllByLabelText('level-control')).toHaveLength(3);
   });
 
   it('renders correct years group based on year prop', () => {
-    render(<YearLevelGroup {...defaultProps} numberOfColumns={3} />);
+    render(() => <YearLevelGroup {...defaultProps} numberOfColumns={3} />);
     expect(screen.getAllByLabelText('level-control').map((node) => node.textContent)).toStrictEqual(
       ['2022', '2023', '2024']
     );
   });
 
   it('supports levelControlAriaLabel as string', () => {
-    render(<YearLevelGroup {...defaultProps} levelControlAriaLabel="test-label" />);
+    render(() => <YearLevelGroup {...defaultProps} levelControlAriaLabel="test-label" />);
     expect(screen.getByText('2022')).toHaveAttribute('aria-label', 'test-label');
   });
 
   it('supports levelControlAriaLabel as function', () => {
     render(
-      <YearLevelGroup
+      () => <YearLevelGroup
         {...defaultProps}
         levelControlAriaLabel={(date) =>
           `${new Date(date).getMonth()}/${new Date(date).getFullYear()}`
@@ -83,14 +83,14 @@ describe('@empoleon/dates/YearLevelGroup', () => {
   });
 
   it('has correct default __staticSelector', () => {
-    const { container } = render(<YearLevelGroup {...defaultProps} />);
+    const { container } = render(() => <YearLevelGroup {...defaultProps} />);
     expect(container.querySelector('table button')).toHaveClass(
       'empoleon-YearLevelGroup-monthsListControl'
     );
   });
 
   it('supports custom __staticSelector', () => {
-    const { container } = render(<YearLevelGroup {...defaultProps} __staticSelector="Calendar" />);
+    const { container } = render(() => <YearLevelGroup {...defaultProps} __staticSelector="Calendar" />);
     expect(container.querySelector('table button')).toHaveClass(
       'empoleon-Calendar-monthsListControl'
     );

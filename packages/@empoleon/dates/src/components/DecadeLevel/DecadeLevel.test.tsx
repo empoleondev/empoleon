@@ -53,18 +53,22 @@ describe('@empoleon/dates/DecadeLevel', () => {
   datesTests.itSupportsOnControlMouseEnter({ component: DecadeLevel, props: defaultProps });
 
   it('renders correct CalendarHeader label', () => {
-    render(<DecadeLevel {...defaultProps} />);
-    expectLabel('2020 – 2029');
+    render(() => <DecadeLevel {...defaultProps} />);
+    const levelControl = screen.getByLabelText(/level-control/i);
+
+    expect(levelControl.textContent).toBe('2020 – 2029');
   });
 
   it('supports changing decade label format', () => {
-    render(<DecadeLevel {...defaultProps} decadeLabelFormat="MM/YY" />);
-    expectLabel('01/20 – 01/29');
+    render(() => <DecadeLevel {...defaultProps} decadeLabelFormat="MM/YY" />);
+
+    const levelControl = screen.getByLabelText(/level-control/i);
+    expect(levelControl.textContent).toBe('01/20 – 01/29');
   });
 
   it('supports changing decade label with callback', () => {
     render(
-      <DecadeLevel
+      () => <DecadeLevel
         {...defaultProps}
         decadeLabelFormat={(startOfDecade, endOfDecade) =>
           `${dayjs(startOfDecade).month()}/${dayjs(startOfDecade).year()} – ${dayjs(endOfDecade).month()}/${dayjs(endOfDecade).year()}`
@@ -72,11 +76,12 @@ describe('@empoleon/dates/DecadeLevel', () => {
       />
     );
 
-    expectLabel('0/2020 – 0/2029');
+    const levelControl = screen.getByLabelText(/level-control/i);
+    expect(levelControl.textContent).toBe('0/2020 – 0/2029');
   });
 
   it('has correct default __staticSelector', () => {
-    const { container } = render(<DecadeLevel {...defaultProps} />);
+    const { container } = render(() => <DecadeLevel {...defaultProps} />);
     expect(container.querySelector('table td button')).toHaveClass(
       'empoleon-DecadeLevel-yearsListControl'
     );
@@ -86,7 +91,7 @@ describe('@empoleon/dates/DecadeLevel', () => {
   });
 
   it('supports custom __staticSelector', () => {
-    const { container } = render(<DecadeLevel {...defaultProps} __staticSelector="Calendar" />);
+    const { container } = render(() => <DecadeLevel {...defaultProps} __staticSelector="Calendar" />);
     expect(container.querySelector('table td button')).toHaveClass(
       'empoleon-Calendar-yearsListControl'
     );
@@ -96,12 +101,12 @@ describe('@empoleon/dates/DecadeLevel', () => {
   });
 
   it('disables next control if maxDate is before end of month', () => {
-    render(<DecadeLevel {...defaultProps} maxDate="2022-04-11" />);
+    render(() => <DecadeLevel {...defaultProps} maxDate="2022-04-11" />);
     expect(screen.getByLabelText('next')).toBeDisabled();
   });
 
   it('disables previous control if minDate is after start of month', () => {
-    render(<DecadeLevel {...defaultProps} minDate="2022-04-11" />);
+    render(() => <DecadeLevel {...defaultProps} minDate="2022-04-11" />);
     expect(screen.getByLabelText('prev')).toBeDisabled();
   });
 });

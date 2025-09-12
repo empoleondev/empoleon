@@ -34,85 +34,20 @@ export function itSupportsStylesApi<
   Props extends Record<string, any>,
   Selectors extends string = string,
 >(options: Options<Props, Selectors>, name = 'supports styles api') {
-  // it(`${name}: classNames (inline object)`, () => {
-  //   const classNames = getTestObjectClassNames(options.selectors);
-  //   const baseProps = getPropsValue(options.props);
-  //   const propsWithClassNames = { ...baseProps, classNames } as Props & { classNames: any };
-  //   const { container } = render(() => <options.component {...propsWithClassNames} />);
-
-  //   options.selectors.forEach((selector) => {
-  //     try {
-  //       expect(container.querySelector(`.${classNames[selector]}`)).toBeInTheDocument();
-  //     } catch (e) {
-  //       throw new Error(`Missing selector: .${classNames[selector]} - Check if this component actually renders elements with the '${selector}' selector`);
-  //     }
-  //   });
-  // });
   it(`${name}: classNames (inline object)`, () => {
-  const classNames = getTestObjectClassNames(options.selectors);
-  const baseProps = getPropsValue(options.props);
-  const propsWithClassNames = { ...baseProps, classNames } as Props & { classNames: any };
+    const classNames = getTestObjectClassNames(options.selectors);
+    const baseProps = getPropsValue(options.props);
+    const propsWithClassNames = { ...baseProps, classNames } as Props & { classNames: any };
+    const { container } = render(() => <options.component {...propsWithClassNames} />);
 
-  console.log('=== TEST DEBUG INFO ===');
-  console.log('Component name:', name);
-  console.log('Expected selectors:', options.selectors);
-  console.log('Generated classNames:', classNames);
-  console.log('Base props:', baseProps);
-  console.log('Props with classNames:', propsWithClassNames);
-
-  const { container } = render(() => <options.component {...propsWithClassNames} />);
-
-  console.log('=== RENDERED HTML ===');
-  console.log(container.innerHTML);
-
-  console.log('=== RENDERED DOM STRUCTURE ===');
-  console.log(container.outerHTML);
-
-  console.log('=== ALL ELEMENTS WITH CLASSES ===');
-  const allElementsWithClasses = container.querySelectorAll('[class]');
-  allElementsWithClasses.forEach((el, index) => {
-    console.log(`Element ${index}:`, {
-      tagName: el.tagName,
-      className: el.className,
-      classList: Array.from(el.classList),
-      textContent: el.textContent?.trim().substring(0, 50) + '...'
+    options.selectors.forEach((selector) => {
+      try {
+        expect(container.querySelector(`.${classNames[selector]}`)).toBeInTheDocument();
+      } catch (e) {
+        throw new Error(`Missing selector: .${classNames[selector]} - Check if this component actually renders elements with the '${selector}' selector`);
+      }
     });
   });
-
-  console.log('=== CHECKING SELECTORS ===');
-  options.selectors.forEach((selector) => {
-    const expectedClassName = classNames[selector];
-    const element = container.querySelector(`.${expectedClassName}`);
-
-    console.log(`Checking selector '${selector}':`);
-    console.log(`  Expected className: '${expectedClassName}'`);
-    console.log(`  Element found:`, element ? 'YES' : 'NO');
-
-    if (element) {
-      console.log(`  Element details:`, {
-        tagName: element.tagName,
-        className: element.className,
-        classList: Array.from(element.classList)
-      });
-    } else {
-      console.log(`  Similar classes found:`,
-        Array.from(container.querySelectorAll('[class]'))
-          .map(el => el.className)
-          .filter(className => className.includes('month') || className.includes('row'))
-      );
-    }
-
-    try {
-      expect(element).toBeInTheDocument();
-      console.log(`  ✅ PASS: ${selector}`);
-    } catch (e) {
-      console.log(`  ❌ FAIL: ${selector}`);
-      throw new Error(`Missing selector: .${expectedClassName} - Check if this component actually renders elements with the '${selector}' selector`);
-    }
-  });
-
-  console.log('=== END DEBUG INFO ===');
-});
 
   if (!options.compound) {
     it(`${name}: classNames (inline function)`, () => {

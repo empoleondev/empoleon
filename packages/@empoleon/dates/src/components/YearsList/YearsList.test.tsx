@@ -33,13 +33,13 @@ describe('@empoleon/dates/YearsList', () => {
   datesTests.itSupportsOnControlMouseEnter({ component: YearsList, props: defaultProps });
 
   it('has correct default __staticSelector', () => {
-    render(<YearsList {...defaultProps} />);
+    render(() => <YearsList {...defaultProps} />);
     expect(screen.getByRole('table')).toHaveClass('empoleon-YearsList-yearsList');
     expect(screen.getAllByRole('button')[0]).toHaveClass('empoleon-YearsList-yearsListControl');
   });
 
   it('supports custom __staticSelector', () => {
-    render(<YearsList {...defaultProps} __staticSelector="Calendar" />);
+    render(() => <YearsList {...defaultProps} __staticSelector="Calendar" />);
     expect(screen.getByRole('table')).toHaveClass('empoleon-Calendar-yearsList');
     expect(screen.getAllByRole('button')[0]).toHaveClass('empoleon-Calendar-yearsListControl');
   });

@@ -18,7 +18,7 @@ import { getMonthInTabOrder } from './get-month-in-tab-order/get-month-in-tab-or
 import { getMonthsData } from './get-months-data/get-months-data';
 import { isMonthDisabled } from './is-month-disabled/is-month-disabled';
 import classes from './MonthsList.module.css';
-import { splitProps } from 'solid-js';
+import { createMemo, For, splitProps } from 'solid-js';
 
 export type MonthsListStylesNames =
   | 'monthsList'
@@ -112,81 +112,85 @@ export const MonthsList = factory<MonthsListFactory>(_props => {
 
   const ctx = useDatesContext();
 
-  const months = getMonthsData(local.year);
+  const months = () => getMonthsData(local.year);
 
   const monthInTabOrder = getMonthInTabOrder({
-    months,
+    months: months(),
     minDate: toDateString(local.minDate)!,
     maxDate: toDateString(local.maxDate)!,
     getMonthControlProps: local.getMonthControlProps,
   });
 
-  const rows = months.map((monthsRow, rowIndex) => {
-    const cells = monthsRow.map((month, cellIndex) => {
-      const controlProps = local.getMonthControlProps?.(month);
-      const isMonthInTabOrder = dayjs(month).isSame(monthInTabOrder, 'month');
-      return (
-        <td
-          {...getStyles('monthsListCell')}
-          data-with-spacing={local.withCellSpacing || undefined}
-        >
-          <PickerControl
-            {...getStyles('monthsListControl')}
-            size={local.size}
-            unstyled={local.unstyled}
-            __staticSelector={local.__staticSelector || 'MonthsList'}
-            data-empoleon-stop-propagation={local.__stopPropagation || undefined}
-            disabled={isMonthDisabled({
-              month,
-              minDate: toDateString(local.minDate)!,
-              maxDate: toDateString(local.maxDate)!,
-            })}
-            ref={(node) => local.__getControlRef?.(rowIndex, cellIndex, node!)}
-            {...controlProps}
-            onKeyDown={(event) => {
-              if (typeof controlProps?.onKeyDown === 'function') {
-                controlProps?.onKeyDown?.(event);
-              }
-              local.__onControlKeyDown?.(event, { rowIndex, cellIndex, date: month });
-            }}
-            onClick={(event) => {
-              if (typeof controlProps?.onClick === 'function') {
-                controlProps?.onClick?.(event);
-              }
-              local.__onControlClick?.(event, month);
-            }}
-            onMouseEnter={(event) => {
-              if (typeof controlProps?.onMouseEnter === 'function') {
-                controlProps?.onMouseEnter?.(event);
-              }
-              local.__onControlMouseEnter?.(event, month);
-            }}
-            onMouseDown={(event) => {
-              if (typeof controlProps?.onMouseDown === 'function') {
-                controlProps?.onMouseDown?.(event);
-              }
-              local.__preventFocus && event.preventDefault();
-            }}
-            tabIndex={local.__preventFocus || !isMonthInTabOrder ? -1 : 0}
-          >
-            {dayjs(month).locale(ctx.getLocale(local.locale)).format(local.monthsListFormat)}
-          </PickerControl>
-        </td>
-      );
-    });
-
-    return (
-      <tr {...getStyles('monthsListRow')}>
-        {cells}
-      </tr>
-    );
-  });
-
   return (
     <Box component="table" ref={local.ref} size={local.size} {...getStyles('monthsList')} {...others}>
-      <tbody>{rows}</tbody>
+      <tbody>
+        <For each={months()}>
+          {(monthsRow, rowIndex) => (
+            <tr {...getStyles('monthsListRow')}>
+              <For each={monthsRow}>
+                {(month, cellIndex) => {
+                  const controlProps = createMemo(() => local.getMonthControlProps?.(month));
+                  const isMonthInTabOrder = dayjs(month).isSame(monthInTabOrder, 'month');
+                  return (
+                    <td
+                      {...getStyles('monthsListCell')}
+                      data-with-spacing={local.withCellSpacing || undefined}
+                    >
+                      <PickerControl
+                        {...getStyles('monthsListControl')}
+                        size={local.size}
+                        unstyled={local.unstyled}
+                        __staticSelector={local.__staticSelector || 'MonthsList'}
+                        data-empoleon-stop-propagation={local.__stopPropagation || undefined}
+                        disabled={isMonthDisabled({
+                          month,
+                          minDate: toDateString(local.minDate)!,
+                          maxDate: toDateString(local.maxDate)!,
+                        })}
+                        ref={(node) => local.__getControlRef?.(rowIndex(), cellIndex(), node!)}
+                        {...controlProps}
+                        onKeyDown={(event) => {
+                          const props = controlProps();
+                          if (props?.onKeyDown) {
+                            (props.onKeyDown as any)(event);
+                          }
+                          local.__onControlKeyDown?.(event, { rowIndex: rowIndex(), cellIndex: cellIndex(), date: month });
+                        }}
+                        onClick={(event) => {
+                          const props = controlProps();
+                          if (props?.onClick) {
+                            (props.onClick as any)(event);
+                          }
+                          local.__onControlClick?.(event, month);
+                        }}
+                        onMouseEnter={(event) => {
+                          const props = controlProps();
+                          if (props?.onMouseEnter) {
+                            (props.onMouseEnter as any)(event);
+                          }
+                          local.__onControlMouseEnter?.(event, month);
+                        }}
+                        onMouseDown={(event) => {
+                          const props = controlProps();
+                          if (props?.onMouseDown) {
+                            (props.onMouseDown as any)(event);
+                          }
+                          local.__preventFocus && event.preventDefault();
+                        }}
+                        tabIndex={local.__preventFocus || !isMonthInTabOrder ? -1 : 0}
+                      >
+                        {dayjs(month).locale(ctx.getLocale(local.locale)).format(local.monthsListFormat)}
+                      </PickerControl>
+                    </td>
+                  );
+                }}
+              </For>
+            </tr>
+          )}
+        </For>
+      </tbody>
     </Box>
-  );
+  )
 });
 
 MonthsList.classes = classes;

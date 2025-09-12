@@ -83,7 +83,7 @@ export const DatePickerInput: DatePickerInputComponent = factory<DatePickerInput
     props,
   });
 
-  const { calendarProps, others } = pickCalendarProps(rest);
+  const pCalendarProps = pickCalendarProps(rest);
 
   const datesInput = useDatesInput({
     type: local.type as any,
@@ -102,7 +102,7 @@ export const DatePickerInput: DatePickerInputComponent = factory<DatePickerInput
 
   return (
     <PickerInputBase
-      formattedValue={datesInput.formattedValue}
+      formattedValue={datesInput.formattedValue()}
       dropdownOpened={datesInput.dropdownOpened()}
       dropdownHandlers={datesInput.dropdownHandlers}
       classNames={resolvedClassNames}
@@ -115,12 +115,12 @@ export const DatePickerInput: DatePickerInputComponent = factory<DatePickerInput
       size={local.size!}
       variant={local.variant}
       dropdownType={local.dropdownType}
-      {...others}
+      {...pCalendarProps.others}
       type={local.type as any}
       __staticSelector="DatePickerInput"
     >
       <DatePicker
-        {...calendarProps}
+        {...pCalendarProps.calendarProps}
         size={local.size}
         variant={local.variant}
         type={local.type}

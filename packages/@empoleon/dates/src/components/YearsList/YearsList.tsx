@@ -1,4 +1,4 @@
-import { splitProps } from 'solid-js';
+import { createMemo, For, splitProps } from 'solid-js';
 import dayjs from 'dayjs';
 import {
   Box,
@@ -111,74 +111,78 @@ export const YearsList = factory<YearsListFactory>(_props => {
 
   const ctx = useDatesContext();
 
-  const years = getYearsData(local.decade);
+  const years = () => getYearsData(local.decade);
 
   const yearInTabOrder = getYearInTabOrder({
-    years,
+    years: years(),
     minDate: local.minDate,
     maxDate: local.maxDate,
     getYearControlProps: local.getYearControlProps,
   });
 
-  const rows = years.map((yearsRow, rowIndex) => {
-    const cells = yearsRow.map((year, cellIndex) => {
-      const controlProps = local.getYearControlProps?.(year);
-      const isYearInTabOrder = dayjs(year).isSame(yearInTabOrder, 'year');
-      return (
-        <td
-          {...getStyles('yearsListCell')}
-          data-with-spacing={local.withCellSpacing || undefined}
-        >
-          <PickerControl
-            {...getStyles('yearsListControl')}
-            size={local.size}
-            unstyled={local.unstyled}
-            data-empoleon-stop-propagation={local.__stopPropagation || undefined}
-            disabled={isYearDisabled({ year, minDate: local.minDate, maxDate: local.maxDate })}
-            ref={(node) => local.__getControlRef?.(rowIndex, cellIndex, node!)}
-            {...controlProps}
-            onKeyDown={(event) => {
-              if (typeof controlProps?.onKeyDown === 'function') {
-                controlProps.onKeyDown(event);
-              }
-              local.__onControlKeyDown?.(event, { rowIndex, cellIndex, date: year });
-            }}
-            onClick={(event) => {
-              if (typeof controlProps?.onClick === 'function') {
-                controlProps.onClick(event);
-              }
-              local.__onControlClick?.(event, year);
-            }}
-            onMouseEnter={(event) => {
-              if (typeof controlProps?.onMouseEnter === 'function') {
-                controlProps.onMouseEnter(event);
-              }
-              local.__onControlMouseEnter?.(event, year);
-            }}
-            onMouseDown={(event) => {
-              if (typeof controlProps?.onMouseDown === 'function') {
-                controlProps.onMouseDown(event);
-              }
-              local.__preventFocus && event.preventDefault();
-            }}
-            tabIndex={local.__preventFocus || !isYearInTabOrder ? -1 : 0}
-          >
-            {dayjs(year).locale(ctx.getLocale(local.locale)).format(local.yearsListFormat)}
-          </PickerControl>
-        </td>
-      );
-    });
-
-    return (
-      <tr {...getStyles('yearsListRow')}>
-        {cells}
-      </tr>
-    );
-  });
-
   return (
     <Box component="table" ref={local.ref} size={local.size} {...getStyles('yearsList')} {...others}>
-      <tbody>{rows}</tbody>
+      <tbody>
+        <For each={years()}>
+          {(yearsRow, rowIndex) => (
+            <tr {...getStyles('yearsListRow')}>
+              <For each={yearsRow}>
+                {(year, cellIndex) => {
+                  const controlProps = createMemo(() => local.getYearControlProps?.(year));
+                  const isYearInTabOrder = dayjs(year).isSame(yearInTabOrder, 'year');
+                  return (
+                    <td
+                      {...getStyles('yearsListCell')}
+                      data-with-spacing={local.withCellSpacing || undefined}
+                    >
+                      <PickerControl
+                        {...getStyles('yearsListControl')}
+                        size={local.size}
+                        unstyled={local.unstyled}
+                        data-empoleon-stop-propagation={local.__stopPropagation || undefined}
+                        disabled={isYearDisabled({ year, minDate: local.minDate, maxDate: local.maxDate })}
+                        ref={(node) => local.__getControlRef?.(rowIndex(), cellIndex(), node!)}
+                        {...controlProps}
+                        onKeyDown={(event) => {
+                          const props = controlProps();
+                          if (props?.onKeyDown) {
+                            (props.onKeyDown as any)(event);
+                          }
+                          local.__onControlKeyDown?.(event, { rowIndex: rowIndex(), cellIndex: cellIndex(), date: year });
+                        }}
+                        onClick={(event) => {
+                          const props = controlProps();
+                          if (props?.onClick) {
+                            (props.onClick as any)(event);
+                          }
+                          local.__onControlClick?.(event, year);
+                        }}
+                        onMouseEnter={(event) => {
+                          const props = controlProps();
+                          if (props?.onMouseEnter) {
+                            (props.onMouseEnter as any)(event);
+                          }
+                          local.__onControlMouseEnter?.(event, year);
+                        }}
+                        onMouseDown={(event) => {
+                          const props = controlProps();
+                          if (props?.onMouseDown) {
+                            (props.onMouseDown as any)(event);
+                          }
+                          local.__preventFocus && event.preventDefault();
+                        }}
+                        tabIndex={local.__preventFocus || !isYearInTabOrder ? -1 : 0}
+                      >
+                        {dayjs(year).locale(ctx.getLocale(local.locale)).format(local.yearsListFormat)}
+                      </PickerControl>
+                    </td>
+                  );
+                }}
+              </For>
+            </tr>
+          )}
+        </For>
+      </tbody>
     </Box>
   );
 });

@@ -1,4 +1,4 @@
-import { JSX, splitProps } from 'solid-js';
+import { createEffect, For, JSX, splitProps } from 'solid-js';
 import dayjs from 'dayjs';
 import { BoxProps, ElementProps, factory, Factory, StylesApiProps, useProps } from '@empoleon/core';
 import { DateStringValue } from '../../types';
@@ -82,73 +82,6 @@ export const YearLevelGroup = factory<YearLevelGroupFactory>(_props => {
 
   let controlsRef: HTMLButtonElement[][][] = [];
 
-  const years = Array(local.numberOfColumns)
-    .fill(0)
-    .map((_, yearIndex) => {
-      const currentYear = dayjs(local.year).add(yearIndex, 'years').format('YYYY-MM-DD');
-
-      return (
-        <YearLevel
-          size={local.size}
-          monthsListFormat={local.monthsListFormat}
-          year={currentYear}
-          withNext={yearIndex === local.numberOfColumns! - 1}
-          withPrevious={yearIndex === 0}
-          yearLabelFormat={local.yearLabelFormat}
-          __stopPropagation={local.__stopPropagation}
-          __onControlClick={local.__onControlClick}
-          __onControlMouseEnter={local.__onControlMouseEnter}
-          __onControlKeyDown={(event, payload) =>
-            handleControlKeyDown({
-              levelIndex: yearIndex,
-              rowIndex: payload.rowIndex,
-              cellIndex: payload.cellIndex,
-              event: event as unknown as KeyboardEvent,
-              controlsRef,
-            })
-          }
-          __getControlRef={(rowIndex, cellIndex, node) => {
-            if (!Array.isArray(controlsRef[yearIndex])) {
-              controlsRef[yearIndex] = [];
-            }
-
-            if (!Array.isArray(controlsRef[yearIndex][rowIndex])) {
-              controlsRef[yearIndex][rowIndex] = [];
-            }
-
-            controlsRef[yearIndex][rowIndex][cellIndex] = node;
-          }}
-          levelControlAriaLabel={
-            typeof local.levelControlAriaLabel === 'function'
-              ? local.levelControlAriaLabel(currentYear)
-              : local.levelControlAriaLabel
-          }
-          locale={local.locale}
-          minDate={local.minDate}
-          maxDate={local.maxDate}
-          __preventFocus={local.__preventFocus}
-          nextIcon={local.nextIcon}
-          previousIcon={local.previousIcon}
-          nextLabel={local.nextLabel}
-          previousLabel={local.previousLabel}
-          onNext={local.onNext}
-          onPrevious={local.onPrevious}
-          onLevelClick={local.onLevelClick}
-          nextDisabled={local.nextDisabled}
-          previousDisabled={local.previousDisabled}
-          hasNextLevel={local.hasNextLevel}
-          getMonthControlProps={local.getMonthControlProps}
-          classNames={local.classNames}
-          styles={local.styles}
-          unstyled={local.unstyled}
-          __staticSelector={local.__staticSelector || 'YearLevelGroup'}
-          withCellSpacing={local.withCellSpacing}
-          headerControlsOrder={local.headerControlsOrder}
-          attributes={local.attributes}
-        />
-      );
-    });
-
   return (
     <LevelsGroup
       classNames={local.classNames}
@@ -160,7 +93,72 @@ export const YearLevelGroup = factory<YearLevelGroupFactory>(_props => {
       attributes={local.attributes}
       {...others}
     >
-      {years}
+      <For each={Array(local.numberOfColumns).fill(0).map((_, index) => index)}>
+        {(yearIndex) => {
+          const currentYear = () => dayjs(local.year).add(yearIndex, 'years').format('YYYY-MM-DD');
+
+          return (
+            <YearLevel
+              size={local.size}
+              monthsListFormat={local.monthsListFormat}
+              year={currentYear()}
+              withNext={yearIndex === local.numberOfColumns - 1}
+              withPrevious={yearIndex === 0}
+              yearLabelFormat={local.yearLabelFormat}
+              __stopPropagation={local.__stopPropagation}
+              __onControlClick={local.__onControlClick}
+              __onControlMouseEnter={local.__onControlMouseEnter}
+              __onControlKeyDown={(event, payload) =>
+                handleControlKeyDown({
+                  levelIndex: yearIndex,
+                  rowIndex: payload.rowIndex,
+                  cellIndex: payload.cellIndex,
+                  event: event,
+                  controlsRef,
+                })
+              }
+              __getControlRef={(rowIndex, cellIndex, node) => {
+                if (!Array.isArray(controlsRef[yearIndex])) {
+                  controlsRef[yearIndex] = [];
+                }
+
+                if (!Array.isArray(controlsRef[yearIndex][rowIndex])) {
+                  controlsRef[yearIndex][rowIndex] = [];
+                }
+
+                controlsRef[yearIndex][rowIndex][cellIndex] = node;
+              }}
+              levelControlAriaLabel={
+                typeof local.levelControlAriaLabel === 'function'
+                  ? local.levelControlAriaLabel(currentYear())
+                  : local.levelControlAriaLabel
+              }
+              locale={local.locale}
+              minDate={local.minDate}
+              maxDate={local.maxDate}
+              __preventFocus={local.__preventFocus}
+              nextIcon={local.nextIcon}
+              previousIcon={local.previousIcon}
+              nextLabel={local.nextLabel}
+              previousLabel={local.previousLabel}
+              onNext={local.onNext}
+              onPrevious={local.onPrevious}
+              onLevelClick={local.onLevelClick}
+              nextDisabled={local.nextDisabled}
+              previousDisabled={local.previousDisabled}
+              hasNextLevel={local.hasNextLevel}
+              getMonthControlProps={local.getMonthControlProps}
+              classNames={local.classNames}
+              styles={local.styles}
+              unstyled={local.unstyled}
+              __staticSelector={local.__staticSelector || 'YearLevelGroup'}
+              withCellSpacing={local.withCellSpacing}
+              headerControlsOrder={local.headerControlsOrder}
+              attributes={local.attributes}
+            />
+          );
+        }}
+      </For>
     </LevelsGroup>
   );
 });

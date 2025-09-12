@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { createSignal, createEffect, onMount, splitProps, JSX } from 'solid-js';
+import { createSignal, createEffect, splitProps, JSX, Show } from 'solid-js';
 import {
   __BaseInputProps,
   __InputStylesNames,
@@ -174,7 +174,7 @@ export const DateInput = factory<DateInputFactory>(_props => {
 
   createEffect(() => {
     setInputValue(formatValue(_value()!));
-  }, [ctx.getLocale(local.locale)]);
+  });
 
   const handleInputChange = (event: Event & { currentTarget: HTMLInputElement; target: HTMLInputElement }) => {
     const val = event.currentTarget?.value;
@@ -222,27 +222,9 @@ export const DateInput = factory<DateInputFactory>(_props => {
     },
   });
 
-  const _rightSection =
-    local.rightSection ||
-    (local.clearable && _value() && !local.readOnly ? (
-      <CloseButton
-        variant="transparent"
-        onMouseDown={(event) => event.preventDefault()}
-        tabIndex={-1}
-        onClick={() => {
-          setValue(null);
-          !controlled && setInputValue('');
-          setDropdownOpened(false);
-        }}
-        unstyled={local.unstyled}
-        size={local.inputProps.size || 'sm'}
-        {...local.clearButtonProps}
-      />
-    ) : null);
-
   createEffect(() => {
-    _value !== undefined && !dropdownOpened() && setInputValue(formatValue(_value()!));
-  }, [_value]);
+    _value() !== undefined && !dropdownOpened() && setInputValue(formatValue(_value()!));
+  });
 
   useClickOutside(() => setDropdownOpened(false), undefined, [
     _wrapperRef!,
@@ -262,22 +244,42 @@ export const DateInput = factory<DateInputFactory>(_props => {
           {...local.popoverProps}
         >
           <Popover.Target>
-            <Input
-              data-dates-input
-              data-read-only={local.readOnly || undefined}
-              autocomplete="off"
-              ref={local.ref}
-              value={inputValue()}
-              onChange={handleInputChange}
-              onBlur={handleInputBlur}
-              onFocus={handleInputFocus}
-              onClick={handleInputClick}
-              readOnly={local.readOnly}
-              rightSection={_rightSection}
-              {...local.inputProps}
-              {...others}
-              __staticSelector="DateInput"
-            />
+            {(popoverProps) => (
+              <div ref={popoverProps.ref}>
+                <Input
+                  data-dates-input
+                  data-read-only={local.readOnly || undefined}
+                  autocomplete="off"
+                  ref={local.ref}
+                  value={inputValue()}
+                  onChange={handleInputChange}
+                  onBlur={handleInputBlur}
+                  onFocus={handleInputFocus}
+                  onClick={handleInputClick}
+                  readOnly={local.readOnly}
+                  rightSection={local.rightSection || (
+                    <Show when={local.clearable && _value() && !local.readOnly} fallback={null}>
+                      <CloseButton
+                        variant="transparent"
+                        onMouseDown={(event) => event.preventDefault()}
+                        tabIndex={-1}
+                        onClick={() => {
+                          setValue(null);
+                          !controlled && setInputValue('');
+                          setDropdownOpened(false);
+                        }}
+                        unstyled={local.unstyled}
+                        size={local.inputProps.size || 'sm'}
+                        {...local.clearButtonProps}
+                      />
+                    </Show>
+                  )}
+                  {...local.inputProps}
+                  {...others}
+                  __staticSelector="DateInput"
+                />
+              </div>
+            )}
           </Popover.Target>
           <Popover.Dropdown
             onMouseDown={(event) => event.preventDefault()}
@@ -299,11 +301,11 @@ export const DateInput = factory<DateInputFactory>(_props => {
               date={_date()}
               onDateChange={setDate}
               getMonthControlProps={(date) => ({
-                selected: typeof _value === 'string' ? isSameMonth(date, _value) : false,
+                selected: typeof _value() === 'string' ? isSameMonth(date, _value()) : false,
                 ...local.getMonthControlProps?.(date),
               })}
               getYearControlProps={(date) => ({
-                selected: typeof _value === 'string' ? dayjs(date).isSame(_value, 'year') : false,
+                selected: typeof _value() === 'string' ? dayjs(date).isSame(_value(), 'year') : false,
                 ...local.getYearControlProps?.(date),
               })}
               attributes={local.wrapperProps.attributes}

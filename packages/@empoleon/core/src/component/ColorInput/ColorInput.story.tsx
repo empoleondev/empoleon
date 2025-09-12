@@ -19,7 +19,7 @@ export function Usage() {
       <ColorInput
         wrapperProps={{ 'data-test': 'hello' }}
         size="xl"
-        popoverProps={{ opened: true }}
+        // popoverProps={{ opened: true }}
       />
     </div>
   );

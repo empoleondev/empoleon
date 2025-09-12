@@ -319,7 +319,6 @@ export const Input = polymorphicFactory<InputFactory>(_props => {
         <Box
           component="input"
           {...valueProp(v, dv)}
-          {...rest}
           {...ariaAttributes()}
           ref={local.ref}
           required={local.required}
@@ -330,6 +329,7 @@ export const Input = polymorphicFactory<InputFactory>(_props => {
           variant={local.variant}
           __size={local.inputSize}
           {...getStyles('input')}
+          {...rest}
         />
 
         {_rightSection && (

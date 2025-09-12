@@ -106,11 +106,11 @@ export const MonthLevelGroup = factory<MonthLevelGroupFactory>(_props => {
     >
       <For each={Array(local.numberOfColumns).fill(0)}>
         {(_, monthIndex) => {
-          const currentMonth = dayjs(local.month).add(monthIndex(), 'months').format('YYYY-MM-DD');
+          const currentMonth = () => dayjs(local.month).add(monthIndex(), 'months').format('YYYY-MM-DD');
 
           return (
             <MonthLevel
-              month={currentMonth}
+              month={currentMonth()}
               withNext={monthIndex() === local.numberOfColumns! - 1}
               withPrevious={monthIndex() === 0}
               monthLabelFormat={local.monthLabelFormat}
@@ -139,7 +139,7 @@ export const MonthLevelGroup = factory<MonthLevelGroupFactory>(_props => {
               }}
               levelControlAriaLabel={
                 typeof local.levelControlAriaLabel === 'function'
-                  ? local.levelControlAriaLabel(currentMonth)
+                  ? local.levelControlAriaLabel(currentMonth())
                   : local.levelControlAriaLabel
               }
               locale={local.locale}

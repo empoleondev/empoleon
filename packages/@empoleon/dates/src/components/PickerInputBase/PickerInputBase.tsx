@@ -171,36 +171,41 @@ export const PickerInputBase = factory<PickerInputBaseFactory>(_props => {
           }}
         >
           <Popover.Target>
-            <Input
-              data-dates-input
-              data-read-only={local.readOnly || undefined}
-              disabled={local.disabled}
-              component="button"
-              type="button"
-              multiline
-              onClick={(event) => {
-                typeof local.onClick === "function" && local.onClick?.(event);
-                local.dropdownHandlers.toggle();
-              }}
-              __clearSection={clearButton}
-              __clearable={local.clearable && local.shouldClear && !local.readOnly && !local.disabled}
-              rightSection={local.rightSection}
-              {...local.inputProps}
-              ref={local.ref}
-              classNames={{ ...local.classNames, input: cx(classes.input, (local.classNames as any)?.input) }}
-              {...others}
-            >
-              {local.formattedValue || (
-                <Input.Placeholder
-                  error={local.inputProps.error}
-                  unstyled={local.unstyled}
-                  className={(local.classNames as any)?.placeholder}
-                  style={(local.styles as any)?.placeholder}
+            {(popoverProps) => (
+              <div ref={popoverProps.ref}>
+                <Input
+                  data-dates-input
+                  data-read-only={local.readOnly || undefined}
+                  disabled={local.disabled}
+                  component="button"
+                  type="button"
+                  multiline
+                  onClick={(event) => {
+                    typeof local.onClick === "function" && local.onClick?.(event);
+                    local.dropdownHandlers.toggle();
+                  }}
+                  __clearSection={clearButton}
+                  __clearable={local.clearable && local.shouldClear && !local.readOnly && !local.disabled}
+                  rightSection={local.rightSection}
+                  {...local.inputProps}
+                  ref={local.ref}
+                  classNames={{ ...local.classNames, input: cx(classes.input, (local.classNames as any)?.input) }}
+                  value={local.value}
+                  {...others}
                 >
-                  {local.placeholder}
-                </Input.Placeholder>
-              )}
-            </Input>
+                  {local.formattedValue || (
+                    <Input.Placeholder
+                      error={local.inputProps.error}
+                      unstyled={local.unstyled}
+                      className={(local.classNames as any)?.placeholder}
+                      style={(local.styles as any)?.placeholder}
+                    >
+                      {local.placeholder}
+                    </Input.Placeholder>
+                  )}
+                </Input>
+            </div>
+            )}
           </Popover.Target>
 
           <Popover.Dropdown data-dates-dropdown>{local.children}</Popover.Dropdown>

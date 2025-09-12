@@ -12,6 +12,7 @@ export function itHandlesControlsKeyboardEvents(
   options: Options,
   name = 'handles arrow keyboard events correctly'
 ) {
+  // original broken
   it(`${name} (numberOfColumns=1)`, async () => {
     const { container } = render(() => <options.component {...options.props} numberOfColumns={1} />);
     const controls = container.querySelectorAll('table button');
