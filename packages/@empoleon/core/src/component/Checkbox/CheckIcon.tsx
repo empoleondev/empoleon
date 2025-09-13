@@ -7,6 +7,7 @@ export interface CheckboxIconProps extends JSX.SvgSVGAttributes<SVGSVGElement> {
 
 export interface CheckIconProps extends JSX.SvgSVGAttributes<SVGSVGElement> {
   size?: number | string;
+  className?: string;
 }
 
 export function CheckIcon(props: CheckIconProps) {

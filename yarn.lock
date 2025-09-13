@@ -1368,6 +1368,54 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@docs/demos@workspace:packages/@docs/demos":
+  version: 0.0.0-use.local
+  resolution: "@docs/demos@workspace:packages/@docs/demos"
+  dependencies:
+    "@docs/styles-api": "workspace:*"
+    "@empoleon/carousel": "workspace:*"
+    "@empoleon/code-highlight": "workspace:*"
+    "@empoleon/core": "workspace:*"
+    "@empoleon/dates": "workspace:*"
+    "@empoleon/dropzone": "workspace:*"
+    "@empoleon/form": "workspace:*"
+    "@empoleon/hooks": "workspace:*"
+    "@empoleon/notifications": "workspace:*"
+    "@empoleon/nprogress": "workspace:*"
+    "@empoleon/spotlight": "workspace:*"
+    "@empoleon/tiptap": "workspace:*"
+    "@empoleonx/demo": "workspace:*"
+    "@empoleonx/dev-icons": "workspace:*"
+    "@tiptap/core": "npm:^2.9.1"
+    "@tiptap/extension-link": "npm:^2.9.1"
+    "@tiptap/pm": "npm:^2.9.1"
+    dayjs: "npm:^1.11.13"
+    embla-carousel-react: "npm:^8.5.2"
+  languageName: unknown
+  linkType: soft
+
+"@docs/styles-api@workspace:*, @docs/styles-api@workspace:packages/@docs/styles-api":
+  version: 0.0.0-use.local
+  resolution: "@docs/styles-api@workspace:packages/@docs/styles-api"
+  dependencies:
+    "@empoleon/carousel": "workspace:*"
+    "@empoleon/code-highlight": "workspace:*"
+    "@empoleon/core": "workspace:*"
+    "@empoleon/dates": "workspace:*"
+    "@empoleon/dropzone": "workspace:*"
+    "@empoleon/notifications": "workspace:*"
+    "@empoleon/nprogress": "workspace:*"
+    "@empoleon/spotlight": "workspace:*"
+    "@empoleon/tiptap": "workspace:*"
+    "@tiptap/core": "npm:^2.9.1"
+    "@tiptap/extension-link": "npm:^2.9.1"
+    "@tiptap/pm": "npm:^2.9.1"
+    dayjs: "npm:^1.11.13"
+    embla-carousel-react: "npm:^8.5.2"
+    shiki: "npm:^3.1.0"
+  languageName: unknown
+  linkType: soft
+
 "@dual-bundle/import-meta-resolve@npm:^4.1.0":
   version: 4.1.0
   resolution: "@dual-bundle/import-meta-resolve@npm:4.1.0"
@@ -1407,7 +1455,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@empoleon/carousel@workspace:packages/@empoleon/carousel":
+"@empoleon/carousel@workspace:*, @empoleon/carousel@workspace:packages/@empoleon/carousel":
   version: 0.0.0-use.local
   resolution: "@empoleon/carousel@workspace:packages/@empoleon/carousel"
   peerDependencies:
@@ -1418,7 +1466,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@empoleon/code-highlight@workspace:packages/@empoleon/code-highlight":
+"@empoleon/code-highlight@workspace:*, @empoleon/code-highlight@workspace:packages/@empoleon/code-highlight":
   version: 0.0.0-use.local
   resolution: "@empoleon/code-highlight@workspace:packages/@empoleon/code-highlight"
   dependencies:
@@ -1470,7 +1518,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@empoleon/dropzone@workspace:packages/@empoleon/dropzone":
+"@empoleon/dropzone@workspace:*, @empoleon/dropzone@workspace:packages/@empoleon/dropzone":
   version: 0.0.0-use.local
   resolution: "@empoleon/dropzone@workspace:packages/@empoleon/dropzone"
   dependencies:
@@ -1480,7 +1528,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@empoleon/form@workspace:packages/@empoleon/form":
+"@empoleon/form@workspace:*, @empoleon/form@workspace:packages/@empoleon/form":
   version: 0.0.0-use.local
   resolution: "@empoleon/form@workspace:packages/@empoleon/form"
   dependencies:
@@ -1507,7 +1555,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@empoleon/notifications@workspace:packages/@empoleon/notifications":
+"@empoleon/notifications@workspace:*, @empoleon/notifications@workspace:packages/@empoleon/notifications":
   version: 0.0.0-use.local
   resolution: "@empoleon/notifications@workspace:packages/@empoleon/notifications"
   dependencies:
@@ -1519,7 +1567,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@empoleon/nprogress@workspace:packages/@empoleon/nprogress":
+"@empoleon/nprogress@workspace:*, @empoleon/nprogress@workspace:packages/@empoleon/nprogress":
   version: 0.0.0-use.local
   resolution: "@empoleon/nprogress@workspace:packages/@empoleon/nprogress"
   dependencies:
@@ -1678,7 +1726,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@empoleon/spotlight@workspace:packages/@empoleon/spotlight":
+"@empoleon/spotlight@workspace:*, @empoleon/spotlight@workspace:packages/@empoleon/spotlight":
   version: 0.0.0-use.local
   resolution: "@empoleon/spotlight@workspace:packages/@empoleon/spotlight"
   dependencies:
@@ -1694,13 +1742,35 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@empoleon/tiptap@workspace:packages/@empoleon/tiptap":
+"@empoleon/tiptap@workspace:*, @empoleon/tiptap@workspace:packages/@empoleon/tiptap":
   version: 0.0.0-use.local
   resolution: "@empoleon/tiptap@workspace:packages/@empoleon/tiptap"
   dependencies:
     "@empoleon/core": "workspace:*"
     "@empoleon/hooks": "workspace:*"
     "@empoleon/solid-tiptap": "npm:1.0.0"
+  languageName: unknown
+  linkType: soft
+
+"@empoleonx/demo@workspace:*, @empoleonx/demo@workspace:packages/@empoleonx/demo":
+  version: 0.0.0-use.local
+  resolution: "@empoleonx/demo@workspace:packages/@empoleonx/demo"
+  dependencies:
+    "@empoleon-tests/core": "workspace:*"
+    "@empoleon/code-highlight": "workspace:*"
+    "@empoleon/core": "workspace:*"
+    "@empoleon/hooks": "workspace:*"
+    shiki: "npm:^3.1.0"
+  languageName: unknown
+  linkType: soft
+
+"@empoleonx/dev-icons@workspace:*, @empoleonx/dev-icons@workspace:packages/@empoleonx/dev-icons":
+  version: 0.0.0-use.local
+  resolution: "@empoleonx/dev-icons@workspace:packages/@empoleonx/dev-icons"
+  dependencies:
+    "@empoleon-tests/core": "workspace:*"
+    "@empoleon/core": "workspace:*"
+    "@empoleon/hooks": "workspace:*"
   languageName: unknown
   linkType: soft
 
@@ -6061,6 +6131,18 @@ __metadata:
   peerDependencies:
     embla-carousel: 8.6.0
   checksum: 10c0/d7e5cb79c1474b3d27621302e63dedf783a281ae0464b21b87183d58103f938d22be9f6a4735de4b1b19806606006da43f6151497df91c3edbbc99a4dae4a94f
+  languageName: node
+  linkType: hard
+
+"embla-carousel-react@npm:^8.5.2":
+  version: 8.6.0
+  resolution: "embla-carousel-react@npm:8.6.0"
+  dependencies:
+    embla-carousel: "npm:8.6.0"
+    embla-carousel-reactive-utils: "npm:8.6.0"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.1 || ^18.0.0 || ^19.0.0 || ^19.0.0-rc
+  checksum: 10c0/461b0c427a6fca62e730c7b39d08e9c55b01a2138c173d5b9ebf77ec92092a900b45ac384731c77382b48d5d65946994d3abba6e9899a66d6e16f8ddf191ed1c
   languageName: node
   linkType: hard
 

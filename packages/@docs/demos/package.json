@@ -1,0 +1,59 @@
+{
+  "name": "@docs/demos",
+  "version": "1.0.0",
+  "description": "Empoleon components demos used on empoleon.dev website",
+  "homepage": "https://empoleon.dev",
+  "license": "MIT",
+  "author": "Vitaly Rtishchev <rtivital@gmail.com>",
+  "keywords": [
+    "jest",
+    "empoleon",
+    "tests"
+  ],
+  "sideEffects": [
+    "*.css"
+  ],
+  "main": "./cjs/index.cjs",
+  "module": "./esm/index.mjs",
+  "types": "./lib/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./lib/index.d.mts",
+        "default": "./esm/index.mjs"
+      },
+      "require": {
+        "types": "./lib/index.d.ts",
+        "default": "./cjs/index.cjs"
+      }
+    },
+    "./styles.css": "./styles.css",
+    "./styles.layer.css": "./styles.layer.css"
+  },
+  "repository": {
+    "url": "https://github.com/empoleondev/empoleon.git",
+    "type": "git",
+    "directory": "packages/@docs/demos"
+  },
+  "devDependencies": {
+    "@docs/styles-api": "workspace:*",
+    "@empoleon/carousel": "workspace:*",
+    "@empoleon/code-highlight": "workspace:*",
+    "@empoleon/core": "workspace:*",
+    "@empoleon/dates": "workspace:*",
+    "@empoleon/dropzone": "workspace:*",
+    "@empoleon/form": "workspace:*",
+    "@empoleon/hooks": "workspace:*",
+    "@empoleon/notifications": "workspace:*",
+    "@empoleon/nprogress": "workspace:*",
+    "@empoleon/spotlight": "workspace:*",
+    "@empoleon/tiptap": "workspace:*",
+    "@empoleonx/demo": "workspace:*",
+    "@empoleonx/dev-icons": "workspace:*",
+    "@tiptap/core": "^2.9.1",
+    "@tiptap/extension-link": "^2.9.1",
+    "@tiptap/pm": "^2.9.1",
+    "dayjs": "^1.11.13",
+    "embla-carousel-react": "^8.5.2"
+  }
+}

@@ -71,6 +71,8 @@ export { useFetch } from './use-fetch/use-fetch';
 export { useRadialMove, normalizeRadialValue } from './use-radial-move/use-radial-move';
 export { useScrollSpy } from './use-scroll-spy/use-scroll-spy';
 export { useFileDialog } from './use-file-dialog/use-file-dialog';
+export { useLongPress } from './use-long-press/use-long-press';
+export { useSelection } from './use-selection/use-selection';
 
 export type { UseMovePosition } from './use-move/use-move';
 export type { OS } from './use-os/use-os';

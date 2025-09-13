@@ -12,6 +12,7 @@ import { useRichTextEditorContext } from '../RichTextEditor.context';
 import classes from '../RichTextEditor.module.css';
 import { Component, JSX, splitProps } from 'solid-js';
 import { Dynamic } from 'solid-js/web';
+import { createMemo } from 'solid-js';
 
 export type RichTextEditorControlStylesNames = 'control';
 
@@ -33,9 +34,9 @@ export type RichTextEditorControlFactory = Factory<{
   compound: true;
 }>;
 
-const defaultProps: Partial<RichTextEditorControlProps> = {
+const defaultProps = {
   interactive: true,
-};
+} satisfies Partial<RichTextEditorControlProps>;
 
 export const RichTextEditorControl = factory<RichTextEditorControlFactory>(_props => {
   const props = useProps('RichTextEditorControl', defaultProps, _props);
@@ -104,8 +105,6 @@ export interface CreateControlProps {
   isDisabled?: (editor: any) => boolean;
   operation: { name: string; attributes?: Record<string, any> | string };
 }
-
-import { createMemo } from 'solid-js';
 
 export function createControl(config: CreateControlProps) {
   const Control = (props: RichTextEditorControlBaseProps) => {

@@ -6,7 +6,7 @@ import {
   ElementProps,
   factory,
   Factory,
-  TypographyStylesProvider,
+  Typography,
   useProps,
 } from '@empoleon/core';
 import { useRichTextEditorContext } from '../RichTextEditor.context';
@@ -41,8 +41,8 @@ export const RichTextEditorContent = factory<RichTextEditorContentFactory>(_prop
 
   if (ctx.withTypographyStyles) {
     return (
-      <TypographyStylesProvider
-        {...ctx.getStyles('typographyStylesProvider', { className: local.className, style: local.style, styles: local.styles, classNames: local.classNames })}
+      <Typography
+        {...ctx.getStyles('Typography', { className: local.className, style: local.style, styles: local.styles, classNames: local.classNames })}
         unstyled={ctx.unstyled}
         ref={local.ref}
       >
@@ -52,7 +52,7 @@ export const RichTextEditorContent = factory<RichTextEditorContentFactory>(_prop
           {...ctx.getStyles('content', { classNames: local.classNames, styles: local.styles })}
           {...others}
         />
-      </TypographyStylesProvider>
+      </Typography>
     );
   }
 

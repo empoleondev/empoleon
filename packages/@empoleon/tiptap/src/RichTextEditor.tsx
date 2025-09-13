@@ -15,6 +15,7 @@ import { RichTextEditorProvider } from './RichTextEditor.context';
 import { RichTextEditorContent } from './RichTextEditorContent/RichTextEditorContent';
 import * as controls from './RichTextEditorControl';
 import { RichTextEditorControl } from './RichTextEditorControl/RichTextEditorControl';
+import { RichTextEditorSourceCodeControl } from './RichTextEditorControl/RichTextEditorSourceCodeControl';
 import { RichTextEditorControlsGroup } from './RichTextEditorControlsGroup/RichTextEditorControlsGroup';
 import { RichTextEditorToolbar } from './RichTextEditorToolbar/RichTextEditorToolbar';
 import classes from './RichTextEditor.module.css';
@@ -26,7 +27,7 @@ export type RichTextEditorStylesNames =
   | 'linkEditorDropdown'
   | 'root'
   | 'content'
-  | 'typographyStylesProvider'
+  | 'Typography'
   | 'control'
   | 'controlIcon'
   | 'controlsGroup'
@@ -47,6 +48,9 @@ export interface RichTextEditorProps
 
   /** Determines whether typography styles should be added, `true` by default */
   withTypographyStyles?: boolean;
+
+  /** Called if `RichTextEditor.SourceCode` clicked.  */
+  onSourceCodeTextSwitch?: (isSourceCodeModeActive: boolean) => void;
 
   /** Labels that are used in controls */
   labels?: Partial<RichTextEditorLabels>;
@@ -99,6 +103,7 @@ export type RichTextEditorFactory = Factory<{
     TaskList: typeof controls.TaskListControl;
     TaskListSink: typeof controls.TaskListSinkControl;
     TaskListLift: typeof controls.TaskListLiftControl;
+    SourceCode: typeof RichTextEditorSourceCodeControl;
   };
 }>;
 
@@ -120,6 +125,7 @@ export const RichTextEditor = factory<RichTextEditorFactory>(_props => {
     'editor',
     'withCodeHighlightStyles',
     'withTypographyStyles',
+    'onSourceCodeTextSwitch',
     'labels',
     'children',
     'variant',
@@ -150,6 +156,7 @@ export const RichTextEditor = factory<RichTextEditorFactory>(_props => {
         labels: mergedLabels(),
         withCodeHighlightStyles: local.withCodeHighlightStyles,
         withTypographyStyles: local.withTypographyStyles,
+        onSourceCodeTextSwitch: local.onSourceCodeTextSwitch,
         unstyled: local.unstyled,
         variant: local.variant,
       }}
@@ -205,3 +212,4 @@ RichTextEditor.Redo = controls.RedoControl;
 RichTextEditor.TaskList = controls.TaskListControl;
 RichTextEditor.TaskListSink = controls.TaskListSinkControl;
 RichTextEditor.TaskListLift = controls.TaskListLiftControl;
+RichTextEditor.SourceCode = RichTextEditorSourceCodeControl;

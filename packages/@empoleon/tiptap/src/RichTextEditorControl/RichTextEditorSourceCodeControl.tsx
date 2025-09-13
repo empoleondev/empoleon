@@ -5,7 +5,7 @@ import { useRichTextEditorContext } from '../RichTextEditor.context';
 import { RichTextEditorControl } from './RichTextEditorControl';
 
 export interface RichTextEditorSourceCodeControlProps extends BoxProps, ElementProps<'button'> {
-  ref: any;
+  ref?: any;
 }
 
 export function RichTextEditorSourceCodeControl(_props: RichTextEditorSourceCodeControlProps) {

@@ -14,6 +14,8 @@ const config: StorybookConfig = {
     '../packages/@empoleon/nprogress/src/*.story.@(ts|tsx)',
     '../packages/@empoleon/spotlight/src/*.story.@(ts|tsx)',
     '../packages/@empoleon/tiptap/src/*.story.@(ts|tsx)',
+    '../packages/@empoleonx/*/src/**/*.story.@(ts|tsx)',
+    '../packages/@docs/*/src/**/*.story.@(ts|tsx)'
   ],
   addons: [
     '@storybook/addon-links',
