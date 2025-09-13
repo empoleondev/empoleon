@@ -1,0 +1,52 @@
+import { Autocomplete, ComboboxItem, OptionsFilter } from '@empoleon/core';
+import { MantineDemo } from '@empoleonx/demo';
+
+const code = `
+import { Autocomplete, ComboboxItem, OptionsFilter } from '@empoleon/core';
+
+const optionsFilter: OptionsFilter = ({ options, search }) => {
+  const splittedSearch = search.toLowerCase().trim().split(' ');
+  return (options as ComboboxItem[]).filter((option) => {
+    const words = option.label.toLowerCase().trim().split(' ');
+    return splittedSearch.every((searchWord) => words.some((word) => word.includes(searchWord)));
+  });
+};
+
+function Demo() {
+  return (
+    <Autocomplete
+      label="Your country"
+      placeholder="Pick value or enter anything"
+      data={['Great Britain', 'Russian Federation', 'United States']}
+      filter={optionsFilter}
+    />
+  );
+}
+`;
+
+const optionsFilter: OptionsFilter = ({ options, search }) => {
+  const splittedSearch = search.toLowerCase().trim().split(' ');
+  return (options as ComboboxItem[]).filter((option) => {
+    const words = option.label.toLowerCase().trim().split(' ');
+    return splittedSearch.every((searchWord) => words.some((word) => word.includes(searchWord)));
+  });
+};
+
+function Demo() {
+  return (
+    <Autocomplete
+      label="Your country"
+      placeholder="Pick value or enter anything"
+      data={['Great Britain', 'Russian Federation', 'United States']}
+      filter={optionsFilter}
+    />
+  );
+}
+
+export const search: MantineDemo = {
+  type: 'code',
+  component: Demo,
+  code,
+  maxWidth: 340,
+  centered: true,
+};

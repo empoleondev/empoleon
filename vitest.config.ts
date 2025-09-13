@@ -12,9 +12,9 @@ export default defineConfig({
 
   test: {
     environment: 'jsdom',
-    // include: [
-    //   '**/use-selection/use-selection.test.ts'
-    // ],
+    include: [
+      '**/use-form/*.test.{ts,tsx}'
+    ],
     setupFiles: ['./vitest.setup.tsx'],
     globals: true,
     testTimeout: 10000,

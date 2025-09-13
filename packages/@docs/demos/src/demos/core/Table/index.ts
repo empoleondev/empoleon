@@ -1,0 +1,13 @@
+export { usage } from './Table.demo.usage';
+export { captions } from './Table.demo.captions';
+export { configurator } from './Table.demo.configurator';
+export { spacingConfigurator } from './Table.demo.spacingConfigurator';
+export { scrollContainer } from './Table.demo.scrollContainer';
+export { scrollContainerMaxHeight } from './Table.demo.scrollContainerMaxHeight';
+export { scrollContainerNative } from './Table.demo.scrollContainerNative';
+export { scrollContainerNativeMaxHeight } from './Table.demo.scrollContainerNativeMaxHeight';
+export { rowSelection } from './Table.demo.rowSelection';
+export { data } from './Table.demo.data';
+export { stickyHeader } from './Table.demo.stickyHeader';
+export { vertical } from './Table.demo.vertical';
+export { tabularNums } from './Table.demo.tabularNums';

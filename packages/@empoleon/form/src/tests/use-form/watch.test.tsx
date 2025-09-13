@@ -82,4 +82,35 @@ describe('@empoleon/form/watch', () => {
 
     expect(spy).not.toHaveBeenCalled();
   });
+
+  it('cascades updates when cascadeUpdate is set to true', () => {
+    const hook = renderHook(() =>
+      useForm({
+        mode: 'uncontrolled',
+        cascadeUpdates: true,
+        initialValues: { person: { name: '' } },
+      })
+    );
+
+    const personSpy = vi.fn();
+
+    renderHook(() => hook.result.watch('person', personSpy));
+    hook.result.setFieldValue('person.name', 'jane doe');
+    expect(personSpy).toHaveBeenCalledWith({
+      previousValue: { name: '' },
+      value: { name: 'jane doe' },
+      touched: true,
+      dirty: true,
+    });
+
+    const nameSpy = vi.fn();
+    renderHook(() => hook.result.watch('person.name', nameSpy));
+    hook.result.setFieldValue('person', { name: 'john doe' });
+    expect(nameSpy).toHaveBeenCalledWith({
+      previousValue: 'jane doe',
+      value: 'john doe',
+      touched: true,
+      dirty: true,
+    });
+  });
 });

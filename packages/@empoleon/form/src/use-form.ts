@@ -46,6 +46,7 @@ export function useForm<
       transformValues: ((values: Values) => values) as any,
       onSubmitPreventDefault: 'always' as const,
       touchTrigger: 'change' as const,
+      cascadeUpdates: false,
     },
     input
   );
@@ -63,7 +64,7 @@ export function useForm<
     mode: props.mode
   });
   const $list = useFormList<Values>({ $values, $errors, $status });
-  const $watch = useFormWatch<Values>({ $status });
+  const $watch = useFormWatch<Values>({ $status, cascadeUpdates: props.cascadeUpdates });
   const [formKey, setFormKey] = createSignal(0);
   const [fieldKeys, setFieldKeys] = createSignal<Record<string, number>>({});
   const [submitting, setSubmitting] = createSignal(false);
