@@ -1,5 +1,5 @@
 import { TimePicker } from '@empoleon/dates';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { TimePicker } from '@empoleon/dates';
@@ -25,7 +25,7 @@ function Demo() {
   );
 }
 
-export const presets: MantineDemo = {
+export const presets: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

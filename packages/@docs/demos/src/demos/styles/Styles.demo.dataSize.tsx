@@ -1,5 +1,5 @@
 import { createTheme, Input, EmpoleonThemeProvider } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import classes from './Styles.demo.dataSize.module.css';
 
 const code = `
@@ -59,7 +59,7 @@ function Demo() {
   );
 }
 
-export const dataSize: MantineDemo = {
+export const dataSize: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   maxWidth: 360,

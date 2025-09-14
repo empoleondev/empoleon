@@ -1,18 +1,19 @@
-import { IconPlus } from '@tabler/icons-react';
+import { IconPlus } from '@tabler/icons-solidjs';
 import { Accordion } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { data, dataCode } from './_base';
 import classes from './Accordion.demo.chevron.module.css';
+import { For } from 'solid-js';
 
 const code = `
-import { IconPlus } from '@tabler/icons-react';
+import { IconPlus } from '@tabler/icons-solidjs';
 import { Accordion } from '@empoleon/core';
 import { data } from './data';
 import classes from './Demo.module.css';
 
 function Demo() {
   const items = data.map((item) => (
-    <Accordion.Item key={item.value} value={item.value}>
+    <Accordion.Item value={item.value}>
       <Accordion.Control icon={item.emoji}>{item.value}</Accordion.Control>
       <Accordion.Panel>{item.description}</Accordion.Panel>
     </Accordion.Item>
@@ -44,26 +45,26 @@ const cssCode = `
 `;
 
 function Demo() {
-  const items = data.map((item) => (
-    <Accordion.Item key={item.value} value={item.value}>
-      <Accordion.Control icon={item.emoji}>{item.value}</Accordion.Control>
-      <Accordion.Panel>{item.description}</Accordion.Panel>
-    </Accordion.Item>
-  ));
-
   return (
     <Accordion
       defaultValue="Apples"
       classNames={{ chevron: classes.chevron }}
-      chevron={<IconPlus className={classes.icon} />}
+      chevron={<IconPlus class={classes.icon} />}
       mih={270}
     >
-      {items}
+      <For each={data}>
+        {(item) => (
+          <Accordion.Item value={item.value}>
+            <Accordion.Control icon={item.emoji}>{item.value}</Accordion.Control>
+            <Accordion.Panel>{item.description}</Accordion.Panel>
+          </Accordion.Item>
+        )}
+      </For>
     </Accordion>
   );
 }
 
-export const chevron: MantineDemo = {
+export const chevron: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code: [

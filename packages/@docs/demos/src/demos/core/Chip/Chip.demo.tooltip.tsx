@@ -1,5 +1,5 @@
 import { Chip, Tooltip } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Tooltip, Chip } from '@empoleon/core';
@@ -16,12 +16,12 @@ function Demo() {
 function Demo() {
   return (
     <Tooltip label="Chip tooltip" refProp="rootRef">
-      <Chip defaultChecked>Chip with tooltip</Chip>
+      {(props) => <Chip {...props} defaultChecked>Chip with tooltip</Chip>}
     </Tooltip>
   );
 }
 
-export const tooltip: MantineDemo = {
+export const tooltip: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

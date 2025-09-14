@@ -1,7 +1,7 @@
-import { useState } from 'react';
 import { FloatingIndicator, UnstyledButton } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import classes from './FloatingIndicator.demo.segmented.module.css';
+import { createSignal } from 'solid-js';
 
 const code = `
 import { useState } from 'react';
@@ -22,7 +22,7 @@ function Demo() {
 
   const controls = data.map((item, index) => (
     <UnstyledButton
-      key={item}
+
       className={classes.control}
       ref={setControlRef(index)}
       onClick={() => setActive(index)}
@@ -33,7 +33,7 @@ function Demo() {
   ));
 
   return (
-    <div className={classes.root} ref={setRootRef}>
+    <div class={classes.root} ref={setRootRef}>
       {controls}
 
       <FloatingIndicator
@@ -87,41 +87,41 @@ const cssCode = `.root {
 const data = ['React', 'Vue', 'Angular', 'Svelte'];
 
 function Demo() {
-  const [rootRef, setRootRef] = useState<HTMLDivElement | null>(null);
-  const [controlsRefs, setControlsRefs] = useState<Record<string, HTMLButtonElement | null>>({});
-  const [active, setActive] = useState(0);
+  const [rootRef, setRootRef] = createSignal<HTMLDivElement | null>(null);
+  const [controlsRefs, setControlsRefs] = createSignal<Record<string, HTMLButtonElement | null>>({});
+  const [active, setActive] = createSignal(0);
 
   const setControlRef = (index: number) => (node: HTMLButtonElement) => {
-    controlsRefs[index] = node;
+    controlsRefs()[index] = node;
     setControlsRefs(controlsRefs);
   };
 
   const controls = data.map((item, index) => (
     <UnstyledButton
-      key={item}
+
       className={classes.control}
       ref={setControlRef(index)}
       onClick={() => setActive(index)}
-      mod={{ active: active === index }}
+      mod={{ active: active() === index }}
     >
-      <span className={classes.controlLabel}>{item}</span>
+      <span class={classes.controlLabel}>{item}</span>
     </UnstyledButton>
   ));
 
   return (
-    <div className={classes.root} ref={setRootRef}>
+    <div class={classes.root} ref={setRootRef}>
       {controls}
 
       <FloatingIndicator
-        target={controlsRefs[active]}
-        parent={rootRef}
+        target={controlsRefs()[active()]}
+        parent={rootRef()}
         className={classes.indicator}
       />
     </div>
   );
 }
 
-export const segmented: MantineDemo = {
+export const segmented: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   centered: true,

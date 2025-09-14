@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import { CheckIcon, Combobox, Group, Pill, PillsInput, useCombobox } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
+import { createMemo, createSignal, For, Show } from 'solid-js';
 
 const code = `
 import { useState } from 'react';
@@ -26,7 +26,7 @@ function Demo() {
     setValue((current) => current.filter((v) => v !== val));
 
   const values = value.map((item) => (
-    <Pill key={item} withRemoveButton onRemove={() => handleValueRemove(item)}>
+    <Pill withRemoveButton onRemove={() => handleValueRemove(item)}>
       {item}
     </Pill>
   ));
@@ -34,7 +34,7 @@ function Demo() {
   const options = groceries
     .filter((item) => item.toLowerCase().includes(search.trim().toLowerCase()))
     .map((item) => (
-      <Combobox.Option value={item} key={item} active={value.includes(item)}>
+      <Combobox.Option value={item} active={value.includes(item)}>
         <Group gap="sm">
           {value.includes(item) ? <CheckIcon size={12} /> : null}
           <span>{item}</span>
@@ -89,8 +89,8 @@ function Demo() {
     onDropdownOpen: () => combobox.updateSelectedOptionIndex('active'),
   });
 
-  const [search, setSearch] = useState('');
-  const [value, setValue] = useState<string[]>([]);
+  const [search, setSearch] = createSignal('');
+  const [value, setValue] = createSignal<string[]>([]);
 
   const handleValueSelect = (val: string) =>
     setValue((current) =>
@@ -100,44 +100,38 @@ function Demo() {
   const handleValueRemove = (val: string) =>
     setValue((current) => current.filter((v) => v !== val));
 
-  const values = value.map((item) => (
-    <Pill key={item} withRemoveButton onRemove={() => handleValueRemove(item)}>
-      {item}
-    </Pill>
-  ));
-
-  const options = groceries
-    .filter((item) => item.toLowerCase().includes(search.trim().toLowerCase()))
-    .map((item) => (
-      <Combobox.Option value={item} key={item} active={value.includes(item)}>
-        <Group gap="sm">
-          {value.includes(item) ? <CheckIcon size={12} /> : null}
-          <span>{item}</span>
-        </Group>
-      </Combobox.Option>
-    ));
+  const filteredOptions = createMemo(() =>
+    groceries.filter((item) =>
+      item.toLowerCase().includes(search().trim().toLowerCase())
+    )
+  );
 
   return (
     <Combobox store={combobox} onOptionSubmit={handleValueSelect}>
       <Combobox.DropdownTarget>
         <PillsInput onClick={() => combobox.openDropdown()}>
           <Pill.Group>
-            {values}
-
+            <For each={value()}>
+              {(item) => (
+                <Pill withRemoveButton onRemove={() => handleValueRemove(item)}>
+                  {item}
+                </Pill>
+              )}
+            </For>
             <Combobox.EventsTarget>
               <PillsInput.Field
                 onFocus={() => combobox.openDropdown()}
                 onBlur={() => combobox.closeDropdown()}
-                value={search}
+                value={search()}
                 placeholder="Search values"
                 onChange={(event) => {
                   combobox.updateSelectedOptionIndex();
                   setSearch(event.currentTarget.value);
                 }}
                 onKeyDown={(event) => {
-                  if (event.key === 'Backspace' && search.length === 0 && value.length > 0) {
+                  if (event.key === 'Backspace' && search().length === 0 && value().length > 0) {
                     event.preventDefault();
-                    handleValueRemove(value[value.length - 1]);
+                    handleValueRemove(value()[value().length - 1]);
                   }
                 }}
               />
@@ -145,17 +139,32 @@ function Demo() {
           </Pill.Group>
         </PillsInput>
       </Combobox.DropdownTarget>
-
       <Combobox.Dropdown>
         <Combobox.Options>
-          {options.length > 0 ? options : <Combobox.Empty>Nothing found...</Combobox.Empty>}
+          <Show
+            when={filteredOptions().length > 0}
+            fallback={<Combobox.Empty>Nothing found...</Combobox.Empty>}
+          >
+            <For each={filteredOptions()}>
+              {(item) => (
+                <Combobox.Option value={item} active={value().includes(item)}>
+                  <Group gap="sm">
+                    <Show when={value().includes(item)}>
+                      <CheckIcon size={12} />
+                    </Show>
+                    <span>{item}</span>
+                  </Group>
+                </Combobox.Option>
+              )}
+            </For>
+          </Show>
         </Combobox.Options>
       </Combobox.Dropdown>
     </Combobox>
   );
 }
 
-export const searchableMultiselect: MantineDemo = {
+export const searchableMultiselect: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

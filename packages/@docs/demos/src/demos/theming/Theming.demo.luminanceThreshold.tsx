@@ -6,7 +6,7 @@ import {
   Stack,
   useEmpoleonTheme,
 } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = (props: Record<string, any>) => `
 import { Button, createTheme, EmpoleonProvider, Stack } from '@empoleon/core';
@@ -21,7 +21,7 @@ function Wrapper(props: any) {
     .fill(0)
     .map((_, index) => (
       <Button
-        key={index}
+
         color=${
           parseThemeColor({ theme: DEFAULT_THEME, color: props.color }).isThemeColor
             ? `{\`${props.color}.\${index}\`}`
@@ -70,7 +70,7 @@ function Wrapper(props: any) {
   );
 }
 
-export const luminanceThreshold: MantineDemo = {
+export const luminanceThreshold: EmpoleonDemo = {
   type: 'configurator',
   component: Wrapper,
   code,

@@ -1,10 +1,10 @@
-import { IconAt } from '@tabler/icons-react';
+import { IconAt } from '@tabler/icons-solidjs';
 import { Badge, Group } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Badge, Group } from '@empoleon/core';
-import { IconAt } from '@tabler/icons-react';
+import { IconAt } from '@tabler/icons-solidjs';
 
 function Demo() {
   const icon = <IconAt size={12} />;
@@ -27,7 +27,7 @@ function Demo() {
   );
 }
 
-export const sections: MantineDemo = {
+export const sections: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   centered: true,

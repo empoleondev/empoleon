@@ -1,5 +1,5 @@
 import { SegmentedControl, Text } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { SegmentedControl, Text } from '@empoleon/core';
@@ -45,7 +45,7 @@ function Demo() {
   );
 }
 
-export const transitions: MantineDemo = {
+export const transitions: EmpoleonDemo = {
   type: 'code',
   code,
   centered: true,

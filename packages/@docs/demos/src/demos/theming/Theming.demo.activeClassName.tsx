@@ -1,5 +1,5 @@
 import { Button, EmpoleonThemeProvider } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import classes from './Theming.demo.activeClassName.module.css';
 
 const tsxCode = `
@@ -33,7 +33,7 @@ function Demo() {
   );
 }
 
-export const activeClassName: MantineDemo = {
+export const activeClassName: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   centered: true,

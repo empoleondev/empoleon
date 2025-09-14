@@ -1,6 +1,6 @@
 import { Box, TextInput } from '@empoleon/core';
 import { useForm } from '@empoleon/form';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { createEffect } from 'solid-js';
 
 const code = `
@@ -33,14 +33,14 @@ function Demo() {
       <TextInput
         label="Name"
         placeholder="Name"
-        key={form.key('name')}
+
         {...form.getInputProps('name')}
       />
       <TextInput
         mt="md"
         label="Occupation"
         placeholder="Occupation"
-        key={form.key('occupation')}
+
         {...form.getInputProps('occupation')}
       />
     </Box>
@@ -86,7 +86,7 @@ function Demo() {
   );
 }
 
-export const localStorage: MantineDemo = {
+export const localStorage: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

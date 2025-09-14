@@ -1,7 +1,7 @@
-import { useRef } from 'react';
 import { Button, Group, ScrollArea, Stack } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { Content } from './_content';
+import { createSignal } from 'solid-js';
 
 const code = `
 import { useRef } from 'react';
@@ -35,16 +35,16 @@ function Demo() {
 `;
 
 function Demo() {
-  const viewport = useRef<HTMLDivElement>(null);
+  const [viewport, setViewport] = createSignal<HTMLDivElement|null>(null);
   const scrollToBottom = () =>
-    viewport.current!.scrollTo({ top: viewport.current!.scrollHeight, behavior: 'smooth' });
+    viewport()!.scrollTo({ top: viewport()!.scrollHeight, behavior: 'smooth' });
   const scrollToCenter = () =>
-    viewport.current!.scrollTo({ top: viewport.current!.scrollHeight / 2, behavior: 'smooth' });
-  const scrollToTop = () => viewport.current!.scrollTo({ top: 0, behavior: 'smooth' });
+    viewport()!.scrollTo({ top: viewport()!.scrollHeight / 2, behavior: 'smooth' });
+  const scrollToTop = () => viewport()!.scrollTo({ top: 0, behavior: 'smooth' });
 
   return (
     <Stack align="center">
-      <ScrollArea w={300} h={200} viewportRef={viewport}>
+      <ScrollArea w={300} h={200} viewport-ref={setViewport}>
         <Content />
       </ScrollArea>
       <Group justify="center">
@@ -56,7 +56,7 @@ function Demo() {
   );
 }
 
-export const scrollTo: MantineDemo = {
+export const scrollTo: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

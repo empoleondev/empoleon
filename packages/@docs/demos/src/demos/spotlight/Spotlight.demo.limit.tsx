@@ -1,6 +1,6 @@
 import { IconSearch } from '@tabler/icons-solidjs';
 import { SpotlightActionData } from '@empoleon/spotlight';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { SpotlightDemoBase } from './_demo-base';
 
 const code = `
@@ -26,7 +26,7 @@ function Demo() {
         highlightQuery
         limit={7}
         searchProps={{
-          leftSection: <IconSearch size={20} stroke={1.5} />,
+          leftSection: <IconSearch size={20} stroke='1.5' />,
           placeholder: 'Search...',
         }}
       />
@@ -59,7 +59,7 @@ function Demo() {
   );
 }
 
-export const limit: MantineDemo = {
+export const limit: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

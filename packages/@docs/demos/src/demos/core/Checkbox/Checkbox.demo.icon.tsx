@@ -1,10 +1,10 @@
-import { IconBiohazard, IconRadioactive } from '@tabler/icons-react';
+import { IconBiohazard, IconRadioactive } from '@tabler/icons-solidjs';
 import { Checkbox, CheckboxProps } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Checkbox, CheckboxProps } from '@empoleon/core';
-import { IconBiohazard, IconRadioactive } from '@tabler/icons-react';
+import { IconBiohazard, IconRadioactive } from '@tabler/icons-solidjs';
 
 const CheckboxIcon: CheckboxProps['icon'] = ({ indeterminate, ...others }) =>
   indeterminate ? <IconRadioactive {...others} /> : <IconBiohazard {...others} />;
@@ -20,6 +20,7 @@ function Demo() {
 `;
 
 const CheckboxIcon: CheckboxProps['icon'] = ({ indeterminate, ...others }) =>
+  // @ts-ignore
   indeterminate ? <IconRadioactive {...others} /> : <IconBiohazard {...others} />;
 
 function Demo() {
@@ -31,7 +32,7 @@ function Demo() {
   );
 }
 
-export const icon: MantineDemo = {
+export const icon: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

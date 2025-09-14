@@ -1,5 +1,5 @@
 import { Switch } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Switch } from '@empoleon/core';
@@ -15,7 +15,7 @@ function Demo() {
 }
 `;
 
-export const configurator: MantineDemo = {
+export const configurator: EmpoleonDemo = {
   type: 'configurator',
   component: (props: any) => <Switch defaultChecked {...props} />,
   code,

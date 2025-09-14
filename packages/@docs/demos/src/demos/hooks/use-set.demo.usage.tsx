@@ -1,6 +1,6 @@
 import { Code, Stack, TextInput } from '@empoleon/core';
 import { useSet } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { createSignal } from 'solid-js';
 
 const code = `
@@ -14,7 +14,7 @@ function Demo() {
 
   const isDuplicate = scopes.has(input.trim().toLowerCase());
 
-  const items = Array.from(scopes).map((scope) => <Code key={scope}>{scope}</Code>);
+  const items = Array.from(scopes).map((scope) => <Code >{scope}</Code>);
 
   return (
     <>
@@ -73,7 +73,7 @@ function Demo() {
   );
 }
 
-export const useSetUsage: MantineDemo = {
+export const useSetUsage: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

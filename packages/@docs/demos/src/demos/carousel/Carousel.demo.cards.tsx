@@ -1,7 +1,7 @@
 import { Carousel, CarouselProps } from '@empoleon/carousel';
 import { Button, Paper, Text, Title, useEmpoleonTheme } from '@empoleon/core';
 import { useMediaQuery } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import classes from './Carousel.demo.cards.module.css';
 import { For } from 'solid-js';
 
@@ -112,7 +112,7 @@ function Demo() {
   const theme = useEmpoleonTheme();
   const mobile = useMediaQuery(\`(max-width: \${theme.breakpoints.sm})\`);
   const slides = data.map((item) => (
-    <Carousel.Slide key={item.title}>
+    <Carousel.Slide >
       <Card {...item} />
     </Carousel.Slide>
   ));
@@ -220,7 +220,7 @@ export function CarouselCardsDemos(props: CarouselProps) {
   );
 }
 
-export const cards: MantineDemo = {
+export const cards: EmpoleonDemo = {
   type: 'code',
   component: CarouselCardsDemos,
   code: [

@@ -1,13 +1,13 @@
-import { IconColorPicker } from '@tabler/icons-react';
+import { IconColorPicker } from '@tabler/icons-solidjs';
 import { ColorInput } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { ColorInput } from '@empoleon/core';
-import { IconColorPicker } from '@tabler/icons-react';
+import { IconColorPicker } from '@tabler/icons-solidjs';
 
 function Demo() {
-  const icon = <IconColorPicker size={18} stroke={1.5} />;
+  const icon = <IconColorPicker size={18} stroke='1.5' />;
 
   return (
     <>
@@ -30,7 +30,7 @@ function Demo() {
 `;
 
 function Demo() {
-  const icon = <IconColorPicker size={18} stroke={1.5} />;
+  const icon = <IconColorPicker size={18} stroke='1.5' />;
 
   return (
     <>
@@ -50,7 +50,7 @@ function Demo() {
   );
 }
 
-export const sections: MantineDemo = {
+export const sections: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

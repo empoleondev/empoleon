@@ -1,5 +1,5 @@
 import { Select } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Select } from '@empoleon/core';
@@ -27,7 +27,7 @@ function Demo() {
   );
 }
 
-export const dropdownShadow: MantineDemo = {
+export const dropdownShadow: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

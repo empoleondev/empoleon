@@ -1,4 +1,4 @@
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import classes from './Styles.demo.rtlMixin.module.css';
 
 const code = `
@@ -29,7 +29,7 @@ function Demo() {
   return <div class={classes.demo}>Demo</div>;
 }
 
-export const rtlMixin: MantineDemo = {
+export const rtlMixin: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code: [

@@ -1,10 +1,10 @@
-import { IconPhoto } from '@tabler/icons-react';
+import { IconPhoto } from '@tabler/icons-solidjs';
 import { ThemeIcon, ThemeIconProps } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 function Wrapper(props: ThemeIconProps) {
   return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <div style={{ display: 'flex', 'align-items': 'center', 'justify-content': 'center' }}>
       <ThemeIcon {...props}>
         <IconPhoto style={{ width: '70%', height: '70%' }} />
       </ThemeIcon>
@@ -14,7 +14,7 @@ function Wrapper(props: ThemeIconProps) {
 
 const code = `
 import { ThemeIcon } from '@empoleon/core';
-import { IconPhoto } from '@tabler/icons-react';
+import { IconPhoto } from '@tabler/icons-solidjs';
 
 function Demo() {
   return (
@@ -25,7 +25,7 @@ function Demo() {
 }
 `;
 
-export const usage: MantineDemo = {
+export const usage: EmpoleonDemo = {
   type: 'configurator',
   component: Wrapper,
   code,

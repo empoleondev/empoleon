@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import { Chip, Group } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
+import { createSignal } from 'solid-js';
 
 const code = `
 import { useState } from 'react';
@@ -33,15 +33,15 @@ function Demo() {
 `;
 
 function Demo() {
-  const [value, setValue] = useState<string | null>('first');
-  const handleChipClick = (event: React.MouseEvent<HTMLInputElement>) => {
-    if (event.currentTarget.value === value) {
+  const [value, setValue] = createSignal<string | null>('first');
+  const handleChipClick = (event: MouseEvent & { currentTarget: HTMLInputElement; target: Element }) => {
+    if (event.currentTarget.value === value()) {
       setValue(null);
     }
   };
 
   return (
-    <Chip.Group multiple={false} value={value} onChange={setValue}>
+    <Chip.Group multiple={false} value={value()} onChange={setValue}>
       <Group>
         <Chip value="first" onClick={handleChipClick}>
           First
@@ -57,7 +57,7 @@ function Demo() {
   );
 }
 
-export const deselect: MantineDemo = {
+export const deselect: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

@@ -1,5 +1,5 @@
 import { Anchor } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Anchor } from '@empoleon/core';
@@ -33,7 +33,7 @@ function Demo() {
   );
 }
 
-export const textProps: MantineDemo = {
+export const textProps: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

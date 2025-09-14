@@ -1,18 +1,18 @@
-import { IconError404, IconFingerprint, IconPhoto } from '@tabler/icons-react';
+import { IconError404, IconFingerprint, IconPhoto } from '@tabler/icons-solidjs';
 import {
   ActionIcon,
   darken,
   defaultVariantColorsResolver,
   Group,
-  MantineThemeProvider,
+  EmpoleonThemeProvider,
   parseThemeColor,
   rgba,
   VariantColorsResolver,
 } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
-import { IconPhoto, IconFingerprint, IconError404 } from '@tabler/icons-react';
+import { IconPhoto, IconFingerprint, IconError404 } from '@tabler/icons-solidjs';
 import {
   ActionIcon,
   Group,
@@ -125,25 +125,25 @@ const variantColorResolver: VariantColorsResolver = (input) => {
 
 function Demo() {
   return (
-    <MantineThemeProvider theme={{ variantColorResolver }}>
+    <EmpoleonThemeProvider theme={{ variantColorResolver }}>
       <Group>
         <ActionIcon color="lime.4" variant="filled" size="lg">
-          <IconPhoto size={20} stroke={1.5} />
+          <IconPhoto size={20} stroke='1.5' />
         </ActionIcon>
 
         <ActionIcon color="orange" variant="light" size="lg">
-          <IconFingerprint size={20} stroke={1.5} />
+          <IconFingerprint size={20} stroke='1.5' />
         </ActionIcon>
 
         <ActionIcon variant="danger" size="lg">
-          <IconError404 size={20} stroke={1.5} />
+          <IconError404 size={20} stroke='1.5' />
         </ActionIcon>
       </Group>
-    </MantineThemeProvider>
+    </EmpoleonThemeProvider>
   );
 }
 
-export const variantColorsResolver: MantineDemo = {
+export const variantColorsResolver: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   centered: true,

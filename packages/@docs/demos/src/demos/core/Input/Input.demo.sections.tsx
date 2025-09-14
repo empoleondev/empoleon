@@ -1,12 +1,12 @@
-import { useState } from 'react';
-import { IconAt } from '@tabler/icons-react';
+import { IconAt } from '@tabler/icons-solidjs';
 import { CloseButton, Input } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
+import { createSignal } from 'solid-js';
 
 const code = `
 import { useState } from 'react';
 import { Input, CloseButton } from '@empoleon/core';
-import { IconAt } from '@tabler/icons-react';
+import { IconAt } from '@tabler/icons-solidjs';
 
 function Demo() {
   const [value, setValue] = useState('Clear me');
@@ -33,13 +33,13 @@ function Demo() {
 `;
 
 function Demo() {
-  const [value, setValue] = useState('Clear me');
+  const [value, setValue] = createSignal('Clear me');
   return (
     <>
       <Input placeholder="Your email" leftSection={<IconAt size={16} />} />
       <Input
         placeholder="Clearable input"
-        value={value}
+        value={value()}
         onChange={(event) => setValue(event.currentTarget.value)}
         rightSectionPointerEvents="all"
         mt="md"
@@ -47,7 +47,7 @@ function Demo() {
           <CloseButton
             aria-label="Clear input"
             onClick={() => setValue('')}
-            style={{ display: value ? undefined : 'none' }}
+            style={{ display: value() ? undefined : 'none' }}
           />
         }
       />
@@ -55,7 +55,7 @@ function Demo() {
   );
 }
 
-export const sections: MantineDemo = {
+export const sections: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   maxWidth: 340,

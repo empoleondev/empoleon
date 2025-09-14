@@ -1,6 +1,6 @@
 import { Box } from '@empoleon/core';
 import { useRadialMove } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import classes from './use-radial-move.demo.usage.module.css';
 import { createSignal } from 'solid-js';
 
@@ -83,7 +83,7 @@ function Demo() {
   );
 }
 
-export const useRadialMoveUsage: MantineDemo = {
+export const useRadialMoveUsage: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code: [

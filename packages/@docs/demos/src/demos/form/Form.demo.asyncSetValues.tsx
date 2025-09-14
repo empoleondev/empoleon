@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { Checkbox, TextInput } from '@empoleon/core';
 import { useForm } from '@empoleon/form';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { createEffect } from 'solid-js';
 
 const code = `
@@ -38,13 +38,11 @@ function Demo() {
       <TextInput
         label="Email"
         placeholder="Email"
-        key={form.key('email')}
         {...form.getInputProps('email')}
       />
       <Checkbox
         mt="sm"
         label="I accept terms and conditions"
-        key={form.key('terms')}
         {...form.getInputProps('terms', { type: 'checkbox' })}
       />
     </form>
@@ -92,7 +90,7 @@ function Demo() {
   );
 }
 
-export const asyncSetValues: MantineDemo = {
+export const asyncSetValues: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

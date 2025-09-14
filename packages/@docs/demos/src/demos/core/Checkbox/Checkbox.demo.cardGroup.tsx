@@ -1,7 +1,7 @@
-import { useState } from 'react';
 import { Checkbox, Group, Stack, Text } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import classes from './Checkbox.demo.card.module.css';
+import { createSignal } from 'solid-js';
 
 const cssCode = `.root {
   position: relative;
@@ -56,7 +56,7 @@ function Demo() {
   const [value, setValue] = useState<string[]>([]);
 
   const cards = data.map((item) => (
-    <Checkbox.Card className={classes.root} radius="md" value={item.name} key={item.name}>
+    <Checkbox.Card className={classes.root} radius="md" value={item.name} >
       <Group wrap="nowrap" align="flex-start">
         <Checkbox.Indicator />
         <div>
@@ -98,10 +98,10 @@ const data = [
 ];
 
 function Demo() {
-  const [value, setValue] = useState<string[]>([]);
+  const [value, setValue] = createSignal<string[]>([]);
 
   const cards = data.map((item) => (
-    <Checkbox.Card className={classes.root} radius="md" value={item.name} key={item.name}>
+    <Checkbox.Card className={classes.root} radius="md" value={item.name} >
       <Group wrap="nowrap" align="flex-start">
         <Checkbox.Indicator />
         <div>
@@ -115,7 +115,7 @@ function Demo() {
   return (
     <>
       <Checkbox.Group
-        value={value}
+        value={value()}
         onChange={setValue}
         label="Pick packages to install"
         description="Choose all packages that you will need in your application"
@@ -126,13 +126,13 @@ function Demo() {
       </Checkbox.Group>
 
       <Text fz="xs" mt="md">
-        CurrentValue: {value.join(', ') || '–'}
+        CurrentValue: {value().join(', ') || '–'}
       </Text>
     </>
   );
 }
 
-export const cardGroup: MantineDemo = {
+export const cardGroup: EmpoleonDemo = {
   type: 'code',
   centered: true,
   maxWidth: 320,

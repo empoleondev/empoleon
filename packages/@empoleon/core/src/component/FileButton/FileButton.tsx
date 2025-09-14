@@ -36,11 +36,11 @@ export interface FileButtonProps<Multiple extends boolean = false> {
   ref?: (el: HTMLInputElement) => void;
 }
 
-const defaultProps: Partial<FileButtonProps> = {
-  multiple: false,
+const defaultProps = {
+  multiple: false as any,
 } satisfies Partial<FileButtonProps>;
 
-export function FileButton (_props: FileButtonProps) {
+export function FileButton<Multiple extends boolean = false>(_props: FileButtonProps<Multiple>) {
   const props = useProps('FileButton', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'onChange',
@@ -71,7 +71,7 @@ export function FileButton (_props: FileButtonProps) {
     if (local.multiple) {
       local.onChange(Array.from(files) as any);
     } else {
-      local.onChange(files[0] || null as any);
+      local.onChange((files[0] || null) as any);
     }
   };
 

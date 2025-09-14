@@ -1,5 +1,5 @@
 import { Anchor, Avatar, Group, Popover, Stack, Text, UnstyledButton } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Popover, Avatar, Text, Group, Anchor, Stack } from '@empoleon/core';
@@ -54,7 +54,7 @@ function Demo() {
 function Demo() {
   return (
     <Popover
-      width={320}
+      width='320px'
       shadow="md"
       withArrow
       withOverlay
@@ -97,7 +97,7 @@ function Demo() {
   );
 }
 
-export const overlay: MantineDemo = {
+export const overlay: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

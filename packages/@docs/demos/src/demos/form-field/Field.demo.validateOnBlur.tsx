@@ -1,6 +1,6 @@
 import { TextInput } from '@empoleon/core';
 import { useField } from '@empoleon/form';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { TextInput } from '@empoleon/core';
@@ -27,7 +27,7 @@ function Demo() {
   return <TextInput {...field.getInputProps()} label="Name" placeholder="Enter your name" />;
 }
 
-export const validateOnBlur: MantineDemo = {
+export const validateOnBlur: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

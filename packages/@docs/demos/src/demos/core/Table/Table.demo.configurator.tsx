@@ -1,6 +1,7 @@
 import { Table, TableProps } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { elements } from './_data';
+import { For } from 'solid-js';
 
 function Wrapper(props: TableProps) {
   return (
@@ -14,14 +15,16 @@ function Wrapper(props: TableProps) {
         </Table.Tr>
       </Table.Thead>
       <Table.Tbody>
-        {elements.map((element) => (
-          <Table.Tr key={element.name}>
-            <Table.Td>{element.position}</Table.Td>
-            <Table.Td>{element.name}</Table.Td>
-            <Table.Td>{element.symbol}</Table.Td>
-            <Table.Td>{element.mass}</Table.Td>
-          </Table.Tr>
-        ))}
+        <For each={elements}>
+          {(element) => (
+            <Table.Tr>
+              <Table.Td>{element.position}</Table.Td>
+              <Table.Td>{element.name}</Table.Td>
+              <Table.Td>{element.symbol}</Table.Td>
+              <Table.Td>{element.mass}</Table.Td>
+            </Table.Tr>
+          )}
+        </For>
       </Table.Tbody>
     </Table>
   );
@@ -39,7 +42,7 @@ function Demo() {
 }
 `;
 
-export const configurator: MantineDemo = {
+export const configurator: EmpoleonDemo = {
   type: 'configurator',
   component: Wrapper,
   code,

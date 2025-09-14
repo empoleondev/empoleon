@@ -1,5 +1,5 @@
 import { Button, Popover, TextInput } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Popover, Button, TextInput } from '@empoleon/core';
@@ -21,7 +21,7 @@ function Demo() {
 
 function Demo() {
   return (
-    <Popover width={300} trapFocus position="bottom" withArrow shadow="md">
+    <Popover width='300px' trapFocus position="bottom" withArrow shadow="md">
       <Popover.Target>
         <Button>Toggle popover</Button>
       </Popover.Target>
@@ -33,7 +33,7 @@ function Demo() {
   );
 }
 
-export const form: MantineDemo = {
+export const form: EmpoleonDemo = {
   type: 'code',
   code,
   centered: true,

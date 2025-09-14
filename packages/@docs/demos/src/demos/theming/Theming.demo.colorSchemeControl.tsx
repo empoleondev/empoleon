@@ -1,7 +1,7 @@
 import { IconMoon, IconSun } from '@tabler/icons-solidjs';
 import cx from 'clsx';
 import { ActionIcon, useComputedColorScheme, useEmpoleonColorScheme } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import classes from './Theming.demo.colorSchemeControl.module.css';
 
 const code = `
@@ -21,8 +21,8 @@ function Demo() {
       size="xl"
       aria-label="Toggle color scheme"
     >
-      <IconSun className={cx(classes.icon, classes.light)} stroke={1.5} />
-      <IconMoon className={cx(classes.icon, classes.dark)} stroke={1.5} />
+      <IconSun className={cx(classes.icon, classes.light)} stroke='1.5' />
+      <IconMoon className={cx(classes.icon, classes.dark)} stroke='1.5' />
     </ActionIcon>
   );
 }
@@ -72,7 +72,7 @@ function Demo() {
   );
 }
 
-export const colorSchemeControl: MantineDemo = {
+export const colorSchemeControl: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   centered: true,

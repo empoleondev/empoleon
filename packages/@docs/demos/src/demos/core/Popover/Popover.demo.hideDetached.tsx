@@ -1,5 +1,5 @@
 import { Box, Button, Group, Popover, useComputedColorScheme } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Box, Button, Group, Popover } from '@empoleon/core';
@@ -67,7 +67,7 @@ function Demo() {
   );
 }
 
-export const hideDetached: MantineDemo = {
+export const hideDetached: EmpoleonDemo = {
   type: 'code',
   code,
   centered: true,

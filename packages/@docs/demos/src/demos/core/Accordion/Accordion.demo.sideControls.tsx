@@ -1,10 +1,10 @@
-import { IconDots } from '@tabler/icons-react';
+import { IconDots } from '@tabler/icons-solidjs';
 import { Accordion, AccordionControlProps, ActionIcon, Center } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Accordion, ActionIcon, AccordionControlProps, Center } from '@empoleon/core';
-import { IconDots } from '@tabler/icons-react';
+import { IconDots } from '@tabler/icons-solidjs';
 
 function AccordionControl(props: AccordionControlProps) {
   return (
@@ -71,7 +71,7 @@ function Demo() {
   );
 }
 
-export const sideControls: MantineDemo = {
+export const sideControls: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

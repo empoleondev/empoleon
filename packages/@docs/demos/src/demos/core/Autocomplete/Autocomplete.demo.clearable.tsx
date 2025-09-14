@@ -1,5 +1,5 @@
 import { Autocomplete } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Autocomplete } from '@empoleon/core';
@@ -29,7 +29,7 @@ function Demo() {
   );
 }
 
-export const clearable: MantineDemo = {
+export const clearable: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

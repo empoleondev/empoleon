@@ -1,5 +1,5 @@
 import { Autocomplete } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Autocomplete } from '@empoleon/core';
@@ -39,13 +39,13 @@ function Demo() {
         label="10px padding"
         placeholder="Pick value or enter anything"
         data={['React', 'Angular', 'Vue', 'Svelte']}
-        comboboxProps={{ dropdownPadding: 10 }}
+        comboboxProps={{ dropdownPadding: '10px' }}
       />
     </>
   );
 }
 
-export const dropdownPadding: MantineDemo = {
+export const dropdownPadding: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

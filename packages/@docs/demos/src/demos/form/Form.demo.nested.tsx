@@ -1,6 +1,6 @@
 import { Box, Checkbox, TextInput } from '@empoleon/core';
 import { useForm } from '@empoleon/form';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { useForm } from '@empoleon/form';
@@ -23,20 +23,20 @@ function Demo() {
       <TextInput
         label="First name"
         placeholder="First name"
-        key={form.key('user.firstName')}
+
         {...form.getInputProps('user.firstName')}
       />
       <TextInput
         label="Last name"
         placeholder="Last name"
         mt="md"
-        key={form.key('user.lastName')}
+
         {...form.getInputProps('user.lastName')}
       />
       <Checkbox
         label="I accept terms and conditions"
         mt="sm"
-        key={form.key('terms')}
+
         {...form.getInputProps('terms', { type: 'checkbox' })}
       />
     </Box>
@@ -78,7 +78,7 @@ function Demo() {
   );
 }
 
-export const nested: MantineDemo = {
+export const nested: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

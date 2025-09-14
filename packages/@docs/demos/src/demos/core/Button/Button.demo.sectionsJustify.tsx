@@ -1,10 +1,10 @@
-import { IconPhoto } from '@tabler/icons-react';
+import { IconPhoto } from '@tabler/icons-solidjs';
 import { Button } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = (props: any) => `
 import { Button } from '@empoleon/core';
-import { IconPhoto } from '@tabler/icons-react';
+import { IconPhoto } from '@tabler/icons-solidjs';
 
 function Demo() {
   const icon = <IconPhoto size={14} />;
@@ -67,7 +67,7 @@ function Wrapper(props: any) {
   );
 }
 
-export const sectionsJustify: MantineDemo = {
+export const sectionsJustify: EmpoleonDemo = {
   type: 'configurator',
   component: Wrapper,
   code,

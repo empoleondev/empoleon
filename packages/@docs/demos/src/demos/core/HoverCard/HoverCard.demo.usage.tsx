@@ -1,5 +1,5 @@
 import { Button, Group, HoverCard, Text } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { HoverCard, Button, Text, Group } from '@empoleon/core';
@@ -27,7 +27,7 @@ function Demo() {
 function Demo() {
   return (
     <Group justify="center">
-      <HoverCard width={280} shadow="md">
+      <HoverCard width='280px' shadow="md">
         <HoverCard.Target>
           <Button>Hover to reveal the card</Button>
         </HoverCard.Target>
@@ -42,7 +42,7 @@ function Demo() {
   );
 }
 
-export const usage: MantineDemo = {
+export const usage: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

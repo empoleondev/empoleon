@@ -1,7 +1,7 @@
 import { useEditor } from '@empoleon/solid-tiptap';
 import StarterKit from '@tiptap/starter-kit';
 import { RichTextEditor } from '@empoleon/tiptap';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { createSignal } from 'solid-js';
 
 const code = `
@@ -77,7 +77,7 @@ function Demo() {
   );
 }
 
-export const sourceCodeSwitcher: MantineDemo = {
+export const sourceCodeSwitcher: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

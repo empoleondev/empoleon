@@ -1,6 +1,6 @@
-import { IconMessageCircle, IconPhoto, IconSettings } from '@tabler/icons-react';
+import { IconMessageCircle, IconPhoto, IconSettings } from '@tabler/icons-solidjs';
 import { Tabs, TabsProps } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { TabsStylesApi } from '@docs/styles-api';
 
 const code = `
@@ -67,7 +67,7 @@ function Demo(props: TabsProps) {
   );
 }
 
-export const stylesApi: MantineDemo = {
+export const stylesApi: EmpoleonDemo = {
   type: 'styles-api',
   data: TabsStylesApi,
   component: Demo,

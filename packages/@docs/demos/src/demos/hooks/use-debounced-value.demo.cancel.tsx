@@ -1,6 +1,6 @@
 import { Box, Button, Group, Text, TextInput } from '@empoleon/core';
 import { useDebouncedValue } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { createSignal } from 'solid-js';
 
 const code = `
@@ -64,7 +64,7 @@ function Demo() {
   );
 }
 
-export const useDebouncedValueCancel: MantineDemo = {
+export const useDebouncedValueCancel: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

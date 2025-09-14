@@ -1,5 +1,5 @@
 import { ColorInput, ColorInputProps } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 function Wrapper(props: ColorInputProps) {
   return (
@@ -22,7 +22,7 @@ function Demo() {
 }
 `;
 
-export const formatsConfigurator: MantineDemo = {
+export const formatsConfigurator: EmpoleonDemo = {
   type: 'configurator',
   component: Wrapper,
   code,

@@ -1,5 +1,5 @@
 import { YearPicker } from '@empoleon/dates';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { createSignal } from 'solid-js';
 
 const code = `
@@ -24,7 +24,7 @@ function Demo() {
   return <YearPicker value={value()} onChange={setValue} minDate="2021-02-01" maxDate="2028-02-01" />;
 }
 
-export const minMax: MantineDemo = {
+export const minMax: EmpoleonDemo = {
   type: 'code',
   centered: true,
   component: Demo,

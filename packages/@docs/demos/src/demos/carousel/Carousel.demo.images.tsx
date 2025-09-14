@@ -1,6 +1,6 @@
 import { Carousel } from '@empoleon/carousel';
 import { Image } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { images as _images } from './_images';
 import { For } from 'solid-js';
 
@@ -18,7 +18,7 @@ const images = [
 
 function Demo() {
   const slides = images.map((url) => (
-    <Carousel.Slide key={url}>
+    <Carousel.Slide >
       <Image src={url} />
     </Carousel.Slide>
   ));
@@ -45,7 +45,7 @@ function Demo() {
   );
 }
 
-export const images: MantineDemo = {
+export const images: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

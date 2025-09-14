@@ -1,11 +1,11 @@
-import { useState } from 'react';
-import { IconCheck, IconX } from '@tabler/icons-react';
+import { IconCheck, IconX } from '@tabler/icons-solidjs';
 import { Box, PasswordInput, Popover, Progress, Text } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
+import { createSignal } from 'solid-js';
 
 const code = `
 import { useState } from 'react';
-import { IconX, IconCheck } from '@tabler/icons-react';
+import { IconX, IconCheck } from '@tabler/icons-solidjs';
 import { PasswordInput, Progress, Text, Popover, Box } from '@empoleon/core';
 
 function PasswordRequirement({ meets, label }: { meets: boolean; label: string }) {
@@ -45,7 +45,7 @@ function Demo() {
   const [popoverOpened, setPopoverOpened] = useState(false);
   const [value, setValue] = useState('');
   const checks = requirements.map((requirement, index) => (
-    <PasswordRequirement key={index} label={requirement.label} meets={requirement.re.test(value)} />
+    <PasswordRequirement label={requirement.label} meets={requirement.re.test(value)} />
   ));
 
   const strength = getStrength(value);
@@ -111,32 +111,32 @@ function getStrength(password: string) {
 }
 
 function Demo() {
-  const [popoverOpened, setPopoverOpened] = useState(false);
-  const [value, setValue] = useState('');
+  const [popoverOpened, setPopoverOpened] = createSignal(false);
+  const [value, setValue] = createSignal('');
   const checks = requirements.map((requirement, index) => (
-    <PasswordRequirement key={index} label={requirement.label} meets={requirement.re.test(value)} />
+    <PasswordRequirement label={requirement.label} meets={requirement.re.test(value())} />
   ));
 
-  const strength = getStrength(value);
+  const strength = getStrength(value());
   const color = strength === 100 ? 'teal' : strength > 50 ? 'yellow' : 'red';
 
   return (
     <Popover
-      opened={popoverOpened}
+      opened={popoverOpened()}
       position="bottom"
       width="target"
       transitionProps={{ transition: 'pop' }}
     >
       <Popover.Target>
         <div
-          onFocusCapture={() => setPopoverOpened(true)}
-          onBlurCapture={() => setPopoverOpened(false)}
+          on-focus-capture={() => setPopoverOpened(true)}
+          on-blur-capture={() => setPopoverOpened(false)}
         >
           <PasswordInput
             withAsterisk
             label="Your password"
             placeholder="Your password"
-            value={value}
+            value={value()}
             onChange={(event) => setValue(event.currentTarget.value)}
           />
         </div>
@@ -150,7 +150,7 @@ function Demo() {
   );
 }
 
-export const strengthMeter: MantineDemo = {
+export const strengthMeter: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

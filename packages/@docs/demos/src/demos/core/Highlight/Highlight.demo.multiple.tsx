@@ -1,5 +1,5 @@
 import { Highlight } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Highlight } from '@empoleon/core';
@@ -13,7 +13,7 @@ function Demo() {
   return <Highlight highlight={['this', 'that']}>Highlight this and also that</Highlight>;
 }
 
-export const multiple: MantineDemo = {
+export const multiple: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

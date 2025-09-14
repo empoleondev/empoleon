@@ -1,6 +1,6 @@
 import { Button, Group, Stack, Text } from '@empoleon/core';
 import { useDebouncedCallback } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { createSignal } from 'solid-js';
 
 const code = `
@@ -107,7 +107,7 @@ function Demo() {
   );
 }
 
-export const useDebouncedCallbackUnmount: MantineDemo = {
+export const useDebouncedCallbackUnmount: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

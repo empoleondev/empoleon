@@ -1,6 +1,6 @@
 import { Button, Group } from '@empoleon/core';
 import { notifications } from '@empoleon/notifications';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Button } from '@empoleon/core';
@@ -18,7 +18,7 @@ const positions = [
 function Demo() {
   const buttons = positions.map((position) => (
     <Button
-      key={position}
+
       onClick={() =>
         notifications.show({
           title: \`Notification at \${position}\`,
@@ -61,7 +61,7 @@ function Demo() {
   return <Group>{buttons}</Group>;
 }
 
-export const position: MantineDemo = {
+export const position: EmpoleonDemo = {
   type: 'code',
   code,
   centered: true,

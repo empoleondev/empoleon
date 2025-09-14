@@ -1,6 +1,6 @@
 import { PasswordInput, Stack } from '@empoleon/core';
 import { useDisclosure } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { useDisclosure } from '@empoleon/hooks';
@@ -33,21 +33,21 @@ function Demo() {
     <Stack>
       <PasswordInput
         label="Password"
-        defaultValue="secret"
-        visible={visible}
+        default-value="secret"
+        visible={visible()}
         onVisibilityChange={toggle}
       />
       <PasswordInput
         label="Confirm password"
-        defaultValue="secret"
-        visible={visible}
+        default-value="secret"
+        visible={visible()}
         onVisibilityChange={toggle}
       />
     </Stack>
   );
 }
 
-export const controlledVisibility: MantineDemo = {
+export const controlledVisibility: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

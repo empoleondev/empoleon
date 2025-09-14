@@ -1,7 +1,7 @@
-import { useState } from 'react';
 import { Checkbox } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import classes from './Checkbox.demo.customize.module.css';
+import { createSignal } from 'solid-js';
 
 const cssCode = `
 .root {
@@ -51,13 +51,13 @@ function Demo() {
 `;
 
 function Demo() {
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = createSignal(false);
 
   return (
     <Checkbox
       classNames={classes}
       label="Checkbox button"
-      checked={checked}
+      checked={checked()}
       onChange={(event) => setChecked(event.currentTarget.checked)}
       wrapperProps={{
         onClick: () => setChecked((c) => !c),
@@ -66,7 +66,7 @@ function Demo() {
   );
 }
 
-export const customize: MantineDemo = {
+export const customize: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   centered: true,

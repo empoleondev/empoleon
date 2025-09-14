@@ -1,5 +1,5 @@
 import { Autocomplete, ComboboxItem, OptionsFilter } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Autocomplete, ComboboxItem, OptionsFilter } from '@empoleon/core';
@@ -45,7 +45,7 @@ function Demo() {
   );
 }
 
-export const sort: MantineDemo = {
+export const sort: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

@@ -1,5 +1,5 @@
 import { Stepper, StepperProps } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 function Wrapper(props: Partial<StepperProps>) {
   return (
@@ -23,7 +23,7 @@ function Demo() {
 }
 `;
 
-export const iconSizeConfigurator: MantineDemo = {
+export const iconSizeConfigurator: EmpoleonDemo = {
   type: 'configurator',
   component: Wrapper,
   code,

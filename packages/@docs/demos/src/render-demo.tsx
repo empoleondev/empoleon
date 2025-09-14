@@ -1,6 +1,6 @@
-import { Demo, MantineDemo } from '@empoleonx/demo';
+import { Demo, EmpoleonDemo } from '@empoleonx/demo';
 
-export function renderDemo(demo: MantineDemo) {
+export function renderDemo(demo: EmpoleonDemo) {
   return () => (
     <div
       style={{

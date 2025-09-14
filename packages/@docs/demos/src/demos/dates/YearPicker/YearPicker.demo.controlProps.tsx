@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import { YearPicker, YearPickerProps } from '@empoleon/dates';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { createSignal } from 'solid-js';
 
 const code = `
@@ -53,7 +53,7 @@ function Demo() {
   return <YearPicker value={value()} onChange={setValue} getYearControlProps={getYearControlProps} />;
 }
 
-export const controlProps: MantineDemo = {
+export const controlProps: EmpoleonDemo = {
   type: 'code',
   centered: true,
   component: Demo,

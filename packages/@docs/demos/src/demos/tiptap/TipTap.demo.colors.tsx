@@ -4,7 +4,7 @@ import TextStyle from '@tiptap/extension-text-style';
 import { useEditor } from '@empoleon/solid-tiptap';
 import StarterKit from '@tiptap/starter-kit';
 import { RichTextEditor } from '@empoleon/tiptap';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { useEditor } from '@empoleon/solid-tiptap';
@@ -44,7 +44,7 @@ function Demo() {
 
         <RichTextEditor.ControlsGroup>
           <RichTextEditor.Control interactive={false}>
-            <IconColorPicker size={16} stroke={1.5} />
+            <IconColorPicker size={16} stroke='1.5' />
           </RichTextEditor.Control>
           <RichTextEditor.Color color="#F03E3E" />
           <RichTextEditor.Color color="#7048E8" />
@@ -109,7 +109,7 @@ function Demo() {
   );
 }
 
-export const colors: MantineDemo = {
+export const colors: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

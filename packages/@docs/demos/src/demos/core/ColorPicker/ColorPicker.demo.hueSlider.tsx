@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import { HueSlider, Text } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
+import { createSignal } from 'solid-js';
 
 const code = `
 import { useState } from 'react';
@@ -19,17 +19,17 @@ function Demo() {
 `;
 
 function Demo() {
-  const [value, onChange] = useState(250);
+  const [value, onChange] = createSignal(250);
 
   return (
     <>
-      <Text>Hue value: {value}</Text>
-      <HueSlider value={value} onChange={onChange} />
+      <Text>Hue value: {value()}</Text>
+      <HueSlider value={value()} onChange={onChange} />
     </>
   );
 }
 
-export const hueSlider: MantineDemo = {
+export const hueSlider: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

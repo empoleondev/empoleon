@@ -1,5 +1,5 @@
 import { Box, Typography } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const html = `
 <h1>Example article</h1>
@@ -43,13 +43,13 @@ function Demo() {
   return (
     <Box maw={560} mx="auto">
       <Typography>
-        <div dangerouslySetInnerHTML={{ __html: html }} />
+        <div innerHTML={html} />
       </Typography>
     </Box>
   );
 }
 
-export const usage: MantineDemo = {
+export const usage: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

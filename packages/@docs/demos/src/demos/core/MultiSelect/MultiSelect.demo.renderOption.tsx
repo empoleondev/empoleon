@@ -1,5 +1,5 @@
 import { Avatar, Group, MultiSelect, MultiSelectProps, Text } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { MultiSelect, MultiSelectProps, Avatar, Group, Text } from '@empoleon/core';
@@ -103,7 +103,7 @@ function Demo() {
   );
 }
 
-export const renderOption: MantineDemo = {
+export const renderOption: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

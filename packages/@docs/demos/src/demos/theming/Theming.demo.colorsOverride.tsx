@@ -1,5 +1,5 @@
 import { Button, Group } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Group, Button, EmpoleonProvider, createTheme } from '@empoleon/core';
@@ -36,7 +36,7 @@ function Demo() {
   );
 }
 
-export const colorsOverride: MantineDemo = {
+export const colorsOverride: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   centered: true,

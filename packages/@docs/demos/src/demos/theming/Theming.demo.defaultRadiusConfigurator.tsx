@@ -1,5 +1,5 @@
 import { Button, TextInput } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = (props: Record<string, any>) => `
 import { EmpoleonProvider, TextInput, Button } from '@empoleon/core';
@@ -30,7 +30,7 @@ function Wrapper(props: any) {
   );
 }
 
-export const defaultRadiusConfigurator: MantineDemo = {
+export const defaultRadiusConfigurator: EmpoleonDemo = {
   type: 'configurator',
   component: Wrapper,
   code,

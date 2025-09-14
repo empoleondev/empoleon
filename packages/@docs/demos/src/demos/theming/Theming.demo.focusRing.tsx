@@ -1,5 +1,5 @@
 import { Button, Code, Group, EmpoleonThemeProvider, Text } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 function Demo() {
   return (
@@ -38,7 +38,7 @@ function Demo() {
   );
 }
 
-export const focusRing: MantineDemo = {
+export const focusRing: EmpoleonDemo = {
   type: 'code',
   component: Demo,
 };

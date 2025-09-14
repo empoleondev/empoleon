@@ -1,5 +1,5 @@
 import { Kbd } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Kbd } from '@empoleon/core';
@@ -21,7 +21,7 @@ function Demo() {
   );
 }
 
-export const usage: MantineDemo = {
+export const usage: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

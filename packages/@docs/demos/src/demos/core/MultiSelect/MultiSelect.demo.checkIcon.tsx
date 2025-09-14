@@ -1,5 +1,5 @@
 import { MultiSelect } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { MultiSelect } from '@empoleon/core';
@@ -34,7 +34,7 @@ function Wrapper(props: any) {
   );
 }
 
-export const checkIcon: MantineDemo = {
+export const checkIcon: EmpoleonDemo = {
   type: 'configurator',
   component: Wrapper,
   code,

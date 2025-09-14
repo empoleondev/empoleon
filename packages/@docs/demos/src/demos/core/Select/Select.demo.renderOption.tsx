@@ -4,9 +4,10 @@ import {
   IconAlignLeft,
   IconAlignRight,
   IconCheck,
-} from '@tabler/icons-react';
+} from '@tabler/icons-solidjs';
 import { Group, Select, SelectProps } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
+import { JSX } from 'solid-js';
 
 const code = `
 import {
@@ -15,7 +16,7 @@ import {
   IconAlignLeft,
   IconAlignRight,
   IconCheck,
-} from '@tabler/icons-react';
+} from '@tabler/icons-solidjs';
 import { Group, Select, SelectProps } from '@empoleon/core';
 
 const iconProps = {
@@ -58,13 +59,13 @@ function Demo() {
 `;
 
 const iconProps = {
-  stroke: 1.5,
+  stroke: '1.5',
   color: 'currentColor',
   opacity: 0.6,
   size: 18,
 };
 
-const icons: Record<string, React.ReactNode> = {
+const icons: Record<string, JSX.Element> = {
   left: <IconAlignLeft {...iconProps} />,
   center: <IconAlignCenter {...iconProps} />,
   right: <IconAlignRight {...iconProps} />,
@@ -75,7 +76,7 @@ const renderSelectOption: SelectProps['renderOption'] = ({ option, checked }) =>
   <Group flex="1" gap="xs">
     {icons[option.value]}
     {option.label}
-    {checked && <IconCheck style={{ marginInlineStart: 'auto' }} {...iconProps} />}
+    {checked && <IconCheck style={{ 'margin-inline-start': 'auto' }} {...iconProps} />}
   </Group>
 );
 
@@ -95,7 +96,7 @@ function Demo() {
   );
 }
 
-export const renderOption: MantineDemo = {
+export const renderOption: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

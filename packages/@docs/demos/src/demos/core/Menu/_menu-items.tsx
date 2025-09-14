@@ -5,7 +5,7 @@ import {
   IconSearch,
   IconSettings,
   IconTrash,
-} from '@tabler/icons-react';
+} from '@tabler/icons-solidjs';
 import { Button, Menu, Text } from '@empoleon/core';
 
 export function DemoMenuItems({ widthRightSection = true, withTarget = true }) {

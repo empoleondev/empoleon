@@ -1,6 +1,6 @@
 import { Text } from '@empoleon/core';
 import { usePageLeave } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { createSignal } from 'solid-js';
 
 const code = `
@@ -20,7 +20,7 @@ function Demo() {
   return <Text ta="center">Mouse left the page {leftsCount()} times</Text>;
 }
 
-export const usePageLeaveDemo: MantineDemo = {
+export const usePageLeaveDemo: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

@@ -1,5 +1,5 @@
 import { SegmentedControl } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { SegmentedControl } from '@empoleon/core';
@@ -13,7 +13,7 @@ function Wrapper(props: any) {
   return <SegmentedControl data={['React', 'Angular', 'Vue']} {...props} />;
 }
 
-export const usage: MantineDemo = {
+export const usage: EmpoleonDemo = {
   type: 'configurator',
   component: Wrapper,
   code,

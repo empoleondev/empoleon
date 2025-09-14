@@ -1,6 +1,6 @@
-import { useRef, useState } from 'react';
 import { Button, FileButton, Group, Text } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
+import { createSignal } from 'solid-js';
 
 const code = `
 import { useState, useRef } from 'react';
@@ -37,18 +37,18 @@ function Demo() {
 `;
 
 function Demo() {
-  const [file, setFile] = useState<File | null>(null);
-  const resetRef = useRef<() => void>(null);
+  const [file, setFile] = createSignal<File | null>(null);
+  const [resetRef, setResetRef] = createSignal<(() => void) | null>(null);
 
   const clearFile = () => {
     setFile(null);
-    resetRef.current?.();
+    resetRef();
   };
 
   return (
     <>
       <Group justify="center">
-        <FileButton resetRef={resetRef} onChange={setFile} accept="image/png,image/jpeg">
+        <FileButton resetRef={setResetRef} onChange={setFile} accept="image/png,image/jpeg">
           {(props) => <Button {...props}>Upload image</Button>}
         </FileButton>
         <Button disabled={!file} color="red" onClick={clearFile}>
@@ -65,7 +65,7 @@ function Demo() {
   );
 }
 
-export const reset: MantineDemo = {
+export const reset: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

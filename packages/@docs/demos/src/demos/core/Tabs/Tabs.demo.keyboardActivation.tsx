@@ -1,5 +1,5 @@
 import { Tabs } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Tabs } from '@empoleon/core';
@@ -35,7 +35,7 @@ function Demo() {
   );
 }
 
-export const keyboardActivation: MantineDemo = {
+export const keyboardActivation: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

@@ -1,6 +1,6 @@
 import { TextInput } from '@empoleon/core';
 import { isEmail, useField } from '@empoleon/form';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { TextInput } from '@empoleon/core';
@@ -27,7 +27,7 @@ function Demo() {
   return <TextInput {...field.getInputProps()} label="Email" placeholder="Enter your email" />;
 }
 
-export const validateOnChange: MantineDemo = {
+export const validateOnChange: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

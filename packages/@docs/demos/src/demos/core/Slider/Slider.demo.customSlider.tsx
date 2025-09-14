@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { IconGripVertical } from '@tabler/icons-react';
+import { IconGripVertical } from '@tabler/icons-solidjs';
 import { clamp, useMove } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import classes from './Slider.demo.customSlider.module.css';
+import { createSignal } from 'solid-js';
 
 const cssCode = `
 .root {
@@ -91,7 +91,7 @@ const cssCode = `
 
 const code = `
 import { useState } from 'react';
-import { IconGripVertical } from '@tabler/icons-react';
+import { IconGripVertical } from '@tabler/icons-solidjs';
 import { clamp, useMove } from '@empoleon/hooks';
 import classes from './Demo.module.css';
 
@@ -101,8 +101,8 @@ function Demo() {
   const labelFloating = value < 0.2 || value > 0.8;
 
   return (
-    <div className={classes.root}>
-      <div className={classes.track} ref={ref}>
+    <div class={classes.root}>
+      <div class={classes.track} ref={ref}>
         <div
           className={classes.filled}
           style={{
@@ -129,7 +129,7 @@ function Demo() {
           className={classes.thumb}
           style={{ left: \`calc(\${value * 100}% - var(--thumb-width) / 2)\` }}
         >
-          <IconGripVertical stroke={1.5} />
+          <IconGripVertical stroke='1.5' />
         </div>
       </div>
     </div>
@@ -138,47 +138,47 @@ function Demo() {
 `;
 
 function Demo() {
-  const [value, setValue] = useState(0.3);
+  const [value, setValue] = createSignal(0.3);
   const { ref } = useMove(({ x }) => setValue(clamp(x, 0.1, 0.9)));
-  const labelFloating = value < 0.2 || value > 0.8;
+  const labelFloating = value() < 0.2 || value() > 0.8;
 
   return (
-    <div className={classes.root}>
-      <div className={classes.track} ref={ref}>
+    <div class={classes.root}>
+      <div class={classes.track} ref={ref}>
         <div
-          className={classes.filled}
+          class={classes.filled}
           style={{
-            width: `calc(${value * 100}% - var(--thumb-width) / 2 - var(--thumb-offset) / 2)`,
+            width: `calc(${value() * 100}% - var(--thumb-width) / 2 - var(--thumb-offset) / 2)`,
           }}
         >
-          <span className={classes.label} data-floating={labelFloating || undefined} data-filled>
-            {(value * 100).toFixed(0)}
+          <span class={classes.label} data-floating={labelFloating || undefined} data-filled>
+            {(value() * 100).toFixed(0)}
           </span>
         </div>
 
         <div
-          className={classes.empty}
+          class={classes.empty}
           style={{
-            width: `calc(${(1 - value) * 100}% - var(--thumb-width) / 2 - var(--thumb-offset) / 2)`,
+            width: `calc(${(1 - value()) * 100}% - var(--thumb-width) / 2 - var(--thumb-offset) / 2)`,
           }}
         >
-          <span className={classes.label} data-floating={labelFloating || undefined}>
-            {((1 - value) * 100).toFixed(0)}
+          <span class={classes.label} data-floating={labelFloating || undefined}>
+            {((1 - value()) * 100).toFixed(0)}
           </span>
         </div>
 
         <div
-          className={classes.thumb}
-          style={{ left: `calc(${value * 100}% - var(--thumb-width) / 2)` }}
+          class={classes.thumb}
+          style={{ left: `calc(${value() * 100}% - var(--thumb-width) / 2)` }}
         >
-          <IconGripVertical stroke={1.5} />
+          <IconGripVertical stroke='1.5' />
         </div>
       </div>
     </div>
   );
 }
 
-export const customSlider: MantineDemo = {
+export const customSlider: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code: [

@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import { Button, Group, Skeleton, Text } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
+import { createSignal } from 'solid-js';
 
 const code = `
 import { useState } from 'react';
@@ -25,11 +25,11 @@ function Demo() {
 `;
 
 function Demo() {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = createSignal(true);
 
   return (
     <>
-      <Skeleton visible={loading}>
+      <Skeleton visible={loading()}>
         <Text>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi dolor nihil amet tempore
           magnam optio, numquam nostrum inventore tempora assumenda saepe, aut repellat. Temporibus
@@ -49,7 +49,7 @@ function Demo() {
   );
 }
 
-export const content: MantineDemo = {
+export const content: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

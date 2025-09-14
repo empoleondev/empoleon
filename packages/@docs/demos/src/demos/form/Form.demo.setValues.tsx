@@ -1,7 +1,7 @@
 import { Button, Group, TextInput } from '@empoleon/core';
 import { useForm } from '@empoleon/form';
 import { randomId } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { useForm } from '@empoleon/form';
@@ -22,14 +22,14 @@ function Demo() {
       <TextInput
         label="Name"
         placeholder="Name"
-        key={form.key('name')}
+
         {...form.getInputProps('name')}
       />
       <TextInput
         mt="md"
         label="Email"
         placeholder="Email"
-        key={form.key('email')}
+
         {...form.getInputProps('email')}
       />
 
@@ -89,7 +89,7 @@ function Demo() {
   );
 }
 
-export const setValues: MantineDemo = {
+export const setValues: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

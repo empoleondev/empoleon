@@ -1,5 +1,5 @@
 import { Box, Container } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Box, Container } from '@empoleon/core';
@@ -41,7 +41,7 @@ function Demo() {
   );
 }
 
-export const breakout: MantineDemo = {
+export const breakout: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

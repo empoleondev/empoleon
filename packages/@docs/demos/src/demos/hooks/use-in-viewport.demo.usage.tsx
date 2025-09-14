@@ -1,6 +1,6 @@
 import { Box, Text } from '@empoleon/core';
 import { useInViewport } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Box, Text } from '@empoleon/core';
@@ -41,7 +41,7 @@ function Demo() {
   );
 }
 
-export const useInViewportDemo: MantineDemo = {
+export const useInViewportDemo: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

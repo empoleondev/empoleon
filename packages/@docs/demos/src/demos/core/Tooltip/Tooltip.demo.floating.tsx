@@ -1,5 +1,5 @@
 import { Box, Tooltip } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Box, Tooltip } from '@empoleon/core';
@@ -25,7 +25,7 @@ function Demo() {
   );
 }
 
-export const floating: MantineDemo = {
+export const floating: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

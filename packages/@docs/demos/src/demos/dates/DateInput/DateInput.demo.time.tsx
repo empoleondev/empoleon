@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import { DateInput } from '@empoleon/dates';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 dayjs.extend(customParseFormat);
 
@@ -31,7 +31,7 @@ function Demo() {
   );
 }
 
-export const time: MantineDemo = {
+export const time: EmpoleonDemo = {
   type: 'code',
   centered: true,
   maxWidth: 400,

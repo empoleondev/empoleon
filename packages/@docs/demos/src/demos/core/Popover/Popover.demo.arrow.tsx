@@ -1,5 +1,5 @@
 import { Button, Popover, Text } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Popover, Button, Text } from '@empoleon/core';
@@ -31,7 +31,7 @@ function Wrapper(props: any) {
   );
 }
 
-export const arrow: MantineDemo = {
+export const arrow: EmpoleonDemo = {
   type: 'configurator',
   component: Wrapper,
   code,

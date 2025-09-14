@@ -3,15 +3,15 @@ import {
   darken,
   defaultVariantColorsResolver,
   Group,
-  MantineThemeProvider,
+  EmpoleonThemeProvider,
   parseThemeColor,
   rgba,
   VariantColorsResolver,
 } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
-import { IconPhoto, IconFingerprint, IconError404 } from '@tabler/icons-react';
+import { IconPhoto, IconFingerprint, IconError404 } from '@tabler/icons-solidjs';
 import {
   Badge,
   Group,
@@ -124,7 +124,7 @@ const variantColorResolver: VariantColorsResolver = (input) => {
 
 function Demo() {
   return (
-    <MantineThemeProvider theme={{ variantColorResolver }}>
+    <EmpoleonThemeProvider theme={{ variantColorResolver }}>
       <Group>
         <Badge color="lime.4" variant="filled" size="lg">
           Lime filled
@@ -138,11 +138,11 @@ function Demo() {
           Danger
         </Badge>
       </Group>
-    </MantineThemeProvider>
+    </EmpoleonThemeProvider>
   );
 }
 
-export const variantColorsResolver: MantineDemo = {
+export const variantColorsResolver: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   centered: true,

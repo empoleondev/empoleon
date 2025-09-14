@@ -1,10 +1,10 @@
-import { IconComponents } from '@tabler/icons-react';
+import { IconComponents } from '@tabler/icons-solidjs';
 import { Autocomplete } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Autocomplete } from '@empoleon/core';
-import { IconComponents } from '@tabler/icons-react';
+import { IconComponents } from '@tabler/icons-solidjs';
 
 function Demo() {
   const icon = <IconComponents size={16} />;
@@ -53,7 +53,7 @@ function Demo() {
   );
 }
 
-export const sections: MantineDemo = {
+export const sections: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   maxWidth: 340,

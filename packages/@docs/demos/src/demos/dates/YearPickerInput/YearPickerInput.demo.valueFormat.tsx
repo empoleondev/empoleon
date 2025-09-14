@@ -1,5 +1,5 @@
 import { YearPickerInput } from '@empoleon/dates';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { YearPickerInput } from '@empoleon/dates';
@@ -17,7 +17,7 @@ function Demo() {
   );
 }
 
-export const valueFormat: MantineDemo = {
+export const valueFormat: EmpoleonDemo = {
   type: 'code',
   centered: true,
   maxWidth: 400,

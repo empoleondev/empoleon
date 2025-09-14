@@ -1,5 +1,5 @@
 import { Button, Group } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Button, Group } from '@empoleon/core';
@@ -27,7 +27,7 @@ function Demo() {
   );
 }
 
-export const autoContrast: MantineDemo = {
+export const autoContrast: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

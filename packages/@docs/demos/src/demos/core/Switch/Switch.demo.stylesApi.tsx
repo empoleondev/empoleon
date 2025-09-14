@@ -1,5 +1,5 @@
 import { Switch } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { SwitchStylesApi } from '@docs/styles-api';
 
 const code = `
@@ -21,7 +21,7 @@ function Demo(props: any) {
   );
 }
 
-export const stylesApi: MantineDemo = {
+export const stylesApi: EmpoleonDemo = {
   type: 'styles-api',
   data: SwitchStylesApi,
   component: Demo,

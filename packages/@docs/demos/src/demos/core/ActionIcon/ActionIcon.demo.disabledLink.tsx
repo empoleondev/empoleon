@@ -1,10 +1,10 @@
-import { IconExternalLink } from '@tabler/icons-react';
+import { IconExternalLink } from '@tabler/icons-solidjs';
 import { ActionIcon } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { ActionIcon } from '@empoleon/core';
-import { IconExternalLink } from '@tabler/icons-react';
+import { IconExternalLink } from '@tabler/icons-solidjs';
 
 function Demo() {
   return (
@@ -37,7 +37,7 @@ function Demo() {
   );
 }
 
-export const disabledLink: MantineDemo = {
+export const disabledLink: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   centered: true,

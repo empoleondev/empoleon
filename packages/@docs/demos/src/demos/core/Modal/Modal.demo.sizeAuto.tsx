@@ -1,6 +1,6 @@
 import { Badge, Button, Group, Modal, Text } from '@empoleon/core';
 import { useCounter, useDisclosure } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { useDisclosure, useCounter } from '@empoleon/hooks';
@@ -12,11 +12,11 @@ function Demo() {
 
   const badges = Array(count)
     .fill(0)
-    .map((_, index) => <Badge key={index}>Badge {index}</Badge>);
+    .map((_, index) => <Badge >Badge {index}</Badge>);
 
   return (
     <>
-      <Modal opened={opened} onClose={close} size="auto" title="Modal size auto">
+      <Modal opened={opened()} onClose={close} size="auto" title="Modal size auto">
         <Text>Modal with size auto will fits its content</Text>
 
         <Group wrap="nowrap" mt="md">
@@ -41,13 +41,13 @@ function Demo() {
   const [opened, { close, open }] = useDisclosure(false);
   const [count, { increment, decrement }] = useCounter(3, { min: 0 });
 
-  const badges = Array(count)
+  const badges = Array(count())
     .fill(0)
-    .map((_, index) => <Badge key={index}>Badge {index}</Badge>);
+    .map((_, index) => <Badge >Badge {index}</Badge>);
 
   return (
     <>
-      <Modal opened={opened} onClose={close} size="auto" title="Modal size auto">
+      <Modal opened={opened()} onClose={close} size="auto" title="Modal size auto">
         <Text>Modal with size auto will fits its content</Text>
 
         <Group wrap="nowrap" mt="md">
@@ -67,7 +67,7 @@ function Demo() {
   );
 }
 
-export const sizeAuto: MantineDemo = {
+export const sizeAuto: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   centered: true,

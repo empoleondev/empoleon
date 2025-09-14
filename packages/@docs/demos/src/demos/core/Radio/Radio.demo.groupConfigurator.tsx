@@ -1,5 +1,5 @@
 import { Group, Radio, RadioGroupProps } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Radio, Group } from '@empoleon/core';
@@ -35,7 +35,7 @@ function Wrapper(props: Partial<RadioGroupProps>) {
   );
 }
 
-export const groupConfigurator: MantineDemo = {
+export const groupConfigurator: EmpoleonDemo = {
   type: 'configurator',
   component: Wrapper,
   centered: true,

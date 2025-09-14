@@ -1,11 +1,16 @@
 import { SimpleGrid, SimpleGridProps } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
-import { defaultItems } from './_demo-item';
+import { EmpoleonDemo } from '@empoleonx/demo';
+import { defaultItems, GridItem } from './_demo-item';
+import { For } from 'solid-js';
 
 function Demo(props: SimpleGridProps) {
   return (
     <SimpleGrid {...props} id="grid-configurator">
-      {defaultItems}
+      <For each={defaultItems}>
+        {(_, index) => (
+          <GridItem>{index() + 1}</GridItem>
+        )}
+      </For>
     </SimpleGrid>
   );
 }
@@ -26,7 +31,7 @@ function Demo() {
 }
 `;
 
-export const usage: MantineDemo = {
+export const usage: EmpoleonDemo = {
   type: 'configurator',
   component: Demo,
   code,

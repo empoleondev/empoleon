@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import { CheckIcon, ColorSwatch } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
+import { createSignal } from 'solid-js';
 
 const code = `
 import { useState } from 'react';
@@ -23,7 +23,7 @@ function Demo() {
 `;
 
 function Demo() {
-  const [checked, setChecked] = useState(true);
+  const [checked, setChecked] = createSignal(true);
 
   return (
     <ColorSwatch
@@ -33,12 +33,12 @@ function Demo() {
       c="white"
       style={{ cursor: 'pointer' }}
     >
-      {checked && <CheckIcon size={12} />}
+      {checked() && <CheckIcon size={12} />}
     </ColorSwatch>
   );
 }
 
-export const component: MantineDemo = {
+export const component: EmpoleonDemo = {
   type: 'code',
   code,
   centered: true,

@@ -1,5 +1,5 @@
 import { Group } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Group } from '@empoleon/core';
@@ -43,7 +43,7 @@ function Demo() {
   );
 }
 
-export const globalClasses: MantineDemo = {
+export const globalClasses: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

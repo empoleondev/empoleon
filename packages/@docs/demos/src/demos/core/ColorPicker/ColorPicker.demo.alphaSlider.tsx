@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import { AlphaSlider, Text } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
+import { createSignal } from 'solid-js';
 
 const code = `
 import { useState } from 'react';
@@ -19,17 +19,17 @@ function Demo() {
 `;
 
 function Demo() {
-  const [value, onChange] = useState(0.55);
+  const [value, onChange] = createSignal(0.55);
 
   return (
     <>
-      <Text>Alpha value: {value}</Text>
-      <AlphaSlider color="#1c7ed6" value={value} onChange={onChange} />
+      <Text>Alpha value: {value()}</Text>
+      <AlphaSlider color="#1c7ed6" value={value()} onChange={onChange} />
     </>
   );
 }
 
-export const alphaSlider: MantineDemo = {
+export const alphaSlider: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

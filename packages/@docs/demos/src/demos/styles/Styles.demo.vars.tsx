@@ -1,5 +1,5 @@
 import { Button, ButtonFactory, Group, PartialVarsResolver } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const inlineCode = `
 import { Button, PartialVarsResolver, ButtonFactory, Group } from '@empoleon/core';
@@ -150,7 +150,7 @@ function Demo() {
   );
 }
 
-export const vars: MantineDemo = {
+export const vars: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   centered: true,

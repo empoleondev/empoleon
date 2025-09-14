@@ -1,10 +1,10 @@
-import { IconFingerprint, IconGauge } from '@tabler/icons-react';
+import { IconFingerprint, IconGauge } from '@tabler/icons-solidjs';
 import { NavLink } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { NavLink } from '@empoleon/core';
-import { IconGauge, IconFingerprint } from '@tabler/icons-react';
+import { IconGauge, IconFingerprint } from '@tabler/icons-solidjs';
 
 function Demo() {
   return (
@@ -12,7 +12,7 @@ function Demo() {
       <NavLink
         href="#required-for-focus"
         label="First parent link"
-        leftSection={<IconGauge size={16} stroke={1.5} />}
+        leftSection={<IconGauge size={16} stroke='1.5' />}
         childrenOffset={28}
       >
         <NavLink href="#required-for-focus" label="First child link" />
@@ -27,7 +27,7 @@ function Demo() {
       <NavLink
         href="#required-for-focus"
         label="Second parent link"
-        leftSection={<IconFingerprint size={16} stroke={1.5} />}
+        leftSection={<IconFingerprint size={16} stroke='1.5' />}
         childrenOffset={28}
         defaultOpened
       >
@@ -46,7 +46,7 @@ function Demo() {
       <NavLink
         href="#required-for-focus"
         label="First parent link"
-        leftSection={<IconGauge size={16} stroke={1.5} />}
+        leftSection={<IconGauge size={16} stroke='1.5' />}
         childrenOffset={28}
       >
         <NavLink href="#required-for-focus" label="First child link" />
@@ -61,7 +61,7 @@ function Demo() {
       <NavLink
         href="#required-for-focus"
         label="Second parent link"
-        leftSection={<IconFingerprint size={16} stroke={1.5} />}
+        leftSection={<IconFingerprint size={16} stroke='1.5' />}
         childrenOffset={28}
         defaultOpened
       >
@@ -73,7 +73,7 @@ function Demo() {
   );
 }
 
-export const nested: MantineDemo = {
+export const nested: EmpoleonDemo = {
   type: 'code',
   centered: true,
   maxWidth: 240,

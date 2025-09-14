@@ -1,5 +1,5 @@
 import { Input } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import classes from './Styles.demo.customVariant.module.css';
 
 const code = `
@@ -56,7 +56,7 @@ function Demo() {
   );
 }
 
-export const customVariant: MantineDemo = {
+export const customVariant: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   maxWidth: 360,

@@ -1,5 +1,5 @@
 import { Input } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { inputOnlyControls } from '../../../shared';
 
 const code = `
@@ -14,7 +14,7 @@ function Wrapper(props: any) {
   return <Input placeholder="Input component" {...props} />;
 }
 
-export const usage: MantineDemo = {
+export const usage: EmpoleonDemo = {
   type: 'configurator',
   component: Wrapper,
   code,

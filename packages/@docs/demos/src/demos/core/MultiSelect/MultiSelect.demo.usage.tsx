@@ -1,5 +1,5 @@
 import { MultiSelect } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { MultiSelect } from '@empoleon/core';
@@ -25,7 +25,7 @@ function Demo() {
   );
 }
 
-export const usage: MantineDemo = {
+export const usage: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

@@ -1,6 +1,6 @@
 import { Button, Group, Switch } from '@empoleon/core';
 import { useDisclosure } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Button, Group, Switch } from '@empoleon/core';
@@ -31,21 +31,21 @@ function Demo() {
   return (
     <>
       <Group>
-        <Button loading={loading}>Filled button</Button>
-        <Button variant="light" loading={loading}>
+        <Button loading={loading()}>Filled button</Button>
+        <Button variant="light" loading={loading()}>
           Light button
         </Button>
-        <Button variant="outline" loading={loading}>
+        <Button variant="outline" loading={loading()}>
           Outline button
         </Button>
       </Group>
 
-      <Switch checked={loading} onChange={toggle} label="Loading state" mt="md" />
+      <Switch checked={loading()} onChange={toggle} label="Loading state" mt="md" />
     </>
   );
 }
 
-export const loading: MantineDemo = {
+export const loading: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   centered: true,

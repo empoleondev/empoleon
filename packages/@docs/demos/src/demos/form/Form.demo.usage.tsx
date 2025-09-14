@@ -2,7 +2,7 @@
 
 import { Button, Checkbox, Group, TextInput } from '@empoleon/core';
 import { useForm } from '@empoleon/form';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Button, Checkbox, Group, TextInput } from '@empoleon/core';
@@ -27,14 +27,14 @@ function Demo() {
         withAsterisk
         label="Email"
         placeholder="your@email.com"
-        key={form.key('email')}
+
         {...form.getInputProps('email')}
       />
 
       <Checkbox
         mt="md"
         label="I agree to sell my privacy"
-        key={form.key('termsOfService')}
+
         {...form.getInputProps('termsOfService', { type: 'checkbox' })}
       />
 
@@ -81,7 +81,7 @@ function Demo() {
   );
 }
 
-export const usage: MantineDemo = {
+export const usage: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

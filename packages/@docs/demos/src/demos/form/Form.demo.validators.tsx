@@ -1,6 +1,6 @@
 import { Button, Group, NumberInput, TextInput } from '@empoleon/core';
 import { hasLength, isEmail, isInRange, isNotEmpty, matches, useForm } from '@empoleon/form';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { useForm, isNotEmpty, isEmail, isInRange, hasLength, matches } from '@empoleon/form';
@@ -32,7 +32,7 @@ function Demo() {
         label="Name"
         placeholder="Name"
         withAsterisk
-        key={form.key('name')}
+
         {...form.getInputProps('name')}
       />
       <TextInput
@@ -40,7 +40,7 @@ function Demo() {
         placeholder="Your job"
         withAsterisk
         mt="md"
-        key={form.key('job')}
+
         {...form.getInputProps('job')}
       />
       <TextInput
@@ -48,7 +48,7 @@ function Demo() {
         placeholder="Your email"
         withAsterisk
         mt="md"
-        key={form.key('email')}
+
         {...form.getInputProps('email')}
       />
       <TextInput
@@ -56,7 +56,7 @@ function Demo() {
         placeholder="Your favorite color"
         withAsterisk
         mt="md"
-        key={form.key('favoriteColor')}
+
         {...form.getInputProps('favoriteColor')}
       />
       <NumberInput
@@ -64,7 +64,7 @@ function Demo() {
         placeholder="Your age"
         withAsterisk
         mt="md"
-        key={form.key('age')}
+
         {...form.getInputProps('age')}
       />
 
@@ -140,7 +140,7 @@ function Demo() {
   );
 }
 
-export const validators: MantineDemo = {
+export const validators: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

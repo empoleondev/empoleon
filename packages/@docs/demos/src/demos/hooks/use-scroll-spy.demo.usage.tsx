@@ -1,6 +1,6 @@
 import { Text, UnstyledButton } from '@empoleon/core';
 import { useScrollSpy } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Text, UnstyledButton } from '@empoleon/core';
@@ -13,7 +13,7 @@ function Demo() {
 
   const headings = spy.data.map((heading, index) => (
     <li
-      key={heading.id}
+
       style={{
         listStylePosition: 'inside',
         paddingInlineStart: heading.depth * 20,
@@ -62,7 +62,7 @@ function Demo() {
   );
 }
 
-export const useScrollSpyUsage: MantineDemo = {
+export const useScrollSpyUsage: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

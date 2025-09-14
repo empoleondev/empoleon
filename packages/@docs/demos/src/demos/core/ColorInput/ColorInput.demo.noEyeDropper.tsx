@@ -1,5 +1,5 @@
 import { ColorInput } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { ColorInput } from '@empoleon/core';
@@ -13,7 +13,7 @@ function Demo() {
   return <ColorInput withEyeDropper={false} label="Without eye dropper" placeholder="Not fun" />;
 }
 
-export const noEyeDropper: MantineDemo = {
+export const noEyeDropper: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

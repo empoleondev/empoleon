@@ -1,5 +1,5 @@
 import { SemiCircleProgress } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { SemiCircleProgress } from '@empoleon/core';
@@ -13,7 +13,7 @@ function Demo() {
   return <SemiCircleProgress value={30} emptySegmentColor="var(--mantine-color-dimmed)" />;
 }
 
-export const emptySegmentColor: MantineDemo = {
+export const emptySegmentColor: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

@@ -1,5 +1,5 @@
 import { getTimeRange, TimePicker } from '@empoleon/dates';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { getTimeRange, TimePicker } from '@empoleon/dates';
@@ -25,7 +25,7 @@ function Demo() {
   );
 }
 
-export const presetsRange: MantineDemo = {
+export const presetsRange: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

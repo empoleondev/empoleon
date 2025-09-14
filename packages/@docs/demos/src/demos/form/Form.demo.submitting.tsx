@@ -1,6 +1,6 @@
 import { Button, Group, Stack, Text, TextInput } from '@empoleon/core';
 import { useForm } from '@empoleon/form';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { createSignal } from 'solid-js';
 
 const code = `
@@ -39,7 +39,7 @@ function Demo() {
         withAsterisk
         label="Name"
         placeholder="Your name"
-        key={form.key('name')}
+
         disabled={form.submitting}
         {...form.getInputProps('name')}
       />
@@ -98,7 +98,7 @@ function Demo() {
   );
 }
 
-export const submitting: MantineDemo = {
+export const submitting: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

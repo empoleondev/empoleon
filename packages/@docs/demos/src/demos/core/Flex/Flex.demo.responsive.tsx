@@ -1,5 +1,5 @@
 import { Button, Flex } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Flex, Button } from '@empoleon/core';
@@ -33,7 +33,7 @@ function Demo() {
   );
 }
 
-export const responsive: MantineDemo = {
+export const responsive: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

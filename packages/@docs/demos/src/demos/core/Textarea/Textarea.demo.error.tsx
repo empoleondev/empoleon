@@ -1,5 +1,5 @@
 import { Textarea } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Textarea } from '@empoleon/core';
@@ -33,7 +33,7 @@ function Demo() {
   );
 }
 
-export const error: MantineDemo = {
+export const error: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   maxWidth: 340,

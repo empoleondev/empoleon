@@ -1,6 +1,6 @@
 import { Button, Group } from '@empoleon/core';
 import { Dropzone } from '@empoleon/dropzone';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { createSignal } from 'solid-js';
 
 const code = `
@@ -37,7 +37,7 @@ function Demo() {
   );
 }
 
-export const enableChildPointerEvent: MantineDemo = {
+export const enableChildPointerEvent: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

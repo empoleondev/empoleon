@@ -1,6 +1,6 @@
 import { Button } from '@empoleon/core';
 import { useLogger } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { createSignal } from 'solid-js';
 
 const code = `
@@ -21,7 +21,7 @@ function Demo() {
   return <Button onClick={() => setCount((c) => c + 1)}>Update state ({count()})</Button>;
 }
 
-export const useLoggerDemo: MantineDemo = {
+export const useLoggerDemo: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

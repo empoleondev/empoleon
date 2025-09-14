@@ -1,6 +1,6 @@
 import { Button } from '@empoleon/core';
 import { useFullscreen } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { useFullscreen } from '@empoleon/hooks';
@@ -27,7 +27,7 @@ function Demo() {
   );
 }
 
-export const useFullscreenDemo: MantineDemo = {
+export const useFullscreenDemo: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

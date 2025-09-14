@@ -7,7 +7,7 @@ import {
   CodeHighlightAdapterProvider,
   createHighlightJsAdapter,
 } from '@empoleon/code-highlight';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 hljs.registerLanguage('typescript', tsLang);
 
@@ -60,7 +60,7 @@ function Demo() {
   );
 }
 
-export const highlightjs: MantineDemo = {
+export const highlightjs: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

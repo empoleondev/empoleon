@@ -3,7 +3,7 @@
 import { Button, TextInput } from '@empoleon/core';
 import { useForm } from '@empoleon/form';
 import { notifications } from '@empoleon/notifications';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { useForm } from '@empoleon/form';
@@ -33,14 +33,14 @@ function Demo() {
       <TextInput
         label="Name"
         placeholder="Name"
-        key={form.key('name')}
+
         {...form.getInputProps('name')}
       />
       <TextInput
         mt="sm"
         label="Email"
         placeholder="Email"
-        key={form.key('email')}
+
         {...form.getInputProps('email')}
       />
       <Button type="submit" mt="sm">
@@ -89,7 +89,7 @@ function Demo() {
   );
 }
 
-export const onSubmitErrors: MantineDemo = {
+export const onSubmitErrors: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

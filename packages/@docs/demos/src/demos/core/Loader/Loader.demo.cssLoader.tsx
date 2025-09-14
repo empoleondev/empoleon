@@ -1,5 +1,5 @@
-import { createTheme, Loader, MantineThemeProvider } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { createTheme, Loader, EmpoleonThemeProvider } from '@empoleon/core';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { CssLoader, cssLoaderModuleCssCode, cssLoaderTsxCode } from './_CssLoader';
 
 const code = `
@@ -19,9 +19,9 @@ const theme = createTheme({
 
 function Demo() {
   return (
-    <MantineThemeProvider theme={theme}>
+    <EmpoleonThemeProvider theme={theme}>
       <Loader />
-    </MantineThemeProvider>
+    </EmpoleonThemeProvider>
   );
 }
 `;
@@ -39,13 +39,13 @@ const theme = createTheme({
 
 function Demo() {
   return (
-    <MantineThemeProvider theme={theme}>
+    <EmpoleonThemeProvider theme={theme}>
       <Loader />
-    </MantineThemeProvider>
+    </EmpoleonThemeProvider>
   );
 }
 
-export const cssLoader: MantineDemo = {
+export const cssLoader: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   centered: true,

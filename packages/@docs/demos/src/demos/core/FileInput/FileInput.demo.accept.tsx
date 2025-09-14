@@ -1,5 +1,5 @@
 import { FileInput } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { FileInput } from '@empoleon/core';
@@ -17,7 +17,7 @@ function Demo() {
   );
 }
 
-export const accept: MantineDemo = {
+export const accept: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

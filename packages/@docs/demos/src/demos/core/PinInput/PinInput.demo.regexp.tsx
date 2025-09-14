@@ -1,5 +1,5 @@
 import { PinInput } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { PinInput } from '@empoleon/core';
@@ -10,10 +10,10 @@ function Demo() {
 `;
 
 function Demo() {
-  return <PinInput type={/^[0-3]*$/} inputType="tel" inputMode="numeric" />;
+  return <PinInput type={/^[0-3]*$/} input-type="tel" inputMode="numeric" />;
 }
 
-export const regexp: MantineDemo = {
+export const regexp: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

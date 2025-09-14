@@ -1,6 +1,6 @@
 import { Code, Text } from '@empoleon/core';
 import { TimePicker, TimePickerPasteSplit } from '@empoleon/dates';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Code, Text } from '@empoleon/core';
@@ -67,7 +67,7 @@ function Demo() {
   );
 }
 
-export const pasteSplit: MantineDemo = {
+export const pasteSplit: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

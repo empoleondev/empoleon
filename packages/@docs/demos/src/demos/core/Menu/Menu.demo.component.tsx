@@ -1,10 +1,10 @@
-import { IconExternalLink } from '@tabler/icons-react';
+import { IconExternalLink } from '@tabler/icons-solidjs';
 import { Button, Menu } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Menu, Button } from '@empoleon/core';
-import { IconExternalLink } from '@tabler/icons-react';
+import { IconExternalLink } from '@tabler/icons-solidjs';
 
 function Demo() {
   return (
@@ -33,7 +33,7 @@ function Demo() {
 
 function Demo() {
   return (
-    <Menu width={200} shadow="md">
+    <Menu width='200px' shadow="md">
       <Menu.Target>
         <Button>Toggle menu</Button>
       </Menu.Target>
@@ -55,7 +55,7 @@ function Demo() {
   );
 }
 
-export const component: MantineDemo = {
+export const component: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

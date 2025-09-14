@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import { Input } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
+import { createSignal } from 'solid-js';
 
 const code = (props: any) => `
 import { Input } from '@empoleon/core';
@@ -22,21 +22,21 @@ function Demo(){
 `;
 
 function Wrapper(props: any) {
-  const [value, setValue] = useState('clearable');
+  const [value, setValue] = createSignal('clearable');
 
   return (
     <Input
       placeholder="Clearable input"
       value={value}
       onChange={(event) => setValue(event.currentTarget.value)}
-      rightSection={value !== '' ? <Input.ClearButton onClick={() => setValue('')} /> : undefined}
+      rightSection={value() !== '' ? <Input.ClearButton onClick={() => setValue('')} /> : undefined}
       rightSectionPointerEvents="auto"
       {...props}
     />
   );
 }
 
-export const clearButton: MantineDemo = {
+export const clearButton: EmpoleonDemo = {
   type: 'configurator',
   component: Wrapper,
   code,

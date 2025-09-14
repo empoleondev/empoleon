@@ -1,5 +1,5 @@
 import { Menu } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { DemoMenuItems } from './_menu-items';
 
 const code = `
@@ -22,7 +22,7 @@ function Demo() {
   );
 }
 
-export const clickHover: MantineDemo = {
+export const clickHover: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

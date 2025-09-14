@@ -1,5 +1,5 @@
 import { Button, Menu } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Button, Menu } from '@empoleon/core';
@@ -59,7 +59,7 @@ function Demo() {
 
 function Demo() {
   return (
-    <Menu width={200} position="bottom-start">
+    <Menu width='200px' position="bottom-start">
       <Menu.Target>
         <Button>Toggle Menu</Button>
       </Menu.Target>
@@ -109,7 +109,7 @@ function Demo() {
   );
 }
 
-export const sub: MantineDemo = {
+export const sub: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

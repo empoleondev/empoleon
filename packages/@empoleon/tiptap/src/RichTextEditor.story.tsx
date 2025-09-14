@@ -1,5 +1,5 @@
 import { For, JSX } from 'solid-js';
-// import { IconColorPicker } from '@tabler/icons-react';
+// import { IconColorPicker } from '@tabler/icons-solidjs';
 import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight';
 import { Color } from '@tiptap/extension-color';
 import Highlight from '@tiptap/extension-highlight';

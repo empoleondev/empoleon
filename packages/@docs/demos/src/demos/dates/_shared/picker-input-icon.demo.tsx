@@ -1,5 +1,5 @@
 import { IconCalendar } from '@tabler/icons-solidjs';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { Component, createSignal } from 'solid-js';
 
 const getCode = (name: string) => `
@@ -9,10 +9,10 @@ import { ${name} } from '@empoleon/dates';
 
 function Demo() {
   const [value, setValue] = useState<string | null>(null);
-  const icon = <IconCalendar size={18} stroke={1.5} />;
+  const icon = <IconCalendar size={18} stroke='1.5' />;
   return (
     <${name}
-      leftSection={<IconCalendar size={18} stroke={1.5} />}
+      leftSection={<IconCalendar size={18} stroke='1.5' />}
       leftSectionPointerEvents="none"
       label="Pick date"
       placeholder="Pick date"
@@ -39,7 +39,7 @@ function getDemo(Component: Component<any>) {
   };
 }
 
-export function getPickerInputIconDemo(Component: Component<any>): MantineDemo {
+export function getPickerInputIconDemo(Component: Component<any>): EmpoleonDemo {
   return {
     type: 'code',
     centered: true,

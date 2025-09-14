@@ -1,5 +1,6 @@
 import { Anchor, Breadcrumbs } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
+import { For } from 'solid-js';
 
 const code = `
 import { Breadcrumbs, Anchor } from '@empoleon/core';
@@ -9,7 +10,7 @@ const items = [
   { title: 'Mantine hooks', href: '#' },
   { title: 'use-id', href: '#' },
 ].map((item, index) => (
-  <Anchor href={item.href} key={index}>
+  <Anchor href={item.href} >
     {item.title}
   </Anchor>
 ));
@@ -30,29 +31,39 @@ const items = [
   { title: 'Mantine', href: 'https://mantine.dev' },
   { title: 'Mantine hooks', href: '#' },
   { title: 'use-id', href: '#' },
-].map((item, index) => (
-  <Anchor href={item.href} key={index}>
-    {item.title}
-  </Anchor>
-));
+];
 
 function Demo() {
   return (
     <>
-      <Breadcrumbs>{items}</Breadcrumbs>
+      <Breadcrumbs>
+        <For each={items}>
+          {(item) => (
+            <Anchor href={item.href}>
+              {item.title}
+            </Anchor>
+          )}
+        </For>
+      </Breadcrumbs>
       <Breadcrumbs
         separator="→"
         mt="xs"
         separatorMargin="md"
         classNames={{ separator: 'mantine-rotate-rtl' }}
       >
-        {items}
+        <For each={items}>
+          {(item) => (
+            <Anchor href={item.href}>
+              {item.title}
+            </Anchor>
+          )}
+        </For>
       </Breadcrumbs>
     </>
   );
 }
 
-export const usage: MantineDemo = {
+export const usage: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

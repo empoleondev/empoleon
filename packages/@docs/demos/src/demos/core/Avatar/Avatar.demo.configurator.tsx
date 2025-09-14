@@ -1,5 +1,5 @@
 import { Avatar } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { staticVariantsControl } from '../../../shared';
 
 const code = `
@@ -10,7 +10,7 @@ function Demo() {
 }
 `;
 
-export const configurator: MantineDemo = {
+export const configurator: EmpoleonDemo = {
   type: 'configurator',
   component: Avatar,
   centered: true,

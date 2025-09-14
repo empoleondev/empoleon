@@ -1,7 +1,6 @@
-import { forwardRef } from 'react';
-import { MantineLoaderComponent } from '@empoleon/core';
+import { EmpoleonLoaderComponent } from '@empoleon/core';
 
-export const RingLoader: MantineLoaderComponent = forwardRef(({ style, ...others }, ref) => (
+export const RingLoader: EmpoleonLoaderComponent = ({ style, ...others }, ref?: any) => (
   <svg
     {...others}
     ref={ref}
@@ -9,14 +8,14 @@ export const RingLoader: MantineLoaderComponent = forwardRef(({ style, ...others
       width: 'var(--loader-size)',
       height: 'var(--loader-size)',
       stroke: 'var(--loader-color)',
-      ...style,
+      ...(style as any),
     }}
     viewBox="0 0 45 45"
     xmlns="http://www.w3.org/2000/svg"
     stroke="#fff"
   >
-    <g fill="none" fillRule="evenodd" transform="translate(1 1)" strokeWidth="2">
-      <circle cx="22" cy="22" r="6" strokeOpacity="0">
+    <g fill="none" fill-rule="evenodd" transform="translate(1 1)" stroke-width="2">
+      <circle cx="22" cy="22" r="6" stroke-opacity="0">
         <animate
           attributeName="r"
           begin="1.5s"
@@ -42,7 +41,7 @@ export const RingLoader: MantineLoaderComponent = forwardRef(({ style, ...others
           repeatCount="indefinite"
         />
       </circle>
-      <circle cx="22" cy="22" r="6" strokeOpacity="0">
+      <circle cx="22" cy="22" r="6" stroke-opacity="0">
         <animate
           attributeName="r"
           begin="3s"
@@ -80,13 +79,13 @@ export const RingLoader: MantineLoaderComponent = forwardRef(({ style, ...others
       </circle>
     </g>
   </svg>
-));
+);
 
 export const ringLoaderCode = `
 import { forwardRef } from 'react';
-import { MantineLoaderComponent } from '@empoleon/core';
+import { EmpoleonLoaderComponent } from '@empoleon/core';
 
-export const RingLoader: MantineLoaderComponent = forwardRef(({ style, ...others }, ref) => (
+export const RingLoader: EmpoleonLoaderComponent = forwardRef(({ style, ...others }, ref) => (
   <svg
     {...others}
     ref={ref}

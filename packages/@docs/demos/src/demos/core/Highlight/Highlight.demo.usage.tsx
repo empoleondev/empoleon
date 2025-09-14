@@ -1,5 +1,5 @@
 import { Highlight, HighlightProps } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 function Wrapper(props: HighlightProps) {
   return <Highlight maw={400} mx="auto" {...props} />;
@@ -17,7 +17,7 @@ function Demo() {
 }
 `;
 
-export const usage: MantineDemo = {
+export const usage: EmpoleonDemo = {
   type: 'configurator',
   component: Wrapper,
   code,

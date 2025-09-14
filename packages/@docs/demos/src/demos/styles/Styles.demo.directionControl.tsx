@@ -1,6 +1,6 @@
 import { IconTextDirectionLtr, IconTextDirectionRtl } from '@tabler/icons-solidjs';
 import { ActionIcon, useDirection } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { createEffect } from 'solid-js';
 
 const code = `
@@ -36,7 +36,7 @@ function Demo() {
   );
 }
 
-export const directionControl: MantineDemo = {
+export const directionControl: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   centered: true,

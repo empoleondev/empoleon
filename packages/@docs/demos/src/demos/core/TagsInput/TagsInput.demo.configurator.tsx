@@ -1,5 +1,5 @@
 import { TagsInput } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { inputControls } from '../../../shared';
 
 const code = `
@@ -29,7 +29,7 @@ function Wrapper(props: any) {
   );
 }
 
-export const configurator: MantineDemo = {
+export const configurator: EmpoleonDemo = {
   type: 'configurator',
   component: Wrapper,
   code,

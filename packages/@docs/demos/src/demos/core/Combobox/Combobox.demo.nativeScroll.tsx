@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import { Combobox, Input, InputBase, useCombobox } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
+import { createSignal, For } from 'solid-js';
 
 const code = `
 import { useState } from 'react';
@@ -46,7 +46,7 @@ function Demo() {
   const [value, setValue] = useState<string | null>(null);
 
   const options = groceries.map((item) => (
-    <Combobox.Option value={item} key={item}>
+    <Combobox.Option value={item} >
       {item}
     </Combobox.Option>
   ));
@@ -119,13 +119,7 @@ function Demo() {
     onDropdownClose: () => combobox.resetSelectedOption(),
   });
 
-  const [value, setValue] = useState<string | null>(null);
-
-  const options = groceries.map((item) => (
-    <Combobox.Option value={item} key={item}>
-      {item}
-    </Combobox.Option>
-  ));
+  const [value, setValue] = createSignal<string | null>(null);
 
   return (
     <Combobox
@@ -144,20 +138,26 @@ function Demo() {
           rightSectionPointerEvents="none"
           onClick={() => combobox.toggleDropdown()}
         >
-          {value || <Input.Placeholder>Pick value</Input.Placeholder>}
+          {value() || <Input.Placeholder>Pick value</Input.Placeholder>}
         </InputBase>
       </Combobox.Target>
 
       <Combobox.Dropdown>
         <Combobox.Options mah={200} style={{ overflowY: 'auto' }}>
-          {options}
+          <For each={groceries}>
+            {(item) => (
+              <Combobox.Option value={item}>
+                {item}
+              </Combobox.Option>
+            )}
+          </For>
         </Combobox.Options>
       </Combobox.Dropdown>
     </Combobox>
   );
 }
 
-export const nativeScroll: MantineDemo = {
+export const nativeScroll: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   maxWidth: 340,

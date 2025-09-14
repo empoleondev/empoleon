@@ -1,5 +1,5 @@
 import { Button, Fieldset, Group, TextInput } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Fieldset, TextInput, Button, Group } from '@empoleon/core';
@@ -31,7 +31,7 @@ function Demo() {
   );
 }
 
-export const disabled: MantineDemo = {
+export const disabled: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   maxWidth: 500,

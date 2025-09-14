@@ -1,6 +1,6 @@
 import { Text } from '@empoleon/core';
 import { useDocumentTitle, useDocumentVisibility } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Text } from '@empoleon/core';
@@ -19,7 +19,7 @@ function Demo() {
   return <Text>Switch to another tab to see document title change</Text>;
 }
 
-export const useDocumentVisibilityDemo: MantineDemo = {
+export const useDocumentVisibilityDemo: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

@@ -1,5 +1,5 @@
 import { FileInput } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { FileInput } from '@empoleon/core';
@@ -13,7 +13,7 @@ function Demo() {
   return <FileInput clearable label="Upload files" placeholder="Upload files" />;
 }
 
-export const clearable: MantineDemo = {
+export const clearable: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

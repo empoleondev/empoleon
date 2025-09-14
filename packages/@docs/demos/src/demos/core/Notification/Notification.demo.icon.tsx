@@ -1,9 +1,9 @@
-import { IconCheck, IconX } from '@tabler/icons-react';
+import { IconCheck, IconX } from '@tabler/icons-solidjs';
 import { Notification } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
-import { IconX, IconCheck } from '@tabler/icons-react';
+import { IconX, IconCheck } from '@tabler/icons-solidjs';
 import { Notification } from '@empoleon/core';
 
 function Demo() {
@@ -39,7 +39,7 @@ function Demo() {
   );
 }
 
-export const icon: MantineDemo = {
+export const icon: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   dimmed: true,

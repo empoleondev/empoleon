@@ -1,7 +1,7 @@
 import { Button, Code, Text } from '@empoleon/core';
 import { useCounter } from '@empoleon/hooks';
 import { notifications, useNotifications } from '@empoleon/notifications';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 function Demo() {
@@ -60,7 +60,7 @@ function Demo() {
   );
 }
 
-export const store: MantineDemo = {
+export const store: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

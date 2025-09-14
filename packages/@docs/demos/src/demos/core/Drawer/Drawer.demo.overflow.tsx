@@ -1,6 +1,6 @@
 import { Button, Drawer } from '@empoleon/core';
 import { useDisclosure } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { useDisclosure } from '@empoleon/hooks';
@@ -11,11 +11,11 @@ function Demo() {
 
   const content = Array(100)
     .fill(0)
-    .map((_, index) => <p key={index}>Drawer with scroll</p>);
+    .map((_, index) => <p >Drawer with scroll</p>);
 
   return (
     <>
-      <Drawer opened={opened} onClose={close} title="Header is sticky">
+      <Drawer opened={opened()} onClose={close} title="Header is sticky">
         {content}
       </Drawer>
 
@@ -32,11 +32,11 @@ function Demo() {
 
   const content = Array(100)
     .fill(0)
-    .map((_, index) => <p key={index}>Drawer with scroll</p>);
+    .map((_, index) => <p >Drawer with scroll</p>);
 
   return (
     <>
-      <Drawer opened={opened} onClose={close} title="Header is sticky">
+      <Drawer opened={opened()} onClose={close} title="Header is sticky">
         {content}
       </Drawer>
 
@@ -47,7 +47,7 @@ function Demo() {
   );
 }
 
-export const overflow: MantineDemo = {
+export const overflow: EmpoleonDemo = {
   type: 'code',
   code,
   centered: true,

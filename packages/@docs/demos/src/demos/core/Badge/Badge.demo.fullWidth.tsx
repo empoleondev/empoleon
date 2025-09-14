@@ -1,5 +1,5 @@
 import { Badge } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Badge } from '@empoleon/core';
@@ -13,7 +13,7 @@ function Demo() {
   return <Badge fullWidth>Full width badge</Badge>;
 }
 
-export const fullWidth: MantineDemo = {
+export const fullWidth: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import { Group, Pagination, Text } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
+import { createSignal } from 'solid-js';
 
 const code = `
 import { useState } from 'react';
@@ -28,18 +28,18 @@ const total = 145;
 const totalPages = Math.ceil(total / limit);
 
 function Demo() {
-  const [page, setPage] = useState(1);
-  const message = `Showing ${limit * (page - 1) + 1} – ${Math.min(total, limit * page)} of ${total}`;
+  const [page, setPage] = createSignal(1);
+  const message = `Showing ${limit * (page() - 1) + 1} – ${Math.min(total, limit * page())} of ${total}`;
 
   return (
     <Group justify="flex-end">
       <Text size="sm">{message}</Text>
-      <Pagination total={totalPages} value={page} onChange={setPage} withPages={false} />
+      <Pagination total={totalPages} value={page()} onChange={setPage} withPages={false} />
     </Group>
   );
 }
 
-export const withPages: MantineDemo = {
+export const withPages: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

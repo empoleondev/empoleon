@@ -1,19 +1,19 @@
-import { forwardRef } from 'react';
 import cx from 'clsx';
-import { Box, MantineLoaderComponent } from '@empoleon/core';
+import { Box, EmpoleonLoaderComponent } from '@empoleon/core';
 import classes from './CssLoader.module.css';
+import { JSX } from 'solid-js';
 
-export const CssLoader: MantineLoaderComponent = forwardRef(({ className, ...others }, ref) => (
-  <Box component="span" className={cx(classes.loader, className)} {...others} ref={ref} />
-));
+export const CssLoader: EmpoleonLoaderComponent = ({ class: className, ...others }, ref?: any) => (
+    <Box component="span" className={cx(classes.loader, className)} {...(others as any)} ref={ref} />
+);
 
 export const cssLoaderTsxCode = `
 import { forwardRef } from 'react';
 import cx from 'clsx';
-import { Box, MantineLoaderComponent } from '@empoleon/core';
+import { Box, EmpoleonLoaderComponent } from '@empoleon/core';
 import classes from './CssLoader.module.css';
 
-export const CssLoader: MantineLoaderComponent = forwardRef(({ className, ...others }, ref) => (
+export const CssLoader: EmpoleonLoaderComponent = forwardRef(({ className, ...others }, ref) => (
   <Box component="span" className={cx(classes.loader, className)} {...others} ref={ref} />
 ));
 `;

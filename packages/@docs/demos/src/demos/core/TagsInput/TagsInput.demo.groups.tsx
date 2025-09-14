@@ -1,5 +1,5 @@
 import { TagsInput } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { TagsInput } from '@empoleon/core';
@@ -31,7 +31,7 @@ function Demo() {
   );
 }
 
-export const groups: MantineDemo = {
+export const groups: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

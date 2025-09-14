@@ -1,6 +1,6 @@
 import { Button, Code, Group, Text } from '@empoleon/core';
 import { useStateHistory } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Button, Code, Group, Text } from '@empoleon/core';
@@ -39,7 +39,7 @@ function Demo() {
   );
 }
 
-export const useStateHistoryUsage: MantineDemo = {
+export const useStateHistoryUsage: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

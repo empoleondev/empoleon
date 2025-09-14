@@ -1,5 +1,5 @@
 import { NumberInput } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { NumberInput } from '@empoleon/core';
@@ -29,7 +29,7 @@ function Demo() {
   );
 }
 
-export const strictClamp: MantineDemo = {
+export const strictClamp: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

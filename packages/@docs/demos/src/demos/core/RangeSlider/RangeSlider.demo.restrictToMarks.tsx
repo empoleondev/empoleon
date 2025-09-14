@@ -1,5 +1,5 @@
 import { RangeSlider } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { RangeSlider } from '@empoleon/core';
@@ -41,7 +41,7 @@ function Demo() {
   );
 }
 
-export const restrictToMarks: MantineDemo = {
+export const restrictToMarks: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import { Combobox, TextInput } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
+import { createSignal } from 'solid-js';
 
 const code = `
 import { useState } from 'react';
@@ -30,14 +30,14 @@ function Demo() {
 `;
 
 function Demo() {
-  const [value, setValue] = useState('');
+  const [value, setValue] = createSignal('');
 
   return (
     <Combobox onOptionSubmit={setValue}>
       <Combobox.EventsTarget>
         <TextInput
           placeholder="Pick value"
-          value={value}
+          value={value()}
           onChange={(event) => setValue(event.currentTarget.value)}
         />
       </Combobox.EventsTarget>
@@ -51,7 +51,7 @@ function Demo() {
   );
 }
 
-export const noDropdown: MantineDemo = {
+export const noDropdown: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

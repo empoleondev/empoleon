@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import { CheckIcon, Combobox, Group, Input, InputBase, useCombobox } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
+import { createSignal, For } from 'solid-js';
 
 const code = `
 import { useState } from 'react';
@@ -23,7 +23,7 @@ function Demo() {
   const [value, setValue] = useState<string | null>('🥦 Broccoli');
 
   const options = groceries.map((item) => (
-    <Combobox.Option value={item} key={item} active={item === value}>
+    <Combobox.Option value={item} active={item === value}>
       <Group gap="xs">
         {item === value && <CheckIcon size={12} />}
         <span>{item}</span>
@@ -75,16 +75,7 @@ function Demo() {
     },
   });
 
-  const [value, setValue] = useState<string | null>('🥦 Broccoli');
-
-  const options = groceries.map((item) => (
-    <Combobox.Option value={item} key={item} active={item === value}>
-      <Group gap="xs">
-        {item === value && <CheckIcon size={12} />}
-        <span>{item}</span>
-      </Group>
-    </Combobox.Option>
-  ));
+  const [value, setValue] = createSignal<string | null>('🥦 Broccoli');
 
   return (
     <Combobox
@@ -104,18 +95,29 @@ function Demo() {
           rightSectionPointerEvents="none"
           onClick={() => combobox.toggleDropdown()}
         >
-          {value || <Input.Placeholder>Pick value</Input.Placeholder>}
+          {value() || <Input.Placeholder>Pick value</Input.Placeholder>}
         </InputBase>
       </Combobox.Target>
 
       <Combobox.Dropdown>
-        <Combobox.Options>{options}</Combobox.Options>
+        <Combobox.Options>
+          <For each={groceries}>
+            {(item) => (
+              <Combobox.Option value={item} active={item === value()}>
+                <Group gap="xs">
+                  {item === value() && <CheckIcon size={12} />}
+                  <span>{item}</span>
+                </Group>
+              </Combobox.Option>
+            )}
+          </For>
+        </Combobox.Options>
       </Combobox.Dropdown>
     </Combobox>
   );
 }
 
-export const activeOption: MantineDemo = {
+export const activeOption: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   maxWidth: 340,

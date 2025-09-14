@@ -1,6 +1,6 @@
 import { Code, Group, Text } from '@empoleon/core';
 import { useMove } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { createSignal } from 'solid-js';
 
 const code = `
@@ -80,7 +80,7 @@ function Demo() {
   );
 }
 
-export const useMoveUsage: MantineDemo = {
+export const useMoveUsage: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

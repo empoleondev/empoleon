@@ -1,5 +1,5 @@
 import { Input, TextInput } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import classes from './Input.demo.focusStyles.module.css';
 
 const code = `
@@ -46,7 +46,7 @@ function Demo() {
   );
 }
 
-export const focusStyles: MantineDemo = {
+export const focusStyles: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   maxWidth: 340,

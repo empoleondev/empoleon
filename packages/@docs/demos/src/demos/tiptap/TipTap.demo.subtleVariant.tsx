@@ -3,7 +3,7 @@ import Underline from '@tiptap/extension-underline';
 import { useEditor } from '@empoleon/solid-tiptap';
 import StarterKit from '@tiptap/starter-kit';
 import { RichTextEditor } from '@empoleon/tiptap';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const content = '<p>Subtle rich text editor variant</p>';
 
@@ -67,7 +67,7 @@ function Demo() {
   );
 }
 
-export const subtleVariant: MantineDemo = {
+export const subtleVariant: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

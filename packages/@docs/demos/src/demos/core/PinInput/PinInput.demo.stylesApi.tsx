@@ -1,5 +1,5 @@
 import { PinInput } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { PinInputStylesApi } from '@docs/styles-api';
 
 const code = `
@@ -16,7 +16,7 @@ function Demo(props: any) {
   return <PinInput {...props} />;
 }
 
-export const stylesApi: MantineDemo = {
+export const stylesApi: EmpoleonDemo = {
   type: 'styles-api',
   data: PinInputStylesApi,
   component: Demo,

@@ -1,5 +1,5 @@
 import { Group, Menu } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { DemoMenuItems } from './_menu-items';
 
 const code = `
@@ -10,7 +10,7 @@ function Demo() {
     .fill(0)
     .map((e, i) => (
       <Menu
-        key={i}
+
         trigger="click-hover"
         loop={false}
         withinPortal={false}
@@ -29,7 +29,7 @@ function Demo() {
     .fill(0)
     .map((_, i) => (
       <Menu
-        key={i}
+
         trigger="click-hover"
         loop={false}
         withinPortal={false}
@@ -42,7 +42,7 @@ function Demo() {
   return <Group>{menus}</Group>;
 }
 
-export const navigation: MantineDemo = {
+export const navigation: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

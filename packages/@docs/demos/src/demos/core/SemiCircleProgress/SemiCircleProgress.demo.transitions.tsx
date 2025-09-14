@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import { Button, SemiCircleProgress } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
+import { createSignal } from 'solid-js';
 
 const code = `
 import { useState } from 'react';
@@ -22,11 +22,11 @@ function Demo() {
 `;
 
 function Demo() {
-  const [value, setValue] = useState(30);
+  const [value, setValue] = createSignal(30);
 
   return (
     <>
-      <SemiCircleProgress value={value} transitionDuration={250} label={`${value}%`} />
+      <SemiCircleProgress value={value()} transitionDuration={250} label={`${value}%`} />
 
       <Button onClick={() => setValue(Math.floor(Math.random() * 100))} mt="xl" fullWidth>
         Set random value
@@ -35,7 +35,7 @@ function Demo() {
   );
 }
 
-export const transitions: MantineDemo = {
+export const transitions: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

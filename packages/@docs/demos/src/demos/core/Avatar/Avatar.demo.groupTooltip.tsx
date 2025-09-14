@@ -1,5 +1,5 @@
 import { Avatar, Tooltip } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { avatars } from './_mockdata';
 
 const code = `
@@ -40,13 +40,13 @@ function Demo() {
     <Tooltip.Group openDelay={300} closeDelay={100}>
       <Avatar.Group spacing="sm">
         <Tooltip label="Salazar Troop" withArrow>
-          <Avatar src={avatars[0]} radius="xl" />
+          {(props) => <Avatar {...props} src={avatars[0]} radius="xl" />}
         </Tooltip>
         <Tooltip label="Bandit Crimes" withArrow>
-          <Avatar src={avatars[1]} radius="xl" />
+          {(props) => <Avatar {...props} src={avatars[1]} radius="xl" />}
         </Tooltip>
         <Tooltip label="Jane Rata" withArrow>
-          <Avatar src={avatars[2]} radius="xl" />
+          {(props) => <Avatar {...props} src={avatars[2]} radius="xl" />}
         </Tooltip>
         <Tooltip
           withArrow
@@ -57,14 +57,14 @@ function Demo() {
             </>
           }
         >
-          <Avatar radius="xl">+2</Avatar>
+          {(props) => <Avatar {...props} radius="xl">+2</Avatar>}
         </Tooltip>
       </Avatar.Group>
     </Tooltip.Group>
   );
 }
 
-export const groupTooltip: MantineDemo = {
+export const groupTooltip: EmpoleonDemo = {
   type: 'code',
   centered: true,
   code,

@@ -1,5 +1,5 @@
 import { Button, Tooltip } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Tooltip, Button } from '@empoleon/core';
@@ -28,12 +28,12 @@ export function Demo() {
       transitionProps={{ duration: 200 }}
       label="Use this button to save this information in your profile, after that you will be able to access it any time and share it via email."
     >
-      <Button>Multiline tooltip</Button>
+      {(props) => <Button {...props} >Multiline tooltip</Button>}
     </Tooltip>
   );
 }
 
-export const multiline: MantineDemo = {
+export const multiline: EmpoleonDemo = {
   type: 'code',
   code,
   centered: true,

@@ -1,10 +1,10 @@
-import { IconChevronDown, IconHash } from '@tabler/icons-react';
+import { IconChevronDown, IconHash } from '@tabler/icons-solidjs';
 import { NativeSelect } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { NativeSelect } from '@empoleon/core';
-import { IconChevronDown, IconHash } from '@tabler/icons-react';
+import { IconChevronDown, IconHash } from '@tabler/icons-solidjs';
 
 function Demo() {
   return (
@@ -47,7 +47,7 @@ function Demo() {
   );
 }
 
-export const sections: MantineDemo = {
+export const sections: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   maxWidth: 340,

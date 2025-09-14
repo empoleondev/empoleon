@@ -1,11 +1,11 @@
-import { IconHeart } from '@tabler/icons-react';
+import { IconHeart } from '@tabler/icons-solidjs';
 import { Alert } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { AlertStylesApi } from '@docs/styles-api';
 
 const code = `
 import { Alert } from '@empoleon/core';
-import { IconHeart } from '@tabler/icons-react';
+import { IconHeart } from '@tabler/icons-solidjs';
 import classes from './Demo.module.css';
 
 function Demo() {
@@ -31,7 +31,7 @@ function Demo(props: any) {
   );
 }
 
-export const stylesApi: MantineDemo = {
+export const stylesApi: EmpoleonDemo = {
   type: 'styles-api',
   data: AlertStylesApi,
   component: Demo,

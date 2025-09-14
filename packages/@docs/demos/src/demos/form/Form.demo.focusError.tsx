@@ -2,7 +2,7 @@
 
 import { Button, Group, TextInput } from '@empoleon/core';
 import { isEmail, isNotEmpty, useForm } from '@empoleon/form';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Button, Group, TextInput } from '@empoleon/core';
@@ -37,7 +37,7 @@ function Demo() {
         withAsterisk
         label="Your name"
         placeholder="Your name"
-        key={form.key('name')}
+
         {...form.getInputProps('name')}
       />
 
@@ -46,7 +46,7 @@ function Demo() {
         label="Your email"
         placeholder="your@email.com"
         mt="md"
-        key={form.key('email')}
+
         {...form.getInputProps('email')}
       />
 
@@ -104,7 +104,7 @@ function Demo() {
   );
 }
 
-export const focusError: MantineDemo = {
+export const focusError: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

@@ -1,5 +1,5 @@
 import { Badge, Button, Card, Group, Image, Text } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Card, Image, Text, Badge, Button, Group } from '@empoleon/core';
@@ -61,7 +61,7 @@ function Demo() {
   );
 }
 
-export const linkSection: MantineDemo = {
+export const linkSection: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

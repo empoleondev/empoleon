@@ -1,6 +1,6 @@
 import { Button, Group } from '@empoleon/core';
 import { useFavicon } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { createSignal } from 'solid-js';
 
 const code = `
@@ -39,7 +39,7 @@ function Demo() {
   );
 }
 
-export const useFaviconUsage: MantineDemo = {
+export const useFaviconUsage: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

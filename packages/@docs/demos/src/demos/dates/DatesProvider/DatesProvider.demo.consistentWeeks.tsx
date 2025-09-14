@@ -1,5 +1,5 @@
 import { DatePicker, DatesProvider } from '@empoleon/dates';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { DatePicker, DatesProvider } from '@empoleon/dates';
@@ -21,7 +21,7 @@ function Demo() {
   );
 }
 
-export const consistentWeeks: MantineDemo = {
+export const consistentWeeks: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

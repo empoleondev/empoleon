@@ -1,5 +1,5 @@
 import { AngleSlider } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { AngleSlider } from '@empoleon/core';
@@ -13,7 +13,7 @@ function Demo() {
   return <AngleSlider aria-label="Angle slider" disabled />;
 }
 
-export const disabled: MantineDemo = {
+export const disabled: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

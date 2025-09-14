@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { Component } from 'solid-js';
 
 const getCodeTemplate = (component: string) =>
@@ -15,7 +15,7 @@ function getDemo(Component: Component<any>) {
   return (props: any) => <Component defaultValue={dayjs().format('YYYY-MM-DD')} {...props} />;
 }
 
-export function getPickerSizeConfiguratorDemo(Component: Component<any>): MantineDemo {
+export function getPickerSizeConfiguratorDemo(Component: Component<any>): EmpoleonDemo {
   return {
     type: 'configurator',
     centered: true,

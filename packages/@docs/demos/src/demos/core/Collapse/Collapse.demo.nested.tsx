@@ -1,18 +1,18 @@
-import { useState } from 'react';
 import { Box, Button, Collapse, CollapseProps, Text } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
+import { createSignal } from 'solid-js';
 
 export function CollapsedDemo({
   children,
   buttonProps,
   ...others
 }: Partial<CollapseProps> & { buttonProps?: any }) {
-  const [opened, setOpened] = useState(false);
+  const [opened, setOpened] = createSignal(false);
 
   return (
     <Box maw={400} mx="auto" mt="md">
       <Button onClick={() => setOpened((o) => !o)} mb={5} {...buttonProps} />
-      <Collapse in={opened} {...others}>
+      <Collapse in={opened()} {...others}>
         {children}
       </Collapse>
     </Box>
@@ -39,7 +39,7 @@ function Demo() {
   );
 }
 
-export const nested: MantineDemo = {
+export const nested: EmpoleonDemo = {
   type: 'code',
   component: Demo,
 };

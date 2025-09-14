@@ -1,5 +1,5 @@
 import { RingProgress, RingProgressProps } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 function Wrapper(props: RingProgressProps) {
   return (
@@ -31,7 +31,7 @@ function Demo() {
 }
 `;
 
-export const configurator: MantineDemo = {
+export const configurator: EmpoleonDemo = {
   type: 'configurator',
   component: Wrapper,
   centered: true,

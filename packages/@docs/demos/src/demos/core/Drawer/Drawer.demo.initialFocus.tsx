@@ -1,6 +1,6 @@
 import { Button, Drawer, TextInput } from '@empoleon/core';
 import { useDisclosure } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { useDisclosure } from '@empoleon/hooks';
@@ -11,7 +11,7 @@ function Demo() {
 
   return (
     <>
-      <Drawer opened={opened} onClose={close} title="Focus demo">
+      <Drawer opened={opened()} onClose={close} title="Focus demo">
         <TextInput label="First input" placeholder="First input" />
         <TextInput
           data-autofocus
@@ -34,7 +34,7 @@ function Demo() {
 
   return (
     <>
-      <Drawer opened={opened} onClose={close} title="Focus demo">
+      <Drawer opened={opened()} onClose={close} title="Focus demo">
         <TextInput label="First input" placeholder="First input" />
         <TextInput
           data-autofocus
@@ -51,7 +51,7 @@ function Demo() {
   );
 }
 
-export const initialFocus: MantineDemo = {
+export const initialFocus: EmpoleonDemo = {
   type: 'code',
   code,
   centered: true,

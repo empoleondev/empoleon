@@ -1,6 +1,6 @@
 import { Avatar, Button, Indicator, Stack } from '@empoleon/core';
 import { useDisclosure } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { useDisclosure } from '@empoleon/hooks';
@@ -41,7 +41,7 @@ function Demo() {
   );
 }
 
-export const disabled: MantineDemo = {
+export const disabled: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

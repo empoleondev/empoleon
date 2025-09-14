@@ -1,6 +1,6 @@
 import { Badge } from '@empoleon/core';
 import { useColorScheme } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Badge } from '@empoleon/core';
@@ -26,7 +26,7 @@ function Demo() {
   );
 }
 
-export const useColorSchemeDemo: MantineDemo = {
+export const useColorSchemeDemo: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

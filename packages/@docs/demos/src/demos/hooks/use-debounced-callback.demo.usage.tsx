@@ -1,6 +1,6 @@
 import { Loader, Text, TextInput } from '@empoleon/core';
 import { useDebouncedCallback } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { createSignal } from 'solid-js';
 
 const code = `
@@ -47,7 +47,7 @@ function Demo() {
         rightSection={loading && <Loader size={20} />}
       />
       {searchResults.map((result) => (
-        <Text key={result.id} size="sm">
+        <Text size="sm">
           {result.title}
         </Text>
       ))}
@@ -103,7 +103,7 @@ function Demo() {
   );
 }
 
-export const useDebouncedCallbackUsage: MantineDemo = {
+export const useDebouncedCallbackUsage: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

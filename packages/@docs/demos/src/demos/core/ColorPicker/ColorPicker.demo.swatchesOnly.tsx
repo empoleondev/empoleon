@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import { ColorPicker, DEFAULT_THEME, Text } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
+import { createSignal } from 'solid-js';
 
 const code = `
 import { useState } from 'react';
@@ -31,13 +31,13 @@ function Demo() {
 `;
 
 function Demo() {
-  const [value, onChange] = useState('#fff');
+  const [value, onChange] = createSignal('#fff');
 
   return (
     <>
       <ColorPicker
         format="hex"
-        value={value}
+        value={value()}
         onChange={onChange}
         withPicker={false}
         fullWidth
@@ -48,13 +48,13 @@ function Demo() {
         ]}
       />
       <Text ta="center" mt={5}>
-        {value}
+        {value()}
       </Text>
     </>
   );
 }
 
-export const swatchesOnly: MantineDemo = {
+export const swatchesOnly: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

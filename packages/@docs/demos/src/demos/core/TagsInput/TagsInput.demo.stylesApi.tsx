@@ -1,17 +1,17 @@
-import { IconAt } from '@tabler/icons-react';
+import { IconAt } from '@tabler/icons-solidjs';
 import { TagsInput } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { TagsInputStylesApi } from '@docs/styles-api';
 
 const code = `
-import { IconAt } from '@tabler/icons-react';
+import { IconAt } from '@tabler/icons-solidjs';
 import { TagsInput } from '@empoleon/core';
 
 function Demo() {
   return (
     <TagsInput
      {{props}}
-      leftSection={<IconAt size={18} stroke={1.5} />}
+      leftSection={<IconAt size={18} stroke='1.5' />}
       label="TagsInput"
       description="Description"
       error="Error"
@@ -28,7 +28,7 @@ function Demo(props: any) {
     <TagsInput
       {...props}
       dropdownOpened
-      leftSection={<IconAt size={18} stroke={1.5} />}
+      leftSection={<IconAt size={18} stroke='1.5' />}
       withAsterisk
       label="TagsInput"
       description="Description"
@@ -42,7 +42,7 @@ function Demo(props: any) {
   );
 }
 
-export const stylesApi: MantineDemo = {
+export const stylesApi: EmpoleonDemo = {
   type: 'styles-api',
   data: TagsInputStylesApi,
   component: Demo,

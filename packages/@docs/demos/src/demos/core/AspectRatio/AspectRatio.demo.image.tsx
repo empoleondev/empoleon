@@ -1,5 +1,5 @@
 import { AspectRatio } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { AspectRatio } from '@empoleon/core';
@@ -27,7 +27,7 @@ function Demo() {
   );
 }
 
-export const image: MantineDemo = {
+export const image: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

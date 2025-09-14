@@ -1,6 +1,6 @@
 import { Badge, em } from '@empoleon/core';
 import { useMediaQuery } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Badge } from '@empoleon/core';
@@ -26,7 +26,7 @@ function Demo() {
   );
 }
 
-export const useMediaQueryDemo: MantineDemo = {
+export const useMediaQueryDemo: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

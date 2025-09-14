@@ -1,11 +1,11 @@
-import { IconInfoCircle } from '@tabler/icons-react';
+import { IconInfoCircle } from '@tabler/icons-solidjs';
 import { Alert } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { staticVariantsControl } from '../../../shared';
 
 const code = `
 import { Alert } from '@empoleon/core';
-import { IconInfoCircle } from '@tabler/icons-react';
+import { IconInfoCircle } from '@tabler/icons-solidjs';
 
 function Demo() {
   const icon = <IconInfoCircle />;
@@ -21,7 +21,7 @@ function Wrapper(props: any) {
   return <Alert icon={<IconInfoCircle />} {...props} />;
 }
 
-export const configurator: MantineDemo = {
+export const configurator: EmpoleonDemo = {
   type: 'configurator',
   component: Wrapper,
   code,

@@ -1,5 +1,5 @@
 import { Pagination } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 function Wrapper(props: any) {
   return <Pagination total={10} {...props} />;
@@ -13,7 +13,7 @@ function Demo() {
 }
 `;
 
-export const configurator: MantineDemo = {
+export const configurator: EmpoleonDemo = {
   type: 'configurator',
   component: Wrapper,
   code,

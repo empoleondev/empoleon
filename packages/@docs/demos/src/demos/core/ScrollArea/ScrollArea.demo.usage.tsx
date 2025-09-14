@@ -1,5 +1,5 @@
 import { Box, ScrollArea, ScrollAreaProps } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { Content } from './_content';
 
 function Wrapper(props: ScrollAreaProps) {
@@ -24,7 +24,7 @@ function Demo() {
 }
 `;
 
-export const usage: MantineDemo = {
+export const usage: EmpoleonDemo = {
   type: 'configurator',
   component: Wrapper,
   code,

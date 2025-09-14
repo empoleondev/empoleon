@@ -1,5 +1,5 @@
 import { Button, Popover, Text } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Popover, Text, Button } from '@empoleon/core';
@@ -20,7 +20,7 @@ function Demo() {
 
 function Wrapper(props: any) {
   return (
-    <Popover width={200} {...props}>
+    <Popover width='20px' {...props}>
       <Popover.Target>
         <Button>Toggle popover</Button>
       </Popover.Target>
@@ -31,7 +31,7 @@ function Wrapper(props: any) {
   );
 }
 
-export const disabled: MantineDemo = {
+export const disabled: EmpoleonDemo = {
   type: 'configurator',
   component: Wrapper,
   code,

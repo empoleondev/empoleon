@@ -1,6 +1,6 @@
 import { Text } from '@empoleon/core';
 import { Dropzone, IMAGE_MIME_TYPE } from '@empoleon/dropzone';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import classes from './Dropzone.demo.stylesApi.module.css';
 
 const cssCode = `
@@ -47,7 +47,7 @@ function Demo() {
   );
 }
 
-export const stylesApi: MantineDemo = {
+export const stylesApi: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code: [

@@ -1,6 +1,6 @@
 import { Loader, TextInput } from '@empoleon/core';
 import { useField } from '@empoleon/form';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Loader, TextInput } from '@empoleon/core';
@@ -57,7 +57,7 @@ function Demo() {
   );
 }
 
-export const asyncValidationOnBlur: MantineDemo = {
+export const asyncValidationOnBlur: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

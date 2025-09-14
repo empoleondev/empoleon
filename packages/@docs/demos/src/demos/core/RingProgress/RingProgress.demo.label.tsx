@@ -1,10 +1,10 @@
-import { IconCheck } from '@tabler/icons-react';
+import { IconCheck } from '@tabler/icons-solidjs';
 import { ActionIcon, Center, Group, RingProgress, Text } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { ActionIcon, RingProgress, Text, Center } from '@empoleon/core';
-import { IconCheck } from '@tabler/icons-react';
+import { IconCheck } from '@tabler/icons-solidjs';
 
 function Demo() {
   return (
@@ -59,7 +59,7 @@ function Demo() {
   );
 }
 
-export const label: MantineDemo = {
+export const label: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

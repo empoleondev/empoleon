@@ -1,5 +1,5 @@
 import { RangeSlider } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { RangeSlider } from '@empoleon/core';
@@ -13,7 +13,7 @@ function Demo() {
   return <RangeSlider inverted defaultValue={[20, 60]} />;
 }
 
-export const inverted: MantineDemo = {
+export const inverted: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

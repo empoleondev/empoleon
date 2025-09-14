@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import { Button, FileButton, Group, Text } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
+import { createSignal } from 'solid-js';
 
 const code = `
 import { useState } from 'react';
@@ -24,7 +24,7 @@ function Demo() {
 
       <ul>
         {files.map((file, index) => (
-          <li key={index}>{file.name}</li>
+          <li >{file.name}</li>
         ))}
       </ul>
     </>
@@ -33,7 +33,7 @@ function Demo() {
 `;
 
 function Demo() {
-  const [files, setFiles] = useState<File[]>([]);
+  const [files, setFiles] = createSignal<File[]>([]);
   return (
     <>
       <Group justify="center">
@@ -42,22 +42,22 @@ function Demo() {
         </FileButton>
       </Group>
 
-      {files.length > 0 && (
+      {files().length > 0 && (
         <Text size="sm" mt="sm">
           Picked files:
         </Text>
       )}
 
       <ul>
-        {files.map((file, index) => (
-          <li key={index}>{file.name}</li>
+        {files().map((file, index) => (
+          <li >{file.name}</li>
         ))}
       </ul>
     </>
   );
 }
 
-export const multiple: MantineDemo = {
+export const multiple: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

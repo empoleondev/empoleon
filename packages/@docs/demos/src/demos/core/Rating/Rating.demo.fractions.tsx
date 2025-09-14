@@ -1,5 +1,5 @@
 import { Group, Rating, Stack } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Rating, Group, Stack } from '@empoleon/core';
@@ -43,7 +43,7 @@ function Demo() {
   );
 }
 
-export const fractions: MantineDemo = {
+export const fractions: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

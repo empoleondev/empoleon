@@ -1,10 +1,10 @@
-import { IconArrowRight, IconDownload, IconPhoto } from '@tabler/icons-react';
+import { IconArrowRight, IconDownload, IconPhoto } from '@tabler/icons-solidjs';
 import { Button, Group } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Group, Button } from '@empoleon/core';
-import { IconPhoto, IconDownload, IconArrowRight } from '@tabler/icons-react';
+import { IconPhoto, IconDownload, IconArrowRight } from '@tabler/icons-solidjs';
 
 function Demo() {
   return (
@@ -38,7 +38,7 @@ function Demo() {
       <Button
         variant="light"
         leftSection={<IconPhoto size={14} />}
-        rightSection={<IconArrowRight size={14} className="mantine-rotate-rtl" />}
+        rightSection={<IconArrowRight size={14} class="mantine-rotate-rtl" />}
       >
         Visit gallery
       </Button>
@@ -46,7 +46,7 @@ function Demo() {
   );
 }
 
-export const sections: MantineDemo = {
+export const sections: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

@@ -1,6 +1,6 @@
 import { Button, Group, Text } from '@empoleon/core';
 import { useCounter } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Group, Button, Text } from '@empoleon/core';
@@ -49,7 +49,7 @@ function Demo() {
   );
 }
 
-export const useCounterDemo: MantineDemo = {
+export const useCounterDemo: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

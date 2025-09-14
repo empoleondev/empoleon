@@ -1,5 +1,5 @@
 import { CodeHighlightTabs } from '@empoleon/code-highlight';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { CssIcon, TypeScriptIcon } from '@empoleonx/dev-icons';
 
 const tsxCode = `
@@ -71,7 +71,7 @@ function Demo() {
   );
 }
 
-export const tabsIcons: MantineDemo = {
+export const tabsIcons: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

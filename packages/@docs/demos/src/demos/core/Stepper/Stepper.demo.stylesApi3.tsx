@@ -1,7 +1,7 @@
-import { useState } from 'react';
 import { Stepper } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import classes from './Stepper.demo.stylesApi3.module.css';
+import { createSignal } from 'solid-js';
 
 const cssCode = `.separator {
   height: 2px;
@@ -63,9 +63,9 @@ function Demo() {
 `;
 
 function Demo() {
-  const [active, setActive] = useState(1);
+  const [active, setActive] = createSignal(1);
   return (
-    <Stepper classNames={classes} active={active} onStepClick={setActive}>
+    <Stepper classNames={classes} active={active()} onStepClick={setActive}>
       <Stepper.Step label="Step 1" description="Create an account" />
       <Stepper.Step label="Step 2" description="Verify email" />
       <Stepper.Step label="Step 3" description="Get full access" />
@@ -73,7 +73,7 @@ function Demo() {
   );
 }
 
-export const stylesApi3: MantineDemo = {
+export const stylesApi3: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code: [

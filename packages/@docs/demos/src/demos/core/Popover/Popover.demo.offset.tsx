@@ -1,5 +1,5 @@
 import { Button, Popover, Text } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { FLOATING_POSITION_DATA } from '../../../shared';
 
 const code = `
@@ -28,7 +28,7 @@ function Demo() {
 
 function Wrapper(props: any) {
   return (
-    <Popover width={200} opened {...props}>
+    <Popover width='200px' opened {...props}>
       <Popover.Target>
         <Button>Popover target</Button>
       </Popover.Target>
@@ -41,7 +41,7 @@ function Wrapper(props: any) {
   );
 }
 
-export const offset: MantineDemo = {
+export const offset: EmpoleonDemo = {
   type: 'configurator',
   component: Wrapper,
   code,

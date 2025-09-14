@@ -1,5 +1,5 @@
 import { Checkbox, CheckboxGroupProps, Group } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Checkbox, Group } from '@empoleon/core';
@@ -35,7 +35,7 @@ function Wrapper(props: Partial<CheckboxGroupProps>) {
   );
 }
 
-export const groupConfigurator: MantineDemo = {
+export const groupConfigurator: EmpoleonDemo = {
   type: 'configurator',
   component: Wrapper,
   code,

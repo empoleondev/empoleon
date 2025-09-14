@@ -2,13 +2,13 @@ import { IconTrash } from '@tabler/icons-solidjs';
 import { ActionIcon, Box, Button, Group, Switch, Text, TextInput } from '@empoleon/core';
 import { useForm } from '@empoleon/form';
 import { randomId } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { useForm } from '@empoleon/form';
 import { TextInput, Switch, Group, ActionIcon, Box, Text, Button } from '@empoleon/core';
 import { randomId } from '@empoleon/hooks';
-import { IconTrash } from '@tabler/icons-react';
+import { IconTrash } from '@tabler/icons-solidjs';
 
 function Demo() {
   const form = useForm({
@@ -19,17 +19,17 @@ function Demo() {
   });
 
   const fields = form.getValues().employees.map((item, index) => (
-    <Group key={item.key} mt="xs">
+    <Group mt="xs">
       <TextInput
         placeholder="John Doe"
         withAsterisk
         style={{ flex: 1 }}
-        key={form.key(\`employees.\${index}.name\`)}
+        .name\`)}
         {...form.getInputProps(\`employees.\${index}.name\`)}
       />
       <Switch
         label="Active"
-        key={form.key(\`employees.\${index}.active\`)}
+        .active\`)}
         {...form.getInputProps(\`employees.\${index}.active\`, { type: 'checkbox' })}
       />
       <ActionIcon color="red" onClick={() => form.removeListItem('employees', index)}>
@@ -129,7 +129,7 @@ function Demo() {
   );
 }
 
-export const lists: MantineDemo = {
+export const lists: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

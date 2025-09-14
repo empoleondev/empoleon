@@ -1,6 +1,7 @@
 import { Accordion } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { data, dataCode } from './_base';
+import { For } from 'solid-js';
 
 const code = `
 import { Accordion } from '@empoleon/core';
@@ -8,7 +9,7 @@ import { data } from './data';
 
 function Demo() {
   const items = data.map((item) => (
-    <Accordion.Item key={item.value} value={item.value}>
+    <Accordion.Item value={item.value}>
       <Accordion.Control icon={item.emoji} disabled={item.value === 'Bananas'}>
         {item.value}
       </Accordion.Control>
@@ -25,23 +26,23 @@ function Demo() {
 `;
 
 function Demo() {
-  const items = data.map((item) => (
-    <Accordion.Item key={item.value} value={item.value}>
-      <Accordion.Control icon={item.emoji} disabled={item.value === 'Bananas'}>
-        {item.value}
-      </Accordion.Control>
-      <Accordion.Panel>{item.description}</Accordion.Panel>
-    </Accordion.Item>
-  ));
-
   return (
     <Accordion defaultValue="Apples" mih={270}>
-      {items}
+      <For each={data}>
+        {(item) => (
+          <Accordion.Item value={item.value}>
+            <Accordion.Control icon={item.emoji} disabled={item.value === 'Bananas'}>
+              {item.value}
+            </Accordion.Control>
+            <Accordion.Panel>{item.description}</Accordion.Panel>
+          </Accordion.Item>
+        )}
+      </For>
     </Accordion>
   );
 }
 
-export const disabled: MantineDemo = {
+export const disabled: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code: [

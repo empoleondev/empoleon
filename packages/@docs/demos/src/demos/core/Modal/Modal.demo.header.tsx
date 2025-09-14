@@ -1,6 +1,6 @@
 import { Button, Modal } from '@empoleon/core';
 import { useDisclosure } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { useDisclosure } from '@empoleon/hooks';
@@ -11,7 +11,7 @@ function Demo() {
 
   return (
     <>
-      <Modal opened={opened} onClose={close} withCloseButton={false}>
+      <Modal opened={opened()} onClose={close} withCloseButton={false}>
         Modal without header, press escape or click on overlay to close
       </Modal>
 
@@ -29,7 +29,7 @@ function Demo() {
 
   return (
     <>
-      <Modal opened={opened} onClose={close} withCloseButton={false}>
+      <Modal opened={opened()} onClose={close} withCloseButton={false}>
         Modal without header, press escape or click on overlay to close
       </Modal>
 
@@ -40,7 +40,7 @@ function Demo() {
   );
 }
 
-export const header: MantineDemo = {
+export const header: EmpoleonDemo = {
   type: 'code',
   code,
   centered: true,

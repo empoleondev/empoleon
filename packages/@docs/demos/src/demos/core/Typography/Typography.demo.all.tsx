@@ -1,5 +1,5 @@
 import { Typography } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const html = `<h1>Heading 1</h1>
 <h2>Heading 2</h2>
@@ -45,12 +45,12 @@ export function AvatarDemo() {
 function Demo() {
   return (
     <Typography>
-      <div dangerouslySetInnerHTML={{ __html: html }} />
+      <div innerHTML={html} />
     </Typography>
   );
 }
 
-export const all: MantineDemo = {
+export const all: EmpoleonDemo = {
   type: 'code',
   component: Demo,
 };

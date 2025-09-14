@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import { Button, Group, Modal } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
+import { createSignal } from 'solid-js';
 
 const code = `
 import { useState } from 'react';
@@ -44,13 +44,13 @@ function Demo() {
 `;
 
 function Demo() {
-  const [noTransitionOpened, setNoTransitionOpened] = useState(false);
-  const [slowTransitionOpened, setSlowTransitionOpened] = useState(false);
+  const [noTransitionOpened, setNoTransitionOpened] = createSignal(false);
+  const [slowTransitionOpened, setSlowTransitionOpened] = createSignal(false);
 
   return (
     <>
       <Modal
-        opened={slowTransitionOpened}
+        opened={slowTransitionOpened()}
         onClose={() => setSlowTransitionOpened(false)}
         title="Please consider this"
         transitionProps={{ transition: 'rotate-left' }}
@@ -59,7 +59,7 @@ function Demo() {
       </Modal>
 
       <Modal
-        opened={noTransitionOpened}
+        opened={noTransitionOpened()}
         onClose={() => setNoTransitionOpened(false)}
         title="Please consider this"
         transitionProps={{ transition: 'fade', duration: 600, timingFunction: 'linear' }}
@@ -79,7 +79,7 @@ function Demo() {
   );
 }
 
-export const transitions: MantineDemo = {
+export const transitions: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import { DateInput, DateInputProps } from '@empoleon/dates';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import dayjs from 'dayjs';
@@ -45,7 +45,7 @@ function Demo() {
   );
 }
 
-export const parser: MantineDemo = {
+export const parser: EmpoleonDemo = {
   type: 'code',
   centered: true,
   maxWidth: 400,

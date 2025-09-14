@@ -1,5 +1,5 @@
 import { TableOfContents } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import classes from './TableOfContents.demo.styles.module.css';
 
 const cssCode = `.control {
@@ -55,7 +55,7 @@ function Demo() {
   );
 }
 
-export const styles: MantineDemo = {
+export const styles: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code: [

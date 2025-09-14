@@ -1,5 +1,5 @@
 import { Highlight } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Highlight } from '@empoleon/core';
@@ -36,7 +36,7 @@ function Demo() {
   );
 }
 
-export const props: MantineDemo = {
+export const props: EmpoleonDemo = {
   type: 'code',
   code,
   centered: true,

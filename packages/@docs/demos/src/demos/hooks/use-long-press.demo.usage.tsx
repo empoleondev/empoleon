@@ -1,7 +1,7 @@
 import { Button } from '@empoleon/core';
 import { useLongPress } from '@empoleon/hooks';
 import { notifications } from '@empoleon/notifications';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Button } from '@empoleon/core';
@@ -19,7 +19,7 @@ function Demo() {
   return <Button {...handlers}>Press and hold</Button>;
 }
 
-export const useLongPressDemo: MantineDemo = {
+export const useLongPressDemo: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

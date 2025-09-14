@@ -1,5 +1,5 @@
 import { Tabs, TabsProps } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 function Wrapper(props: TabsProps) {
   const panelProps = props.placement === 'left' ? { pl: 'xs' } : { pr: 'xs' };
@@ -44,7 +44,7 @@ function Demo() {
 }
 `;
 
-export const placement: MantineDemo = {
+export const placement: EmpoleonDemo = {
   type: 'configurator',
   component: Wrapper,
   code,

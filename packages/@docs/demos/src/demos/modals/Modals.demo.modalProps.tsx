@@ -1,7 +1,7 @@
 import { Button, Text } from '@empoleon/core';
 import { modals } from '@empoleon/modals';
 import { notifications } from '@empoleon/notifications';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Button, Text } from '@empoleon/core';
@@ -59,7 +59,7 @@ function Demo() {
   return <Button onClick={openModal}>Open confirm modal</Button>;
 }
 
-export const modalProps: MantineDemo = {
+export const modalProps: EmpoleonDemo = {
   type: 'code',
   centered: true,
   component: Demo,

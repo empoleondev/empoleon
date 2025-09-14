@@ -1,5 +1,5 @@
 import { TextInput } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { TextInput } from '@empoleon/core';
@@ -23,7 +23,7 @@ function Demo() {
   );
 }
 
-export const sizesMedia: MantineDemo = {
+export const sizesMedia: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code: [{ fileName: 'Demo.tsx', code, language: 'tsx' }],

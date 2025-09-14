@@ -1,5 +1,5 @@
 import { Autocomplete } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Autocomplete } from '@empoleon/core';
@@ -27,7 +27,7 @@ function Demo() {
   );
 }
 
-export const autoSelectOnBlur: MantineDemo = {
+export const autoSelectOnBlur: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

@@ -2,7 +2,7 @@
 
 import { IconDashboard, IconFileText, IconHome, IconSearch } from '@tabler/icons-solidjs';
 import { SpotlightActionData } from '@empoleon/spotlight';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { SpotlightDemoBase } from './_demo-base';
 
 const actions: SpotlightActionData[] = [
@@ -40,21 +40,21 @@ const actions: SpotlightActionData[] = [
     label: 'Home',
     description: 'Get to home page',
     onClick: () => console.log('Home'),
-    leftSection: <IconHome size={24} stroke={1.5} />,
+    leftSection: <IconHome size={24} stroke='1.5' />,
   },
   {
     id: 'dashboard',
     label: 'Dashboard',
     description: 'Get full information about current system status',
     onClick: () => console.log('Dashboard'),
-    leftSection: <IconDashboard size={24} stroke={1.5} />,
+    leftSection: <IconDashboard size={24} stroke='1.5' />,
   },
   {
     id: 'documentation',
     label: 'Documentation',
     description: 'Visit documentation to lean more about all features',
     onClick: () => console.log('Documentation'),
-    leftSection: <IconFileText size={24} stroke={1.5} />,
+    leftSection: <IconFileText size={24} stroke='1.5' />,
   },
 ];
 
@@ -67,7 +67,7 @@ function Demo() {
         nothingFound="Nothing found..."
         highlightQuery
         searchProps={{
-          leftSection: <IconSearch size={20} stroke={1.5} />,
+          leftSection: <IconSearch size={20} stroke='1.5' />,
           placeholder: 'Search...',
         }}
       />
@@ -91,7 +91,7 @@ function Demo() {
   );
 }
 
-export const usage: MantineDemo = {
+export const usage: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

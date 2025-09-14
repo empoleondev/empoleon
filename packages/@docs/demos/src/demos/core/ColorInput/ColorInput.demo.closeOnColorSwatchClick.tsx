@@ -1,5 +1,5 @@
 import { ColorInput, DEFAULT_THEME } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { ColorInput, DEFAULT_THEME } from '@empoleon/core';
@@ -35,7 +35,7 @@ function Demo() {
   );
 }
 
-export const closeOnColorSwatchClick: MantineDemo = {
+export const closeOnColorSwatchClick: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

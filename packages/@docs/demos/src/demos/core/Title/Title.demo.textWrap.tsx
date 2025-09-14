@@ -1,5 +1,5 @@
 import { Title } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Title } from '@empoleon/core';
@@ -23,7 +23,7 @@ function Wrapper(props: any) {
   );
 }
 
-export const textWrap: MantineDemo = {
+export const textWrap: EmpoleonDemo = {
   type: 'configurator',
   component: Wrapper,
   code,

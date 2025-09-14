@@ -1,6 +1,6 @@
 import { Box, Button, Collapse, Group, Text } from '@empoleon/core';
 import { useDisclosure } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Button, Group, Text, Collapse, Box } from '@empoleon/core';
@@ -32,7 +32,7 @@ function Demo() {
         <Button onClick={toggle}>Toggle content</Button>
       </Group>
 
-      <Collapse in={opened}>
+      <Collapse in={opened()}>
         <Text>
           From Bulbapedia: Bulbasaur is a small, quadrupedal Pokémon that has blue-green skin with
           darker patches. It has red eyes with white pupils, pointed, ear-like structures on top of
@@ -48,7 +48,7 @@ function Demo() {
   );
 }
 
-export const usage: MantineDemo = {
+export const usage: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

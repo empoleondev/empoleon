@@ -1,5 +1,5 @@
 import { Pagination, Text } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Text, Pagination } from '@empoleon/core';
@@ -39,7 +39,7 @@ function Demo() {
   );
 }
 
-export const boundaries: MantineDemo = {
+export const boundaries: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

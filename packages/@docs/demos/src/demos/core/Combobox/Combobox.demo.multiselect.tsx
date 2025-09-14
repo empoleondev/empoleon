@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import { CheckIcon, Combobox, Group, Input, Pill, PillsInput, useCombobox } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
+import { createSignal, For, Show } from 'solid-js';
 
 const code = `
 import { useState } from 'react';
@@ -25,13 +25,13 @@ function Demo() {
     setValue((current) => current.filter((v) => v !== val));
 
   const values = value.map((item) => (
-    <Pill key={item} withRemoveButton onRemove={() => handleValueRemove(item)}>
+    <Pill withRemoveButton onRemove={() => handleValueRemove(item)}>
       {item}
     </Pill>
   ));
 
   const options = groceries.map((item) => (
-    <Combobox.Option value={item} key={item} active={value.includes(item)}>
+    <Combobox.Option value={item} active={value.includes(item)}>
       <Group gap="sm">
         {value.includes(item) ? <CheckIcon size={12} /> : null}
         <span>{item}</span>
@@ -82,7 +82,7 @@ function Demo() {
     onDropdownOpen: () => combobox.updateSelectedOptionIndex('active'),
   });
 
-  const [value, setValue] = useState<string[]>([]);
+  const [value, setValue] = createSignal<string[]>([]);
 
   const handleValueSelect = (val: string) =>
     setValue((current) =>
@@ -92,19 +92,10 @@ function Demo() {
   const handleValueRemove = (val: string) =>
     setValue((current) => current.filter((v) => v !== val));
 
-  const values = value.map((item) => (
-    <Pill key={item} withRemoveButton onRemove={() => handleValueRemove(item)}>
+  const values = value().map((item) => (
+    <Pill withRemoveButton onRemove={() => handleValueRemove(item)}>
       {item}
     </Pill>
-  ));
-
-  const options = groceries.map((item) => (
-    <Combobox.Option value={item} key={item} active={value.includes(item)}>
-      <Group gap="sm">
-        {value.includes(item) ? <CheckIcon size={12} /> : null}
-        <span>{item}</span>
-      </Group>
-    </Combobox.Option>
   ));
 
   return (
@@ -123,9 +114,9 @@ function Demo() {
                 type="hidden"
                 onBlur={() => combobox.closeDropdown()}
                 onKeyDown={(event) => {
-                  if (event.key === 'Backspace' && value.length > 0) {
+                  if (event.key === 'Backspace' && value().length > 0) {
                     event.preventDefault();
-                    handleValueRemove(value[value.length - 1]);
+                    handleValueRemove(value()[value().length - 1]);
                   }
                 }}
               />
@@ -135,13 +126,26 @@ function Demo() {
       </Combobox.DropdownTarget>
 
       <Combobox.Dropdown>
-        <Combobox.Options>{options}</Combobox.Options>
+        <Combobox.Options>
+          <For each={groceries}>
+            {(item) => (
+              <Combobox.Option value={item} active={value().includes(item)}>
+                <Group gap="sm">
+                  <Show when={value().includes(item)}>
+                    <CheckIcon size={12} />
+                  </Show>
+                  <span>{item}</span>
+                </Group>
+              </Combobox.Option>
+            )}
+          </For>
+        </Combobox.Options>
       </Combobox.Dropdown>
     </Combobox>
   );
 }
 
-export const multiselect: MantineDemo = {
+export const multiselect: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

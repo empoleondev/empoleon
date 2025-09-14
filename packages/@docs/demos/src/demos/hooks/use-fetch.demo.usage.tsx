@@ -1,6 +1,6 @@
 import { Box, Button, Code, Group, LoadingOverlay, Text } from '@empoleon/core';
 import { useFetch } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Box, Button, Code, Group, LoadingOverlay, Text } from '@empoleon/core';
@@ -74,7 +74,7 @@ function Demo() {
   );
 }
 
-export const useFetchUsage: MantineDemo = {
+export const useFetchUsage: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

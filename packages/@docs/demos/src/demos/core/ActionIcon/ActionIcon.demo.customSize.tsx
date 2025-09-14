@@ -1,11 +1,11 @@
-import { IconHeart } from '@tabler/icons-react';
-import { ActionIcon, createTheme, Group, MantineThemeProvider } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { IconHeart } from '@tabler/icons-solidjs';
+import { ActionIcon, createTheme, Group, EmpoleonThemeProvider } from '@empoleon/core';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import classes from './ActionIcon.demo.customSize.module.css';
 
 const code = `
-import { ActionIcon, createTheme, Group, MantineThemeProvider } from '@empoleon/core';
-import { IconHeart } from '@tabler/icons-react';
+import { ActionIcon, createTheme, Group, EmpoleonThemeProvider } from '@empoleon/core';
+import { IconHeart } from '@tabler/icons-solidjs';
 import classes from './Demo.module.css';
 
 const theme = createTheme({
@@ -18,7 +18,7 @@ const theme = createTheme({
 
 function Demo() {
   return (
-    <MantineThemeProvider theme={theme}>
+    <EmpoleonThemeProvider theme={theme}>
       <Group justify="center">
         <ActionIcon size="xxs" aria-label="Custom xxs size">
           <IconHeart size={10} />
@@ -28,7 +28,7 @@ function Demo() {
           <IconHeart size={32} />
         </ActionIcon>
       </Group>
-    </MantineThemeProvider>
+    </EmpoleonThemeProvider>
   );
 }
 `;
@@ -50,7 +50,7 @@ const theme = createTheme({
 
 function Demo() {
   return (
-    <MantineThemeProvider theme={theme}>
+    <EmpoleonThemeProvider theme={theme}>
       <Group justify="center">
         <ActionIcon size="xxs" aria-label="Custom xxs size">
           <IconHeart size={10} />
@@ -60,11 +60,11 @@ function Demo() {
           <IconHeart size={32} />
         </ActionIcon>
       </Group>
-    </MantineThemeProvider>
+    </EmpoleonThemeProvider>
   );
 }
 
-export const customSize: MantineDemo = {
+export const customSize: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code: [

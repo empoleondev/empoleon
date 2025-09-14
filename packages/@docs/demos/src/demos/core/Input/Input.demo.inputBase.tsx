@@ -1,6 +1,6 @@
-import { IMaskInput } from 'react-imask';
+import { createMaskedInput } from 'solid-imask';
 import { InputBase } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { InputBase } from '@empoleon/core';
@@ -27,12 +27,15 @@ function Demo() {
 `;
 
 function Demo() {
+  const MaskedInput = createMaskedInput({
+    mask: "+{7} (000) 000-00-00",
+  });
+
   return (
     <>
       <InputBase
         label="Your phone"
-        component={IMaskInput}
-        mask="+7 (000) 000-0000"
+        component={MaskedInput}
         placeholder="Your phone"
       />
 
@@ -45,7 +48,7 @@ function Demo() {
   );
 }
 
-export const inputBase: MantineDemo = {
+export const inputBase: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   maxWidth: 340,

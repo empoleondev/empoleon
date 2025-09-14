@@ -1,6 +1,6 @@
 import { Button } from '@empoleon/core';
 import { useEventListener } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { createSignal } from 'solid-js';
 
 const code = `
@@ -25,7 +25,7 @@ function Demo() {
   return <Button ref={ref}>Button clicks: {count()}</Button>;
 }
 
-export const useEventListenerDemo: MantineDemo = {
+export const useEventListenerDemo: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

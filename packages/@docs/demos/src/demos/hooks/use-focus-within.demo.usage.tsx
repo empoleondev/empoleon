@@ -1,6 +1,6 @@
 import { Box, Button, Text, TextInput } from '@empoleon/core';
 import { useFocusWithin } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { useFocusWithin } from '@empoleon/hooks';
@@ -45,7 +45,7 @@ function Demo() {
   );
 }
 
-export const useFocusWithinDemo: MantineDemo = {
+export const useFocusWithinDemo: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

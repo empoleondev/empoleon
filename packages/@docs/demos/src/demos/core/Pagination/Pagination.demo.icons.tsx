@@ -4,9 +4,9 @@ import {
   IconArrowLeft,
   IconArrowRight,
   IconGripHorizontal,
-} from '@tabler/icons-react';
+} from '@tabler/icons-solidjs';
 import { Group, Pagination } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Group, Pagination } from '@empoleon/core';
@@ -16,7 +16,7 @@ import {
   IconArrowLeft,
   IconArrowRight,
   IconGripHorizontal,
-} from '@tabler/icons-react';
+} from '@tabler/icons-solidjs';
 
 function Demo() {
   return (
@@ -75,7 +75,7 @@ function Demo() {
   );
 }
 
-export const icons: MantineDemo = {
+export const icons: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

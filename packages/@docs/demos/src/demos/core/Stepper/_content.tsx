@@ -4,12 +4,12 @@ export function Content(props: BoxProps & ElementProps<'div'>) {
   return (
     <Box
       style={{
-        height: 60,
+        height: '60px',
         display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontWeight: 500,
-        fontSize: 'var(--mantine-font-size-lg)',
+        'align-items': 'center',
+        'justify-content': 'center',
+        'font-weight': 500,
+        'font-size': 'var(--mantine-font-size-lg)',
       }}
       {...props}
     />

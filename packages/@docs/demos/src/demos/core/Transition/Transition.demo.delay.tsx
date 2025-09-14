@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import { Button, Flex, Paper, Transition } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
+import { createSignal } from 'solid-js';
 
 const code = `
 import { useState } from 'react';
@@ -34,13 +34,13 @@ export function Demo() {
 }`;
 
 export function Demo() {
-  const [opened, setOpened] = useState(false);
+  const [opened, setOpened] = createSignal(false);
 
   return (
     <Flex maw={200} pos="relative" justify="center" m="auto">
       <Button onClick={() => setOpened(true)}>Open dropdown</Button>
 
-      <Transition mounted={opened} transition="pop" enterDelay={500} exitDelay={300}>
+      <Transition mounted={opened()} transition="pop" enterDelay={500} exitDelay={300}>
         {(transitionStyle) => (
           <Paper
             shadow="md"
@@ -60,7 +60,7 @@ export function Demo() {
   );
 }
 
-export const delay: MantineDemo = {
+export const delay: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

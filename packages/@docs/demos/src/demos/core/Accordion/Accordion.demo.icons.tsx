@@ -1,9 +1,9 @@
-import { IconCameraSelfie, IconPhoto, IconPrinter } from '@tabler/icons-react';
+import { IconCameraSelfie, IconPhoto, IconPrinter } from '@tabler/icons-solidjs';
 import { Accordion } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
-import { IconPhoto, IconPrinter, IconCameraSelfie } from '@tabler/icons-react';
+import { IconPhoto, IconPrinter, IconCameraSelfie } from '@tabler/icons-solidjs';
 import { Accordion } from '@empoleon/core';
 
 function Demo() {
@@ -11,7 +11,7 @@ function Demo() {
     <Accordion variant="filled" radius="md" defaultValue="photos">
       <Accordion.Item value="photos">
         <Accordion.Control
-          icon={<IconPhoto size={22} stroke={1.5} color="var(--mantine-color-dimmed)" />}
+          icon={<IconPhoto size={22} stroke='1.5' color="var(--mantine-color-dimmed)" />}
         >
           Recent photos
         </Accordion.Control>
@@ -20,7 +20,7 @@ function Demo() {
 
       <Accordion.Item value="print">
         <Accordion.Control
-          icon={<IconPrinter size={22} stroke={1.5} color="var(--mantine-color-dimmed)" />}
+          icon={<IconPrinter size={22} stroke='1.5' color="var(--mantine-color-dimmed)" />}
         >
           Print photos
         </Accordion.Control>
@@ -29,7 +29,7 @@ function Demo() {
 
       <Accordion.Item value="camera">
         <Accordion.Control
-          icon={<IconCameraSelfie size={22} stroke={1.5} color="var(--mantine-color-dimmed)" />}
+          icon={<IconCameraSelfie size={22} stroke='1.5' color="var(--mantine-color-dimmed)" />}
         >
           Camera settings
         </Accordion.Control>
@@ -45,7 +45,7 @@ function Demo() {
     <Accordion variant="filled" radius="md" defaultValue="photos" mih={200}>
       <Accordion.Item value="photos">
         <Accordion.Control
-          icon={<IconPhoto size={22} stroke={1.5} color="var(--mantine-color-dimmed)" />}
+          icon={<IconPhoto size={22} stroke='1.5' color="var(--mantine-color-dimmed)" />}
         >
           Recent photos
         </Accordion.Control>
@@ -54,7 +54,7 @@ function Demo() {
 
       <Accordion.Item value="print">
         <Accordion.Control
-          icon={<IconPrinter size={22} stroke={1.5} color="var(--mantine-color-dimmed)" />}
+          icon={<IconPrinter size={22} stroke='1.5' color="var(--mantine-color-dimmed)" />}
         >
           Print photos
         </Accordion.Control>
@@ -63,7 +63,7 @@ function Demo() {
 
       <Accordion.Item value="camera">
         <Accordion.Control
-          icon={<IconCameraSelfie size={22} stroke={1.5} color="var(--mantine-color-dimmed)" />}
+          icon={<IconCameraSelfie size={22} stroke='1.5' color="var(--mantine-color-dimmed)" />}
         >
           Camera settings
         </Accordion.Control>
@@ -73,7 +73,7 @@ function Demo() {
   );
 }
 
-export const icons: MantineDemo = {
+export const icons: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

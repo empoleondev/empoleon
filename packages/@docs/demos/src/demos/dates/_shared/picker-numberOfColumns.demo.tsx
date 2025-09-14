@@ -1,5 +1,5 @@
 import { Text } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { Component, createSignal } from 'solid-js';
 
 const getCode = (name: string) => `
@@ -34,7 +34,7 @@ function getDemo(Component: Component<any>) {
   };
 }
 
-export function getPickerNumberOfColumnsDemo(Component: Component<any>): MantineDemo {
+export function getPickerNumberOfColumnsDemo(Component: Component<any>): EmpoleonDemo {
   return {
     type: 'code',
     centered: true,

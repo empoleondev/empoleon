@@ -1,6 +1,6 @@
 import { Kbd, Text } from '@empoleon/core';
 import { useMutationObserver } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { createSignal } from 'solid-js';
 
 const code = `
@@ -69,7 +69,7 @@ function Demo() {
   );
 }
 
-export const useMutationObserverTarget: MantineDemo = {
+export const useMutationObserverTarget: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

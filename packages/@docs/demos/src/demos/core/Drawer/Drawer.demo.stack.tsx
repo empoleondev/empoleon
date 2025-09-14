@@ -1,5 +1,5 @@
 import { Button, Drawer, Group, useDrawersStack } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Button, Group, Drawer, useDrawersStack } from '@empoleon/core';
@@ -111,7 +111,7 @@ function Demo() {
   );
 }
 
-export const stack: MantineDemo = {
+export const stack: EmpoleonDemo = {
   type: 'code',
   code,
   centered: true,

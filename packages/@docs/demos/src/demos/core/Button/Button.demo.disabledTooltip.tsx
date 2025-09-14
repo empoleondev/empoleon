@@ -1,5 +1,5 @@
 import { Button, Tooltip } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Button, Tooltip } from '@empoleon/core';
@@ -18,14 +18,14 @@ function Demo() {
 function Demo() {
   return (
     <Tooltip label="Tooltip for disabled button">
-      <Button data-disabled onClick={(event) => event.preventDefault()}>
+      {(props) => <Button {...props} data-disabled onClick={(event) => event.preventDefault()}>
         Disabled button with tooltip
-      </Button>
+      </Button>}
     </Tooltip>
   );
 }
 
-export const disabledTooltip: MantineDemo = {
+export const disabledTooltip: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   centered: true,

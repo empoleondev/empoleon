@@ -1,6 +1,6 @@
-import { useRef, useState } from 'react';
 import { Box, Popover, ScrollArea, Text, TextInput, UnstyledButton } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
+import { createSignal } from 'solid-js';
 
 const code = `
 import { useState, useRef } from 'react';
@@ -48,7 +48,7 @@ function Demo() {
   const items = filtered.map((item, index) => (
     <UnstyledButton
       data-list-item
-      key={item}
+
       display="block"
       bg={index === hovered ? 'var(--mantine-color-blue-light)' : undefined}
       w="100%"
@@ -59,7 +59,7 @@ function Demo() {
   ));
 
   return (
-    <Popover width="target" opened={opened}>
+    <Popover width="target" opened={opened()}>
       <Popover.Target>
         <TextInput
           value={query}
@@ -141,17 +141,17 @@ const groceries = [
 ];
 
 function Demo() {
-  const viewportRef = useRef<HTMLDivElement>(null);
-  const [query, setQuery] = useState('');
-  const [opened, setOpened] = useState(false);
-  const [hovered, setHovered] = useState(-1);
-  const filtered = groceries.filter((item) => item.toLowerCase().includes(query.toLowerCase()));
+  const [viewportRef, setViewportRef] = createSignal<HTMLDivElement|null>(null)
+  const [query, setQuery] = createSignal('');
+  const [opened, setOpened] = createSignal(false);
+  const [hovered, setHovered] = createSignal(-1);
+  const filtered = groceries.filter((item) => item.toLowerCase().includes(query().toLowerCase()));
   const items = filtered.map((item, index) => (
     <UnstyledButton
       data-list-item
-      key={item}
+
       display="block"
-      bg={index === hovered ? 'var(--mantine-color-blue-light)' : undefined}
+      bg={index === hovered() ? 'var(--mantine-color-blue-light)' : undefined}
       w="100%"
       p={5}
     >
@@ -160,10 +160,10 @@ function Demo() {
   ));
 
   return (
-    <Popover width="target" opened={opened}>
+    <Popover width="target" opened={opened()}>
       <Popover.Target>
         <TextInput
-          value={query}
+          value={query()}
           onFocus={() => setOpened(true)}
           onBlur={() => setOpened(false)}
           onChange={(event) => {
@@ -175,7 +175,7 @@ function Demo() {
               event.preventDefault();
               setHovered((current) => {
                 const nextIndex = current + 1 >= filtered.length ? current : current + 1;
-                viewportRef.current
+                viewportRef()
                   ?.querySelectorAll('[data-list-item]')
                   ?.[nextIndex]?.scrollIntoView({ block: 'nearest' });
                 return nextIndex;
@@ -186,7 +186,7 @@ function Demo() {
               event.preventDefault();
               setHovered((current) => {
                 const nextIndex = current - 1 < 0 ? current : current - 1;
-                viewportRef.current
+                viewportRef()
                   ?.querySelectorAll('[data-list-item]')
                   ?.[nextIndex]?.scrollIntoView({ block: 'nearest' });
                 return nextIndex;
@@ -197,7 +197,7 @@ function Demo() {
         />
       </Popover.Target>
       <Popover.Dropdown p={0}>
-        <ScrollArea.Autosize viewportRef={viewportRef} mah={200} type="always" scrollbars="y">
+        <ScrollArea.Autosize viewport-ref={setViewportRef} mah={200} type="always" scrollbars="y">
           <Box px="xs" py={5}>
             {items.length > 0 ? items : <Text c="dimmed">Nothing found</Text>}
           </Box>
@@ -207,7 +207,7 @@ function Demo() {
   );
 }
 
-export const autosizePopover: MantineDemo = {
+export const autosizePopover: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

@@ -1,11 +1,11 @@
-import { IconXboxX } from '@tabler/icons-react';
+import { IconXboxX } from '@tabler/icons-solidjs';
 import { Button, Drawer } from '@empoleon/core';
 import { useDisclosure } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { AuthenticationForm } from '../../../shared/AuthenticationForm/AuthenticationForm';
 
 const code = `
-import { IconXboxX } from '@tabler/icons-react';
+import { IconXboxX } from '@tabler/icons-solidjs';
 import { useDisclosure } from '@empoleon/hooks';
 import { Drawer, Button } from '@empoleon/core';
 
@@ -15,11 +15,11 @@ function Demo() {
   return (
     <>
       <Drawer
-        opened={opened}
+        opened={opened()}
         onClose={close}
         title="Authentication"
         closeButtonProps={{
-          icon: <IconXboxX size={20} stroke={1.5} />,
+          icon: <IconXboxX size={20} stroke='1.5' />,
         }}
       >
         {/* Drawer content */}
@@ -39,11 +39,11 @@ function Demo() {
   return (
     <>
       <Drawer
-        opened={opened}
+        opened={opened()}
         onClose={close}
         title="Authentication"
         closeButtonProps={{
-          icon: <IconXboxX size={20} stroke={1.5} />,
+          icon: <IconXboxX size={20} stroke='1.5' />,
         }}
       >
         <AuthenticationForm noShadow noPadding />
@@ -56,7 +56,7 @@ function Demo() {
   );
 }
 
-export const closeIcon: MantineDemo = {
+export const closeIcon: EmpoleonDemo = {
   type: 'code',
   code,
   centered: true,

@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import { DatePicker } from '@empoleon/dates';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import dayjs from 'dayjs';
@@ -83,7 +83,7 @@ function Demo() {
   );
 }
 
-export const presetsRange: MantineDemo = {
+export const presetsRange: EmpoleonDemo = {
   type: 'code',
   centered: true,
   component: Demo,

@@ -1,7 +1,7 @@
 import { useEditor } from '@empoleon/solid-tiptap';
 import StarterKit from '@tiptap/starter-kit';
 import { Link, RichTextEditor } from '@empoleon/tiptap';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import classes from './TipTap.demo.typographyStyles.module.css';
 
 const cssCode = `.root {
@@ -41,7 +41,7 @@ function Demo() {
   );
 }
 
-export const typographyStyles: MantineDemo = {
+export const typographyStyles: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,
@@ -64,7 +64,7 @@ function Demo() {
   );
 }
 
-export const typographyStyles: MantineDemo = {
+export const typographyStyles: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code: [

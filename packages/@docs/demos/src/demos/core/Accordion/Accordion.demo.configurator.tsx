@@ -1,6 +1,7 @@
 import { Accordion, AccordionProps } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { data, dataCode } from './_base';
+import { For } from 'solid-js';
 
 const code = `
 import { Accordion } from '@empoleon/core';
@@ -8,7 +9,7 @@ import { data } from './data';
 
 function Demo() {
   const items = data.map((item) => (
-    <Accordion.Item key={item.value} value={item.value}>
+    <Accordion.Item value={item.value}>
       <Accordion.Control icon={item.emoji}>{item.value}</Accordion.Control>
       <Accordion.Panel>{item.description}</Accordion.Panel>
     </Accordion.Item>
@@ -23,21 +24,21 @@ function Demo() {
 `;
 
 function Demo(props: AccordionProps) {
-  const items = data.map((item) => (
-    <Accordion.Item key={item.value} value={item.value}>
-      <Accordion.Control icon={item.emoji}>{item.value}</Accordion.Control>
-      <Accordion.Panel>{item.description}</Accordion.Panel>
-    </Accordion.Item>
-  ));
-
   return (
     <Accordion {...props} defaultValue="Apples" mih={320}>
-      {items}
+      <For each={data}>
+        {(item) => (
+          <Accordion.Item value={item.value}>
+            <Accordion.Control icon={item.emoji}>{item.value}</Accordion.Control>
+            <Accordion.Panel>{item.description}</Accordion.Panel>
+          </Accordion.Item>
+        )}
+      </For>
     </Accordion>
   );
 }
 
-export const configurator: MantineDemo = {
+export const configurator: EmpoleonDemo = {
   type: 'configurator',
   component: Demo,
   code: [

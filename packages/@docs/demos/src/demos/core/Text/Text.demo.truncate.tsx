@@ -1,5 +1,5 @@
 import { Box, Text } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Text, Box } from '@empoleon/core';
@@ -29,7 +29,7 @@ function Wrapper(props: any) {
   );
 }
 
-export const truncate: MantineDemo = {
+export const truncate: EmpoleonDemo = {
   type: 'configurator',
   component: Wrapper,
   code,

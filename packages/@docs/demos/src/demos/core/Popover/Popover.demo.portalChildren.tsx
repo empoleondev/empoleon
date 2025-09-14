@@ -1,6 +1,6 @@
 import { Button, Popover, Select } from '@empoleon/core';
 import { DatePickerInput } from '@empoleon/dates';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Button, Popover, Select } from '@empoleon/core';
@@ -33,7 +33,7 @@ function Demo() {
 
 function Demo() {
   return (
-    <Popover width={300} position="bottom" withArrow shadow="md">
+    <Popover width='300px' position="bottom" withArrow shadow="md">
       <Popover.Target>
         <Button>Toggle popover</Button>
       </Popover.Target>
@@ -55,7 +55,7 @@ function Demo() {
   );
 }
 
-export const portalChildren: MantineDemo = {
+export const portalChildren: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

@@ -1,6 +1,6 @@
 import { IconSearch } from '@tabler/icons-solidjs';
 import { SpotlightActionData } from '@empoleon/spotlight';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { SpotlightDemoBase } from './_demo-base';
 
 const code = `
@@ -27,7 +27,7 @@ function Demo() {
         scrollable
         maxHeight={350}
         searchProps={{
-          leftSection: <IconSearch size={20} stroke={1.5} />,
+          leftSection: <IconSearch size={20} stroke='1.5' />,
           placeholder: 'Search...',
         }}
       />
@@ -61,7 +61,7 @@ function Demo() {
   );
 }
 
-export const scrollable: MantineDemo = {
+export const scrollable: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

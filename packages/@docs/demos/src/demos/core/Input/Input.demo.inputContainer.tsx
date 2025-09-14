@@ -1,6 +1,7 @@
-import { useState } from 'react';
 import { TextInput, Tooltip } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
+import { createSignal } from 'solid-js';
+import { Dynamic } from 'solid-js/web';
 
 const code = `
 import { useState } from 'react';
@@ -27,7 +28,7 @@ function Demo() {
 `;
 
 function Demo() {
-  const [focused, setFocused] = useState(false);
+  const [focused, setFocused] = createSignal(false);
 
   return (
     <TextInput
@@ -37,15 +38,15 @@ function Demo() {
       onFocus={() => setFocused(true)}
       onBlur={() => setFocused(false)}
       inputContainer={(children) => (
-        <Tooltip label="Additional information" position="top-start" opened={focused}>
-          {children}
+        <Tooltip label="Additional information" position="top-start" opened={focused()}>
+          {(props) => <Dynamic component={children as any} {...props} />}
         </Tooltip>
       )}
     />
   );
 }
 
-export const inputContainer: MantineDemo = {
+export const inputContainer: EmpoleonDemo = {
   type: 'code',
   centered: true,
   maxWidth: 400,

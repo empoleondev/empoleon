@@ -1,5 +1,5 @@
 import { Rating, RatingProps } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Rating } from '@empoleon/core';
@@ -13,7 +13,7 @@ function Wrapper(props: RatingProps) {
   return <Rating defaultValue={2} {...props} />;
 }
 
-export const configurator: MantineDemo = {
+export const configurator: EmpoleonDemo = {
   type: 'configurator',
   component: Wrapper,
   code,

@@ -2,7 +2,7 @@ import { IconStar } from '@tabler/icons-solidjs';
 import { useEditor } from '@empoleon/solid-tiptap';
 import StarterKit from '@tiptap/starter-kit';
 import { RichTextEditor, useRichTextEditorContext } from '@empoleon/tiptap';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { useEditor } from '@empoleon/solid-tiptap';
@@ -18,7 +18,7 @@ function InsertStarControl() {
       aria-label="Insert star emoji"
       title="Insert star emoji"
     >
-      <IconStar stroke={1.5} size={16} />
+      <IconStar stroke='1.5' size={16} />
     </RichTextEditor.Control>
   );
 }
@@ -71,7 +71,7 @@ function Demo() {
   );
 }
 
-export const customControl: MantineDemo = {
+export const customControl: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

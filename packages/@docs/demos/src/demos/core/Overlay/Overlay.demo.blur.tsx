@@ -1,5 +1,5 @@
 import { AspectRatio, Overlay } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Overlay, AspectRatio } from '@empoleon/core';
@@ -29,7 +29,7 @@ function Wrapper(props: any) {
   );
 }
 
-export const blur: MantineDemo = {
+export const blur: EmpoleonDemo = {
   type: 'configurator',
   component: Wrapper,
   code,

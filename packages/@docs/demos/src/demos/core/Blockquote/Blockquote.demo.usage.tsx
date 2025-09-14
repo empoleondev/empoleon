@@ -1,10 +1,10 @@
-import { IconInfoCircle } from '@tabler/icons-react';
+import { IconInfoCircle } from '@tabler/icons-solidjs';
 import { Blockquote } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Blockquote } from '@empoleon/core';
-import { IconInfoCircle } from '@tabler/icons-react';
+import { IconInfoCircle } from '@tabler/icons-solidjs';
 
 function Demo() {
   const icon = <IconInfoCircle />;
@@ -25,7 +25,7 @@ function Wrapper(props: any) {
   );
 }
 
-export const usage: MantineDemo = {
+export const usage: EmpoleonDemo = {
   type: 'configurator',
   component: Wrapper,
   code,

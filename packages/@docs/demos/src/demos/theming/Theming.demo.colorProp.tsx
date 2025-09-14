@@ -1,5 +1,5 @@
 import { Button, Group, Text } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Group, Button, Text } from '@empoleon/core';
@@ -82,7 +82,7 @@ function Demo() {
   );
 }
 
-export const colorProp: MantineDemo = {
+export const colorProp: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   defaultExpanded: false,

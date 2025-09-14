@@ -1,6 +1,6 @@
 import { Button, em, Tooltip } from '@empoleon/core';
 import { useMediaQuery } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Tooltip, Button, em } from '@empoleon/core';
@@ -27,7 +27,7 @@ function Demo() {
   );
 }
 
-export const useMediaQueryHook: MantineDemo = {
+export const useMediaQueryHook: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

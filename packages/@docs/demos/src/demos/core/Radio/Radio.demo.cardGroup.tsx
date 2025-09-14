@@ -1,7 +1,7 @@
-import { useState } from 'react';
 import { Group, Radio, Stack, Text } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import classes from './Radio.demo.card.module.css';
+import { createSignal } from 'solid-js';
 
 const cssCode = `.root {
   position: relative;
@@ -56,7 +56,7 @@ function Demo() {
   const [value, setValue] = useState<string | null>(null);
 
   const cards = data.map((item) => (
-    <Radio.Card className={classes.root} radius="md" value={item.name} key={item.name}>
+    <Radio.Card className={classes.root} radius="md" value={item.name} >
       <Group wrap="nowrap" align="flex-start">
         <Radio.Indicator />
         <div>
@@ -98,10 +98,10 @@ const data = [
 ];
 
 function Demo() {
-  const [value, setValue] = useState<string | null>(null);
+  const [value, setValue] = createSignal<string | null>(null);
 
   const cards = data.map((item) => (
-    <Radio.Card className={classes.root} radius="md" value={item.name} key={item.name}>
+    <Radio.Card className={classes.root} radius="md" value={item.name} >
       <Group wrap="nowrap" align="flex-start">
         <Radio.Indicator />
         <div>
@@ -115,7 +115,7 @@ function Demo() {
   return (
     <>
       <Radio.Group
-        value={value}
+        value={value()}
         onChange={setValue}
         label="Pick one package to install"
         description="Choose a package that you will need in your application"
@@ -126,13 +126,13 @@ function Demo() {
       </Radio.Group>
 
       <Text fz="xs" mt="md">
-        CurrentValue: {value || '–'}
+        CurrentValue: {value() || '–'}
       </Text>
     </>
   );
 }
 
-export const cardGroup: MantineDemo = {
+export const cardGroup: EmpoleonDemo = {
   type: 'code',
   centered: true,
   maxWidth: 320,

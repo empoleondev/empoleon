@@ -1,10 +1,10 @@
-import { IconSun, IconVideo } from '@tabler/icons-react';
+import { IconSun, IconVideo } from '@tabler/icons-solidjs';
 import { Avatar, Text, ThemeIcon, Timeline } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { ThemeIcon, Text, Avatar, Timeline } from '@empoleon/core';
-import { IconSun, IconVideo } from '@tabler/icons-react';
+import { IconSun, IconVideo } from '@tabler/icons-solidjs';
 
 function Demo() {
   return (
@@ -103,7 +103,7 @@ function Demo() {
   );
 }
 
-export const bullet: MantineDemo = {
+export const bullet: EmpoleonDemo = {
   type: 'code',
   centered: true,
   maxWidth: 320,

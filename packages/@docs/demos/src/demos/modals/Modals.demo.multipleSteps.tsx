@@ -1,6 +1,6 @@
 import { Button, Text } from '@empoleon/core';
 import { modals } from '@empoleon/modals';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Button, Text } from '@empoleon/core';
@@ -75,7 +75,7 @@ function Demo() {
   );
 }
 
-export const multipleSteps: MantineDemo = {
+export const multipleSteps: EmpoleonDemo = {
   type: 'code',
   centered: true,
   component: Demo,

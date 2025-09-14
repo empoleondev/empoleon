@@ -1,5 +1,5 @@
 import { Code } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Code } from '@empoleon/core';
@@ -25,7 +25,7 @@ function Demo() {
   return <Code block>{codeForPreviousDemo}</Code>;
 }
 
-export const block: MantineDemo = {
+export const block: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

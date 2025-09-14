@@ -1,5 +1,5 @@
 import { Slider } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 function Wrapper(props: any) {
   return <Slider {...props} defaultValue={20} />;
@@ -13,7 +13,7 @@ function Demo() {
 }
 `;
 
-export const thumbSize: MantineDemo = {
+export const thumbSize: EmpoleonDemo = {
   type: 'configurator',
   component: Wrapper,
   code,

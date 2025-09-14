@@ -7,13 +7,13 @@ interface DemoComponent {
   component: Component<any>;
 }
 
-export type MantineDemo =
+export type EmpoleonDemo =
   | ({ type: 'code' } & DemoComponent & CodeDemoProps)
   | ({ type: 'configurator' } & DemoComponent & ConfiguratorDemoProps)
   | ({ type: 'styles-api' } & DemoComponent & StylesApiDemoProps);
 
 interface DemoProps {
-  data: MantineDemo;
+  data: EmpoleonDemo;
   demoProps?: {
     defaultExpanded?: boolean;
     maxCollapsedHeight?: number;

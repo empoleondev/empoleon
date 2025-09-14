@@ -1,5 +1,5 @@
 import { ActionIcon, Group, TextInput } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { ActionIcon, Group, TextInput } from '@empoleon/core';
@@ -27,7 +27,7 @@ function Demo() {
   );
 }
 
-export const inputSize: MantineDemo = {
+export const inputSize: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

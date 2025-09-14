@@ -1,11 +1,11 @@
-import { IconMessageCircle, IconPhoto, IconSettings } from '@tabler/icons-react';
+import { IconMessageCircle, IconPhoto, IconSettings } from '@tabler/icons-solidjs';
 import { Tabs } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import classes from './Tabs.demo.customize.module.css';
 
 const code = `
 import { Tabs } from '@empoleon/core';
-import { IconPhoto, IconMessageCircle, IconSettings } from '@tabler/icons-react';
+import { IconPhoto, IconMessageCircle, IconSettings } from '@tabler/icons-solidjs';
 import classes from './Demo.module.css';
 
 function Demo() {
@@ -101,7 +101,7 @@ function Demo() {
   );
 }
 
-export const customize: MantineDemo = {
+export const customize: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code: [

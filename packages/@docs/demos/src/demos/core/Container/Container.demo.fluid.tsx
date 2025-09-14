@@ -1,5 +1,5 @@
 import { Container } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Container } from '@empoleon/core';
@@ -21,7 +21,7 @@ function Demo() {
   );
 }
 
-export const fluid: MantineDemo = {
+export const fluid: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

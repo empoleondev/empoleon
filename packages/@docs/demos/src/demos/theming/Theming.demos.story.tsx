@@ -1,7 +1,18 @@
+import { JSX } from 'solid-js';
 import { renderDemo } from '../../render-demo';
 import * as demos from './index';
+import { EmpoleonProvider } from '@empoleon/core';
 
-export default { title: 'Theming' };
+export default {
+  title: 'Theming',
+  decorators: [
+    (Story: () => JSX.Element) => (
+      <EmpoleonProvider>
+        <Story />
+      </EmpoleonProvider>
+    ),
+  ]
+};
 
 export const Demo_focusRing = {
   name: '⭐ Demo: focusRing',

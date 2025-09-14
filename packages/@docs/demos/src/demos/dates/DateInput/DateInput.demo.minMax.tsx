@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import { DateInput } from '@empoleon/dates';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import dayjs from 'dayjs';
@@ -29,7 +29,7 @@ function Demo() {
   );
 }
 
-export const minMax: MantineDemo = {
+export const minMax: EmpoleonDemo = {
   type: 'code',
   centered: true,
   maxWidth: 400,

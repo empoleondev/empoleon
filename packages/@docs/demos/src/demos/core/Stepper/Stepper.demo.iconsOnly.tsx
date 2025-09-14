@@ -1,12 +1,12 @@
-import { useState } from 'react';
-import { IconMailOpened, IconShieldCheck, IconUserCheck } from '@tabler/icons-react';
+import { IconMailOpened, IconShieldCheck, IconUserCheck } from '@tabler/icons-solidjs';
 import { Stepper } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
+import { createSignal } from 'solid-js';
 
 const code = `
 import { useState } from 'react';
 import { Stepper } from '@empoleon/core';
-import { IconUserCheck, IconMailOpened, IconShieldCheck } from '@tabler/icons-react';
+import { IconUserCheck, IconMailOpened, IconShieldCheck } from '@tabler/icons-solidjs';
 
 function Demo() {
   const [active, setActive] = useState(0);
@@ -22,9 +22,9 @@ function Demo() {
 `;
 
 function Demo() {
-  const [active, setActive] = useState(0);
+  const [active, setActive] = createSignal(0);
   return (
-    <Stepper active={active} onStepClick={setActive}>
+    <Stepper active={active()} onStepClick={setActive}>
       <Stepper.Step icon={<IconUserCheck size={18} />} />
       <Stepper.Step icon={<IconMailOpened size={18} />} />
       <Stepper.Step icon={<IconShieldCheck size={18} />} />
@@ -32,7 +32,7 @@ function Demo() {
   );
 }
 
-export const iconsOnly: MantineDemo = {
+export const iconsOnly: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

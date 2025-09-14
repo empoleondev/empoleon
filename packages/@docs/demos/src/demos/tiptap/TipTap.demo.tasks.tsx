@@ -3,7 +3,7 @@ import TipTapTaskList from '@tiptap/extension-task-list';
 import { useEditor } from '@empoleon/solid-tiptap';
 import StarterKit from '@tiptap/starter-kit';
 import { getTaskListExtension, RichTextEditor } from '@empoleon/tiptap';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import TaskItem from '@tiptap/extension-task-item';
@@ -85,7 +85,7 @@ function Demo() {
   );
 }
 
-export const tasks: MantineDemo = {
+export const tasks: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

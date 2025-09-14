@@ -2,7 +2,7 @@
 
 import { TextInput } from '@empoleon/core';
 import { useForm } from '@empoleon/form';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { TextInput } from '@empoleon/core';
@@ -60,7 +60,7 @@ function Demo() {
   );
 }
 
-export const watch: MantineDemo = {
+export const watch: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

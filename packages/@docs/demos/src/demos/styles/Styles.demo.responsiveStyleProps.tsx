@@ -1,5 +1,5 @@
 import { Box } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Box } from '@empoleon/core';
@@ -35,7 +35,7 @@ function Demo() {
   );
 }
 
-export const responsiveStyleProps: MantineDemo = {
+export const responsiveStyleProps: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

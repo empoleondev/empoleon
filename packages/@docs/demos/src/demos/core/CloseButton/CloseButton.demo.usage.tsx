@@ -1,5 +1,5 @@
 import { CloseButton } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { CloseButton } from '@empoleon/core';
@@ -13,7 +13,7 @@ function Wrapper(props: any) {
   return <CloseButton {...props} />;
 }
 
-export const usage: MantineDemo = {
+export const usage: EmpoleonDemo = {
   type: 'configurator',
   component: Wrapper,
   code,

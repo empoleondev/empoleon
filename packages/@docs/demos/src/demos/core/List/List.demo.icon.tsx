@@ -1,10 +1,10 @@
-import { IconCircleCheck, IconCircleDashed } from '@tabler/icons-react';
+import { IconCircleCheck, IconCircleDashed } from '@tabler/icons-solidjs';
 import { List, ThemeIcon } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { List, ThemeIcon } from '@empoleon/core';
-import { IconCircleCheck, IconCircleDashed } from '@tabler/icons-react';
+import { IconCircleCheck, IconCircleDashed } from '@tabler/icons-solidjs';
 
 function Demo() {
   return (
@@ -43,9 +43,11 @@ function Demo() {
       size="sm"
       center
       icon={
-        <ThemeIcon color="teal" size={24} radius="xl">
-          <IconCircleCheck size={16} />
-        </ThemeIcon>
+        () => <>
+          <ThemeIcon color="teal" size={24} radius="xl">
+            <IconCircleCheck size={16} />
+          </ThemeIcon>
+        </>
       }
     >
       <List.Item>Clone or download repository from GitHub</List.Item>
@@ -54,9 +56,11 @@ function Demo() {
       <List.Item>Run tests to make sure your changes do not break the build</List.Item>
       <List.Item
         icon={
-          <ThemeIcon color="blue" size={24} radius="xl">
-            <IconCircleDashed size={16} />
-          </ThemeIcon>
+          () => <>
+            <ThemeIcon color="blue" size={24} radius="xl">
+              <IconCircleDashed size={16} />
+            </ThemeIcon>
+          </>
         }
       >
         Submit a pull request once you are done
@@ -65,7 +69,7 @@ function Demo() {
   );
 }
 
-export const icon: MantineDemo = {
+export const icon: EmpoleonDemo = {
   type: 'code',
   centered: true,
   maxWidth: 500,

@@ -1,5 +1,5 @@
 import { CodeHighlight } from '@empoleon/code-highlight';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const exampleCode = `
 function Button() {
@@ -55,7 +55,7 @@ function Demo() {
   );
 }
 
-export const copy: MantineDemo = {
+export const copy: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

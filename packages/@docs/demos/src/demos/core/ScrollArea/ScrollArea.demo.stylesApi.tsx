@@ -1,5 +1,5 @@
 import { Box, ScrollArea } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { Content } from './_content';
 import classes from './ScrollArea.demo.stylesApi.module.css';
 
@@ -50,7 +50,7 @@ function Demo() {
   );
 }
 
-export const stylesApi: MantineDemo = {
+export const stylesApi: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   centered: true,

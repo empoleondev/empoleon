@@ -1,5 +1,5 @@
 import { Carousel, CarouselProps } from '@empoleon/carousel';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { Slides } from './_slides';
 
 function Wrapper(props: CarouselProps) {
@@ -27,7 +27,7 @@ function Demo() {
 }
 `;
 
-export const configurator: MantineDemo = {
+export const configurator: EmpoleonDemo = {
   type: 'configurator',
   component: Wrapper,
   code,

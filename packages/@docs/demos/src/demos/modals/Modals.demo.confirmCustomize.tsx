@@ -1,7 +1,7 @@
 import { Button, Text } from '@empoleon/core';
 import { modals } from '@empoleon/modals';
 import { notifications } from '@empoleon/notifications';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Button, Text } from '@empoleon/core';
@@ -62,7 +62,7 @@ function Demo() {
   );
 }
 
-export const confirmCustomize: MantineDemo = {
+export const confirmCustomize: EmpoleonDemo = {
   type: 'code',
   centered: true,
   component: Demo,

@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import { AspectRatio, Button, Overlay } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
+import { createSignal } from 'solid-js';
 
 const code = `
 import { useState } from 'react';
@@ -26,7 +26,7 @@ function Demo() {
 `;
 
 function Demo() {
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = createSignal(true);
   return (
     <>
       <AspectRatio ratio={16 / 9} maw={400} mx="auto" pos="relative">
@@ -34,7 +34,7 @@ function Demo() {
           src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-1.png"
           alt="Demo"
         />
-        {visible && <Overlay color="#000" backgroundOpacity={0.85} />}
+        {visible() && <Overlay color="#000" backgroundOpacity={0.85} />}
       </AspectRatio>
       <Button onClick={() => setVisible((v) => !v)} fullWidth maw={200} mx="auto" mt="xl">
         Toggle overlay
@@ -43,7 +43,7 @@ function Demo() {
   );
 }
 
-export const usage: MantineDemo = {
+export const usage: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

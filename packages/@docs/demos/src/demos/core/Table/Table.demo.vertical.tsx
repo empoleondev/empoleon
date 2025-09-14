@@ -1,5 +1,5 @@
 import { Table } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Table } from '@empoleon/core';
@@ -71,7 +71,7 @@ export function Demo() {
   );
 }
 
-export const vertical: MantineDemo = {
+export const vertical: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

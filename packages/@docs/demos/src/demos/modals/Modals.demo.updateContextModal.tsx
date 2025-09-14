@@ -1,6 +1,6 @@
 import { Button } from '@empoleon/core';
 import { modals } from '@empoleon/modals';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Button, Text, Stack, Center, Loader } from '@empoleon/core';
@@ -108,7 +108,7 @@ function Demo() {
   );
 }
 
-export const updateContextModal: MantineDemo = {
+export const updateContextModal: EmpoleonDemo = {
   type: 'code',
   centered: true,
   component: Demo,

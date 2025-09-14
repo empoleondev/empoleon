@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import { Stepper, StepperProps } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
+import { createSignal } from 'solid-js';
 
 const code = `
 import { useState } from 'react';
@@ -58,13 +58,13 @@ function StyledStepper(props: StepperProps) {
         },
 
         stepIcon: {
-          borderWidth: 3,
+          'border-width': '3px',
         },
 
         separator: {
-          marginLeft: -2,
-          marginRight: -2,
-          height: 6,
+          'margin-left': '-2px',
+          'margin-right': '-2px',
+          height: '6px',
         },
       }}
       {...props}
@@ -73,9 +73,9 @@ function StyledStepper(props: StepperProps) {
 }
 
 function Demo() {
-  const [active, setActive] = useState(1);
+  const [active, setActive] = createSignal(1);
   return (
-    <StyledStepper active={active} onStepClick={setActive}>
+    <StyledStepper active={active()} onStepClick={setActive}>
       <Stepper.Step label="Step 1" description="Create an account" />
       <Stepper.Step label="Step 2" description="Verify email" />
       <Stepper.Step label="Step 3" description="Get full access" />
@@ -83,7 +83,7 @@ function Demo() {
   );
 }
 
-export const stylesApi2: MantineDemo = {
+export const stylesApi2: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

@@ -1,5 +1,5 @@
 import { Avatar } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { avatars } from './_mockdata';
 
 const code = `
@@ -30,7 +30,7 @@ function Demo() {
   );
 }
 
-export const link: MantineDemo = {
+export const link: EmpoleonDemo = {
   type: 'code',
   centered: true,
   code,

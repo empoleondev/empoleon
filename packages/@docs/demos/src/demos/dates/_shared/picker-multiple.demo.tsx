@@ -1,4 +1,4 @@
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { Component, createSignal } from 'solid-js';
 
 const getCode = (name: string) => `
@@ -19,7 +19,7 @@ function getDemo(Component: Component) {
   };
 }
 
-export function getPickerMultipleDemo(Component: Component): MantineDemo {
+export function getPickerMultipleDemo(Component: Component): EmpoleonDemo {
   return {
     type: 'code',
     centered: true,

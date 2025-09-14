@@ -1,5 +1,5 @@
 import { Textarea } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Textarea } from '@empoleon/core';
@@ -13,7 +13,7 @@ function Demo() {
   return <Textarea resize="vertical" label="Disabled" placeholder="Your comment" />;
 }
 
-export const resize: MantineDemo = {
+export const resize: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

@@ -1,7 +1,7 @@
-import { useState } from 'react';
 import { Group, Radio, Text } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import classes from './Radio.demo.card.module.css';
+import { createSignal } from 'solid-js';
 
 const cssCode = `.root {
   position: relative;
@@ -68,13 +68,13 @@ function Demo() {
 `;
 
 function Demo() {
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = createSignal(false);
 
   return (
     <Radio.Card
       className={classes.root}
       radius="md"
-      checked={checked}
+      checked={checked()}
       onClick={() => setChecked((c) => !c)}
     >
       <Group wrap="nowrap" align="flex-start">
@@ -90,7 +90,7 @@ function Demo() {
   );
 }
 
-export const card: MantineDemo = {
+export const card: EmpoleonDemo = {
   type: 'code',
   centered: true,
   maxWidth: 320,

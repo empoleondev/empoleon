@@ -1,5 +1,5 @@
 import { Grid } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { ColWrapper as Col } from './_col-wrapper';
 
 const code = `
@@ -28,7 +28,7 @@ function Demo() {
   );
 }
 
-export const offset: MantineDemo = {
+export const offset: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

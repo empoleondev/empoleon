@@ -1,6 +1,6 @@
 import { Box, Button, Group, LoadingOverlay } from '@empoleon/core';
 import { useDisclosure } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { AuthenticationForm } from '../../../shared/AuthenticationForm/AuthenticationForm';
 
 const code = `
@@ -36,7 +36,7 @@ export function Demo() {
     <>
       <Box pos="relative">
         <LoadingOverlay
-          visible={visible}
+          visible={visible()}
           zIndex={1000}
           overlayProps={{ radius: 'sm', blur: 2 }}
           loaderProps={{ color: 'pink', type: 'bars' }}
@@ -51,7 +51,7 @@ export function Demo() {
   );
 }
 
-export const loaderProps: MantineDemo = {
+export const loaderProps: EmpoleonDemo = {
   centered: true,
   maxWidth: 400,
   dimmed: true,

@@ -1,6 +1,6 @@
 import { Text, TextInput } from '@empoleon/core';
 import { useField } from '@empoleon/form';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Text, TextInput } from '@empoleon/core';
@@ -53,7 +53,7 @@ function Demo() {
   );
 }
 
-export const statusControlled: MantineDemo = {
+export const statusControlled: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

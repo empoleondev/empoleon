@@ -1,5 +1,5 @@
 import { Group, Switch, SwitchGroupProps } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Switch, Group } from '@empoleon/core';
@@ -34,7 +34,7 @@ function Wrapper(props: SwitchGroupProps) {
   );
 }
 
-export const groupConfigurator: MantineDemo = {
+export const groupConfigurator: EmpoleonDemo = {
   type: 'configurator',
   component: Wrapper,
   code,

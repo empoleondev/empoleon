@@ -1,5 +1,5 @@
 import { Radio } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Radio } from '@empoleon/core';
@@ -26,12 +26,12 @@ function Demo() {
       label="Custom icon color"
       name="check"
       value="check"
-      defaultChecked
+      default-checked
     />
   );
 }
 
-export const iconColor: MantineDemo = {
+export const iconColor: EmpoleonDemo = {
   type: 'code',
   centered: true,
   component: Demo,

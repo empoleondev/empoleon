@@ -2,8 +2,8 @@
 import { IconSearch } from '@tabler/icons-solidjs';
 import { Badge, Button, Center, Group, Text } from '@empoleon/core';
 import { createSpotlight, Spotlight } from '@empoleon/spotlight';
-import { MantineDemo } from '@empoleonx/demo';
-import { createMemo, createSignal } from 'solid-js';
+import { EmpoleonDemo } from '@empoleonx/demo';
+import { createMemo, createSignal, For, Show } from 'solid-js';
 
 const code = `
 import { useState } from 'react';
@@ -45,7 +45,7 @@ function Demo() {
   const items = data
   .filter((item) => item.title.toLowerCase().includes(query.toLowerCase().trim()))
   .map((item) => (
-    <Spotlight.Action key={item.title} onClick={() => console.log(item)}>
+    <Spotlight.Action onClick={() => console.log(item)}>
       <Group wrap="nowrap" w="100%">
         {item.image && (
           <Center>
@@ -73,7 +73,7 @@ function Demo() {
       <Button onClick={spotlight.open}>Open spotlight</Button>
 
       <Spotlight.Root query={query} onQueryChange={setQuery}>
-        <Spotlight.Search placeholder="Search..." leftSection={<IconSearch stroke={1.5} />} />
+        <Spotlight.Search placeholder="Search..." leftSection={<IconSearch stroke='1.5' />} />
         <Spotlight.ActionsList>
           {items.length > 0 ? items : <Spotlight.Empty>Nothing found...</Spotlight.Empty>}
         </Spotlight.ActionsList>
@@ -115,31 +115,8 @@ function Demo() {
   const [store, spotlight] = createSpotlight();
   const [query, setQuery] = createSignal('');
 
-  const items = data
-    .filter((item) => item.title.toLowerCase().includes(query().toLowerCase().trim()))
-    .map((item) => (
-      <Spotlight.Action onClick={() => console.log(item)}>
-        <Group wrap="nowrap" w="100%">
-          {item.image && (
-            <Center>
-              <img src={item.image} alt={item.title} width={50} height={50} />
-            </Center>
-          )}
-
-          <div style={{ flex: 1 }}>
-            <Text>{item.title}</Text>
-
-            {item.description && (
-              <Text opacity={0.6} size="xs">
-                {item.description}
-              </Text>
-            )}
-          </div>
-
-          {item.new && <Badge variant="default">new</Badge>}
-        </Group>
-      </Spotlight.Action>
-    ));
+  const filteredItems = () => data
+    .filter((item) => item.title.toLowerCase().includes(query().toLowerCase().trim()));
 
   return (
     <>
@@ -148,14 +125,40 @@ function Demo() {
       <Spotlight.Root store={store} query={query()} onQueryChange={setQuery} shortcut={null}>
         <Spotlight.Search placeholder="Search..." leftSection={<IconSearch stroke='1.5' />} />
         <Spotlight.ActionsList>
-          {items.length > 0 ? items : <Spotlight.Empty>Nothing found...</Spotlight.Empty>}
+          <For each={filteredItems()} fallback={<Spotlight.Empty>Nothing found...</Spotlight.Empty>}>
+            {(item) => (
+              <Spotlight.Action onClick={() => console.log(item)}>
+                <Group wrap="nowrap" w="100%">
+                  <Show when={item.image}>
+                    <Center>
+                      <img src={item.image} alt={item.title} width={50} height={50} />
+                    </Center>
+                  </Show>
+
+                  <div style={{ flex: 1 }}>
+                    <Text>{item.title}</Text>
+
+                    <Show when={item.description}>
+                      <Text opacity={0.6} size="xs">
+                        {item.description}
+                      </Text>
+                    </Show>
+                  </div>
+
+                  <Show when={item.new}>
+                    <Badge variant="default">new</Badge>
+                  </Show>
+                </Group>
+              </Spotlight.Action>
+            )}
+          </For>
         </Spotlight.ActionsList>
       </Spotlight.Root>
     </>
   );
 }
 
-export const customAction: MantineDemo = {
+export const customAction: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

@@ -1,5 +1,5 @@
 import { Button, Popover, Text } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Popover, Text, Button } from '@empoleon/core';
@@ -20,7 +20,7 @@ function Demo() {
 
 function Demo() {
   return (
-    <Popover width={200} position="bottom" clickOutsideEvents={['mouseup', 'touchend']}>
+    <Popover width='200px' position="bottom" clickOutsideEvents={['mouseup', 'touchend']}>
       <Popover.Target>
         <Button>Toggle popover</Button>
       </Popover.Target>
@@ -31,7 +31,7 @@ function Demo() {
   );
 }
 
-export const clickOutsideEvents: MantineDemo = {
+export const clickOutsideEvents: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

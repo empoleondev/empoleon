@@ -1,13 +1,13 @@
-import { IconLock } from '@tabler/icons-react';
+import { IconLock } from '@tabler/icons-solidjs';
 import { PasswordInput } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { PasswordInput } from '@empoleon/core';
-import { IconLock } from '@tabler/icons-react';
+import { IconLock } from '@tabler/icons-solidjs';
 
 function Demo() {
-  const icon = <IconLock size={18} stroke={1.5} />;
+  const icon = <IconLock size={18} stroke='1.5' />;
 
   return (
     <>
@@ -24,7 +24,7 @@ function Demo() {
 `;
 
 function Demo() {
-  const icon = <IconLock size={18} stroke={1.5} />;
+  const icon = <IconLock size={18} stroke='1.5' />;
 
   return (
     <>
@@ -45,7 +45,7 @@ function Demo() {
   );
 }
 
-export const sections: MantineDemo = {
+export const sections: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

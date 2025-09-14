@@ -1,6 +1,6 @@
 import { Box, Paper, Text } from '@empoleon/core';
 import { useIntersection } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { createSignal } from 'solid-js';
 
 const code = `
@@ -68,7 +68,7 @@ function Demo() {
   );
 }
 
-export const useIntersectionDemo: MantineDemo = {
+export const useIntersectionDemo: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

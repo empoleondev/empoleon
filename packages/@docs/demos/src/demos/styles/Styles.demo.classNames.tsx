@@ -1,5 +1,5 @@
 import { TextInput } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import classes from './Styles.demo.classNames.module.css';
 import { createSignal } from 'solid-js';
 
@@ -87,7 +87,7 @@ function Demo() {
   );
 }
 
-export const classNames: MantineDemo = {
+export const classNames: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   maxWidth: 360,

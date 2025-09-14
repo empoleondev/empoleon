@@ -1,5 +1,5 @@
 import { FileInput, FileInputProps, Pill } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { FileInput, FileInputProps, Pill } from '@empoleon/core';
@@ -13,7 +13,7 @@ const ValueComponent: FileInputProps['valueComponent'] = ({ value }) => {
     return (
       <Pill.Group>
         {value.map((file, index) => (
-          <Pill key={index}>{file.name}</Pill>
+          <Pill >{file.name}</Pill>
         ))}
       </Pill.Group>
     );
@@ -43,7 +43,7 @@ const ValueComponent: FileInputProps['valueComponent'] = ({ value }) => {
     return (
       <Pill.Group>
         {value.map((file, index) => (
-          <Pill key={index}>{file.name}</Pill>
+          <Pill >{file.name}</Pill>
         ))}
       </Pill.Group>
     );
@@ -63,7 +63,7 @@ function Demo() {
   );
 }
 
-export const valueComponent: MantineDemo = {
+export const valueComponent: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

@@ -1,5 +1,5 @@
 import { ColorPicker, ColorPickerProps, DEFAULT_THEME } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 function Wrapper(props: ColorPickerProps) {
   return (
@@ -25,7 +25,7 @@ function Demo() {
 }
 `;
 
-export const swatchesConfigurator: MantineDemo = {
+export const swatchesConfigurator: EmpoleonDemo = {
   type: 'configurator',
   component: Wrapper,
   code,

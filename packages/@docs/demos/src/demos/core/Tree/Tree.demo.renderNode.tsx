@@ -1,10 +1,10 @@
-import { IconChevronDown } from '@tabler/icons-react';
+import { IconChevronDown } from '@tabler/icons-solidjs';
 import { Group, Tree } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { data, dataCode } from './data';
 
 const code = `
-import { IconChevronDown } from '@tabler/icons-react';
+import { IconChevronDown } from '@tabler/icons-solidjs';
 import { Group, Tree } from '@empoleon/core';
 import { data } from './data';
 
@@ -51,7 +51,7 @@ function Demo() {
   );
 }
 
-export const renderNode: MantineDemo = {
+export const renderNode: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code: [

@@ -1,7 +1,7 @@
 import { EmblaCarouselType } from 'embla-carousel';
 import { Carousel } from '@empoleon/carousel';
 import { Progress } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { Slides } from './_slides';
 import { createEffect, createSignal } from 'solid-js';
 
@@ -91,7 +91,7 @@ function Demo() {
   );
 }
 
-export const progress: MantineDemo = {
+export const progress: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

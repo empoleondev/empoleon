@@ -1,5 +1,5 @@
 import { TextInput } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { inputControls } from '../../../shared';
 
 const code = `
@@ -20,7 +20,7 @@ function Wrapper(props: any) {
   return <TextInput {...props} placeholder="Input placeholder" />;
 }
 
-export const usage: MantineDemo = {
+export const usage: EmpoleonDemo = {
   type: 'configurator',
   component: Wrapper,
   code,

@@ -1,5 +1,5 @@
 import { InputBase, Pill } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Pill, InputBase } from '@empoleon/core';
@@ -8,7 +8,7 @@ function Demo() {
   const pills = Array(10)
     .fill(0)
     .map((_, index) => (
-      <Pill key={index} withRemoveButton>
+      <Pill withRemoveButton>
         Item {index}
       </Pill>
     ));
@@ -25,7 +25,7 @@ function Demo() {
   const pills = Array(10)
     .fill(0)
     .map((_, index) => (
-      <Pill key={index} withRemoveButton>
+      <Pill withRemoveButton>
         Item {index}
       </Pill>
     ));
@@ -37,7 +37,7 @@ function Demo() {
   );
 }
 
-export const withinInput: MantineDemo = {
+export const withinInput: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

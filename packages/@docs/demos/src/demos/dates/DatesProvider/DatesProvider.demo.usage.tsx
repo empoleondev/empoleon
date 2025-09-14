@@ -1,7 +1,7 @@
 import 'dayjs/locale/ru';
 
 import { DatePickerInput, DatesProvider, MonthPickerInput } from '@empoleon/dates';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import 'dayjs/locale/ru';
@@ -26,7 +26,7 @@ function Demo() {
   );
 }
 
-export const usage: MantineDemo = {
+export const usage: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

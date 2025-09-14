@@ -1,5 +1,5 @@
 import { Tabs, TabsListProps } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 function Wrapper(props: TabsListProps) {
   return (
@@ -29,7 +29,7 @@ function Demo() {
 }
 `;
 
-export const position: MantineDemo = {
+export const position: EmpoleonDemo = {
   type: 'configurator',
   component: Wrapper,
   code,

@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import { Group, PasswordInput, Progress } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
+import { createSignal } from 'solid-js';
 
 const code = `
 import { useState } from 'react';
@@ -109,14 +109,14 @@ function getStrengthColor(strength: number) {
 }
 
 function Demo() {
-  const [value, setValue] = useState('');
-  const strength = getStrength(value);
+  const [value, setValue] = createSignal('');
+  const strength = getStrength(value());
   const color = getStrengthColor(strength);
 
   return (
     <div>
       <PasswordInput
-        value={value}
+        value={value()}
         onChange={(event) => setValue(event.currentTarget.value)}
         placeholder="Enter password"
         label="Enter password"
@@ -126,7 +126,7 @@ function Demo() {
         <Progress
           size="xs"
           color={color}
-          value={value.length > 0 ? 100 : 0}
+          value={value().length > 0 ? 100 : 0}
           transitionDuration={0}
         />
         <Progress size="xs" color={color} transitionDuration={0} value={strength < 30 ? 0 : 100} />
@@ -137,7 +137,7 @@ function Demo() {
   );
 }
 
-export const segments: MantineDemo = {
+export const segments: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

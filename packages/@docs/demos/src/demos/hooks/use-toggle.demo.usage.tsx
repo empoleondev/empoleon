@@ -1,6 +1,6 @@
 import { Button } from '@empoleon/core';
 import { upperFirst, useToggle } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Button } from '@empoleon/core';
@@ -27,7 +27,7 @@ function Demo() {
   );
 }
 
-export const useToggleDemo: MantineDemo = {
+export const useToggleDemo: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

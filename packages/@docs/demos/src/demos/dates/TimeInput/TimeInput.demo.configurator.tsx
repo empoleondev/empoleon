@@ -1,5 +1,5 @@
 import { TimeInput } from '@empoleon/dates';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { inputControls } from '../../../shared';
 
 const code = `
@@ -19,7 +19,7 @@ function Wrapper(props: any) {
   return <TimeInput {...props} />;
 }
 
-export const configurator: MantineDemo = {
+export const configurator: EmpoleonDemo = {
   type: 'configurator',
   component: Wrapper,
   code,

@@ -1,7 +1,7 @@
 import { Box, Group, Kbd } from '@empoleon/core';
 import { useHotkeys } from '@empoleon/hooks';
 import { modals } from '@empoleon/modals';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const shortcutCode = `
 import { Box, Group, Kbd } from '@empoleon/core';
@@ -103,7 +103,7 @@ function Demo() {
   );
 }
 
-export const useHotkeysDemoIndex: MantineDemo = {
+export const useHotkeysDemoIndex: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code: [

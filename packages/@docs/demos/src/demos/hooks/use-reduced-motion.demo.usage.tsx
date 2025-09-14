@@ -1,6 +1,6 @@
 import { Badge } from '@empoleon/core';
 import { useReducedMotion } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Badge } from '@empoleon/core';
@@ -33,7 +33,7 @@ function Demo() {
   );
 }
 
-export const useReducedMotionDemo: MantineDemo = {
+export const useReducedMotionDemo: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

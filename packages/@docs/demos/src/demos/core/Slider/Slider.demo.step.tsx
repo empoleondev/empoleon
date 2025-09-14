@@ -1,5 +1,5 @@
 import { Slider, Text } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Slider, Text } from '@empoleon/core';
@@ -71,7 +71,7 @@ function Demo() {
   );
 }
 
-export const step: MantineDemo = {
+export const step: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

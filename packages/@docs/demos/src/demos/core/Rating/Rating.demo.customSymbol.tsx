@@ -4,9 +4,9 @@ import {
   IconMoodHappy,
   IconMoodSad,
   IconMoodSmile,
-} from '@tabler/icons-react';
+} from '@tabler/icons-solidjs';
 import { Rating } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Rating } from '@empoleon/core';
@@ -16,7 +16,7 @@ import {
   IconMoodSmile,
   IconMoodHappy,
   IconMoodCrazyHappy,
-} from '@tabler/icons-react';
+} from '@tabler/icons-solidjs';
 
 const getIconStyle = (color?: string) => ({
   width: 24,
@@ -76,14 +76,19 @@ const getEmptyIcon = (value: number) => {
 
   switch (value) {
     case 1:
+      // @ts-ignore
       return <IconMoodCry style={iconStyle} />;
     case 2:
+      // @ts-ignore
       return <IconMoodSad style={iconStyle} />;
     case 3:
+      // @ts-ignore
       return <IconMoodSmile style={iconStyle} />;
     case 4:
+      // @ts-ignore
       return <IconMoodHappy style={iconStyle} />;
     case 5:
+      // @ts-ignore
       return <IconMoodCrazyHappy style={iconStyle} />;
     default:
       return null;
@@ -93,14 +98,19 @@ const getEmptyIcon = (value: number) => {
 const getFullIcon = (value: number) => {
   switch (value) {
     case 1:
+      // @ts-ignore
       return <IconMoodCry style={getIconStyle('red')} />;
     case 2:
+      // @ts-ignore
       return <IconMoodSad style={getIconStyle('orange')} />;
     case 3:
+      // @ts-ignore
       return <IconMoodSmile style={getIconStyle('yellow')} />;
     case 4:
+      // @ts-ignore
       return <IconMoodHappy style={getIconStyle('lime')} />;
     case 5:
+      // @ts-ignore
       return <IconMoodCrazyHappy style={getIconStyle('green')} />;
     default:
       return null;
@@ -111,7 +121,7 @@ function Demo() {
   return <Rating emptySymbol={getEmptyIcon} fullSymbol={getFullIcon} highlightSelectedOnly />;
 }
 
-export const customSymbol: MantineDemo = {
+export const customSymbol: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

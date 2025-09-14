@@ -1,6 +1,6 @@
 import { Button, Group, Paper } from '@empoleon/core';
 import { useClickOutside } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { createSignal } from 'solid-js';
 
 const code = `
@@ -59,7 +59,7 @@ function Demo() {
   );
 }
 
-export const useClickOutsideEvents: MantineDemo = {
+export const useClickOutsideEvents: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

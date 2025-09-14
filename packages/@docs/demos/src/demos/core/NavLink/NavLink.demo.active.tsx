@@ -1,11 +1,11 @@
-import { useState } from 'react';
-import { IconActivity, IconChevronRight, IconFingerprint, IconGauge } from '@tabler/icons-react';
+import { IconActivity, IconChevronRight, IconFingerprint, IconGauge } from '@tabler/icons-solidjs';
 import { Box, Group, NavLink } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
+import { createSignal } from 'solid-js';
 
 const code = `
 import { useState } from 'react';
-import { IconGauge, IconFingerprint, IconActivity, IconChevronRight } from '@tabler/icons-react';
+import { IconGauge, IconFingerprint, IconActivity, IconChevronRight } from '@tabler/icons-solidjs';
 import { Box, NavLink } from '@empoleon/core';
 
 const data = [
@@ -13,7 +13,7 @@ const data = [
   {
     icon: IconFingerprint,
     label: 'Security',
-    rightSection: <IconChevronRight size={16} stroke={1.5} />,
+    rightSection: <IconChevronRight size={16} stroke='1.5' />,
   },
   { icon: IconActivity, label: 'Activity' },
 ];
@@ -24,12 +24,12 @@ function Demo() {
   const items = data.map((item, index) => (
     <NavLink
       href="#required-for-focus"
-      key={item.label}
+
       active={index === active}
       label={item.label}
       description={item.description}
       rightSection={item.rightSection}
-      leftSection={<item.icon size={16} stroke={1.5} />}
+      leftSection={<item.icon size={16} stroke='1.5' />}
       onClick={() => setActive(index)}
       {{props}}
     />
@@ -44,23 +44,23 @@ const data = [
   {
     icon: IconFingerprint,
     label: 'Security',
-    rightSection: <IconChevronRight size={16} stroke={1.5} className="mantine-rotate-rtl" />,
+    rightSection: <IconChevronRight size={16} stroke='1.5' class="mantine-rotate-rtl" />,
   },
   { icon: IconActivity, label: 'Activity' },
 ];
 
 function Demo(props: any) {
-  const [active, setActive] = useState(0);
+  const [active, setActive] = createSignal(0);
 
   const items = data.map((item, index) => (
     <NavLink
       href="#required-for-focus"
-      key={item.label}
-      active={index === active}
+
+      active={index === active()}
       label={item.label}
       description={item.description}
       rightSection={item.rightSection}
-      leftSection={<item.icon size={16} stroke={1.5} />}
+      leftSection={<item.icon size={16} stroke='1.5' />}
       onClick={() => setActive(index)}
       {...props}
     />
@@ -73,7 +73,7 @@ function Demo(props: any) {
   );
 }
 
-export const active: MantineDemo = {
+export const active: EmpoleonDemo = {
   type: 'configurator',
   component: Demo,
   code,

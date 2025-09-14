@@ -1,6 +1,6 @@
 import { Box, Portal, Text } from '@empoleon/core';
 import { useHeadroom } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Box, Portal, Text } from '@empoleon/core';
@@ -64,7 +64,7 @@ function Demo() {
   );
 }
 
-export const useHeadroomDemo: MantineDemo = {
+export const useHeadroomDemo: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

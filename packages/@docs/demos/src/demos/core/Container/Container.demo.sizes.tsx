@@ -1,5 +1,5 @@
-import { Container, createTheme, MantineThemeProvider, rem } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { Container, createTheme, EmpoleonThemeProvider, rem } from '@empoleon/core';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Container, MantineProvider, createTheme, rem } from '@empoleon/core';
@@ -70,15 +70,15 @@ const theme = createTheme({
 
 function Demo() {
   return (
-    <MantineThemeProvider theme={theme}>
+    <EmpoleonThemeProvider theme={theme}>
       <Container size="xxs" bg="var(--mantine-color-blue-light)">
         Container with custom size
       </Container>
-    </MantineThemeProvider>
+    </EmpoleonThemeProvider>
   );
 }
 
-export const sizes: MantineDemo = {
+export const sizes: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

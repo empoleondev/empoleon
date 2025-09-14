@@ -1,4 +1,4 @@
-import { IconChevronDown } from '@tabler/icons-react';
+import { IconChevronDown } from '@tabler/icons-solidjs';
 import {
   Button,
   Checkbox,
@@ -8,11 +8,11 @@ import {
   Tree,
   useTree,
 } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { data, dataCode } from './data';
 
 const code = `
-import { IconChevronDown } from '@tabler/icons-react';
+import { IconChevronDown } from '@tabler/icons-solidjs';
 import {
   Button,
   Checkbox,
@@ -145,7 +145,7 @@ function Demo() {
   );
 }
 
-export const checkAllNodes: MantineDemo = {
+export const checkAllNodes: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code: [

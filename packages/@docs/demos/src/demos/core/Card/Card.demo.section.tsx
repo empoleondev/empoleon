@@ -1,10 +1,10 @@
-import { IconDots, IconEye, IconFileZip, IconTrash } from '@tabler/icons-react';
+import { IconDots, IconEye, IconFileZip, IconTrash } from '@tabler/icons-solidjs';
 import { ActionIcon, Card, Group, Image, Menu, SimpleGrid, Text } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { ActionIcon, Card, Group, Image, Menu, SimpleGrid, Text } from '@empoleon/core';
-import { IconDots, IconEye, IconFileZip, IconTrash } from '@tabler/icons-react';
+import { IconDots, IconEye, IconFileZip, IconTrash } from '@tabler/icons-solidjs';
 
 const images = [
   'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-1.png',
@@ -57,7 +57,7 @@ function Demo() {
       <Card.Section inheritPadding mt="sm" pb="md">
         <SimpleGrid cols={3}>
           {images.map((image) => (
-            <Image src={image} key={image} radius="sm" />
+            <Image src={image} radius="sm" />
           ))}
         </SimpleGrid>
       </Card.Section>
@@ -110,7 +110,7 @@ function Demo() {
       <Card.Section inheritPadding mt="sm" pb="md">
         <SimpleGrid cols={3}>
           {images.map((image) => (
-            <Image src={image} key={image} radius="sm" />
+            <Image src={image} radius="sm" />
           ))}
         </SimpleGrid>
       </Card.Section>
@@ -118,7 +118,7 @@ function Demo() {
   );
 }
 
-export const section: MantineDemo = {
+export const section: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

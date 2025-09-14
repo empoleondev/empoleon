@@ -1,6 +1,6 @@
 import { Text } from '@empoleon/core';
 import { useViewportSize } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { useViewportSize } from '@empoleon/hooks';
@@ -21,7 +21,7 @@ function Demo() {
   );
 }
 
-export const useViewportSizeDemo: MantineDemo = {
+export const useViewportSizeDemo: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

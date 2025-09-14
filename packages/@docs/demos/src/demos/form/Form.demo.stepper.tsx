@@ -1,6 +1,6 @@
 import { Button, Code, Group, PasswordInput, Stepper, TextInput } from '@empoleon/core';
 import { useForm } from '@empoleon/form';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { createSignal } from 'solid-js';
 
 const code = `
@@ -62,14 +62,14 @@ function Demo() {
           <TextInput
             label="Username"
             placeholder="Username"
-            key={form.key('username')}
+
             {...form.getInputProps('username')}
           />
           <PasswordInput
             mt="md"
             label="Password"
             placeholder="Password"
-            key={form.key('password')}
+
             {...form.getInputProps('password')}
           />
         </Stepper.Step>
@@ -78,14 +78,14 @@ function Demo() {
           <TextInput
             label="Name"
             placeholder="Name"
-            key={form.key('name')}
+
             {...form.getInputProps('name')}
           />
           <TextInput
             mt="md"
             label="Email"
             placeholder="Email"
-            key={form.key('email')}
+
             {...form.getInputProps('email')}
           />
         </Stepper.Step>
@@ -94,14 +94,14 @@ function Demo() {
           <TextInput
             label="Website"
             placeholder="Website"
-            key={form.key('website')}
+
             {...form.getInputProps('website')}
           />
           <TextInput
             mt="md"
             label="GitHub"
             placeholder="GitHub"
-            key={form.key('github')}
+
             {...form.getInputProps('github')}
           />
         </Stepper.Step>
@@ -237,7 +237,7 @@ function Demo() {
   );
 }
 
-export const stepper: MantineDemo = {
+export const stepper: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

@@ -1,6 +1,6 @@
 import { Button, Group, ScrollArea } from '@empoleon/core';
 import { useCounter } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const lorem =
   'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta perspiciatis reiciendis voluptate eaque itaque quos. Natus iure tenetur libero, reprehenderit ad, sequi, in aliquam eos necessitatibus expedita delectus veniam culpa!';
@@ -16,7 +16,7 @@ function Demo() {
   const [count, handlers] = useCounter(3, { min: 0, max: 10 });
   const content = Array(count)
     .fill(0)
-    .map((_, index) => <p key={index}>{lorem}</p>);
+    .map((_, index) => <p >{lorem}</p>);
 
   return (
     <>
@@ -39,9 +39,9 @@ function Demo() {
 
 function Demo() {
   const [count, handlers] = useCounter(3, { min: 0, max: 10 });
-  const content = Array(count)
+  const content = Array(count())
     .fill(0)
-    .map((_, index) => <p key={index}>{lorem}</p>);
+    .map((_, index) => <p >{lorem}</p>);
 
   return (
     <>
@@ -59,7 +59,7 @@ function Demo() {
   );
 }
 
-export const maxHeight: MantineDemo = {
+export const maxHeight: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

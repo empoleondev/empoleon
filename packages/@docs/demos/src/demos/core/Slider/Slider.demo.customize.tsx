@@ -1,5 +1,5 @@
 import { Box, Slider } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import classes from './Slider.demo.customize.module.css';
 
 const code = `
@@ -73,7 +73,7 @@ function Demo() {
   );
 }
 
-export const customize: MantineDemo = {
+export const customize: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code: [

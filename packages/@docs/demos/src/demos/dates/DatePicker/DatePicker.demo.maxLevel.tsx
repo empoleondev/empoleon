@@ -1,6 +1,6 @@
 import { Group } from '@empoleon/core';
 import { DatePicker } from '@empoleon/dates';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Group } from '@empoleon/core';
@@ -25,7 +25,7 @@ function Demo() {
   );
 }
 
-export const maxLevel: MantineDemo = {
+export const maxLevel: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

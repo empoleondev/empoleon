@@ -4,13 +4,13 @@ import {
   IconCircleOff,
   IconGauge,
   IconHome2,
-} from '@tabler/icons-react';
+} from '@tabler/icons-solidjs';
 import { Badge, NavLink } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Badge, NavLink } from '@empoleon/core';
-import { IconHome2, IconGauge, IconChevronRight, IconActivity, IconCircleOff } from '@tabler/icons-react';
+import { IconHome2, IconGauge, IconChevronRight, IconActivity, IconCircleOff } from '@tabler/icons-solidjs';
 
 function Demo() {
   return (
@@ -18,20 +18,20 @@ function Demo() {
       <NavLink
         href="#required-for-focus"
         label="With icon"
-        leftSection={<IconHome2 size={16} stroke={1.5} />}
+        leftSection={<IconHome2 size={16} stroke='1.5' />}
       />
       <NavLink
         href="#required-for-focus"
         label="With right section"
-        leftSection={<IconGauge size={16} stroke={1.5} />}
+        leftSection={<IconGauge size={16} stroke='1.5' />}
         rightSection={
-          <IconChevronRight size={12} stroke={1.5} className="mantine-rotate-rtl" />
+          <IconChevronRight size={12} stroke='1.5' className="mantine-rotate-rtl" />
         }
       />
       <NavLink
         href="#required-for-focus"
         label="Disabled"
-        leftSection={<IconCircleOff size={16} stroke={1.5} />}
+        leftSection={<IconCircleOff size={16} stroke='1.5' />}
         disabled
       />
       <NavLink
@@ -47,9 +47,9 @@ function Demo() {
       <NavLink
         href="#required-for-focus"
         label="Active subtle"
-        leftSection={<IconActivity size={16} stroke={1.5} />}
+        leftSection={<IconActivity size={16} stroke='1.5' />}
         rightSection={
-          <IconChevronRight size={12} stroke={1.5} className="mantine-rotate-rtl" />
+          <IconChevronRight size={12} stroke='1.5' className="mantine-rotate-rtl" />
         }
         variant="subtle"
         active
@@ -57,18 +57,18 @@ function Demo() {
       <NavLink
         href="#required-for-focus"
         label="Active light"
-        leftSection={<IconActivity size={16} stroke={1.5} />}
+        leftSection={<IconActivity size={16} stroke='1.5' />}
         rightSection={
-          <IconChevronRight size={12} stroke={1.5} className="mantine-rotate-rtl" />
+          <IconChevronRight size={12} stroke='1.5' className="mantine-rotate-rtl" />
         }
         active
       />
       <NavLink
         href="#required-for-focus"
         label="Active filled"
-        leftSection={<IconActivity size={16} stroke={1.5} />}
+        leftSection={<IconActivity size={16} stroke='1.5' />}
         rightSection={
-          <IconChevronRight size={12} stroke={1.5} className="mantine-rotate-rtl" />
+          <IconChevronRight size={12} stroke='1.5' className="mantine-rotate-rtl" />
         }
         variant="filled"
         active
@@ -84,18 +84,18 @@ function Demo() {
       <NavLink
         href="#required-for-focus"
         label="With icon"
-        leftSection={<IconHome2 size={16} stroke={1.5} />}
+        leftSection={<IconHome2 size={16} stroke='1.5' />}
       />
       <NavLink
         href="#required-for-focus"
         label="With right section"
-        leftSection={<IconGauge size={16} stroke={1.5} />}
-        rightSection={<IconChevronRight size={12} stroke={1.5} className="mantine-rotate-rtl" />}
+        leftSection={<IconGauge size={16} stroke='1.5' />}
+        rightSection={<IconChevronRight size={12} stroke='1.5' class="emploeon-rotate-rtl" />}
       />
       <NavLink
         href="#required-for-focus"
         label="Disabled"
-        leftSection={<IconCircleOff size={16} stroke={1.5} />}
+        leftSection={<IconCircleOff size={16} stroke='1.5' />}
         disabled
       />
       <NavLink
@@ -111,23 +111,23 @@ function Demo() {
       <NavLink
         href="#required-for-focus"
         label="Active subtle"
-        leftSection={<IconActivity size={16} stroke={1.5} />}
-        rightSection={<IconChevronRight size={12} stroke={1.5} className="mantine-rotate-rtl" />}
+        leftSection={<IconActivity size={16} stroke='1.5' />}
+        rightSection={<IconChevronRight size={12} stroke='1.5' class="empoleon-rotate-rtl" />}
         variant="subtle"
         active
       />
       <NavLink
         href="#required-for-focus"
         label="Active light"
-        leftSection={<IconActivity size={16} stroke={1.5} />}
-        rightSection={<IconChevronRight size={12} stroke={1.5} className="mantine-rotate-rtl" />}
+        leftSection={<IconActivity size={16} stroke='1.5' />}
+        rightSection={<IconChevronRight size={12} stroke='1.5' class="empoleon-rotate-rtl" />}
         active
       />
       <NavLink
         href="#required-for-focus"
         label="Active filled"
-        leftSection={<IconActivity size={16} stroke={1.5} />}
-        rightSection={<IconChevronRight size={12} stroke={1.5} className="mantine-rotate-rtl" />}
+        leftSection={<IconActivity size={16} stroke='1.5' />}
+        rightSection={<IconChevronRight size={12} stroke='1.5' class="empoleon-rotate-rtl" />}
         variant="filled"
         active
       />
@@ -135,7 +135,7 @@ function Demo() {
   );
 }
 
-export const usage: MantineDemo = {
+export const usage: EmpoleonDemo = {
   type: 'code',
   centered: true,
   maxWidth: 240,

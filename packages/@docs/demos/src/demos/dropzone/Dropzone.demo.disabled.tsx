@@ -1,4 +1,4 @@
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { BaseDemo } from './_base';
 import classes from './Dropzone.disabled.module.css';
 
@@ -31,7 +31,7 @@ function Demo() {
   return <BaseDemo disabled className={classes.disabled} />;
 }
 
-export const disabled: MantineDemo = {
+export const disabled: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code: [

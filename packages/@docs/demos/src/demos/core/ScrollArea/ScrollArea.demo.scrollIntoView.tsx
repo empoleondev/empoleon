@@ -1,6 +1,6 @@
-import { useRef, useState } from 'react';
 import { ScrollArea, TextInput, UnstyledButton } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
+import { createSignal } from 'solid-js';
 
 const code = `
 import { useState, useRef } from 'react';
@@ -47,7 +47,7 @@ function Demo() {
   const items = filtered.map((item, index) => (
     <UnstyledButton
       data-list-item
-      key={item}
+
       display="block"
       bg={index === hovered ? 'var(--mantine-color-blue-light)' : undefined}
       w="100%"
@@ -132,16 +132,16 @@ const groceries: string[] = [
 ];
 
 function Demo() {
-  const viewportRef = useRef<HTMLDivElement>(null);
-  const [query, setQuery] = useState('');
-  const [hovered, setHovered] = useState(-1);
-  const filtered = groceries.filter((item) => item.toLowerCase().includes(query.toLowerCase()));
+  const [viewportRef, setViewportRef] = createSignal<HTMLDivElement | null>(null)
+  const [query, setQuery] = createSignal('');
+  const [hovered, setHovered] = createSignal(-1);
+  const filtered = groceries.filter((item) => item.toLowerCase().includes(query().toLowerCase()));
   const items = filtered.map((item, index) => (
     <UnstyledButton
       data-list-item
-      key={item}
+
       display="block"
-      bg={index === hovered ? 'var(--mantine-color-blue-light)' : undefined}
+      bg={index === hovered() ? 'var(--mantine-color-blue-light)' : undefined}
       w="100%"
       p={5}
     >
@@ -152,7 +152,7 @@ function Demo() {
   return (
     <>
       <TextInput
-        value={query}
+        value={query()}
         onChange={(event) => {
           setQuery(event.currentTarget.value);
           setHovered(-1);
@@ -162,7 +162,7 @@ function Demo() {
             event.preventDefault();
             setHovered((current) => {
               const nextIndex = current + 1 >= filtered.length ? current : current + 1;
-              viewportRef.current
+              viewportRef()
                 ?.querySelectorAll('[data-list-item]')
                 ?.[nextIndex]?.scrollIntoView({ block: 'nearest' });
               return nextIndex;
@@ -173,7 +173,7 @@ function Demo() {
             event.preventDefault();
             setHovered((current) => {
               const nextIndex = current - 1 < 0 ? current : current - 1;
-              viewportRef.current
+              viewportRef()
                 ?.querySelectorAll('[data-list-item]')
                 ?.[nextIndex]?.scrollIntoView({ block: 'nearest' });
               return nextIndex;
@@ -182,14 +182,14 @@ function Demo() {
         }}
         placeholder="Search groceries"
       />
-      <ScrollArea h={150} type="always" mt="md" viewportRef={viewportRef}>
+      <ScrollArea h={150} type="always" mt="md" viewport-ref={setViewportRef}>
         {items}
       </ScrollArea>
     </>
   );
 }
 
-export const scrollIntoView: MantineDemo = {
+export const scrollIntoView: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

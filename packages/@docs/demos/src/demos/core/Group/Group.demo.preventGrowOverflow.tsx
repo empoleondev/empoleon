@@ -1,5 +1,5 @@
 import { Box, Button, Group, Text } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Group, Button, Box, Text } from '@empoleon/core';
@@ -65,7 +65,7 @@ function Demo() {
   );
 }
 
-export const preventGrowOverflow: MantineDemo = {
+export const preventGrowOverflow: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

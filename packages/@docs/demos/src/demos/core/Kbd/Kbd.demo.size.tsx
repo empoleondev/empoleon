@@ -1,5 +1,5 @@
 import { Kbd } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Kbd } from '@empoleon/core';
@@ -13,7 +13,7 @@ function Wrapper(props: any) {
   return <Kbd {...props}>Shift</Kbd>;
 }
 
-export const size: MantineDemo = {
+export const size: EmpoleonDemo = {
   type: 'configurator',
   component: Wrapper,
   code,

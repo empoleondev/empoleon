@@ -1,11 +1,11 @@
-import { IconAt } from '@tabler/icons-react';
+import { IconAt } from '@tabler/icons-solidjs';
 import { Badge } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { BadgeStylesApi } from '@docs/styles-api';
 
 const code = `
 import { Badge } from '@empoleon/core';
-import { IconAt } from '@tabler/icons-react';
+import { IconAt } from '@tabler/icons-solidjs';
 
 function Demo() {
   const icon = <IconAt size={12} />;
@@ -28,7 +28,7 @@ function Demo(props: any) {
   );
 }
 
-export const stylesApi: MantineDemo = {
+export const stylesApi: EmpoleonDemo = {
   type: 'styles-api',
   data: BadgeStylesApi,
   component: Demo,

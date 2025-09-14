@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import { Button, Combobox, TextInput, useCombobox } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
+import { createSignal, For } from 'solid-js';
 
 const code = `
 import { useState } from 'react';
@@ -13,7 +13,7 @@ function Demo() {
   const combobox = useCombobox({ opened });
 
   const options = groceries.map((item) => (
-    <Combobox.Option value={item} key={item}>
+    <Combobox.Option value={item} >
       {item}
     </Combobox.Option>
   ));
@@ -45,14 +45,8 @@ function Demo() {
 const groceries = ['🍎 Apples', '🍌 Bananas', '🥦 Broccoli', '🥕 Carrots', '🍫 Chocolate'];
 
 function Demo() {
-  const [opened, setOpened] = useState(false);
+  const [opened, setOpened] = createSignal(false);
   const combobox = useCombobox({ opened });
-
-  const options = groceries.map((item) => (
-    <Combobox.Option value={item} key={item}>
-      {item}
-    </Combobox.Option>
-  ));
 
   return (
     <>
@@ -70,14 +64,20 @@ function Demo() {
         </Combobox.Target>
 
         <Combobox.Dropdown>
-          <Combobox.Options>{options}</Combobox.Options>
+           <For each={groceries}>
+            {(item) => (
+              <Combobox.Option value={item}>
+                {item}
+              </Combobox.Option>
+            )}
+          </For>
         </Combobox.Dropdown>
       </Combobox>
     </>
   );
 }
 
-export const controlledDropdown: MantineDemo = {
+export const controlledDropdown: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

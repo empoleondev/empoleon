@@ -1,5 +1,5 @@
 import { Button, createTheme, Group, EmpoleonThemeProvider } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { EmpoleonProvider, Button, Group, createTheme } from '@empoleon/core';
@@ -53,7 +53,7 @@ function Demo() {
   );
 }
 
-export const defaultProps: MantineDemo = {
+export const defaultProps: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   centered: true,

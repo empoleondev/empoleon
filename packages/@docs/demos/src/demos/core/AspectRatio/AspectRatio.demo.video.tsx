@@ -1,5 +1,5 @@
 import { AspectRatio } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { AspectRatio } from '@empoleon/core';
@@ -27,13 +27,13 @@ function Demo() {
         title="YouTube video player"
         style={{ border: 0 }}
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
+        allow-full-screen
       />
     </AspectRatio>
   );
 }
 
-export const video: MantineDemo = {
+export const video: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

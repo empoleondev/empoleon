@@ -1,6 +1,6 @@
 import { Button, Text, TextInput } from '@empoleon/core';
 import { formRootRule, isNotEmpty, useForm } from '@empoleon/form';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Button, Text, TextInput } from '@empoleon/core';
@@ -101,7 +101,7 @@ function Demo() {
   );
 }
 
-export const rootRuleObject: MantineDemo = {
+export const rootRuleObject: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

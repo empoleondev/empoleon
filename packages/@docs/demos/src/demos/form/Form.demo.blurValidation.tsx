@@ -2,7 +2,7 @@
 
 import { Button, NumberInput, TextInput } from '@empoleon/core';
 import { useForm } from '@empoleon/form';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { useForm } from '@empoleon/form';
@@ -27,14 +27,14 @@ function Demo() {
       <TextInput
         label="Name"
         placeholder="Name"
-        key={form.key('name')}
+
         {...form.getInputProps('name')}
       />
       <TextInput
         mt="sm"
         label="Email"
         placeholder="Email"
-        key={form.key('email')}
+
         {...form.getInputProps('email')}
       />
       <NumberInput
@@ -43,7 +43,7 @@ function Demo() {
         placeholder="Age"
         min={0}
         max={99}
-        key={form.key('age')}
+
         {...form.getInputProps('age')}
       />
       <Button type="submit" mt="sm">
@@ -96,7 +96,7 @@ function Demo() {
   );
 }
 
-export const blurValidation: MantineDemo = {
+export const blurValidation: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

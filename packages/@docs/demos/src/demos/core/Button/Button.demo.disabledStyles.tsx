@@ -1,5 +1,5 @@
 import { Button } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import classes from './Button.demo.disabledStyles.module.css';
 
 const code = `
@@ -33,7 +33,7 @@ function Demo() {
   );
 }
 
-export const disabledStyles: MantineDemo = {
+export const disabledStyles: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   centered: true,

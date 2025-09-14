@@ -1,5 +1,5 @@
 import { Grid, GridProps } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { ColWrapper as Col } from './_col-wrapper';
 
 function Wrapper(props: GridProps) {
@@ -30,7 +30,7 @@ function Demo() {
 }
 `;
 
-export const growConfigurator: MantineDemo = {
+export const growConfigurator: EmpoleonDemo = {
   type: 'configurator',
   component: Wrapper,
   code,

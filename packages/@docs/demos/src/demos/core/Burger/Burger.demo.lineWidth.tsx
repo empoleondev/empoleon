@@ -1,6 +1,6 @@
 import { Burger } from '@empoleon/core';
 import { useDisclosure } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { useDisclosure } from '@empoleon/hooks';
@@ -8,18 +8,18 @@ import { Burger } from '@empoleon/core';
 
 function Demo() {
   const [opened, { toggle }] = useDisclosure();
-  return <Burger{{props}} size="xl" opened={opened} onClick={toggle} aria-label="Toggle navigation" />;
+  return <Burger{{props}} size="xl" opened={opened()} onClick={toggle} aria-label="Toggle navigation" />;
 }
 `;
 
 function Wrapper(props: any) {
   const [opened, { toggle }] = useDisclosure();
   return (
-    <Burger {...props} size="xl" opened={opened} onClick={toggle} aria-label="Toggle navigation" />
+    <Burger {...props} size="xl" opened={opened()} onClick={toggle} aria-label="Toggle navigation" />
   );
 }
 
-export const lineWidth: MantineDemo = {
+export const lineWidth: EmpoleonDemo = {
   type: 'configurator',
   component: Wrapper,
   code,

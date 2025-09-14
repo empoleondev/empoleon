@@ -12,6 +12,4 @@ export function GridItem({ className, children, ...others }: GridItemProps) {
   );
 }
 
-export const defaultItems = Array(5)
-  .fill(0)
-  .map((_, index) => <GridItem key={index}>{index + 1}</GridItem>);
+export const defaultItems = Array(5).fill(0);

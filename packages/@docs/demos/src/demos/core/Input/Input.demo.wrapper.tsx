@@ -1,5 +1,5 @@
 import { Input } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { inputWrapperOnlyControls } from '../../../shared';
 
 const code = `
@@ -22,7 +22,7 @@ function Wrapper(props: any) {
   );
 }
 
-export const wrapper: MantineDemo = {
+export const wrapper: EmpoleonDemo = {
   type: 'configurator',
   component: Wrapper,
   code,

@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import { Combobox, Input, InputBase, useCombobox } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
+import { createSignal } from 'solid-js';
 
 const code = `
 import { useState } from 'react';
@@ -59,7 +59,7 @@ function Demo() {
     onDropdownClose: () => combobox.resetSelectedOption(),
   });
 
-  const [value, setValue] = useState<string | null>(null);
+  const [value, setValue] = createSignal<string | null>(null);
 
   return (
     <Combobox
@@ -78,7 +78,7 @@ function Demo() {
           rightSectionPointerEvents="none"
           onClick={() => combobox.toggleDropdown()}
         >
-          {value || <Input.Placeholder>Pick value</Input.Placeholder>}
+          {value() || <Input.Placeholder>Pick value</Input.Placeholder>}
         </InputBase>
       </Combobox.Target>
 
@@ -101,7 +101,7 @@ function Demo() {
   );
 }
 
-export const groups: MantineDemo = {
+export const groups: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   maxWidth: 340,

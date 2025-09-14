@@ -1,6 +1,6 @@
 import { Button, Popover, Text } from '@empoleon/core';
 import { useDisclosure } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { useDisclosure } from '@empoleon/hooks';
@@ -9,7 +9,7 @@ import { Popover, Text, Button } from '@empoleon/core';
 function Demo() {
   const [opened, { close, open }] = useDisclosure(false);
   return (
-    <Popover width={200} position="bottom" withArrow shadow="md" opened={opened}>
+    <Popover width={200} position="bottom" withArrow shadow="md" opened={opened()}>
       <Popover.Target>
         <Button onMouseEnter={open} onMouseLeave={close}>
           Hover to see popover
@@ -26,7 +26,7 @@ function Demo() {
 function Demo() {
   const [opened, { close, open }] = useDisclosure(false);
   return (
-    <Popover width={200} position="bottom" withArrow shadow="md" opened={opened}>
+    <Popover width='200px' position="bottom" withArrow shadow="md" opened={opened()}>
       <Popover.Target>
         <Button onMouseEnter={open} onMouseLeave={close}>
           Hover to see popover
@@ -39,7 +39,7 @@ function Demo() {
   );
 }
 
-export const hover: MantineDemo = {
+export const hover: EmpoleonDemo = {
   type: 'code',
   code,
   centered: true,

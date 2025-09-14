@@ -1,5 +1,5 @@
 import { ColorInput, DEFAULT_THEME } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { ColorInput } from '@empoleon/core';
@@ -28,7 +28,7 @@ function Demo() {
   );
 }
 
-export const swatches: MantineDemo = {
+export const swatches: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

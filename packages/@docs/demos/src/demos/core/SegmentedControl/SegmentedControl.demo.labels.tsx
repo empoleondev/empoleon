@@ -1,10 +1,10 @@
-import { IconCode, IconExternalLink, IconEye } from '@tabler/icons-react';
+import { IconCode, IconExternalLink, IconEye } from '@tabler/icons-solidjs';
 import { Center, SegmentedControl } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Center, SegmentedControl } from '@empoleon/core';
-import { IconEye, IconCode, IconExternalLink } from '@tabler/icons-react';
+import { IconEye, IconCode, IconExternalLink } from '@tabler/icons-solidjs';
 
 function Demo() {
   return (
@@ -50,7 +50,7 @@ function Demo() {
         {
           value: 'preview',
           label: (
-            <Center style={{ gap: 10 }}>
+            <Center style={{ gap: '10px' }}>
               <IconEye size={16} />
               <span>Preview</span>
             </Center>
@@ -59,7 +59,7 @@ function Demo() {
         {
           value: 'code',
           label: (
-            <Center style={{ gap: 10 }}>
+            <Center style={{ gap: '10px' }}>
               <IconCode size={16} />
               <span>Code</span>
             </Center>
@@ -68,7 +68,7 @@ function Demo() {
         {
           value: 'export',
           label: (
-            <Center style={{ gap: 10 }}>
+            <Center style={{ gap: '10px' }}>
               <IconExternalLink size={16} />
               <span>Export</span>
             </Center>
@@ -79,7 +79,7 @@ function Demo() {
   );
 }
 
-export const labels: MantineDemo = {
+export const labels: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   centered: true,

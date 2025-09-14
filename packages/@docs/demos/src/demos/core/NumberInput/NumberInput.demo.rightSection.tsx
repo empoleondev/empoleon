@@ -1,10 +1,10 @@
-import { IconChartBubble } from '@tabler/icons-react';
+import { IconChartBubble } from '@tabler/icons-solidjs';
 import { NumberInput } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { NumberInput } from '@empoleon/core';
-import { IconChartBubble } from '@tabler/icons-react';
+import { IconChartBubble } from '@tabler/icons-solidjs';
 
 function Demo() {
   return (
@@ -37,7 +37,7 @@ function Demo() {
   );
 }
 
-export const rightSection: MantineDemo = {
+export const rightSection: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

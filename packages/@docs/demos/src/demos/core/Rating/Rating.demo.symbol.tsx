@@ -1,10 +1,10 @@
-import { IconMoon, IconSun } from '@tabler/icons-react';
+import { IconMoon, IconSun } from '@tabler/icons-solidjs';
 import { Rating } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Rating } from '@empoleon/core';
-import { IconSun, IconMoon } from '@tabler/icons-react';
+import { IconSun, IconMoon } from '@tabler/icons-solidjs';
 
 function Demo() {
   return <Rating emptySymbol={<IconSun size={16} />} fullSymbol={<IconMoon size={16} />} />;
@@ -15,7 +15,7 @@ function Demo() {
   return <Rating emptySymbol={<IconSun size={16} />} fullSymbol={<IconMoon size={16} />} />;
 }
 
-export const symbol: MantineDemo = {
+export const symbol: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

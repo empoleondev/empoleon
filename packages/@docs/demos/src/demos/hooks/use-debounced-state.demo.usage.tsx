@@ -1,6 +1,6 @@
 import { Box, Text, TextInput } from '@empoleon/core';
 import { useDebouncedState } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { useDebouncedState } from '@empoleon/hooks';
@@ -44,7 +44,7 @@ function Demo() {
   );
 }
 
-export const useDebouncedStateUsage: MantineDemo = {
+export const useDebouncedStateUsage: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

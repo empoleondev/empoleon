@@ -1,5 +1,5 @@
 import { List } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { List } from '@empoleon/core';
@@ -58,7 +58,7 @@ function Demo() {
   );
 }
 
-export const nested: MantineDemo = {
+export const nested: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

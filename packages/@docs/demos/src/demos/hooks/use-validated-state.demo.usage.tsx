@@ -1,6 +1,6 @@
 import { Box, Text, TextInput } from '@empoleon/core';
 import { useValidatedState } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { TextInput, Text, Box } from '@empoleon/core';
@@ -77,7 +77,7 @@ function Demo() {
   );
 }
 
-export const useValidatedStateDemo: MantineDemo = {
+export const useValidatedStateDemo: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

@@ -1,10 +1,10 @@
-import { IconChevronDown } from '@tabler/icons-react';
+import { IconChevronDown } from '@tabler/icons-solidjs';
 import { Input } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Input } from '@empoleon/core';
-import { IconChevronDown } from '@tabler/icons-react';
+import { IconChevronDown } from '@tabler/icons-solidjs';
 
 function Demo() {
   return (
@@ -15,7 +15,7 @@ function Demo() {
 
       <Input
         component="select"
-        rightSection={<IconChevronDown size={14} stroke={1.5} />}
+        rightSection={<IconChevronDown size={14} stroke='1.5' />}
         pointer
         mt="md"
       >
@@ -36,7 +36,7 @@ function Demo() {
 
       <Input
         component="select"
-        rightSection={<IconChevronDown size={14} stroke={1.5} />}
+        rightSection={<IconChevronDown size={14} stroke='1.5' />}
         pointer
         mt="md"
       >
@@ -47,7 +47,7 @@ function Demo() {
   );
 }
 
-export const component: MantineDemo = {
+export const component: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

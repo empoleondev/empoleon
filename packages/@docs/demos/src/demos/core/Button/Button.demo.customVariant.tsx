@@ -1,5 +1,5 @@
-import { Button, createTheme, Group, MantineThemeProvider } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { Button, createTheme, Group, EmpoleonThemeProvider } from '@empoleon/core';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import classes from './Button.demo.customVariant.module.css';
 
 const code = `
@@ -51,16 +51,16 @@ const theme = createTheme({
 
 function Demo() {
   return (
-    <MantineThemeProvider theme={theme}>
+    <EmpoleonThemeProvider theme={theme}>
       <Group>
         <Button variant="danger">Danger variant</Button>
         <Button variant="primary">Primary variant</Button>
       </Group>
-    </MantineThemeProvider>
+    </EmpoleonThemeProvider>
   );
 }
 
-export const customVariant: MantineDemo = {
+export const customVariant: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   centered: true,

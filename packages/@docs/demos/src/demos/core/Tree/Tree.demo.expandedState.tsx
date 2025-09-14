@@ -1,5 +1,5 @@
 import { getTreeExpandedState, Tree, useTree } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { data, dataCode } from './data';
 
 const code = `
@@ -23,7 +23,7 @@ function Demo() {
   return <Tree data={data} tree={tree} />;
 }
 
-export const expandedState: MantineDemo = {
+export const expandedState: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code: [

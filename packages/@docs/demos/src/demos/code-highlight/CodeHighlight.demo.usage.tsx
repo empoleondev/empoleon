@@ -1,5 +1,5 @@
 import { CodeHighlight } from '@empoleon/code-highlight';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const exampleCode = `
 type FilterPropsRes<T extends Record<string, any>> = {
@@ -30,7 +30,7 @@ function Demo() {
   return <CodeHighlight code={exampleCode} language="tsx" radius="md" />;
 }
 
-export const usage: MantineDemo = {
+export const usage: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

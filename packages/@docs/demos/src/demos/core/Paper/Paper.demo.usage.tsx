@@ -1,5 +1,5 @@
 import { Box, Paper, Text } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 function Wrapper(props: any) {
   return (
@@ -31,7 +31,7 @@ function Demo() {
 }
 `;
 
-export const usage: MantineDemo = {
+export const usage: EmpoleonDemo = {
   type: 'configurator',
   component: Wrapper,
   code,

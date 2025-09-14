@@ -3,14 +3,14 @@ import { IconGripVertical } from '@tabler/icons-solidjs';
 import { Button, Center, Group, TextInput } from '@empoleon/core';
 import { useForm } from '@empoleon/form';
 import { randomId } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Group, TextInput, Button, Center } from '@empoleon/core';
 import { useForm } from '@empoleon/form';
 import { randomId } from '@empoleon/hooks';
 import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
-import { IconGripVertical } from '@tabler/icons-react';
+import { IconGripVertical } from '@tabler/icons-solidjs';
 
 function Demo() {
   const form = useForm({
@@ -27,7 +27,7 @@ function Demo() {
   });
 
   const fields = form.getValues().employees.map((item, index) => (
-    <Draggable key={item.key} index={index} draggableId={item.key}>
+    <Draggable index={index} draggableId={item.key}>
       {(provided) => (
         <Group ref={provided.innerRef} mt="xs" {...provided.draggableProps}>
           <Center {...provided.dragHandleProps}>
@@ -35,12 +35,12 @@ function Demo() {
           </Center>
           <TextInput
             placeholder="John Doe"
-            key={form.key(\`employees.\${index}.name\`)}
+            .name\`)}
             {...form.getInputProps(\`employees.\${index}.name\`)}
           />
           <TextInput
             placeholder="example@mail.com"
-            key={form.key(\`employees.\${index}.email\`)}
+            .email\`)}
             {...form.getInputProps(\`employees.\${index}.email\`)}
           />
         </Group>
@@ -90,7 +90,7 @@ function Demo() {
   });
 
   // const fields = form.getValues().employees.map((item, index) => (
-    // <Draggable key={item.key} index={index} draggableId={item.key}>
+    // <Draggable index={index} draggableId={item.key}>
     //   {(provided) => (
         // <Group ref={provided.innerRef} mt="xs" {...provided.draggableProps}>
         //   <Center {...provided.dragHandleProps}>
@@ -138,7 +138,7 @@ function Demo() {
   );
 }
 
-export const dnd: MantineDemo = {
+export const dnd: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

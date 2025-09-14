@@ -1,7 +1,7 @@
-import { useState } from 'react';
 import { Button, Group, Modal } from '@empoleon/core';
 import { useDisclosure } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
+import { createSignal } from 'solid-js';
 
 const code = `
 import { useState } from 'react';
@@ -64,7 +64,7 @@ function Demo() {
 function Demo() {
   const [firstOpened, firstHandlers] = useDisclosure(false);
   const [secondOpened, secondHandlers] = useDisclosure(false);
-  const [modalData, setModalData] = useState({
+  const [modalData, setModalData] = createSignal({
     title: '',
     message: '',
   });
@@ -78,18 +78,18 @@ function Demo() {
           setModalData({ title: '', message: '' });
         }}
         transitionProps={{ duration: 300, exitDuration: 1000, transition: 'fade-down' }}
-        title={modalData.title}
+        title={modalData().title}
       >
-        {modalData.message}
+        {modalData().message}
       </Modal>
       <Modal
         opened={secondOpened}
         onClose={secondHandlers.close}
         transitionProps={{ duration: 300, exitDuration: 1000, transition: 'fade-down' }}
         onExitTransitionEnd={() => setModalData({ title: '', message: '' })}
-        title={modalData.title}
+        title={modalData().title}
       >
-        {modalData.message}
+        {modalData().message}
       </Modal>
 
       <Group>
@@ -117,7 +117,7 @@ function Demo() {
   );
 }
 
-export const transitionEnd: MantineDemo = {
+export const transitionEnd: EmpoleonDemo = {
   type: 'code',
   code,
   centered: true,

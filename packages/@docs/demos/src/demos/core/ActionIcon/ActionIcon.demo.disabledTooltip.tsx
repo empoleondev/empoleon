@@ -1,10 +1,10 @@
-import { IconHeart } from '@tabler/icons-react';
+import { IconHeart } from '@tabler/icons-solidjs';
 import { ActionIcon, Tooltip } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { ActionIcon, Tooltip } from '@empoleon/core';
-import { IconHeart } from '@tabler/icons-react';
+import { IconHeart } from '@tabler/icons-solidjs';
 
 function Demo() {
   return (
@@ -20,14 +20,14 @@ function Demo() {
 function Demo() {
   return (
     <Tooltip label="Tooltip for disabled button">
-      <ActionIcon size="xl" data-disabled onClick={(event) => event.preventDefault()}>
+      {(props) => <ActionIcon {...props} size="xl" data-disabled onClick={(event) => event.preventDefault()}>
         <IconHeart />
-      </ActionIcon>
+      </ActionIcon>}
     </Tooltip>
   );
 }
 
-export const disabledTooltip: MantineDemo = {
+export const disabledTooltip: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   centered: true,

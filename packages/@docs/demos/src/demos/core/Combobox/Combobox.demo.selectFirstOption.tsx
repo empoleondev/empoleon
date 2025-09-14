@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
 import { Combobox, TextInput, useCombobox } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
+import { createEffect, createSignal, For, Show } from 'solid-js';
 
 const code = `
 import { useState, useEffect } from 'react';
@@ -20,7 +20,7 @@ function Demo() {
     : groceries;
 
   const options = filteredOptions.map((item) => (
-    <Combobox.Option value={item} key={item}>
+    <Combobox.Option value={item} >
       {item}
     </Combobox.Option>
   ));
@@ -70,22 +70,16 @@ function Demo() {
     onDropdownClose: () => combobox.resetSelectedOption(),
   });
 
-  const [value, setValue] = useState('');
-  const shouldFilterOptions = !groceries.some((item) => item === value);
+  const [value, setValue] = createSignal('');
+  const shouldFilterOptions = !groceries.some((item) => item === value());
   const filteredOptions = shouldFilterOptions
-    ? groceries.filter((item) => item.toLowerCase().includes(value.toLowerCase().trim()))
+    ? groceries.filter((item) => item.toLowerCase().includes(value().toLowerCase().trim()))
     : groceries;
 
-  const options = filteredOptions.map((item) => (
-    <Combobox.Option value={item} key={item}>
-      {item}
-    </Combobox.Option>
-  ));
-
-  useEffect(() => {
+  createEffect(() => {
     // We need to wait for options to render before we can select first one
     combobox.selectFirstOption();
-  }, [value]);
+  });
 
   return (
     <Combobox
@@ -99,7 +93,7 @@ function Demo() {
         <TextInput
           label="Pick value or type anything"
           placeholder="Pick value or type anything"
-          value={value}
+          value={value()}
           onChange={(event) => {
             setValue(event.currentTarget.value);
             combobox.openDropdown();
@@ -112,14 +106,25 @@ function Demo() {
 
       <Combobox.Dropdown>
         <Combobox.Options>
-          {options.length === 0 ? <Combobox.Empty>Nothing found</Combobox.Empty> : options}
+          <Show
+            when={filteredOptions.length > 0}
+            fallback={<Combobox.Empty>Nothing found</Combobox.Empty>}
+          >
+            <For each={filteredOptions}>
+              {(item) => (
+                <Combobox.Option value={item}>
+                  {item}
+                </Combobox.Option>
+              )}
+            </For>
+          </Show>
         </Combobox.Options>
       </Combobox.Dropdown>
     </Combobox>
   );
 }
 
-export const selectFirstOption: MantineDemo = {
+export const selectFirstOption: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   centered: true,

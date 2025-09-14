@@ -1,5 +1,5 @@
 import { Avatar, Group } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { names, namesCode } from './_mockdata';
 
 const code = `
@@ -9,7 +9,7 @@ ${namesCode}
 
 function Demo() {
   const avatars = names.map((name) => (
-    <Avatar key={name} name={name} color="initials" allowedInitialsColors={['blue', 'red']} />
+    <Avatar name={name} color="initials" allowedInitialsColors={['blue', 'red']} />
   ));
   return <Group>{avatars}</Group>;
 }
@@ -17,12 +17,12 @@ function Demo() {
 
 function Demo() {
   const avatars = names.map((name) => (
-    <Avatar key={name} name={name} color="initials" allowedInitialsColors={['blue', 'red']} />
+    <Avatar name={name} color="initials" allowedInitialsColors={['blue', 'red']} />
   ));
   return <Group>{avatars}</Group>;
 }
 
-export const allowedColors: MantineDemo = {
+export const allowedColors: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

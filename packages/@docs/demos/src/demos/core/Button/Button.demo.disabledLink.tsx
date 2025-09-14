@@ -1,5 +1,5 @@
 import { Button } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Button } from '@empoleon/core';
@@ -31,7 +31,7 @@ function Demo() {
   );
 }
 
-export const disabledLink: MantineDemo = {
+export const disabledLink: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   centered: true,

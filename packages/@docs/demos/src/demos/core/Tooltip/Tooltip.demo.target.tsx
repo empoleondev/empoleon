@@ -1,5 +1,5 @@
 import { Button, Tooltip } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Button, Tooltip } from '@empoleon/core';
@@ -17,13 +17,14 @@ function Demo() {
 function Demo() {
   return (
     <>
-      <Tooltip target="#hover-me" label="Tooltip over button" />
-      <Button id="hover-me">Hover me to see tooltip</Button>
+      <Tooltip target="#hover-me" label="Tooltip over button">
+        {(props) => <Button {...props}  id="hover-me">Hover me to see tooltip</Button>}
+      </Tooltip>
     </>
   );
 }
 
-export const target: MantineDemo = {
+export const target: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

@@ -1,6 +1,6 @@
 import { Button, Stack, Text } from '@empoleon/core';
 import { useInterval } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { createEffect, createSignal } from 'solid-js';
 
 const code = `
@@ -49,7 +49,7 @@ function Demo() {
   );
 }
 
-export const useIntervalDemo: MantineDemo = {
+export const useIntervalDemo: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

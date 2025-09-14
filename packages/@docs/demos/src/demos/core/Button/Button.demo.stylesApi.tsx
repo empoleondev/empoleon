@@ -1,11 +1,11 @@
-import { IconAt } from '@tabler/icons-react';
+import { IconAt } from '@tabler/icons-solidjs';
 import { Button } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { ButtonStylesApi } from '@docs/styles-api';
 
 const code = `
 import { Button } from '@empoleon/core';
-import { IconAt } from '@tabler/icons-react';
+import { IconAt } from '@tabler/icons-solidjs';
 
 function Demo() {
   return <Button{{props}} leftSection={<IconAt size={16} />}>Your email</Button>;
@@ -20,7 +20,7 @@ function Demo(props: any) {
   );
 }
 
-export const stylesApi: MantineDemo = {
+export const stylesApi: EmpoleonDemo = {
   type: 'styles-api',
   data: ButtonStylesApi,
   component: Demo,

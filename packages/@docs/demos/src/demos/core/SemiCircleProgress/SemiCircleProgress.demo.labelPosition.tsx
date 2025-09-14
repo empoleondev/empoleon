@@ -1,5 +1,5 @@
 import { SemiCircleProgress } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { SemiCircleProgress } from '@empoleon/core';
@@ -23,7 +23,7 @@ function Demo() {
   );
 }
 
-export const labelPosition: MantineDemo = {
+export const labelPosition: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

@@ -1,5 +1,5 @@
 import { Button } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { gradientControls } from '../../../shared';
 
 const code = (props: any) => `
@@ -28,7 +28,7 @@ function Wrapper(props: any) {
   );
 }
 
-export const gradient: MantineDemo = {
+export const gradient: EmpoleonDemo = {
   type: 'configurator',
   component: Wrapper,
   code,

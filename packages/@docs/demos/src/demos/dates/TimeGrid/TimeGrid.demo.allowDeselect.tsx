@@ -1,5 +1,5 @@
 import { getTimeRange, TimeGrid } from '@empoleon/dates';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { getTimeRange, TimeGrid } from '@empoleon/dates';
@@ -25,7 +25,7 @@ function Demo() {
   );
 }
 
-export const allowDeselect: MantineDemo = {
+export const allowDeselect: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

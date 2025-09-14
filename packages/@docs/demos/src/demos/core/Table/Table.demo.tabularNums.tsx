@@ -1,5 +1,6 @@
 import { NumberFormatter, Table } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
+import { For } from 'solid-js';
 
 const code = `
 import { NumberFormatter, Table } from '@empoleon/core';
@@ -14,7 +15,7 @@ const data = [
 
 function Demo() {
   const rows = data.map((item) => (
-    <Table.Tr key={item.product}>
+    <Table.Tr >
       <Table.Td>{item.product}</Table.Td>
       <Table.Td>
         <NumberFormatter value={item.unitsSold} thousandSeparator />
@@ -45,15 +46,6 @@ const data = [
 ];
 
 export function Wrapper(props: any) {
-  const rows = data.map((item) => (
-    <Table.Tr key={item.product}>
-      <Table.Td>{item.product}</Table.Td>
-      <Table.Td>
-        <NumberFormatter value={item.unitsSold} thousandSeparator />
-      </Table.Td>
-    </Table.Tr>
-  ));
-
   return (
     <Table {...props}>
       <Table.Thead>
@@ -62,12 +54,23 @@ export function Wrapper(props: any) {
           <Table.Th>Units sold</Table.Th>
         </Table.Tr>
       </Table.Thead>
-      <Table.Tbody>{rows}</Table.Tbody>
+      <Table.Tbody>
+        <For each={data}>
+          {(item) => (
+            <Table.Tr>
+              <Table.Td>{item.product}</Table.Td>
+              <Table.Td>
+                <NumberFormatter value={item.unitsSold} thousandSeparator />
+              </Table.Td>
+            </Table.Tr>
+          )}
+        </For>
+      </Table.Tbody>
     </Table>
   );
 }
 
-export const tabularNums: MantineDemo = {
+export const tabularNums: EmpoleonDemo = {
   type: 'configurator',
   component: Wrapper,
   code,

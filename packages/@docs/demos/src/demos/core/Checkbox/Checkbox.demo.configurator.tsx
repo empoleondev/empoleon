@@ -1,5 +1,5 @@
 import { Checkbox, CheckboxProps } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Checkbox } from '@empoleon/core';
@@ -15,7 +15,7 @@ function Demo() {
 }
 `;
 
-export const configurator: MantineDemo = {
+export const configurator: EmpoleonDemo = {
   type: 'configurator',
   component: (props: CheckboxProps) => <Checkbox {...props} defaultChecked />,
   code,

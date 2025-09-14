@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import { Indicator } from '@empoleon/core';
 import { Calendar } from '@empoleon/dates';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import dayjs from 'dayjs';
@@ -41,7 +41,7 @@ function Demo() {
   );
 }
 
-export const isStatic: MantineDemo = {
+export const isStatic: EmpoleonDemo = {
   type: 'code',
   centered: true,
   component: Demo,

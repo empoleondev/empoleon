@@ -1,5 +1,5 @@
 import { Divider } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Divider } from '@empoleon/core';
@@ -25,7 +25,7 @@ function Demo() {
   );
 }
 
-export const variants: MantineDemo = {
+export const variants: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

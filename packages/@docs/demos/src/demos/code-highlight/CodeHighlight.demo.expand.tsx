@@ -1,5 +1,5 @@
 import { CodeHighlightTabs } from '@empoleon/code-highlight';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const tsxCode = `
 import { Group, Button, EmpoleonProvider, createTheme } from '@empoleon/core';
@@ -80,7 +80,7 @@ function Demo() {
   );
 }
 
-export const expand: MantineDemo = {
+export const expand: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code: [

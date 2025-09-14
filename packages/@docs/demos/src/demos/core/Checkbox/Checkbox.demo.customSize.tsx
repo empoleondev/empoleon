@@ -1,5 +1,5 @@
-import { Checkbox, createTheme, MantineThemeProvider } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { Checkbox, createTheme, EmpoleonThemeProvider } from '@empoleon/core';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import classes from './Checkbox.demo.customSize.module.css';
 
 const cssCode = `.root {
@@ -50,14 +50,14 @@ const theme = createTheme({
 
 function Demo() {
   return (
-    <MantineThemeProvider theme={theme}>
+    <EmpoleonThemeProvider theme={theme}>
       <Checkbox size="xxs" label="Extra small checkbox" />
       <Checkbox size="xxl" label="Extra large checkbox" mt="md" />
-    </MantineThemeProvider>
+    </EmpoleonThemeProvider>
   );
 }
 
-export const customSize: MantineDemo = {
+export const customSize: EmpoleonDemo = {
   type: 'code',
   centered: true,
   component: Demo,

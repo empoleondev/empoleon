@@ -1,6 +1,6 @@
-import { useRef } from 'react';
 import { Button, Group, NumberInput, NumberInputHandlers } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
+import { createSignal } from 'solid-js';
 
 const code = `
 import { useRef } from 'react';
@@ -35,13 +35,14 @@ function Demo() {
 `;
 
 function Demo() {
-  const handlersRef = useRef<NumberInputHandlers>(null);
+  const [handlersRef, setHandlersRef] = createSignal<NumberInputHandlers | null>(null)
+
   return (
     <>
       <NumberInput
         label="Click buttons to change value"
         placeholder="Click the buttons"
-        handlersRef={handlersRef}
+        handlersRef={setHandlersRef}
         step={2}
         min={10}
         max={20}
@@ -49,11 +50,11 @@ function Demo() {
       />
 
       <Group mt="md" justify="center">
-        <Button onClick={() => handlersRef.current?.decrement()} variant="default">
+        <Button onClick={() => handlersRef()?.decrement()} variant="default">
           Decrement by 2
         </Button>
 
-        <Button onClick={() => handlersRef.current?.increment()} variant="default">
+        <Button onClick={() => handlersRef()?.increment()} variant="default">
           Increment by 2
         </Button>
       </Group>
@@ -61,7 +62,7 @@ function Demo() {
   );
 }
 
-export const handlers: MantineDemo = {
+export const handlers: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

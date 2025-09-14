@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import { RingProgress, Text } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
+import { createSignal } from 'solid-js';
 
 const code = `
 import { useState } from 'react';
@@ -27,7 +27,7 @@ function Demo() {
 `;
 
 function Demo() {
-  const [hovered, setHovered] = useState(-1);
+  const [hovered, setHovered] = createSignal(-1);
   const reset = () => setHovered(-1);
   return (
     <>
@@ -40,12 +40,12 @@ function Demo() {
           { value: 15, color: 'indigo', onMouseEnter: () => setHovered(2), onMouseLeave: reset },
         ]}
       />
-      <Text>Hovered section: {hovered === -1 ? 'none' : hovered}</Text>
+      <Text>Hovered section: {hovered() === -1 ? 'none' : hovered()}</Text>
     </>
   );
 }
 
-export const sectionsProps: MantineDemo = {
+export const sectionsProps: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

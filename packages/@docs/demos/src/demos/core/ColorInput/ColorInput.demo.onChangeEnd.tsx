@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import { ColorInput, Text } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
+import { createSignal } from 'solid-js';
 
 const code = `
 import { useState } from 'react';
@@ -27,12 +27,12 @@ function Demo() {
 `;
 
 function Demo() {
-  const [changeEndValue, setChangeEndValue] = useState('#FFFFFF');
+  const [changeEndValue, setChangeEndValue] = createSignal('#FFFFFF');
 
   return (
     <>
       <Text mb="md">
-        Change end value: <b>{changeEndValue}</b>
+        Change end value: <b>{changeEndValue()}</b>
       </Text>
 
       <ColorInput
@@ -45,7 +45,7 @@ function Demo() {
   );
 }
 
-export const onChangeEnd: MantineDemo = {
+export const onChangeEnd: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

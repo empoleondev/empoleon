@@ -1,6 +1,6 @@
 import { Box, Checkbox } from '@empoleon/core';
 import { randomId, useListState } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { useListState, randomId } from '@empoleon/hooks';
@@ -23,7 +23,7 @@ export function IndeterminateCheckbox() {
       mt="xs"
       ml={33}
       label={value.label}
-      key={value.key}
+
       checked={value.checked}
       onChange={(event) => handlers.setItemProp(index, 'checked', event.currentTarget.checked)}
     />
@@ -55,15 +55,15 @@ const initialValues = [
 
 export function Demo() {
   const [values, handlers] = useListState(initialValues);
-  const allChecked = values.every((value) => value.checked);
-  const indeterminate = values.some((value) => value.checked) && !allChecked;
+  const allChecked = values().every((value) => value.checked);
+  const indeterminate = values().some((value) => value.checked) && !allChecked;
 
-  const items = values.map((value, index) => (
+  const items = values().map((value, index) => (
     <Checkbox
       mt="xs"
       ml={33}
       label={value.label}
-      key={value.key}
+
       checked={value.checked}
       onChange={(event) => handlers.setItemProp(index, 'checked', event.currentTarget.checked)}
     />
@@ -86,7 +86,7 @@ export function Demo() {
   );
 }
 
-export const indeterminate: MantineDemo = {
+export const indeterminate: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

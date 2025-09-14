@@ -1,6 +1,6 @@
 import { Button, NumberInput, TextInput } from '@empoleon/core';
 import { useForm } from '@empoleon/form';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { NumberInput, TextInput, Button } from '@empoleon/core';
@@ -28,13 +28,13 @@ function Demo() {
     <>
       <TextInput
         {...form.getInputProps('name')}
-        key={form.key('name')}
+
         label="Your name"
         placeholder="Your name"
       />
       <NumberInput
         {...form.getInputProps('age')}
-        key={form.key('age')}
+
         label="Age"
         placeholder="Age"
         mt="md"
@@ -85,7 +85,7 @@ function Demo() {
   );
 }
 
-export const enhanceGetInputPropsForm: MantineDemo = {
+export const enhanceGetInputPropsForm: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

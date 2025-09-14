@@ -1,5 +1,5 @@
 import { Switch, Tooltip } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Switch, Tooltip } from '@empoleon/core';
@@ -16,12 +16,12 @@ function Demo() {
 function Demo() {
   return (
     <Tooltip label="Switch tooltip" refProp="rootRef">
-      <Switch label="Switch with tooltip" />
+      {(props) => <Switch {...props} label="Switch with tooltip" />}
     </Tooltip>
   );
 }
 
-export const tooltip: MantineDemo = {
+export const tooltip: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

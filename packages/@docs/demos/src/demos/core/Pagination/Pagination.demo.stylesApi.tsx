@@ -1,5 +1,5 @@
 import { Pagination } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { PaginationStylesApi } from '@docs/styles-api';
 
 const code = `
@@ -14,7 +14,7 @@ function Demo(props: any) {
   return <Pagination total={10} {...props} />;
 }
 
-export const stylesApi: MantineDemo = {
+export const stylesApi: EmpoleonDemo = {
   type: 'styles-api',
   data: PaginationStylesApi,
   component: Demo,

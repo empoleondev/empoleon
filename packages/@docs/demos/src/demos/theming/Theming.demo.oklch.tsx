@@ -1,5 +1,5 @@
 import { Button, Group } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { EmpoleonProvider, createTheme, Group, Button } from '@empoleon/core';
@@ -52,7 +52,7 @@ function Demo() {
   );
 }
 
-export const oklch: MantineDemo = {
+export const oklch: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

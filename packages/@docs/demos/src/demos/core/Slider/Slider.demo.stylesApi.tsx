@@ -1,5 +1,5 @@
 import { Slider } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { SliderStylesApi } from '@docs/styles-api';
 
 const code = `
@@ -25,7 +25,7 @@ function Demo(props: any) {
   );
 }
 
-export const stylesApi: MantineDemo = {
+export const stylesApi: EmpoleonDemo = {
   type: 'styles-api',
   data: SliderStylesApi,
   component: Demo,

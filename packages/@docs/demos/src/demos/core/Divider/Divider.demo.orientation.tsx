@@ -1,5 +1,5 @@
 import { Divider, Group, Text } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Divider, Group, Text } from '@empoleon/core';
@@ -41,7 +41,7 @@ function Demo() {
   );
 }
 
-export const orientation: MantineDemo = {
+export const orientation: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

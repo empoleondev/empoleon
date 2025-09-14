@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import { DatePicker } from '@empoleon/dates';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { createSignal } from 'solid-js';
 
 const code = `
@@ -54,7 +54,7 @@ function Demo() {
   );
 }
 
-export const controlledDate: MantineDemo = {
+export const controlledDate: EmpoleonDemo = {
   type: 'code',
   centered: true,
   component: Demo,

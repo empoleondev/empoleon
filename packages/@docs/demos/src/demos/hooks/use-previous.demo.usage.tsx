@@ -1,6 +1,6 @@
 import { Text, TextInput } from '@empoleon/core';
 import { useInputState, usePrevious } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { TextInput, Text } from '@empoleon/core';
@@ -45,7 +45,7 @@ function Demo() {
   );
 }
 
-export const usePreviousUsage: MantineDemo = {
+export const usePreviousUsage: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import {
   IconArrowDown,
   IconArrowDownLeft,
@@ -9,10 +8,11 @@ import {
   IconArrowUpLeft,
   IconArrowUpRight,
   IconCircle,
-} from '@tabler/icons-react';
+} from '@tabler/icons-solidjs';
 import { FloatingIndicator, UnstyledButton } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import classes from './FloatingIndicator.demo.direction.module.css';
+import { createSignal } from 'solid-js';
 
 const code = `
 import { useState } from 'react';
@@ -26,7 +26,7 @@ import {
   IconArrowUpLeft,
   IconArrowUpRight,
   IconCircle,
-} from '@tabler/icons-react';
+} from '@tabler/icons-solidjs';
 import { FloatingIndicator, UnstyledButton } from '@empoleon/core';
 import classes from './Demo.module.css';
 
@@ -41,21 +41,21 @@ function Demo() {
   };
 
   return (
-    <div className={classes.root} dir="ltr" ref={setRootRef}>
+    <div class={classes.root} dir="ltr" ref={setRootRef}>
       <FloatingIndicator
         target={controlsRefs[active]}
         parent={rootRef}
         className={classes.indicator}
       />
 
-      <div className={classes.controlsGroup}>
+      <div class={classes.controlsGroup}>
         <UnstyledButton
           className={classes.control}
           onClick={() => setActive('up-left')}
           ref={setControlRef('up-left')}
           mod={{ active: active === 'up-left' }}
         >
-          <IconArrowUpLeft size={26} stroke={1.5} />
+          <IconArrowUpLeft size={26} stroke='1.5' />
         </UnstyledButton>
         <UnstyledButton
           className={classes.control}
@@ -63,7 +63,7 @@ function Demo() {
           ref={setControlRef('up')}
           mod={{ active: active === 'up' }}
         >
-          <IconArrowUp size={26} stroke={1.5} />
+          <IconArrowUp size={26} stroke='1.5' />
         </UnstyledButton>
         <UnstyledButton
           className={classes.control}
@@ -71,17 +71,17 @@ function Demo() {
           ref={setControlRef('up-right')}
           mod={{ active: active === 'up-right' }}
         >
-          <IconArrowUpRight size={26} stroke={1.5} />
+          <IconArrowUpRight size={26} stroke='1.5' />
         </UnstyledButton>
       </div>
-      <div className={classes.controlsGroup}>
+      <div class={classes.controlsGroup}>
         <UnstyledButton
           className={classes.control}
           onClick={() => setActive('left')}
           ref={setControlRef('left')}
           mod={{ active: active === 'left' }}
         >
-          <IconArrowLeft size={26} stroke={1.5} />
+          <IconArrowLeft size={26} stroke='1.5' />
         </UnstyledButton>
         <UnstyledButton
           className={classes.control}
@@ -89,7 +89,7 @@ function Demo() {
           ref={setControlRef('center')}
           mod={{ active: active === 'center' }}
         >
-          <IconCircle size={26} stroke={1.5} />
+          <IconCircle size={26} stroke='1.5' />
         </UnstyledButton>
         <UnstyledButton
           className={classes.control}
@@ -97,17 +97,17 @@ function Demo() {
           ref={setControlRef('right')}
           mod={{ active: active === 'right' }}
         >
-          <IconArrowRight size={26} stroke={1.5} />
+          <IconArrowRight size={26} stroke='1.5' />
         </UnstyledButton>
       </div>
-      <div className={classes.controlsGroup}>
+      <div class={classes.controlsGroup}>
         <UnstyledButton
           className={classes.control}
           onClick={() => setActive('down-left')}
           ref={setControlRef('down-left')}
           mod={{ active: active === 'down-left' }}
         >
-          <IconArrowDownLeft size={26} stroke={1.5} />
+          <IconArrowDownLeft size={26} stroke='1.5' />
         </UnstyledButton>
         <UnstyledButton
           className={classes.control}
@@ -115,7 +115,7 @@ function Demo() {
           ref={setControlRef('down')}
           mod={{ active: active === 'down' }}
         >
-          <IconArrowDown size={26} stroke={1.5} />
+          <IconArrowDown size={26} stroke='1.5' />
         </UnstyledButton>
         <UnstyledButton
           className={classes.control}
@@ -123,7 +123,7 @@ function Demo() {
           ref={setControlRef('down-right')}
           mod={{ active: active === 'down-right' }}
         >
-          <IconArrowDownRight size={26} stroke={1.5} />
+          <IconArrowDownRight size={26} stroke='1.5' />
         </UnstyledButton>
       </div>
     </div>
@@ -176,106 +176,106 @@ const cssCode = `.root {
 }`;
 
 function Demo() {
-  const [rootRef, setRootRef] = useState<HTMLDivElement | null>(null);
-  const [controlsRefs, setControlsRefs] = useState<Record<string, HTMLButtonElement | null>>({});
-  const [active, setActive] = useState('center');
+  const [rootRef, setRootRef] = createSignal<HTMLDivElement | null>(null);
+  const [controlsRefs, setControlsRefs] = createSignal<Record<string, HTMLButtonElement | null>>({});
+  const [active, setActive] = createSignal('center');
 
   const setControlRef = (name: string) => (node: HTMLButtonElement) => {
-    controlsRefs[name] = node;
+    controlsRefs()[name] = node;
     setControlsRefs(controlsRefs);
   };
 
   return (
-    <div className={classes.root} dir="ltr" ref={setRootRef}>
+    <div class={classes.root} dir="ltr" ref={setRootRef}>
       <FloatingIndicator
-        target={controlsRefs[active]}
-        parent={rootRef}
+        target={controlsRefs()[active()]}
+        parent={rootRef()}
         className={classes.indicator}
       />
 
-      <div className={classes.controlsGroup}>
+      <div class={classes.controlsGroup}>
         <UnstyledButton
           className={classes.control}
           onClick={() => setActive('up-left')}
           ref={setControlRef('up-left')}
-          mod={{ active: active === 'up-left' }}
+          mod={{ active: active() === 'up-left' }}
         >
-          <IconArrowUpLeft size={26} stroke={1.5} />
+          <IconArrowUpLeft size={26} stroke='1.5' />
         </UnstyledButton>
         <UnstyledButton
           className={classes.control}
           onClick={() => setActive('up')}
           ref={setControlRef('up')}
-          mod={{ active: active === 'up' }}
+          mod={{ active: active() === 'up' }}
         >
-          <IconArrowUp size={26} stroke={1.5} />
+          <IconArrowUp size={26} stroke='1.5' />
         </UnstyledButton>
         <UnstyledButton
           className={classes.control}
           onClick={() => setActive('up-right')}
           ref={setControlRef('up-right')}
-          mod={{ active: active === 'up-right' }}
+          mod={{ active: active() === 'up-right' }}
         >
-          <IconArrowUpRight size={26} stroke={1.5} />
+          <IconArrowUpRight size={26} stroke='1.5' />
         </UnstyledButton>
       </div>
-      <div className={classes.controlsGroup}>
+      <div class={classes.controlsGroup}>
         <UnstyledButton
           className={classes.control}
           onClick={() => setActive('left')}
           ref={setControlRef('left')}
-          mod={{ active: active === 'left' }}
+          mod={{ active: active() === 'left' }}
         >
-          <IconArrowLeft size={26} stroke={1.5} />
+          <IconArrowLeft size={26} stroke='1.5' />
         </UnstyledButton>
         <UnstyledButton
           className={classes.control}
           onClick={() => setActive('center')}
           ref={setControlRef('center')}
-          mod={{ active: active === 'center' }}
+          mod={{ active: active() === 'center' }}
         >
-          <IconCircle size={26} stroke={1.5} />
+          <IconCircle size={26} stroke='1.5' />
         </UnstyledButton>
         <UnstyledButton
           className={classes.control}
           onClick={() => setActive('right')}
           ref={setControlRef('right')}
-          mod={{ active: active === 'right' }}
+          mod={{ active: active() === 'right' }}
         >
-          <IconArrowRight size={26} stroke={1.5} />
+          <IconArrowRight size={26} stroke='1.5' />
         </UnstyledButton>
       </div>
-      <div className={classes.controlsGroup}>
+      <div class={classes.controlsGroup}>
         <UnstyledButton
           className={classes.control}
           onClick={() => setActive('down-left')}
           ref={setControlRef('down-left')}
-          mod={{ active: active === 'down-left' }}
+          mod={{ active: active() === 'down-left' }}
         >
-          <IconArrowDownLeft size={26} stroke={1.5} />
+          <IconArrowDownLeft size={26} stroke='1.5' />
         </UnstyledButton>
         <UnstyledButton
           className={classes.control}
           onClick={() => setActive('down')}
           ref={setControlRef('down')}
-          mod={{ active: active === 'down' }}
+          mod={{ active: active() === 'down' }}
         >
-          <IconArrowDown size={26} stroke={1.5} />
+          <IconArrowDown size={26} stroke='1.5' />
         </UnstyledButton>
         <UnstyledButton
           className={classes.control}
           onClick={() => setActive('down-right')}
           ref={setControlRef('down-right')}
-          mod={{ active: active === 'down-right' }}
+          mod={{ active: active() === 'down-right' }}
         >
-          <IconArrowDownRight size={26} stroke={1.5} />
+          <IconArrowDownRight size={26} stroke='1.5' />
         </UnstyledButton>
       </div>
     </div>
   );
 }
 
-export const direction: MantineDemo = {
+export const direction: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   centered: true,

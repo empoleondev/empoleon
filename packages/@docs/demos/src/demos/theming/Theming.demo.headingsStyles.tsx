@@ -1,5 +1,5 @@
 import { createTheme, EmpoleonThemeProvider, Title } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import classes from './Theming.demo.headingStyles.module.css';
 
 const code = `
@@ -66,7 +66,7 @@ function Demo() {
   );
 }
 
-export const headingsStyles: MantineDemo = {
+export const headingsStyles: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code: [

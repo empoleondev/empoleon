@@ -1,4 +1,4 @@
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { Component } from 'solid-js';
 
 const getCodeTemplate = (component: string) =>
@@ -14,7 +14,7 @@ function Demo() {
 }
 `;
 
-export function getPickerInputConfiguratorDemo(Component: Component<any>): MantineDemo {
+export function getPickerInputConfiguratorDemo(Component: Component<any>): EmpoleonDemo {
   return {
     type: 'configurator',
     component: Component,

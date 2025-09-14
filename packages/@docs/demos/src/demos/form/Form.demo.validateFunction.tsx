@@ -2,7 +2,7 @@
 
 import { Box, Button, Group, NumberInput, TextInput } from '@empoleon/core';
 import { useForm } from '@empoleon/form';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { useForm } from '@empoleon/form';
@@ -29,14 +29,14 @@ function Demo() {
         <TextInput
           label="Name"
           placeholder="Name"
-          key={form.key('name')}
+
           {...form.getInputProps('name')}
         />
         <NumberInput
           mt="sm"
           label="Age"
           placeholder="You age"
-          key={form.key('age')}
+
           {...form.getInputProps('age')}
         />
 
@@ -87,7 +87,7 @@ function Demo() {
   );
 }
 
-export const validateFunction: MantineDemo = {
+export const validateFunction: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

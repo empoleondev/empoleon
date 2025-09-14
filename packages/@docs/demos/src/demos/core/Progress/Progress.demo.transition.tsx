@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import { Button, Progress } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
+import { createSignal } from 'solid-js';
 
 const code = `
 import { useState } from 'react';
@@ -20,10 +20,10 @@ function Demo() {
 `;
 
 function Demo() {
-  const [value, setValue] = useState(50);
+  const [value, setValue] = createSignal(50);
   return (
     <>
-      <Progress value={value} size="lg" transitionDuration={200} />
+      <Progress value={value()} size="lg" transitionDuration={200} />
       <Button onClick={() => setValue(Math.random() * 100)} mt="md">
         Set random value
       </Button>
@@ -31,7 +31,7 @@ function Demo() {
   );
 }
 
-export const transition: MantineDemo = {
+export const transition: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

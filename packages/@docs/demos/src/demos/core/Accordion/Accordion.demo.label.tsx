@@ -1,5 +1,6 @@
 import { Accordion, AccordionProps, Avatar, Group, Text } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
+import { For } from 'solid-js';
 
 const charactersList = [
   {
@@ -81,7 +82,7 @@ function AccordionLabel({ label, image, description }: AccordionLabelProps) {
 
 function Demo() {
   const items = charactersList.map((item) => (
-    <Accordion.Item value={item.id} key={item.label}>
+    <Accordion.Item value={item.id} >
       <Accordion.Control aria-label={item.label}>
         <AccordionLabel {...item} />
       </Accordion.Control>
@@ -120,20 +121,20 @@ function AccordionLabel({ label, image, description }: AccordionLabelProps) {
 }
 
 export function AccordionDemo(props: Partial<AccordionProps>) {
-  const items = charactersList.map((item) => (
-    <Accordion.Item value={item.id} key={item.label}>
-      <Accordion.Control aria-label={item.label}>
-        <AccordionLabel {...item} />
-      </Accordion.Control>
-      <Accordion.Panel>
-        <Text size="sm">{item.content}</Text>
-      </Accordion.Panel>
-    </Accordion.Item>
-  ));
-
   return (
     <Accordion chevronPosition="right" variant="contained" radius="md" {...props}>
-      {items}
+      <For each={charactersList}>
+        {(item) => (
+          <Accordion.Item value={item.id}>
+            <Accordion.Control aria-label={item.label}>
+              <AccordionLabel {...item} />
+            </Accordion.Control>
+            <Accordion.Panel>
+              <Text size="sm">{item.content}</Text>
+            </Accordion.Panel>
+          </Accordion.Item>
+        )}
+      </For>
     </Accordion>
   );
 }
@@ -142,7 +143,7 @@ function Demo() {
   return <AccordionDemo />;
 }
 
-export const label: MantineDemo = {
+export const label: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

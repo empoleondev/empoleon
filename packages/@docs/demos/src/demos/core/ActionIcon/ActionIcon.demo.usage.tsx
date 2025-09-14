@@ -1,16 +1,16 @@
-import { IconAdjustments } from '@tabler/icons-react';
+import { IconAdjustments } from '@tabler/icons-solidjs';
 import { ActionIcon } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { interactiveVariantsControl } from '../../../shared';
 
 const code = `
 import { ActionIcon } from '@empoleon/core';
-import { IconAdjustments } from '@tabler/icons-react';
+import { IconAdjustments } from '@tabler/icons-solidjs';
 
 function Demo() {
   return (
     <ActionIcon{{props}} aria-label="Settings">
-      <IconAdjustments style={{ width: '70%', height: '70%' }} stroke={1.5} />
+      <IconAdjustments style={{ width: '70%', height: '70%' }} stroke='1.5' />
     </ActionIcon>
   );
 }
@@ -19,12 +19,12 @@ function Demo() {
 function Wrapper(props: any) {
   return (
     <ActionIcon {...props} aria-label="Settings">
-      <IconAdjustments style={{ width: '70%', height: '70%' }} stroke={1.5} />
+      <IconAdjustments style={{ width: '70%', height: '70%' }} stroke='1.5' />
     </ActionIcon>
   );
 }
 
-export const usage: MantineDemo = {
+export const usage: EmpoleonDemo = {
   type: 'configurator',
   component: Wrapper,
   code,

@@ -1,5 +1,5 @@
 import { NumberInput } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { NumberInput } from '@empoleon/core';
@@ -27,7 +27,7 @@ function Demo() {
   );
 }
 
-export const decimalSeparator: MantineDemo = {
+export const decimalSeparator: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

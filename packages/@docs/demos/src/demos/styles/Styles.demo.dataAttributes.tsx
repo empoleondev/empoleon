@@ -1,6 +1,6 @@
 import { IconArrowRight } from '@tabler/icons-solidjs';
 import { Button, ButtonProps, Group } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import classes from './Styles.demo.dataAttributes.module.css';
 import { JSX } from 'solid-js';
 
@@ -98,7 +98,7 @@ function Demo() {
   );
 }
 
-export const dataAttributes: MantineDemo = {
+export const dataAttributes: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   centered: true,

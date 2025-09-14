@@ -1,5 +1,5 @@
 import { UnstyledButton } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { UnstyledButton } from '@empoleon/core';
@@ -13,7 +13,7 @@ function Demo() {
   return <UnstyledButton>Button without styles</UnstyledButton>;
 }
 
-export const usage: MantineDemo = {
+export const usage: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   centered: true,

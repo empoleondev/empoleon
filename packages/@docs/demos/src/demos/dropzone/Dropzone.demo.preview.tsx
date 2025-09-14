@@ -1,6 +1,6 @@
 import { Image, SimpleGrid, Text } from '@empoleon/core';
 import { Dropzone, FileWithPath, IMAGE_MIME_TYPE } from '@empoleon/dropzone';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { createSignal } from 'solid-js';
 
 const code = `
@@ -13,7 +13,7 @@ function Demo() {
 
   const previews = files.map((file, index) => {
     const imageUrl = URL.createObjectURL(file);
-    return <Image key={index} src={imageUrl} onLoad={() => URL.revokeObjectURL(imageUrl)} />;
+    return <Image src={imageUrl} onLoad={() => URL.revokeObjectURL(imageUrl)} />;
   });
 
   return (
@@ -51,7 +51,7 @@ function Demo() {
   );
 }
 
-export const preview: MantineDemo = {
+export const preview: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

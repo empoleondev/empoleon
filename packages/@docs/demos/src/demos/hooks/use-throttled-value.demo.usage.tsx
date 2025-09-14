@@ -1,6 +1,6 @@
 import { Text, TextInput } from '@empoleon/core';
 import { useThrottledValue } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { createSignal } from 'solid-js';
 
 const code = `
@@ -32,7 +32,7 @@ function Demo() {
   );
 }
 
-export const useThrottledValueUsage: MantineDemo = {
+export const useThrottledValueUsage: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

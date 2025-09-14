@@ -1,5 +1,5 @@
 import { Button, Tooltip } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { FLOATING_POSITION_DATA } from '../../../shared';
 
 const code = (props: any) => `
@@ -27,12 +27,12 @@ function Wrapper(props: any) {
       label="Tooltip"
       offset={{ mainAxis: props.mainAxis, crossAxis: props.crossAxis }}
     >
-      <Button>Button with tooltip</Button>
+      {(props) => <Button {...props}>Button with tooltip</Button>}
     </Tooltip>
   );
 }
 
-export const offsetAxis: MantineDemo = {
+export const offsetAxis: EmpoleonDemo = {
   type: 'configurator',
   component: Wrapper,
   code,

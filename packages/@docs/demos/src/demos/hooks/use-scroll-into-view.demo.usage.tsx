@@ -1,6 +1,6 @@
 import { Box, Button, Group, Text } from '@empoleon/core';
 import { useScrollIntoView } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { useScrollIntoView } from '@empoleon/hooks';
@@ -63,7 +63,7 @@ function Demo() {
   );
 }
 
-export const useScrollIntoViewUsage: MantineDemo = {
+export const useScrollIntoViewUsage: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

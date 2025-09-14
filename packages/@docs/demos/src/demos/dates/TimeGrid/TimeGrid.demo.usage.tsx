@@ -1,5 +1,5 @@
 import { getTimeRange, TimeGrid } from '@empoleon/dates';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { getTimeRange, TimeGrid } from '@empoleon/dates';
@@ -34,7 +34,7 @@ function Wrapper(props: any) {
   );
 }
 
-export const usage: MantineDemo = {
+export const usage: EmpoleonDemo = {
   type: 'configurator',
   component: Wrapper,
   code,

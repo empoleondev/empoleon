@@ -1,6 +1,6 @@
 import { Button, Drawer } from '@empoleon/core';
 import { useDisclosure } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { AuthenticationForm } from '../../../shared/AuthenticationForm/AuthenticationForm';
 
 const code = `
@@ -12,7 +12,7 @@ function Demo() {
 
   return (
     <>
-      <Drawer offset={8} radius="md" opened={opened} onClose={close} title="Authentication">
+      <Drawer offset={8} radius="md" opened={opened()} onClose={close} title="Authentication">
         {/* Drawer content */}
       </Drawer>
 
@@ -29,7 +29,7 @@ function Demo() {
 
   return (
     <>
-      <Drawer offset={8} radius="md" opened={opened} onClose={close} title="Authentication">
+      <Drawer offset={8} radius="md" opened={opened()} onClose={close} title="Authentication">
         <AuthenticationForm noShadow noPadding />
       </Drawer>
 
@@ -40,7 +40,7 @@ function Demo() {
   );
 }
 
-export const offset: MantineDemo = {
+export const offset: EmpoleonDemo = {
   type: 'code',
   code,
   centered: true,

@@ -1,5 +1,5 @@
 import { DateInput } from '@empoleon/dates';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { DateInput } from '@empoleon/dates';
@@ -13,7 +13,7 @@ function Demo() {
   return <DateInput label="Disabled" placeholder="Date input" disabled />;
 }
 
-export const disabled: MantineDemo = {
+export const disabled: EmpoleonDemo = {
   type: 'code',
   centered: true,
   maxWidth: 400,

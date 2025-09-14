@@ -1,7 +1,7 @@
-import { useState } from 'react';
 import { Button, Drawer, Group } from '@empoleon/core';
 import { useDisclosure } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
+import { createSignal } from 'solid-js';
 
 const code = `
 import { useState } from 'react';
@@ -64,7 +64,7 @@ function Demo() {
 function Demo() {
   const [firstOpened, firstHandlers] = useDisclosure(false);
   const [secondOpened, secondHandlers] = useDisclosure(false);
-  const [drawerData, setDrawerData] = useState({
+  const [drawerData, setDrawerData] = createSignal({
     title: '',
     message: '',
   });
@@ -72,24 +72,24 @@ function Demo() {
   return (
     <>
       <Drawer
-        opened={firstOpened}
+        opened={firstOpened()}
         onClose={() => {
           firstHandlers.close();
           setDrawerData({ title: '', message: '' });
         }}
         transitionProps={{ duration: 300, exitDuration: 1000 }}
-        title={drawerData.title}
+        title={drawerData().title}
       >
-        {drawerData.message}
+        {drawerData().message}
       </Drawer>
       <Drawer
-        opened={secondOpened}
+        opened={secondOpened()}
         onClose={secondHandlers.close}
         transitionProps={{ duration: 300, exitDuration: 1000 }}
         onExitTransitionEnd={() => setDrawerData({ title: '', message: '' })}
-        title={drawerData.title}
+        title={drawerData().title}
       >
-        {drawerData.message}
+        {drawerData().message}
       </Drawer>
 
       <Group>
@@ -117,7 +117,7 @@ function Demo() {
   );
 }
 
-export const transitionEnd: MantineDemo = {
+export const transitionEnd: EmpoleonDemo = {
   type: 'code',
   code,
   centered: true,

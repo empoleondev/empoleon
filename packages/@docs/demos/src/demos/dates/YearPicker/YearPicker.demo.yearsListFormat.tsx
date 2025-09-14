@@ -1,5 +1,5 @@
 import { YearPicker } from '@empoleon/dates';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { createSignal } from 'solid-js';
 
 const code = `
@@ -17,7 +17,7 @@ function Demo() {
   return <YearPicker yearsListFormat="YY" value={value()} onChange={setValue} />;
 }
 
-export const yearsListFormat: MantineDemo = {
+export const yearsListFormat: EmpoleonDemo = {
   type: 'code',
   centered: true,
   component: Demo,

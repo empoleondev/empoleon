@@ -1,9 +1,9 @@
-import { IconFingerprint } from '@tabler/icons-react';
+import { IconFingerprint } from '@tabler/icons-solidjs';
 import { Group, ThemeIcon } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
-import { IconFingerprint } from '@tabler/icons-react';
+import { IconFingerprint } from '@tabler/icons-solidjs';
 import { ThemeIcon, Group } from '@empoleon/core';
 
 function Demo() {
@@ -33,7 +33,7 @@ function Demo() {
   );
 }
 
-export const autoContrast: MantineDemo = {
+export const autoContrast: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

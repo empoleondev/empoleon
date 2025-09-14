@@ -1,6 +1,6 @@
 import { Button } from '@empoleon/core';
 import { randomId, useDocumentTitle } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { createSignal } from 'solid-js';
 
 const code = `
@@ -26,7 +26,7 @@ function Demo() {
   return <Button onClick={() => setTitle(randomId())}>Set document title to random id</Button>;
 }
 
-export const useDocumentTitleDemo: MantineDemo = {
+export const useDocumentTitleDemo: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

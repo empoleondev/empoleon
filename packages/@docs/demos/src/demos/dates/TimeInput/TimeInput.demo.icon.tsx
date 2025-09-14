@@ -1,13 +1,13 @@
 import { IconClock } from '@tabler/icons-solidjs';
 import { TimeInput } from '@empoleon/dates';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { IconClock } from '@tabler/icons-solidjs';
 import { TimeInput } from '@empoleon/dates';
 
 function Demo() {
-  return <TimeInput leftSection={<IconClock size={16} stroke={1.5} />} />;
+  return <TimeInput leftSection={<IconClock size={16} stroke='1.5' />} />;
 }
 `;
 
@@ -15,7 +15,7 @@ function Demo() {
   return <TimeInput leftSection={<IconClock size={16} stroke='1.5' />} />;
 }
 
-export const icon: MantineDemo = {
+export const icon: EmpoleonDemo = {
   type: 'code',
   centered: true,
   maxWidth: 340,

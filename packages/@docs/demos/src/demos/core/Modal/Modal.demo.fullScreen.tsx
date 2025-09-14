@@ -1,6 +1,6 @@
 import { Button, Modal, Text } from '@empoleon/core';
 import { useDisclosure } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { AuthenticationForm } from '../../../shared/AuthenticationForm/AuthenticationForm';
 
 const code = `
@@ -13,7 +13,7 @@ function Demo() {
   return (
     <>
       <Modal
-        opened={opened}
+        opened={opened()}
         onClose={close}
         title="This is a fullscreen modal"
         fullScreen
@@ -37,7 +37,7 @@ function Demo() {
   return (
     <>
       <Modal
-        opened={opened}
+        opened={opened()}
         onClose={close}
         title="This is a fullscreen modal"
         fullScreen
@@ -60,7 +60,7 @@ function Demo() {
   );
 }
 
-export const fullScreen: MantineDemo = {
+export const fullScreen: EmpoleonDemo = {
   type: 'code',
   code,
   centered: true,

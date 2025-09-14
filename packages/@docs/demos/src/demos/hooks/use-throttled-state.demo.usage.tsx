@@ -1,6 +1,6 @@
 import { Text, TextInput } from '@empoleon/core';
 import { useThrottledState } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Text, TextInput } from '@empoleon/core';
@@ -35,7 +35,7 @@ function Demo() {
   );
 }
 
-export const useThrottledStateUsage: MantineDemo = {
+export const useThrottledStateUsage: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

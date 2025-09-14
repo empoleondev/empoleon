@@ -1,5 +1,5 @@
 import { Box, ScrollArea } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { Content } from './_content';
 
 const code = `
@@ -26,7 +26,7 @@ function Demo() {
   );
 }
 
-export const horizontal: MantineDemo = {
+export const horizontal: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   centered: true,

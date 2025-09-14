@@ -1,6 +1,6 @@
 import { Button, Group } from '@empoleon/core';
 import { notifications } from '@empoleon/notifications';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import classes from './Notifications.demo.customize.module.css';
 
 const code = `
@@ -95,7 +95,7 @@ function Demo() {
   );
 }
 
-export const customize: MantineDemo = {
+export const customize: EmpoleonDemo = {
   type: 'code',
   centered: true,
   component: Demo,

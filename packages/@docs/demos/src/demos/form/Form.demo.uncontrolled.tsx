@@ -1,6 +1,6 @@
 import { Button, Code, Text, TextInput } from '@empoleon/core';
 import { hasLength, isEmail, useForm } from '@empoleon/form';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { createSignal } from 'solid-js';
 
 const code = `
@@ -24,13 +24,13 @@ function Demo() {
     <form onSubmit={form.onSubmit(setSubmittedValues)}>
       <TextInput
         {...form.getInputProps('name')}
-        key={form.key('name')}
+
         label="Name"
         placeholder="Name"
       />
       <TextInput
         {...form.getInputProps('email')}
-        key={form.key('email')}
+
         mt="md"
         label="Email"
         placeholder="Email"
@@ -87,7 +87,7 @@ function Demo() {
   );
 }
 
-export const uncontrolled: MantineDemo = {
+export const uncontrolled: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

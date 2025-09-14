@@ -1,17 +1,17 @@
-import { IconAt } from '@tabler/icons-react';
+import { IconAt } from '@tabler/icons-solidjs';
 import { MultiSelect } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { MultiSelectStylesApi } from '@docs/styles-api';
 
 const code = `
-import { IconAt } from '@tabler/icons-react';
+import { IconAt } from '@tabler/icons-solidjs';
 import { MultiSelect } from '@empoleon/core';
 
 function Demo() {
   return (
     <MultiSelect
      {{props}}
-      leftSection={<IconAt size={18} stroke={1.5} />}
+      leftSection={<IconAt size={18} stroke='1.5' />}
       label="MultiSelect"
       description="Description"
       error="Error"
@@ -31,7 +31,7 @@ function Demo(props: any) {
     <MultiSelect
       {...props}
       dropdownOpened
-      leftSection={<IconAt size={18} stroke={1.5} />}
+      leftSection={<IconAt size={18} stroke='1.5' />}
       withAsterisk
       label="MultiSelect"
       description="Description"
@@ -45,7 +45,7 @@ function Demo(props: any) {
   );
 }
 
-export const stylesApi: MantineDemo = {
+export const stylesApi: EmpoleonDemo = {
   type: 'styles-api',
   data: MultiSelectStylesApi,
   component: Demo,

@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import { Combobox, TextInput, useCombobox } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
+import { createMemo, createSignal, For } from 'solid-js';
 
 const code = `
 import { useState } from 'react';
@@ -17,7 +17,7 @@ function Demo() {
     : groceries;
 
   const options = filteredOptions.map((item) => (
-    <Combobox.Option value={item} key={item}>
+    <Combobox.Option value={item} >
       {item}
     </Combobox.Option>
   ));
@@ -57,17 +57,15 @@ const groceries = ['🍎 Apples', '🍌 Bananas', '🥦 Broccoli', '🥕 Carrots
 
 function Demo() {
   const combobox = useCombobox();
-  const [value, setValue] = useState('');
-  const shouldFilterOptions = !groceries.some((item) => item === value);
-  const filteredOptions = shouldFilterOptions
-    ? groceries.filter((item) => item.toLowerCase().includes(value.toLowerCase().trim()))
-    : groceries;
-
-  const options = filteredOptions.map((item) => (
-    <Combobox.Option value={item} key={item}>
-      {item}
-    </Combobox.Option>
-  ));
+  const [value, setValue] = createSignal('');
+  const shouldFilterOptions = createMemo(() =>
+    !groceries.some((item) => item === value())
+  );
+  const filteredOptions = createMemo(() =>
+    shouldFilterOptions()
+      ? groceries.filter((item) => item.toLowerCase().includes(value().toLowerCase().trim()))
+      : groceries
+  );
 
   return (
     <Combobox
@@ -81,7 +79,7 @@ function Demo() {
         <TextInput
           label="Pick value or type anything"
           placeholder="Pick value or type anything"
-          value={value}
+          value={value()}
           onChange={(event) => {
             setValue(event.currentTarget.value);
             combobox.openDropdown();
@@ -92,14 +90,22 @@ function Demo() {
         />
       </Combobox.Target>
 
-      <Combobox.Dropdown hidden={options.length === 0}>
-        <Combobox.Options>{options}</Combobox.Options>
+      <Combobox.Dropdown hidden={filteredOptions().length === 0}>
+        <Combobox.Options>
+          <For each={filteredOptions()}>
+            {(item) => (
+              <Combobox.Option value={item}>
+                {item}
+              </Combobox.Option>
+            )}
+          </For>
+        </Combobox.Options>
       </Combobox.Dropdown>
     </Combobox>
   );
 }
 
-export const hiddenDropdown: MantineDemo = {
+export const hiddenDropdown: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   centered: true,

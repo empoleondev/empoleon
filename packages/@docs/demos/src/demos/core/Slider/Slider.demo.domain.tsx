@@ -1,5 +1,5 @@
 import { Slider } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Slider } from '@empoleon/core';
@@ -23,6 +23,7 @@ function Demo() {
 function Demo() {
   return (
     <Slider
+      // @ts-ignore
       domain={[0, 100]}
       min={10}
       max={90}
@@ -36,7 +37,7 @@ function Demo() {
   );
 }
 
-export const domain: MantineDemo = {
+export const domain: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

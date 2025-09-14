@@ -1,5 +1,5 @@
 import { Switch } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import classes from './Switch.demo.styles.module.css';
 
 const cssCode = `.track {
@@ -34,7 +34,7 @@ function Demo() {
   return <Switch classNames={classes} size="lg" />;
 }
 
-export const styles: MantineDemo = {
+export const styles: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code: [

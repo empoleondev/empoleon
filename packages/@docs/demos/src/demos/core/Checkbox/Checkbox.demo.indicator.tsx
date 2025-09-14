@@ -1,5 +1,5 @@
 import { Checkbox, Group } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Checkbox, Group } from '@empoleon/core';
@@ -31,7 +31,7 @@ function Demo() {
   );
 }
 
-export const indicator: MantineDemo = {
+export const indicator: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

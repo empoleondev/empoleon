@@ -1,5 +1,5 @@
 import { createTheme, EmpoleonThemeProvider, useProps } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { JSX } from 'solid-js';
 
 const code = `
@@ -80,7 +80,7 @@ function Demo() {
   );
 }
 
-export const usePropsHook: MantineDemo = {
+export const usePropsHook: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

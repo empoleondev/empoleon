@@ -1,5 +1,5 @@
 import { ComboboxItem, MultiSelect, OptionsFilter } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { MultiSelect, ComboboxItem, OptionsFilter } from '@empoleon/core';
@@ -45,7 +45,7 @@ function Demo() {
   );
 }
 
-export const search: MantineDemo = {
+export const search: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

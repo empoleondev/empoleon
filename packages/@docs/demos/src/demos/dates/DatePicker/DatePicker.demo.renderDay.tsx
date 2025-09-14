@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import { Indicator } from '@empoleon/core';
 import { DatePicker, DatePickerProps } from '@empoleon/dates';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import dayjs from 'dayjs';
@@ -35,7 +35,7 @@ function Demo() {
   return <DatePicker renderDay={dayRenderer} />;
 }
 
-export const renderDay: MantineDemo = {
+export const renderDay: EmpoleonDemo = {
   type: 'code',
   centered: true,
   component: Demo,

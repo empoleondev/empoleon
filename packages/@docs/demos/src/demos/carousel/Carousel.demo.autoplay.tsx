@@ -1,6 +1,6 @@
 import Autoplay from 'embla-carousel-autoplay';
 import { Carousel } from '@empoleon/carousel';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { Slides } from './_slides';
 import { createSignal, onMount, onCleanup } from 'solid-js';
 import type { AutoplayType } from 'embla-carousel-autoplay';
@@ -65,7 +65,7 @@ function Demo() {
   );
 }
 
-export const autoplay: MantineDemo = {
+export const autoplay: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

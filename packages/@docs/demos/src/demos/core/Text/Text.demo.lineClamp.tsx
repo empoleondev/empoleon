@@ -1,5 +1,5 @@
 import { Text, Typography } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Typography, Text } from '@empoleon/core';
@@ -26,7 +26,7 @@ function Demo() {
   return (
     <Text lineClamp={3} component="div">
       <Typography>
-        <h3 style={{ marginTop: 0 }}>Line clamp with Typography</h3>
+        <h3 style={{ 'margin-top': 0 }}>Line clamp with Typography</h3>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt nulla quam aut sed
           corporis voluptates praesentium inventore, sapiente ex tempore sit consequatur debitis
@@ -39,7 +39,7 @@ function Demo() {
   );
 }
 
-export const lineClamp: MantineDemo = {
+export const lineClamp: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

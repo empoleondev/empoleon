@@ -1,5 +1,5 @@
 import { Grid } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { ColWrapper as Col } from './_col-wrapper';
 
 const code = `
@@ -28,7 +28,7 @@ function Demo() {
   return (
     // Wrapper div is added for demonstration purposes only.
     // It is not required in real projects.
-    <div style={{ resize: 'horizontal', overflow: 'hidden', maxWidth: '100%' }}>
+    <div style={{ resize: 'horizontal', overflow: 'hidden', 'max-width': '100%' }}>
       <Grid
         type="container"
         breakpoints={{ xs: '100px', sm: '200px', md: '300px', lg: '400px', xl: '500px' }}
@@ -42,7 +42,7 @@ function Demo() {
   );
 }
 
-export const container: MantineDemo = {
+export const container: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

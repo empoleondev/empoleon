@@ -1,5 +1,5 @@
 import { Button, Group, EmpoleonProvider, useEmpoleonColorScheme } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { createEffect, createSignal } from 'solid-js';
 
 const code = (props: any) => `
@@ -43,7 +43,7 @@ function Wrapper(props: any) {
   );
 }
 
-export const primaryShadeConfigurator: MantineDemo = {
+export const primaryShadeConfigurator: EmpoleonDemo = {
   type: 'configurator',
   component: Wrapper,
   code,

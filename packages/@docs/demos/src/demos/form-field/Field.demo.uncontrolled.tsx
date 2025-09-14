@@ -1,6 +1,6 @@
 import { Button, TextInput } from '@empoleon/core';
 import { useField } from '@empoleon/form';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Button, TextInput } from '@empoleon/core';
@@ -17,7 +17,7 @@ function Demo() {
     <>
       <TextInput
         {...field.getInputProps()}
-        key={field.key}
+
         label="Name"
         placeholder="Enter your name"
         mb="md"
@@ -48,7 +48,7 @@ function Demo() {
   );
 }
 
-export const uncontrolled: MantineDemo = {
+export const uncontrolled: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

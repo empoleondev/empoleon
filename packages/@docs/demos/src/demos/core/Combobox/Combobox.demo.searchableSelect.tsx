@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import { Combobox, InputBase, useCombobox } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
+import { createSignal, For, Show } from 'solid-js';
 
 const code = `
 import { useState } from 'react';
@@ -22,7 +22,7 @@ function Demo() {
     : groceries;
 
   const options = filteredOptions.map((item) => (
-    <Combobox.Option value={item} key={item}>
+    <Combobox.Option value={item} >
       {item}
     </Combobox.Option>
   ));
@@ -72,19 +72,13 @@ function Demo() {
     onDropdownClose: () => combobox.resetSelectedOption(),
   });
 
-  const [value, setValue] = useState<string | null>(null);
-  const [search, setSearch] = useState('');
+  const [value, setValue] = createSignal<string | null>(null);
+  const [search, setSearch] = createSignal('');
 
-  const shouldFilterOptions = groceries.every((item) => item !== search);
+  const shouldFilterOptions = groceries.every((item) => item !== search());
   const filteredOptions = shouldFilterOptions
-    ? groceries.filter((item) => item.toLowerCase().includes(search.toLowerCase().trim()))
+    ? groceries.filter((item) => item.toLowerCase().includes(search().toLowerCase().trim()))
     : groceries;
-
-  const options = filteredOptions.map((item) => (
-    <Combobox.Option value={item} key={item}>
-      {item}
-    </Combobox.Option>
-  ));
 
   return (
     <Combobox
@@ -103,10 +97,10 @@ function Demo() {
           onFocus={() => combobox.openDropdown()}
           onBlur={() => {
             combobox.closeDropdown();
-            setSearch(value || '');
+            setSearch(value() || '');
           }}
           placeholder="Search value"
-          value={search}
+          value={search()}
           onChange={(event) => {
             combobox.updateSelectedOptionIndex();
             setSearch(event.currentTarget.value);
@@ -116,14 +110,25 @@ function Demo() {
 
       <Combobox.Dropdown>
         <Combobox.Options>
-          {options.length > 0 ? options : <Combobox.Empty>Nothing found</Combobox.Empty>}
+          <Show
+            when={filteredOptions.length > 0}
+            fallback={<Combobox.Empty>Nothing found</Combobox.Empty>}
+          >
+            <For each={filteredOptions}>
+              {(item) => (
+                <Combobox.Option value={item}>
+                  {item}
+                </Combobox.Option>
+              )}
+            </For>
+          </Show>
         </Combobox.Options>
       </Combobox.Dropdown>
     </Combobox>
   );
 }
 
-export const searchableSelect: MantineDemo = {
+export const searchableSelect: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   maxWidth: 340,

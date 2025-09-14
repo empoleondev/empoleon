@@ -1,5 +1,5 @@
 import { SegmentedControl, Stack, Text } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { SegmentedControl } from '@empoleon/core';
@@ -109,7 +109,7 @@ function Demo() {
   );
 }
 
-export const disabled: MantineDemo = {
+export const disabled: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

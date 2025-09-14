@@ -1,5 +1,5 @@
 import { Select } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Select } from '@empoleon/core';
@@ -22,12 +22,12 @@ function Demo() {
       label="Your favorite library"
       placeholder="Pick value"
       data={['React', 'Angular', 'Vue', 'Svelte']}
-      comboboxProps={{ width: 200, position: 'bottom-start' }}
+      comboboxProps={{ width: '200px', position: 'bottom-start' }}
     />
   );
 }
 
-export const dropdownWidth: MantineDemo = {
+export const dropdownWidth: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

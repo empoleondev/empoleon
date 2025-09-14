@@ -1,5 +1,5 @@
 import { Image } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Image } from '@empoleon/core';
@@ -27,7 +27,7 @@ function Demo() {
   );
 }
 
-export const fallback: MantineDemo = {
+export const fallback: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

@@ -1,10 +1,10 @@
-import { IconStar } from '@tabler/icons-react';
+import { IconStar } from '@tabler/icons-solidjs';
 import { Avatar, Group } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Avatar } from '@empoleon/core';
-import { IconStar } from '@tabler/icons-react';
+import { IconStar } from '@tabler/icons-solidjs';
 
 function Demo() {
   return (
@@ -43,7 +43,7 @@ function Demo() {
   );
 }
 
-export const placeholders: MantineDemo = {
+export const placeholders: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

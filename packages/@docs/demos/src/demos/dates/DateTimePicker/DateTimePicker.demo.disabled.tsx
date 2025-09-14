@@ -1,5 +1,5 @@
 import { DateTimePicker } from '@empoleon/dates';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { DateTimePicker } from '@empoleon/dates';
@@ -13,7 +13,7 @@ function Demo() {
   return <DateTimePicker label="Disabled" placeholder="Pick date and time" disabled />;
 }
 
-export const disabled: MantineDemo = {
+export const disabled: EmpoleonDemo = {
   type: 'code',
   centered: true,
   maxWidth: 400,

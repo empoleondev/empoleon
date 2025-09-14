@@ -1,7 +1,7 @@
-import { useState } from 'react';
 import { Pagination, Text } from '@empoleon/core';
 import { randomId } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
+import { createSignal } from 'solid-js';
 
 const code = `
 import { useState } from 'react';
@@ -27,7 +27,7 @@ const data = chunk(
 function Demo() {
   const [activePage, setPage] = useState(1);
   const items = data[activePage - 1].map((item) => (
-    <Text key={item.id}>
+    <Text >
       id: {item.id}, name: {item.name}
     </Text>
   ));
@@ -58,9 +58,9 @@ const data = chunk(
 );
 
 function Demo() {
-  const [activePage, setPage] = useState(1);
-  const items = data[activePage - 1].map((item) => (
-    <Text key={item.id}>
+  const [activePage, setPage] = createSignal(1);
+  const items = data[activePage() - 1].map((item) => (
+    <Text >
       id: {item.id}, name: {item.name}
     </Text>
   ));
@@ -68,12 +68,12 @@ function Demo() {
   return (
     <>
       {items}
-      <Pagination total={data.length} value={activePage} onChange={setPage} mt="sm" />
+      <Pagination total={data.length} value={activePage()} onChange={setPage} mt="sm" />
     </>
   );
 }
 
-export const withContent: MantineDemo = {
+export const withContent: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

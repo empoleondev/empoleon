@@ -1,5 +1,5 @@
 import { AngleSlider, Group } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { AngleSlider, Group } from '@empoleon/core';
@@ -83,7 +83,7 @@ function Demo() {
   );
 }
 
-export const marks: MantineDemo = {
+export const marks: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

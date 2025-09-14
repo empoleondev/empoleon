@@ -1,5 +1,5 @@
 import { NativeSelect } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { inputControls } from '../../../shared';
 
 const code = `
@@ -14,7 +14,7 @@ function Wrapper(props: any) {
   return <NativeSelect {...props} data={['React', 'Angular', 'Vue']} />;
 }
 
-export const usage: MantineDemo = {
+export const usage: EmpoleonDemo = {
   type: 'configurator',
   component: Wrapper,
   code,

@@ -1,6 +1,6 @@
 import { Button, Code, Text, TextInput } from '@empoleon/core';
 import { hasLength, isEmail, useForm } from '@empoleon/form';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { createSignal } from 'solid-js';
 
 const code = `
@@ -67,7 +67,7 @@ function Demo() {
   );
 }
 
-export const controlled: MantineDemo = {
+export const controlled: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import { Box, Button, Combobox, Text, useCombobox } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
+import { createSignal, For } from 'solid-js';
 
 const code = `
 import { useState } from 'react';
@@ -15,7 +15,7 @@ function Demo() {
   });
 
   const options = groceries.map((item) => (
-    <Combobox.Option value={item} key={item}>
+    <Combobox.Option value={item} >
       {item}
     </Combobox.Option>
   ));
@@ -58,16 +58,10 @@ function Demo() {
 const groceries = ['🍎 Apples', '🍌 Bananas', '🥦 Broccoli', '🥕 Carrots', '🍫 Chocolate'];
 
 function Demo() {
-  const [selectedItem, setSelectedItem] = useState<string | null>(null);
+  const [selectedItem, setSelectedItem] = createSignal<string | null>(null);
   const combobox = useCombobox({
     onDropdownClose: () => combobox.resetSelectedOption(),
   });
-
-  const options = groceries.map((item) => (
-    <Combobox.Option value={item} key={item}>
-      {item}
-    </Combobox.Option>
-  ));
 
   return (
     <>
@@ -77,13 +71,13 @@ function Demo() {
         </Text>
 
         <Text span size="sm">
-          {selectedItem || 'Nothing selected'}
+          {selectedItem() || 'Nothing selected'}
         </Text>
       </Box>
 
       <Combobox
         store={combobox}
-        width={250}
+        width='250px'
         position="bottom-start"
         withArrow
         onOptionSubmit={(val) => {
@@ -96,14 +90,22 @@ function Demo() {
         </Combobox.Target>
 
         <Combobox.Dropdown>
-          <Combobox.Options>{options}</Combobox.Options>
+          <Combobox.Options>
+            <For each={groceries}>
+              {(item) => (
+                <Combobox.Option value={item}>
+                  {item}
+                </Combobox.Option>
+              )}
+            </For>
+          </Combobox.Options>
         </Combobox.Dropdown>
       </Combobox>
     </>
   );
 }
 
-export const button: MantineDemo = {
+export const button: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   maxWidth: 340,

@@ -1,10 +1,10 @@
-import { IconEyeCheck, IconEyeOff } from '@tabler/icons-react';
+import { IconEyeCheck, IconEyeOff } from '@tabler/icons-solidjs';
 import { PasswordInput } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { PasswordInput } from '@empoleon/core';
-import { IconEyeCheck, IconEyeOff } from '@tabler/icons-react';
+import { IconEyeCheck, IconEyeOff } from '@tabler/icons-solidjs';
 
 const VisibilityToggleIcon = ({ reveal }: { reveal: boolean }) =>
   reveal ? (
@@ -41,13 +41,13 @@ function Demo() {
       mx="auto"
       label="Change visibility toggle icon"
       placeholder="Change visibility toggle icon"
-      defaultValue="secret"
+      default-value="secret"
       visibilityToggleIcon={VisibilityToggleIcon}
     />
   );
 }
 
-export const visibilityIcon: MantineDemo = {
+export const visibilityIcon: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

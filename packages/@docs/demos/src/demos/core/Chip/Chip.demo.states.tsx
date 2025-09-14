@@ -1,5 +1,5 @@
 import { Chip, Group } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 function Demo() {
   return (
@@ -49,7 +49,7 @@ function Demo() {
   );
 }
 
-export const states: MantineDemo = {
+export const states: EmpoleonDemo = {
   type: 'code',
   component: Demo,
 };

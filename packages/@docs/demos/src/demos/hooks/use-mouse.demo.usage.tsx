@@ -1,6 +1,6 @@
 import { Code, Text } from '@empoleon/core';
 import { useMouse } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Text, Code } from '@empoleon/core';
@@ -26,7 +26,7 @@ function Demo() {
   );
 }
 
-export const useMouseUsage: MantineDemo = {
+export const useMouseUsage: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

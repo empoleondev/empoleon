@@ -1,6 +1,6 @@
 import cx from 'clsx';
-import { Container, createTheme, MantineThemeProvider } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { Container, createTheme, EmpoleonThemeProvider } from '@empoleon/core';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import classes from './Container.demo.responsive.module.css';
 
 const code = `
@@ -55,15 +55,15 @@ const theme = createTheme({
 
 function Demo() {
   return (
-    <MantineThemeProvider theme={theme}>
+    <EmpoleonThemeProvider theme={theme}>
       <Container size="responsive" bg="var(--mantine-color-blue-light)">
         Container with responsive size
       </Container>
-    </MantineThemeProvider>
+    </EmpoleonThemeProvider>
   );
 }
 
-export const responsive: MantineDemo = {
+export const responsive: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code: [

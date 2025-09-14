@@ -1,6 +1,6 @@
 import { IconBrandCodesandbox, IconMessage2 } from '@tabler/icons-solidjs';
 import { CodeHighlight, CodeHighlightControl } from '@empoleon/code-highlight';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const exampleCode = `
 function greet() {
@@ -63,7 +63,7 @@ function Demo() {
   );
 }
 
-export const customControl: MantineDemo = {
+export const customControl: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

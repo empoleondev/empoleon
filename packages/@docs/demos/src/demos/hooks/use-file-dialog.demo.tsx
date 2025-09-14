@@ -1,6 +1,6 @@
 import { Button, Group, List } from '@empoleon/core';
 import { useFileDialog } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Button, Group, List } from '@empoleon/core';
@@ -10,7 +10,7 @@ function Demo() {
   const fileDialog = useFileDialog();
 
   const pickedFiles = Array.from(fileDialog.files || []).map((file) => (
-    <List.Item key={file.name}>{file.name}</List.Item>
+    <List.Item >{file.name}</List.Item>
   ));
 
   return (
@@ -51,7 +51,7 @@ function Demo() {
   );
 }
 
-export const useFileDialogUsage: MantineDemo = {
+export const useFileDialogUsage: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

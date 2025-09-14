@@ -1,5 +1,5 @@
 import { Select } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import classes from './Select.demo.dropdownOffset.module.css';
 
 const cssCode = `.dropdown {
@@ -49,7 +49,7 @@ function Demo() {
   );
 }
 
-export const dropdownOffset: MantineDemo = {
+export const dropdownOffset: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code: [

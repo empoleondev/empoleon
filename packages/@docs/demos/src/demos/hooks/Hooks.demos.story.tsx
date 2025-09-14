@@ -1,7 +1,18 @@
+import { JSX } from 'solid-js';
 import { renderDemo } from '../../render-demo';
 import * as demos from './index';
+import { EmpoleonProvider } from '@empoleon/core';
 
-export default { title: 'Hooks' };
+export default {
+  title: 'Hooks',
+  decorators: [
+    (Story: () => JSX.Element) => (
+      <EmpoleonProvider>
+        <Story />
+      </EmpoleonProvider>
+    ),
+  ]
+};
 
 export const Demo_useClickOutsideEvents = {
   name: '⭐ Demo: useClickOutsideEvents',
@@ -76,11 +87,6 @@ export const Demo_useEventListenerDemo = {
 export const Demo_useFocusWithinDemo = {
   name: '⭐ Demo: useFocusWithinDemo',
   render: renderDemo(demos.useFocusWithinDemo),
-};
-
-export const Demo_useForceUpdateDemo = {
-  name: '⭐ Demo: useForceUpdateDemo',
-  render: renderDemo(demos.useForceUpdateDemo),
 };
 
 export const Demo_useFullscreenDemo = {
@@ -331,11 +337,6 @@ export const Demo_useThrottledCallbackUsage = {
 export const Demo_useOrientationUsage = {
   name: '⭐ Demo: useOrientationUsage',
   render: renderDemo(demos.useOrientationUsage),
-};
-
-export const Demo_useIsFirstRenderUsage = {
-  name: '⭐ Demo: useIsFirstRenderUsage',
-  render: renderDemo(demos.useIsFirstRenderUsage),
 };
 
 export const Demo_useRadialMoveUsage = {

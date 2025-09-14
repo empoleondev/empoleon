@@ -1,6 +1,6 @@
 import { Button, Stack } from '@empoleon/core';
 import { useFullscreen } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const refCode = `
 import { useFullscreen } from '@empoleon/hooks';
@@ -43,7 +43,7 @@ function RefDemo() {
   );
 }
 
-export const useFullscreenRefDemo: MantineDemo = {
+export const useFullscreenRefDemo: EmpoleonDemo = {
   type: 'code',
   code: refCode,
   component: RefDemo,

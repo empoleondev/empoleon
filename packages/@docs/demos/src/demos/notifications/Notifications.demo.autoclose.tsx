@@ -1,6 +1,6 @@
 import { Button, Group } from '@empoleon/core';
 import { notifications } from '@empoleon/notifications';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Group, Button } from '@empoleon/core';
@@ -77,7 +77,7 @@ function Demo() {
   );
 }
 
-export const autoclose: MantineDemo = {
+export const autoclose: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

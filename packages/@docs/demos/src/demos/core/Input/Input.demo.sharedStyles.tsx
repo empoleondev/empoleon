@@ -1,5 +1,5 @@
-import { createTheme, Input, MantineThemeProvider, NativeSelect, TextInput } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { createTheme, Input, EmpoleonThemeProvider, NativeSelect, TextInput } from '@empoleon/core';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import classes from './Input.demo.sharedStyles.module.css';
 
 const code = `
@@ -65,14 +65,14 @@ const theme = createTheme({
 
 function Demo() {
   return (
-    <MantineThemeProvider theme={theme}>
+    <EmpoleonThemeProvider theme={theme}>
       <TextInput label="Text input" placeholder="Text input" />
       <NativeSelect mt="md" label="Native select" data={['React', 'Angular', 'Vue', 'Svelte']} />
-    </MantineThemeProvider>
+    </EmpoleonThemeProvider>
   );
 }
 
-export const sharedStyles: MantineDemo = {
+export const sharedStyles: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   centered: true,

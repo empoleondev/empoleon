@@ -1,10 +1,10 @@
-import { Badge, Group, keys, MANTINE_TRANSITIONS, Tooltip } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { Badge, Group, keys, EMPOLEON_TRANSITIONS, Tooltip } from '@empoleon/core';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 export function Demo() {
-  const transitions = keys(MANTINE_TRANSITIONS).map((transition) => (
-    <Tooltip key={transition} label={transition} transitionProps={{ transition, duration: 300 }}>
-      <Badge variant="light">{transition}</Badge>
+  const transitions = keys(EMPOLEON_TRANSITIONS).map((transition) => (
+    <Tooltip label={transition} transitionProps={{ transition, duration: 300 }}>
+      {(props) => <Badge {...props} variant="light">{transition}</Badge>}
     </Tooltip>
   ));
 
@@ -15,7 +15,7 @@ export function Demo() {
   );
 }
 
-export const transitions: MantineDemo = {
+export const transitions: EmpoleonDemo = {
   type: 'code',
   component: Demo,
 };

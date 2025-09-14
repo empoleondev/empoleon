@@ -1,12 +1,12 @@
-import { forwardRef } from 'react';
-import { IconChevronRight } from '@tabler/icons-react';
+import { IconChevronRight } from '@tabler/icons-solidjs';
 import { Avatar, Group, Menu, Text, UnstyledButton } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { DemoMenuItems } from './_menu-items';
+import { JSX } from 'solid-js';
 
 const code = `
 import { forwardRef } from 'react';
-import { IconChevronRight } from '@tabler/icons-react';
+import { IconChevronRight } from '@tabler/icons-solidjs';
 import { Group, Avatar, Text, Menu, UnstyledButton } from '@empoleon/core';
 
 interface UserButtonProps extends React.ComponentPropsWithoutRef<'button'> {
@@ -62,41 +62,39 @@ function Demo() {
 }
 `;
 
-interface UserButtonProps extends React.ComponentPropsWithoutRef<'button'> {
+interface UserButtonProps extends JSX.ButtonHTMLAttributes<HTMLButtonElement> {
   image: string;
   name: string;
   email: string;
-  icon?: React.ReactNode;
+  icon?: JSX.Element;
 }
 
-const UserButton = forwardRef<HTMLButtonElement, UserButtonProps>(
-  ({ image, name, email, icon, ...others }: UserButtonProps, ref) => (
-    <UnstyledButton
-      ref={ref}
-      style={{
-        padding: 'var(--mantine-spacing-md)',
-        color: 'var(--mantine-color-text)',
-        borderRadius: 'var(--mantine-radius-sm)',
-      }}
-      {...others}
-    >
-      <Group>
-        <Avatar src={image} radius="xl" />
+const UserButton = ({ image, name, email, icon, ...others }: UserButtonProps, ref: any) => (
+  <UnstyledButton
+    ref={ref}
+    style={{
+      padding: 'var(--mantine-spacing-md)',
+      color: 'var(--mantine-color-text)',
+      'border-radius': 'var(--mantine-radius-sm)',
+    } as any}
+    {...others}
+  >
+    <Group>
+      <Avatar src={image} radius="xl" />
 
-        <div style={{ flex: 1 }}>
-          <Text size="sm" fw={500}>
-            {name}
-          </Text>
+      <div style={{ flex: 1 }}>
+        <Text size="sm" fw={500}>
+          {name}
+        </Text>
 
-          <Text c="dimmed" size="xs">
-            {email}
-          </Text>
-        </div>
+        <Text c="dimmed" size="xs">
+          {email}
+        </Text>
+      </div>
 
-        {icon || <IconChevronRight size={16} />}
-      </Group>
-    </UnstyledButton>
-  )
+      {icon || <IconChevronRight size={16} />}
+    </Group>
+  </UnstyledButton>
 );
 
 function Demo() {
@@ -114,7 +112,7 @@ function Demo() {
   );
 }
 
-export const customControl: MantineDemo = {
+export const customControl: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

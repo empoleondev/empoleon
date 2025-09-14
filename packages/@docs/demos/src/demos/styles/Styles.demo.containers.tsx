@@ -1,4 +1,4 @@
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import classes from './Styles.demo.containers.module.css';
 
 const cssCode = `.root {
@@ -44,7 +44,7 @@ function Demo() {
   );
 }
 
-export const containers: MantineDemo = {
+export const containers: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code: [

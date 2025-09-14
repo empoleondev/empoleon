@@ -1,6 +1,6 @@
 import { Group, Table } from '@empoleon/core';
 import { useResizeObserver } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import classes from './use-resize-observer.demo.usage.module.css';
 
 const code = `
@@ -84,7 +84,7 @@ function Demo() {
   );
 }
 
-export const useResizeObserverDemo: MantineDemo = {
+export const useResizeObserverDemo: EmpoleonDemo = {
   type: 'code',
   code: [
     { code, language: 'tsx', fileName: 'Demo.tsx' },

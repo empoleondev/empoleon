@@ -1,5 +1,5 @@
 import { Button, Group } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { BaseDemo } from './_base';
 import { createSignal } from 'solid-js';
 
@@ -38,7 +38,7 @@ function Demo() {
   );
 }
 
-export const manual: MantineDemo = {
+export const manual: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

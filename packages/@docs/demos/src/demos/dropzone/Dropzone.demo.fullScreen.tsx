@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { Button, Group } from '@empoleon/core';
 import { Dropzone, IMAGE_MIME_TYPE } from '@empoleon/dropzone';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { DropzoneDemoChildren } from './_base';
 import { createSignal } from 'solid-js';
 
@@ -32,13 +32,13 @@ function Demo() {
       >
         <Group justify="center" gap="xl" mih={220} style={{ pointerEvents: 'none' }}>
           <Dropzone.Accept>
-            <IconUpload size={52} color="var(--mantine-color-blue-6)" stroke={1.5} />
+            <IconUpload size={52} color="var(--mantine-color-blue-6)" stroke='1.5' />
           </Dropzone.Accept>
           <Dropzone.Reject>
-            <IconX size={52} color="var(--mantine-color-red-6)" stroke={1.5} />
+            <IconX size={52} color="var(--mantine-color-red-6)" stroke='1.5' />
           </Dropzone.Reject>
           <Dropzone.Idle>
-            <IconPhoto size={52} color="var(--mantine-color-dimmed)" stroke={1.5} />
+            <IconPhoto size={52} color="var(--mantine-color-dimmed)" stroke='1.5' />
           </Dropzone.Idle>
 
           <div>
@@ -81,7 +81,7 @@ function Demo() {
   );
 }
 
-export const fullScreen: MantineDemo = {
+export const fullScreen: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

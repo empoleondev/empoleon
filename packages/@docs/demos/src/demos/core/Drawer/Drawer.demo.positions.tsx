@@ -1,10 +1,10 @@
-import { useState } from 'react';
 import { Button, Drawer, Group } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
+import { createSignal } from 'solid-js';
 
 function Demo() {
-  const [opened, setOpened] = useState(false);
-  const [position, setPosition] = useState<'top' | 'left' | 'right' | 'bottom'>('top');
+  const [opened, setOpened] = createSignal(false);
+  const [position, setPosition] = createSignal<'top' | 'left' | 'right' | 'bottom'>('top');
   const open = (p: typeof position) => {
     setPosition(p);
     setOpened(true);
@@ -13,26 +13,26 @@ function Demo() {
   return (
     <>
       <Drawer
-        opened={opened}
+        opened={opened()}
         onClose={() => setOpened(false)}
         padding="md"
-        position={position}
+        position={position()}
         withCloseButton={false}
       >
         Press escape to close the drawer
       </Drawer>
 
       <Group justify="center">
-        <Button variant="default" onClick={() => open('left')}>
+        <Button variant="default" onClick={() => open(() => 'left')}>
           Left
         </Button>
-        <Button variant="default" onClick={() => open('right')}>
+        <Button variant="default" onClick={() => open(() => 'right')}>
           Right
         </Button>
-        <Button variant="default" onClick={() => open('top')}>
+        <Button variant="default" onClick={() => open(() => 'top')}>
           Top
         </Button>
-        <Button variant="default" onClick={() => open('bottom')}>
+        <Button variant="default" onClick={() => open(() => 'bottom')}>
           Bottom
         </Button>
       </Group>
@@ -40,7 +40,7 @@ function Demo() {
   );
 }
 
-export const positions: MantineDemo = {
+export const positions: EmpoleonDemo = {
   type: 'code',
   component: Demo,
 };

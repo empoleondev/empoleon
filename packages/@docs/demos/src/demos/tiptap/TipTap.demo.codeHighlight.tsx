@@ -4,7 +4,7 @@ import StarterKit from '@tiptap/starter-kit';
 import tsLanguageSyntax from 'highlight.js/lib/languages/typescript';
 import { createLowlight } from 'lowlight';
 import { RichTextEditor } from '@empoleon/tiptap';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const lowlight = createLowlight();
 
@@ -151,7 +151,7 @@ function Demo() {
   );
 }
 
-export const codeHighlight: MantineDemo = {
+export const codeHighlight: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

@@ -1,5 +1,5 @@
 import { DatePicker } from '@empoleon/dates';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { DatePicker } from '@empoleon/dates';
@@ -13,7 +13,7 @@ function Demo() {
   return <DatePicker hideWeekdays />;
 }
 
-export const hideWeekdays: MantineDemo = {
+export const hideWeekdays: EmpoleonDemo = {
   type: 'code',
   centered: true,
   component: Demo,

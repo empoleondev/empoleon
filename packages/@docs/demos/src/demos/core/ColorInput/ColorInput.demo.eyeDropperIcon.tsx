@@ -1,15 +1,15 @@
-import { IconFocus2 } from '@tabler/icons-react';
+import { IconFocus2 } from '@tabler/icons-solidjs';
 import { ColorInput } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { ColorInput } from '@empoleon/core';
-import { IconFocus2 } from '@tabler/icons-react';
+import { IconFocus2 } from '@tabler/icons-solidjs';
 
 function Demo() {
   return (
     <ColorInput
-      eyeDropperIcon={<IconFocus2 size={18} stroke={1.5} />}
+      eyeDropperIcon={<IconFocus2 size={18} stroke='1.5' />}
       label="With custom eye dropper icon"
       placeholder="Pick color"
     />
@@ -20,14 +20,14 @@ function Demo() {
 function Demo() {
   return (
     <ColorInput
-      eyeDropperIcon={<IconFocus2 size={18} stroke={1.5} />}
+      eyeDropperIcon={<IconFocus2 size={18} stroke='1.5' />}
       label="With custom eye dropper icon"
       placeholder="Pick color"
     />
   );
 }
 
-export const eyeDropperIcon: MantineDemo = {
+export const eyeDropperIcon: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

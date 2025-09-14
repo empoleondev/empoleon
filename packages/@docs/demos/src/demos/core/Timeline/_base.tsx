@@ -3,7 +3,7 @@ import {
   IconGitCommit,
   IconGitPullRequest,
   IconMessageDots,
-} from '@tabler/icons-react';
+} from '@tabler/icons-solidjs';
 import { Text, Timeline, TimelineProps } from '@empoleon/core';
 
 export function TimelineBase({ noIcon, ...props }: Partial<TimelineProps> & { noIcon?: boolean }) {

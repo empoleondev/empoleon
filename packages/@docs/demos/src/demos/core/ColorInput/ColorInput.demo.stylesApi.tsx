@@ -1,5 +1,5 @@
 import { ColorInput } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { ColorInputStylesApi } from '@docs/styles-api';
 
 const code = `
@@ -36,7 +36,7 @@ function Demo(props: any) {
   );
 }
 
-export const stylesApi: MantineDemo = {
+export const stylesApi: EmpoleonDemo = {
   type: 'styles-api',
   data: ColorInputStylesApi,
   component: Demo,

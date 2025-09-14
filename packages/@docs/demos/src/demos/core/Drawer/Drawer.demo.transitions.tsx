@@ -1,6 +1,6 @@
 import { Button, Drawer } from '@empoleon/core';
 import { useDisclosure } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { AuthenticationForm } from '../../../shared/AuthenticationForm/AuthenticationForm';
 
 const code = `
@@ -13,7 +13,7 @@ function Demo() {
   return (
     <>
       <Drawer
-        opened={opened}
+        opened={opened()}
         onClose={close}
         title="Authentication"
         transitionProps={{ transition: 'rotate-left', duration: 150, timingFunction: 'linear' }}
@@ -36,7 +36,7 @@ function Demo() {
   return (
     <>
       <Drawer
-        opened={opened}
+        opened={opened()}
         onClose={close}
         title="Authentication"
         transitionProps={{ transition: 'rotate-left', duration: 150, timingFunction: 'linear' }}
@@ -51,7 +51,7 @@ function Demo() {
   );
 }
 
-export const transitions: MantineDemo = {
+export const transitions: EmpoleonDemo = {
   type: 'code',
   code,
   centered: true,

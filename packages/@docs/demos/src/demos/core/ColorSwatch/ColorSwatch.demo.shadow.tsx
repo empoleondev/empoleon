@@ -1,5 +1,5 @@
 import { ColorSwatch } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { ColorSwatch } from '@empoleon/core';
@@ -13,7 +13,7 @@ function Wrapper(props: any) {
   return <ColorSwatch color="rgba(255, 255, 255, 0.7)" {...props} />;
 }
 
-export const shadow: MantineDemo = {
+export const shadow: EmpoleonDemo = {
   type: 'configurator',
   component: Wrapper,
   code,

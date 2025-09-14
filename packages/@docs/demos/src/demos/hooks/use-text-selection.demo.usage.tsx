@@ -1,5 +1,5 @@
 import { useTextSelection } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { useTextSelection } from '@empoleon/hooks';
@@ -27,7 +27,7 @@ function Demo() {
   );
 }
 
-export const useTextSelectionUsage: MantineDemo = {
+export const useTextSelectionUsage: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

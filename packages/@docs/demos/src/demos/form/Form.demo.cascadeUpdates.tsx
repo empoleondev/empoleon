@@ -1,6 +1,6 @@
 import { Button, Code, Stack, TextInput } from '@empoleon/core';
 import { createFormContext } from '@empoleon/form';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { createSignal } from 'solid-js';
 
 const code = `
@@ -25,7 +25,7 @@ function Demo() {
         <TextInput
           label="Name"
           placeholder="Name"
-          key={form.key('person.name')}
+
           {...form.getInputProps('person.name')}
         />
         <Button onClick={() => form.setFieldValue("person", { name: "Jane Doe" })}>Set 'person' object to \`{'{ name: "Jane Doe" }'}\`</Button>
@@ -90,7 +90,7 @@ function Watcher() {
   return <Code block>{JSON.stringify({ person: person(), name: name() }, null, 2)}</Code>;
 }
 
-export const cascadeUpdates: MantineDemo = {
+export const cascadeUpdates: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

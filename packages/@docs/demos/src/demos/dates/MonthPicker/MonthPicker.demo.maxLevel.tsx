@@ -1,5 +1,5 @@
 import { MonthPicker } from '@empoleon/dates';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { MonthPicker } from '@empoleon/dates';
@@ -13,7 +13,7 @@ function Demo() {
   return <MonthPicker maxLevel="year" />;
 }
 
-export const maxLevel: MantineDemo = {
+export const maxLevel: EmpoleonDemo = {
   type: 'code',
   centered: true,
   component: Demo,

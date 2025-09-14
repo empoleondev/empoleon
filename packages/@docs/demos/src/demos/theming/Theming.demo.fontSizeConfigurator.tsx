@@ -1,5 +1,5 @@
 import { Text } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = (props: any) => `
 import { Text } from '@empoleon/core';
@@ -27,7 +27,7 @@ function Wrapper(props: any) {
   );
 }
 
-export const fontSizeConfigurator: MantineDemo = {
+export const fontSizeConfigurator: EmpoleonDemo = {
   type: 'configurator',
   component: Wrapper,
   code,

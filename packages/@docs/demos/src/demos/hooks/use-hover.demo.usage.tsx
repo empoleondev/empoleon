@@ -1,6 +1,6 @@
 import { Text } from '@empoleon/core';
 import { useHover } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { useHover } from '@empoleon/hooks';
@@ -33,7 +33,7 @@ function Demo() {
   );
 }
 
-export const useHoverDemo: MantineDemo = {
+export const useHoverDemo: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

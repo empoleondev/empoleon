@@ -1,5 +1,5 @@
 import { Pill } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { PillStylesApi } from '@docs/styles-api';
 import classes from './_demo.module.css';
 
@@ -14,7 +14,7 @@ function Demo() {
 
 function Demo(props: any) {
   return (
-    <div className={classes.demoWrapper}>
+    <div class={classes.demoWrapper}>
       <Pill {...props} withRemoveButton style={{ flex: 0 }}>
         Test pill
       </Pill>
@@ -22,7 +22,7 @@ function Demo(props: any) {
   );
 }
 
-export const stylesApi: MantineDemo = {
+export const stylesApi: EmpoleonDemo = {
   type: 'styles-api',
   data: PillStylesApi,
   component: Demo,

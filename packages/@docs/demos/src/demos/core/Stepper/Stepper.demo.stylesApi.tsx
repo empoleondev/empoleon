@@ -1,8 +1,8 @@
-import { useState } from 'react';
 import { Button, Group, Stepper } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { StepperStylesApi } from '@docs/styles-api';
 import { Content } from './_content';
+import { createSignal } from 'solid-js';
 
 const code = `
 import { Stepper } from '@empoleon/core';
@@ -39,13 +39,13 @@ function Demo() {
 `;
 
 function Demo(props: any) {
-  const [active, setActive] = useState(1);
+  const [active, setActive] = createSignal(1);
   const nextStep = () => setActive((current) => (current < 2 ? current + 1 : current));
   const prevStep = () => setActive((current) => (current > 0 ? current - 1 : current));
 
   return (
     <>
-      <Stepper active={active} onStepClick={setActive} {...props}>
+      <Stepper active={active()} onStepClick={setActive} {...props}>
         <Stepper.Step label="First step" description="Create an account" loading>
           <Content>Step 1 content: Create an account</Content>
         </Stepper.Step>
@@ -68,7 +68,7 @@ function Demo(props: any) {
   );
 }
 
-export const stylesApi: MantineDemo = {
+export const stylesApi: EmpoleonDemo = {
   type: 'styles-api',
   centered: true,
   maxWidth: '100%',

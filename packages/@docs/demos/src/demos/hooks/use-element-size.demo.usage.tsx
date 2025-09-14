@@ -1,6 +1,6 @@
 import { Group, Text, useEmpoleonTheme } from '@empoleon/core';
 import { useElementSize } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { useElementSize } from '@empoleon/hooks';
@@ -46,7 +46,7 @@ function Demo() {
   );
 }
 
-export const useElementSizeDemo: MantineDemo = {
+export const useElementSizeDemo: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

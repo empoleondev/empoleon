@@ -1,5 +1,5 @@
 import { YearPicker } from '@empoleon/dates';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { createSignal } from 'solid-js';
 
 const code = `
@@ -17,7 +17,7 @@ function Demo() {
   return <YearPicker defaultDate="2040-02-01" value={value()} onChange={setValue} />;
 }
 
-export const defaultDate: MantineDemo = {
+export const defaultDate: EmpoleonDemo = {
   type: 'code',
   centered: true,
   component: Demo,

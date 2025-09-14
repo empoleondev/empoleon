@@ -1,5 +1,5 @@
 import { Menu } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { MenuStylesApi } from '@docs/styles-api';
 import { DemoMenuItems } from './_menu-items';
 
@@ -23,7 +23,7 @@ function Demo(props: any) {
   );
 }
 
-export const stylesApi: MantineDemo = {
+export const stylesApi: EmpoleonDemo = {
   type: 'styles-api',
   data: MenuStylesApi,
   component: Demo,

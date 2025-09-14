@@ -1,5 +1,5 @@
 import { MonthPicker } from '@empoleon/dates';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { createSignal } from 'solid-js';
 
 const code = `
@@ -31,7 +31,7 @@ function Demo() {
   );
 }
 
-export const labelFormat: MantineDemo = {
+export const labelFormat: EmpoleonDemo = {
   type: 'code',
   centered: true,
   component: Demo,

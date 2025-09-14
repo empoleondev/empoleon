@@ -1,6 +1,6 @@
 import { Table, Text } from '@empoleon/core';
 import { useNetwork } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Text, Table } from '@empoleon/core';
@@ -107,7 +107,7 @@ function Demo() {
   );
 }
 
-export const useNetworkDemo: MantineDemo = {
+export const useNetworkDemo: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

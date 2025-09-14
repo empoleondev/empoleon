@@ -8,7 +8,7 @@ import {
   rgba,
   VariantColorsResolver,
 } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import {
@@ -137,7 +137,7 @@ function Demo() {
   );
 }
 
-export const variantColorsResolver: MantineDemo = {
+export const variantColorsResolver: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   centered: true,

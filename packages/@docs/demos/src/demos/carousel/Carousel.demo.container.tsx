@@ -1,5 +1,5 @@
 import { Carousel } from '@empoleon/carousel';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { Slides } from './_slides';
 
 const code = `
@@ -63,7 +63,7 @@ function Demo() {
   );
 }
 
-export const container: MantineDemo = {
+export const container: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

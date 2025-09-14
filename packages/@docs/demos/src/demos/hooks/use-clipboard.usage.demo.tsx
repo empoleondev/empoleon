@@ -1,6 +1,6 @@
 import { Button } from '@empoleon/core';
 import { useClipboard } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Button } from '@empoleon/core';
@@ -32,7 +32,7 @@ function Demo() {
   );
 }
 
-export const useClipboardDemo: MantineDemo = {
+export const useClipboardDemo: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

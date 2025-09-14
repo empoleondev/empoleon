@@ -1,5 +1,5 @@
 import { Button, MultiSelect, Popover } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Popover, Button, MultiSelect } from '@empoleon/core';
@@ -25,7 +25,7 @@ function Demo() {
 
 function Demo() {
   return (
-    <Popover width={300} position="bottom" withArrow shadow="md">
+    <Popover width='300px' position="bottom" withArrow shadow="md">
       <Popover.Target>
         <Button>Toggle popover</Button>
       </Popover.Target>
@@ -41,7 +41,7 @@ function Demo() {
   );
 }
 
-export const withinPopover: MantineDemo = {
+export const withinPopover: EmpoleonDemo = {
   type: 'code',
   code,
   centered: true,

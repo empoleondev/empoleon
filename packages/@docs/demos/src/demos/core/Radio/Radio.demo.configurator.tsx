@@ -1,5 +1,5 @@
 import { Radio, RadioProps } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Radio } from '@empoleon/core';
@@ -22,7 +22,7 @@ function Wrapper(props: RadioProps) {
   );
 }
 
-export const configurator: MantineDemo = {
+export const configurator: EmpoleonDemo = {
   type: 'configurator',
   component: Wrapper,
   code,

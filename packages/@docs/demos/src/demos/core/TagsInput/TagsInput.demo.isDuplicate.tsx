@@ -1,5 +1,5 @@
 import { TagsInput } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { TagsInput } from '@empoleon/core';
@@ -27,7 +27,7 @@ function Demo() {
   );
 }
 
-export const isDuplicate: MantineDemo = {
+export const isDuplicate: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

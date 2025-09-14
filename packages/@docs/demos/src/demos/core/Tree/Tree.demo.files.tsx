@@ -1,6 +1,6 @@
-import { IconFolder, IconFolderOpen } from '@tabler/icons-react';
+import { IconFolder, IconFolderOpen } from '@tabler/icons-solidjs';
 import { Group, RenderTreeNodePayload, Tree } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { CssIcon, NpmIcon, TypeScriptCircleIcon } from '@empoleonx/dev-icons';
 import { data, dataCode } from './data';
 import classes from './Tree.demo.files.module.css';
@@ -40,7 +40,7 @@ const cssCode = `.root {
 }`;
 
 const code = `
-import { IconFolder, IconFolderOpen } from '@tabler/icons-react';
+import { IconFolder, IconFolderOpen } from '@tabler/icons-solidjs';
 import { Group, RenderTreeNodePayload, Tree } from '@empoleon/core';
 import { CssIcon, NpmIcon, TypeScriptCircleIcon } from '@empoleonx/dev-icons';
 import { data, dataCode } from './data';
@@ -119,9 +119,9 @@ function FileIcon({ name, isFolder, expanded }: FileIconProps) {
 
   if (isFolder) {
     return expanded ? (
-      <IconFolderOpen color="var(--mantine-color-yellow-9)" size={14} stroke={2.5} />
+      <IconFolderOpen color="var(--mantine-color-yellow-9)" size={14} stroke='2.5' />
     ) : (
-      <IconFolder color="var(--mantine-color-yellow-9)" size={14} stroke={2.5} />
+      <IconFolder color="var(--mantine-color-yellow-9)" size={14} stroke='2.5' />
     );
   }
 
@@ -149,7 +149,7 @@ function Demo() {
   );
 }
 
-export const files: MantineDemo = {
+export const files: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   centered: true,

@@ -1,10 +1,10 @@
-import { IconX } from '@tabler/icons-react';
+import { IconX } from '@tabler/icons-solidjs';
 import { Chip } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Chip } from '@empoleon/core';
-import { IconX } from '@tabler/icons-react';
+import { IconX } from '@tabler/icons-solidjs';
 
 function Demo() {
   return (
@@ -28,7 +28,7 @@ function Demo() {
   );
 }
 
-export const icon: MantineDemo = {
+export const icon: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

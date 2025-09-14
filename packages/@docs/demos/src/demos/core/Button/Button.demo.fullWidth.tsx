@@ -1,5 +1,5 @@
 import { Button } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Button } from '@empoleon/core';
@@ -13,7 +13,7 @@ function Demo() {
   return <Button fullWidth>Full width button</Button>;
 }
 
-export const fullWidth: MantineDemo = {
+export const fullWidth: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

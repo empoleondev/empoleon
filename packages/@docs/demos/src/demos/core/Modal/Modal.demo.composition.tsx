@@ -1,6 +1,6 @@
 import { Button, Modal } from '@empoleon/core';
 import { useDisclosure } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { useDisclosure } from '@empoleon/hooks';
@@ -11,7 +11,7 @@ function Demo() {
 
   return (
     <>
-      <Modal.Root opened={opened} onClose={close}>
+      <Modal.Root opened={opened()} onClose={close}>
         <Modal.Overlay />
         <Modal.Content>
           <Modal.Header>
@@ -35,7 +35,7 @@ function Demo() {
 
   return (
     <>
-      <Modal.Root opened={opened} onClose={close}>
+      <Modal.Root opened={opened()} onClose={close}>
         <Modal.Overlay />
         <Modal.Content>
           <Modal.Header>
@@ -53,7 +53,7 @@ function Demo() {
   );
 }
 
-export const composition: MantineDemo = {
+export const composition: EmpoleonDemo = {
   type: 'code',
   code,
   centered: true,

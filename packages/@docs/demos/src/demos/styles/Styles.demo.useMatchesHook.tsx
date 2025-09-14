@@ -1,5 +1,5 @@
 import { Box, useMatches } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Box, useMatches } from '@empoleon/core';
@@ -33,7 +33,7 @@ function Demo() {
   );
 }
 
-export const useMatchesHook: MantineDemo = {
+export const useMatchesHook: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

@@ -1,7 +1,7 @@
 import { TextInput } from '@empoleon/core';
 import { getHotkeyHandler } from '@empoleon/hooks';
 import { notifications } from '@empoleon/notifications';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { createSignal } from 'solid-js';
 
 const code = `
@@ -50,7 +50,7 @@ function Demo() {
   );
 }
 
-export const useHotkeysDemo: MantineDemo = {
+export const useHotkeysDemo: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

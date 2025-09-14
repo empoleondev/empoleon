@@ -1,7 +1,7 @@
-import { useState } from 'react';
 import { Box, Button, Paper, Transition } from '@empoleon/core';
 import { useClickOutside } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
+import { createSignal } from 'solid-js';
 
 const code = `
 import { useState } from 'react';
@@ -61,7 +61,7 @@ const scaleY = {
 };
 
 export function Demo() {
-  const [opened, setOpened] = useState(false);
+  const [opened, setOpened] = createSignal(false);
   const clickOutsideRef = useClickOutside(() => setOpened(false));
 
   return (
@@ -72,7 +72,7 @@ export function Demo() {
     >
       <Button onClick={() => setOpened(true)}>Open dropdown</Button>
       <Transition
-        mounted={opened}
+        mounted={opened()}
         transition={scaleY}
         duration={200}
         timingFunction="ease"
@@ -98,7 +98,7 @@ export function Demo() {
   );
 }
 
-export const custom: MantineDemo = {
+export const custom: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

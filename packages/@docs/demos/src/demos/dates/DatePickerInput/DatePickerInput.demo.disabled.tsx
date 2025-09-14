@@ -1,5 +1,5 @@
 import { DatePickerInput } from '@empoleon/dates';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { DatePickerInput } from '@empoleon/dates';
@@ -29,7 +29,7 @@ function Demo() {
   );
 }
 
-export const disabled: MantineDemo = {
+export const disabled: EmpoleonDemo = {
   type: 'code',
   centered: true,
   maxWidth: 400,

@@ -1,7 +1,7 @@
-import { useState } from 'react';
 import { Button, Group, Stepper } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { Content } from './_content';
+import { createSignal } from 'solid-js';
 
 const code = `
 import { useState } from 'react';
@@ -67,8 +67,8 @@ function Demo() {
 `;
 
 function Demo() {
-  const [active, setActive] = useState(1);
-  const [highestStepVisited, setHighestStepVisited] = useState(active);
+  const [active, setActive] = createSignal(1);
+  const [highestStepVisited, setHighestStepVisited] = createSignal(active());
 
   const handleStepChange = (nextStep: number) => {
     const isOutOfBounds = nextStep > 3 || nextStep < 0;
@@ -82,11 +82,11 @@ function Demo() {
   };
 
   // Allow the user to freely go back and forth between visited steps.
-  const shouldAllowSelectStep = (step: number) => highestStepVisited >= step && active !== step;
+  const shouldAllowSelectStep = (step: number) => highestStepVisited() >= step && active() !== step;
 
   return (
     <>
-      <Stepper active={active} onStepClick={setActive}>
+      <Stepper active={active()} onStepClick={setActive}>
         <Stepper.Step
           label="First step"
           description="Create an account"
@@ -115,16 +115,16 @@ function Demo() {
       </Stepper>
 
       <Group justify="center" mt="xl">
-        <Button variant="default" onClick={() => handleStepChange(active - 1)}>
+        <Button variant="default" onClick={() => handleStepChange(active() - 1)}>
           Back
         </Button>
-        <Button onClick={() => handleStepChange(active + 1)}>Next step</Button>
+        <Button onClick={() => handleStepChange(active() + 1)}>Next step</Button>
       </Group>
     </>
   );
 }
 
-export const allowStepSelect: MantineDemo = {
+export const allowStepSelect: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

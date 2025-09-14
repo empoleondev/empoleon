@@ -1,13 +1,13 @@
 import { Skeleton, SkeletonProps } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 function Wrapper(props: Partial<SkeletonProps>) {
   return (
     <div>
-      <Skeleton height={50} circle mb="xl" {...props} />
-      <Skeleton height={8} radius="xl" {...props} />
-      <Skeleton height={8} mt={6} radius="xl" {...props} />
-      <Skeleton height={8} mt={6} width="70%" radius="xl" {...props} />
+      <Skeleton height='50px' circle mb="xl" {...props} />
+      <Skeleton height='8px' radius="xl" {...props} />
+      <Skeleton height='8px' mt={6} radius="xl" {...props} />
+      <Skeleton height='8px' mt={6} width="70%" radius="xl" {...props} />
     </div>
   );
 }
@@ -29,7 +29,7 @@ const code = (props: any) => `
   }
   `;
 
-export const configurator: MantineDemo = {
+export const configurator: EmpoleonDemo = {
   type: 'configurator',
   component: Wrapper,
   code,

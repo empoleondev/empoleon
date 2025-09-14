@@ -1,5 +1,5 @@
 import { Button, Group, Tree, useTree } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { data, dataCode } from './data';
 
 const code = `
@@ -35,7 +35,7 @@ function Demo() {
   );
 }
 
-export const controller: MantineDemo = {
+export const controller: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code: [

@@ -1,6 +1,6 @@
 import { Button, Select } from '@empoleon/core';
 import { useDisclosure } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Select, Button } from '@empoleon/core';
@@ -37,13 +37,13 @@ function Demo() {
         label="Your favorite library"
         placeholder="Pick value"
         data={['React', 'Angular', 'Vue', 'Svelte']}
-        dropdownOpened={dropdownOpened}
+        dropdownOpened={dropdownOpened()}
       />
     </>
   );
 }
 
-export const dropdownOpened: MantineDemo = {
+export const dropdownOpened: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

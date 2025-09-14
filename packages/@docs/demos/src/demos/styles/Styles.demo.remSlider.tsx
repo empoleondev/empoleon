@@ -1,5 +1,5 @@
 import { Slider } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { createEffect } from 'solid-js';
 
 const code = `
@@ -38,7 +38,7 @@ function Demo() {
   );
 }
 
-export const remSlider: MantineDemo = {
+export const remSlider: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   maxWidth: 340,

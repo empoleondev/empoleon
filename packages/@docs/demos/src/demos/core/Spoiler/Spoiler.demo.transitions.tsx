@@ -1,4 +1,4 @@
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { Wrapper } from './_wrapper';
 
 const code = `
@@ -17,7 +17,7 @@ function Demo() {
   return <Wrapper transitionDuration={0} />;
 }
 
-export const transitions: MantineDemo = {
+export const transitions: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

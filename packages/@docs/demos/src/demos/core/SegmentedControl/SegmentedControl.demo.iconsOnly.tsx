@@ -1,10 +1,10 @@
-import { IconCode, IconExternalLink, IconEye } from '@tabler/icons-react';
+import { IconCode, IconExternalLink, IconEye } from '@tabler/icons-solidjs';
 import { SegmentedControl, VisuallyHidden } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { SegmentedControl, VisuallyHidden } from '@empoleon/core';
-import { IconEye, IconCode, IconExternalLink } from '@tabler/icons-react';
+import { IconEye, IconCode, IconExternalLink } from '@tabler/icons-solidjs';
 
 function Demo() {
   const iconProps = {
@@ -53,7 +53,7 @@ function Demo() {
   const iconProps = {
     style: { display: 'block' },
     size: 20,
-    stroke: 1.5,
+    stroke: '1.5',
   };
 
   return (
@@ -91,7 +91,7 @@ function Demo() {
   );
 }
 
-export const iconsOnly: MantineDemo = {
+export const iconsOnly: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   centered: true,

@@ -1,6 +1,6 @@
 import { Button, Group, Text } from '@empoleon/core';
 import { useWindowScroll } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { useWindowScroll } from '@empoleon/hooks';
@@ -33,7 +33,7 @@ function Demo() {
   );
 }
 
-export const useWindowScrollDemo: MantineDemo = {
+export const useWindowScrollDemo: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

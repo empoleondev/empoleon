@@ -1,5 +1,5 @@
 import { Menu } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { DemoMenuItems } from './_menu-items';
 
 const code = `
@@ -11,7 +11,7 @@ import {
   IconMessageCircle,
   IconTrash,
   IconArrowsLeftRight,
-} from '@tabler/icons-react';
+} from '@tabler/icons-solidjs';
 
 function Demo() {
   return (
@@ -64,13 +64,13 @@ function Demo() {
 
 function Demo() {
   return (
-    <Menu shadow="md" width={200} withinPortal>
+    <Menu shadow="md" width='200px' withinPortal>
       <DemoMenuItems />
     </Menu>
   );
 }
 
-export const usage: MantineDemo = {
+export const usage: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

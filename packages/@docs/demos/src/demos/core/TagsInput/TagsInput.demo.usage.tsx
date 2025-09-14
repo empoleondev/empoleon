@@ -1,5 +1,5 @@
 import { TagsInput } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { TagsInput } from '@empoleon/core';
@@ -13,7 +13,7 @@ function Demo() {
   return <TagsInput label="Press Enter to submit a tag" placeholder="Enter tag" />;
 }
 
-export const usage: MantineDemo = {
+export const usage: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

@@ -1,5 +1,5 @@
 import { Combobox, TextInput, useCombobox } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { ComboboxStylesApi } from '@docs/styles-api';
 
 const code = `
@@ -43,7 +43,7 @@ function Demo() {
 
 function Demo(props: any) {
   const combobox = useCombobox({
-    opened: true,
+    opened: () => true,
   });
 
   return (
@@ -78,7 +78,7 @@ function Demo(props: any) {
   );
 }
 
-export const stylesApi: MantineDemo = {
+export const stylesApi: EmpoleonDemo = {
   type: 'styles-api',
   data: ComboboxStylesApi,
   component: Demo,

@@ -1,7 +1,7 @@
 import { IconCheck } from '@tabler/icons-solidjs';
 import { Button } from '@empoleon/core';
 import { notifications } from '@empoleon/notifications';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Button } from '@empoleon/core';
@@ -69,7 +69,7 @@ function Demo() {
   );
 }
 
-export const update: MantineDemo = {
+export const update: EmpoleonDemo = {
   type: 'code',
   code,
   centered: true,

@@ -1,10 +1,10 @@
-import { IconCircleX } from '@tabler/icons-react';
+import { IconCircleX } from '@tabler/icons-solidjs';
 import { Stepper } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Stepper } from '@empoleon/core';
-import { IconCircleX } from '@tabler/icons-react';
+import { IconCircleX } from '@tabler/icons-solidjs';
 
 function Demo() {
   return (
@@ -37,7 +37,7 @@ function Demo() {
   );
 }
 
-export const stepColor: MantineDemo = {
+export const stepColor: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

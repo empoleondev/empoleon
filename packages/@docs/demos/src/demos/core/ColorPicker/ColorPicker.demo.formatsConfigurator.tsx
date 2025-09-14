@@ -1,14 +1,14 @@
-import { useState } from 'react';
 import { ColorPicker, ColorPickerProps, Stack, Text } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
+import { createSignal } from 'solid-js';
 
 function Wrapper(props: ColorPickerProps) {
-  const [value, onChange] = useState('#C5D899');
+  const [value, onChange] = createSignal('#C5D899');
 
   return (
     <Stack align="center">
-      <ColorPicker value={value} onChange={onChange} {...props} />
-      <Text>{value}</Text>
+      <ColorPicker value={value()} onChange={onChange} {...props} />
+      <Text>{value()}</Text>
     </Stack>
   );
 }
@@ -21,7 +21,7 @@ function Demo() {
 }
 `;
 
-export const formatsConfigurator: MantineDemo = {
+export const formatsConfigurator: EmpoleonDemo = {
   type: 'configurator',
   component: Wrapper,
   code,

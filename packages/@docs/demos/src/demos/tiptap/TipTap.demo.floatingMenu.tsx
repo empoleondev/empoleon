@@ -1,7 +1,7 @@
 import { FloatingMenu, useEditor } from '@empoleon/solid-tiptap';
 import StarterKit from '@tiptap/starter-kit';
 import { Link, RichTextEditor } from '@empoleon/tiptap';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { useEditor, FloatingMenu } from '@empoleon/solid-tiptap';
@@ -53,7 +53,7 @@ function Demo() {
   );
 }
 
-export const floatingMenu: MantineDemo = {
+export const floatingMenu: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

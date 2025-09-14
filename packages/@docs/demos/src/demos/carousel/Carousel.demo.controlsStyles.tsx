@@ -1,5 +1,5 @@
 import { Carousel } from '@empoleon/carousel';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { Slides } from './_slides';
 import classes from './Carousel.demo.controlsStyles.module.css';
 
@@ -36,7 +36,7 @@ function Demo() {
   );
 }
 
-export const controlsStyles: MantineDemo = {
+export const controlsStyles: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code: [

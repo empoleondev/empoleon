@@ -1,5 +1,5 @@
 import { TimePicker } from '@empoleon/dates';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { TimePicker } from '@empoleon/dates';
@@ -13,7 +13,7 @@ function Demo() {
   return <TimePicker label="Enter time" format="12h" />;
 }
 
-export const format12h: MantineDemo = {
+export const format12h: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

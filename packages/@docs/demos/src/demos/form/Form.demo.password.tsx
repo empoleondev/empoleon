@@ -2,7 +2,7 @@
 
 import { Box, Button, Group, PasswordInput } from '@empoleon/core';
 import { useForm } from '@empoleon/form';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { useForm } from '@empoleon/form';
@@ -28,7 +28,7 @@ function Demo() {
         <PasswordInput
           label="Password"
           placeholder="Password"
-          key={form.key('password')}
+
           {...form.getInputProps('password')}
         />
 
@@ -36,7 +36,7 @@ function Demo() {
           mt="sm"
           label="Confirm password"
           placeholder="Confirm password"
-          key={form.key('confirmPassword')}
+
           {...form.getInputProps('confirmPassword')}
         />
 
@@ -87,7 +87,7 @@ function Demo() {
   );
 }
 
-export const password: MantineDemo = {
+export const password: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

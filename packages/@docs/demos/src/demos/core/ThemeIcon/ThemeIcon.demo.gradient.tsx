@@ -1,11 +1,11 @@
-import { IconHeart } from '@tabler/icons-react';
+import { IconHeart } from '@tabler/icons-solidjs';
 import { ThemeIcon } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { gradientControls } from '../../../shared';
 
 const code = (props: any) => `
 import { ThemeIcon } from '@empoleon/core';
-import { IconHeart } from '@tabler/icons-react';
+import { IconHeart } from '@tabler/icons-solidjs';
 
 function Demo() {
   return (
@@ -34,7 +34,7 @@ function Wrapper(props: any) {
   );
 }
 
-export const gradient: MantineDemo = {
+export const gradient: EmpoleonDemo = {
   type: 'configurator',
   component: Wrapper,
   code,

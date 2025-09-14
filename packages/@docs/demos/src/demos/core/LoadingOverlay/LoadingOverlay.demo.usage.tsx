@@ -1,6 +1,6 @@
 import { Box, Button, Group, LoadingOverlay } from '@empoleon/core';
 import { useDisclosure } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { AuthenticationForm } from '../../../shared/AuthenticationForm/AuthenticationForm';
 
 const code = `
@@ -30,7 +30,7 @@ export function Demo() {
   return (
     <>
       <Box pos="relative">
-        <LoadingOverlay visible={visible} zIndex={1000} overlayProps={{ radius: 'sm', blur: 2 }} />
+        <LoadingOverlay visible={visible()} zIndex={1000} overlayProps={{ radius: 'sm', blur: 2 }} />
         <AuthenticationForm noSubmit />
       </Box>
 
@@ -41,7 +41,7 @@ export function Demo() {
   );
 }
 
-export const usage: MantineDemo = {
+export const usage: EmpoleonDemo = {
   centered: true,
   maxWidth: 400,
   dimmed: true,

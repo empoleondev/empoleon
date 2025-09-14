@@ -5,13 +5,13 @@ import {
   IconSearch,
   IconSettings,
   IconTrash,
-} from '@tabler/icons-react';
+} from '@tabler/icons-solidjs';
 import { Button, Menu } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Menu, Button } from '@empoleon/core';
-import { IconSearch } from '@tabler/icons-react';
+import { IconSearch } from '@tabler/icons-solidjs';
 
 function Demo() {
   return (
@@ -61,7 +61,7 @@ function Demo() {
   );
 }
 
-export const disabled: MantineDemo = {
+export const disabled: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

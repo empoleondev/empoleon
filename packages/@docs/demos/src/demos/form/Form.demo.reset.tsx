@@ -1,6 +1,6 @@
 import { Button, Group, TextInput } from '@empoleon/core';
 import { useForm } from '@empoleon/form';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { useForm } from '@empoleon/form';
@@ -20,14 +20,14 @@ function Demo() {
       <TextInput
         label="Name"
         placeholder="Name"
-        key={form.key('name')}
+
         {...form.getInputProps('name')}
       />
       <TextInput
         mt="md"
         label="Email"
         placeholder="Email"
-        key={form.key('email')}
+
         {...form.getInputProps('email')}
       />
 
@@ -69,7 +69,7 @@ function Demo() {
   );
 }
 
-export const reset: MantineDemo = {
+export const reset: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

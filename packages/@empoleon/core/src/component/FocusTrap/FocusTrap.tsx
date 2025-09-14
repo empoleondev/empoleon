@@ -17,7 +17,12 @@ export interface FocusTrapProps {
   innerRef?: SolidRef<any>;
 }
 
-export const FocusTrap: Component<FocusTrapProps> = (props) => {
+interface FocusTrapComponent extends Component<FocusTrapProps> {
+  displayName?: string;
+  InitialFocus: typeof FocusTrapInitialFocus;
+}
+
+export const FocusTrap: FocusTrapComponent = (props) => {
   const [local] = splitProps(props, ['children', 'active', 'innerRef']);
 
   const focusTrapRef = useFocusTrap(() => local.active);
@@ -33,3 +38,7 @@ export const FocusTrap: Component<FocusTrapProps> = (props) => {
 export function FocusTrapInitialFocus(props: Partial<VisuallyHiddenProps>) {
   return <VisuallyHidden tabIndex={-1} data-autofocus {...props} />;
 }
+
+FocusTrap.displayName = '@empoleon/core/FocusTrap';
+FocusTrapInitialFocus.displayName = '@empoleon/core/FocusTrapInitialFocus';
+FocusTrap.InitialFocus = FocusTrapInitialFocus;

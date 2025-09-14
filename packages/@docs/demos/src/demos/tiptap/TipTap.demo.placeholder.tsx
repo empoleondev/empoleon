@@ -2,7 +2,7 @@ import Placeholder from '@tiptap/extension-placeholder';
 import { useEditor } from '@empoleon/solid-tiptap';
 import StarterKit from '@tiptap/starter-kit';
 import { RichTextEditor } from '@empoleon/tiptap';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { RichTextEditor } from '@empoleon/tiptap';
@@ -37,7 +37,7 @@ function Demo() {
   );
 }
 
-export const placeholder: MantineDemo = {
+export const placeholder: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

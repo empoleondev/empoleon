@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import { Box, Button, Combobox, Text, useCombobox } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
+import { createMemo, createSignal, For, Show } from 'solid-js';
 
 const code = `
 import { useState } from 'react';
@@ -26,7 +26,7 @@ function Demo() {
   const options = groceries
     .filter((item) => item.toLowerCase().includes(search.toLowerCase().trim()))
     .map((item) => (
-      <Combobox.Option value={item} key={item}>
+      <Combobox.Option value={item} >
         {item}
       </Combobox.Option>
     ));
@@ -76,8 +76,8 @@ function Demo() {
 const groceries = ['🍎 Apples', '🍌 Bananas', '🥦 Broccoli', '🥕 Carrots', '🍫 Chocolate'];
 
 function Demo() {
-  const [search, setSearch] = useState('');
-  const [selectedItem, setSelectedItem] = useState<string | null>(null);
+  const [search, setSearch] = createSignal('');
+  const [selectedItem, setSelectedItem] = createSignal<string | null>(null);
   const combobox = useCombobox({
     onDropdownClose: () => {
       combobox.resetSelectedOption();
@@ -90,13 +90,11 @@ function Demo() {
     },
   });
 
-  const options = groceries
-    .filter((item) => item.toLowerCase().includes(search.toLowerCase().trim()))
-    .map((item) => (
-      <Combobox.Option value={item} key={item}>
-        {item}
-      </Combobox.Option>
-    ));
+  const filteredGroceries = createMemo(() =>
+    groceries.filter((item) =>
+      item.toLowerCase().includes(search().toLowerCase().trim())
+    )
+  );
 
   return (
     <>
@@ -106,13 +104,13 @@ function Demo() {
         </Text>
 
         <Text span size="sm">
-          {selectedItem || 'Nothing selected'}
+          {selectedItem() || 'Nothing selected'}
         </Text>
       </Box>
 
       <Combobox
         store={combobox}
-        width={250}
+        width='250px'
         position="bottom-start"
         withArrow
         onOptionSubmit={(val) => {
@@ -126,12 +124,23 @@ function Demo() {
 
         <Combobox.Dropdown>
           <Combobox.Search
-            value={search}
+            value={search()}
             onChange={(event) => setSearch(event.currentTarget.value)}
             placeholder="Search groceries"
           />
           <Combobox.Options>
-            {options.length > 0 ? options : <Combobox.Empty>Nothing found</Combobox.Empty>}
+            <Show
+              when={filteredGroceries().length > 0}
+              fallback={<Combobox.Empty>Nothing found</Combobox.Empty>}
+            >
+              <For each={filteredGroceries()}>
+                {(item) => (
+                  <Combobox.Option value={item}>
+                    {item}
+                  </Combobox.Option>
+                )}
+              </For>
+            </Show>
           </Combobox.Options>
         </Combobox.Dropdown>
       </Combobox>
@@ -139,7 +148,7 @@ function Demo() {
   );
 }
 
-export const buttonSearch: MantineDemo = {
+export const buttonSearch: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   maxWidth: 340,

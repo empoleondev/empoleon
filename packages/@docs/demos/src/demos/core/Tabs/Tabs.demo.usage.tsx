@@ -1,6 +1,6 @@
-import { IconMessageCircle, IconPhoto, IconSettings } from '@tabler/icons-react';
+import { IconMessageCircle, IconPhoto, IconSettings } from '@tabler/icons-solidjs';
 import { Tabs, TabsProps, useDirection } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 function Wrapper(props: TabsProps) {
   const { dir } = useDirection();
@@ -38,7 +38,7 @@ function Wrapper(props: TabsProps) {
 
 const code = `
 import { Tabs } from '@empoleon/core';
-import { IconPhoto, IconMessageCircle, IconSettings } from '@tabler/icons-react';
+import { IconPhoto, IconMessageCircle, IconSettings } from '@tabler/icons-solidjs';
 
 function Demo() {
   return (
@@ -70,7 +70,7 @@ function Demo() {
   );
 }`;
 
-export const usage: MantineDemo = {
+export const usage: EmpoleonDemo = {
   type: 'configurator',
   component: Wrapper,
   code,

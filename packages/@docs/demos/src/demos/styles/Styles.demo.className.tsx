@@ -1,5 +1,5 @@
 import { Box } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import classes from './Styles.demo.className.module.css';
 
 const code = `
@@ -39,7 +39,7 @@ function Demo() {
   );
 }
 
-export const className: MantineDemo = {
+export const className: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code: [

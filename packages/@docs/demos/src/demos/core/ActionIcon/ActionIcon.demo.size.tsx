@@ -1,10 +1,10 @@
-import { IconHeart } from '@tabler/icons-react';
+import { IconHeart } from '@tabler/icons-solidjs';
 import { ActionIcon } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { ActionIcon } from '@empoleon/core';
-import { IconHeart } from '@tabler/icons-react';
+import { IconHeart } from '@tabler/icons-solidjs';
 
 function Demo() {
   return (
@@ -23,7 +23,7 @@ function Demo() {
   );
 }
 
-export const size: MantineDemo = {
+export const size: EmpoleonDemo = {
   type: 'code',
   centered: true,
   component: Demo,

@@ -1,10 +1,10 @@
-import { IconExclamationCircle } from '@tabler/icons-react';
+import { IconExclamationCircle } from '@tabler/icons-solidjs';
 import { TextInput } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { TextInput } from '@empoleon/core';
-import { IconExclamationCircle } from '@tabler/icons-react';
+import { IconExclamationCircle } from '@tabler/icons-solidjs';
 
 function Demo() {
   return (
@@ -60,7 +60,7 @@ function Demo() {
   );
 }
 
-export const error: MantineDemo = {
+export const error: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

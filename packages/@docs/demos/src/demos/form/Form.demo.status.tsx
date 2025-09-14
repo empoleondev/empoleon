@@ -2,7 +2,7 @@
 
 import { Button, TextInput } from '@empoleon/core';
 import { useForm } from '@empoleon/form';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { useForm } from '@empoleon/form';
@@ -18,7 +18,7 @@ function Demo() {
     <div>
       <TextInput
         {...form.getInputProps('text')}
-        key={form.key('text')}
+
         label="Touched/dirty demo"
         placeholder="Touched/dirty demo"
       />
@@ -61,7 +61,7 @@ function Demo() {
   );
 }
 
-export const status: MantineDemo = {
+export const status: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

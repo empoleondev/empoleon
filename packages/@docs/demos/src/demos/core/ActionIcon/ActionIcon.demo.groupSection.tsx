@@ -1,10 +1,10 @@
-import { IconChevronDown, IconChevronUp } from '@tabler/icons-react';
+import { IconChevronDown, IconChevronUp } from '@tabler/icons-solidjs';
 import { ActionIcon } from '@empoleon/core';
 import { useCounter } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
-import { IconChevronDown, IconChevronUp } from '@tabler/icons-react';
+import { IconChevronDown, IconChevronUp } from '@tabler/icons-solidjs';
 import { ActionIcon } from '@empoleon/core';
 import { useCounter } from '@empoleon/hooks';
 
@@ -36,7 +36,7 @@ function Demo() {
         <IconChevronDown color="var(--mantine-color-red-text)" />
       </ActionIcon>
       <ActionIcon.GroupSection variant="default" size="lg" bg="var(--mantine-color-body)" miw={60}>
-        {value}
+        {value()}
       </ActionIcon.GroupSection>
       <ActionIcon variant="default" size="lg" radius="md" onClick={increment}>
         <IconChevronUp color="var(--mantine-color-teal-text)" />
@@ -45,7 +45,7 @@ function Demo() {
   );
 }
 
-export const groupSection: MantineDemo = {
+export const groupSection: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

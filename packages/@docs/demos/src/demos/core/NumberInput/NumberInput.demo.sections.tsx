@@ -1,13 +1,13 @@
-import { IconCurrencyDram } from '@tabler/icons-react';
+import { IconCurrencyDram } from '@tabler/icons-solidjs';
 import { NumberInput } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { NumberInput } from '@empoleon/core';
-import { IconCurrencyDram } from '@tabler/icons-react';
+import { IconCurrencyDram } from '@tabler/icons-solidjs';
 
 function Demo() {
-  const icon = <IconCurrencyDram size={20} stroke={1.5} />;
+  const icon = <IconCurrencyDram size={20} stroke='1.5' />;
   return (
     <>
       <NumberInput leftSection={icon} label="With left section" placeholder="With left section" />
@@ -23,7 +23,7 @@ function Demo() {
 `;
 
 function Demo() {
-  const icon = <IconCurrencyDram size={20} stroke={1.5} />;
+  const icon = <IconCurrencyDram size={20} stroke='1.5' />;
   return (
     <>
       <NumberInput leftSection={icon} label="With left section" placeholder="With left section" />
@@ -37,7 +37,7 @@ function Demo() {
   );
 }
 
-export const sections: MantineDemo = {
+export const sections: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

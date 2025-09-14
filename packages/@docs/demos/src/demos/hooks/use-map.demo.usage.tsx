@@ -1,7 +1,7 @@
 import { IconPlus, IconTrash } from '@tabler/icons-solidjs';
 import { ActionIcon, Group, Table } from '@empoleon/core';
 import { useMap } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { IconPlus, IconTrash } from '@tabler/icons-solidjs';
@@ -16,16 +16,16 @@ function Demo() {
   ]);
 
   const rows = Array.from(map.entries()).map(([key, value]) => (
-    <Table.Tr key={key}>
+    <Table.Tr >
       <Table.Td>{key}</Table.Td>
       <Table.Td>{value}</Table.Td>
       <Table.Td>
         <Group>
           <ActionIcon variant="default" onClick={() => map.set(key, value + 1)} fw={500}>
-            <IconPlus stroke={1.5} size={18} />
+            <IconPlus stroke='1.5' size={18} />
           </ActionIcon>
           <ActionIcon variant="default" onClick={() => map.delete(key)} c="red">
-            <IconTrash stroke={1.5} size={18} />
+            <IconTrash stroke='1.5' size={18} />
           </ActionIcon>
         </Group>
       </Table.Td>
@@ -85,7 +85,7 @@ function Demo() {
   );
 }
 
-export const useMapUsage: MantineDemo = {
+export const useMapUsage: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

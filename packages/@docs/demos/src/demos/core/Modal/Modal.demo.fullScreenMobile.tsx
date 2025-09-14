@@ -1,6 +1,6 @@
 import { Button, em, Modal } from '@empoleon/core';
 import { useDisclosure, useMediaQuery } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { useDisclosure, useMediaQuery } from '@empoleon/hooks';
@@ -13,7 +13,7 @@ function Demo() {
   return (
     <>
       <Modal
-        opened={opened}
+        opened={opened()}
         onClose={close}
         title="This is a fullscreen modal"
         fullScreen={isMobile}
@@ -37,10 +37,10 @@ function Demo() {
   return (
     <>
       <Modal
-        opened={opened}
+        opened={opened()}
         onClose={close}
         title="This is a fullscreen modal"
-        fullScreen={isMobile}
+        fullScreen={isMobile()}
         transitionProps={{ transition: 'fade', duration: 200 }}
       >
         The Modal will be full screen only on mobile
@@ -53,7 +53,7 @@ function Demo() {
   );
 }
 
-export const fullScreenMobile: MantineDemo = {
+export const fullScreenMobile: EmpoleonDemo = {
   type: 'code',
   code,
   centered: true,

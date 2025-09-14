@@ -1,17 +1,17 @@
-import { IconAt } from '@tabler/icons-react';
+import { IconAt } from '@tabler/icons-solidjs';
 import { Autocomplete } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { AutocompleteStylesApi } from '@docs/styles-api';
 
 const code = `
-import { IconAt } from '@tabler/icons-react';
+import { IconAt } from '@tabler/icons-solidjs';
 import { Autocomplete } from '@empoleon/core';
 
 function Demo() {
   return (
     <Autocomplete
      {{props}}
-      leftSection={<IconAt size={18} stroke={1.5} />}
+      leftSection={<IconAt size={18} stroke='1.5' />}
       label="Autocomplete"
       description="Description"
       error="Error"
@@ -27,7 +27,7 @@ function Demo(props: any) {
     <Autocomplete
       {...props}
       dropdownOpened
-      leftSection={<IconAt size={18} stroke={1.5} />}
+      leftSection={<IconAt size={18} stroke='1.5' />}
       withAsterisk
       label="Autocomplete"
       description="Description"
@@ -43,7 +43,7 @@ function Demo(props: any) {
 const data = { ...AutocompleteStylesApi };
 delete (data as any).selectors.empty;
 
-export const stylesApi: MantineDemo = {
+export const stylesApi: EmpoleonDemo = {
   type: 'styles-api',
   data,
   component: Demo,

@@ -1,6 +1,6 @@
 import { Button } from '@empoleon/core';
 import { notifications } from '@empoleon/notifications';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Button } from '@empoleon/core';
@@ -46,7 +46,7 @@ function Demo() {
   );
 }
 
-export const limit: MantineDemo = {
+export const limit: EmpoleonDemo = {
   type: 'code',
   code,
   centered: true,

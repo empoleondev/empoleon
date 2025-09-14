@@ -1,10 +1,10 @@
-import { IconChevronDown } from '@tabler/icons-react';
+import { IconChevronDown } from '@tabler/icons-solidjs';
 import { Checkbox, Group, RenderTreeNodePayload, Tree } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { data, dataCode } from './data';
 
 const code = `
-import { IconChevronDown } from '@tabler/icons-react';
+import { IconChevronDown } from '@tabler/icons-solidjs';
 import { Checkbox, Group, RenderTreeNodePayload, Tree } from '@empoleon/core';
 import { data } from './data';
 
@@ -81,7 +81,7 @@ function Demo() {
   return <Tree data={data} levelOffset={23} expandOnClick={false} renderNode={renderTreeNode} />;
 }
 
-export const checked: MantineDemo = {
+export const checked: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code: [

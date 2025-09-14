@@ -1,10 +1,10 @@
-import { IconSearch } from '@tabler/icons-react';
+import { IconSearch } from '@tabler/icons-solidjs';
 import { Anchor, Box, Divider } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Divider, Box, Anchor } from '@empoleon/core';
-import { IconSearch } from '@tabler/icons-react';
+import { IconSearch } from '@tabler/icons-solidjs';
 
 function Demo() {
   return (
@@ -65,7 +65,7 @@ function Demo() {
   );
 }
 
-export const labels: MantineDemo = {
+export const labels: EmpoleonDemo = {
   type: 'code',
   code,
   component: Demo,

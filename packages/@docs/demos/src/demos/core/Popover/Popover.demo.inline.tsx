@@ -1,5 +1,5 @@
 import { Mark, Popover, Text } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Popover, Mark, Text } from '@empoleon/core';
@@ -43,7 +43,7 @@ function Demo() {
   );
 }
 
-export const inline: MantineDemo = {
+export const inline: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

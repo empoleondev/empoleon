@@ -1,5 +1,5 @@
 import { Text, Title } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Text, Title } from '@empoleon/core';
@@ -21,7 +21,7 @@ function Demo() {
   );
 }
 
-export const inherit: MantineDemo = {
+export const inherit: EmpoleonDemo = {
   type: 'code',
   component: Demo,
   code,

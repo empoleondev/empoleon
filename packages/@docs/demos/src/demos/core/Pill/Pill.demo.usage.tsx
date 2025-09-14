@@ -1,5 +1,5 @@
 import { Pill } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import classes from './_demo.module.css';
 
 const code = `
@@ -12,13 +12,13 @@ function Demo() {
 
 function Wrapper(props: any) {
   return (
-    <div className={classes.demoWrapper}>
+    <div class={classes.demoWrapper}>
       <Pill {...props}>React</Pill>
     </div>
   );
 }
 
-export const usage: MantineDemo = {
+export const usage: EmpoleonDemo = {
   type: 'configurator',
   component: Wrapper,
   code,

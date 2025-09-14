@@ -1,6 +1,6 @@
 import { Button, Modal } from '@empoleon/core';
 import { useDisclosure } from '@empoleon/hooks';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { AuthenticationForm } from '../../../shared/AuthenticationForm/AuthenticationForm';
 
 const code = `
@@ -12,7 +12,7 @@ function Demo() {
 
   return (
     <>
-      <Modal opened={opened} onClose={close} title="Authentication" centered>
+      <Modal opened={opened()} onClose={close} title="Authentication" centered>
         {/* Modal content */}
       </Modal>
 
@@ -29,7 +29,7 @@ function Demo() {
 
   return (
     <>
-      <Modal opened={opened} onClose={close} title="Authentication" centered>
+      <Modal opened={opened()} onClose={close} title="Authentication" centered>
         <AuthenticationForm noPadding noShadow />
       </Modal>
 
@@ -40,7 +40,7 @@ function Demo() {
   );
 }
 
-export const centered: MantineDemo = {
+export const centered: EmpoleonDemo = {
   type: 'code',
   code,
   centered: true,

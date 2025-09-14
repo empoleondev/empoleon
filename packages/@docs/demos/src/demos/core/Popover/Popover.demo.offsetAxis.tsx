@@ -1,5 +1,5 @@
 import { Button, Popover, Text } from '@empoleon/core';
-import { MantineDemo } from '@empoleonx/demo';
+import { EmpoleonDemo } from '@empoleonx/demo';
 import { FLOATING_POSITION_DATA } from '../../../shared';
 
 const code = (props: any) => `
@@ -29,7 +29,7 @@ function Demo() {
 function Wrapper(props: any) {
   return (
     <Popover
-      width={200}
+      width='200px'
       position={props.position}
       opened
       offset={{ mainAxis: props.mainAxis, crossAxis: props.crossAxis }}
@@ -46,7 +46,7 @@ function Wrapper(props: any) {
   );
 }
 
-export const offsetAxis: MantineDemo = {
+export const offsetAxis: EmpoleonDemo = {
   type: 'configurator',
   component: Wrapper,
   code,
