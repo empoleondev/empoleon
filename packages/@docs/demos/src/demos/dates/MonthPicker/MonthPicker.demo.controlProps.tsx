@@ -12,7 +12,7 @@ const getYearControlProps: MonthPickerProps['getYearControlProps'] = (date) => {
   if (dayjs(date).year() === new Date().getFullYear()) {
     return {
       style: {
-        color: 'var(--mantine-color-blue-filled)',
+        color: 'var(--empoleon-color-blue-filled)',
         fontWeight: 700,
       },
     };
@@ -29,7 +29,7 @@ const getMonthControlProps: MonthPickerProps['getMonthControlProps'] = (date) =>
   if (dayjs(date).month() === 1) {
     return {
       style: {
-        color: 'var(--mantine-color-blue-filled)',
+        color: 'var(--empoleon-color-blue-filled)',
         fontWeight: 700,
       },
     };
@@ -59,7 +59,7 @@ const getYearControlProps: MonthPickerProps['getYearControlProps'] = (date) => {
   if (dayjs(date).year() === new Date().getFullYear()) {
     return {
       style: {
-        color: 'var(--mantine-color-blue-filled)',
+        color: 'var(--empoleon-color-blue-filled)',
         fontWeight: 700,
       },
     };
@@ -76,7 +76,7 @@ const getMonthControlProps: MonthPickerProps['getMonthControlProps'] = (date) =>
   if (dayjs(date).month() === 1) {
     return {
       style: {
-        color: 'var(--mantine-color-blue-filled)',
+        color: 'var(--empoleon-color-blue-filled)',
         fontWeight: 700,
       },
     };

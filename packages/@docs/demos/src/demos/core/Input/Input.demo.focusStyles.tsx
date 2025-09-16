@@ -26,7 +26,7 @@ const cssCode = `
   transition: none;
 
   &:focus-within {
-    outline: 2px solid var(--mantine-color-blue-filled);
+    outline: 2px solid var(--empoleon-color-blue-filled);
     border-color: transparent;
   }
 }

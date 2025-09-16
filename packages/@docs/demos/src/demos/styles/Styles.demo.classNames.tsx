@@ -44,7 +44,7 @@ const cssCode = `
   border-bottom-width: 2px;
   border-radius: 0;
   padding-left: 0;
-  background-color: var(--mantine-color-body);
+  background-color: var(--empoleon-color-body);
 }
 
 .label {
@@ -52,15 +52,15 @@ const cssCode = `
   z-index: 1;
   pointer-events: none;
   top: 7px;
-  color: var(--mantine-color-placeholder);
+  color: var(--empoleon-color-placeholder);
   font-weight: 400;
-  font-size: var(--mantine-font-size-sm);
+  font-size: var(--empoleon-font-size-sm);
   transition: color 100ms ease, transform 100ms ease, font-size 100ms ease;
 
   &[data-floating] {
     transform: translateY(-20px);
-    font-size: var(--mantine-font-size-xs);
-    color: var(--mantine-color-text);
+    font-size: var(--empoleon-font-size-xs);
+    color: var(--empoleon-color-text);
   }
 }
 `;

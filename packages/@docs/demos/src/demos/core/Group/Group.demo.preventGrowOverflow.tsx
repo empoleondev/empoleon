@@ -7,7 +7,7 @@ import { Group, Button, Box, Text } from '@empoleon/core';
 function Demo() {
   return (
     <Box style={{ overflow: 'hidden' }}>
-      <Box maw={500} p="md" mx="auto" bg="var(--mantine-color-blue-light)">
+      <Box maw={500} p="md" mx="auto" bg="var(--empoleon-color-blue-light)">
         <Text size="sm" mb={5}>
           preventGrowOverflow: true – each child width is always limited to 33% of parent width
           (since there are 3 children)
@@ -38,7 +38,7 @@ function Demo() {
 function Demo() {
   return (
     <Box style={{ overflow: 'hidden' }}>
-      <Box maw={500} p="md" mx="auto" bg="var(--mantine-color-blue-light)">
+      <Box maw={500} p="md" mx="auto" bg="var(--empoleon-color-blue-light)">
         <Text size="sm" mb={5}>
           preventGrowOverflow: true – each child width is always limited to 33% of parent width
           (since there are 3 children)

@@ -28,13 +28,13 @@ function Demo() {
 const cssCode = `
 .root {
   &[data-variant='danger'] {
-    background-color: var(--mantine-color-red-9);
-    color: var(--mantine-color-red-0);
+    background-color: var(--empoleon-color-red-9);
+    color: var(--empoleon-color-red-0);
   }
 
   &[data-variant='primary'] {
     background: linear-gradient(45deg, #4b6cb7 10%, #253b67 90%);
-    color: var(--mantine-color-white);
+    color: var(--empoleon-color-white);
   }
 }
 `;

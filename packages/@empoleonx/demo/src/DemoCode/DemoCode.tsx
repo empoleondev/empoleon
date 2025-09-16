@@ -1,25 +1,40 @@
+import { createMemo, mergeProps } from 'solid-js';
 import { CodeHighlightTabs, CodeHighlightTabsCode } from '@empoleon/code-highlight';
 import { getCodeFileIcon } from '@empoleonx/dev-icons';
 import classes from './DemoCode.module.css';
 
 export interface DemoCodeProps {
-  code?: string | CodeHighlightTabsCode[];
+  code?: (() => string | CodeHighlightTabsCode[]) | string | CodeHighlightTabsCode[];
   defaultExpanded?: boolean;
   maxCollapsedHeight?: number;
 }
 
-export function DemoCode({ code, maxCollapsedHeight, defaultExpanded = true }: DemoCodeProps) {
-  const _code: CodeHighlightTabsCode | CodeHighlightTabsCode[] | undefined =
-    typeof code === 'string' ? [{ code, fileName: 'Demo.tsx', language: 'tsx' }] : code;
-  return _code ? (
+export function DemoCode(props: DemoCodeProps) {
+  const mergedProps = mergeProps({
+    ...props,
+    defaultExpanded: false
+  })
+
+  const _code = createMemo(() => {
+    const codeValue = typeof props.code === 'function' ? props.code() : props.code;
+
+    if (!codeValue) return undefined;
+
+    if (typeof codeValue === 'string') {
+      return [{ code: codeValue, fileName: 'Demo.tsx', language: 'tsx' }];
+    }
+
+    return Array.isArray(codeValue) ? codeValue : [codeValue];
+  });
+
+  return _code() ? (
     <CodeHighlightTabs
-      code={_code}
+      code={_code()!}
       className={classes.code}
-      // @ts-ignore
       getFileIcon={getCodeFileIcon}
       withExpandButton
-      maxCollapsedHeight={maxCollapsedHeight}
-      defaultExpanded={defaultExpanded}
+      maxCollapsedHeight={mergedProps.maxCollapsedHeight}
+      defaultExpanded={mergedProps.defaultExpanded}
     />
   ) : null;
 }

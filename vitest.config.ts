@@ -12,14 +12,14 @@ export default defineConfig({
 
   test: {
     environment: 'jsdom',
-    include: [
-      '**/use-form/*.test.{ts,tsx}'
-    ],
     setupFiles: ['./vitest.setup.tsx'],
     globals: true,
     testTimeout: 10000,
     pool: 'forks',
     isolate: true,
+    include: [
+      '**/CodeHighlight/*.test.{ts,tsx}'
+    ],
     exclude: [
       // Exclude all node_modules test files
       'node_modules/**',

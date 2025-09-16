@@ -1,14 +1,14 @@
 .demo {
   flex: 1;
-  border-top-left-radius: calc(var(--mantine-radius-md) - 1px);
-  border-top-right-radius: calc(var(--mantine-radius-md) - 1px);
+  border-top-left-radius: calc(var(--empoleon-radius-md) - 1px);
+  border-top-right-radius: calc(var(--empoleon-radius-md) - 1px);
 
   &:where([data-with-padding]) {
-    padding: var(--mantine-spacing-md);
+    padding: var(--empoleon-spacing-md);
   }
 
   &[data-dimmed] {
-    background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-8));
+    background-color: light-dark(var(--empoleon-color-gray-0), var(--empoleon-color-dark-8));
   }
 
   &[data-centered] {
@@ -18,7 +18,7 @@
   }
 
   &[data-striped] {
-    border-top-left-radius: calc(var(--mantine-radius-md) - 1px);
+    border-top-left-radius: calc(var(--empoleon-radius-md) - 1px);
     background: repeating-linear-gradient(
         45deg,
         transparent 0,
@@ -35,7 +35,7 @@
       );
 
     @mixin rtl {
-      border-top-right-radius: calc(var(--mantine-radius-md) - 1px);
+      border-top-right-radius: calc(var(--empoleon-radius-md) - 1px);
       border-top-left-radius: 0;
     }
 

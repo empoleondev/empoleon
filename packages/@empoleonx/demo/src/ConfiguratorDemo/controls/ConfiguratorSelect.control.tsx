@@ -2,6 +2,7 @@ import { BoxProps, ElementProps, NativeSelect } from '@empoleon/core';
 import { getControlLabel } from './get-control-label';
 import { SelectData, transformSelectData } from './transform-select-data';
 import { ConfiguratorControl } from './types';
+import { createEffect, splitProps } from 'solid-js';
 
 export type ConfiguratorSelectControlOptions = ConfiguratorControl<
   'select',
@@ -17,19 +18,20 @@ export interface ConfiguratorSelectControlProps
   prop: string;
 }
 
-export function ConfiguratorSelectControl({
-  value,
-  onChange,
-  prop,
-  data,
-  ...others
-}: ConfiguratorSelectControlProps) {
+export function ConfiguratorSelectControl(props: ConfiguratorSelectControlProps) {
+  const [local, others] = splitProps(props, [
+    'value',
+    'onChange',
+    'prop',
+    'data',
+  ]);
+
   return (
     <NativeSelect
-      value={value}
-      onChange={(event) => onChange(event.currentTarget.value)}
-      label={getControlLabel(prop)}
-      data={transformSelectData(data)}
+      value={local.value}
+      onChange={(event) => local.onChange(event.currentTarget.value)}
+      label={getControlLabel(local.prop)}
+      data={transformSelectData(local.data)}
       {...others}
     />
   );

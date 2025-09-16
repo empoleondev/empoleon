@@ -6,15 +6,15 @@
     padding-right: 0;
 
     @mixin light {
-      border-color: var(--mantine-color-gray-3);
+      border-color: var(--empoleon-color-gray-3);
     }
 
     @mixin dark {
-      border-color: var(--mantine-color-dark-3);
+      border-color: var(--empoleon-color-dark-3);
     }
 
     &:focus {
-      border-color: var(--mantine-color-blue-filled);
+      border-color: var(--empoleon-color-blue-filled);
     }
   }
 }

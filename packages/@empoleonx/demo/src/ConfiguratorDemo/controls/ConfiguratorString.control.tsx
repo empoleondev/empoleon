@@ -1,6 +1,7 @@
 import { BoxProps, ElementProps, TextInput } from '@empoleon/core';
 import { getControlLabel } from './get-control-label';
 import { ConfiguratorControl } from './types';
+import { splitProps } from 'solid-js';
 
 export type ConfiguratorStringControlOptions = ConfiguratorControl<
   'string',
@@ -15,17 +16,18 @@ export interface ConfiguratorStringControlProps
   prop: string;
 }
 
-export function ConfiguratorStringControl({
-  value,
-  onChange,
-  prop,
-  ...others
-}: ConfiguratorStringControlProps) {
+export function ConfiguratorStringControl(props: ConfiguratorStringControlProps) {
+  const [local, others] = splitProps(props, [
+    'value',
+    'onChange',
+    'prop',
+  ]);
+
   return (
     <TextInput
-      value={value}
-      onChange={(event) => onChange(event.currentTarget.value)}
-      label={getControlLabel(prop)}
+      value={local.value}
+      onChange={(event) => local.onChange(event.currentTarget.value)}
+      label={getControlLabel(local.prop)}
       placeholder="Enter prop value"
       {...others}
     />

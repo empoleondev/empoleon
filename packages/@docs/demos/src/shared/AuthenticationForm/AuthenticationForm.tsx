@@ -66,7 +66,7 @@ export function AuthenticationForm({
       style={{
         ...style,
         position: 'relative',
-        backgroundColor: 'var(--mantine-color-body)',
+        backgroundColor: 'var(--empoleon-color-body)',
       }}
     >
       <form onSubmit={form.onSubmit(handleSubmit)}>

@@ -6,8 +6,8 @@ function Slide({ children }: { children: JSX.Element }) {
   return (
     <Box
       style={{
-        backgroundColor: 'var(--mantine-color-blue-filled)',
-        color: 'var(--mantine-color-white)',
+        backgroundColor: 'var(--empoleon-color-blue-filled)',
+        color: 'var(--empoleon-color-white)',
         height: '100%',
         width: '100%',
         display: 'flex',

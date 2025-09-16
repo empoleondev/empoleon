@@ -12,7 +12,7 @@ const getYearControlProps: YearPickerProps['getYearControlProps'] = (date) => {
   if (dayjs(date).year() === new Date().getFullYear()) {
     return {
       style: {
-        color: 'var(--mantine-color-blue-filled)',
+        color: 'var(--empoleon-color-blue-filled)',
         fontWeight: 700,
       },
     };
@@ -35,7 +35,7 @@ const getYearControlProps: YearPickerProps['getYearControlProps'] = (date) => {
   if (dayjs(date).year() === new Date().getFullYear()) {
     return {
       style: {
-        color: 'var(--mantine-color-blue-filled)',
+        color: 'var(--empoleon-color-blue-filled)',
         fontWeight: 700,
       },
     };

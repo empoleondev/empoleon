@@ -14,8 +14,8 @@ const getDayProps: DatePickerProps['getDayProps'] = (date) => {
   if (d.day() === 5 && d.date() === 13) {
     return {
       style: {
-        backgroundColor: 'var(--mantine-color-red-filled)',
-        color: 'var(--mantine-color-white)',
+        backgroundColor: 'var(--empoleon-color-red-filled)',
+        color: 'var(--empoleon-color-white)',
       },
     };
   }
@@ -29,7 +29,7 @@ const getYearControlProps: DatePickerProps['getYearControlProps'] = (date) => {
   if (d.year() === new Date().getFullYear()) {
     return {
       style: {
-        color: 'var(--mantine-color-blue-filled)',
+        color: 'var(--empoleon-color-blue-filled)',
         fontWeight: 700,
       },
     };
@@ -47,7 +47,7 @@ const getMonthControlProps: DatePickerProps['getMonthControlProps'] = (date) => 
   if (d.month() === 1) {
     return {
       style: {
-        color: 'var(--mantine-color-blue-filled)',
+        color: 'var(--empoleon-color-blue-filled)',
         fontWeight: 700,
       },
     };
@@ -81,8 +81,8 @@ const getDayProps: DatePickerProps['getDayProps'] = (date) => {
   if (d.day() === 5 && d.date() === 13) {
     return {
       style: {
-        backgroundColor: 'var(--mantine-color-red-filled)',
-        color: 'var(--mantine-color-white)',
+        backgroundColor: 'var(--empoleon-color-red-filled)',
+        color: 'var(--empoleon-color-white)',
       },
     };
   }
@@ -96,7 +96,7 @@ const getYearControlProps: DatePickerProps['getYearControlProps'] = (date) => {
   if (d.year() === new Date().getFullYear()) {
     return {
       style: {
-        color: 'var(--mantine-color-blue-filled)',
+        color: 'var(--empoleon-color-blue-filled)',
         fontWeight: 700,
       },
     };
@@ -114,7 +114,7 @@ const getMonthControlProps: DatePickerProps['getMonthControlProps'] = (date) => 
   if (d.month() === 1) {
     return {
       style: {
-        color: 'var(--mantine-color-blue-filled)',
+        color: 'var(--empoleon-color-blue-filled)',
         fontWeight: 700,
       },
     };

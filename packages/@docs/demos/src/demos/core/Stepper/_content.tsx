@@ -9,7 +9,7 @@ export function Content(props: BoxProps & ElementProps<'div'>) {
         'align-items': 'center',
         'justify-content': 'center',
         'font-weight': 500,
-        'font-size': 'var(--mantine-font-size-lg)',
+        'font-size': 'var(--empoleon-font-size-lg)',
       }}
       {...props}
     />

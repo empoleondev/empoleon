@@ -1,6 +1,7 @@
 import { BoxProps, ElementProps, Input, Slider } from '@empoleon/core';
 import { getControlLabel } from './get-control-label';
 import { ConfiguratorControl } from './types';
+import { createMemo, splitProps } from 'solid-js';
 
 const MARKS = [
   { value: 0, label: 'xs' },
@@ -18,19 +19,20 @@ export interface ConfiguratorSizeControlProps extends BoxProps, ElementProps<'di
   prop: string;
 }
 
-export function ConfiguratorSizeControl({
-  value,
-  onChange,
-  prop,
-  ...others
-}: ConfiguratorSizeControlProps) {
-  const _value = MARKS.find((mark) => mark.label === value)!.value;
-  const handleChange = (val: number) => onChange(MARKS.find((mark) => mark.value === val)!.label);
+export function ConfiguratorSizeControl(props: ConfiguratorSizeControlProps) {
+  const [local, others] = splitProps(props, [
+    'value',
+    'onChange',
+    'prop',
+  ]);
+
+  const _value = createMemo(() => MARKS.find((mark) => mark.label === local.value)!.value);
+  const handleChange = (val: number) => local.onChange(MARKS.find((mark) => mark.value === val)!.label);
 
   return (
-    <Input.Wrapper labelElement="div" label={getControlLabel(prop)} {...others}>
+    <Input.Wrapper labelElement="div" label={getControlLabel(local.prop)} {...others}>
       <Slider
-        value={_value}
+        value={_value()}
         onChange={handleChange}
         label={(val) => MARKS.find((mark) => mark.value === val)!.label}
         step={25}

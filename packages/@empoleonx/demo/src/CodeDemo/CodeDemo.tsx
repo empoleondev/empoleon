@@ -1,39 +1,33 @@
+import { mergeProps } from 'solid-js';
 import { DemoArea, DemoAreaProps } from '../DemoArea';
 import { DemoCode, DemoCodeProps } from '../DemoCode';
 import { DemoRoot } from '../DemoRoot';
 
 export interface CodeDemoProps extends DemoCodeProps, DemoAreaProps {}
 
-export function CodeDemo({
-  code,
-  children,
-  withPadding,
-  centered,
-  defaultExpanded = true,
-  maxWidth,
-  minHeight,
-  dimmed,
-  striped,
-  maxCollapsedHeight,
-  overflow,
-}: CodeDemoProps) {
+export function CodeDemo(props: CodeDemoProps) {
+  const mergedProps = mergeProps({
+    ...props,
+    defaultExpanded: true
+  })
+
   return (
     <DemoRoot>
       <DemoArea
-        withPadding={withPadding}
-        centered={centered}
-        maxWidth={maxWidth}
-        minHeight={minHeight}
-        dimmed={dimmed}
-        striped={striped}
-        overflow={overflow}
+        withPadding={mergedProps.withPadding}
+        centered={mergedProps.centered}
+        maxWidth={mergedProps.maxWidth}
+        minHeight={mergedProps.minHeight}
+        dimmed={mergedProps.dimmed}
+        striped={mergedProps.striped}
+        overflow={mergedProps.overflow}
       >
-        {children}
+        {mergedProps.children}
       </DemoArea>
       <DemoCode
-        code={code}
-        defaultExpanded={defaultExpanded}
-        maxCollapsedHeight={maxCollapsedHeight}
+        code={mergedProps.code}
+        defaultExpanded={mergedProps.defaultExpanded}
+        maxCollapsedHeight={mergedProps.maxCollapsedHeight}
       />
     </DemoRoot>
   );

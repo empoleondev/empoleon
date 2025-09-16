@@ -10,7 +10,7 @@ function Demo() {
       <Code color="blue.9" c="white">
         React.createElement()
       </Code>
-      <Code color="var(--mantine-color-blue-light)">React.createElement()</Code>
+      <Code color="var(--empoleon-color-blue-light)">React.createElement()</Code>
     </Group>
   );
 }
@@ -22,7 +22,7 @@ function Demo() {
       <Code color="blue.9" c="white">
         React.createElement()
       </Code>
-      <Code color="var(--mantine-color-blue-light)">React.createElement()</Code>
+      <Code color="var(--empoleon-color-blue-light)">React.createElement()</Code>
     </Group>
   );
 }

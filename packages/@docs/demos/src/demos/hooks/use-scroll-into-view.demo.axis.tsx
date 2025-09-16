@@ -20,7 +20,7 @@ function Demo() {
             ref={targetRef}
             p="md"
             style={{
-              backgroundColor: 'var(--mantine-color-blue-light)',
+              backgroundColor: 'var(--empoleon-color-blue-light)',
               width: 'max-content',
             }}
           >
@@ -48,7 +48,7 @@ function Demo() {
             ref={targetRef}
             p="md"
             style={{
-              backgroundColor: 'var(--mantine-color-blue-light)',
+              backgroundColor: 'var(--empoleon-color-blue-light)',
               width: 'max-content',
             }}
           >

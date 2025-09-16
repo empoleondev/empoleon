@@ -20,7 +20,7 @@ function Demo() {
             ref={targetRef}
             p="xl"
             style={{
-              backgroundColor: 'var(--mantine-color-blue-light)',
+              backgroundColor: 'var(--empoleon-color-blue-light)',
               width: '100%',
             }}
           >
@@ -48,7 +48,7 @@ function Demo() {
             ref={targetRef}
             p="xl"
             style={{
-              backgroundColor: 'var(--mantine-color-blue-light)',
+              backgroundColor: 'var(--empoleon-color-blue-light)',
               width: '100%',
             }}
           >

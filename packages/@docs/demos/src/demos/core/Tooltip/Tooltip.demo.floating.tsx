@@ -7,7 +7,7 @@ import { Box, Tooltip } from '@empoleon/core';
 function Demo() {
   return (
     <Tooltip.Floating label="Floating tooltip">
-      <Box p="xl" bg="var(--mantine-color-blue-light)" style={{ cursor: 'default' }}>
+      <Box p="xl" bg="var(--empoleon-color-blue-light)" style={{ cursor: 'default' }}>
         Hover over the box to see tooltip
       </Box>
     </Tooltip.Floating>
@@ -18,7 +18,7 @@ function Demo() {
 function Demo() {
   return (
     <Tooltip.Floating label="Floating tooltip">
-      <Box p="xl" bg="var(--mantine-color-blue-light)" style={{ cursor: 'default' }}>
+      <Box p="xl" bg="var(--empoleon-color-blue-light)" style={{ cursor: 'default' }}>
         Hover over the box to see tooltip
       </Box>
     </Tooltip.Floating>

@@ -19,7 +19,7 @@ const TestModal = ({
         {innerProps.loading ? (
           <Loader size={32}/>
         ): (
-          <IconCheck size={23} color="var(--mantine-color-teal-6)" />
+          <IconCheck size={23} color="var(--empoleon-color-teal-6)" />
         )}
       </Center>
     </Stack>

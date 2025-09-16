@@ -61,7 +61,7 @@ function Demo() {
 
   return (
     <ActionIcon
-      onClick={() => setColorScheme(computedColorScheme === 'light' ? 'dark' : 'light')}
+      onClick={() => setColorScheme(computedColorScheme() === 'light' ? 'dark' : 'light')}
       variant="default"
       size="xl"
       aria-label="Toggle color scheme"

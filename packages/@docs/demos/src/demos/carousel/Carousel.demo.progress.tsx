@@ -1,34 +1,41 @@
+import { createEffect, createSignal } from 'solid-js';
 import { EmblaCarouselType } from 'embla-carousel';
 import { Carousel } from '@empoleon/carousel';
 import { Progress } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
 import { Slides } from './_slides';
-import { createEffect, createSignal } from 'solid-js';
 
 const code = `
-import { useCallback, useEffect, useState } from 'react';
+import { createEffect, createSignal } from 'solid-js';
 import { EmblaCarouselType } from 'embla-carousel';
 import { Carousel } from '@empoleon/carousel';
 import { Progress } from '@empoleon/core';
 
 function Demo() {
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [embla, setEmbla] = useState<EmblaCarouselType | null>(null);
+  const [scrollProgress, setScrollProgress] = createSignal(0);
+  const [embla, setEmbla] = createSignal<EmblaCarouselType | null>(null);
 
-  const handleScroll = useCallback(() => {
-    if (!embla) {
+  const handleScroll = () => {
+    const emblaInstance = embla();
+    if (!emblaInstance) {
       return;
     }
-    const progress = Math.max(0, Math.min(1, embla.scrollProgress()));
+    const progress = Math.max(0, Math.min(1, emblaInstance.scrollProgress()));
     setScrollProgress(progress * 100);
-  }, [embla, setScrollProgress]);
+  };
 
-  useEffect(() => {
-    if (embla) {
-      embla.on('scroll', handleScroll);
+  createEffect(() => {
+    const emblaInstance = embla();
+    if (emblaInstance) {
+      emblaInstance.on('scroll', handleScroll);
       handleScroll();
+
+      // Cleanup function
+      return () => {
+        emblaInstance.off('scroll', handleScroll);
+      };
     }
-  }, [embla]);
+  });
 
   return (
     <>

@@ -14,13 +14,13 @@ function Demo() {
   return (
     <ActionIcon.Group>
       <ActionIcon variant="default" size="lg" radius="md" onClick={decrement}>
-        <IconChevronDown color="var(--mantine-color-red-text)" />
+        <IconChevronDown color="var(--empoleon-color-red-text)" />
       </ActionIcon>
-      <ActionIcon.GroupSection variant="default" size="lg" bg="var(--mantine-color-body)" miw={60}>
+      <ActionIcon.GroupSection variant="default" size="lg" bg="var(--empoleon-color-body)" miw={60}>
         {value}
       </ActionIcon.GroupSection>
       <ActionIcon variant="default" size="lg" radius="md" onClick={increment}>
-        <IconChevronUp color="var(--mantine-color-teal-text)" />
+        <IconChevronUp color="var(--empoleon-color-teal-text)" />
       </ActionIcon>
     </ActionIcon.Group>
   );
@@ -33,13 +33,13 @@ function Demo() {
   return (
     <ActionIcon.Group>
       <ActionIcon variant="default" size="lg" radius="md" onClick={decrement}>
-        <IconChevronDown color="var(--mantine-color-red-text)" />
+        <IconChevronDown color="var(--empoleon-color-red-text)" />
       </ActionIcon>
-      <ActionIcon.GroupSection variant="default" size="lg" bg="var(--mantine-color-body)" miw={60}>
+      <ActionIcon.GroupSection variant="default" size="lg" bg="var(--empoleon-color-body)" miw={60}>
         {value()}
       </ActionIcon.GroupSection>
       <ActionIcon variant="default" size="lg" radius="md" onClick={increment}>
-        <IconChevronUp color="var(--mantine-color-teal-text)" />
+        <IconChevronUp color="var(--empoleon-color-teal-text)" />
       </ActionIcon>
     </ActionIcon.Group>
   );

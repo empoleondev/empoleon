@@ -3,7 +3,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--mantine-color-white);
+  color: var(--empoleon-color-white);
   flex: 1 0 calc(15% - 4px);
 }
 
@@ -19,6 +19,6 @@
   justify-content: center;
   flex: 1 0 calc(15% - 4px);
   height: 28px;
-  border-radius: var(--mantine-radius-sm);
-  border: 1px solid light-dark(var(--mantine-color-gray-5), var(--mantine-color-dark-3));
+  border-radius: var(--empoleon-radius-sm);
+  border: 1px solid light-dark(var(--empoleon-color-gray-5), var(--empoleon-color-dark-3));
 }

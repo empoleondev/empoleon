@@ -21,9 +21,9 @@ const UserButton = forwardRef<HTMLButtonElement, UserButtonProps>(
     <UnstyledButton
       ref={ref}
       style={{
-        padding: 'var(--mantine-spacing-md)',
-        color: 'var(--mantine-color-text)',
-        borderRadius: 'var(--mantine-radius-sm)',
+        padding: 'var(--empoleon-spacing-md)',
+        color: 'var(--empoleon-color-text)',
+        borderRadius: 'var(--empoleon-radius-sm)',
       }}
       {...others}
     >
@@ -73,9 +73,9 @@ const UserButton = ({ image, name, email, icon, ...others }: UserButtonProps, re
   <UnstyledButton
     ref={ref}
     style={{
-      padding: 'var(--mantine-spacing-md)',
-      color: 'var(--mantine-color-text)',
-      'border-radius': 'var(--mantine-radius-sm)',
+      padding: 'var(--empoleon-spacing-md)',
+      color: 'var(--empoleon-color-text)',
+      'border-radius': 'var(--empoleon-radius-sm)',
     } as any}
     {...others}
   >

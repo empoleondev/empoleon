@@ -17,15 +17,15 @@ const cssCode = `.card {
 
 .title {
   font-weight: 900;
-  color: var(--mantine-color-white);
+  color: var(--empoleon-color-white);
   line-height: 1.2;
   font-size: 32px;
-  margin-top: var(--mantine-spacing-xs);
+  margin-top: var(--empoleon-spacing-xs);
   cursor: default;
 }
 
 .category {
-  color: var(--mantine-color-white);
+  color: var(--empoleon-color-white);
   opacity: 0.7;
   font-weight: 700;
   text-transform: uppercase;

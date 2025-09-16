@@ -3,13 +3,40 @@ import hljs from 'highlight.js';
 import { getCodeFileIcon } from '@empoleonx/dev-icons';
 import { createHighlightJsAdapter } from '../CodeHighlightProvider/adapters/highlight-js-adapter';
 import { createShikiAdapter } from '../CodeHighlightProvider/adapters/shiki-adapter';
-import { CodeHighlightAdapterProvider } from '../CodeHighlightProvider/CodeHighlightProvider';
+import { CodeHighlightAdapterProvider, CodeHighlightProvider } from '../CodeHighlightProvider/CodeHighlightProvider';
 import { CodeHighlightTabs } from '../CodeHighlightTabs/CodeHighlightTabs';
 import { CodeHighlight } from './CodeHighlight';
 import { InlineCodeHighlight } from './InlineCodeHighlight';
-import { createSignal } from 'solid-js';
+import { createEffect, createSignal, JSX } from 'solid-js';
+import { EmpoleonProvider, useEmpoleonColorScheme } from '@empoleon/core';
 
-export default { title: 'CodeHighlight' };
+const shikiAdapter = createShikiAdapter();
+
+function ColorSchemeWrapper(props: { children: JSX.Element; globals: any }) {
+  const { setColorScheme } = useEmpoleonColorScheme();
+
+  createEffect(() => {
+    const theme = props.globals?.theme || 'light';
+    setColorScheme(theme);
+  });
+
+  return <>{props.children}</>;
+}
+
+export default {
+  title: 'CodeHighlight',
+  decorators: [
+    (Story: () => JSX.Element, context: any) => (
+      <CodeHighlightAdapterProvider adapter={shikiAdapter}>
+        <EmpoleonProvider>
+          <ColorSchemeWrapper globals={context.globals}>
+            <Story />
+          </ColorSchemeWrapper>
+        </EmpoleonProvider>
+      </CodeHighlightAdapterProvider>
+    ),
+  ]
+};
 
 const tsxCode = `
 import { forwardRef } from 'react';
@@ -182,22 +209,10 @@ export function HTMLCode() {
   );
 }
 
-async function loadShiki() {
-  const { createHighlighter } = await import('shiki');
-  const shiki = await createHighlighter({
-    langs: ['tsx', 'scss', 'html', 'bash', 'json'],
-    themes: [],
-  });
-
-  return shiki;
-}
-
-const shikiAdapter = createShikiAdapter(loadShiki);
-
 export function ShikiAdapter() {
   return (
     <div style={{ padding: '40px' }}>
-      <CodeHighlightAdapterProvider adapter={shikiAdapter}>
+      <CodeHighlightProvider adapter={shikiAdapter}>
         <CodeHighlight
           code={tsxCode}
           withExpandButton
@@ -206,7 +221,7 @@ export function ShikiAdapter() {
           withBorder
           language="tsx"
         />
-      </CodeHighlightAdapterProvider>
+      </CodeHighlightProvider>
     </div>
   );
 }

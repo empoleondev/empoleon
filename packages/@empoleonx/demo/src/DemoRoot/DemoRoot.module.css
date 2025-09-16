@@ -1,12 +1,12 @@
 .root {
   border: 1px solid var(--demo-border);
-  border-radius: var(--mantine-radius-md);
+  border-radius: var(--empoleon-radius-md);
 
   @mixin light {
-    --demo-border: var(--mantine-color-gray-2);
+    --demo-border: var(--empoleon-color-gray-2);
   }
 
   @mixin dark {
-    --demo-border: var(--mantine-color-dark-5);
+    --demo-border: var(--empoleon-color-dark-5);
   }
 }

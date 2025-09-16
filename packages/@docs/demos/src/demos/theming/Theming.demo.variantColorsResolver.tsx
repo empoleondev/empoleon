@@ -33,8 +33,8 @@ const variantColorResolver: VariantColorsResolver = (input) => {
   if (parsedColor.isThemeColor && parsedColor.color === 'lime' && input.variant === 'filled') {
     return {
       ...defaultResolvedColors,
-      color: 'var(--mantine-color-black)',
-      hoverColor: 'var(--mantine-color-black)',
+      color: 'var(--empoleon-color-black)',
+      hoverColor: 'var(--empoleon-color-black)',
     };
   }
 
@@ -51,9 +51,9 @@ const variantColorResolver: VariantColorsResolver = (input) => {
   // Add new variants support
   if (input.variant === 'danger') {
     return {
-      background: 'var(--mantine-color-red-9)',
-      hover: 'var(--mantine-color-red-8)',
-      color: 'var(--mantine-color-white)',
+      background: 'var(--empoleon-color-red-9)',
+      hover: 'var(--empoleon-color-red-8)',
+      color: 'var(--empoleon-color-white)',
       border: 'none',
     };
   }
@@ -91,8 +91,8 @@ const variantColorResolver: VariantColorsResolver = (input) => {
   if (parsedColor.isThemeColor && parsedColor.color === 'lime' && input.variant === 'filled') {
     return {
       ...defaultResolvedColors,
-      color: 'var(--mantine-color-black)',
-      hoverColor: 'var(--mantine-color-black)',
+      color: 'var(--empoleon-color-black)',
+      hoverColor: 'var(--empoleon-color-black)',
     };
   }
 
@@ -109,9 +109,9 @@ const variantColorResolver: VariantColorsResolver = (input) => {
   // Add new variants support
   if (input.variant === 'danger') {
     return {
-      background: 'var(--mantine-color-red-9)',
-      hover: 'var(--mantine-color-red-8)',
-      color: 'var(--mantine-color-white)',
+      background: 'var(--empoleon-color-red-9)',
+      hover: 'var(--empoleon-color-red-8)',
+      color: 'var(--empoleon-color-white)',
       border: 'none',
     };
   }

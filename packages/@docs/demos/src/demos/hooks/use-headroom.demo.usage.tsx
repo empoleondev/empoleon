@@ -18,12 +18,12 @@ function Demo() {
             top: 0,
             left: 0,
             right: 0,
-            padding: 'var(--mantine-spacing-xs)',
+            padding: 'var(--empoleon-spacing-xs)',
             height: 60,
             zIndex: 1000000,
             transform: \`translate3d(0, \${pinned ? 0 : '-110px'}, 0)\`,
             transition: 'transform 400ms ease',
-            backgroundColor: 'var(--mantine-color-body)',
+            backgroundColor: 'var(--empoleon-color-body)',
           }}
         >
           Pinned header
@@ -48,12 +48,12 @@ function Demo() {
             top: 0,
             left: 0,
             right: 0,
-            padding: 'var(--mantine-spacing-xs)',
+            padding: 'var(--empoleon-spacing-xs)',
             height: '60px',
             'z-index': 1000000,
             transform: `translate3d(0, ${pinned() ? 0 : '-110px'}, 0)`,
             transition: 'transform 400ms ease',
-            'background-color': 'var(--mantine-color-body)',
+            'background-color': 'var(--empoleon-color-body)',
           }}
         >
           Pinned header

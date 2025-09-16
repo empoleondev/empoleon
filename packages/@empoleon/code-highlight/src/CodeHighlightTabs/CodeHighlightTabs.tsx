@@ -71,6 +71,7 @@ const defaultProps: Partial<CodeHighlightTabsProps> = {};
 
 export const CodeHighlightTabs = factory<CodeHighlightTabsFactory>(_props => {
   const props = useProps('CodeHighlightTabs', defaultProps, _props);
+
   const [local, others] = splitProps(props, [
     'classNames',
     'className',
@@ -135,6 +136,8 @@ export const CodeHighlightTabs = factory<CodeHighlightTabsFactory>(_props => {
     props,
   });
 
+  console.log('tabs', _expanded());
+
   createEffect(() => {
     if (value() >= local.code.length) {
       setValue(local.code.length - 1);
@@ -145,7 +148,7 @@ export const CodeHighlightTabs = factory<CodeHighlightTabsFactory>(_props => {
     return null;
   }
 
-  const currentCode = local.code[value()] || { code: '', language: 'tsx', fileName: '' };
+  const currentCode = () => local.code[value()] || { code: '', language: 'tsx', fileName: '' };
 
   const files = local.code.map((node, index) => (
     <UnstyledButton
@@ -171,8 +174,8 @@ export const CodeHighlightTabs = factory<CodeHighlightTabsFactory>(_props => {
       </ScrollArea>
 
       <CodeHighlight
-        code={currentCode.code}
-        language={currentCode.language}
+        code={currentCode().code}
+        language={currentCode().language}
         expanded={_expanded()}
         onExpandedChange={setExpanded}
         withCopyButton={local.withCopyButton}

@@ -20,9 +20,9 @@ function Demo() {
       label="Switch with thumb icon"
       thumbIcon={
         checked ? (
-          <IconCheck size={12} color="var(--mantine-color-teal-6)" stroke={3} />
+          <IconCheck size={12} color="var(--empoleon-color-teal-6)" stroke={3} />
         ) : (
-          <IconX size={12} color="var(--mantine-color-red-6)" stroke={3} />
+          <IconX size={12} color="var(--empoleon-color-red-6)" stroke={3} />
         )
       }
     />
@@ -42,9 +42,9 @@ function Demo() {
       label="Switch with thumb icon"
       thumbIcon={
         checked() ? (
-          <IconCheck size={12} color="var(--mantine-color-teal-6)" stroke='3' />
+          <IconCheck size={12} color="var(--empoleon-color-teal-6)" stroke='3' />
         ) : (
-          <IconX size={12} color="var(--mantine-color-red-6)" stroke='3' />
+          <IconX size={12} color="var(--empoleon-color-red-6)" stroke='3' />
         )
       }
     />

@@ -11,7 +11,7 @@ function Button() {
 const cssCode = `
 .button {
   background-color: transparent;
-  color: var(--mantine-color-blue-9);
+  color: var(--empoleon-color-blue-9);
 }
 `;
 

@@ -10,55 +10,42 @@ export interface DemoColumnsProps extends DemoAreaProps {
   controls: JSX.Element;
 }
 
-export function DemoColumns({
-  children,
-  withPadding,
-  centered,
-  maxWidth,
-  minHeight,
-  title,
-  description,
-  controls,
-  dimmed,
-  striped,
-  overflow,
-  withGrid,
-}: DemoColumnsProps) {
+export function DemoColumns(props: DemoColumnsProps) {
   return (
     <div class={classes.root}>
       <div class={classes.columns}>
         <DemoArea
-          withPadding={withPadding}
-          maxWidth={maxWidth}
-          minHeight={minHeight}
-          centered={centered}
-          dimmed={dimmed}
-          striped={striped}
-          overflow={overflow}
+          withPadding={props.withPadding}
+          maxWidth={props.maxWidth}
+          minHeight={props.minHeight}
+          centered={props.centered}
+          dimmed={props.dimmed}
+          striped={props.striped}
+          overflow={props.overflow}
         >
-          {children}
+          {props.children}
         </DemoArea>
 
         <div class={classes.controls}>
-          {title && (
+          {props.title && (
             <div class={classes.header}>
               <Text fw={500} fz="sm" mb={5}>
-                {title}
+                {props.title}
               </Text>
-              {description && (
+              {props.description && (
                 <Text c="dimmed" fz={11} lh={1.45}>
-                  {description}
+                  {props.description}
                 </Text>
               )}
             </div>
           )}
 
-          {withGrid ? (
+          {props.withGrid ? (
             <SimpleGrid type="container" cols={{ base: 1, '480px': 2, '780px': 4 }} p={8}>
-              {controls}
+              {props.controls}
             </SimpleGrid>
           ) : (
-            controls
+            props.controls
           )}
         </div>
       </div>

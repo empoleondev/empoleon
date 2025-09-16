@@ -268,7 +268,7 @@ export const Input = polymorphicFactory<InputFactory>(_props => {
         value: v,
         onInput: (e: Event) => {
           (rest as any).onChange?.(e);
-          (e.target as any).value = v;
+          // (e.target as any).value = v;
         }
       };
     }

@@ -6,18 +6,18 @@ import { createSignal } from 'solid-js';
 const cssCode = `
 .list {
   position: relative;
-  margin-bottom: var(--mantine-spacing-md);
+  margin-bottom: var(--empoleon-spacing-md);
 }
 
 .indicator {
-  background-color: var(--mantine-color-white);
-  border-radius: var(--mantine-radius-md);
-  border: 1px solid var(--mantine-color-gray-2);
-  box-shadow: var(--mantine-shadow-sm);
+  background-color: var(--empoleon-color-white);
+  border-radius: var(--empoleon-radius-md);
+  border: 1px solid var(--empoleon-color-gray-2);
+  box-shadow: var(--empoleon-shadow-sm);
 
   @mixin dark {
-    background-color: var(--mantine-color-dark-6);
-    border-color: var(--mantine-color-dark-4);
+    background-color: var(--empoleon-color-dark-6);
+    border-color: var(--empoleon-color-dark-4);
   }
 }
 
@@ -25,17 +25,17 @@ const cssCode = `
   z-index: 1;
   font-weight: 500;
   transition: color 100ms ease;
-  color: var(--mantine-color-gray-7);
+  color: var(--empoleon-color-gray-7);
 
   &[data-active] {
-    color: var(--mantine-color-black);
+    color: var(--empoleon-color-black);
   }
 
   @mixin dark {
-    color: var(--mantine-color-dark-1);
+    color: var(--empoleon-color-dark-1);
 
     &[data-active] {
-      color: var(--mantine-color-white);
+      color: var(--empoleon-color-white);
     }
   }
 }

@@ -1,3 +1,4 @@
+import { codeToHtml } from 'shiki';
 import type { CodeHighlightAdapter } from '../CodeHighlightProvider';
 import { dark, light } from './shiki-themes';
 
@@ -25,25 +26,29 @@ interface CreateShikiAdapterOptions {
 }
 
 export const createShikiAdapter = (
-  loadShiki: () => Promise<any>,
   { forceColorScheme }: CreateShikiAdapterOptions = {}
 ): CodeHighlightAdapter => {
   return {
-    loadContext: loadShiki,
-    getHighlighter: (ctx) => {
-      if (!ctx) {
-        return ({ code }) => ({ highlightedCode: code, isHighlighted: false });
-      }
+    getHighlighter: (ctx: any) => async ({ code, language, colorScheme }) => {
+      try {
+        const html = await codeToHtml(code, {
+          lang: language || 'text',
+          theme: forceColorScheme || (colorScheme === 'light' ? light : dark),
+        });
 
-      return ({ code, language, colorScheme }) => ({
-        isHighlighted: true,
-        highlightedCode: stripShikiCodeBlocks(
-          ctx.codeToHtml(code, {
-            lang: language,
-            theme: forceColorScheme || ((colorScheme === 'light' ? light : dark) as any),
-          })
-        ),
-      });
+        return {
+          isHighlighted: true,
+          highlightedCode: stripShikiCodeBlocks(html),
+          codeElementProps: {}
+        };
+      } catch (error) {
+        console.error('Shiki highlighting failed:', error);
+        return {
+          highlightedCode: code,
+          isHighlighted: false,
+          codeElementProps: {}
+        };
+      }
     },
   };
 };

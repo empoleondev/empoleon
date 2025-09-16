@@ -27,7 +27,7 @@ function Demo() {
         rightSection={
           <IconExclamationCircle
             size={20}
-            color="var(--mantine-color-error)"
+            color="var(--empoleon-color-error)"
           />
         }
       />
@@ -54,7 +54,7 @@ function Demo() {
         error="Something went wrong"
         withErrorStyles={false}
         rightSectionPointerEvents="none"
-        rightSection={<IconExclamationCircle size={20} color="var(--mantine-color-error)" />}
+        rightSection={<IconExclamationCircle size={20} color="var(--empoleon-color-error)" />}
       />
     </>
   );

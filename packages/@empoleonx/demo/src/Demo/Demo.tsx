@@ -1,4 +1,4 @@
-import { Component } from 'solid-js';
+import { Component, Match, Switch } from 'solid-js';
 import { CodeDemo, CodeDemoProps } from '../CodeDemo/CodeDemo';
 import { ConfiguratorDemo, ConfiguratorDemoProps } from '../ConfiguratorDemo/ConfiguratorDemo';
 import { StylesApiDemo, StylesApiDemoProps } from '../StylesApiDemo/StylesApiDemo';
@@ -20,27 +20,24 @@ interface DemoProps {
   };
 }
 
-export function Demo({ data, demoProps }: DemoProps) {
-  switch (data.type) {
-    case 'code':
-      return (
-        <CodeDemo {...data} {...demoProps}>
-          <data.component />
+export function Demo(props: DemoProps) {
+  return (
+    <Switch>
+      <Match when={props.data.type === 'code'}>
+        <CodeDemo {...(props.data as any)} {...props.demoProps}>
+          <props.data.component />
         </CodeDemo>
-      );
-    case 'configurator':
-      return (
-        <ConfiguratorDemo {...data} {...demoProps}>
-          <data.component />
+      </Match>
+      <Match when={props.data.type === 'configurator'}>
+        <ConfiguratorDemo {...(props.data as any)} {...props.demoProps}>
+          <props.data.component />
         </ConfiguratorDemo>
-      );
-    case 'styles-api':
-      return (
-        <StylesApiDemo {...data} {...demoProps}>
-          <data.component />
+      </Match>
+      <Match when={props.data.type === 'styles-api'}>
+        <StylesApiDemo {...(props.data as any)} {...props.demoProps}>
+          <props.data.component />
         </StylesApiDemo>
-      );
-    default:
-      return null;
-  }
+      </Match>
+    </Switch>
+  );
 }

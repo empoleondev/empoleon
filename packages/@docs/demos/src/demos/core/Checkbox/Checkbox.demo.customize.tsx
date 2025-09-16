@@ -5,9 +5,9 @@ import { createSignal } from 'solid-js';
 
 const cssCode = `
 .root {
-  border: 1px solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
-  padding: var(--mantine-spacing-xs) var(--mantine-spacing-sm);
-  border-radius: var(--mantine-radius-md);
+  border: 1px solid light-dark(var(--empoleon-color-gray-3), var(--empoleon-color-dark-4));
+  padding: var(--empoleon-spacing-xs) var(--empoleon-spacing-sm);
+  border-radius: var(--empoleon-radius-md);
   font-weight: 500;
   transition:
     color 100ms ease,
@@ -16,9 +16,9 @@ const cssCode = `
   cursor: pointer;
 
   &[data-checked] {
-    background-color: var(--mantine-color-blue-filled);
-    border-color: var(--mantine-color-blue-filled);
-    color: var(--mantine-color-white);
+    background-color: var(--empoleon-color-blue-filled);
+    border-color: var(--empoleon-color-blue-filled);
+    color: var(--empoleon-color-white);
   }
 
   & * {

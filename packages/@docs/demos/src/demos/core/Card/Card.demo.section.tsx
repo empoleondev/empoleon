@@ -44,7 +44,7 @@ function Demo() {
       </Card.Section>
 
       <Text mt="sm" c="dimmed" size="sm">
-        <Text span inherit c="var(--mantine-color-anchor)">
+        <Text span inherit c="var(--empoleon-color-anchor)">
           200+ images uploaded
         </Text>{' '}
         since last visit, review them to select which one should be added to your gallery
@@ -97,7 +97,7 @@ function Demo() {
       </Card.Section>
 
       <Text mt="sm" c="dimmed" size="sm">
-        <Text span inherit c="var(--mantine-color-anchor)">
+        <Text span inherit c="var(--empoleon-color-anchor)">
           200+ images uploaded
         </Text>{' '}
         since last visit, review them to select which one should be added to your gallery

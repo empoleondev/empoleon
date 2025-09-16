@@ -10,7 +10,7 @@ interface ExpandCodeButtonProps {
 
 export function ExpandCodeButton(props: ExpandCodeButtonProps) {
   const expandCodeLabel = props.expandCodeLabel || 'Expand code';
-  const collapseCodeLabel = props.expandCodeLabel || 'Collapse code';
+  const collapseCodeLabel = props.collapseCodeLabel || 'Collapse code';
 
   return (
     <CodeHighlightControl

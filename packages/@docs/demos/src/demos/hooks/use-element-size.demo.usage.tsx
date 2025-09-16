@@ -34,7 +34,7 @@ function Demo() {
             width: '400px',
             height: '120px',
             border: 'none',
-            'background-color': 'var(--mantine-color-body)',
+            'background-color': 'var(--empoleon-color-body)',
             position: 'relative',
           }}
         />

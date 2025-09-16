@@ -22,20 +22,20 @@ const cssCode = `
 .scrollbar {
   &,
   &:hover {
-    background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-6));
+    background-color: light-dark(var(--empoleon-color-gray-0), var(--empoleon-color-dark-6));
   }
 
   &[data-orientation='vertical'] .thumb {
-    background-color: var(--mantine-color-red-6);
+    background-color: var(--empoleon-color-red-6);
   }
 
   &[data-orientation='horizontal'] .thumb {
-    background-color: var(--mantine-color-blue-6);
+    background-color: var(--empoleon-color-blue-6);
   }
 }
 
 .corner {
-  background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-6));
+  background-color: light-dark(var(--empoleon-color-gray-0), var(--empoleon-color-dark-6));
   opacity: 1;
 }
 `;

@@ -38,7 +38,7 @@ const cssCode = `
   }
 
   &:is(h5, h6) {
-    color: var(--mantine-color-dimmed);
+    color: var(--empoleon-color-dimmed);
   }
 }
 `;

@@ -1,4 +1,4 @@
-import { JSX, splitProps } from 'solid-js';
+import { createEffect, createMemo, createSignal, JSX, splitProps } from 'solid-js';
 import cx from 'clsx';
 import {
   Box,
@@ -100,7 +100,7 @@ export interface CodeHighlightProps
   __inline?: boolean;
 
   /** Code to highlight */
-  code: string;
+  code: string | (() => string);
 
   /** Language of the code, used for syntax highlighting */
   language?: string;
@@ -133,6 +133,7 @@ const varsResolver = createVarsResolver<CodeHighlightFactory>(
 
 export const CodeHighlight = factory<CodeHighlightFactory>(_props => {
   const props = useProps('CodeHighlight', defaultProps, _props);
+
   const [local, others] = splitProps(props, [
     'classNames',
     'className',
@@ -179,6 +180,8 @@ export const CodeHighlight = factory<CodeHighlightFactory>(_props => {
     rootSelector: 'codeHighlight',
   });
 
+  console.log('local.expanded', local.expanded);
+
   const [_expanded, setExpanded] = useUncontrolled({
     value: () => local.expanded,
     defaultValue: local.defaultExpanded!,
@@ -191,18 +194,55 @@ export const CodeHighlight = factory<CodeHighlightFactory>(_props => {
 
   const colorScheme = useComputedColorScheme();
   const highlight = useHighlight();
-  const highlightedCode = highlight({ code: local.code.trim(), language: local.language, colorScheme });
 
-  const codeContent = highlightedCode.isHighlighted
-    ? { dangerouslySetInnerHTML: { __html: highlightedCode.highlightedCode } }
-    : { children: local.code.trim() };
+  // Create a signal to store the highlighted result
+  const [highlightedResult, setHighlightedResult] = createSignal<{
+    highlightedCode: string;
+    isHighlighted: boolean;
+    codeElementProps?: Record<string, any>;
+  }>({
+    highlightedCode: '',
+    isHighlighted: false,
+    codeElementProps: {}
+  });
+
+  // Create effect to handle async highlighting
+  createEffect(() => {
+    // Track reactive dependencies synchronously
+    const codeValue = typeof local.code === 'function' ? local.code() : local.code;
+    const code = (codeValue || '').trim();
+    const language = local.language;
+    const scheme = local.codeColorScheme || colorScheme();
+
+    // Handle async operation
+    highlight({
+      code,
+      language,
+      colorScheme: scheme
+    }).then((result) => {
+      setHighlightedResult(result);
+    }).catch((error) => {
+      // Fallback to unhighlighted code
+      setHighlightedResult({
+        highlightedCode: code,
+        isHighlighted: false,
+        codeElementProps: {}
+      });
+    });
+  });
+
+  const codeContent = createMemo(() => {
+    const result = highlightedResult();
+    return result.isHighlighted
+      ? { innerHTML: result.highlightedCode }
+      : { children: ((typeof local.code === 'function' ? local.code() : local.code) || '').trim() };
+  });
 
   const safeOthers = Object.fromEntries(
     Object.entries(others).filter(([key]) =>
-      !key.startsWith('on') || key === 'onClick' // Keep only onClick if needed
+      !key.startsWith('on') || key === 'onClick'
     )
   );
-
 
   if (local.__inline) {
     return (
@@ -210,16 +250,20 @@ export const CodeHighlight = factory<CodeHighlightFactory>(_props => {
         component="code"
         ref={local.ref as any}
         {...safeOthers}
-        {...highlightedCode.codeElementProps}
+        {...highlightedResult().codeElementProps}
         {...getStyles('codeHighlight', {
-          className: cx(highlightedCode.codeElementProps?.className, local.className),
-          style: [{ ...highlightedCode.codeElementProps?.style }, local.style],
+          className: cx(highlightedResult().codeElementProps?.className, local.className),
+          style: [{ ...highlightedResult().codeElementProps?.style }, local.style],
         })}
         data-with-border={local.withBorder || undefined}
-        {...codeContent}
+        {...codeContent()}
       />
     );
   }
+
+  createEffect(() => {
+    console.log(_expanded());
+  })
 
   return (
     <CodeHighlightContextProvider value={{ getStyles, codeColorScheme: local.codeColorScheme }}>
@@ -244,7 +288,7 @@ export const CodeHighlight = factory<CodeHighlightFactory>(_props => {
               />
             )}
             {local.withCopyButton && (
-              <CopyCodeButton code={local.code} copiedLabel={local.copiedLabel} copyLabel={local.copyLabel} />
+              <CopyCodeButton code={typeof local.code === 'function' ? local.code() : (local.code || '')} copiedLabel={local.copiedLabel} copyLabel={local.copyLabel} />
             )}
           </div>
         )}
@@ -254,24 +298,36 @@ export const CodeHighlight = factory<CodeHighlightFactory>(_props => {
           scrollbarSize={4}
           dir="ltr"
           offsetScrollbars={false}
-          data-collapsed={!_expanded || undefined}
+          data-collapsed={!_expanded() || undefined}
           {...getStyles('scrollarea')}
         >
           <pre {...getStyles('pre')} data-with-offset={local.__withOffset || undefined}>
-            <code
-              {...highlightedCode.codeElementProps}
-              {...getStyles('code', {
-                className: highlightedCode.codeElementProps?.className,
-                style: highlightedCode.codeElementProps?.style,
-              })}
-              {...codeContent}
-            />
+            {codeContent().innerHTML ? (
+              <code
+                {...highlightedResult().codeElementProps}
+                {...getStyles('code', {
+                  className: highlightedResult().codeElementProps?.className,
+                  style: highlightedResult().codeElementProps?.style,
+                })}
+                innerHTML={codeContent().innerHTML}
+              />
+            ) : (
+              <code
+                {...highlightedResult().codeElementProps}
+                {...getStyles('code', {
+                  className: highlightedResult().codeElementProps?.className,
+                  style: highlightedResult().codeElementProps?.style,
+                })}
+              >
+                {codeContent().children}
+              </code>
+            )}
           </pre>
         </ScrollArea>
 
         <UnstyledButton
           {...getStyles('showCodeButton')}
-          mod={{ hidden: _expanded }}
+          mod={{ hidden: _expanded() }}
           onClick={() => setExpanded(true)}
           data-code-color-scheme={local.codeColorScheme}
         >

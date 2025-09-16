@@ -17,15 +17,15 @@ const images = [
 ];
 
 function Demo() {
-  const slides = images.map((url) => (
-    <Carousel.Slide >
-      <Image src={url} />
-    </Carousel.Slide>
-  ));
-
   return (
     <Carousel withIndicators height={200}>
-      {slides}
+      <For each={_images}>
+        {(url) => (
+          <Carousel.Slide>
+            <Image src={url} />
+          </Carousel.Slide>
+        )}
+      </For>
     </Carousel>
   );
 }

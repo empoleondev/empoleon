@@ -10,6 +10,7 @@ import { Dynamic } from 'solid-js/web';
 export interface StylesApiDemoProps extends DemoAreaProps {
   data: { selectors: Record<string, string> };
   code: string;
+  component: any;
 }
 
 function getCss(hovered: string | null) {
@@ -18,19 +19,10 @@ function getCss(hovered: string | null) {
     : '/*\n * Hover over selectors to apply outline styles\n *\n */';
 }
 
-export function StylesApiDemo({
-  data,
-  code,
-  withPadding,
-  maxWidth,
-  centered,
-  children,
-  dimmed,
-  striped,
-}: StylesApiDemoProps) {
+export function StylesApiDemo(props: StylesApiDemoProps) {
   const [hovered, setHovered] = createSignal<string | null>(null);
 
-  const selectors = Object.keys(data.selectors);
+  const selectors = Object.keys(props.data.selectors);
   const controls = selectors.map((selector) => (
     <UnstyledButton
       className={classes.selector}
@@ -39,7 +31,7 @@ export function StylesApiDemo({
     >
       <Text mb={2}>{selector}</Text>
       <Text fz={11} c="dimmed">
-        {data.selectors[selector]}
+        {props.data.selectors[selector]}
       </Text>
     </UnstyledButton>
   ));
@@ -51,31 +43,21 @@ export function StylesApiDemo({
       <style innerHTML={getCss(hovered())} />
       <DemoRoot>
         <DemoColumns
-          withPadding={withPadding}
-          maxWidth={maxWidth}
-          centered={centered}
+          withPadding={props.withPadding}
+          maxWidth={props.maxWidth}
+          centered={props.centered}
           controls={controls}
-          dimmed={dimmed}
-          striped={striped}
+          dimmed={props.dimmed}
+          striped={props.striped}
           title="Component Styles API"
           description="Hover over selectors to highlight corresponding elements"
         >
-          {/* {cloneElement(children as JSX.Element, {
-            classNames: selectors.reduce<Record<string, string>>((acc, item) => {
+          <Dynamic
+            component={props.component}
+            classNames={selectors.reduce<Record<string, string>>((acc, item) => {
               acc[item] = item;
               return acc;
-            }, {}),
-          })} */}
-          <Dynamic
-            component={children}
-            // @ts-ignore
-            {...mergeProps(children.props || {}, {
-              classNames: selectors.reduce((acc, item) => {
-                // @ts-ignore
-                acc[item] = item;
-                return acc;
-              }, {})
-            })}
+            }, {})}
           />
         </DemoColumns>
 
@@ -85,7 +67,7 @@ export function StylesApiDemo({
             {
               fileName: 'Demo.tsx',
               language: 'tsx',
-              code: code.replace('{{props}}', classNamesProp),
+              code: props.code.replace('{{props}}', classNamesProp),
             },
           ]}
         />

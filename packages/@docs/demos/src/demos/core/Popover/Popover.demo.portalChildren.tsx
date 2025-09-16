@@ -12,7 +12,7 @@ function Demo() {
       <Popover.Target>
         <Button>Toggle popover</Button>
       </Popover.Target>
-      <Popover.Dropdown bg="var(--mantine-color-body)">
+      <Popover.Dropdown bg="var(--empoleon-color-body)">
         <Select
           label="Select within Popover"
           placeholder="Select within Popover"
@@ -37,7 +37,7 @@ function Demo() {
       <Popover.Target>
         <Button>Toggle popover</Button>
       </Popover.Target>
-      <Popover.Dropdown bg="var(--mantine-color-body)">
+      <Popover.Dropdown bg="var(--empoleon-color-body)">
         <Select
           label="Select within Popover"
           placeholder="Select within Popover"

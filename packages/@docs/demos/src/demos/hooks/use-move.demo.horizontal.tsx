@@ -20,7 +20,7 @@ function Demo() {
           style={{
             width: 400,
             height: 16,
-            backgroundColor: 'var(--mantine-color-blue-light)',
+            backgroundColor: 'var(--empoleon-color-blue-light)',
             position: 'relative',
           }}
         >
@@ -29,7 +29,7 @@ function Demo() {
             style={{
               width: \`\${value * 100}%\`,
               height: 16,
-              backgroundColor: 'var(--mantine-color-blue-filled)',
+              backgroundColor: 'var(--empoleon-color-blue-filled)',
               opacity: 0.7,
             }}
           />
@@ -42,7 +42,7 @@ function Demo() {
               top: 0,
               width: 16,
               height: 16,
-              backgroundColor: 'var(--mantine-color-blue-7)',
+              backgroundColor: 'var(--empoleon-color-blue-7)',
             }}
           />
         </div>
@@ -68,7 +68,7 @@ function Demo() {
           style={{
             width: '400px',
             height: '16px',
-            'background-color': 'var(--mantine-color-blue-light)',
+            'background-color': 'var(--empoleon-color-blue-light)',
             position: 'relative',
           }}
         >
@@ -77,7 +77,7 @@ function Demo() {
             style={{
               width: `${value() * 100}%`,
               height: '16px',
-              'background-color': 'var(--mantine-color-blue-filled)',
+              'background-color': 'var(--empoleon-color-blue-filled)',
               opacity: 0.7,
             }}
           />
@@ -90,7 +90,7 @@ function Demo() {
               top: 0,
               width: '16px',
               height: '16px',
-              'background-color': 'var(--mantine-color-blue-7)',
+              'background-color': 'var(--empoleon-color-blue-7)',
             }}
           />
         </div>

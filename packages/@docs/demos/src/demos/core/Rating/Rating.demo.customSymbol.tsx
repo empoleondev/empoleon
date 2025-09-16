@@ -21,7 +21,7 @@ import {
 const getIconStyle = (color?: string) => ({
   width: 24,
   height: 24,
-  color: color ? \`var(--mantine-color-\${color}-7)\` : undefined,
+  color: color ? \`var(--empoleon-color-\${color}-7)\` : undefined,
 });
 
 const getEmptyIcon = (value: number) => {
@@ -68,7 +68,7 @@ function Demo() {
 const getIconStyle = (color?: string) => ({
   width: 24,
   height: 24,
-  color: color ? `var(--mantine-color-${color}-7)` : undefined,
+  color: color ? `var(--empoleon-color-${color}-7)` : undefined,
 });
 
 const getEmptyIcon = (value: number) => {

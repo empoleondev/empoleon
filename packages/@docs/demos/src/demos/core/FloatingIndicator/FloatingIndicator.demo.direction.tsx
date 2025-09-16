@@ -133,17 +133,17 @@ function Demo() {
 
 const cssCode = `.root {
   position: relative;
-  background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-8));
+  background-color: light-dark(var(--empoleon-color-gray-0), var(--empoleon-color-dark-8));
   width: fit-content;
-  padding: var(--mantine-spacing-sm);
-  border-radius: var(--mantine-radius-md);
+  padding: var(--empoleon-spacing-sm);
+  border-radius: var(--empoleon-radius-md);
 }
 
 .indicator {
-  background-color: light-dark(var(--mantine-color-white), var(--mantine-color-dark-6));
-  border-radius: var(--mantine-radius-md);
-  box-shadow: var(--mantine-shadow-md);
-  border: 1px solid light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-4));
+  background-color: light-dark(var(--empoleon-color-white), var(--empoleon-color-dark-6));
+  border-radius: var(--empoleon-radius-md);
+  box-shadow: var(--empoleon-shadow-md);
+  border: 1px solid light-dark(var(--empoleon-color-gray-2), var(--empoleon-color-dark-4));
 }
 
 .controlsGroup {
@@ -156,16 +156,16 @@ const cssCode = `.root {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: light-dark(var(--mantine-color-gray-6), var(--mantine-color-dark-2));
-  border-radius: var(--mantine-radius-md);
+  color: light-dark(var(--empoleon-color-gray-6), var(--empoleon-color-dark-2));
+  border-radius: var(--empoleon-radius-md);
 
   &[data-active] {
-    color: light-dark(var(--mantine-color-black), var(--mantine-color-white));
+    color: light-dark(var(--empoleon-color-black), var(--empoleon-color-white));
   }
 
   @mixin hover {
-    color: light-dark(var(--mantine-color-black), var(--mantine-color-white));
-    background-color: light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-7));
+    color: light-dark(var(--empoleon-color-black), var(--empoleon-color-white));
+    background-color: light-dark(var(--empoleon-color-gray-1), var(--empoleon-color-dark-7));
   }
 
   & svg {

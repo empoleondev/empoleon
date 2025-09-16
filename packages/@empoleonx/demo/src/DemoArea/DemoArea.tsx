@@ -1,6 +1,6 @@
 import { Box, rem } from '@empoleon/core';
 import classes from './DemoArea.module.css';
-import { JSX } from 'solid-js';
+import { JSX, mergeProps } from 'solid-js';
 
 export interface DemoAreaProps {
   children?: JSX.Element;
@@ -13,29 +13,25 @@ export interface DemoAreaProps {
   overflow?: 'hidden' | 'auto';
 }
 
-export function DemoArea({
-  withPadding = true,
-  overflow,
-  centered,
-  maxWidth,
-  minHeight,
-  children,
-  dimmed,
-  striped,
-}: DemoAreaProps) {
+export function DemoArea(props: DemoAreaProps) {
+  const mergedProps = mergeProps({
+    ...props,
+    withPadding: true
+  })
+
   return (
     <Box
       className={classes.demo}
-      style={{ overflow }}
-      mod={{ 'with-padding': withPadding, centered, dimmed, striped }}
+      style={{ overflow: mergedProps.overflow }}
+      mod={{ 'with-padding': mergedProps.withPadding, centered: mergedProps.centered, dimmed: mergedProps.dimmed, striped: mergedProps.striped }}
       __vars={{
-        '--demo-flex': maxWidth ? '1' : undefined,
-        '--demo-max-width': maxWidth ? rem(maxWidth) : undefined,
-        '--demo-min-height': minHeight ? rem(minHeight) : undefined,
-        '--demo-margin-y': maxWidth && centered ? 'auto' : undefined,
+        '--demo-flex': mergedProps.maxWidth ? '1' : undefined,
+        '--demo-max-width': mergedProps.maxWidth ? rem(mergedProps.maxWidth) : undefined,
+        '--demo-min-height': mergedProps.minHeight ? rem(mergedProps.minHeight) : undefined,
+        '--demo-margin-y': mergedProps.maxWidth && mergedProps.centered ? 'auto' : undefined,
       }}
     >
-      <div class={classes.demoInner}>{children}</div>
+      <div class={classes.demoInner}>{mergedProps.children}</div>
     </Box>
   );
 }

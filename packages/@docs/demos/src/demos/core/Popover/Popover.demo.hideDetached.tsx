@@ -7,7 +7,7 @@ import { Box, Button, Group, Popover } from '@empoleon/core';
 function Demo() {
   return (
     <Box
-      bd="1px solid var(--mantine-color-dimmed)"
+      bd="1px solid var(--empoleon-color-dimmed)"
       p="xl"
       w={400}
       h={200}
@@ -40,7 +40,7 @@ function Demo() {
 
   return (
     <Box
-      bd="1px solid var(--mantine-color-dimmed)"
+      bd="1px solid var(--empoleon-color-dimmed)"
       p="xl"
       w={400}
       h={200}

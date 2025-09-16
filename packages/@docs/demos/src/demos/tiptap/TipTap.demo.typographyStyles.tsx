@@ -6,16 +6,16 @@ import classes from './TipTap.demo.typographyStyles.module.css';
 
 const cssCode = `.root {
   h2 {
-    color: light-dark(var(--mantine-color-gray-6), var(--mantine-color-dark-2));
-    font-size: var(--mantine-font-size-xl);
+    color: light-dark(var(--empoleon-color-gray-6), var(--empoleon-color-dark-2));
+    font-size: var(--empoleon-font-size-xl);
   }
 
   p {
-    font-size: var(--mantine-font-size-lg);
+    font-size: var(--empoleon-font-size-lg);
   }
 
   a {
-    color: var(--mantine-color-red-6);
+    color: var(--empoleon-color-red-6);
   }
 }`;
 

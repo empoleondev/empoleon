@@ -21,28 +21,28 @@ interface TransformCodePayloadInput {
   state: Record<string, any>;
 }
 
-function transformCodePayload({ code, controls, state }: TransformCodePayloadInput) {
-  return typeof code === 'function'
-    ? code(clearProps(controls, state))
-    : injectProps(clearProps(controls, state), code);
+function transformCodePayload(props: TransformCodePayloadInput) {
+  return typeof props.code === 'function'
+    ? props.code(clearProps(props.controls, props.state))
+    : injectProps(clearProps(props.controls, props.state), props.code);
 }
 
-export function getCodeArray({ code, controls, state }: GetCodeArrayInput) {
-  if (typeof code === 'string' || typeof code === 'function') {
+export function getCodeArray(props: GetCodeArrayInput) {
+  if (typeof props.code === 'string' || typeof props.code === 'function') {
     return [
       {
         fileName: 'Demo.tsx',
         language: 'tsx' as const,
-        code: transformCodePayload({ code, controls, state }),
+        code: transformCodePayload({ code: props.code, controls: props.controls, state: props.state }),
       },
     ];
   }
 
-  if (Array.isArray(code)) {
-    return code.map((item) => ({
+  if (Array.isArray(props.code)) {
+    return props.code.map((item) => ({
       fileName: item.fileName || 'Demo.tsx',
       language: item.language || 'tsx',
-      code: transformCodePayload({ code: item.code, controls, state }),
+      code: transformCodePayload({ code: item.code, controls: props.controls, state: props.state }),
     }));
   }
 

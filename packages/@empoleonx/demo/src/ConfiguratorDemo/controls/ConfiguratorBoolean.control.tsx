@@ -1,6 +1,7 @@
 import { BoxProps, ElementProps, Switch } from '@empoleon/core';
 import { getControlLabel } from './get-control-label';
 import { ConfiguratorControl } from './types';
+import { splitProps } from 'solid-js';
 
 export type ConfiguratorBooleanControlOptions = ConfiguratorControl<
   'boolean',
@@ -15,17 +16,18 @@ export interface ConfiguratorBooleanControlProps
   prop: string;
 }
 
-export function ConfiguratorBooleanControl({
-  value,
-  onChange,
-  prop,
-  ...others
-}: ConfiguratorBooleanControlProps) {
+export function ConfiguratorBooleanControl(props: ConfiguratorBooleanControlProps) {
+  const [local, others] = splitProps(props, [
+    'value',
+    'onChange',
+    'prop'
+  ]);
+
   return (
     <Switch
-      checked={value}
-      onChange={(event) => onChange(event.currentTarget.checked)}
-      label={getControlLabel(prop)}
+      checked={local.value}
+      onChange={(event) => local.onChange(event.currentTarget.checked)}
+      label={getControlLabel(local.prop)}
       {...others}
     />
   );

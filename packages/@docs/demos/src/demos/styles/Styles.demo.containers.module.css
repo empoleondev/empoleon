@@ -8,15 +8,15 @@
 }
 
 .child {
-  background-color: var(--mantine-color-dimmed);
-  color: var(--mantine-color-white);
-  padding: var(--mantine-spacing-md);
+  background-color: var(--empoleon-color-dimmed);
+  color: var(--empoleon-color-white);
+  padding: var(--empoleon-spacing-md);
 
   @container (max-width: 500px) {
-    background-color: var(--mantine-color-blue-filled);
+    background-color: var(--empoleon-color-blue-filled);
   }
 
   @container (max-width: 300px) {
-    background-color: var(--mantine-color-red-filled);
+    background-color: var(--empoleon-color-red-filled);
   }
 }

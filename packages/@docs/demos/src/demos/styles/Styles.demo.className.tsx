@@ -17,7 +17,7 @@ function Demo() {
 
 const cssCode = `
 .box {
-  font-size: var(--mantine-font-size-xl);
+  font-size: var(--empoleon-font-size-xl);
   text-align: center;
   font-weight: 600;
 }
@@ -25,9 +25,9 @@ const cssCode = `
 .highlight {
   padding: 4px 10px;
   display: inline-block;
-  border-radius: var(--mantine-radius-md);
-  background: var(--mantine-color-blue-light);
-  color: var(--mantine-color-blue-light-color);
+  border-radius: var(--empoleon-radius-md);
+  background: var(--empoleon-color-blue-light);
+  color: var(--empoleon-color-blue-light-color);
 }
 `;
 

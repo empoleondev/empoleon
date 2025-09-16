@@ -7,5 +7,5 @@ export function useComputedColorScheme(
 ) {
   const osColorScheme = useColorScheme(defaultValue, options);
   const { colorScheme } = useEmpoleonColorScheme();
-  return colorScheme === 'auto' ? osColorScheme : colorScheme;
+  return () => colorScheme === 'auto' ? osColorScheme() : colorScheme;
 }

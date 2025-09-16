@@ -12,15 +12,15 @@ function Demo() {
 const cssCode = `
 .demo {
   text-align: center;
-  color: var(--mantine-color-white);
-  padding: var(--mantine-spacing-md);
+  color: var(--empoleon-color-white);
+  padding: var(--empoleon-spacing-md);
 
   /* LTR styles */
-  background-color: var(--mantine-color-blue-filled);
+  background-color: var(--empoleon-color-blue-filled);
 
   @mixin rtl {
     /* RTL styles override LTR styles */
-    background-color: var(--mantine-color-red-filled);
+    background-color: var(--empoleon-color-red-filled);
   }
 }
 `;

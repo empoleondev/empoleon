@@ -25,7 +25,7 @@ function Demo() {
 const cssCode = `
 .track {
   &::before {
-    background-color: light-dark(var(--mantine-color-blue-1), var(--mantine-color-dark-3));
+    background-color: light-dark(var(--empoleon-color-blue-1), var(--empoleon-color-dark-3));
   }
 }
 
@@ -34,15 +34,15 @@ const cssCode = `
   height: 6px;
   border-radius: 6px;
   transform: translateX(-3px) translateY(-2px);
-  border-color: light-dark(var(--mantine-color-blue-1), var(--mantine-color-dark-3));
+  border-color: light-dark(var(--empoleon-color-blue-1), var(--empoleon-color-dark-3));
 
   &[data-filled] {
-    border-color: var(--mantine-color-blue-6);
+    border-color: var(--empoleon-color-blue-6);
   }
 }
 
 .markLabel {
-  font-size: var(--mantine-font-size-xs);
+  font-size: var(--empoleon-font-size-xs);
   margin-bottom: 5px;
   margin-top: 0;
 }
@@ -50,9 +50,9 @@ const cssCode = `
 .thumb {
   height: 16px;
   width: 16px;
-  background-color: var(--mantine-color-white);
+  background-color: var(--empoleon-color-white);
   border-width: 1px;
-  box-shadow: var(--mantine-shadow-sm);
+  box-shadow: var(--empoleon-shadow-sm);
 }
 `;
 

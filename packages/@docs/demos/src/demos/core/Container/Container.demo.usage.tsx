@@ -6,7 +6,7 @@ import { Container } from '@empoleon/core';
 
 function Demo() {
   const demoProps = {
-    bg: 'var(--mantine-color-blue-light)',
+    bg: 'var(--empoleon-color-blue-light)',
     h: 50,
     mt: 'md',
   };
@@ -29,7 +29,7 @@ function Demo() {
 
 function Demo() {
   const demoProps = {
-    bg: 'var(--mantine-color-blue-light)',
+    bg: 'var(--empoleon-color-blue-light)',
     h: 50,
     mt: 'md',
   };

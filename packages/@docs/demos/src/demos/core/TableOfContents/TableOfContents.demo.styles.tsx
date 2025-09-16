@@ -6,8 +6,8 @@ const cssCode = `.control {
   transition: transform 100ms ease;
 
   &[data-active] {
-    background-color: var(--mantine-color-lime-4);
-    color: var(--mantine-color-black);
+    background-color: var(--empoleon-color-lime-4);
+    color: var(--empoleon-color-black);
     transform: scale(1.1);
   }
 }`;

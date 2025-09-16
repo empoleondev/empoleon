@@ -11,13 +11,13 @@ function Demo() {
 
 const cssCode = `
 .demo {
-  background-color: var(--mantine-color-blue-filled);
-  color: var(--mantine-color-white);
-  padding: var(--mantine-spacing-md);
+  background-color: var(--empoleon-color-blue-filled);
+  color: var(--empoleon-color-white);
+  padding: var(--empoleon-spacing-md);
   text-align: center;
 
   @media (min-width: em(750px)) {
-    background-color: var(--mantine-color-red-filled);
+    background-color: var(--empoleon-color-red-filled);
   }
 }
 `;

@@ -12,7 +12,7 @@ function Demo() {
   return (
     <>
       <Group justify="center">
-        <Box ref={ref} w={300} h={180} bg="var(--mantine-color-blue-light)" />
+        <Box ref={ref} w={300} h={180} bg="var(--empoleon-color-blue-light)" />
       </Group>
       <Text ta="center">
         Mouse coordinates <Code>{\`{ x: \${x}, y: \${y} }\`}</Code>
@@ -28,7 +28,7 @@ function Demo() {
   return (
     <>
       <Group justify="center">
-        <Box ref={ref} w={300} h={180} bg="var(--mantine-color-blue-light)" />
+        <Box ref={ref} w={300} h={180} bg="var(--empoleon-color-blue-light)" />
       </Group>
       <Text ta="center" mt="sm">
         Mouse coordinates <Code>{`{ x: ${position().x}, y: ${position().y} }`}</Code>

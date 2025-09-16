@@ -8,77 +8,77 @@
   }
 
   & :where(h1, h2, h3, h4, h5, h6) {
-    margin-bottom: var(--mantine-spacing-xs);
-    text-wrap: var(--mantine-heading-text-wrap);
-    font-family: var(--mantine-font-family-headings);
+    margin-bottom: var(--empoleon-spacing-xs);
+    text-wrap: var(--empoleon-heading-text-wrap);
+    font-family: var(--empoleon-font-family-headings);
   }
 
   & :where(h1) {
-    margin-top: calc(1.5 * var(--mantine-spacing-xl));
-    font-size: var(--mantine-h1-font-size);
-    line-height: var(--mantine-h1-line-height);
-    font-weight: var(--mantine-h1-font-weight);
+    margin-top: calc(1.5 * var(--empoleon-spacing-xl));
+    font-size: var(--empoleon-h1-font-size);
+    line-height: var(--empoleon-h1-line-height);
+    font-weight: var(--empoleon-h1-font-weight);
   }
 
   & :where(h2) {
-    margin-top: var(--mantine-spacing-xl);
-    font-size: var(--mantine-h2-font-size);
-    line-height: var(--mantine-h2-line-height);
-    font-weight: var(--mantine-h2-font-weight);
+    margin-top: var(--empoleon-spacing-xl);
+    font-size: var(--empoleon-h2-font-size);
+    line-height: var(--empoleon-h2-line-height);
+    font-weight: var(--empoleon-h2-font-weight);
   }
 
   & :where(h3) {
-    margin-top: calc(0.8 * var(--mantine-spacing-xl));
-    font-size: var(--mantine-h3-font-size);
-    line-height: var(--mantine-h3-line-height);
-    font-weight: var(--mantine-h3-font-weight);
+    margin-top: calc(0.8 * var(--empoleon-spacing-xl));
+    font-size: var(--empoleon-h3-font-size);
+    line-height: var(--empoleon-h3-line-height);
+    font-weight: var(--empoleon-h3-font-weight);
   }
 
   & :where(h4) {
-    margin-top: calc(0.8 * var(--mantine-spacing-xl));
-    font-size: var(--mantine-h4-font-size);
-    line-height: var(--mantine-h4-line-height);
-    font-weight: var(--mantine-h4-font-weight);
+    margin-top: calc(0.8 * var(--empoleon-spacing-xl));
+    font-size: var(--empoleon-h4-font-size);
+    line-height: var(--empoleon-h4-line-height);
+    font-weight: var(--empoleon-h4-font-weight);
   }
 
   & :where(h5) {
-    margin-top: calc(0.5 * var(--mantine-spacing-xl));
-    font-size: var(--mantine-h5-font-size);
-    line-height: var(--mantine-h5-line-height);
-    font-weight: var(--mantine-h5-font-weight);
+    margin-top: calc(0.5 * var(--empoleon-spacing-xl));
+    font-size: var(--empoleon-h5-font-size);
+    line-height: var(--empoleon-h5-line-height);
+    font-weight: var(--empoleon-h5-font-weight);
   }
 
   & :where(h6) {
-    margin-top: calc(0.5 * var(--mantine-spacing-xl));
-    font-size: var(--mantine-h6-font-size);
-    line-height: var(--mantine-h6-line-height);
-    font-weight: var(--mantine-h6-font-weight);
+    margin-top: calc(0.5 * var(--empoleon-spacing-xl));
+    font-size: var(--empoleon-h6-font-size);
+    line-height: var(--empoleon-h6-line-height);
+    font-weight: var(--empoleon-h6-font-weight);
   }
 
   & :where(img) {
     max-width: 100%;
-    margin-bottom: var(--mantine-spacing-xs);
+    margin-bottom: var(--empoleon-spacing-xs);
   }
 
   & :where(p) {
     margin-top: 0;
-    margin-bottom: var(--mantine-spacing-lg);
+    margin-bottom: var(--empoleon-spacing-lg);
   }
 
   & :where(mark) {
     @mixin where-light {
-      background-color: var(--mantine-color-yellow-2);
+      background-color: var(--empoleon-color-yellow-2);
       color: inherit;
     }
 
     @mixin where-dark {
-      background-color: var(--mantine-color-yellow-5);
-      color: var(--mantine-color-black);
+      background-color: var(--empoleon-color-yellow-5);
+      color: var(--empoleon-color-black);
     }
   }
 
   & :where(a) {
-    color: var(--mantine-color-anchor);
+    color: var(--empoleon-color-anchor);
     text-decoration: none;
 
     @mixin hover {
@@ -87,37 +87,37 @@
   }
 
   & :where(hr) {
-    margin-top: var(--mantine-spacing-md);
-    margin-bottom: var(--mantine-spacing-md);
+    margin-top: var(--empoleon-spacing-md);
+    margin-bottom: var(--empoleon-spacing-md);
     border: 0;
     border-top: 1px solid;
 
     @mixin where-light {
-      border-color: var(--mantine-color-gray-3);
+      border-color: var(--empoleon-color-gray-3);
     }
 
     @mixin where-dark {
-      border-color: var(--mantine-color-dark-3);
+      border-color: var(--empoleon-color-dark-3);
     }
   }
 
   & :where(pre) {
-    padding: var(--mantine-spacing-xs);
-    line-height: var(--mantine-line-height);
+    padding: var(--empoleon-spacing-xs);
+    line-height: var(--empoleon-line-height);
     margin: 0;
-    margin-top: var(--mantine-spacing-md);
-    margin-bottom: var(--mantine-spacing-md);
+    margin-top: var(--empoleon-spacing-md);
+    margin-bottom: var(--empoleon-spacing-md);
     overflow-x: auto;
-    font-family: var(--mantine-font-family-monospace);
-    font-size: var(--mantine-font-size-xs);
-    border-radius: var(--mantine-radius-sm);
+    font-family: var(--empoleon-font-family-monospace);
+    font-size: var(--empoleon-font-size-xs);
+    border-radius: var(--empoleon-radius-sm);
 
     @mixin where-light {
-      background-color: var(--mantine-color-gray-0);
+      background-color: var(--empoleon-color-gray-0);
     }
 
     @mixin where-dark {
-      background-color: var(--mantine-color-dark-8);
+      background-color: var(--empoleon-color-dark-8);
     }
 
     & :where(code) {
@@ -133,49 +133,49 @@
     --kbd-fz: 12px;
     --kbd-padding: 3px 5px;
 
-    font-family: var(--mantine-font-family-monospace);
-    line-height: var(--mantine-line-height);
+    font-family: var(--empoleon-font-family-monospace);
+    line-height: var(--empoleon-line-height);
     font-weight: 700;
     padding: var(--kbd-padding);
     font-size: var(--kbd-fz);
-    border-radius: var(--mantine-radius-sm);
+    border-radius: var(--empoleon-radius-sm);
     border: 1px solid;
     border-bottom-width: 3px;
 
     @mixin where-light {
-      border-color: var(--mantine-color-gray-3);
-      color: var(--mantine-color-gray-7);
-      background-color: var(--mantine-color-gray-0);
+      border-color: var(--empoleon-color-gray-3);
+      color: var(--empoleon-color-gray-7);
+      background-color: var(--empoleon-color-gray-0);
     }
 
     @mixin where-dark {
-      border-color: var(--mantine-color-dark-3);
-      color: var(--mantine-color-dark-0);
-      background-color: var(--mantine-color-dark-5);
+      border-color: var(--empoleon-color-dark-3);
+      color: var(--empoleon-color-dark-0);
+      background-color: var(--empoleon-color-dark-5);
     }
   }
 
   & :where(code) {
-    line-height: var(--mantine-line-height);
+    line-height: var(--empoleon-line-height);
     padding: 1px 5px;
-    border-radius: var(--mantine-radius-sm);
-    font-family: var(--mantine-font-family-monospace);
-    font-size: var(--mantine-font-size-xs);
+    border-radius: var(--empoleon-radius-sm);
+    font-family: var(--empoleon-font-family-monospace);
+    font-size: var(--empoleon-font-size-xs);
 
     @mixin where-light {
-      background-color: var(--mantine-color-gray-0);
-      color: var(--mantine-color-black);
+      background-color: var(--empoleon-color-gray-0);
+      color: var(--empoleon-color-black);
     }
 
     @mixin where-dark {
-      background-color: var(--mantine-color-dark-5);
-      color: var(--mantine-color-white);
+      background-color: var(--empoleon-color-dark-5);
+      color: var(--empoleon-color-white);
     }
   }
 
   & :where(ul, ol):not([data-type='taskList']) {
-    margin-bottom: var(--mantine-spacing-md);
-    padding-inline-start: var(--mantine-spacing-xl);
+    margin-bottom: var(--empoleon-spacing-md);
+    padding-inline-start: var(--empoleon-spacing-xl);
     list-style-position: outside;
   }
 
@@ -183,27 +183,27 @@
     width: 100%;
     border-collapse: collapse;
     caption-side: bottom;
-    margin-bottom: var(--mantine-spacing-md);
+    margin-bottom: var(--empoleon-spacing-md);
 
     @mixin where-light {
-      --table-border-color: var(--mantine-color-gray-3);
+      --table-border-color: var(--empoleon-color-gray-3);
     }
 
     @mixin where-dark {
-      --table-border-color: var(--mantine-color-dark-4);
+      --table-border-color: var(--empoleon-color-dark-4);
     }
 
     & :where(caption) {
-      margin-top: var(--mantine-spacing-xs);
-      font-size: var(--mantine-font-size-sm);
-      color: var(--mantine-color-dimmed);
+      margin-top: var(--empoleon-spacing-xs);
+      font-size: var(--empoleon-font-size-sm);
+      color: var(--empoleon-color-dimmed);
     }
 
     & :where(th) {
       text-align: left;
       font-weight: bold;
-      font-size: var(--mantine-font-size-sm);
-      padding: var(--mantine-spacing-xs) var(--mantine-spacing-sm);
+      font-size: var(--empoleon-font-size-sm);
+      padding: var(--empoleon-spacing-xs) var(--empoleon-spacing-sm);
     }
 
     & :where(thead th) {
@@ -217,10 +217,10 @@
     }
 
     & :where(td) {
-      padding: var(--mantine-spacing-xs) var(--mantine-spacing-sm);
+      padding: var(--empoleon-spacing-xs) var(--empoleon-spacing-sm);
       border-bottom: 1px solid;
       border-color: var(--table-border-color);
-      font-size: var(--mantine-font-size-sm);
+      font-size: var(--empoleon-font-size-sm);
     }
 
     & :where(tr:last-of-type td) {
@@ -229,18 +229,18 @@
   }
 
   & :where(blockquote) {
-    font-size: var(--mantine-font-size-lg);
-    line-height: var(--mantine-line-height);
-    margin: var(--mantine-spacing-md) 0;
-    border-radius: var(--mantine-radius-sm);
-    padding: var(--mantine-spacing-md) var(--mantine-spacing-lg);
+    font-size: var(--empoleon-font-size-lg);
+    line-height: var(--empoleon-line-height);
+    margin: var(--empoleon-spacing-md) 0;
+    border-radius: var(--empoleon-radius-sm);
+    padding: var(--empoleon-spacing-md) var(--empoleon-spacing-lg);
 
     @mixin where-light {
-      background-color: var(--mantine-color-gray-0);
+      background-color: var(--empoleon-color-gray-0);
     }
 
     @mixin where-dark {
-      background-color: var(--mantine-color-dark-8);
+      background-color: var(--empoleon-color-dark-8);
     }
   }
 }

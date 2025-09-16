@@ -1,12 +1,12 @@
 .col {
   height: 100%;
-  background-color: light-dark(var(--mantine-color-blue-0), var(--mantine-color-dark-4));
-  padding: var(--mantine-spacing-md);
+  background-color: light-dark(var(--empoleon-color-blue-0), var(--empoleon-color-dark-4));
+  padding: var(--empoleon-spacing-md);
 }
 
 .label {
-  color: light-dark(var(--mantine-color-blue-6), var(--mantine-color-dimmed));
-  font-size: var(--mantine-font-size-xl);
+  color: light-dark(var(--empoleon-color-blue-6), var(--empoleon-color-dimmed));
+  font-size: var(--empoleon-font-size-xl);
   font-weight: bold;
   text-align: center;
   height: 100%;

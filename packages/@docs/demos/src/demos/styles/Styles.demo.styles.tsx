@@ -6,7 +6,7 @@ import { Button } from '@empoleon/core';
 
 function Demo() {
   const gradient =
-    'linear-gradient(45deg, var(--mantine-color-pink-filled) 0%, var(--mantine-color-orange-filled) 50%, var(--mantine-color-yellow-filled) 100%)';
+    'linear-gradient(45deg, var(--empoleon-color-pink-filled) 0%, var(--empoleon-color-orange-filled) 50%, var(--empoleon-color-yellow-filled) 100%)';
 
   return (
     <Button
@@ -19,11 +19,11 @@ function Demo() {
         },
 
         inner: {
-          background: 'var(--mantine-color-body)',
-          color: 'var(--mantine-color-text)',
+          background: 'var(--empoleon-color-body)',
+          color: 'var(--empoleon-color-text)',
           borderRadius: 'calc(var(--button-radius) - 2px)',
-          paddingLeft: 'var(--mantine-spacing-md)',
-          paddingRight: 'var(--mantine-spacing-md)',
+          paddingLeft: 'var(--empoleon-spacing-md)',
+          paddingRight: 'var(--empoleon-spacing-md)',
         },
 
         label: {
@@ -41,7 +41,7 @@ function Demo() {
 
 function Demo() {
   const gradient =
-    'linear-gradient(45deg, var(--mantine-color-pink-filled) 0%, var(--mantine-color-orange-filled) 50%, var(--mantine-color-yellow-filled) 100%)';
+    'linear-gradient(45deg, var(--empoleon-color-pink-filled) 0%, var(--empoleon-color-orange-filled) 50%, var(--empoleon-color-yellow-filled) 100%)';
 
   return (
     <Button
@@ -54,11 +54,11 @@ function Demo() {
         },
 
         inner: {
-          background: 'var(--mantine-color-body)',
-          color: 'var(--mantine-color-text)',
+          background: 'var(--empoleon-color-body)',
+          color: 'var(--empoleon-color-text)',
           'border-radius': 'calc(var(--button-radius) - 2px)',
-          'padding-left': 'var(--mantine-spacing-md)',
-          'padding-right': 'var(--mantine-spacing-md)',
+          'padding-left': 'var(--empoleon-spacing-md)',
+          'padding-right': 'var(--empoleon-spacing-md)',
         },
 
         label: {

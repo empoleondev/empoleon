@@ -11,7 +11,7 @@ function Demo() {
       highlight={['highlighted', 'default']}
       highlightStyles={{
         backgroundImage:
-          'linear-gradient(45deg, var(--mantine-color-cyan-5), var(--mantine-color-indigo-5))',
+          'linear-gradient(45deg, var(--empoleon-color-cyan-5), var(--empoleon-color-indigo-5))',
         fontWeight: 700,
         WebkitBackgroundClip: 'text',
         WebkitTextFillColor: 'transparent',
@@ -30,7 +30,7 @@ function Demo() {
       highlight={['highlighted', 'default']}
       highlightStyles={{
         'background-image':
-          'linear-gradient(45deg, var(--mantine-color-cyan-5), var(--mantine-color-indigo-5))',
+          'linear-gradient(45deg, var(--empoleon-color-cyan-5), var(--empoleon-color-indigo-5))',
         'font-weight': 700,
         '--webkit-background-clip': 'text',
         '--webkit-text-fill-color': 'transparent',

@@ -1,18 +1,18 @@
 .root {
-  background-color: var(--notification-color, var(--mantine-primary-color-filled));
+  background-color: var(--notification-color, var(--empoleon-primary-color-filled));
 
   &::before {
-    background-color: var(--mantine-color-white);
+    background-color: var(--empoleon-color-white);
   }
 }
 
 .description,
 .title {
-  color: var(--mantine-color-white);
+  color: var(--empoleon-color-white);
 }
 
 .closeButton {
-  color: var(--mantine-color-white);
+  color: var(--empoleon-color-white);
 
   @mixin hover {
     background-color: rgba(0, 0, 0, 0.1);

@@ -6,7 +6,7 @@ import { data, dataCode } from './data';
 import classes from './Tree.demo.files.module.css';
 
 const cssCode = `.root {
-  font-family: var(--mantine-font-family-monospace);
+  font-family: var(--empoleon-font-family-monospace);
   font-size: 13px;
 }
 
@@ -15,12 +15,12 @@ const cssCode = `.root {
 
   &[data-hovered] {
     @mixin where-light {
-      background-color: var(--mantine-color-gray-0);
+      background-color: var(--empoleon-color-gray-0);
     }
 
     @mixin where-dark {
-      background-color: var(--mantine-color-dark-6);
-      color: var(--mantine-color-white);
+      background-color: var(--empoleon-color-dark-6);
+      color: var(--empoleon-color-white);
     }
   }
 
@@ -28,13 +28,13 @@ const cssCode = `.root {
     font-weight: 700;
 
     @mixin light {
-      background-color: var(--mantine-color-blue-0);
-      color: var(--mantine-color-black);
+      background-color: var(--empoleon-color-blue-0);
+      color: var(--empoleon-color-black);
     }
 
     @mixin dark {
-      background-color: alpha(var(--mantine-color-blue-8), 0.35);
-      color: var(--mantine-color-blue-0);
+      background-color: alpha(var(--empoleon-color-blue-8), 0.35);
+      color: var(--empoleon-color-blue-0);
     }
   }
 }`;
@@ -67,9 +67,9 @@ function FileIcon({ name, isFolder, expanded }: FileIconProps) {
 
   if (isFolder) {
     return expanded ? (
-      <IconFolderOpen color="var(--mantine-color-yellow-9)" size={14} stroke={2.5} />
+      <IconFolderOpen color="var(--empoleon-color-yellow-9)" size={14} stroke={2.5} />
     ) : (
-      <IconFolder color="var(--mantine-color-yellow-9)" size={14} stroke={2.5} />
+      <IconFolder color="var(--empoleon-color-yellow-9)" size={14} stroke={2.5} />
     );
   }
 
@@ -119,9 +119,9 @@ function FileIcon({ name, isFolder, expanded }: FileIconProps) {
 
   if (isFolder) {
     return expanded ? (
-      <IconFolderOpen color="var(--mantine-color-yellow-9)" size={14} stroke='2.5' />
+      <IconFolderOpen color="var(--empoleon-color-yellow-9)" size={14} stroke='2.5' />
     ) : (
-      <IconFolder color="var(--mantine-color-yellow-9)" size={14} stroke='2.5' />
+      <IconFolder color="var(--empoleon-color-yellow-9)" size={14} stroke='2.5' />
     );
   }
 

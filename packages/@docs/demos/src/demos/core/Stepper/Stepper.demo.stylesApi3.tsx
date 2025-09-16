@@ -5,23 +5,23 @@ import { createSignal } from 'solid-js';
 
 const cssCode = `.separator {
   height: 2px;
-  border-top: 2px solid light-dark(var(--mantine-color-gray-4), var(--mantine-color-dark-3));
-  border-radius: var(--mantine-radius-xl);
+  border-top: 2px solid light-dark(var(--empoleon-color-gray-4), var(--empoleon-color-dark-3));
+  border-radius: var(--empoleon-radius-xl);
   background-color: transparent;
 
   &[data-active] {
     border-width: 0;
     background-image: linear-gradient(
       45deg,
-      var(--mantine-color-blue-6),
-      var(--mantine-color-cyan-6)
+      var(--empoleon-color-blue-6),
+      var(--empoleon-color-cyan-6)
     );
   }
 }
 
 .stepIcon {
   border-color: transparent;
-  background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-4));
+  background-color: light-dark(var(--empoleon-color-gray-0), var(--empoleon-color-dark-4));
   border-width: 0;
 
   &[data-completed] {
@@ -29,8 +29,8 @@ const cssCode = `.separator {
     background-color: transparent;
     background-image: linear-gradient(
       45deg,
-      var(--mantine-color-blue-6),
-      var(--mantine-color-cyan-6)
+      var(--empoleon-color-blue-6),
+      var(--empoleon-color-cyan-6)
     );
   }
 }

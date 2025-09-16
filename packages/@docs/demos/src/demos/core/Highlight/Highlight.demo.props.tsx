@@ -12,7 +12,7 @@ function Demo() {
       target="_blank"
       highlight="mantine"
       fw={500}
-      c="var(--mantine-color-anchor)"
+      c="var(--empoleon-color-anchor)"
     >
       Mantine website
     </Highlight>
@@ -29,7 +29,7 @@ function Demo() {
       target="_blank"
       highlight="mantine"
       fw={500}
-      c="var(--mantine-color-anchor)"
+      c="var(--empoleon-color-anchor)"
     >
       Mantine website
     </Highlight>

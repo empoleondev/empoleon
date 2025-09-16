@@ -26,7 +26,7 @@ function Demo() {
   const rows = elements.map((element) => {
     const isSelected = selection.includes(element.position);
     return (
-      <Table.Tr bg={isSelected ? 'var(--mantine-color-blue-light)' : undefined}>
+      <Table.Tr bg={isSelected ? 'var(--empoleon-color-blue-light)' : undefined}>
         <Table.Td>
           <Checkbox
             aria-label="Select row"
@@ -97,7 +97,7 @@ function Demo() {
   const rows = elements.map((element) => {
     const isSelected = selection().includes(element.position);
     return (
-      <Table.Tr bg={isSelected ? 'var(--mantine-color-blue-light)' : undefined}>
+      <Table.Tr bg={isSelected ? 'var(--empoleon-color-blue-light)' : undefined}>
         <Table.Td>
           <Checkbox
             aria-label="Select row"

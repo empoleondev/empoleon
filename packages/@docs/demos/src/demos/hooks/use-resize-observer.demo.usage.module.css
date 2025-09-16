@@ -12,10 +12,10 @@
   height: 200px;
   max-height: 220px;
   min-height: 80px;
-  background-color: light-dark(var(--mantine-color-blue-6), var(--mantine-color-blue-8));
+  background-color: light-dark(var(--empoleon-color-blue-6), var(--empoleon-color-blue-8));
   resize: both;
   overflow: auto;
-  color: var(--mantine-color-white);
+  color: var(--empoleon-color-white);
   display: flex;
   align-items: center;
   justify-content: center;

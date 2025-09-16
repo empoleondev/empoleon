@@ -12,7 +12,7 @@ function Demo() {
   return (
     <ColorSwatch
       component="button"
-      color="var(--mantine-color-grape-6)"
+      color="var(--empoleon-color-grape-6)"
       onClick={() => setChecked((c) => !c)}
       style={{ color: '#fff', cursor: 'pointer' }}
     >
@@ -28,7 +28,7 @@ function Demo() {
   return (
     <ColorSwatch
       component="button"
-      color="var(--mantine-color-grape-6)"
+      color="var(--empoleon-color-grape-6)"
       onClick={() => setChecked((c) => !c)}
       c="white"
       style={{ cursor: 'pointer' }}

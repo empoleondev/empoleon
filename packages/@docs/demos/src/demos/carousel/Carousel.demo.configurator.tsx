@@ -13,7 +13,6 @@ function Wrapper(props: CarouselProps) {
 const code = `
 import { Carousel } from '@empoleon/carousel';
 
-
 function Demo() {
   return (
     <Carousel

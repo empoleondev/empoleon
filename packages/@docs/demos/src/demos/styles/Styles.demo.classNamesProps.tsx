@@ -31,11 +31,11 @@ function Demo() {
 
 const cssCode = `
 .labelRequired {
-  color: var(--mantine-color-red-filled);
+  color: var(--empoleon-color-red-filled);
 }
 
 .inputError {
-  background-color: var(--mantine-color-red-light);
+  background-color: var(--empoleon-color-red-light);
 }
 `;
 

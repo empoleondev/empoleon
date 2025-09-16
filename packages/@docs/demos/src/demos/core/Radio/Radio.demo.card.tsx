@@ -5,36 +5,36 @@ import { createSignal } from 'solid-js';
 
 const cssCode = `.root {
   position: relative;
-  padding: var(--mantine-spacing-md);
+  padding: var(--empoleon-spacing-md);
   transition: border-color 150ms ease;
 
   &[data-checked] {
-    border-color: var(--mantine-primary-color-filled);
+    border-color: var(--empoleon-primary-color-filled);
   }
 
   @mixin hover {
     @mixin light {
-      background-color: var(--mantine-color-gray-0);
+      background-color: var(--empoleon-color-gray-0);
     }
 
     @mixin dark {
-      background-color: var(--mantine-color-dark-6);
+      background-color: var(--empoleon-color-dark-6);
     }
   }
 }
 
 .label {
-  font-family: var(--mantine-font-family-monospace);
+  font-family: var(--empoleon-font-family-monospace);
   font-weight: bold;
-  font-size: var(--mantine-font-size-md);
+  font-size: var(--empoleon-font-size-md);
   line-height: 1.3;
-  color: var(--mantine-color-bright);
+  color: var(--empoleon-color-bright);
 }
 
 .description {
   margin-top: 8px;
-  color: var(--mantine-color-dimmed);
-  font-size: var(--mantine-font-size-xs);
+  color: var(--empoleon-color-dimmed);
+  font-size: var(--empoleon-font-size-xs);
 }
 `;
 

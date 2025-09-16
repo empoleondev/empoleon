@@ -33,7 +33,7 @@ const theme = createTheme({
 function Demo() {
   return (
     <MantineProvider theme={theme}>
-      <Container size="xxs" bg="var(--mantine-color-blue-light)">
+      <Container size="xxs" bg="var(--empoleon-color-blue-light)">
         Container with custom size
       </Container>
     </MantineProvider>
@@ -71,7 +71,7 @@ const theme = createTheme({
 function Demo() {
   return (
     <EmpoleonThemeProvider theme={theme}>
-      <Container size="xxs" bg="var(--mantine-color-blue-light)">
+      <Container size="xxs" bg="var(--empoleon-color-blue-light)">
         Container with custom size
       </Container>
     </EmpoleonThemeProvider>

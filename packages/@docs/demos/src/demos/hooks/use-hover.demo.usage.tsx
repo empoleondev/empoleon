@@ -22,7 +22,7 @@ function Demo() {
       ref={ref}
       style={{
         height: '60px',
-        'background-color': 'var(--mantine-color-blue-light)',
+        'background-color': 'var(--empoleon-color-blue-light)',
         display: 'flex',
         'align-items': 'center',
         'justify-content': 'center',
