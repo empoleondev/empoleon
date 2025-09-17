@@ -90,7 +90,7 @@ function Card({ image, title, category }: CardProps) {
       shadow="md"
       p="xl"
       radius="md"
-      style={{ backgroundImage: \`url(\${image})\` }}
+      style={{ 'background-image': \`url(\${image})\` }}
       className={classes.card}
     >
       <div>
@@ -180,7 +180,7 @@ export function Card({ image, title, category }: CardProps) {
       shadow="md"
       p="xl"
       radius="md"
-      style={{ backgroundImage: `url(${image})` }}
+      style={{ 'background-image': `url(${image})` }}
       className={classes.card}
     >
       <div>

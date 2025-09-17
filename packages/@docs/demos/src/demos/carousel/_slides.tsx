@@ -1,20 +1,20 @@
 import { Carousel } from '@empoleon/carousel';
 import { Box } from '@empoleon/core';
-import { JSX } from 'solid-js';
+import { For, JSX } from 'solid-js';
 
 function Slide({ children }: { children: JSX.Element }) {
   return (
     <Box
       style={{
-        backgroundColor: 'var(--empoleon-color-blue-filled)',
+        'background-color': 'var(--empoleon-color-blue-filled)',
         color: 'var(--empoleon-color-white)',
         height: '100%',
         width: '100%',
         display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 50,
-        fontWeight: 'bold',
+        'justify-content': 'center',
+        'align-items': 'center',
+        'font-size': '50px',
+        'font-weight': 'bold',
       }}
     >
       {children}
@@ -23,12 +23,11 @@ function Slide({ children }: { children: JSX.Element }) {
 }
 
 export function Slides({ count }: { count: number }) {
-  const slides = Array(count)
-    .fill(0)
-    .map((_, index) => (
+  return <For each={Array(count).fill(0)}>
+    {(_, index) => (
       <Carousel.Slide>
-        <Slide>{index + 1}</Slide>
+        <Slide>{index() + 1}</Slide>
       </Carousel.Slide>
-    ));
-  return <>{slides}</>;
+    )}
+  </For>;
 }

@@ -2,7 +2,7 @@ import { BoxProps, ElementProps, Input, SegmentedControl } from '@empoleon/core'
 import { getControlLabel } from './get-control-label';
 import { SelectData, transformSelectData } from './transform-select-data';
 import { ConfiguratorControl } from './types';
-import { mergeProps, splitProps } from 'solid-js';
+import { createMemo, mergeProps, splitProps } from 'solid-js';
 
 export type ConfiguratorSegmentedControlOptions = ConfiguratorControl<
   'segmented',
@@ -31,11 +31,13 @@ export function ConfiguratorSegmentedControl(props: ConfiguratorSegmentedControl
     'transformLabel'
   ]);
 
+  const reactiveValue = createMemo(() => props.value);
+
   return (
     <Input.Wrapper labelElement="div" label={getControlLabel(local.prop)} {...others}>
       <SegmentedControl
         data={local.transformLabel ? transformSelectData(local.data) : local.data}
-        value={local.value}
+        value={reactiveValue()}
         onChange={local.onChange}
         fullWidth
         transitionDuration={150}

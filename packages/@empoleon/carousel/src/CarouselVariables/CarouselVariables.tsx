@@ -10,49 +10,52 @@ import {
   rem,
   useEmpoleonTheme,
 } from '@empoleon/core';
+import { createMemo } from 'solid-js';
 import type { CarouselProps } from '../Carousel';
 
 interface CarouselVariablesProps extends CarouselProps {
   selector: string;
 }
 
-export function CarouselVariables({ slideGap, slideSize, selector }: CarouselVariablesProps) {
+export function CarouselVariables(props: CarouselVariablesProps) {
   const theme = useEmpoleonTheme();
 
-  const baseStyles: Record<string, string | undefined> = filterProps({
-    '--carousel-slide-gap': getSpacing(getBaseValue(slideGap)),
-    '--carousel-slide-size': rem(getBaseValue(slideSize)),
-  });
+  const baseStyles = createMemo(() => filterProps({
+    '--carousel-slide-gap': getSpacing(getBaseValue(props.slideGap)),
+    '--carousel-slide-size': rem(getBaseValue(props.slideSize)),
+  }));
 
-  const queries = keys(theme.breakpoints).reduce<Record<string, Record<string, any>>>(
+  const queries = createMemo(() => keys(theme.breakpoints).reduce<Record<string, Record<string, any>>>(
     (acc, breakpoint) => {
       if (!acc[breakpoint]) {
         acc[breakpoint] = {};
       }
 
-      if (typeof slideGap === 'object' && slideGap[breakpoint] !== undefined) {
-        acc[breakpoint]['--carousel-slide-gap'] = getSpacing(slideGap[breakpoint]);
+      if (typeof props.slideGap === 'object' && props.slideGap[breakpoint] !== undefined) {
+        acc[breakpoint]['--carousel-slide-gap'] = getSpacing(props.slideGap[breakpoint]);
       }
 
-      if (typeof slideSize === 'object' && slideSize[breakpoint] !== undefined) {
-        acc[breakpoint]['--carousel-slide-size'] = getSpacing(slideSize[breakpoint]);
+      if (typeof props.slideSize === 'object' && props.slideSize[breakpoint] !== undefined) {
+        acc[breakpoint]['--carousel-slide-size'] = getSpacing(props.slideSize[breakpoint]);
       }
 
       return acc;
     },
     {}
+  ));
+
+  const sortedBreakpoints = createMemo(() =>
+    getSortedBreakpoints(keys(queries()), theme.breakpoints).filter(
+      (breakpoint) => keys(queries()[breakpoint.value]).length > 0
+    )
   );
 
-  const sortedBreakpoints = getSortedBreakpoints(keys(queries), theme.breakpoints).filter(
-    (breakpoint) => keys(queries[breakpoint.value]).length > 0
-  );
-
-  const media = sortedBreakpoints.map((breakpoint) => ({
+  const media = createMemo(() => sortedBreakpoints().map((breakpoint) => ({
     query: `(min-width: ${theme.breakpoints[breakpoint.value as EmpoleonBreakpoint]})`,
-    styles: queries[breakpoint.value],
-  }));
+    styles: queries()[breakpoint.value],
+  })));
 
-  return <InlineStyles styles={baseStyles} media={media} selector={selector} />;
+  return <InlineStyles styles={baseStyles()} media={media()} selector={props.selector} />;
 }
 
 function getBreakpoints(values: unknown) {
@@ -67,46 +70,44 @@ function sortBreakpoints(breakpoints: string[]) {
   return breakpoints.sort((a, b) => (px(a) as number) - (px(b) as number));
 }
 
-function getUniqueBreakpoints({ slideGap, slideSize }: Omit<CarouselVariablesProps, 'selector'>) {
+function getUniqueBreakpoints(props: Omit<CarouselVariablesProps, 'selector'>) {
   const breakpoints = Array.from(
-    new Set([...getBreakpoints(slideGap), ...getBreakpoints(slideSize)])
+    new Set([...getBreakpoints(props.slideGap), ...getBreakpoints(props.slideSize)])
   );
 
   return sortBreakpoints(breakpoints);
 }
 
-export function CarouselContainerVariables({
-  slideGap,
-  slideSize,
-  selector,
-}: CarouselVariablesProps) {
-  const baseStyles: Record<string, string | undefined> = filterProps({
-    '--carousel-slide-gap': getSpacing(getBaseValue(slideGap)),
-    '--carousel-slide-size': rem(getBaseValue(slideSize)),
-  });
-
-  const queries = getUniqueBreakpoints({ slideGap, slideSize }).reduce<
-    Record<string, Record<string, any>>
-  >((acc, breakpoint) => {
-    if (!acc[breakpoint]) {
-      acc[breakpoint] = {};
-    }
-
-    if (typeof slideGap === 'object' && slideGap[breakpoint] !== undefined) {
-      acc[breakpoint]['--carousel-slide-gap'] = getSpacing(slideGap[breakpoint]);
-    }
-
-    if (typeof slideSize === 'object' && slideSize[breakpoint] !== undefined) {
-      acc[breakpoint]['--carousel-slide-size'] = getSpacing(slideSize[breakpoint]);
-    }
-
-    return acc;
-  }, {});
-
-  const media = Object.keys(queries).map((breakpoint) => ({
-    query: `carousel (min-width: ${breakpoint})`,
-    styles: queries[breakpoint],
+export function CarouselContainerVariables(props: CarouselVariablesProps) {
+  const baseStyles = createMemo(() => filterProps({
+    '--carousel-slide-gap': getSpacing(getBaseValue(props.slideGap)),
+    '--carousel-slide-size': rem(getBaseValue(props.slideSize)),
   }));
 
-  return <InlineStyles styles={baseStyles} container={media} selector={selector} />;
+  const queries = createMemo(() =>
+    getUniqueBreakpoints({ slideGap: props.slideGap, slideSize: props.slideSize }).reduce<
+      Record<string, Record<string, any>>
+    >((acc, breakpoint) => {
+      if (!acc[breakpoint]) {
+        acc[breakpoint] = {};
+      }
+
+      if (typeof props.slideGap === 'object' && props.slideGap[breakpoint] !== undefined) {
+        acc[breakpoint]['--carousel-slide-gap'] = getSpacing(props.slideGap[breakpoint]);
+      }
+
+      if (typeof props.slideSize === 'object' && props.slideSize[breakpoint] !== undefined) {
+        acc[breakpoint]['--carousel-slide-size'] = getSpacing(props.slideSize[breakpoint]);
+      }
+
+      return acc;
+    }, {})
+  );
+
+  const media = createMemo(() => Object.keys(queries()).map((breakpoint) => ({
+    query: `carousel (min-width: ${breakpoint})`,
+    styles: queries()[breakpoint],
+  })));
+
+  return <InlineStyles styles={baseStyles()} container={media()} selector={props.selector} />;
 }

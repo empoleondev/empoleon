@@ -136,8 +136,6 @@ export const CodeHighlightTabs = factory<CodeHighlightTabsFactory>(_props => {
     props,
   });
 
-  console.log('tabs', _expanded());
-
   createEffect(() => {
     if (value() >= local.code.length) {
       setValue(local.code.length - 1);

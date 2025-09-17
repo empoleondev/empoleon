@@ -180,8 +180,6 @@ export const CodeHighlight = factory<CodeHighlightFactory>(_props => {
     rootSelector: 'codeHighlight',
   });
 
-  console.log('local.expanded', local.expanded);
-
   const [_expanded, setExpanded] = useUncontrolled({
     value: () => local.expanded,
     defaultValue: local.defaultExpanded!,
@@ -260,10 +258,6 @@ export const CodeHighlight = factory<CodeHighlightFactory>(_props => {
       />
     );
   }
-
-  createEffect(() => {
-    console.log(_expanded());
-  })
 
   return (
     <CodeHighlightContextProvider value={{ getStyles, codeColorScheme: local.codeColorScheme }}>

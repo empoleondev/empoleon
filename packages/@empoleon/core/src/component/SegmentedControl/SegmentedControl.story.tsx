@@ -24,7 +24,7 @@ export function WithinModal() {
 
   return (
     <>
-      <Modal opened={opened} onClose={close} title="Within Modal">
+      <Modal opened={opened()} onClose={close} title="Within Modal">
         <SegmentedControl data={['React', 'Angular', 'Vue', 'Svelte']} />
       </Modal>
 

@@ -1,4 +1,4 @@
-import { createSignal, Index, JSX, onCleanup, onMount, splitProps } from 'solid-js';
+import { createSignal, Index, JSX, onCleanup, onMount, splitProps, createEffect } from 'solid-js';
 import type { EmblaCarouselType, EmblaOptionsType, EmblaPluginType } from 'embla-carousel';
 import createEmblaCarousel from 'embla-carousel-solid';
 import {
@@ -274,66 +274,70 @@ export const Carousel = factory<CarouselFactory>(_props => {
     }
   };
 
-  onMount(() => {
-    const embla = emblaApi();
-    if (embla) {
-      local.getEmblaApi?.(embla);
-      handleSelect();
-      setSlidesCount(embla.scrollSnapList().length);
-      embla.on('select', handleSelect);
-
-      onCleanup(() => {
-        embla.off('select', handleSelect);
-      });
-    }
-  });
-
   let containerRef: HTMLDivElement | undefined;
 
   onMount(() => {
     const embla = emblaApi();
     if (embla) {
       local.getEmblaApi?.(embla);
-      handleSelect();
-      setSlidesCount(embla.scrollSnapList().length);
+
+      const updateSlideInfo = () => {
+        const count = embla.scrollSnapList().length;
+        setSlidesCount(count);
+        handleSelect();
+      };
+
       embla.on('select', handleSelect);
+      embla.on('reInit', updateSlideInfo);
+      embla.on('scroll', updateScrollState);
+      embla.on('select', updateScrollState);
 
       const observer = new MutationObserver(() => {
         embla.reInit();
-        const count = embla.scrollSnapList().length;
-        setSlidesCount(count);
-        setSelected((currentSelected) => clamp(currentSelected, 0, count > 0 ? count - 1 : 0));
+        setTimeout(() => {
+          const count = embla.scrollSnapList().length;
+          setSlidesCount(count);
+          setSelected((currentSelected) => clamp(currentSelected, 0, count > 0 ? count - 1 : 0));
+        }, 0);
       });
 
       if (containerRef) {
         observer.observe(containerRef, { childList: true });
       }
 
+      setTimeout(updateSlideInfo, 0);
+      setTimeout(updateScrollState, 0);
+
       onCleanup(() => {
         embla.off('select', handleSelect);
+        embla.off('reInit', updateSlideInfo);
+        embla.on('scroll', updateScrollState);
+        embla.on('select', updateScrollState);
         observer.disconnect();
       });
     }
   });
 
-  const canScrollPrev = () => emblaApi()?.canScrollPrev() || false;
-  const canScrollNext = () => emblaApi()?.canScrollNext() || false;
+  createEffect(() => {
+    const embla = emblaApi();
+    if (embla) {
+      const count = embla.scrollSnapList().length;
+      if (count > 0 && slidesCount() === 0) {
+        setSlidesCount(count);
+      }
+    }
+  });
 
-  const indicators = () => (
-    <Index each={Array(slidesCount()).fill(0)}>
-      {(_, index) => (
-        <UnstyledButton
-          {...getStyles('indicator')}
-          data-active={index === selected() || undefined}
-          aria-hidden
-          tabIndex={-1}
-          onClick={() => handleScroll(index)}
-          data-orientation={local.orientation}
-          onMouseDown={(event) => event.preventDefault()}
-        />
-      )}
-    </Index>
-  );
+  const [canScrollPrev, setCanScrollPrev] = createSignal(false);
+  const [canScrollNext, setCanScrollNext] = createSignal(false);
+
+  const updateScrollState = () => {
+    const embla = emblaApi();
+    if (embla) {
+      setCanScrollPrev(embla.canScrollPrev());
+      setCanScrollNext(embla.canScrollNext());
+    }
+  };
 
   return (
     <CarouselProvider value={{ getStyles, orientation: local.orientation }}>
@@ -362,7 +366,21 @@ export const Carousel = factory<CarouselFactory>(_props => {
 
         {local.withIndicators && (
           <div {...getStyles('indicators')} data-orientation={local.orientation}>
-            {indicators()}
+            <Index each={Array(slidesCount()).fill(0)}>
+              {(_, index) => (
+                <>
+                <UnstyledButton
+                  {...getStyles('indicator')}
+                  data-active={index === selected() || undefined}
+                  aria-hidden
+                  tabIndex={-1}
+                  onClick={() => handleScroll(index)}
+                  data-orientation={local.orientation}
+                  onMouseDown={(event) => event.preventDefault()}
+                />
+                </>
+              )}
+            </Index>
           </div>
         )}
 

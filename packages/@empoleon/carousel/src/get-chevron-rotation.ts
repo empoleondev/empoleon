@@ -4,10 +4,10 @@ interface Options {
   direction: 'next' | 'previous';
 }
 
-export function getChevronRotation({ dir, orientation, direction }: Options) {
-  if (direction === 'previous') {
-    return orientation === 'horizontal' ? 90 * (dir === 'ltr' ? 1 : -1) : -180;
+export function getChevronRotation(props: Options) {
+  if (props.direction === 'previous') {
+    return props.orientation === 'horizontal' ? 90 * (props.dir === 'ltr' ? 1 : -1) : -180;
   }
 
-  return orientation === 'horizontal' ? 90 * (dir === 'ltr' ? -1 : 1) : 0;
+  return props.orientation === 'horizontal' ? 90 * (props.dir === 'ltr' ? -1 : 1) : 0;
 }

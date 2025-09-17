@@ -178,12 +178,6 @@ export const SegmentedControl = factory<SegmentedControlFactory>(_props => {
 
   const theme = useEmpoleonTheme();
 
-  createEffect(() => {
-    const d = local.data;
-    const len = Array.isArray(d) ? d.length : undefined;
-    const values = Array.isArray(d) ? d.map((x: any) => (typeof x === 'string' ? x : x?.value)) : d;
-  });
-
   const _data = createMemo(() =>
     (local.data ?? []).map((item) =>
       typeof item === 'string' ? { label: item, value: item } : item
