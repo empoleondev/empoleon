@@ -218,14 +218,14 @@ export const NavLink = polymorphicFactory<NavLinkFactory>(_props => {
             mod={{ rotate: _opened() && !local.disableRightSectionRotation, position: 'right' }}
           >
             {withChildren
-              ? local.rightSection || <AccordionChevron {...getStyles('chevron')} />
+              ? local.rightSection || <AccordionChevron {...getStyles('chevron') as any} />
               : local.rightSection}
           </Box>
         )}
       </UnstyledButton>
       {withChildren && (
         <Collapse in={_opened()} {...getStyles('collapse')}>
-          <div {...getStyles('children')}>{local.children}</div>
+          <Box component='div' {...getStyles('children')}>{local.children}</Box>
         </Collapse>
       )}
     </>

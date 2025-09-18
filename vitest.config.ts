@@ -18,7 +18,7 @@ export default defineConfig({
     pool: 'forks',
     isolate: true,
     include: [
-      '**/CodeHighlight/*.test.{ts,tsx}'
+      '**/Accordion/*.test.{ts,tsx}'
     ],
     exclude: [
       // Exclude all node_modules test files

@@ -245,7 +245,7 @@ export const SegmentedControl = factory<SegmentedControlFactory>(_props => {
             {...getStyles('control')}
             mod={{ active: _value() === item.value, orientation: local.orientation }}
           >
-            <input
+            <Box component='input'
               {...getStyles('input')}
               disabled={local.disabled || item.disabled}
               type="radio"
@@ -273,7 +273,7 @@ export const SegmentedControl = factory<SegmentedControlFactory>(_props => {
                     : undefined,
               }}
             >
-              <span {...getStyles('innerLabel')}>{item.label}</span>
+              <Box component='span' {...getStyles('innerLabel')}>{item.label}</Box>
             </Box>
           </Box>
         )}

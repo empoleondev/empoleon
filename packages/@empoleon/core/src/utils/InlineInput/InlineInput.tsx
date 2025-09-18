@@ -106,7 +106,7 @@ export function InlineInput(props: InlineInputProps) {
       >
         {local.children}
 
-        <div {...getStyles('labelWrapper')} data-disabled={local.disabled || undefined}>
+        <Box component='div' {...getStyles('labelWrapper')} data-disabled={local.disabled || undefined}>
           {local.label && (
             <Box
               component={labelElement}
@@ -129,7 +129,7 @@ export function InlineInput(props: InlineInputProps) {
               {local.error}
             </Input.Error>
           )}
-        </div>
+        </Box>
       </Box>
     </Box>
   );

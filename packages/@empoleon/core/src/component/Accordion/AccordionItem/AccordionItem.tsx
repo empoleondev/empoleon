@@ -50,7 +50,7 @@ export const AccordionItem = factory<AccordionItemFactory>(_props => {
       <Box
         ref={local.ref}
         mod={[{ active: ctx.isItemActive(local.value) }, local.mod]}
-        {...ctx.getStyles('item', { className: local.className, classNames: local.classNames, styles: local.styles, style: local.style, variant: ctx.variant })}
+        {...ctx.getStyles('item', { className: local.className, classNames: local.classNames, styles: local.styles, style: local.style, variant: ctx.variant() })}
         {...others}
       />
     </AccordionItemProvider>

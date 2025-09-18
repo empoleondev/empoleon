@@ -223,23 +223,23 @@ export const AngleSlider = factory<AngleSliderFactory>(_props => {
       {...others}
     >
       {local.marks && local.marks.length > 0 && (
-        <div {...getStyles('marks')}>
+        <Box component='div' {...getStyles('marks')}>
           <For each={local.marks}>{(mark) => (
-            <div
+            <Box component='div'
               {...getStyles('mark', { style: { '--angle': `${mark.value}deg` } })}
               data-label={mark.label || undefined}
             />
           )}
           </For>
-        </div>
+        </Box>
       )}
 
       {local.withLabel && (
-        <div {...getStyles('label')}>
+        <Box component='div' {...getStyles('label')}>
           {typeof local.formatLabel === 'function' ? local.formatLabel(_value()) : _value()}
-        </div>
+        </Box>
       )}
-      <div
+      <Box component='div'
         tabIndex={local.tabIndex ?? (local.disabled ? -1 : 0)}
         role="slider"
         aria-valuemax={360}

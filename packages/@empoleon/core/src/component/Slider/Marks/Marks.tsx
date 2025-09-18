@@ -49,7 +49,7 @@ export function Marks(props: MarksProps) {
                 }}
               />
               <Show when={mark.label}>
-                <div {...getStyles('markLabel')}>{mark.label}</div>
+                <Box component='div' {...getStyles('markLabel')}>{mark.label}</Box>
               </Show>
             </Box>
           )}

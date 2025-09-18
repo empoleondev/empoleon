@@ -112,9 +112,9 @@ export const Blockquote = factory<BlockquoteFactory>(_props => {
 
   return (
     <Box component="blockquote" ref={local.ref} {...getStyles('root')} {...others}>
-      {local.icon && <span {...getStyles('icon')}>{local.icon}</span>}
+      {local.icon && <Box component="span" {...getStyles('icon')}>{local.icon}</Box>}
       {local.children}
-      {local.cite && <cite {...getStyles('cite')}>{local.cite}</cite>}
+      {local.cite && <Box component="cite" {...getStyles('cite')}>{local.cite}</Box>}
     </Box>
   );
 });

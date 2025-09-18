@@ -138,16 +138,16 @@ export const Notification = factory<NotificationFactory>(_props => {
       role={local.role || 'alert'}
       {...others}
     >
-      {local.icon && !local.loading && <div {...getStyles('icon')}>{local.icon}</div>}
+      {local.icon && !local.loading && <Box component='div' {...getStyles('icon')}>{local.icon}</Box>}
       {local.loading && <Loader size={28} color={local.color} {...local.loaderProps} {...getStyles('loader')} />}
 
-      <div {...getStyles('body')}>
-        {local.title && <div {...getStyles('title')}>{local.title}</div>}
+      <Box component='div' {...getStyles('body')}>
+        {local.title && <Box component='div' {...getStyles('title')}>{local.title}</Box>}
 
         <Box {...getStyles('description')} mod={{ 'data-with-title': !!local.title }}>
           {local.children}
         </Box>
-      </div>
+      </Box>
 
       {local.withCloseButton && (
         <CloseButton

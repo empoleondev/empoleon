@@ -278,7 +278,7 @@ export const Tooltip = factory<TooltipFactory>(_props => {
                 arrowOffset={local.arrowOffset!}
                 arrowRadius={local.arrowRadius!}
                 arrowPosition={local.arrowPosition!}
-                {...getStyles('arrow')}
+                {...getStyles('arrow') as any}
               />
             </Box>
           )}

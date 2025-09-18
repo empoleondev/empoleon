@@ -231,9 +231,9 @@ export const Stepper = factory<StepperFactory>(_props => {
             wrap: local.wrap && local.orientation !== 'vertical',
           }}
         >
-          <StepNodes {...getStyles('separator')} active={local.active} orientation={local.orientation} children={local.children} getStyles={getStyles} />
+          <StepNodes {...getStyles('separator') as any} active={local.active} orientation={local.orientation} children={local.children} getStyles={getStyles} />
         </Box>
-        <CompletedNode {...getStyles('content')} active={local.active} children={local.children} />
+        <CompletedNode {...getStyles('content') as any} active={local.active} children={local.children} />
       </Box>
     </StepperProvider>
   );

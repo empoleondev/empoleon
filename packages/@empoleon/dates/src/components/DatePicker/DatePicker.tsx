@@ -221,7 +221,7 @@ export const DatePicker: DatePickerComponent = factory<DatePickerFactory>(_props
       fallback={calendar}
     >
       <Box {...getStyles('datePickerRoot')} size={local.size} {...others}>
-        <div {...getStyles('presetsList')}>
+        <Box component='div' {...getStyles('presetsList')}>
           <For each={local.presets}>
             {preset => (
               <button
@@ -233,7 +233,7 @@ export const DatePicker: DatePickerComponent = factory<DatePickerFactory>(_props
               </button>
             )}
           </For>
-        </div>
+        </Box>
         {calendar}
       </Box>
     </Show>

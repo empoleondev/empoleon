@@ -304,7 +304,8 @@ export const Input = polymorphicFactory<InputFactory>(_props => {
         size={local.size}
       >
         {local.leftSection && (
-          <div
+          <Box
+            component='div'
             {...local.leftSectionProps}
             data-position="left"
             {...getStyles('section', {
@@ -313,7 +314,7 @@ export const Input = polymorphicFactory<InputFactory>(_props => {
             })}
           >
             {local.leftSection}
-          </div>
+          </Box>
         )}
 
         <Box
@@ -333,7 +334,8 @@ export const Input = polymorphicFactory<InputFactory>(_props => {
         />
 
         {_rightSection && (
-          <div
+          <Box
+            component='div'
             {...local.rightSectionProps}
             data-position="right"
             {...getStyles('section', {
@@ -342,7 +344,7 @@ export const Input = polymorphicFactory<InputFactory>(_props => {
             })}
           >
             {_rightSection}
-          </div>
+          </Box>
         )}
       </Box>
     </InputContext>

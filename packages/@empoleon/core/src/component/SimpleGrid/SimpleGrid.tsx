@@ -82,9 +82,9 @@ export const SimpleGrid = factory<SimpleGridFactory>(_props => {
     return (
       <>
         <SimpleGridContainerVariables {...props} selector={`.${responsiveClassName}`} />
-        <div {...getStyles('container')}>
+        <Box component='div' {...getStyles('container')}>
           <Box ref={local.ref} {...getStyles('root', { className: responsiveClassName })} {...others} />
-        </div>
+        </Box>
       </>
     );
   }

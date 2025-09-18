@@ -1,4 +1,4 @@
-import { splitProps, JSX } from 'solid-js';
+import { splitProps, JSX, createEffect } from 'solid-js';
 import {
   Box,
   BoxProps,
@@ -113,29 +113,29 @@ const loaderTransition: EmpoleonTransition = {
 };
 
 const varsResolver = createVarsResolver<ButtonFactory>(
-  (theme, { radius, color, gradient, variant, size, justify, autoContrast }) => {
+  (theme, props) => {
     const colors = theme.variantColorResolver({
-      color: color || theme.primaryColor,
+      color: props.color || theme.primaryColor,
       theme,
-      gradient,
-      variant: variant || 'filled',
-      autoContrast,
+      gradient: props.gradient,
+      variant: props.variant || 'filled',
+      autoContrast: props.autoContrast,
     });
 
     return {
       root: {
-        '--button-justify': justify,
-        '--button-height': getSize(size, 'button-height'),
-        '--button-padding-x': getSize(size, 'button-padding-x'),
-        '--button-fz': size?.includes('compact')
-          ? getFontSize(size.replace('compact-', ''))
-          : getFontSize(size),
-        '--button-radius': radius === undefined ? undefined : getRadius(radius),
-        '--button-bg': color || variant ? colors.background : undefined,
-        '--button-hover': color || variant ? colors.hover : undefined,
+        '--button-justify': props.justify,
+        '--button-height': getSize(props.size, 'button-height'),
+        '--button-padding-x': getSize(props.size, 'button-padding-x'),
+        '--button-fz': props.size?.includes('compact')
+          ? getFontSize(props.size.replace('compact-', ''))
+          : getFontSize(props.size),
+        '--button-radius': props.radius === undefined ? undefined : getRadius(props.radius),
+        '--button-bg': props.color || props.variant ? colors.background : undefined,
+        '--button-hover': props.color || props.variant ? colors.hover : undefined,
         '--button-color': colors.color,
-        '--button-bd': color || variant ? colors.border : undefined,
-        '--button-hover-color': color || variant ? colors.hoverColor : undefined,
+        '--button-bd': props.color || props.variant ? colors.border : undefined,
+        '--button-hover-color': props.color || props.variant ? colors.hoverColor : undefined,
       },
     };
   }
@@ -215,7 +215,7 @@ export const Button = polymorphicFactory<ButtonFactory>(_props => {
         )}
       </Transition>
 
-      <span {...getStyles('inner')}>
+      <Box component="span" {...getStyles('inner')}>
         {local.leftSection && (
           <Box component="span" {...getStyles('section')} mod={{ position: 'left' }}>
             {local.leftSection}
@@ -231,7 +231,7 @@ export const Button = polymorphicFactory<ButtonFactory>(_props => {
             {local.rightSection}
           </Box>
         )}
-      </span>
+      </Box>
     </UnstyledButton>
   );
 });

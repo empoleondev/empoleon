@@ -74,7 +74,7 @@ export const Code = factory<CodeFactory>(_props => {
   });
 
   return (
-    <Box<any>
+    <Box
       component={local.block ? 'pre' : 'code'}
       variant={local.variant}
       ref={local.ref}

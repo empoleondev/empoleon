@@ -211,7 +211,7 @@ export const ScrollArea = factory<ScrollAreaFactory>(_props => {
 
       {(local.scrollbars === 'xy' || local.scrollbars === 'x') && (
         <ScrollAreaScrollbar
-          {...getStyles('scrollbar')}
+          {...getStyles('scrollbar') as any}
           orientation="horizontal"
           data-hidden={
             local.type === 'never' || (local.offsetScrollbars === 'present' && !horizontalThumbVisible())
@@ -222,13 +222,13 @@ export const ScrollArea = factory<ScrollAreaFactory>(_props => {
           onMouseEnter={() => setScrollbarHovered(true)}
           onMouseLeave={() => setScrollbarHovered(false)}
         >
-          <ScrollAreaThumb {...getStyles('thumb')} />
+          <ScrollAreaThumb {...getStyles('thumb') as any} />
         </ScrollAreaScrollbar>
       )}
 
       {(local.scrollbars === 'xy' || local.scrollbars === 'y') && (
         <ScrollAreaScrollbar
-          {...getStyles('scrollbar')}
+          {...getStyles('scrollbar') as any}
           orientation="vertical"
           data-hidden={
             local.type === 'never' || (local.offsetScrollbars === 'present' && !verticalThumbVisible())
@@ -239,12 +239,12 @@ export const ScrollArea = factory<ScrollAreaFactory>(_props => {
           onMouseEnter={() => setScrollbarHovered(true)}
           onMouseLeave={() => setScrollbarHovered(false)}
         >
-          <ScrollAreaThumb {...getStyles('thumb')} />
+          <ScrollAreaThumb {...getStyles('thumb') as any} />
         </ScrollAreaScrollbar>
       )}
 
       <ScrollAreaCorner
-        {...getStyles('corner')}
+        {...getStyles('corner') as any}
         data-hovered={scrollbarHovered || undefined}
         data-hidden={local.type === 'never' || undefined}
       />

@@ -188,7 +188,7 @@ export const ColorInput = factory<ColorInputFactory>(__props => {
           .catch(() => {})
       }
     >
-      {local.eyeDropperIcon || <EyeDropperIcon {...getStyles('eyeDropperIcon')} />}
+      {local.eyeDropperIcon || <EyeDropperIcon {...getStyles('eyeDropperIcon') as any} />}
     </ActionIcon>
   );
 

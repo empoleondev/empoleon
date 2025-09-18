@@ -101,10 +101,10 @@ export const ColorSwatch = polymorphicFactory<ColorSwatchFactory>(_props => {
       {...getStyles('root', { focusable: true })}
       {...others}
     >
-      <span {...getStyles('alphaOverlay')} />
-      {local.withShadow && <span {...getStyles('shadowOverlay')} />}
-      <span {...getStyles('colorOverlay', { style: { 'background-color': local.color } })} />
-      <span {...getStyles('childrenOverlay')}>{local.children}</span>
+      <Box component="span" {...getStyles('alphaOverlay')} />
+      {local.withShadow && <Box component="span" {...getStyles('shadowOverlay')} />}
+      <Box component="span" {...getStyles('colorOverlay', { style: { 'background-color': local.color } })} />
+      <Box component="span" {...getStyles('childrenOverlay')}>{local.children}</Box>
     </Box>
   );
 });

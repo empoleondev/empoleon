@@ -89,7 +89,7 @@ export function Thumb(props: ThumbProps) {
         {...local.labelTransitionProps}
       >
         {(transitionStyles) => (
-          <div {...getStyles('label', { style: transitionStyles })}>{local.label}</div>
+          <Box component='div' {...getStyles('label', { style: transitionStyles })}>{local.label}</Box>
         )}
       </Transition>
     </Box>

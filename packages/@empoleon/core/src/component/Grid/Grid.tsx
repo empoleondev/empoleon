@@ -114,11 +114,11 @@ export const Grid = factory<GridFactory>(_props => {
     return (
       <GridProvider value={{ getStyles, grow: local.grow, columns: local.columns || 12, breakpoints: local.breakpoints, type: local.type }}>
         <GridVariables selector={`.${responsiveClassName}`} {...props} />
-        <div {...getStyles('container')}>
+        <Box component='div' {...getStyles('container')}>
           <Box ref={local.ref} {...getStyles('root', { className: responsiveClassName })} {...others}>
-            <div {...getStyles('inner')}>{local.children}</div>
+            <Box component='div' {...getStyles('inner')}>{local.children}</Box>
           </Box>
-        </div>
+        </Box>
       </GridProvider>
     );
   }
@@ -127,7 +127,7 @@ export const Grid = factory<GridFactory>(_props => {
     <GridProvider value={{ getStyles, grow: local.grow, columns: local.columns || 12, breakpoints: local.breakpoints, type: local.type }}>
       <GridVariables selector={`.${responsiveClassName}`} {...props} />
       <Box ref={local.ref} {...getStyles('root', { className: responsiveClassName })} {...others}>
-        <div {...getStyles('inner')}>{local.children}</div>
+        <Box component='div' {...getStyles('inner')}>{local.children}</Box>
       </Box>
     </GridProvider>
   );

@@ -137,8 +137,8 @@ export const RingProgress = factory<RingProgressFactory>(_props => {
 
   return (
     <Box {...getStyles('root')} size={local.size} ref={local.ref} {...others}>
-      <svg {...getStyles('svg')}>{curves}</svg>
-      {local.label && <div {...getStyles('label')}>{local.label}</div>}
+      <Box component='svg' {...getStyles('svg')}>{curves}</Box>
+      {local.label && <Box component='div' {...getStyles('label')}>{local.label}</Box>}
     </Box>
   );
 });

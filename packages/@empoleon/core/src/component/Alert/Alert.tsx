@@ -141,24 +141,24 @@ export const Alert = factory<AlertFactory>(_props => {
       aria-describedby={bodyId}
       aria-labelledby={titleId}
     >
-      <div {...getStyles('wrapper')}>
-        {local.icon && <div {...getStyles('icon')}>{local.icon}</div>}
+      <Box component='div' {...getStyles('wrapper')}>
+        {local.icon && <Box component='div' {...getStyles('icon')}>{local.icon}</Box>}
 
-        <div {...getStyles('body')}>
+        <Box component='div' {...getStyles('body')}>
           {local.title && (
-            <div {...getStyles('title')} data-with-close-button={local.withCloseButton || undefined}>
-              <span id={titleId} {...getStyles('label')}>
+            <Box component='div' {...getStyles('title')} data-with-close-button={local.withCloseButton || undefined}>
+              <Box component='span' id={titleId} {...getStyles('label')}>
                 {local.title}
-              </span>
-            </div>
+              </Box>
+            </Box>
           )}
 
           {local.children && (
-            <div id={bodyId} {...getStyles('message')} data-variant={local.variant}>
+            <Box component='div' id={bodyId} {...getStyles('message')} data-variant={local.variant}>
               {local.children}
-            </div>
+            </Box>
           )}
-        </div>
+        </Box>
 
         {local.withCloseButton && (
           <CloseButton
@@ -171,7 +171,7 @@ export const Alert = factory<AlertFactory>(_props => {
             unstyled={local.unstyled}
           />
         )}
-      </div>
+      </Box>
     </Box>
   );
 });

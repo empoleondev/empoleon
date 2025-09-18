@@ -141,7 +141,7 @@ export const Spoiler = factory<SpoilerFactory>(_props => {
           {spoilerMoreContent()}
         </Anchor>
       </Show>
-      <div
+      <Box component='div'
         {...getStyles('content', {
           style: { 'max-height': !show() ? rem(local.maxHeight) : height() ? rem(height()) : undefined },
         })}
@@ -150,7 +150,7 @@ export const Spoiler = factory<SpoilerFactory>(_props => {
         id={regionId}
       >
         <div ref={contentRef}>{local.children}</div>
-      </div>
+      </Box>
     </Box>
   );
 });

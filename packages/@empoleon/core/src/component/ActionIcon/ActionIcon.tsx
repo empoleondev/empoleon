@@ -143,7 +143,7 @@ export const ActionIcon = polymorphicFactory<ActionIconFactory>(_props => {
   ]);
 
   const getStyles = useStyles<ActionIconFactory>({
-    name: ['ActionIcon', local.__staticSelector],
+    name: 'ActionIcon',
     props,
     className: local.className,
     style: local.style,

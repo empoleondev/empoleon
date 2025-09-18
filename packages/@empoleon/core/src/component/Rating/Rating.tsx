@@ -286,7 +286,7 @@ export const Rating = factory<RatingFactory>(_props => {
             const isGroupActive = createMemo(() => !local.readOnly && Math.ceil(hovered()) === integerValue);
 
             return (
-              <div
+              <Box component='div'
                 data-active={isGroupActive() ? true : undefined}
                 {...getStyles('symbolGroup')}
               >
@@ -317,7 +317,7 @@ export const Rating = factory<RatingFactory>(_props => {
                     )
                   }}
                 </Index>
-              </div>
+              </Box>
             )
           }}
         </Index>

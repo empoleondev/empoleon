@@ -6,16 +6,16 @@ import { AccordionChevronPosition, AccordionHeadingOrder } from './Accordion.typ
 interface AccordionContext {
   loop: boolean | undefined;
   transitionDuration: number | undefined;
-  disableChevronRotation: boolean | undefined;
-  chevronPosition: AccordionChevronPosition | undefined;
+  disableChevronRotation: () => boolean | undefined;
+  chevronPosition: () => AccordionChevronPosition | undefined;
   order: AccordionHeadingOrder | undefined;
-  chevron: JSX.Element | Component;
+  chevron: JSX.Element | Component | null;
   onChange: (value: string) => void;
   isItemActive: (value: string) => boolean;
   getControlId: (value: string) => string;
   getRegionId: (value: string) => string;
   getStyles: GetStylesApi<AccordionFactory>;
-  variant: string | undefined;
+  variant: () => string | undefined;
   unstyled: boolean | undefined;
 }
 

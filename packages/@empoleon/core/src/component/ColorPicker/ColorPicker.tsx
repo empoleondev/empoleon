@@ -247,8 +247,8 @@ export const ColorPicker = factory<ColorPickerFactory>(_props => {
               onScrubEnd={stopScrubbing}
             />
 
-            <div {...getStyles('body')}>
-              <div {...getStyles('sliders')}>
+            <Box component='div' {...getStyles('body')}>
+              <Box component='div' {...getStyles('sliders')}>
                 <HueSlider
                   value={parsed().h}
                   onChange={(h) => handleChange({ h })}
@@ -277,7 +277,7 @@ export const ColorPicker = factory<ColorPickerFactory>(_props => {
                     onScrubEnd={stopScrubbing}
                   />
                 )}
-              </div>
+              </Box>
 
               {withAlpha && (
                 <ColorSwatch
@@ -287,7 +287,7 @@ export const ColorPicker = factory<ColorPickerFactory>(_props => {
                   {...getStyles('preview')}
                 />
               )}
-            </div>
+            </Box>
           </>
         )}
 

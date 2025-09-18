@@ -115,9 +115,9 @@ export const InputLabel = factory<InputLabelFactory>(_props => {
     >
       {local.children}
       {local.required && (
-        <span {...getStyles('required')} aria-hidden>
+        <Box component='span' {...getStyles('required')} aria-hidden>
           {' *'}
-        </span>
+        </Box>
       )}
     </Box>
   );

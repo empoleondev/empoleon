@@ -1,4 +1,5 @@
 import {
+  Box,
   BoxProps,
   CloseButtonProps,
   DataAttributes,
@@ -213,7 +214,7 @@ export const DateInputMask = factory<DateInputMaskFactory>(_props => {
             typeof local.onBlurCapture === "function" && local.onBlurCapture?.(event);
           }}
         >
-          <div {...getStyles('fieldsRoot')} />
+          <Box component='div' {...getStyles('fieldsRoot')} />
         </InputBase>
       </Popover.Target>
       <Popover.Dropdown>Dropdown</Popover.Dropdown>

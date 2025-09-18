@@ -1,6 +1,7 @@
 import cx from 'clsx';
 import { useId, useUncontrolled } from '@empoleon/hooks';
 import {
+  Box,
   BoxProps,
   createVarsResolver,
   ElementProps,
@@ -234,7 +235,7 @@ export const PasswordInput = factory<PasswordInputFactory>(_props => {
         withErrorStyles={local.withErrorStyles}
         attributes={local.attributes}
       >
-        <input
+        <Box component='input'
           required={local.required}
           data-invalid={!!local.error || undefined}
           data-with-left-section={!!local.leftSection || undefined}

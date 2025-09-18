@@ -163,15 +163,15 @@ export const Badge = polymorphicFactory<BadgeFactory>(_props => {
       {...others}
     >
       {local.leftSection && (
-        <span {...getStyles('section')} data-position="left">
+        <Box component='span' {...getStyles('section')} data-position="left">
           {local.leftSection}
-        </span>
+        </Box>
       )}
-      <span {...getStyles('label')}>{local.children}</span>
+      <Box component='span' {...getStyles('label')}>{local.children}</Box>
       {local.rightSection && (
-        <span {...getStyles('section')} data-position="right">
+        <Box component='span' {...getStyles('section')} data-position="right">
           {local.rightSection}
-        </span>
+        </Box>
       )}
     </Box>
   );

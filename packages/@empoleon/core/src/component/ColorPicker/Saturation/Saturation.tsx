@@ -102,25 +102,28 @@ export function Saturation(props: SaturationProps) {
       tabIndex={focusable ? 0 : -1}
       onKeyDown={handleKeyDown}
     >
-      <div
+      <Box
+        component='div'
         {...getStyles('saturationOverlay', {
           style: { 'background-color': `hsl(${local.value.h}, 100%, 50%)` },
         })}
       />
 
-      <div
+      <Box
+        component='div'
         {...getStyles('saturationOverlay', {
           style: { 'background-image': 'linear-gradient(90deg, #fff, transparent)' },
         })}
       />
 
-      <div
+      <Box
+        component='div'
         {...getStyles('saturationOverlay', {
           style: { 'background-image': 'linear-gradient(0deg, #000, transparent)' },
         })}
       />
 
-      <Thumb position={position()} {...getStyles('thumb', { style: { backgroundColor: local.color } })} />
+      <Thumb position={position()} {...getStyles('thumb', { style: { backgroundColor: local.color } }) as any} />
     </Box>
   );
 }

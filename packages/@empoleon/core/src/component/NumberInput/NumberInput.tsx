@@ -479,7 +479,7 @@ export const NumberInput = factory<NumberInputFactory>(_props => {
   };
 
   const controls = (
-    <div {...getStyles('controls')}>
+    <Box component='div' {...getStyles('controls')}>
       <UnstyledButton
         {...getStyles('control')}
         tabIndex={-1}
@@ -510,7 +510,7 @@ export const NumberInput = factory<NumberInputFactory>(_props => {
       >
         <NumberInputChevron direction="down" />
       </UnstyledButton>
-    </div>
+    </Box>
   );
 
   return (

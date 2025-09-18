@@ -80,6 +80,9 @@ export interface AccordionProps<Multiple extends boolean = false>
   /** Size of the chevron icon container, `24` by default */
   chevronSize?: number | string;
 
+  /** Size of the default chevron icon. Ignored when `chevron` prop is set. @default `16` */
+  chevronIconSize?: number | string;
+
   /** Heading order, has no effect on visuals */
   order?: AccordionHeadingOrder;
 
@@ -103,7 +106,8 @@ const defaultProps: Partial<AccordionProps> = {
   disableChevronRotation: false,
   chevronPosition: 'right',
   variant: 'default',
-  chevron: AccordionChevron,
+  chevronSize: 'auto',
+  chevronIconSize: 16,
 };
 
 const varsResolver = createVarsResolver<AccordionFactory>(
@@ -141,6 +145,8 @@ export function Accordion<Multiple extends boolean = false>(_props: AccordionPro
     'chevron',
     'variant',
     'radius',
+    'chevronIconSize',
+    'attributes',
   ]);
 
   const uid = useId(local.id);
@@ -178,9 +184,12 @@ export function Accordion<Multiple extends boolean = false>(_props: AccordionPro
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
   });
+
+  const variant = () => local.variant;
 
   return (
     <AccordionProvider
@@ -195,31 +204,19 @@ export function Accordion<Multiple extends boolean = false>(_props: AccordionPro
           `${uid}-panel`,
           'Accordion.Item component was rendered with invalid value or without value'
         ),
+        chevron: local.chevron === null ? null : local.chevron || (() => <AccordionChevron size={local.chevronIconSize} />),
         transitionDuration: local.transitionDuration,
-        disableChevronRotation: local.disableChevronRotation,
-        chevronPosition: local.chevronPosition,
+        disableChevronRotation: () => local.disableChevronRotation,
+        chevronPosition: () => local.chevronPosition,
         order: local.order,
-        chevron: local.chevron,
         loop: local.loop,
         getStyles,
-        variant: local.variant,
+        variant,
         unstyled: local.unstyled,
       }}
     >
-      <Box {...getStyles('root', { variant: local.variant })} id={uid} {...others} variant={local.variant} data-accordion>
+      <Box {...getStyles('root', { variant: variant() })} id={uid} {...others} variant={variant()} data-accordion>
         {local.children}
-
-        {/* Hidden elements for testing - ensures all selectors are present for style API tests */}
-        {!local.children && (
-          <div style={{ display: 'none' }}>
-            <div {...getStyles('item')} />
-            <div {...getStyles('control')} />
-            <div {...getStyles('chevron')} />
-            <div {...getStyles('label')} />
-            <div {...getStyles('icon')} />
-            <div {...getStyles('content')} />
-          </div>
-        )}
       </Box>
     </AccordionProvider>
   );

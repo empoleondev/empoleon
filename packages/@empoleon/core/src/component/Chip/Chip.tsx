@@ -205,7 +205,7 @@ export const Chip = factory<ChipFactory>(_props => {
       {...styleProps}
       {...local.wrapperProps as EmpoleonStyleProps}
     >
-      <input
+      <Box component='input'
         type={_type()}
         {...getStyles('input')}
         checked={_checked()}
@@ -222,19 +222,19 @@ export const Chip = factory<ChipFactory>(_props => {
         {...rest}
       />
 
-      <label
+      <Box component='label'
         for={uuid}
         data-checked={_checked() || undefined}
         data-disabled={local.disabled || undefined}
         {...getStyles('label', { variant: local.variant || 'filled' })}
       >
         {_checked() && (
-          <span {...getStyles('iconWrapper')}>
-            {local.icon || <CheckIcon {...getStyles('checkIcon')} />}
-          </span>
+          <Box component='span' {...getStyles('iconWrapper')}>
+            {local.icon || <CheckIcon {...getStyles('checkIcon') as any} />}
+          </Box>
         )}
         <span>{local.children}</span>
-      </label>
+      </Box>
     </Box>
   );
 });

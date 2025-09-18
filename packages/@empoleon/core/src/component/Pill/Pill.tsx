@@ -125,7 +125,7 @@ export const Pill = factory<PillFactory>(_props => {
       ]}
       {...others}
     >
-      <span {...getStyles('label')}>{local.children}</span>
+      <Box component='span' {...getStyles('label')}>{local.children}</Box>
       {local.withRemoveButton && (
         <CloseButton
           variant="transparent"

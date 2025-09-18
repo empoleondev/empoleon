@@ -101,7 +101,7 @@ export const TableScrollContainer = factory<TableScrollContainerFactory>(_props 
       {...getStyles('scrollContainer')}
       {...others}
     >
-      <div {...getStyles('scrollContainerInner')}>{local.children}</div>
+      <Box component='div' {...getStyles('scrollContainerInner')}>{local.children}</Box>
     </Box>
   );
 });

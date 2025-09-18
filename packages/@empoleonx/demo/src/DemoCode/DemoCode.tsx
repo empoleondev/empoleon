@@ -12,7 +12,7 @@ export interface DemoCodeProps {
 export function DemoCode(props: DemoCodeProps) {
   const mergedProps = mergeProps({
     ...props,
-    defaultExpanded: false
+    defaultExpanded: true
   })
 
   const _code = createMemo(() => {

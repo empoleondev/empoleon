@@ -163,11 +163,11 @@ export const Avatar = polymorphicFactory<AvatarFactory>(_props => {
       {...others}
     >
       {error() ? (
-        <span {...getStyles('placeholder')} title={local.alt}>
+        <Box component='span' {...getStyles('placeholder')} title={local.alt}>
           {local.children || (typeof local.name === 'string' && getInitials(local.name)) || <AvatarPlaceholderIcon />}
-        </span>
+        </Box>
       ) : (
-        <img
+        <Box component='img'
           {...local.imageProps}
           {...getStyles('image')}
           src={local.src!}

@@ -5,17 +5,7 @@ import { EmpoleonProvider, useEmpoleonColorScheme } from '@empoleon/core';
 import { createShikiAdapter } from '@empoleon/code-highlight';
 import { CodeHighlightAdapterProvider } from '@empoleon/code-highlight';
 
-async function loadShiki() {
-  const { createHighlighter } = await import('shiki');
-  const shiki = await createHighlighter({
-    langs: ['tsx', 'scss', 'html', 'bash', 'json'],
-    themes: [],
-  });
-
-  return shiki;
-}
-
-const shikiAdapter = createShikiAdapter(loadShiki);
+const shikiAdapter = createShikiAdapter();
 
 function ColorSchemeWrapper(props: { children: JSX.Element; globals: any }) {
   const { setColorScheme } = useEmpoleonColorScheme();

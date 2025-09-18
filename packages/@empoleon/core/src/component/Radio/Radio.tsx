@@ -222,7 +222,7 @@ export const Radio = factory<RadioFactory>(_props => {
           disabled={local.disabled}
           type="radio"
         />
-        <Icon {...getStyles('icon')} aria-hidden />
+        <Icon {...getStyles('icon') as any} aria-hidden />
       </Box>
     </InlineInput>
   );

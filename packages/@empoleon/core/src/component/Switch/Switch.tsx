@@ -249,7 +249,7 @@ export const Switch = factory<SwitchFactory>(_props => {
         >
           {local.thumbIcon}
         </Box>
-        <span {...getStyles('trackLabel')}>{_checked() ? local.onLabel : local.offLabel}</span>
+        <Box component='span' {...getStyles('trackLabel')}>{_checked() ? local.onLabel : local.offLabel}</Box>
       </Box>
     </InlineInput>
   );

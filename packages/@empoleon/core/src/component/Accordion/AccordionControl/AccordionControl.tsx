@@ -1,4 +1,4 @@
-import { Component, JSX, splitProps } from 'solid-js';
+import { Component, createEffect, createMemo, JSX, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
@@ -72,11 +72,11 @@ export const AccordionControl = factory<AccordionControlFactory>(_props => {
   const content = (
     <UnstyledButton<'button'>
       {...others}
-      {...ctx.getStyles('control', { className: local.className, classNames: local.classNames, style: local.style, styles: local.styles, variant: ctx.variant })}
+      {...ctx.getStyles('control', { className: local.className, classNames: local.classNames, style: local.style, styles: local.styles, variant: ctx.variant() })}
       unstyled={ctx.unstyled}
       mod={[
         'accordion-control',
-        { active: isActive(), 'chevron-position': ctx.chevronPosition, disabled: local.disabled },
+        { active: isActive(), 'chevron-position': ctx.chevronPosition(), disabled: local.disabled },
         local.mod,
       ]}
       ref={local.ref}
@@ -105,7 +105,7 @@ export const AccordionControl = factory<AccordionControlFactory>(_props => {
     >
       <Box
         component="span"
-        mod={{ rotate: !ctx.disableChevronRotation && isActive, position: ctx.chevronPosition }}
+        mod={{ rotate: !ctx.disableChevronRotation() && isActive(), position: ctx.chevronPosition() }}
         {...ctx.getStyles('chevron', { classNames: local.classNames, styles: local.styles  })}
       >
         <Chevron />
@@ -114,7 +114,7 @@ export const AccordionControl = factory<AccordionControlFactory>(_props => {
       {local.icon && (
         <Box
           component="span"
-          mod={{ 'chevron-position': ctx.chevronPosition }}
+          mod={{ 'chevron-position': ctx.chevronPosition() }}
           {...ctx.getStyles('icon', { classNames: local.classNames, styles: local.styles })}
         >
           {local.icon}

@@ -149,7 +149,7 @@ export const RadioIndicator = factory<RadioIndicatorFactory>(_props => {
       mod={[{ checked: _checked, disabled: local.disabled }, local.mod]}
       {...others}
     >
-      <Icon {...getStyles('icon')} />
+      <Icon {...getStyles('icon') as any} />
     </Box>
   );
 });

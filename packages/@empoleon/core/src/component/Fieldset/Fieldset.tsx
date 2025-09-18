@@ -87,7 +87,7 @@ export const Fieldset = factory<FieldsetFactory>(_props => {
       {...getStyles('root', { variant: local.variant })}
       {...others}
     >
-      {local.legend && <legend {...getStyles('legend', { variant: local.variant })}>{local.legend}</legend>}
+      {local.legend && <Box component='legend' {...getStyles('legend', { variant: local.variant })}>{local.legend}</Box>}
       {local.children}
     </Box>
   );

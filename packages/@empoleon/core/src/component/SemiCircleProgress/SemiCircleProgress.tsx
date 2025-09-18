@@ -167,13 +167,13 @@ export const SemiCircleProgress = factory<SemiCircleProgressFactory>(_props => {
   return (
     <Box ref={local.ref} size={local.size} {...getStyles('root')} {...others}>
       {local.label && (
-        <p {...getStyles('label')} data-position={local.labelPosition} data-orientation={local.orientation}>
+        <Box component='p' {...getStyles('label')} data-position={local.labelPosition} data-orientation={local.orientation}>
           {local.label}
-        </p>
+        </Box>
       )}
 
-      <svg width={local.size} height={local.size! / 2} {...getStyles('svg')}>
-        <circle
+      <Box component='svg' width={local.size} height={local.size! / 2} {...getStyles('svg')}>
+        <Box component='circle'
           cx={coordinateForCircle}
           cy={coordinateForCircle}
           r={radius}
@@ -184,7 +184,7 @@ export const SemiCircleProgress = factory<SemiCircleProgressFactory>(_props => {
           {...getStyles('emptySegment', { style: { 'stroke-dashoffset': `${circumference}` } })}
         />
 
-        <circle
+        <Box component='circle'
           cx={coordinateForCircle}
           cy={coordinateForCircle}
           r={radius}
@@ -194,7 +194,7 @@ export const SemiCircleProgress = factory<SemiCircleProgressFactory>(_props => {
           stroke-dasharray={`${circumference}`}
           {...getStyles('filledSegment', { style: { 'stroke-dashoffset': `${semiCirclePercentage}` } })}
         />
-      </svg>
+      </Box>
     </Box>
   );
 });

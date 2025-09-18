@@ -143,7 +143,7 @@ export const ColorSlider = factory<ColorSliderFactory>(_props => {
 
   const layers = <Index each={local.overlays}>
     {(overlay) => (
-      <div {...getStyles('sliderOverlay')} style={overlay()} />
+      <Box component='div' {...getStyles('sliderOverlay')} style={overlay()} />
     )}
   </Index>
 
@@ -167,7 +167,7 @@ export const ColorSlider = factory<ColorSliderFactory>(_props => {
 
       <Thumb
         position={position()}
-        {...getStyles('thumb', { style: { top: rem(1), background: thumbColor() } })}
+        {...getStyles('thumb', { style: { top: rem(1), background: thumbColor() } }) as any}
       />
     </Box>
   );

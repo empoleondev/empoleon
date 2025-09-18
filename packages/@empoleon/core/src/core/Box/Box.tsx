@@ -1,5 +1,5 @@
 import cx from 'clsx';
-import { createMemo, Show, splitProps, JSX, children, createEffect } from 'solid-js';
+import { createMemo, Show, splitProps, JSX, createEffect } from 'solid-js';
 import { mergeRefs, Ref } from "@solid-primitives/refs";
 import { Dynamic } from 'solid-js/web';
 import { createPolymorphicComponent } from '../factory';
