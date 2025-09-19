@@ -52,9 +52,9 @@ export type CheckboxCardFactory = Factory<{
   vars: CheckboxCardCssVariables;
 }>;
 
-const defaultProps: Partial<CheckboxCardProps> = {
+const defaultProps = {
   withBorder: true,
-};
+} satisfies Partial<CheckboxCardProps>;
 
 const varsResolver = createVarsResolver<CheckboxCardFactory>((_, { radius }) => ({
   card: {

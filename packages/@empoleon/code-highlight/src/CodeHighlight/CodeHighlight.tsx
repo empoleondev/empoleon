@@ -82,7 +82,7 @@ export interface CodeHighlightSettings {
   withBorder?: boolean;
 
   /** Extra controls to display in the controls list */
-  controls?: JSX.Element[];
+  controls?: JSX.Element[] | (() => JSX.Element[]);
 
   /** Set to change contrast of controls and other elements if you prefer to use dark code color scheme in light mode or light code color scheme in dark mode */
   codeColorScheme?: 'dark' | 'light';
@@ -193,7 +193,6 @@ export const CodeHighlight = factory<CodeHighlightFactory>(_props => {
   const colorScheme = useComputedColorScheme();
   const highlight = useHighlight();
 
-  // Create a signal to store the highlighted result
   const [highlightedResult, setHighlightedResult] = createSignal<{
     highlightedCode: string;
     isHighlighted: boolean;
@@ -204,15 +203,12 @@ export const CodeHighlight = factory<CodeHighlightFactory>(_props => {
     codeElementProps: {}
   });
 
-  // Create effect to handle async highlighting
   createEffect(() => {
-    // Track reactive dependencies synchronously
     const codeValue = typeof local.code === 'function' ? local.code() : local.code;
     const code = (codeValue || '').trim();
     const language = local.language;
     const scheme = local.codeColorScheme || colorScheme();
 
-    // Handle async operation
     highlight({
       code,
       language,
@@ -220,7 +216,6 @@ export const CodeHighlight = factory<CodeHighlightFactory>(_props => {
     }).then((result) => {
       setHighlightedResult(result);
     }).catch((error) => {
-      // Fallback to unhighlighted code
       setHighlightedResult({
         highlightedCode: code,
         isHighlighted: false,
@@ -254,8 +249,10 @@ export const CodeHighlight = factory<CodeHighlightFactory>(_props => {
           style: [{ ...highlightedResult().codeElementProps?.style }, local.style],
         })}
         data-with-border={local.withBorder || undefined}
-        {...codeContent()}
-      />
+        innerHTML={codeContent().innerHTML || undefined}
+      >
+        {!codeContent().innerHTML ? codeContent().children : undefined}
+      </Box>
     );
   }
 
@@ -271,7 +268,7 @@ export const CodeHighlight = factory<CodeHighlightFactory>(_props => {
       >
         {shouldDisplayControls && (
           <div {...getStyles('controls')} data-with-offset={local.__withOffset || undefined}>
-            {local.controls}
+            {typeof local.controls === 'function' ? local.controls() : local.controls}
 
             {local.withExpandButton && (
               <ExpandCodeButton

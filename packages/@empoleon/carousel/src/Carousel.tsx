@@ -340,7 +340,7 @@ export const Carousel = factory<CarouselFactory>(_props => {
   };
 
   return (
-    <CarouselProvider value={{ getStyles, orientation: local.orientation }}>
+    <CarouselProvider value={{ getStyles, orientation: () => local.orientation }}>
       {local.type === 'container' ? (
         <CarouselContainerVariables {...props} selector={`.${responsiveClassName}`} />
       ) : (

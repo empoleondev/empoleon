@@ -160,7 +160,7 @@ export const Checkbox = factory<CheckboxFactory>(_props => {
   ]);
 
   const ctx = useCheckboxGroupContext();
-  const _size = local.size || ctx?.size;
+  const _size = () => (local.size || ctx?.size);
   const Icon = local.icon!;
 
   const getStyles = useStyles<CheckboxFactory>({
@@ -182,50 +182,34 @@ export const Checkbox = factory<CheckboxFactory>(_props => {
   const rest = () => extracted().rest;
   const uuid = useId(local.id);
 
-//   const contextProps = createMemo(() => {
-//    if (ctx) {
-//      return {
-//        checked: ctx.value().includes(rest().value as string),
-//        onChange: (event: Event) => {
-//          ctx.onChange(event as any);
-//          typeof local.onChange === 'function' && local.onChange(event as any);
-//        },
-//      };
-//    }
-//    if (local.checked !== undefined) {
-//      return { checked: local.checked, onChange: local.onChange };
-//    }
-//    if (local.defaultChecked !== undefined) {
-//      return { checked: !!local.defaultChecked, onChange: local.onChange };
-//    }
-//    return { onChange: local.onChange };
-//  });
-
-const contextProps = createMemo(() => {
-  if (ctx) {
-    return {
-      checked: ctx.value().includes(rest().value as string),
-      onChange: (event: Event) => {
-        ctx.onChange(event as any);
-        typeof local.onChange === 'function' && local.onChange(event as any);
-      },
-    };
-  }
-  if (local.checked !== undefined) {
-    return { checked: local.checked, onChange: local.onChange };
-  }
-  if (local.defaultChecked !== undefined) {
-    return { checked: !!local.defaultChecked, onChange: local.onChange };
-  }
-  return { onChange: local.onChange };
-});
+  const contextProps = createMemo(() => {
+    if (ctx) {
+      return {
+        checked: ctx.value().includes(rest().value as string),
+        onChange: (event: Event) => {
+          ctx.onChange(event as any);
+          typeof local.onChange === 'function' && local.onChange(event as any);
+        },
+      };
+    }
+    if (local.checked !== undefined) {
+      return { checked: local.checked, onChange: local.onChange };
+    }
+    if (local.defaultChecked !== undefined) {
+      return { checked: !!local.defaultChecked, onChange: local.onChange };
+    }
+    return { onChange: local.onChange };
+  });
 
   const fallbackRef = null;
   const ref = local.ref || fallbackRef;
 
   let inputRef: HTMLInputElement | undefined;
+
+  const indeterminate = createMemo(() => local.indeterminate);
+
   createEffect(() => {
-    if (inputRef) inputRef.indeterminate = local.indeterminate || false;
+    if (inputRef) inputRef.indeterminate = indeterminate() || false;
   });
 
   const toolTipEvents = {
@@ -239,8 +223,8 @@ const contextProps = createMemo(() => {
       __staticSelector="Checkbox"
       __stylesApiProps={props}
       id={uuid}
-      size={_size}
-      labelPosition={local.labelPosition}
+      size={_size()}
+      labelPosition={() => local.labelPosition}
       label={local.label}
       description={local.description}
       error={local.error}
@@ -274,8 +258,7 @@ const contextProps = createMemo(() => {
           onChange={contextProps().onChange}
           type="checkbox"
         />
-
-        <Icon indeterminate={local.indeterminate} {...getStyles('icon')} />
+        <Icon indeterminate={indeterminate()} {...getStyles('icon')} />
       </Box>
     </InlineInput>
   );

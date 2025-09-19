@@ -154,7 +154,7 @@ export const CheckboxIndicator = factory<CheckboxIndicatorFactory>(_props => {
       mod={[{ checked: _checked(), disabled: local.disabled }, local.mod]}
       {...others}
     >
-      <Icon indeterminate={local.indeterminate} {...getStyles('icon')} />
+      <Icon indeterminate={indeterminate()} {...getStyles('icon')} />
     </Box>
   );
 });

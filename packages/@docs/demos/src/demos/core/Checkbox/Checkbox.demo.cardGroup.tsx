@@ -1,7 +1,7 @@
 import { Checkbox, Group, Stack, Text } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
 import classes from './Checkbox.demo.card.module.css';
-import { createSignal } from 'solid-js';
+import { createSignal, For } from 'solid-js';
 
 const cssCode = `.root {
   position: relative;
@@ -100,18 +100,6 @@ const data = [
 function Demo() {
   const [value, setValue] = createSignal<string[]>([]);
 
-  const cards = data.map((item) => (
-    <Checkbox.Card className={classes.root} radius="md" value={item.name} >
-      <Group wrap="nowrap" align="flex-start">
-        <Checkbox.Indicator />
-        <div>
-          <Text className={classes.label}>{item.name}</Text>
-          <Text className={classes.description}>{item.description}</Text>
-        </div>
-      </Group>
-    </Checkbox.Card>
-  ));
-
   return (
     <>
       <Checkbox.Group
@@ -121,7 +109,19 @@ function Demo() {
         description="Choose all packages that you will need in your application"
       >
         <Stack pt="md" gap="xs">
-          {cards}
+          <For each={data}>
+            {(item) => (
+              <Checkbox.Card className={classes.root} radius="md" value={item.name}>
+                <Group wrap="nowrap" align="flex-start">
+                  <Checkbox.Indicator />
+                  <div>
+                    <Text className={classes.label}>{item.name}</Text>
+                    <Text className={classes.description}>{item.description}</Text>
+                  </div>
+                </Group>
+              </Checkbox.Card>
+            )}
+          </For>
         </Stack>
       </Checkbox.Group>
 

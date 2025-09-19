@@ -1,62 +1,59 @@
-// import type { StorybookConfig } from 'storybook-solidjs-vite';
-// import tsconfigPaths from 'vite-tsconfig-paths';
-
-// const config: StorybookConfig = {
-//   // fuck it, we'll do it live!
-//   stories: [
-//     '../packages/@empoleon/core/src/component/**/*.story.@(js|jsx|ts|tsx)',
-//     '../packages/@empoleon/carousel/src/*.story.@(ts|tsx)',
-//     '../packages/@empoleon/code-highlight/src/CodeHighlight/*.story.@(ts|tsx)',
-//     '../packages/@empoleon/dates/src/**/*.story.@(ts|tsx)',
-//     '../packages/@empoleon/dropzone/src/*.story.@(ts|tsx)',
-//     '../packages/@empoleon/form/src/stories/*.story.@(ts|tsx)',
-//     '../packages/@empoleon/modals/src/*.story.@(ts|tsx)',
-//     '../packages/@empoleon/notifications/src/*.story.@(ts|tsx)',
-//     '../packages/@empoleon/nprogress/src/*.story.@(ts|tsx)',
-//     '../packages/@empoleon/spotlight/src/*.story.@(ts|tsx)',
-//     '../packages/@empoleon/tiptap/src/*.story.@(ts|tsx)',
-//     '../packages/@empoleonx/*/src/**/*.story.@(ts|tsx)',
-//     '../packages/@docs/*/src/**/*.story.@(ts|tsx)'
-//   ],
-//   addons: [
-//     '@storybook/addon-links',
-//   ],
-//   framework: {
-//     name: 'storybook-solidjs-vite',
-//     options: {},
-//   },
-//   async viteFinal(config) {
-//     config.plugins?.push(tsconfigPaths());
-//     return config;
-//   },
-// };
-
-// export default config;
-
 import type { StorybookConfig } from '@storybook/html-vite';
 import solidPlugin from 'vite-plugin-solid';
 import tsconfigPaths from 'vite-tsconfig-paths';
+import path from 'path';
+import fg from 'fast-glob';
+
+const getPath = (storyPath: string) => path.resolve(process.cwd(), storyPath).replace(/\\/g, '/');
+const getGlobPaths = (paths: string[]) =>
+  paths.reduce<string[]>((acc, path) => [...acc, ...fg.sync(path)], []);
+
+function getStoryPaths() {
+  return getGlobPaths([
+    getPath('packages/@empoleon/*/src/**/*.story.@(js|jsx|ts|tsx)'),
+    getPath('packages/@empoleon/carousel/src/*.story.@(ts|tsx)'),
+    getPath('packages/@empoleon/code-highlight/src/CodeHighlight/*.story.@(ts|tsx)'),
+    getPath('packages/@empoleon/dates/src/**/*.story.@(ts|tsx)'),
+    getPath('packages/@empoleon/dropzone/src/*.story.@(ts|tsx)'),
+    getPath('packages/@empoleon/form/src/stories/*.story.@(ts|tsx)'),
+    getPath('packages/@empoleon/modals/src/*.story.@(ts|tsx)'),
+    getPath('packages/@empoleon/notifications/src/*.story.@(ts|tsx)'),
+    getPath('packages/@empoleon/nprogress/src/*.story.@(ts|tsx)'),
+    getPath('packages/@empoleon/spotlight/src/*.story.@(ts|tsx)'),
+    getPath('packages/@empoleon/tiptap/src/*.story.@(ts|tsx)'),
+    getPath('packages/@docs/*/src/**/*.story.@(ts|tsx)')
+  ]);
+}
+
+const storiesPath = getStoryPaths().sort((a, b) => {
+  const nameA = path.basename(a).toLowerCase();
+  const nameB = path.basename(b).toLowerCase();
+
+  const componentA = nameA.split('.story')[0];
+  const componentB = nameB.split('.story')[0];
+
+  const actualComponentA = componentA.startsWith('demo:') ? componentA.substring(5).trim() : componentA;
+  const actualComponentB = componentB.startsWith('demo:') ? componentB.substring(5).trim() : componentB;
+
+  const componentComparison = actualComponentA.localeCompare(actualComponentB);
+  if (componentComparison !== 0) {
+    return componentComparison;
+  }
+
+  const isDemoA = componentA.startsWith('demo:');
+  const isDemoB = componentB.startsWith('demo:');
+
+  if (isDemoA === isDemoB) {
+    return nameA.localeCompare(nameB);
+  }
+
+  return isDemoA ? 1 : -1;
+});
 
 const config: StorybookConfig = {
-  // fuck it, we'll do it live!
-  stories: [
-    '../packages/@empoleon/core/src/component/**/*.story.@(js|jsx|ts|tsx)',
-    '../packages/@empoleon/carousel/src/*.story.@(ts|tsx)',
-    '../packages/@empoleon/code-highlight/src/CodeHighlight/*.story.@(ts|tsx)',
-    '../packages/@empoleon/dates/src/**/*.story.@(ts|tsx)',
-    '../packages/@empoleon/dropzone/src/*.story.@(ts|tsx)',
-    '../packages/@empoleon/form/src/stories/*.story.@(ts|tsx)',
-    '../packages/@empoleon/modals/src/*.story.@(ts|tsx)',
-    '../packages/@empoleon/notifications/src/*.story.@(ts|tsx)',
-    '../packages/@empoleon/nprogress/src/*.story.@(ts|tsx)',
-    '../packages/@empoleon/spotlight/src/*.story.@(ts|tsx)',
-    '../packages/@empoleon/tiptap/src/*.story.@(ts|tsx)',
-    '../packages/@empoleonx/*/src/**/*.story.@(ts|tsx)',
-    '../packages/@docs/*/src/**/*.story.@(ts|tsx)'
-  ],
+  stories: storiesPath,
   addons: [
     '@storybook/addon-links',
-    // '@storybook/addon-essentials', // Includes backgrounds, controls, etc.
   ],
   framework: {
     name: '@storybook/html-vite',

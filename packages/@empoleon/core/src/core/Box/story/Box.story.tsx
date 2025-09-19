@@ -1,7 +1,18 @@
-import { DEFAULT_THEME, rgba } from '../EmpoleonProvider';
-import { Box } from './Box';
+import { JSX } from 'solid-js';
+import { DEFAULT_THEME, EmpoleonProvider, rgba } from '../../EmpoleonProvider';
+import { Box } from '../Box';
+import { theme } from './theme';
 
-export default { title: 'Box' };
+export default {
+  title: 'Box',
+  decorators: [
+    (Story: () => JSX.Element) => (
+      <EmpoleonProvider theme={theme}>
+        <Story />
+      </EmpoleonProvider>
+    ),
+  ]
+};
 
 export function Usage() {
   return (

@@ -1,4 +1,4 @@
-import { JSX, splitProps } from 'solid-js';
+import { JSX, Show, splitProps } from 'solid-js';
 import { rem } from '../../core';
 
 export interface CheckboxIconProps extends JSX.SvgSVGAttributes<SVGSVGElement> {
@@ -35,9 +35,14 @@ export function CheckIcon(props: CheckIconProps) {
   );
 }
 
-export function CheckboxIcon({ indeterminate, ...others }: CheckboxIconProps) {
-  if (indeterminate) {
-    return (
+export function CheckboxIcon(props: CheckboxIconProps) {
+  const [local, others] = splitProps(props, ['indeterminate']);
+
+  return (
+    <Show
+      when={local.indeterminate}
+      fallback={<CheckIcon {...others} />}
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -47,8 +52,6 @@ export function CheckboxIcon({ indeterminate, ...others }: CheckboxIconProps) {
       >
         <rect width="32" height="6" fill="currentColor" rx="3" />
       </svg>
-    );
-  }
-
-  return <CheckIcon {...others} />;
+    </Show>
+  );
 }

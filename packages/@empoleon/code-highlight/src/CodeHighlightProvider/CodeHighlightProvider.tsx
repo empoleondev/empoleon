@@ -1,5 +1,4 @@
 import { createEffect, createMemo, createSignal, JSX, createContext, useContext } from 'solid-js';
-import { codeToHtml } from 'shiki';
 import { plainTextAdapter } from './adapters/plain-text-adapter';
 
 // Types matching the old interface
@@ -25,46 +24,6 @@ export interface CodeHighlightAdapter {
   getHighlighter: (ctx: any) => Highlighter;
 }
 
-// Utility functions from new code
-function stripElement(openTag: string, data: string) {
-  const openIndex = data.indexOf(`<${openTag}`);
-  let closeIndex = openIndex + openTag.length;
-  for (let i = openIndex; i < data.length; i++) {
-    if (data[i] === '>') {
-      closeIndex = i;
-      break;
-    }
-  }
-  const striped = data.slice(0, openIndex) + data.slice(closeIndex + 1);
-  return striped.replace(`</${openTag}>`, '');
-}
-
-function stripShikiCodeBlocks(data: string) {
-  return stripElement('code', stripElement('pre', data));
-}
-
-const defaultShikiAdapter: CodeHighlightAdapter = {
-  getHighlighter: () => async ({ code, language, colorScheme }) => {
-    try {
-      const html = await codeToHtml(code, {
-        lang: language || 'text',
-        theme: colorScheme === 'dark' ? 'github-dark' : 'github-light'
-      });
-      return {
-        highlightedCode: stripShikiCodeBlocks(html),
-        isHighlighted: true,
-        codeElementProps: {}
-      };
-    } catch (error) {
-      return {
-        highlightedCode: code,
-        isHighlighted: false,
-        codeElementProps: {}
-      };
-    }
-  }
-};
-
 interface CodeHighlightProviderContext {
   adapter: CodeHighlightAdapter;
   highlight: () => Highlighter;
@@ -81,7 +40,7 @@ export interface CodeHighlightAdapterProviderProps {
 }
 
 export function CodeHighlightAdapterProvider(props: CodeHighlightAdapterProviderProps) {
-  const adapter = props.adapter || defaultShikiAdapter;
+  const adapter = props.adapter || plainTextAdapter;
   const [ctx, setCtx] = createSignal<any>(null);
   const highlight = createMemo(() => adapter.getHighlighter(ctx()));
 

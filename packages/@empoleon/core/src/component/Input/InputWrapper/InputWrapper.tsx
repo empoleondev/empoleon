@@ -176,7 +176,7 @@ export const InputWrapper = factory<InputWrapperFactory>(_props => {
   };
 
   const idBase = useId(local.id);
-  const isRequired = typeof local.withAsterisk === 'boolean' ? local.withAsterisk : local.required;
+  const isRequired = () => (typeof local.withAsterisk === 'boolean' ? local.withAsterisk : local.required);
   const errorId = local.errorProps?.id || `${idBase}-error`;
   const descriptionId = local.descriptionProps?.id || `${idBase}-description`;
   const inputId = idBase;
@@ -213,7 +213,7 @@ export const InputWrapper = factory<InputWrapperFactory>(_props => {
                     labelElement={local.labelElement}
                     id={labelId}
                     for={inputId}
-                    required={isRequired}
+                    required={isRequired()}
                     {...sharedProps}
                     {...local.labelProps}
                   >

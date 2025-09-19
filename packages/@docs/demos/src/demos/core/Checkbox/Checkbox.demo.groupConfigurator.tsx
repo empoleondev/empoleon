@@ -4,7 +4,6 @@ import { EmpoleonDemo } from '@empoleonx/demo';
 const code = `
 import { Checkbox, Group } from '@empoleon/core';
 
-
 function Demo() {
   return (
     <Checkbox.Group

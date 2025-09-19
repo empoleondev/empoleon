@@ -61,6 +61,9 @@ export const defaultCssVariablesResolver: CSSVariablesResolver = (theme) => {
       '--empoleon-color-default-color': 'var(--empoleon-color-black)',
       '--empoleon-color-default-border': 'var(--empoleon-color-gray-4)',
       '--empoleon-color-dimmed': 'var(--empoleon-color-gray-6)',
+      '--empoleon-color-disabled': 'var(--empoleon-color-gray-2)',
+      '--empoleon-color-disabled-color': 'var(--empoleon-color-gray-5)',
+      '--empoleon-color-disabled-border': 'var(--empoleon-color-gray-3)',
     },
     dark: {
       '--empoleon-primary-color-contrast': getPrimaryContrastColor(theme, 'dark'),
@@ -75,6 +78,9 @@ export const defaultCssVariablesResolver: CSSVariablesResolver = (theme) => {
       '--empoleon-color-default-color': 'var(--empoleon-color-white)',
       '--empoleon-color-default-border': 'var(--empoleon-color-dark-4)',
       '--empoleon-color-dimmed': 'var(--empoleon-color-dark-2)',
+      '--empoleon-color-disabled': 'var(--empoleon-color-dark-6)',
+      '--empoleon-color-disabled-color': 'var(--empoleon-color-dark-3)',
+      '--empoleon-color-disabled-border': 'var(--empoleon-color-dark-4)',
     },
   };
 

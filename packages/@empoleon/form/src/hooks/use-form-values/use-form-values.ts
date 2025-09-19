@@ -58,6 +58,7 @@ export function useFormValues<Values extends Record<PropertyKey, any>>(props: Us
     set current(value: Values) {
       refValuesData = value;
       setRefValuesSignal(() => value);
+      setStateValues(() => value);
     }
   };
 

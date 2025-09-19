@@ -45,17 +45,16 @@ function Demo() {
       code={exampleCode}
       language="tsx"
       radius="md"
-      controls={[
+      controls={() => [
         <CodeHighlightControl
           component="a"
           href="https://codesandbox.io"
           target="_blank"
           tooltipLabel="Open on codesandbox"
-          key="sandbox"
         >
           <IconBrandCodesandbox />
         </CodeHighlightControl>,
-        <CodeHighlightControl tooltipLabel="Discuss with GPT" key="gpt">
+        <CodeHighlightControl tooltipLabel="Discuss with GPT">
           <IconMessage2 />
         </CodeHighlightControl>,
       ]}

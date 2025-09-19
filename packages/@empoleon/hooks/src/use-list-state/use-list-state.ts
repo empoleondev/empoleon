@@ -51,25 +51,25 @@ export function useListState<T>(initialValue: T[] = []): UseListState<T> {
       return cloned;
     });
 
-  const reorder = ({ from, to }: { from: number; to: number }) =>
+  const reorder = (props: { from: number; to: number }) =>
     setState((current) => {
       const cloned = [...current];
-      const item = current[from];
+      const item = current[props.from];
 
-      cloned.splice(from, 1);
-      cloned.splice(to, 0, item);
+      cloned.splice(props.from, 1);
+      cloned.splice(props.to, 0, item);
 
       return cloned;
     });
 
-  const swap = ({ from, to }: { from: number; to: number }) =>
+  const swap = (props: { from: number; to: number }) =>
     setState((current) => {
       const cloned = [...current];
-      const fromItem = cloned[from];
-      const toItem = cloned[to];
+      const fromItem = cloned[props.from];
+      const toItem = cloned[props.to];
 
-      cloned.splice(to, 1, fromItem);
-      cloned.splice(from, 1, toItem);
+      cloned.splice(props.to, 1, fromItem);
+      cloned.splice(props.from, 1, toItem);
 
       return cloned;
     });
