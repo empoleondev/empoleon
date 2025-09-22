@@ -1,3 +1,4 @@
+import { splitProps } from 'solid-js';
 import { ComboboxParsedItem, ComboboxParsedItemGroup } from '../Combobox';
 
 export interface NativeSelectOptionProps {
@@ -14,11 +15,11 @@ export function NativeSelectOption({ data }: NativeSelectOptionProps) {
     return <optgroup label={data.group}>{items}</optgroup>;
   }
 
-  const { value, label, ...others } = data;
+  const [local, others] = splitProps(data, ['value', 'label']);
 
   return (
-    <option value={data.value} {...others}>
-      {data.label}
+    <option value={local.value} {...others}>
+      {local.label}
     </option>
   );
 }

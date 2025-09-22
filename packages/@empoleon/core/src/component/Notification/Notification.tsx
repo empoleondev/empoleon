@@ -81,10 +81,10 @@ const defaultProps = {
   withCloseButton: true,
 } satisfies Partial<NotificationProps>;
 
-const varsResolver = createVarsResolver<NotificationFactory>((theme, { radius, color }) => ({
+const varsResolver = createVarsResolver<NotificationFactory>((theme, props) => ({
   root: {
-    '--notification-radius': radius === undefined ? undefined : getRadius(radius),
-    '--notification-color': color ? getThemeColor(color, theme) : undefined,
+    '--notification-radius': props.radius === undefined ? undefined : getRadius(props.radius),
+    '--notification-color': props.color ? getThemeColor(props.color, theme) : undefined,
   },
 }));
 

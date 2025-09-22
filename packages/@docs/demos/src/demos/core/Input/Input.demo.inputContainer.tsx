@@ -39,7 +39,7 @@ function Demo() {
       onBlur={() => setFocused(false)}
       inputContainer={(children) => (
         <Tooltip label="Additional information" position="top-start" opened={focused()}>
-          {(props) => <Dynamic component={children as any} {...props} />}
+          {(props) => <Dynamic {...props} component={children as any} />}
         </Tooltip>
       )}
     />

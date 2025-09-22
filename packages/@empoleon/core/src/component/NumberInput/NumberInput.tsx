@@ -191,9 +191,9 @@ const defaultProps = {
   startValue: 0,
 } satisfies Partial<NumberInputProps>;
 
-const varsResolver = createVarsResolver<NumberInputFactory>((_, { size }) => ({
+const varsResolver = createVarsResolver<NumberInputFactory>((_, props) => ({
   controls: {
-    '--ni-chevron-size': getSize(size, 'ni-chevron-size'),
+    '--ni-chevron-size': getSize(props.size, 'ni-chevron-size'),
   },
 }));
 

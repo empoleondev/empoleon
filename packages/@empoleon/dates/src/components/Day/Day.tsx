@@ -72,9 +72,9 @@ export type DayFactory = Factory<{
 
 const defaultProps: Partial<DayProps> = {};
 
-const varsResolver = createVarsResolver<DayFactory>((_, { size }) => ({
+const varsResolver = createVarsResolver<DayFactory>((_, props) => ({
   day: {
-    '--day-size': getSize(size, 'day-size'),
+    '--day-size': getSize(props.size, 'day-size'),
   },
 }));
 

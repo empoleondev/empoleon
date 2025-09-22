@@ -68,6 +68,7 @@ export function useForm<
   const [formKey, setFormKey] = createSignal(0);
   const [fieldKeys, setFieldKeys] = createSignal<Record<string, number>>({});
   const [submitting, setSubmitting] = createSignal(false);
+  const [externalUpdateTrigger, setExternalUpdateTrigger] = createSignal(0);
 
   const reset: Reset = () => {
     $values.resetValues();
@@ -138,7 +139,8 @@ export function useForm<
 
   const setValues: SetValues<Values> = (values) => {
     const previousValues = $values.refValues.current;
-    $values.setValues({ values, updateState: props.mode === 'controlled' });
+    $values.setValues({ values, updateState: false });
+    setExternalUpdateTrigger(prev => prev + 1);
     handleValuesChanges(previousValues);
   };
 
@@ -160,6 +162,11 @@ export function useForm<
   ) => {
     const { type = 'input', withError = true, withFocus = true, ...otherOptions } = options;
 
+    const fieldValue = () => {
+      externalUpdateTrigger();
+      return getPath(path, $values.refValues.current);
+    };
+
     const handler = getInputOnChange((value) =>
       setFieldValue(path, value as any, { forceUpdate: false })
     );
@@ -173,20 +180,13 @@ export function useForm<
     }
 
     if (type === 'checkbox') {
-      payload[props.mode === 'controlled' ? 'checked' : 'defaultChecked'] = getPath(
-        path,
-        $values.stateValues()
-      );
+      payload[props.mode === 'controlled' ? 'checked' : 'defaultChecked'] = fieldValue();
     } else if (type === 'select') {
-      const fieldValue = getPath(path, $values.stateValues());
-      // For select elements, convert empty string to undefined to show first option (React compatibility)
-      const selectValue = fieldValue === '' ? undefined : fieldValue;
+      const value = fieldValue();
+      const selectValue = value === '' ? undefined : value;
       payload[props.mode === 'controlled' ? 'value' : 'defaultValue'] = selectValue;
     } else {
-      payload[props.mode === 'controlled' ? 'value' : 'defaultValue'] = getPath(
-        path,
-        $values.stateValues()
-      );
+      payload[props.mode === 'controlled' ? 'value' : 'defaultValue'] = fieldValue();
     }
 
     if (withFocus) {

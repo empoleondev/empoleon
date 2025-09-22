@@ -14,7 +14,7 @@ import {
 import { usePillsInputContext } from '../../PillsInput/PillsInput.context';
 import { PillGroupProvider } from '../PillGroup.context';
 import classes from '../Pill.module.css';
-import { splitProps } from 'solid-js';
+import { createEffect, splitProps } from 'solid-js';
 
 export type PillGroupStylesNames = 'group';
 export type PillGroupCssVariables = {
@@ -43,9 +43,9 @@ export type PillGroupFactory = Factory<{
   ctx: { size: EmpoleonSize | (string & {}) | undefined };
 }>;
 
-const varsResolver = createVarsResolver<PillGroupFactory>((_, { gap }, { size }) => ({
+const varsResolver = createVarsResolver<PillGroupFactory>((_, props, props2) => ({
   group: {
-    '--pg-gap': gap !== undefined ? getSize(gap) : getSize(size, 'pg-gap'),
+    '--pg-gap': props.gap !== undefined ? getSize(props.gap) : getSize(props2.size, 'pg-gap'),
   },
 }));
 
@@ -65,7 +65,7 @@ export const PillGroup = factory<PillGroupFactory>(_props => {
   ]);
 
   const pillsInputCtx = usePillsInputContext();
-  const _size = pillsInputCtx?.size || local.size || undefined;
+  const _size = () => (pillsInputCtx?.size() || local.size || undefined);
 
   const getStyles = useStyles<PillGroupFactory>({
     name: 'PillGroup',
@@ -79,13 +79,13 @@ export const PillGroup = factory<PillGroupFactory>(_props => {
     attributes: local.attributes,
     vars: local.vars,
     varsResolver,
-    stylesCtx: { size: _size },
+    stylesCtx: { size: _size() },
     rootSelector: 'group',
   });
 
   return (
     <PillGroupProvider value={{ size: _size, disabled: local.disabled }}>
-      <Box ref={local.ref} size={_size} {...getStyles('group')} {...others} />
+      <Box ref={local.ref} size={_size()} {...getStyles('group')} {...others} />
     </PillGroupProvider>
   );
 });

@@ -5,7 +5,6 @@ import { inputControls } from '../../../shared';
 const code = `
 import { ColorInput } from '@empoleon/core';
 
-
 function Demo() {
   return (
     <ColorInput

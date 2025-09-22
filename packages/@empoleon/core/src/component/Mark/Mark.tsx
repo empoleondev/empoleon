@@ -35,10 +35,10 @@ const defaultProps = {
   color: 'yellow',
 } satisfies Partial<MarkProps>;
 
-const varsResolver = createVarsResolver<MarkFactory>((theme, { color }) => ({
+const varsResolver = createVarsResolver<MarkFactory>((theme, props) => ({
   root: {
-    '--mark-bg-dark': getMarkColor({ color, theme, defaultShade: 5 }),
-    '--mark-bg-light': getMarkColor({ color, theme, defaultShade: 2 }),
+    '--mark-bg-dark': getMarkColor({ color: props.color, theme, defaultShade: 5 }),
+    '--mark-bg-light': getMarkColor({ color: props.color, theme, defaultShade: 2 }),
   },
 }));
 

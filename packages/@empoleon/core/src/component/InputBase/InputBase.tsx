@@ -59,6 +59,3 @@ export const InputBase = polymorphicFactory<InputBaseFactory>(_props => {
     </Input.Wrapper>
   );
 });
-
-InputBase.classes = { ...Input.classes, ...Input.Wrapper.classes };
-InputBase.displayName = '@empoleon/core/InputBase';

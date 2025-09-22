@@ -119,14 +119,14 @@ const defaultProps: Partial<ColorPickerProps> = {
   __staticSelector: 'ColorPicker',
 };
 
-const varsResolver = createVarsResolver<ColorPickerFactory>((_, { size, swatchesPerRow }) => ({
+const varsResolver = createVarsResolver<ColorPickerFactory>((_, props) => ({
   wrapper: {
-    '--cp-preview-size': getSize(size, 'cp-preview-size'),
-    '--cp-width': getSize(size, 'cp-width'),
-    '--cp-body-spacing': getSpacing(size),
-    '--cp-swatch-size': `${100 / swatchesPerRow!}%`,
-    '--cp-thumb-size': getSize(size, 'cp-thumb-size'),
-    '--cp-saturation-height': getSize(size, 'cp-saturation-height'),
+    '--cp-preview-size': getSize(props.size, 'cp-preview-size'),
+    '--cp-width': getSize(props.size, 'cp-width'),
+    '--cp-body-spacing': getSpacing(props.size),
+    '--cp-swatch-size': `${100 / props.swatchesPerRow!}%`,
+    '--cp-thumb-size': getSize(props.size, 'cp-thumb-size'),
+    '--cp-saturation-height': getSize(props.size, 'cp-saturation-height'),
   },
 }));
 

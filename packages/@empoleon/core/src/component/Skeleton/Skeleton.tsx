@@ -55,11 +55,11 @@ const defaultProps = {
 } satisfies Partial<SkeletonProps>;
 
 const varsResolver = createVarsResolver<SkeletonFactory>(
-  (_, { width, height, radius, circle }) => ({
+  (_, props) => ({
     root: {
-      '--skeleton-height': rem(height),
-      '--skeleton-width': circle ? rem(height) : rem(width),
-      '--skeleton-radius': circle ? '1000px' : radius === undefined ? undefined : getRadius(radius),
+      '--skeleton-height': rem(props.height),
+      '--skeleton-width': props.circle ? rem(props.height) : rem(props.width),
+      '--skeleton-radius': props.circle ? '1000px' : props.radius === undefined ? undefined : getRadius(props.radius),
     },
   })
 );

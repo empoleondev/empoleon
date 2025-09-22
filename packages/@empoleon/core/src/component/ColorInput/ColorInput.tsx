@@ -1,4 +1,4 @@
-import { createEffect, createSignal, JSX, splitProps } from 'solid-js';
+import { createEffect, createMemo, createSignal, JSX, splitProps } from 'solid-js';
 import { useEyeDropper, useUncontrolled } from '@empoleon/hooks';
 import {
   BoxProps,
@@ -80,7 +80,7 @@ export type ColorInputFactory = Factory<{
   variant: InputVariant;
 }>;
 
-const defaultProps: Partial<ColorInputProps> = {
+const defaultProps = {
   format: 'hex',
   fixOnBlur: true,
   withPreview: true,
@@ -88,15 +88,15 @@ const defaultProps: Partial<ColorInputProps> = {
   withPicker: true,
   popoverProps: { transitionProps: { transition: 'fade', duration: 0 } },
   withEyeDropper: true,
-};
+} satisfies Partial<ColorInputProps>;
 
-const varsResolver = createVarsResolver<ColorInputFactory>((_, { size }) => ({
+const varsResolver = createVarsResolver<ColorInputFactory>((_, props) => ({
   eyeDropperIcon: {
-    '--ci-eye-dropper-icon-size': getSize(size, 'ci-eye-dropper-icon-size'),
+    '--ci-eye-dropper-icon-size': getSize(props.size, 'ci-eye-dropper-icon-size'),
   },
 
   colorPreview: {
-    '--ci-preview-size': getSize(size, 'ci-preview-size'),
+    '--ci-preview-size': getSize(props.size, 'ci-preview-size'),
   },
 }));
 
@@ -222,7 +222,7 @@ export const ColorInput = factory<ColorInputFactory>(__props => {
 
   return (
     <Input.Wrapper
-      {...local.wrapperProps}
+      {...(() => local.wrapperProps)()}
       classNames={resolvedClassNames}
       styles={resolvedStyles}
       __staticSelector="ColorInput"

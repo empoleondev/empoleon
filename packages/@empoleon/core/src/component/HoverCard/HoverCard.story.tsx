@@ -75,7 +75,7 @@ export function TargetWithTooltip() {
 export function WithSwitch() {
   return (
     <div style={{ 'padding': '40px' }}>
-      <HoverCard width='280px' shadow="md" closeDelay={5000}>
+      <HoverCard width='280px' shadow="md">
         <HoverCard.Target refProp="rootRef" eventPropsWrapperName="wrapperProps">
           <Switch label="Switch label" />
         </HoverCard.Target>

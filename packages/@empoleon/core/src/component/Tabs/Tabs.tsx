@@ -113,12 +113,12 @@ const defaultProps: Partial<TabsProps> = {
   placement: 'left',
 };
 
-const varsResolver = createVarsResolver<TabsFactory>((theme, { radius, color, autoContrast }) => ({
+const varsResolver = createVarsResolver<TabsFactory>((theme, props) => ({
   root: {
-    '--tabs-radius': getRadius(radius),
-    '--tabs-color': getThemeColor(color, theme),
-    '--tabs-text-color': getAutoContrastValue(autoContrast, theme)
-      ? getContrastColor({ color, theme, autoContrast })
+    '--tabs-radius': getRadius(props.radius),
+    '--tabs-color': getThemeColor(props.color, theme),
+    '--tabs-text-color': getAutoContrastValue(props.autoContrast, theme)
+      ? getContrastColor({ color: props.color, theme, autoContrast: props.autoContrast })
       : undefined,
   },
 }));

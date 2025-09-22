@@ -47,9 +47,9 @@ const defaultProps = {
   labelElement: 'label',
 } satisfies Partial<InputLabelProps>;
 
-const varsResolver = createVarsResolver<InputLabelFactory>((_, { size }) => ({
+const varsResolver = createVarsResolver<InputLabelFactory>((_, props) => ({
   label: {
-    '--input-label-size': getFontSize(size),
+    '--input-label-size': getFontSize(props.size),
     '--input-asterisk-color': undefined,
   },
 }));

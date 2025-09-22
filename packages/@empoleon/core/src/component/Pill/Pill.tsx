@@ -18,7 +18,7 @@ import { usePillsInputContext } from '../PillsInput/PillsInput.context';
 import { usePillGroupContext } from './PillGroup.context';
 import { PillGroup } from './PillGroup/PillGroup';
 import classes from './Pill.module.css';
-import { JSX, splitProps } from 'solid-js';
+import { createEffect, createMemo, JSX, splitProps } from 'solid-js';
 
 export type PillStylesNames = 'root' | 'label' | 'remove';
 export type PillVariant = 'default' | 'contrast';
@@ -62,11 +62,11 @@ const defaultProps = {
   variant: 'default',
 } satisfies Partial<PillProps>;
 
-const varsResolver = createVarsResolver<PillFactory>((_, { radius }, { size }) => ({
+const varsResolver = createVarsResolver<PillFactory>((_, props, props2) => ({
   root: {
-    '--pill-fz': getSize(size, 'pill-fz'),
-    '--pill-height': getSize(size, 'pill-height'),
-    '--pill-radius': radius === undefined ? undefined : getRadius(radius),
+    '--pill-fz': getSize(props2.size, 'pill-fz'),
+    '--pill-height': getSize(props2.size, 'pill-height'),
+    '--pill-radius': props.radius === undefined ? undefined : getRadius(props.radius),
   },
 }));
 
@@ -94,8 +94,10 @@ export const Pill = factory<PillFactory>(_props => {
 
   const ctx = usePillGroupContext();
   const pillsInputCtx = usePillsInputContext();
-  const _size = local.size || ctx?.size || undefined;
+  const _size = () => (local.size || ctx?.size() || undefined);
   const _variant = pillsInputCtx?.variant === 'filled' ? 'contrast' : local.variant || 'default';
+
+  const stylesCtx = createMemo(() => ({ size: _size() }));
 
   const getStyles = useStyles<PillFactory>({
     name: 'Pill',
@@ -109,7 +111,7 @@ export const Pill = factory<PillFactory>(_props => {
     attributes: local.attributes,
     vars: local.vars,
     varsResolver,
-    stylesCtx: { size: _size },
+    get stylesCtx() { return stylesCtx(); }
   });
 
   return (
@@ -117,7 +119,7 @@ export const Pill = factory<PillFactory>(_props => {
       component="div"
       ref={local.ref}
       variant={_variant}
-      size={_size}
+      size={_size()}
       {...getStyles('root', { variant: _variant })}
       mod={[
         { 'with-remove': local.withRemoveButton && !local.disabled, disabled: local.disabled || ctx?.disabled },

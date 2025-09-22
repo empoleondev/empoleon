@@ -141,13 +141,13 @@ const defaultProps = {
 } satisfies Partial<SliderProps>;
 
 const varsResolver = createVarsResolver<SliderFactory>(
-  (theme, { size, color, thumbSize, radius }) => ({
+  (theme, props) => ({
     root: {
-      '--slider-size': getSize(size, 'slider-size'),
-      '--slider-color': color ? getThemeColor(color, theme) : undefined,
-      '--slider-radius': radius === undefined ? undefined : getRadius(radius),
+      '--slider-size': getSize(props.size, 'slider-size'),
+      '--slider-color': props.color ? getThemeColor(props.color, theme) : undefined,
+      '--slider-radius': props.radius === undefined ? undefined : getRadius(props.radius),
       '--slider-thumb-size':
-        thumbSize !== undefined ? rem(thumbSize) : 'calc(var(--slider-size) * 2)',
+        props.thumbSize !== undefined ? rem(props.thumbSize) : 'calc(var(--slider-size) * 2)',
     },
   })
 );

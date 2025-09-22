@@ -96,23 +96,23 @@ export type NavLinkFactory = PolymorphicFactory<{
 }>;
 
 const varsResolver = createVarsResolver<NavLinkFactory>(
-  (theme, { variant, color, childrenOffset, autoContrast }) => {
+  (theme, props) => {
     const colors = theme.variantColorResolver({
-      color: color || theme.primaryColor,
+      color: props.color || theme.primaryColor,
       theme,
-      variant: variant || 'light',
-      autoContrast,
+      variant: props.variant || 'light',
+      autoContrast: props.autoContrast,
     });
 
     return {
       root: {
-        '--nl-bg': color || variant ? colors.background : undefined,
-        '--nl-hover': color || variant ? colors.hover : undefined,
-        '--nl-color': color || variant ? colors.color : undefined,
+        '--nl-bg': props.color || props.variant ? colors.background : undefined,
+        '--nl-hover': props.color || props.variant ? colors.hover : undefined,
+        '--nl-color': props.color || props.variant ? colors.color : undefined,
       },
 
       children: {
-        '--nl-offset': getSpacing(childrenOffset),
+        '--nl-offset': getSpacing(props.childrenOffset),
       },
     };
   }

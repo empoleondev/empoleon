@@ -96,10 +96,10 @@ const defaultProps = {
   amPmLabels: { am: 'AM', pm: 'PM' },
 } satisfies Partial<TimeGridProps>;
 
-const varsResolver = createVarsResolver<TimeGridFactory>((_theme, { size, radius }) => ({
+const varsResolver = createVarsResolver<TimeGridFactory>((_theme, props) => ({
   root: {
-    '--time-grid-fz': getFontSize(size),
-    '--time-grid-radius': getRadius(radius),
+    '--time-grid-fz': getFontSize(props.size),
+    '--time-grid-radius': getRadius(props.radius),
   },
 }));
 

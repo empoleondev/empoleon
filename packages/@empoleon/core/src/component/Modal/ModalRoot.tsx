@@ -67,12 +67,12 @@ const defaultProps: Partial<ModalRootProps> = {
 };
 
 const varsResolver = createVarsResolver<ModalRootFactory>(
-  (_, { radius, size, yOffset, xOffset }) => ({
+  (_, props) => ({
     root: {
-      '--modal-radius': radius === undefined ? undefined : getRadius(radius),
-      '--modal-size': getSize(size, 'modal-size'),
-      '--modal-y-offset': rem(yOffset),
-      '--modal-x-offset': rem(xOffset),
+      '--modal-radius': props.radius === undefined ? undefined : getRadius(props.radius),
+      '--modal-size': getSize(props.size, 'modal-size'),
+      '--modal-y-offset': rem(props.yOffset),
+      '--modal-x-offset': rem(props.xOffset),
     },
   })
 );

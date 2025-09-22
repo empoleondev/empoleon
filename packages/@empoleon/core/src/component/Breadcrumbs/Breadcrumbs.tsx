@@ -44,9 +44,9 @@ const defaultProps: Partial<BreadcrumbsProps> = {
   separator: '/',
 };
 
-const varsResolver = createVarsResolver<BreadcrumbsFactory>((_, { separatorMargin }) => ({
+const varsResolver = createVarsResolver<BreadcrumbsFactory>((_, props) => ({
   root: {
-    '--bc-separator-margin': getSpacing(separatorMargin),
+    '--bc-separator-margin': getSpacing(props.separatorMargin),
   },
 }));
 

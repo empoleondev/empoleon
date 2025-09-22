@@ -88,7 +88,7 @@ export const Flex = polymorphicFactory<FlexFactory>(_props => {
 
   const theme = useEmpoleonTheme();
   const responsiveClassName = useRandomClassName();
-  const parsedStyleProps = parseStyleProps({
+  const parsedStyleProps = () => parseStyleProps({
     styleProps: {
       gap: local.gap,
       rowGap: local.rowGap,
@@ -104,18 +104,18 @@ export const Flex = polymorphicFactory<FlexFactory>(_props => {
 
   return (
     <>
-      {parsedStyleProps.hasResponsiveStyles && (
+      {parsedStyleProps().hasResponsiveStyles && (
         <InlineStyles
           selector={`.${responsiveClassName}`}
-          styles={parsedStyleProps.styles}
-          media={parsedStyleProps.media}
+          styles={parsedStyleProps().styles}
+          media={parsedStyleProps().media}
         />
       )}
       <Box
         ref={local.ref}
         {...getStyles('root', {
           className: responsiveClassName,
-          style: filterProps(parsedStyleProps.inlineStyles),
+          style: filterProps(parsedStyleProps().inlineStyles),
         })}
         {...others}
       />

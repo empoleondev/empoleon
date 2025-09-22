@@ -195,10 +195,10 @@ const defaultProps = {
   width: 'max-content',
 } satisfies Partial<PopoverProps>;
 
-const varsResolver = createVarsResolver<PopoverFactory>((_, { radius, shadow }) => ({
+const varsResolver = createVarsResolver<PopoverFactory>((_, props) => ({
   dropdown: {
-    '--popover-radius': radius === undefined ? undefined : getRadius(radius),
-    '--popover-shadow': getShadow(shadow),
+    '--popover-radius': props.radius === undefined ? undefined : getRadius(props.radius),
+    '--popover-shadow': getShadow(props.shadow),
   },
 }));
 

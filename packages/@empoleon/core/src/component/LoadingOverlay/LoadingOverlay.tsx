@@ -55,9 +55,9 @@ const defaultProps = {
   zIndex: getDefaultZIndex('overlay'),
 } satisfies Partial<LoadingOverlayProps>;
 
-const varsResolver = createVarsResolver<LoadingOverlayFactory>((_, { zIndex }) => ({
+const varsResolver = createVarsResolver<LoadingOverlayFactory>((_, props) => ({
   root: {
-    '--lo-z-index': zIndex?.toString(),
+    '--lo-z-index': props.zIndex?.toString(),
   },
 }));
 

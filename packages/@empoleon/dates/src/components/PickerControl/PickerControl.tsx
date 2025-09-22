@@ -55,10 +55,10 @@ export type PickerControlFactory = Factory<{
   vars: PickerControlCssVariables;
 }>;
 
-const varsResolver = createVarsResolver<PickerControlFactory>((_, { size }) => ({
+const varsResolver = createVarsResolver<PickerControlFactory>((_, props) => ({
   pickerControl: {
-    '--dpc-fz': getFontSize(size),
-    '--dpc-size': getSize(size, 'dpc-size'),
+    '--dpc-fz': getFontSize(props.size),
+    '--dpc-size': getSize(props.size, 'dpc-size'),
   },
 }));
 

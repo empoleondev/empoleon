@@ -39,8 +39,8 @@ const defaultProps: Partial<ButtonGroupProps> = {
   orientation: 'horizontal',
 };
 
-const varsResolver = createVarsResolver<ButtonGroupFactory>((_, { borderWidth }) => ({
-  group: { '--button-border-width': rem(borderWidth) },
+const varsResolver = createVarsResolver<ButtonGroupFactory>((_, props) => ({
+  group: { '--button-border-width': rem(props.borderWidth) },
 }));
 
 export const ButtonGroup = factory<ButtonGroupFactory>(_props => {

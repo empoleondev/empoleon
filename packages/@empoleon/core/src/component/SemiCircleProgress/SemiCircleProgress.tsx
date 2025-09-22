@@ -97,27 +97,17 @@ function getRotation(props: Pick<SemiCircleProgressProps, 'orientation' | 'fillD
 }
 
 const varsResolver = createVarsResolver<SemiCircleProgressFactory>(
-  (
-    theme,
-    {
-      filledSegmentColor,
-      emptySegmentColor,
-      orientation,
-      fillDirection,
-      transitionDuration,
-      thickness,
-    }
-  ) => ({
+  (theme, props) => ({
     root: {
-      '--scp-filled-segment-color': filledSegmentColor
-        ? getThemeColor(filledSegmentColor, theme)
+      '--scp-filled-segment-color': props.filledSegmentColor
+        ? getThemeColor(props.filledSegmentColor, theme)
         : undefined,
-      '--scp-empty-segment-color': emptySegmentColor
-        ? getThemeColor(emptySegmentColor, theme)
+      '--scp-empty-segment-color': props.emptySegmentColor
+        ? getThemeColor(props.emptySegmentColor, theme)
         : undefined,
-      '--scp-rotation': getRotation({ orientation, fillDirection }),
-      '--scp-transition-duration': transitionDuration ? `${transitionDuration}ms` : undefined,
-      '--scp-thickness': rem(thickness),
+      '--scp-rotation': getRotation({ orientation: props.orientation, fillDirection: props.fillDirection }),
+      '--scp-transition-duration': props.transitionDuration ? `${props.transitionDuration}ms` : undefined,
+      '--scp-thickness': rem(props.thickness),
     },
   })
 );

@@ -44,7 +44,7 @@ export const PillsInput = factory<PillsInputFactory>(_props => {
   const fieldRef = null as HTMLInputElement | null;
 
   return (
-    <PillsInputProvider value={{ fieldRef, size: local.size!, disabled: local.disabled, hasError: !!local.error, variant: local.variant }}>
+    <PillsInputProvider value={{ fieldRef, size: () => local.size!, disabled: local.disabled, hasError: !!local.error, variant: local.variant }}>
       <InputBase
         size={local.size}
         error={local.error}

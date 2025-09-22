@@ -65,11 +65,11 @@ const defaultProps: Partial<CloseButtonProps> = {
   variant: 'subtle',
 };
 
-const varsResolver = createVarsResolver<CloseButtonFactory>((_, { size, radius, iconSize }) => ({
+const varsResolver = createVarsResolver<CloseButtonFactory>((_, props) => ({
   root: {
-    '--cb-size': getSize(size, 'cb-size'),
-    '--cb-radius': radius === undefined ? undefined : getRadius(radius),
-    '--cb-icon-size': rem(iconSize),
+    '--cb-size': getSize(props.size, 'cb-size'),
+    '--cb-radius': props.radius === undefined ? undefined : getRadius(props.radius),
+    '--cb-icon-size': rem(props.iconSize),
   },
 }));
 

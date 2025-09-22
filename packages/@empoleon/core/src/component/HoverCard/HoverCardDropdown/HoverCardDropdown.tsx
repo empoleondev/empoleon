@@ -16,6 +16,7 @@ export function HoverCardDropdown(_props: HoverCardDropdownProps) {
     'onMouseEnter',
     'onMouseLeave',
     'children',
+    'style'
   ]);
 
   const ctx = useHoverCardContext();
@@ -30,6 +31,13 @@ export function HoverCardDropdown(_props: HoverCardDropdownProps) {
         {...floatingProps}
         onMouseEnter={createEventHandler<any>(local.onMouseEnter, floatingProps.onMouseEnter)}
         onMouseLeave={createEventHandler<any>(local.onMouseLeave, floatingProps.onMouseLeave)}
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          transform: `translate(${ctx.x?.() ?? 0}px, ${ctx.y?.() ?? 0}px)`,
+          ...local.style
+        }}
         {...others}
       >
         {local.children}
@@ -52,4 +60,5 @@ export function HoverCardDropdown(_props: HoverCardDropdownProps) {
 }
 
 HoverCardDropdown.displayName = '@empoleon/core/HoverCardDropdown';
+
 

@@ -59,24 +59,24 @@ export type ActionIconGroupSectionFactory = Factory<{
 const defaultProps: Partial<ActionIconGroupSectionProps> = {};
 
 const varsResolver = createVarsResolver<ActionIconGroupSectionFactory>(
-  (theme, { radius, color, gradient, variant, autoContrast, size }) => {
+  (theme, props) => {
     const colors = theme.variantColorResolver({
-      color: color || theme.primaryColor,
+      color: props.color || theme.primaryColor,
       theme,
-      gradient,
-      variant: variant || 'filled',
-      autoContrast,
+      gradient: props.gradient,
+      variant: props.variant || 'filled',
+      autoContrast: props.autoContrast,
     });
 
     return {
       groupSection: {
-        '--section-height': getSize(size, 'section-height'),
-        '--section-padding-x': getSize(size, 'section-padding-x'),
-        '--section-fz': getFontSize(size),
-        '--section-radius': radius === undefined ? undefined : getRadius(radius),
-        '--section-bg': color || variant ? colors.background : undefined,
+        '--section-height': getSize(props.size, 'section-height'),
+        '--section-padding-x': getSize(props.size, 'section-padding-x'),
+        '--section-fz': getFontSize(props.size),
+        '--section-radius': props.radius === undefined ? undefined : getRadius(props.radius),
+        '--section-bg': props.color || props.variant ? colors.background : undefined,
         '--section-color': colors.color,
-        '--section-bd': color || variant ? colors.border : undefined,
+        '--section-bd': props.color || props.variant ? colors.border : undefined,
       },
     };
   }

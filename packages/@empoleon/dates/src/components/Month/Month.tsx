@@ -137,10 +137,10 @@ const defaultProps = {
   withCellSpacing: true,
 } satisfies Partial<MonthProps>;
 
-const varsResolver = createVarsResolver<MonthFactory>((_, { size }) => ({
+const varsResolver = createVarsResolver<MonthFactory>((_, props) => ({
   weekNumber: {
-    '--wn-fz': getFontSize(size),
-    '--wn-size': getSize(size, 'wn-size'),
+    '--wn-fz': getFontSize(props.size),
+    '--wn-size': getSize(props.size, 'wn-size'),
   },
 }));
 

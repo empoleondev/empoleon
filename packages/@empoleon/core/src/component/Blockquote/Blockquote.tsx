@@ -55,15 +55,15 @@ const defaultProps: Partial<BlockquoteProps> = {
   iconSize: 48,
 } satisfies Partial<BlockquoteProps>;
 
-const varsResolver = createVarsResolver<BlockquoteFactory>((theme, { color, iconSize, radius }) => {
+const varsResolver = createVarsResolver<BlockquoteFactory>((theme, props) => {
   const darkParsed = parseThemeColor({
-    color: color || theme.primaryColor,
+    color: props.color || theme.primaryColor,
     theme,
     colorScheme: 'dark',
   });
 
   const lightParsed = parseThemeColor({
-    color: color || theme.primaryColor,
+    color: props.color || theme.primaryColor,
     theme,
     colorScheme: 'light',
   });
@@ -72,9 +72,9 @@ const varsResolver = createVarsResolver<BlockquoteFactory>((theme, { color, icon
     root: {
       '--bq-bg-light': rgba(lightParsed.value, 0.07),
       '--bq-bg-dark': rgba(darkParsed.value, 0.06),
-      '--bq-bd': getThemeColor(color, theme),
-      '--bq-icon-size': rem(iconSize),
-      '--bq-radius': getRadius(radius),
+      '--bq-bd': getThemeColor(props.color, theme),
+      '--bq-icon-size': rem(props.iconSize),
+      '--bq-radius': getRadius(props.radius),
     },
   };
 });

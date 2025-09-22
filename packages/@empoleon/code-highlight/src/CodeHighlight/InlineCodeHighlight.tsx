@@ -51,10 +51,10 @@ export type InlineCodeHighlightFactory = Factory<{
 const defaultProps: Partial<InlineCodeHighlightProps> = {};
 
 const varsResolver = createVarsResolver<InlineCodeHighlightFactory>(
-  (theme, { background, radius }) => ({
+  (theme, props) => ({
     inlineCodeHighlight: {
-      '--ch-background': background ? getThemeColor(background, theme) : undefined,
-      '--ch-radius': typeof radius !== 'undefined' ? getRadius(radius) : undefined,
+      '--ch-background': props.background ? getThemeColor(props.background, theme) : undefined,
+      '--ch-radius': typeof props.radius !== 'undefined' ? getRadius(props.radius) : undefined,
     },
   })
 );

@@ -83,9 +83,9 @@ export type DatePickerFactory = Factory<{
   stylesNames: DatePickerStylesNames;
 }>;
 
-const varsResolver = createVarsResolver<DatePickerFactory>((_, { size }) => ({
+const varsResolver = createVarsResolver<DatePickerFactory>((_, props) => ({
   datePickerRoot: {
-    '--preset-font-size': getFontSize(size),
+    '--preset-font-size': getFontSize(props.size),
   },
 }));
 

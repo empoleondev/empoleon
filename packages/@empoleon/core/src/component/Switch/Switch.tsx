@@ -114,15 +114,15 @@ const defaultProps = {
   withThumbIndicator: true,
 } satisfies Partial<SwitchProps>;
 
-const varsResolver = createVarsResolver<SwitchFactory>((theme, { radius, color, size }) => ({
+const varsResolver = createVarsResolver<SwitchFactory>((theme, props) => ({
   root: {
-    '--switch-radius': radius === undefined ? undefined : getRadius(radius),
-    '--switch-height': getSize(size, 'switch-height'),
-    '--switch-width': getSize(size, 'switch-width'),
-    '--switch-thumb-size': getSize(size, 'switch-thumb-size'),
-    '--switch-label-font-size': getSize(size, 'switch-label-font-size'),
-    '--switch-track-label-padding': getSize(size, 'switch-track-label-padding'),
-    '--switch-color': color ? getThemeColor(color, theme) : undefined,
+    '--switch-radius': props.radius === undefined ? undefined : getRadius(props.radius),
+    '--switch-height': getSize(props.size, 'switch-height'),
+    '--switch-width': getSize(props.size, 'switch-width'),
+    '--switch-thumb-size': getSize(props.size, 'switch-thumb-size'),
+    '--switch-label-font-size': getSize(props.size, 'switch-label-font-size'),
+    '--switch-track-label-padding': getSize(props.size, 'switch-track-label-padding'),
+    '--switch-color': props.color ? getThemeColor(props.color, theme) : undefined,
   },
 }));
 
@@ -221,7 +221,7 @@ export const Switch = factory<SwitchFactory>(_props => {
       {...styleProps}
       {...local.wrapperProps as any}
     >
-      <input
+      <Box component='input'
         {...rest}
         disabled={local.disabled}
         checked={dataChecked()}

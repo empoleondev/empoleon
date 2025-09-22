@@ -43,11 +43,11 @@ const defaultProps = {
   justify: 'flex-start',
 } satisfies Partial<StackProps>;
 
-const varsResolver = createVarsResolver<StackFactory>((_, { gap, align, justify }) => ({
+const varsResolver = createVarsResolver<StackFactory>((_, props) => ({
   root: {
-    '--stack-gap': getSpacing(gap),
-    '--stack-align': align,
-    '--stack-justify': justify,
+    '--stack-gap': getSpacing(props.gap),
+    '--stack-align': props.align,
+    '--stack-justify': props.justify,
   },
 }));
 

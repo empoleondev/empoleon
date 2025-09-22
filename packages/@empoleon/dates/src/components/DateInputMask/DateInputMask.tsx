@@ -191,31 +191,33 @@ export const DateInputMask = factory<DateInputMaskFactory>(_props => {
       {...local.popoverProps}
     >
       <Popover.Target>
-        {/* @ts-ignore */}
-        <InputBase
-          component="div"
-          ref={local.ref}
-          {...others}
-          __staticSelector="DateInputMask"
-          style={local.style}
-          className={local.className}
-          classNames={resolvedClassNames}
-          styles={resolvedStyles}
-          onMouseDown={(event) => {
-            event.preventDefault();
-            typeof local.onMouseDown === "function" && local.onMouseDown?.(event);
-          }}
-          onFocusCapture={(event) => {
-            setDropdownOpened(true);
-            typeof local.onFocusCapture === "function" && local.onFocusCapture?.(event);
-          }}
-          onBlurCapture={(event) => {
-            setDropdownOpened(false);
-            typeof local.onBlurCapture === "function" && local.onBlurCapture?.(event);
-          }}
-        >
-          <Box component='div' {...getStyles('fieldsRoot')} />
-        </InputBase>
+        {(popoverProps) => (
+          <InputBase
+            {...popoverProps}
+            component="div"
+            ref={local.ref}
+            {...others}
+            __staticSelector="DateInputMask"
+            style={local.style}
+            className={local.className}
+            classNames={resolvedClassNames}
+            styles={resolvedStyles}
+            onMouseDown={(event) => {
+              event.preventDefault();
+              typeof local.onMouseDown === "function" && local.onMouseDown?.(event);
+            }}
+            onFocusCapture={(event) => {
+              setDropdownOpened(true);
+              typeof local.onFocusCapture === "function" && local.onFocusCapture?.(event);
+            }}
+            onBlurCapture={(event) => {
+              setDropdownOpened(false);
+              typeof local.onBlurCapture === "function" && local.onBlurCapture?.(event);
+            }}
+          >
+            <Box component='div' {...getStyles('fieldsRoot')} />
+          </InputBase>
+        )}
       </Popover.Target>
       <Popover.Dropdown>Dropdown</Popover.Dropdown>
     </Popover>

@@ -41,10 +41,10 @@ const defaultProps = {
   error: null,
 } satisfies Partial<ComboboxChevronProps>;
 
-const varsResolver = createVarsResolver<ComboboxChevronFactory>((theme, { size, color }) => ({
+const varsResolver = createVarsResolver<ComboboxChevronFactory>((theme, props) => ({
   chevron: {
-    '--combobox-chevron-size': getSize(size, 'combobox-chevron-size'),
-    '--combobox-chevron-color': color ? getThemeColor(color, theme) : undefined,
+    '--combobox-chevron-size': getSize(props.size, 'combobox-chevron-size'),
+    '--combobox-chevron-color': props.color ? getThemeColor(props.color, theme) : undefined,
   },
 }));
 

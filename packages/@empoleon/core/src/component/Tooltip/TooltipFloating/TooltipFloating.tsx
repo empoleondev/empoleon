@@ -47,11 +47,11 @@ const defaultProps: Partial<TooltipFloatingProps> = {
   zIndex: getDefaultZIndex('popover'),
 };
 
-const varsResolver = createVarsResolver<TooltipFloatingFactory>((theme, { radius, color }) => ({
+const varsResolver = createVarsResolver<TooltipFloatingFactory>((theme, props) => ({
   tooltip: {
-    '--tooltip-radius': radius === undefined ? undefined : getRadius(radius),
-    '--tooltip-bg': color ? getThemeColor(color, theme) : undefined,
-    '--tooltip-color': color ? 'var(--empoleon-color-white)' : undefined,
+    '--tooltip-radius': props.radius === undefined ? undefined : getRadius(props.radius),
+    '--tooltip-bg': props.color ? getThemeColor(props.color, theme) : undefined,
+    '--tooltip-color': props.color ? 'var(--empoleon-color-white)' : undefined,
   },
 }));
 

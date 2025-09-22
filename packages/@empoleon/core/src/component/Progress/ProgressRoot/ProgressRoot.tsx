@@ -50,12 +50,12 @@ export type ProgressRootFactory = Factory<{
 const defaultProps: Partial<ProgressRootProps> = {};
 
 const varsResolver = createVarsResolver<ProgressRootFactory>(
-  (_, { size, radius, transitionDuration }) => ({
+  (_, props) => ({
     root: {
-      '--progress-size': getSize(size, 'progress-size'),
-      '--progress-radius': radius === undefined ? undefined : getRadius(radius),
+      '--progress-size': getSize(props.size, 'progress-size'),
+      '--progress-radius': props.radius === undefined ? undefined : getRadius(props.radius),
       '--progress-transition-duration':
-        typeof transitionDuration === 'number' ? `${transitionDuration}ms` : undefined,
+        typeof props.transitionDuration === 'number' ? `${props.transitionDuration}ms` : undefined,
     },
   })
 );

@@ -68,13 +68,13 @@ const defaultProps: Partial<GroupProps> = {
 };
 
 const varsResolver = createVarsResolver<GroupFactory>(
-  (_, { grow, preventGrowOverflow, gap, align, justify, wrap }, { childWidth }) => ({
+  (_, props, props2) => ({
     root: {
-      '--group-child-width': grow && preventGrowOverflow ? childWidth : undefined,
-      '--group-gap': getSpacing(gap),
-      '--group-align': align,
-      '--group-justify': justify,
-      '--group-wrap': wrap,
+      '--group-child-width': props.grow && props.preventGrowOverflow ? props2.childWidth : undefined,
+      '--group-gap': getSpacing(props.gap),
+      '--group-align': props.align,
+      '--group-justify': props.justify,
+      '--group-wrap': props.wrap,
     },
   })
 );

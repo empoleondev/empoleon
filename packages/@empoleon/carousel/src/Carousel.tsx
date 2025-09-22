@@ -153,11 +153,11 @@ const defaultEmblaOptions: EmblaOptionsType = {
 };
 
 const varsResolver = createVarsResolver<CarouselFactory>(
-  (_, { height, controlSize, controlsOffset }) => ({
+  (_, props) => ({
     root: {
-      '--carousel-height': rem(height),
-      '--carousel-control-size': rem(controlSize),
-      '--carousel-controls-offset': getSpacing(controlsOffset),
+      '--carousel-height': rem(props.height),
+      '--carousel-control-size': rem(props.controlSize),
+      '--carousel-controls-offset': getSpacing(props.controlsOffset),
     },
   })
 );

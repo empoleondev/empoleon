@@ -111,12 +111,12 @@ const defaultProps: Partial<AccordionProps> = {
 };
 
 const varsResolver = createVarsResolver<AccordionFactory>(
-  (_, { transitionDuration, chevronSize, radius }) => ({
+  (_, props) => ({
     root: {
       '--accordion-transition-duration':
-        transitionDuration === undefined ? undefined : `${transitionDuration}ms`,
-      '--accordion-chevron-size': chevronSize === undefined ? undefined : rem(chevronSize),
-      '--accordion-radius': radius === undefined ? undefined : getRadius(radius),
+        props.transitionDuration === undefined ? undefined : `${props.transitionDuration}ms`,
+      '--accordion-chevron-size': props.chevronSize === undefined ? undefined : rem(props.chevronSize),
+      '--accordion-radius': props.radius === undefined ? undefined : getRadius(props.radius),
     },
   })
 );

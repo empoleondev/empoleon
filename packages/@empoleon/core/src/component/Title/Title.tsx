@@ -50,15 +50,15 @@ const defaultProps = {
   order: 1,
 } satisfies Partial<TitleProps>;
 
-const varsResolver = createVarsResolver<TitleFactory>((_, { order, size, lineClamp, textWrap }) => {
-  const sizeVariables = getTitleSize(order!, size);
+const varsResolver = createVarsResolver<TitleFactory>((_, props) => {
+  const sizeVariables = getTitleSize(props.order!, props.size);
   return {
     root: {
       '--title-fw': sizeVariables.fontWeight,
       '--title-lh': sizeVariables.lineHeight,
       '--title-fz': sizeVariables.fontSize,
-      '--title-line-clamp': typeof lineClamp === 'number' ? lineClamp.toString() : undefined,
-      '--title-text-wrap': textWrap,
+      '--title-line-clamp': typeof props.lineClamp === 'number' ? props.lineClamp.toString() : undefined,
+      '--title-text-wrap': props.textWrap,
     },
   };
 });

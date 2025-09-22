@@ -100,14 +100,14 @@ const defaultProps = {
 } satisfies Partial<PaginationRootProps>;
 
 const varsResolver = createVarsResolver<PaginationRootFactory>(
-  (theme, { size, radius, color, autoContrast }) => ({
+  (theme, props) => ({
     root: {
-      '--pagination-control-radius': radius === undefined ? undefined : getRadius(radius),
-      '--pagination-control-size': getSize(size, 'pagination-control-size'),
-      '--pagination-control-fz': getFontSize(size),
-      '--pagination-active-bg': color ? getThemeColor(color, theme) : undefined,
-      '--pagination-active-color': getAutoContrastValue(autoContrast, theme)
-        ? getContrastColor({ color, theme, autoContrast })
+      '--pagination-control-radius': props.radius === undefined ? undefined : getRadius(props.radius),
+      '--pagination-control-size': getSize(props.size, 'pagination-control-size'),
+      '--pagination-control-fz': getFontSize(props.size),
+      '--pagination-active-bg': props.color ? getThemeColor(props.color, theme) : undefined,
+      '--pagination-active-color': getAutoContrastValue(props.autoContrast, theme)
+        ? getContrastColor({ color: props.color, theme, autoContrast: props.autoContrast })
         : undefined,
     },
   })

@@ -35,9 +35,9 @@ export type AvatarGroupFactory = Factory<{
   vars: AvatarGroupCssVariables;
 }>;
 
-const varsResolver = createVarsResolver<AvatarGroupFactory>((_, { spacing }) => ({
+const varsResolver = createVarsResolver<AvatarGroupFactory>((_, props) => ({
   group: {
-    '--ag-spacing': getSpacing(spacing),
+    '--ag-spacing': getSpacing(props.spacing),
   },
 }));
 

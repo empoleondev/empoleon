@@ -54,11 +54,11 @@ const defaultProps: Partial<DividerProps> = {
   orientation: 'horizontal',
 };
 
-const varsResolver = createVarsResolver<DividerFactory>((theme, { color, variant, size }) => ({
+const varsResolver = createVarsResolver<DividerFactory>((theme, props) => ({
   root: {
-    '--divider-color': color ? getThemeColor(color, theme) : undefined,
-    '--divider-border-style': variant,
-    '--divider-size': getSize(size, 'divider-size'),
+    '--divider-color': props.color ? getThemeColor(props.color, theme) : undefined,
+    '--divider-border-style': props.variant,
+    '--divider-size': getSize(props.size, 'divider-size'),
   },
 }));
 

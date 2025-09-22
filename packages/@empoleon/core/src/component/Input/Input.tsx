@@ -1,4 +1,4 @@
-import { splitProps, JSX, createEffect, createMemo } from 'solid-js';
+import { splitProps, JSX, createMemo } from 'solid-js';
 import {
   Box,
   BoxProps,
@@ -291,7 +291,7 @@ export const Input = polymorphicFactory<InputFactory>(_props => {
         {...local.wrapperProps}
         mod={[
           {
-            error: errorMod,
+            error: errorMod(),
             pointer: local.pointer,
             disabled: local.disabled,
             multiline: local.multiline,
@@ -325,7 +325,7 @@ export const Input = polymorphicFactory<InputFactory>(_props => {
           required={local.required}
           mod={{
             disabled: local.disabled,
-            error: errorMod,
+            error: errorMod(),
           }}
           variant={local.variant}
           __size={local.inputSize}

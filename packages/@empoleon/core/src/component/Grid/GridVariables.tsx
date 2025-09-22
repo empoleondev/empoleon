@@ -1,3 +1,4 @@
+import { Accessor, createMemo } from 'solid-js';
 import {
   filterProps,
   getBaseValue,
@@ -14,13 +15,13 @@ interface GridVariablesProps extends GridProps {
   selector: string;
 }
 
-export function GridVariables({ gutter, selector, breakpoints, type }: GridVariablesProps) {
+export function GridVariables(props: GridVariablesProps) {
   const theme = useEmpoleonTheme();
-  const _breakpoints = breakpoints || theme.breakpoints;
+  const _breakpoints = props.breakpoints || theme.breakpoints;
 
-  const baseStyles: Record<string, string | undefined> = filterProps({
-    '--grid-gutter': getSpacing(getBaseValue(gutter)),
-  });
+  const baseStyles: Accessor<Record<string, string | undefined>> = createMemo(() => filterProps({
+    '--grid-gutter': getSpacing(getBaseValue(props.gutter)),
+  }));
 
   const queries = keys(_breakpoints).reduce<Record<string, Record<string, any>>>(
     (acc, breakpoint) => {
@@ -28,8 +29,8 @@ export function GridVariables({ gutter, selector, breakpoints, type }: GridVaria
         acc[breakpoint] = {};
       }
 
-      if (typeof gutter === 'object' && gutter[breakpoint] !== undefined) {
-        acc[breakpoint]['--grid-gutter'] = getSpacing(gutter[breakpoint]);
+      if (typeof props.gutter === 'object' && props.gutter[breakpoint] !== undefined) {
+        acc[breakpoint]['--grid-gutter'] = getSpacing(props.gutter[breakpoint]);
       }
 
       return acc;
@@ -43,7 +44,7 @@ export function GridVariables({ gutter, selector, breakpoints, type }: GridVaria
 
   const values = sortedBreakpoints.map((breakpoint) => ({
     query:
-      type === 'container'
+      props.type === 'container'
         ? `empoleon-grid (min-width: ${_breakpoints[breakpoint.value as keyof GridBreakpoints]})`
         : `(min-width: ${_breakpoints[breakpoint.value as keyof GridBreakpoints]})`,
     styles: queries[breakpoint.value],
@@ -51,10 +52,10 @@ export function GridVariables({ gutter, selector, breakpoints, type }: GridVaria
 
   return (
     <InlineStyles
-      styles={baseStyles}
-      media={type === 'container' ? undefined : values}
-      container={type === 'container' ? values : undefined}
-      selector={selector}
+      styles={baseStyles()}
+      media={props.type === 'container' ? undefined : values}
+      container={props.type === 'container' ? values : undefined}
+      selector={props.selector}
     />
   );
 }

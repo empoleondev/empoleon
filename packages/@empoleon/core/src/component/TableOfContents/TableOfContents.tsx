@@ -103,21 +103,21 @@ const defaultProps = {
 } satisfies Partial<TableOfContentsProps>;
 
 const varsResolver = createVarsResolver<TableOfContentsFactory>(
-  (theme, { color, size, variant, autoContrast, depthOffset, radius }) => {
+  (theme, props) => {
     const colors = theme.variantColorResolver({
-      color: color || theme.primaryColor,
+      color: props.color || theme.primaryColor,
       theme,
-      variant: variant || 'filled',
-      autoContrast,
+      variant: props.variant || 'filled',
+      autoContrast: props.autoContrast,
     });
 
     return {
       root: {
-        '--toc-bg': variant !== 'none' ? colors.background : undefined,
-        '--toc-color': variant !== 'none' ? colors.color : undefined,
-        '--toc-size': getFontSize(size),
-        '--toc-depth-offset': rem(depthOffset),
-        '--toc-radius': getRadius(radius),
+        '--toc-bg': props.variant !== 'none' ? colors.background : undefined,
+        '--toc-color': props.variant !== 'none' ? colors.color : undefined,
+        '--toc-size': getFontSize(props.size),
+        '--toc-depth-offset': rem(props.depthOffset),
+        '--toc-radius': getRadius(props.radius),
       },
     };
   }

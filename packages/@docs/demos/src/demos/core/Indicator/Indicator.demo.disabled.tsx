@@ -29,7 +29,7 @@ function Demo() {
 
   return (
     <Stack align="center">
-      <Indicator inline disabled={!visible} color="red" size={12}>
+      <Indicator inline disabled={!visible()} color="red" size={12}>
         <Avatar
           size="lg"
           radius="sm"

@@ -68,10 +68,10 @@ const defaultProps = {
   type: 'oval',
 } satisfies Partial<LoaderProps>;
 
-const varsResolver = createVarsResolver<LoaderFactory>((theme, { size, color }) => ({
+const varsResolver = createVarsResolver<LoaderFactory>((theme, props) => ({
   root: {
-    '--loader-size': getSize(size, 'loader-size'),
-    '--loader-color': color ? getThemeColor(color, theme) : undefined,
+    '--loader-size': getSize(props.size, 'loader-size'),
+    '--loader-color': props.color ? getThemeColor(props.color, theme) : undefined,
   },
 }));
 

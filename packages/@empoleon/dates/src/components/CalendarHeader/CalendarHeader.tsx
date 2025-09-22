@@ -105,10 +105,10 @@ const defaultProps: Partial<CalendarHeaderProps> = {
   headerControlsOrder: ['previous', 'level', 'next'],
 } satisfies Partial<CalendarHeaderProps>;
 
-const varsResolver = createVarsResolver<CalendarHeaderFactory>((_, { size }) => ({
+const varsResolver = createVarsResolver<CalendarHeaderFactory>((_, props) => ({
   calendarHeader: {
-    '--dch-control-size': getSize(size, 'dch-control-size'),
-    '--dch-fz': getFontSize(size),
+    '--dch-control-size': getSize(props.size, 'dch-control-size'),
+    '--dch-fz': getFontSize(props.size),
   },
 }));
 

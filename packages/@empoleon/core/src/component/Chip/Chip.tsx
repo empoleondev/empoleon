@@ -102,27 +102,27 @@ const defaultProps: Partial<ChipProps> = {
 };
 
 const varsResolver = createVarsResolver<ChipFactory>(
-  (theme, { size, radius, variant, color, autoContrast }) => {
+  (theme, props) => {
     const colors = theme.variantColorResolver({
-      color: color || theme.primaryColor,
+      color: props.color || theme.primaryColor,
       theme,
-      variant: variant || 'filled',
-      autoContrast,
+      variant: props.variant || 'filled',
+      autoContrast: props.autoContrast,
     });
 
     return {
       root: {
-        '--chip-fz': getFontSize(size),
-        '--chip-size': getSize(size, 'chip-size'),
-        '--chip-radius': radius === undefined ? undefined : getRadius(radius),
-        '--chip-checked-padding': getSize(size, 'chip-checked-padding'),
-        '--chip-padding': getSize(size, 'chip-padding'),
-        '--chip-icon-size': getSize(size, 'chip-icon-size'),
-        '--chip-bg': color || variant ? colors.background : undefined,
-        '--chip-hover': color || variant ? colors.hover : undefined,
-        '--chip-color': color || variant ? colors.color : undefined,
-        '--chip-bd': color || variant ? colors.border : undefined,
-        '--chip-spacing': getSize(size, 'chip-spacing'),
+        '--chip-fz': getFontSize(props.size),
+        '--chip-size': getSize(props.size, 'chip-size'),
+        '--chip-radius': props.radius === undefined ? undefined : getRadius(props.radius),
+        '--chip-checked-padding': getSize(props.size, 'chip-checked-padding'),
+        '--chip-padding': getSize(props.size, 'chip-padding'),
+        '--chip-icon-size': getSize(props.size, 'chip-icon-size'),
+        '--chip-bg': props.color || props.variant ? colors.background : undefined,
+        '--chip-hover': props.color || props.variant ? colors.hover : undefined,
+        '--chip-color': props.color || props.variant ? colors.color : undefined,
+        '--chip-bd': props.color || props.variant ? colors.border : undefined,
+        '--chip-spacing': getSize(props.size, 'chip-spacing'),
       },
     };
   }

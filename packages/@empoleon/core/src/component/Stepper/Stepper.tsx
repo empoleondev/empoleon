@@ -127,18 +127,18 @@ const defaultProps = {
 } satisfies Partial<StepperProps>;
 
 const varsResolver = createVarsResolver<StepperFactory>(
-  (theme, { color, iconSize, size, contentPadding, radius, autoContrast }) => ({
+  (theme, props) => ({
     root: {
-      '--stepper-color': color ? getThemeColor(color, theme) : undefined,
-      '--stepper-icon-color': getAutoContrastValue(autoContrast, theme)
-        ? getContrastColor({ color, theme, autoContrast })
+      '--stepper-color': props.color ? getThemeColor(props.color, theme) : undefined,
+      '--stepper-icon-color': getAutoContrastValue(props.autoContrast, theme)
+        ? getContrastColor({ color: props.color, theme, autoContrast: props.autoContrast })
         : undefined,
       '--stepper-icon-size':
-        iconSize === undefined ? getSize(size, 'stepper-icon-size') : rem(iconSize),
-      '--stepper-content-padding': getSpacing(contentPadding),
-      '--stepper-radius': radius === undefined ? undefined : getRadius(radius),
-      '--stepper-fz': getFontSize(size),
-      '--stepper-spacing': getSpacing(size),
+        props.iconSize === undefined ? getSize(props.size, 'stepper-icon-size') : rem(props.iconSize),
+      '--stepper-content-padding': getSpacing(props.contentPadding),
+      '--stepper-radius': props.radius === undefined ? undefined : getRadius(props.radius),
+      '--stepper-fz': getFontSize(props.size),
+      '--stepper-spacing': getSpacing(props.size),
     },
   })
 );

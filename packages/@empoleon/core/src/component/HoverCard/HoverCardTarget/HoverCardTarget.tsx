@@ -9,9 +9,9 @@ export interface HoverCardTargetProps extends Omit<PopoverTargetProps, 'children
   eventPropsWrapperName?: string;
 }
 
-const defaultProps: Partial<HoverCardTargetProps> = {
+const defaultProps = {
   refProp: 'ref',
-};
+} satisfies Partial<HoverCardTargetProps>;
 
 export function HoverCardTarget(_props: HoverCardTargetProps) {
   const props = useProps('HoverCardTarget', defaultProps, _props);
@@ -37,15 +37,20 @@ export function HoverCardTarget(_props: HoverCardTargetProps) {
     return (
       <Popover.Target {...others}>
         {(targetProps) => {
-          const wrapperProps = local.eventPropsWrapperName
-            ? { [local.eventPropsWrapperName]: { ...referenceProps, ref: ctx.reference } }
-            : { ...referenceProps, ref: ctx.reference };
+          const combinedRef = (el: HTMLElement | null) => {
+            if (ctx.reference) {
+              ctx.reference(el);
+            }
+          };
+
+          const mergedProps = {
+            ...targetProps,
+            ...referenceProps,
+            ref: combinedRef
+          };
 
           return (
-            <span
-              {...wrapperProps}
-              {...targetProps}
-            >
+            <span {...mergedProps}>
               {local.children}
             </span>
           );

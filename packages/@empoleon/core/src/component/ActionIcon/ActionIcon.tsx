@@ -93,24 +93,24 @@ export type ActionIconFactory = PolymorphicFactory<{
 const defaultProps: Partial<ActionIconProps> = {};
 
 const varsResolver = createVarsResolver<ActionIconFactory>(
-  (theme, resolver) => {
+  (theme, props) => {
     const colors = theme.variantColorResolver({
-      color: resolver.color || theme.primaryColor,
+      color: props.color || theme.primaryColor,
       theme,
-      gradient: resolver.gradient,
-      variant: resolver.variant || 'filled',
-      autoContrast: resolver.autoContrast,
+      gradient: props.gradient,
+      variant: props.variant || 'filled',
+      autoContrast: props.autoContrast,
     });
 
     return {
       root: {
-        '--ai-size': getSize(resolver.size, 'ai-size'),
-        '--ai-radius': resolver.radius === undefined ? undefined : getRadius(resolver.radius),
-        '--ai-bg': resolver.color || resolver.variant ? colors.background : undefined,
-        '--ai-hover': resolver.color || resolver.variant ? colors.hover : undefined,
-        '--ai-hover-color': resolver.color || resolver.variant ? colors.hoverColor : undefined,
+        '--ai-size': getSize(props.size, 'ai-size'),
+        '--ai-radius': props.radius === undefined ? undefined : getRadius(props.radius),
+        '--ai-bg': props.color || props.variant ? colors.background : undefined,
+        '--ai-hover': props.color || props.variant ? colors.hover : undefined,
+        '--ai-hover-color': props.color || props.variant ? colors.hoverColor : undefined,
         '--ai-color': colors.color,
-        '--ai-bd': resolver.color || resolver.variant ? colors.border : undefined,
+        '--ai-bd': props.color || props.variant ? colors.border : undefined,
       },
     };
   }

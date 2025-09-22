@@ -85,10 +85,10 @@ const defaultProps: Partial<AngleSliderProps> = {
   withLabel: true,
 } satisfies Partial<AngleSliderProps>;
 
-const varsResolver = createVarsResolver<AngleSliderFactory>((_, { size, thumbSize }) => ({
+const varsResolver = createVarsResolver<AngleSliderFactory>((_, props) => ({
   root: {
-    '--slider-size': rem(size),
-    '--thumb-size': rem(thumbSize),
+    '--slider-size': rem(props.size),
+    '--thumb-size': rem(props.thumbSize),
   },
 }));
 

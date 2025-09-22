@@ -34,11 +34,12 @@ export function createEdgeComponent(edgeProps: CreateEdgeComponent) {
     ]);
     const Icon = local.icon!;
     const ctx = usePaginationContext();
-    const disabled = () => edgeProps.type === 'next' ? ctx.active() === ctx.total() : ctx.active() === 1;
+    const _disabled = () => edgeProps.type === 'next' ? ctx.active() === ctx.total() : ctx.active() === 1;
+    const disabled = () => (ctx.disabled() || _disabled());
 
     return (
       <PaginationControl
-        disabled={ctx.disabled() || disabled()}
+        disabled={disabled()}
         ref={local.ref}
         onClick={ctx[edgeProps.action]}
         withPadding={false}

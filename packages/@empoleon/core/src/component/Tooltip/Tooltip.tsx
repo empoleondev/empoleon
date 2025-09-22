@@ -121,19 +121,19 @@ const defaultProps: Partial<TooltipProps> = {
 };
 
 const varsResolver = createVarsResolver<TooltipFactory>(
-  (theme, { radius, color, variant, autoContrast }) => {
+  (theme, props) => {
     const colors = theme.variantColorResolver({
       theme,
-      color: color || theme.primaryColor,
-      autoContrast,
-      variant: variant || 'filled',
+      color: props.color || theme.primaryColor,
+      autoContrast: props.autoContrast,
+      variant: props.variant || 'filled',
     });
 
     return {
       tooltip: {
-        '--tooltip-radius': radius === undefined ? undefined : getRadius(radius),
-        '--tooltip-bg': color ? colors.background : undefined,
-        '--tooltip-color': color ? colors.color : undefined,
+        '--tooltip-radius': props.radius === undefined ? undefined : getRadius(props.radius),
+        '--tooltip-bg': props.color ? colors.background : undefined,
+        '--tooltip-color': props.color ? colors.color : undefined,
       },
     };
   }

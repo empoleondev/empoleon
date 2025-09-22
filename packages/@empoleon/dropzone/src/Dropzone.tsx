@@ -164,22 +164,22 @@ const defaultProps = {
 } satisfies Partial<DropzoneProps>;
 
 const varsResolver = createVarsResolver<DropzoneFactory>(
-  (theme, { radius, variant, acceptColor, rejectColor }) => {
+  (theme, props) => {
     const acceptColors = theme.variantColorResolver({
-      color: acceptColor || theme.primaryColor,
+      color: props.acceptColor || theme.primaryColor,
       theme,
-      variant: variant!,
+      variant: props.variant!,
     });
 
     const rejectColors = theme.variantColorResolver({
-      color: rejectColor || 'red',
+      color: props.rejectColor || 'red',
       theme,
-      variant: variant!,
+      variant: props.variant!,
     });
 
     return {
       root: {
-        '--dropzone-radius': getRadius(radius),
+        '--dropzone-radius': getRadius(props.radius),
         '--dropzone-accept-color': acceptColors.color,
         '--dropzone-accept-bg': acceptColors.background,
         '--dropzone-reject-color': rejectColors.color,

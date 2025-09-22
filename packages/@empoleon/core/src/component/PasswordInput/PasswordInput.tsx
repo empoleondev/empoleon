@@ -63,10 +63,10 @@ const defaultProps: Partial<PasswordInputProps> = {
   visibilityToggleIcon: PasswordToggleIcon,
 };
 
-const varsResolver = createVarsResolver<PasswordInputFactory>((_, { size }) => ({
+const varsResolver = createVarsResolver<PasswordInputFactory>((_, props) => ({
   root: {
-    '--psi-icon-size': getSize(size, 'psi-icon-size'),
-    '--psi-button-size': getSize(size, 'psi-button-size'),
+    '--psi-icon-size': getSize(props.size, 'psi-icon-size'),
+    '--psi-button-size': getSize(props.size, 'psi-button-size'),
   },
 }));
 

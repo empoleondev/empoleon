@@ -135,35 +135,20 @@ const defaultProps: Partial<TableProps> = {
 };
 
 const varsResolver = createVarsResolver<TableFactory>(
-  (
-    theme,
-    {
-      layout,
-      captionSide,
-      horizontalSpacing,
-      verticalSpacing,
-      borderColor,
-      stripedColor,
-      highlightOnHoverColor,
-      striped,
-      highlightOnHover,
-      stickyHeaderOffset,
-      stickyHeader,
-    }
-  ) => ({
+  (theme, props) => ({
     table: {
-      '--table-layout': layout,
-      '--table-caption-side': captionSide,
-      '--table-horizontal-spacing': getSpacing(horizontalSpacing),
-      '--table-vertical-spacing': getSpacing(verticalSpacing),
-      '--table-border-color': borderColor ? getThemeColor(borderColor, theme) : undefined,
+      '--table-layout': props.layout,
+      '--table-caption-side': props.captionSide,
+      '--table-horizontal-spacing': getSpacing(props.horizontalSpacing),
+      '--table-vertical-spacing': getSpacing(props.verticalSpacing),
+      '--table-border-color': props.borderColor ? getThemeColor(props.borderColor, theme) : undefined,
       '--table-striped-color':
-        striped && stripedColor ? getThemeColor(stripedColor, theme) : undefined,
+        props.striped && props.stripedColor ? getThemeColor(props.stripedColor, theme) : undefined,
       '--table-highlight-on-hover-color':
-        highlightOnHover && highlightOnHoverColor
-          ? getThemeColor(highlightOnHoverColor, theme)
+        props.highlightOnHover && props.highlightOnHoverColor
+          ? getThemeColor(props.highlightOnHoverColor, theme)
           : undefined,
-      '--table-sticky-header-offset': stickyHeader ? rem(stickyHeaderOffset) : undefined,
+      '--table-sticky-header-offset': props.stickyHeader ? rem(props.stickyHeaderOffset) : undefined,
     },
   })
 );

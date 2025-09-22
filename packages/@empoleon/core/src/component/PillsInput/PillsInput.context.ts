@@ -1,10 +1,11 @@
 import { Ref } from '@solid-primitives/refs';
 import { createOptionalContext, EmpoleonSize } from '../../core';
 import { InputVariant } from '../Input';
+import { Accessor } from 'solid-js';
 
 export interface PillsInputContextValue {
   fieldRef: Ref<HTMLInputElement | null>;
-  size: EmpoleonSize | (string & {});
+  size: Accessor<EmpoleonSize | (string & {})>;
   disabled: boolean | undefined;
   hasError: boolean | undefined;
   variant: InputVariant | (string & {}) | undefined;

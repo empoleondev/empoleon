@@ -39,10 +39,10 @@ export type InputDescriptionFactory = Factory<{
   vars: InputDescriptionCssVariables;
 }>;
 
-const varsResolver = createVarsResolver<InputDescriptionFactory>((_, { size }) => ({
+const varsResolver = createVarsResolver<InputDescriptionFactory>((_, props) => ({
   description: {
     '--input-description-size':
-      size === undefined ? undefined : `calc(${getFontSize(size)} - ${rem(2)})`,
+      props.size === undefined ? undefined : `calc(${getFontSize(props.size)} - ${rem(2)})`,
   },
 }));
 

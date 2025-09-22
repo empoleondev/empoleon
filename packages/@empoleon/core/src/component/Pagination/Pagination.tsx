@@ -1,4 +1,4 @@
-import { splitProps } from 'solid-js';
+import { createMemo, Show, splitProps } from 'solid-js';
 import { factory, Factory, EmpoleonSpacing, useProps } from '../../core';
 import { Group } from '../Group/Group';
 import { PaginationIcon } from './Pagination.icons';
@@ -104,16 +104,19 @@ export const Pagination = factory<PaginationFactory>(_props => {
     return null;
   }
 
+  const hasControls = createMemo(() => local.withControls);
+  const hasEdges = createMemo(() => local.withEdges);
+
   return (
     <PaginationRoot ref={local.ref} total={local.total} {...others}>
       <Group gap={local.gap}>
-        {local.withEdges && <PaginationFirst icon={local.firstIcon} {...local.getControlProps?.('first')} />}
-        {local.withControls && (
+        {hasEdges() && <PaginationFirst icon={local.firstIcon} {...local.getControlProps?.('first')} />}
+        {hasControls() && (
           <PaginationPrevious icon={local.previousIcon} {...local.getControlProps?.('previous')} />
         )}
         {local.withPages && <PaginationItems dotsIcon={local.dotsIcon} />}
-        {local.withControls && <PaginationNext icon={local.nextIcon} {...local.getControlProps?.('next')} />}
-        {local.withEdges && <PaginationLast icon={local.lastIcon} {...local.getControlProps?.('last')} />}
+        <Show when={hasControls()}><PaginationNext icon={local.nextIcon} /></Show>
+        {hasEdges() && <PaginationLast icon={local.lastIcon} {...local.getControlProps?.('last')} />}
       </Group>
     </PaginationRoot>
   );

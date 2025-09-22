@@ -1,4 +1,4 @@
-import { createEffect, createSignal, createMemo, onCleanup, Accessor } from 'solid-js';
+import { createSignal, createMemo, onCleanup, Accessor } from 'solid-js';
 import {
   useDelayGroup,
   useDismiss,
@@ -115,5 +115,7 @@ export function useHoverCard(settings: UseHoverCard) {
     getFloatingProps: interactions.getFloatingProps,
     openDropdown,
     closeDropdown,
+    x: () => floating.x,
+    y: () => floating.y,
   };
 }

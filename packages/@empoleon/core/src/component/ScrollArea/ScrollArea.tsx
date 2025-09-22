@@ -95,10 +95,10 @@ const defaultProps: Partial<ScrollAreaProps> = {
 } satisfies Partial<ScrollAreaProps>;
 
 const varsResolver = createVarsResolver<ScrollAreaFactory>(
-  (_, { scrollbarSize, overscrollBehavior }) => ({
+  (_, props) => ({
     root: {
-      '--scrollarea-scrollbar-size': rem(scrollbarSize),
-      '--scrollarea-over-scroll-behavior': overscrollBehavior,
+      '--scrollarea-scrollbar-size': rem(props.scrollbarSize),
+      '--scrollarea-over-scroll-behavior': props.overscrollBehavior,
     },
   })
 );

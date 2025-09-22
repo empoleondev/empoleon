@@ -54,10 +54,10 @@ const defaultProps: Partial<ColorSwatchProps> = {
   withShadow: true,
 };
 
-const varsResolver = createVarsResolver<ColorSwatchFactory>((_, { radius, size }) => ({
+const varsResolver = createVarsResolver<ColorSwatchFactory>((_, props) => ({
   root: {
-    '--cs-radius': radius === undefined ? undefined : getRadius(radius),
-    '--cs-size': rem(size),
+    '--cs-radius': props.radius === undefined ? undefined : getRadius(props.radius),
+    '--cs-size': rem(props.size),
   },
 }));
 

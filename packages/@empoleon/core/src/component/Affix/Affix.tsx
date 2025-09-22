@@ -61,13 +61,13 @@ const defaultProps: Partial<AffixProps> = {
   withinPortal: true,
 } satisfies Partial<AffixProps>;
 
-const varsResolver = createVarsResolver<AffixFactory>((_, { zIndex, position }) => ({
+const varsResolver = createVarsResolver<AffixFactory>((_, props) => ({
   root: {
-    '--affix-z-index': zIndex?.toString(),
-    '--affix-top': getSpacing(position?.top),
-    '--affix-left': getSpacing(position?.left),
-    '--affix-bottom': getSpacing(position?.bottom),
-    '--affix-right': getSpacing(position?.right),
+    '--affix-z-index': props.zIndex?.toString(),
+    '--affix-top': getSpacing(props.position?.top),
+    '--affix-left': getSpacing(props.position?.left),
+    '--affix-bottom': getSpacing(props.position?.bottom),
+    '--affix-right': getSpacing(props.position?.right),
   },
 }));
 

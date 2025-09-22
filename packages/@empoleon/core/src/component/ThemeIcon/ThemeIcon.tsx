@@ -64,22 +64,22 @@ export type ThemeIconFactory = Factory<{
 }>;
 
 const varsResolver = createVarsResolver<ThemeIconFactory>(
-  (theme, { size, radius, variant, gradient, color, autoContrast }) => {
+  (theme, props) => {
     const colors = theme.variantColorResolver({
-      color: color || theme.primaryColor,
+      color: props.color || theme.primaryColor,
       theme,
-      gradient,
-      variant: variant || 'filled',
-      autoContrast,
+      gradient: props.gradient,
+      variant: props.variant || 'filled',
+      autoContrast: props.autoContrast,
     });
 
     return {
       root: {
-        '--ti-size': getSize(size, 'ti-size'),
-        '--ti-radius': radius === undefined ? undefined : getRadius(radius),
-        '--ti-bg': color || variant ? colors.background : undefined,
-        '--ti-color': color || variant ? colors.color : undefined,
-        '--ti-bd': color || variant ? colors.border : undefined,
+        '--ti-size': getSize(props.size, 'ti-size'),
+        '--ti-radius': props.radius === undefined ? undefined : getRadius(props.radius),
+        '--ti-bg': props.color || props.variant ? colors.background : undefined,
+        '--ti-color': props.color || props.variant ? colors.color : undefined,
+        '--ti-bd': props.color || props.variant ? colors.border : undefined,
       },
     };
   }

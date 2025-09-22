@@ -67,11 +67,11 @@ const defaultProps = {
   type: 'unordered',
 } satisfies Partial<ListProps>;
 
-const varsResolver = createVarsResolver<ListFactory>((_, { size, spacing }) => ({
+const varsResolver = createVarsResolver<ListFactory>((_, props) => ({
   root: {
-    '--list-fz': getFontSize(size),
-    '--list-lh': getLineHeight(size),
-    '--list-spacing': getSpacing(spacing),
+    '--list-fz': getFontSize(props.size),
+    '--list-lh': getLineHeight(props.size),
+    '--list-spacing': getSpacing(props.spacing),
   },
 }));
 

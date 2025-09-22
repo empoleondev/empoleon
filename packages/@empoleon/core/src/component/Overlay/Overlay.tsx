@@ -71,16 +71,16 @@ const defaultProps: Partial<OverlayProps> = {
 };
 
 const varsResolver = createVarsResolver<OverlayFactory>(
-  (_, { gradient, color, backgroundOpacity, blur, radius, zIndex }) => ({
+  (_, props) => ({
     root: {
       '--overlay-bg':
-        gradient ||
-        ((color !== undefined || backgroundOpacity !== undefined) &&
-          rgba(color || '#000', backgroundOpacity ?? 0.6)) ||
+        props.gradient ||
+        ((props.color !== undefined || props.backgroundOpacity !== undefined) &&
+          rgba(props.color || '#000', props.backgroundOpacity ?? 0.6)) ||
         undefined,
-      '--overlay-filter': blur ? `blur(${rem(blur)})` : undefined,
-      '--overlay-radius': radius === undefined ? undefined : getRadius(radius),
-      '--overlay-z-index': zIndex?.toString(),
+      '--overlay-filter': props.blur ? `blur(${rem(props.blur)})` : undefined,
+      '--overlay-radius': props.radius === undefined ? undefined : getRadius(props.radius),
+      '--overlay-z-index': props.zIndex?.toString(),
     },
   })
 );

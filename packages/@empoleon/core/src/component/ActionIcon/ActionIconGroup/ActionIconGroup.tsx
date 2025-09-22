@@ -39,8 +39,8 @@ const defaultProps: Partial<ActionIconGroupProps> = {
   orientation: 'horizontal',
 };
 
-const varsResolver = createVarsResolver<ActionIconGroupFactory>((_, { borderWidth }) => ({
-  group: { '--ai-border-width': rem(borderWidth) },
+const varsResolver = createVarsResolver<ActionIconGroupFactory>((_, props) => ({
+  group: { '--ai-border-width': rem(props.borderWidth) },
 }));
 
 export const ActionIconGroup = factory<ActionIconGroupFactory>(_props => {

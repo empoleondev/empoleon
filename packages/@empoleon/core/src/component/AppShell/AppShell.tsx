@@ -108,10 +108,10 @@ const defaultProps: Partial<AppShellProps> = {
 } satisfies Partial<AppShellProps>;
 
 const varsResolver = createVarsResolver<AppShellFactory>(
-  (_, { transitionDuration, transitionTimingFunction }) => ({
+  (_, props) => ({
     root: {
-      '--app-shell-transition-duration': `${transitionDuration}ms`,
-      '--app-shell-transition-timing-function': transitionTimingFunction,
+      '--app-shell-transition-duration': `${props.transitionDuration}ms`,
+      '--app-shell-transition-timing-function': props.transitionTimingFunction,
     },
   })
 );

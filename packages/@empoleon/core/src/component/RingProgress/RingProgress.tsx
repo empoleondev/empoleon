@@ -70,11 +70,11 @@ const defaultProps = {
 } satisfies Partial<RingProgressProps>;
 
 const varsResolver = createVarsResolver<RingProgressFactory>(
-  (_, { size, thickness, transitionDuration }) => ({
+  (_, props) => ({
     root: {
-      '--rp-size': rem(size),
-      '--rp-label-offset': rem(thickness! * 2),
-      '--rp-transition-duration': transitionDuration ? `${transitionDuration}ms` : undefined,
+      '--rp-size': rem(props.size),
+      '--rp-label-offset': rem(props.thickness! * 2),
+      '--rp-transition-duration': props.transitionDuration ? `${props.transitionDuration}ms` : undefined,
     },
   })
 );

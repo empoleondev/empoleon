@@ -202,9 +202,9 @@ const defaultProps = {
   maxDropdownContentHeight: 200,
 } satisfies Partial<TimePickerProps>;
 
-const varsResolver = createVarsResolver<TimePickerFactory>((_theme, { size }) => ({
+const varsResolver = createVarsResolver<TimePickerFactory>((_theme, props) => ({
   dropdown: {
-    '--control-font-size': getFontSize(size),
+    '--control-font-size': getFontSize(props.size),
   },
 }));
 

@@ -62,10 +62,10 @@ const defaultProps = {
   initialState: false,
 } satisfies Partial<SpoilerProps>;
 
-const varsResolver = createVarsResolver<SpoilerFactory>((_, { transitionDuration }) => ({
+const varsResolver = createVarsResolver<SpoilerFactory>((_, props) => ({
   root: {
     '--spoiler-transition-duration':
-      transitionDuration !== undefined ? `${transitionDuration}ms` : undefined,
+      props.transitionDuration !== undefined ? `${props.transitionDuration}ms` : undefined,
   },
 }));
 

@@ -116,9 +116,9 @@ const defaultProps: Partial<TreeProps> = {
   expandOnSpace: true,
 };
 
-const varsResolver = createVarsResolver<TreeFactory>((_theme, { levelOffset }) => ({
+const varsResolver = createVarsResolver<TreeFactory>((_theme, props) => ({
   root: {
-    '--level-offset': getSpacing(levelOffset),
+    '--level-offset': getSpacing(props.levelOffset),
   },
 }));
 

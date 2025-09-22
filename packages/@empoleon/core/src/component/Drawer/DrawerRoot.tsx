@@ -98,15 +98,15 @@ const defaultProps = {
   position: 'left',
 } satisfies Partial<DrawerRootProps>;
 
-const varsResolver = createVarsResolver<DrawerRootFactory>((_, { position, size, offset }) => ({
+const varsResolver = createVarsResolver<DrawerRootFactory>((_, props) => ({
   root: {
-    '--drawer-size': getSize(size, 'drawer-size'),
-    '--drawer-flex': getDrawerFlex(position),
+    '--drawer-size': getSize(props.size, 'drawer-size'),
+    '--drawer-flex': getDrawerFlex(props.position),
     '--drawer-height':
-      position === 'left' || position === 'right' ? undefined : 'var(--drawer-size)',
-    '--drawer-align': getDrawerAlign(position),
-    '--drawer-justify': position === 'right' ? 'flex-end' : undefined,
-    '--drawer-offset': rem(offset),
+      props.position === 'left' || props.position === 'right' ? undefined : 'var(--drawer-size)',
+    '--drawer-align': getDrawerAlign(props.position),
+    '--drawer-justify': props.position === 'right' ? 'flex-end' : undefined,
+    '--drawer-offset': rem(props.offset),
   },
 }));
 

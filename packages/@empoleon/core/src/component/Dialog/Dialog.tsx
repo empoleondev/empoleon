@@ -68,9 +68,9 @@ const defaultProps: Partial<DialogProps> = {
   },
 };
 
-const varsResolver = createVarsResolver<DialogFactory>((_, { size }) => ({
+const varsResolver = createVarsResolver<DialogFactory>((_, props) => ({
   root: {
-    '--dialog-size': getSize(size, 'dialog-size'),
+    '--dialog-size': getSize(props.size, 'dialog-size'),
   },
 }));
 

@@ -46,10 +46,10 @@ export type FloatingIndicatorFactory = Factory<{
 const defaultProps: Partial<FloatingIndicatorProps> = {};
 
 const varsResolver = createVarsResolver<FloatingIndicatorFactory>(
-  (_theme, { transitionDuration }) => ({
+  (_theme, props) => ({
     root: {
       '--transition-duration':
-        typeof transitionDuration === 'number' ? `${transitionDuration}ms` : transitionDuration,
+        typeof props.transitionDuration === 'number' ? `${props.transitionDuration}ms` : props.transitionDuration,
     },
   })
 );

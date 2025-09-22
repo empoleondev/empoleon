@@ -117,16 +117,16 @@ const defaultProps = {
 } satisfies Partial<SegmentedControlProps>;
 
 const varsResolver = createVarsResolver<SegmentedControlFactory>(
-  (theme, { radius, color, transitionDuration, size, transitionTimingFunction }) => ({
+  (theme, props) => ({
     root: {
-      '--sc-radius': radius === undefined ? undefined : getRadius(radius),
-      '--sc-color': color ? getThemeColor(color, theme) : undefined,
-      '--sc-shadow': color ? undefined : 'var(--empoleon-shadow-xs)',
+      '--sc-radius': props.radius === undefined ? undefined : getRadius(props.radius),
+      '--sc-color': props.color ? getThemeColor(props.color, theme) : undefined,
+      '--sc-shadow': props.color ? undefined : 'var(--empoleon-shadow-xs)',
       '--sc-transition-duration':
-        transitionDuration === undefined ? undefined : `${transitionDuration}ms`,
-      '--sc-transition-timing-function': transitionTimingFunction,
-      '--sc-padding': getSize(size, 'sc-padding'),
-      '--sc-font-size': getFontSize(size),
+        props.transitionDuration === undefined ? undefined : `${props.transitionDuration}ms`,
+      '--sc-transition-timing-function': props.transitionTimingFunction,
+      '--sc-padding': getSize(props.size, 'sc-padding'),
+      '--sc-font-size': getFontSize(props.size),
     },
   })
 );

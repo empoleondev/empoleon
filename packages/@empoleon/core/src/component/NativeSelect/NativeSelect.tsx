@@ -1,4 +1,4 @@
-import { splitProps } from 'solid-js';
+import { For, splitProps } from 'solid-js';
 import { BoxProps, ElementProps, factory, Factory, StylesApiProps, useProps } from '../../core';
 import { ComboboxChevron, ComboboxData, getParsedComboboxData } from '../Combobox';
 import { __BaseInputProps, __InputStylesNames } from '../Input';
@@ -36,10 +36,6 @@ export const NativeSelect = factory<NativeSelectFactory>(_props => {
     'ref'
   ]);
 
-  const options = getParsedComboboxData(local.data).map((item: any, index: any) => (
-    <NativeSelectOption data={item} />
-  ));
-
   return (
     <InputBase
       component="select"
@@ -54,7 +50,9 @@ export const NativeSelect = factory<NativeSelectFactory>(_props => {
         local.rightSection || <ComboboxChevron size={local.size} error={local.error} unstyled={local.unstyled} />
       }
     >
-      {local.children || options}
+      {local.children || <For each={getParsedComboboxData(local.data)}>
+        {item => <NativeSelectOption data={item} />}
+      </For>}
     </InputBase>
   );
 });

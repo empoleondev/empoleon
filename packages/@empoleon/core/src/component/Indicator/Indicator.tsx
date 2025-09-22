@@ -94,16 +94,16 @@ const defaultProps = {
 } satisfies Partial<IndicatorProps>;
 
 const varsResolver = createVarsResolver<IndicatorFactory>(
-  (theme, { color, position, offset, size, radius, zIndex, autoContrast }) => ({
+  (theme, props) => ({
     root: {
-      '--indicator-color': color ? getThemeColor(color, theme) : undefined,
-      '--indicator-text-color': getAutoContrastValue(autoContrast, theme)
-        ? getContrastColor({ color, theme, autoContrast })
+      '--indicator-color': props.color ? getThemeColor(props.color, theme) : undefined,
+      '--indicator-text-color': getAutoContrastValue(props.autoContrast, theme)
+        ? getContrastColor({ color: props.color, theme, autoContrast: props.autoContrast })
         : undefined,
-      '--indicator-size': rem(size),
-      '--indicator-radius': radius === undefined ? undefined : getRadius(radius),
-      '--indicator-z-index': zIndex?.toString(),
-      ...getPositionVariables(position, offset),
+      '--indicator-size': rem(props.size),
+      '--indicator-radius': props.radius === undefined ? undefined : getRadius(props.radius),
+      '--indicator-z-index': props.zIndex?.toString(),
+      ...getPositionVariables(props.position, props.offset),
     },
   })
 );

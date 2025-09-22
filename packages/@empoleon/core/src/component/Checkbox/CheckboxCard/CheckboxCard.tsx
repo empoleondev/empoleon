@@ -56,9 +56,9 @@ const defaultProps = {
   withBorder: true,
 } satisfies Partial<CheckboxCardProps>;
 
-const varsResolver = createVarsResolver<CheckboxCardFactory>((_, { radius }) => ({
+const varsResolver = createVarsResolver<CheckboxCardFactory>((_, props) => ({
   card: {
-    '--card-radius': getRadius(radius),
+    '--card-radius': getRadius(props.radius),
   },
 }));
 

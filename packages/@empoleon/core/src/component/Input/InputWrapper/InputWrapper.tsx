@@ -108,19 +108,17 @@ const defaultProps: Partial<InputWrapperProps> = {
   inputWrapperOrder: ['label', 'description', 'input', 'error'],
 };
 
-const varsResolver = createVarsResolver<InputWrapperFactory>((_, { size }) => ({
+const varsResolver = createVarsResolver<InputWrapperFactory>((_, props) => ({
   label: {
-    '--input-label-size': getFontSize(size),
+    '--input-label-size': getFontSize(props.size),
     '--input-asterisk-color': undefined,
   },
-
   error: {
-    '--input-error-size': size === undefined ? undefined : `calc(${getFontSize(size)} - ${rem(2)})`,
+    '--input-error-size': props.size === undefined ? undefined : `calc(${getFontSize(props.size)} - ${rem(2)})`,
   },
-
   description: {
     '--input-description-size':
-      size === undefined ? undefined : `calc(${getFontSize(size)} - ${rem(2)})`,
+      props.size === undefined ? undefined : `calc(${getFontSize(props.size)} - ${rem(2)})`,
   },
 }));
 
@@ -221,7 +219,9 @@ export const InputWrapper = factory<InputWrapperFactory>(_props => {
                   </InputLabel>
                 )
               }</Match>
-              <Match when={part === 'input'}><>{local.inputContainer!(local.children)}</></Match>
+              <Match when={part === 'input'}>
+                <>{local.inputContainer!(local.children)}</>
+              </Match>
               <Match when={part === 'description'}>{
                 hasDescription && (
                   <InputDescription

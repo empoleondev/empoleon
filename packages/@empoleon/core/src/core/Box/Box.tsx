@@ -90,7 +90,7 @@ const _Box = <T extends HTMLElement = HTMLDivElement>(
   ]);
 
   const theme = useEmpoleonTheme();
-  const Element = local.component || 'div';
+  const Element = () => local.component || 'div';
   const { styleProps, rest } = extractStyleProps(others);
 
   const useSxTransform = useEmpoleonSxTransform();
@@ -176,7 +176,7 @@ const _Box = <T extends HTMLElement = HTMLDivElement>(
       {typeof local.renderRoot === 'function' ? (
         local.renderRoot(elementProps())
       ) : (
-        <Dynamic component={Element} {...elementProps()}>
+        <Dynamic component={Element()} {...elementProps()}>
           {local.children}
         </Dynamic>
       )}

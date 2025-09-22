@@ -47,11 +47,11 @@ const defaultProps = {
 } satisfies Partial<TableScrollContainerProps>;
 
 const varsResolver = createVarsResolver<TableScrollContainerFactory>(
-  (_, { minWidth, maxHeight, type }) => ({
+  (_, props) => ({
     scrollContainer: {
-      '--table-min-width': rem(minWidth),
-      '--table-max-height': rem(maxHeight),
-      '--table-overflow': type === 'native' ? 'auto' : undefined,
+      '--table-min-width': rem(props.minWidth),
+      '--table-max-height': rem(props.maxHeight),
+      '--table-overflow': props.type === 'native' ? 'auto' : undefined,
     },
   })
 );

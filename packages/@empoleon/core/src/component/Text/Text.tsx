@@ -81,13 +81,13 @@ const defaultProps: Partial<TextProps> = {
 };
 
 const varsResolver = createVarsResolver<TextFactory>(
-  (theme, { variant, lineClamp, gradient, size, color }) => ({
+  (theme, props) => ({
     root: {
-      '--text-fz': getFontSize(size),
-      '--text-lh': getLineHeight(size),
-      '--text-gradient': variant === 'gradient' ? getGradient(gradient, theme) : undefined,
-      '--text-line-clamp': typeof lineClamp === 'number' ? lineClamp.toString() : undefined,
-      '--text-color': color ? getThemeColor(color, theme) : undefined,
+      '--text-fz': getFontSize(props.size),
+      '--text-lh': getLineHeight(props.size),
+      '--text-gradient': props.variant === 'gradient' ? getGradient(props.gradient, theme) : undefined,
+      '--text-line-clamp': typeof props.lineClamp === 'number' ? props.lineClamp.toString() : undefined,
+      '--text-color': props.color ? getThemeColor(props.color, theme) : undefined,
     },
   })
 );

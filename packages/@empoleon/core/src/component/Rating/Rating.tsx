@@ -100,10 +100,10 @@ const defaultProps = {
   color: 'yellow',
 } satisfies Partial<RatingProps>;
 
-const varsResolver = createVarsResolver<RatingFactory>((theme, { size, color }) => ({
+const varsResolver = createVarsResolver<RatingFactory>((theme, props) => ({
   root: {
-    '--rating-size': getSize(size, 'rating-size'),
-    '--rating-color': getThemeColor(color, theme),
+    '--rating-size': getSize(props.size, 'rating-size'),
+    '--rating-color': getThemeColor(props.color, theme),
   },
 }));
 

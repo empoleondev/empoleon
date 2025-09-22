@@ -61,14 +61,14 @@ export type BurgerFactory = Factory<{
 const defaultProps: Partial<BurgerProps> = {};
 
 const varsResolver = createVarsResolver<BurgerFactory>(
-  (theme, { color, size, lineSize, transitionDuration, transitionTimingFunction }) => ({
+  (theme, props) => ({
     root: {
-      '--burger-color': color ? getThemeColor(color, theme) : undefined,
-      '--burger-size': getSize(size, 'burger-size'),
-      '--burger-line-size': lineSize ? rem(lineSize) : undefined,
+      '--burger-color': props.color ? getThemeColor(props.color, theme) : undefined,
+      '--burger-size': getSize(props.size, 'burger-size'),
+      '--burger-line-size': props.lineSize ? rem(props.lineSize) : undefined,
       '--burger-transition-duration':
-        transitionDuration === undefined ? undefined : `${transitionDuration}ms`,
-      '--burger-transition-timing-function': transitionTimingFunction,
+        props.transitionDuration === undefined ? undefined : `${props.transitionDuration}ms`,
+      '--burger-transition-timing-function': props.transitionTimingFunction,
     },
   })
 );

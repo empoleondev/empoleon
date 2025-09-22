@@ -53,9 +53,9 @@ const defaultProps = {
   withBorder: true,
 } satisfies Partial<RadioCardProps>;
 
-const varsResolver = createVarsResolver<RadioCardFactory>((_, { radius }) => ({
+const varsResolver = createVarsResolver<RadioCardFactory>((_, props) => ({
   card: {
-    '--card-radius': getRadius(radius),
+    '--card-radius': getRadius(props.radius),
   },
 }));
 

@@ -45,11 +45,11 @@ export const Highlight = polymorphicFactory<HighlightFactory>(_props => {
     'ref'
   ]);
 
-  const highlightChunks = highlighter(local.children, local.highlight);
+  const highlightChunks = () => highlighter(local.children, local.highlight);
 
   return (
     <Text unstyled={local.unstyled} ref={local.ref} {...others} __staticSelector="Highlight">
-      <For each={highlightChunks}>
+      <For each={highlightChunks()}>
         {(item, i) =>
           item.highlighted ? (
             <Mark

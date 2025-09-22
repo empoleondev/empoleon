@@ -76,8 +76,8 @@ const defaultProps: Partial<RadioIndicatorProps> = {
 };
 
 const varsResolver = createVarsResolver<RadioIndicatorFactory>(
-  (theme, { radius, color, size, iconColor, variant, autoContrast }) => {
-    const parsedColor = parseThemeColor({ color: color || theme.primaryColor, theme });
+  (theme, props) => {
+    const parsedColor = parseThemeColor({ color: props.color || theme.primaryColor, theme });
     const outlineColor =
       parsedColor.isThemeColor && parsedColor.shade === undefined
         ? `var(--empoleon-color-${parsedColor.color}-outline)`
@@ -85,14 +85,14 @@ const varsResolver = createVarsResolver<RadioIndicatorFactory>(
 
     return {
       indicator: {
-        '--radio-size': getSize(size, 'radio-size'),
-        '--radio-radius': radius === undefined ? undefined : getRadius(radius),
-        '--radio-color': variant === 'outline' ? outlineColor : getThemeColor(color, theme),
-        '--radio-icon-size': getSize(size, 'radio-icon-size'),
-        '--radio-icon-color': iconColor
-          ? getThemeColor(iconColor, theme)
-          : getAutoContrastValue(autoContrast, theme)
-            ? getContrastColor({ color, theme, autoContrast })
+        '--radio-size': getSize(props.size, 'radio-size'),
+        '--radio-radius': props.radius === undefined ? undefined : getRadius(props.radius),
+        '--radio-color': props.variant === 'outline' ? outlineColor : getThemeColor(props.color, theme),
+        '--radio-icon-size': getSize(props.size, 'radio-icon-size'),
+        '--radio-icon-color': props.iconColor
+          ? getThemeColor(props.iconColor, theme)
+          : getAutoContrastValue(props.autoContrast, theme)
+            ? getContrastColor({ color: props.color, theme, autoContrast: props.autoContrast })
             : undefined,
       },
     };

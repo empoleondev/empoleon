@@ -64,12 +64,12 @@ export const ListItem = factory<ListItemFactory>(_props => {
       ref={local.ref}
       {...others}
     >
-      <div {...ctx.getStyles('itemWrapper', stylesApiProps)}>
+      <Box component='div' {...ctx.getStyles('itemWrapper', stylesApiProps)}>
         {iconEl() && (
-          <span {...ctx.getStyles('itemIcon', stylesApiProps)}>{iconEl()}</span>
+          <Box component='span' {...ctx.getStyles('itemIcon', stylesApiProps)}>{iconEl()}</Box>
         )}
-        <span {...ctx.getStyles('itemLabel', stylesApiProps)}>{local.children}</span>
-      </div>
+        <Box component='span' {...ctx.getStyles('itemLabel', stylesApiProps)}>{local.children}</Box>
+      </Box>
     </Box>
   );
 });

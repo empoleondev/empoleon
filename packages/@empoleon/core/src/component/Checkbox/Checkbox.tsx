@@ -104,8 +104,8 @@ const defaultProps: Partial<CheckboxProps> = {
 } satisfies Partial<CheckboxProps>;
 
 const varsResolver = createVarsResolver<CheckboxFactory>(
-  (theme, { radius, color, size, iconColor, variant, autoContrast }) => {
-    const parsedColor = parseThemeColor({ color: color || theme.primaryColor, theme });
+  (theme, props) => {
+    const parsedColor = parseThemeColor({ color: props.color || theme.primaryColor, theme });
     const outlineColor =
       parsedColor.isThemeColor && parsedColor.shade === undefined
         ? `var(--empoleon-color-${parsedColor.color}-outline)`
@@ -113,13 +113,13 @@ const varsResolver = createVarsResolver<CheckboxFactory>(
 
     return {
       root: {
-        '--checkbox-size': getSize(size, 'checkbox-size'),
-        '--checkbox-radius': radius === undefined ? undefined : getRadius(radius),
-        '--checkbox-color': variant === 'outline' ? outlineColor : getThemeColor(color, theme),
-        '--checkbox-icon-color': iconColor
-          ? getThemeColor(iconColor, theme)
-          : getAutoContrastValue(autoContrast, theme)
-            ? getContrastColor({ color, theme, autoContrast })
+        '--checkbox-size': getSize(props.size, 'checkbox-size'),
+        '--checkbox-radius': props.radius === undefined ? undefined : getRadius(props.radius),
+        '--checkbox-color': props.variant === 'outline' ? outlineColor : getThemeColor(props.color, theme),
+        '--checkbox-icon-color': props.iconColor
+          ? getThemeColor(props.iconColor, theme)
+          : getAutoContrastValue(props.autoContrast, theme)
+            ? getContrastColor({ color: props.color, theme, autoContrast: props.autoContrast })
             : undefined,
       },
     };

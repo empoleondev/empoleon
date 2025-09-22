@@ -100,10 +100,10 @@ const defaultProps = {
   withinPortal: true,
 } satisfies Partial<NotificationsProps>;
 
-const varsResolver = createVarsResolver<NotificationsFactory>((_, { zIndex, containerWidth }) => ({
+const varsResolver = createVarsResolver<NotificationsFactory>((_, props) => ({
   root: {
-    '--notifications-z-index': zIndex?.toString(),
-    '--notifications-container-width': rem(containerWidth),
+    '--notifications-z-index': props.zIndex?.toString(),
+    '--notifications-container-width': rem(props.containerWidth),
   },
 }));
 

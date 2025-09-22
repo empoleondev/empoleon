@@ -104,16 +104,16 @@ const defaultProps: Partial<ComboboxProps> = {
   size: 'sm',
 } satisfies Partial<ComboboxProps>;
 
-const varsResolver = createVarsResolver<ComboboxFactory>((_, { size, dropdownPadding }) => ({
+const varsResolver = createVarsResolver<ComboboxFactory>((_, props) => ({
   options: {
-    '--combobox-option-fz': getFontSize(size),
-    '--combobox-option-padding': getSize(size, 'combobox-option-padding'),
+    '--combobox-option-fz': getFontSize(props.size),
+    '--combobox-option-padding': getSize(props.size, 'combobox-option-padding'),
   },
 
   dropdown: {
-    '--combobox-padding': dropdownPadding === undefined ? undefined : rem(dropdownPadding),
-    '--combobox-option-fz': getFontSize(size),
-    '--combobox-option-padding': getSize(size, 'combobox-option-padding'),
+    '--combobox-padding': props.dropdownPadding === undefined ? undefined : rem(props.dropdownPadding),
+    '--combobox-option-fz': getFontSize(props.size),
+    '--combobox-option-padding': getSize(props.size, 'combobox-option-padding'),
   },
 }));
 

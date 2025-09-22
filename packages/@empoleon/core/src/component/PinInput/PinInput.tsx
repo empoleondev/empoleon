@@ -143,9 +143,9 @@ const defaultProps = {
   size: 'sm',
 } satisfies Partial<PinInputProps>;
 
-const varsResolver = createVarsResolver<PinInputFactory>((_, { size }) => ({
+const varsResolver = createVarsResolver<PinInputFactory>((_, props) => ({
   root: {
-    '--pin-input-size': getSize(size ?? defaultProps.size, 'pin-input-size'),
+    '--pin-input-size': getSize(props.size ?? defaultProps.size, 'pin-input-size'),
   },
 }));
 

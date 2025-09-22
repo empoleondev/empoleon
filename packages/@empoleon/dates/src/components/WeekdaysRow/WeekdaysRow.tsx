@@ -58,10 +58,10 @@ export type WeekdaysRowFactory = Factory<{
 
 const defaultProps: Partial<WeekdaysRowProps> = {};
 
-const varsResolver = createVarsResolver<WeekdaysRowFactory>((_, { size }) => ({
+const varsResolver = createVarsResolver<WeekdaysRowFactory>((_, props) => ({
   weekdaysRow: {
-    '--wr-fz': getFontSize(size),
-    '--wr-spacing': getSpacing(size),
+    '--wr-fz': getFontSize(props.size),
+    '--wr-spacing': getSpacing(props.size),
   },
 }));
 

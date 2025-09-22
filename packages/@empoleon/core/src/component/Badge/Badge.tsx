@@ -85,25 +85,25 @@ export type BadgeFactory = PolymorphicFactory<{
 const defaultProps: Partial<BadgeProps> = {};
 
 const varsResolver = createVarsResolver<BadgeFactory>(
-  (theme, { radius, color, gradient, variant, size, autoContrast }) => {
+  (theme, props) => {
     const colors = theme.variantColorResolver({
-      color: color || theme.primaryColor,
+      color: props.color || theme.primaryColor,
       theme,
-      gradient,
-      variant: variant || 'filled',
-      autoContrast,
+      gradient: props.gradient,
+      variant: props.variant || 'filled',
+      autoContrast: props.autoContrast,
     });
 
     return {
       root: {
-        '--badge-height': getSize(size, 'badge-height'),
-        '--badge-padding-x': getSize(size, 'badge-padding-x'),
-        '--badge-fz': getSize(size, 'badge-fz'),
-        '--badge-radius': radius === undefined ? undefined : getRadius(radius),
-        '--badge-bg': color || variant ? colors.background : undefined,
-        '--badge-color': color || variant ? colors.color : undefined,
-        '--badge-bd': color || variant ? colors.border : undefined,
-        '--badge-dot-color': variant === 'dot' ? getThemeColor(color, theme) : undefined,
+        '--badge-height': getSize(props.size, 'badge-height'),
+        '--badge-padding-x': getSize(props.size, 'badge-padding-x'),
+        '--badge-fz': getSize(props.size, 'badge-fz'),
+        '--badge-radius': props.radius === undefined ? undefined : getRadius(props.radius),
+        '--badge-bg': props.color || props.variant ? colors.background : undefined,
+        '--badge-color': props.color || props.variant ? colors.color : undefined,
+        '--badge-bd': props.color || props.variant ? colors.border : undefined,
+        '--badge-dot-color': props.variant === 'dot' ? getThemeColor(props.color, theme) : undefined,
       },
     };
   }

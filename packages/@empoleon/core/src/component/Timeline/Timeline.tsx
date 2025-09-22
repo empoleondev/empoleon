@@ -74,14 +74,14 @@ const defaultProps = {
 } satisfies Partial<TimelineProps>;
 
 const varsResolver = createVarsResolver<TimelineFactory>(
-  (theme, { bulletSize, lineWidth, radius, color, autoContrast }) => ({
+  (theme, props) => ({
     root: {
-      '--tl-bullet-size': rem(bulletSize),
-      '--tl-line-width': rem(lineWidth),
-      '--tl-radius': radius === undefined ? undefined : getRadius(radius),
-      '--tl-color': color ? getThemeColor(color, theme) : undefined,
-      '--tl-icon-color': getAutoContrastValue(autoContrast, theme)
-        ? getContrastColor({ color, theme, autoContrast })
+      '--tl-bullet-size': rem(props.bulletSize),
+      '--tl-line-width': rem(props.lineWidth),
+      '--tl-radius': props.radius === undefined ? undefined : getRadius(props.radius),
+      '--tl-color': props.color ? getThemeColor(props.color, theme) : undefined,
+      '--tl-icon-color': getAutoContrastValue(props.autoContrast, theme)
+        ? getContrastColor({ color: props.color, theme, autoContrast: props.autoContrast })
         : undefined,
     },
   })

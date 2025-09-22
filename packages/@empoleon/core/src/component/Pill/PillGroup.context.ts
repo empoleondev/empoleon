@@ -1,7 +1,8 @@
+import { Accessor } from 'solid-js';
 import { createOptionalContext, EmpoleonSize } from '../../core';
 
 export interface PillGroupContextValue {
-  size: EmpoleonSize | (string & {}) | undefined;
+  size: Accessor<EmpoleonSize | (string & {}) | undefined>;
   disabled: boolean | undefined;
 }
 

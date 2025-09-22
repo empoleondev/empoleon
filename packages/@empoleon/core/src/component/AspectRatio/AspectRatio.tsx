@@ -32,9 +32,9 @@ export type AspectRatioFactory = Factory<{
   vars: AspectRatioCssVariables;
 }>;
 
-const varsResolver = createVarsResolver<AspectRatioFactory>((_, { ratio }) => ({
+const varsResolver = createVarsResolver<AspectRatioFactory>((_, props) => ({
   root: {
-    '--ar-ratio': ratio?.toString(),
+    '--ar-ratio': props.ratio?.toString(),
   },
 }));
 

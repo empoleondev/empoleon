@@ -84,30 +84,27 @@ export type AvatarFactory = PolymorphicFactory<{
 }>;
 
 const varsResolver = createVarsResolver<AvatarFactory>(
-  (
-    theme,
-    { size, radius, variant, gradient, color, autoContrast, name, allowedInitialsColors }
-  ) => {
+  (theme, props) => {
     const _color =
-      color === 'initials' && typeof name === 'string'
-        ? getInitialsColor(name, allowedInitialsColors)
-        : color;
+      props.color === 'initials' && typeof props.name === 'string'
+        ? getInitialsColor(props.name, props.allowedInitialsColors)
+        : props.color;
 
     const colors = theme.variantColorResolver({
       color: _color || 'gray',
       theme,
-      gradient,
-      variant: variant || 'light',
-      autoContrast,
+      gradient: props.gradient,
+      variant: props.variant || 'light',
+      autoContrast: props.autoContrast,
     });
 
     return {
       root: {
-        '--avatar-size': getSize(size, 'avatar-size'),
-        '--avatar-radius': radius === undefined ? undefined : getRadius(radius),
-        '--avatar-bg': _color || variant ? colors.background : undefined,
-        '--avatar-color': _color || variant ? colors.color : undefined,
-        '--avatar-bd': _color || variant ? colors.border : undefined,
+        '--avatar-size': getSize(props.size, 'avatar-size'),
+        '--avatar-radius': props.radius === undefined ? undefined : getRadius(props.radius),
+        '--avatar-bg': _color || props.variant ? colors.background : undefined,
+        '--avatar-color': _color || props.variant ? colors.color : undefined,
+        '--avatar-bd': _color || props.variant ? colors.border : undefined,
       },
     };
   }

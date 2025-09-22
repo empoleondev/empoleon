@@ -36,9 +36,9 @@ export type CodeFactory = Factory<{
 
 const defaultProps: Partial<CodeProps> = {};
 
-const varsResolver = createVarsResolver<CodeFactory>((theme, { color }) => ({
+const varsResolver = createVarsResolver<CodeFactory>((theme, props) => ({
   root: {
-    '--code-bg': color ? getThemeColor(color, theme) : undefined,
+    '--code-bg': props.color ? getThemeColor(props.color, theme) : undefined,
   },
 }));
 

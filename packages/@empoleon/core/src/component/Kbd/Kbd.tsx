@@ -33,8 +33,8 @@ export type KbdFactory = Factory<{
 
 const defaultProps: Partial<KbdProps> = {};
 
-const varsResolver = createVarsResolver<KbdFactory>((_, { size }) => ({
-  root: { '--kbd-fz': getSize(size, 'kbd-fz') },
+const varsResolver = createVarsResolver<KbdFactory>((_, props) => ({
+  root: { '--kbd-fz': getSize(props.size, 'kbd-fz') },
 }));
 
 export const Kbd = factory<KbdFactory>(_props => {

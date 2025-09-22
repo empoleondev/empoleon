@@ -1,6 +1,4 @@
-import { useDisclosure } from '@empoleon/hooks';
 import { ExtendComponent, Factory, useProps } from '../../core';
-import { useDelayedHover } from '../../utils/Floating';
 import { Popover, PopoverProps, PopoverStylesNames } from '../Popover';
 import { PopoverCssVariables } from '../Popover/Popover';
 import { HoverCardContextProvider } from './HoverCard.context';
@@ -35,11 +33,11 @@ export type HoverCardFactory = Factory<{
   vars: PopoverCssVariables;
 }>;
 
-const defaultProps: Partial<HoverCardProps> = {
+const defaultProps = {
   openDelay: 0,
   closeDelay: 150,
   initiallyOpened: false,
-};
+} satisfies Partial<HoverCardProps>;
 
 export function HoverCard(_props: HoverCardProps) {
   const props = useProps('HoverCard', defaultProps, _props);
@@ -69,9 +67,11 @@ export function HoverCard(_props: HoverCardProps) {
         getFloatingProps: hoverCard.getFloatingProps,
         reference: hoverCard.reference,
         floating: hoverCard.floating,
+        x: hoverCard.x,
+        y: hoverCard.y,
       }}
     >
-      <Popover {...others} opened={hoverCard.opened()} keepMounted __staticSelector="HoverCard">
+      <Popover {...others} opened={hoverCard.opened()} __staticSelector="HoverCard">
         {local.children}
       </Popover>
     </HoverCardContextProvider>
