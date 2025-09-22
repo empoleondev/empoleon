@@ -102,14 +102,14 @@ export const Group = factory<GroupFactory>(_props => {
     'ref',
   ]);
 
-  const filteredChildren = filterFalsyChildren(local.children);
-  const childrenCount = filteredChildren.length;
+  const filteredChildren = () => filterFalsyChildren(local.children);
+  const childrenCount = () => filteredChildren.length;
   const resolvedGap = getSpacing(local.gap ?? 'md');
-  const childWidth = `calc(${
-    100 / childrenCount
+  const childWidth = () => `calc(${
+    100 / childrenCount()
   }% - (${resolvedGap} - ${resolvedGap} / ${childrenCount}))`;
 
-  const stylesCtx: GroupStylesCtx = { childWidth };
+  const stylesCtx: GroupStylesCtx = { childWidth: childWidth() };
 
   const getStyles = useStyles<GroupFactory>({
     name: 'Group',
@@ -135,7 +135,7 @@ export const Group = factory<GroupFactory>(_props => {
       size={local.__size}
       {...others}
     >
-      {filteredChildren}
+      {filteredChildren()}
     </Box>
   );
 });
