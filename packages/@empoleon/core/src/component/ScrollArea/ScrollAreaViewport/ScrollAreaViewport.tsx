@@ -21,9 +21,9 @@ export function ScrollAreaViewport(props: ScrollAreaViewportProps) {
         ...local.style,
       }}
     >
-      <div {...ctx.getStyles("content")} ref={ctx.onContentChange}>
+      <Box component='div' {...ctx.getStyles("content")} ref={ctx.onContentChange}>
         {local.children}
-      </div>
+      </Box>
     </Box>
   );
 }

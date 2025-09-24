@@ -1,4 +1,4 @@
-import { JSX, createSignal, createEffect, onCleanup, onMount, splitProps } from 'solid-js';
+import { JSX, createSignal, createEffect, onCleanup, splitProps } from 'solid-js';
 import { useScrollAreaContext } from '../ScrollArea.context';
 import {
   ScrollbarContextValue,
@@ -41,13 +41,13 @@ export function Scrollbar(props: ScrollbarPrivateProps & JSX.HTMLAttributes<HTML
   const composeRefs = useMergedRef(local.ref, (node: HTMLDivElement) => setScrollbar(node));
   const [rectRef, setRect] = createSignal<DOMRect | null>(null);
   const [prevWebkitUserSelectRef, setPrevWebkitUserSelectRef] = createSignal('');
-  const { viewport } = context;
+  const [isDragging, setIsDragging] = createSignal(false);
+
   const maxScrollPos = () => local.sizes.content - local.sizes.viewport;
   const handleResize = useDebouncedCallback(local.onResize, 10);
 
   const handleDragScroll = (e: PointerEvent) => {
     const rect = rectRef();
-
     if (rect !== null){
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
@@ -95,26 +95,52 @@ export function Scrollbar(props: ScrollbarPrivateProps & JSX.HTMLAttributes<HTML
           position: 'absolute',
           ...(typeof scrollbarProps.style === 'object' && scrollbarProps.style !== null ? scrollbarProps.style : {})
         }}
-        onPointerDown={composeEventHandlers(local.onThumbPointerDown, (e: PointerEvent) => {
-          e.preventDefault();
-          if (e.button === 0) {
-            const el = e.currentTarget as HTMLElement;
-            el.setPointerCapture(e.pointerId);
-            setRect(scrollbar()!.getBoundingClientRect());
-            setPrevWebkitUserSelectRef(document.body.style.webkitUserSelect);
-            document.body.style.webkitUserSelect = 'none';
+        onPointerDown={composeEventHandlers(
+          (e: PointerEvent) => {
+            const target = e.target as HTMLElement;
+            const isThumbClick = target.closest('[data-empoleon-scrollarea-thumb]') !== null;
+
+            if (isThumbClick) {
+              const rect = scrollbar()?.getBoundingClientRect();
+              if (rect) {
+                const relativeX = e.clientX - rect.left;
+                const relativeY = e.clientY - rect.top;
+                local.onThumbPointerDown({ x: relativeX, y: relativeY });
+              }
+            } else {
+              local.onThumbPointerDown({ x: 0, y: 0 });
+            }
+          },
+          (e: PointerEvent) => {
+            e.preventDefault();
+            if (e.button === 0) {
+              const el = e.currentTarget as HTMLElement;
+              el.setPointerCapture(e.pointerId);
+              setIsDragging(true);
+              setRect(scrollbar()!.getBoundingClientRect());
+              setPrevWebkitUserSelectRef(document.body.style.webkitUserSelect);
+              document.body.style.webkitUserSelect = 'none';
+              handleDragScroll(e);
+            }
+          }
+        )}
+        onPointerMove={composeEventHandlers(local.onThumbPositionChange, (e: PointerEvent) => {
+          if (isDragging()) {
             handleDragScroll(e);
           }
         })}
-        onPointerMove={composeEventHandlers(local.onThumbPositionChange, handleDragScroll)}
         onPointerUp={composeEventHandlers(local.onThumbPointerUp, (e: PointerEvent) => {
           const el = e.currentTarget as HTMLElement;
           if (el.hasPointerCapture(e.pointerId)) {
             e.preventDefault();
             el.releasePointerCapture(e.pointerId);
           }
+          setIsDragging(false);
+          document.body.style.webkitUserSelect = prevWebkitUserSelectRef();
+          setRect(null);
         })}
         onLostPointerCapture={() => {
+          setIsDragging(false);
           document.body.style.webkitUserSelect = prevWebkitUserSelectRef();
           setRect(null);
         }}

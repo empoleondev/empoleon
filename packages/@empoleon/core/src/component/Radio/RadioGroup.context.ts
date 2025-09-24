@@ -2,7 +2,7 @@ import { createOptionalContext, EmpoleonSize } from '../../core';
 
 interface RadioGroupContextValue {
   size: EmpoleonSize | undefined;
-  value: string;
+  value: () => string;
   onChange: (event: Event | string) => void;
   name: string;
 }

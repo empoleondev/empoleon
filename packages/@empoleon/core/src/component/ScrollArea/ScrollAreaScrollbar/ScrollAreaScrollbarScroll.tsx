@@ -19,9 +19,9 @@ export interface ScrollAreaScrollbarScrollProps
 }
 
 export function ScrollAreaScrollbarScroll(props: ScrollAreaScrollbarScrollProps) {
-  const [local, others] = splitProps(props, ['forceMount', 'ref', 'orientation']);
+  const [local, others] = splitProps(props, ['forceMount', 'ref']);
   const context = useScrollAreaContext();
-  const isHorizontal = () => local.orientation === 'horizontal';
+  const isHorizontal = () => props.orientation === 'horizontal';
   const [state, setState] = createSignal<'hidden' | 'idle' | 'interacting' | 'scrolling'>('hidden');
   const debounceScrollEnd = useDebouncedCallback(() => setState('idle'), 100);
 

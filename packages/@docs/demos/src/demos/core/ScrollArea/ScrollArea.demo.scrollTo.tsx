@@ -35,16 +35,37 @@ function Demo() {
 `;
 
 function Demo() {
-  const [viewport, setViewport] = createSignal<HTMLDivElement|null>(null);
-  const scrollToBottom = () =>
-    viewport()!.scrollTo({ top: viewport()!.scrollHeight, behavior: 'smooth' });
-  const scrollToCenter = () =>
-    viewport()!.scrollTo({ top: viewport()!.scrollHeight / 2, behavior: 'smooth' });
-  const scrollToTop = () => viewport()!.scrollTo({ top: 0, behavior: 'smooth' });
+  const [viewport, setViewport] = createSignal<HTMLDivElement>();
+
+  const scrollToBottom = () => {
+    const el = viewport();
+    if (el) {
+      el.scrollTo({ top: el.scrollHeight, behavior: 'smooth' });
+    }
+  };
+
+  const scrollToCenter = () => {
+    const el = viewport();
+    if (el) {
+      el.scrollTo({ top: (el.scrollHeight - el.clientHeight) / 2, behavior: 'smooth' });
+    }
+  };
+
+  const scrollToTop = () => {
+    const el = viewport();
+    if (el) {
+      el.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
 
   return (
     <Stack align="center">
-      <ScrollArea w={300} h={200} viewport-ref={setViewport}>
+      <ScrollArea
+        w={300}
+        h={200}
+        // @ts-ignore - TypeScript definition is incorrect, this prop accepts a function
+        viewportRef={setViewport}
+      >
         <Content />
       </ScrollArea>
       <Group justify="center">

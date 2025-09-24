@@ -506,14 +506,14 @@ export const RangeSlider = factory<RangeSliderFactory>(_props => {
     }
   };
 
-  const sharedThumbProps = {
+  const sharedThumbProps = () => ({
     max: local.max!,
     min: local.min!,
     size: local.size,
     labelTransitionProps: local.labelTransitionProps,
     labelAlwaysOn: local.labelAlwaysOn,
     onBlur: () => setFocused(-1),
-  };
+  });
 
   const hasArrayThumbChildren = Array.isArray(local.thumbChildren);
 
@@ -564,7 +564,7 @@ export const RangeSlider = factory<RangeSliderFactory>(_props => {
           }}
         >
           <Thumb
-            {...sharedThumbProps}
+            {...sharedThumbProps()}
             value={local.scale!(_value()[0])}
             position={positions()[0]}
             dragging={active()}
@@ -590,7 +590,7 @@ export const RangeSlider = factory<RangeSliderFactory>(_props => {
           </Thumb>
 
           <Thumb
-            {...sharedThumbProps}
+            {...sharedThumbProps()}
             thumbLabel={local.thumbToLabel}
             value={local.scale!(_value()[1])}
             position={positions()[1]}

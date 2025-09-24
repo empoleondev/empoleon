@@ -1,4 +1,4 @@
-import { Component, splitProps } from 'solid-js';
+import { Component, createEffect, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
@@ -139,14 +139,14 @@ export const RadioIndicator = factory<RadioIndicatorFactory>(_props => {
   });
 
   const ctx = useRadioCardContext();
-  const _checked = typeof local.checked === 'boolean' ? local.checked : ctx?.checked || false;
+  const _checked = () => (typeof local.checked === 'boolean' ? local.checked : ctx?.checked() || false);
 
   return (
     <Box
       ref={local.ref}
       {...getStyles('indicator', { variant: local.variant })}
       variant={local.variant}
-      mod={[{ checked: _checked, disabled: local.disabled }, local.mod]}
+      mod={[{ checked: _checked(), disabled: local.disabled }, local.mod]}
       {...others}
     >
       <Icon {...getStyles('icon') as any} />

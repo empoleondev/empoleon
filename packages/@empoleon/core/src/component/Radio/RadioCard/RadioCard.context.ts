@@ -1,7 +1,7 @@
 import { createOptionalContext } from '../../../core';
 
 export interface RadioCardContextValue {
-  checked: boolean;
+  checked: () => boolean;
 }
 
 export const [RadioCardProvider, useRadioCardContext] =

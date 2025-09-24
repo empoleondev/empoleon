@@ -1,4 +1,4 @@
-import { createSignal, onMount, splitProps } from 'solid-js';
+import { createSignal, onCleanup, onMount, splitProps } from 'solid-js';
 import { PossibleRef, useMergedRef } from '@empoleon/hooks';
 import { useScrollAreaContext } from '../ScrollArea.context';
 import { ScrollAreaScrollbarAxisProps } from '../ScrollArea.types';
@@ -21,7 +21,12 @@ export function ScrollAreaScrollbarX(props: ScrollAreaScrollbarAxisProps) {
   onMount(() => {
     if (ref()) {
       setComputedStyle(window.getComputedStyle(ref() as Element));
+      ctx.onScrollbarXChange(ref() as HTMLDivElement);
     }
+  });
+
+  onCleanup(() => {
+    ctx.onScrollbarXChange(null);
   });
 
   return (

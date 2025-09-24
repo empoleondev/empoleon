@@ -2,7 +2,7 @@ import { BoxProps, ElementProps, NativeSelect } from '@empoleon/core';
 import { getControlLabel } from './get-control-label';
 import { SelectData, transformSelectData } from './transform-select-data';
 import { ConfiguratorControl } from './types';
-import { createEffect, splitProps } from 'solid-js';
+import { splitProps } from 'solid-js';
 
 export type ConfiguratorSelectControlOptions = ConfiguratorControl<
   'select',

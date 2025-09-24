@@ -1,4 +1,4 @@
-import { createEffect, createSignal, JSX, onCleanup, splitProps } from 'solid-js';
+import { createEffect, createSignal, JSX, onCleanup, Show, splitProps } from 'solid-js';
 import { PossibleRef, useMergedRef } from '@empoleon/hooks';
 import {
   Box,
@@ -186,22 +186,21 @@ export const ScrollArea = factory<ScrollAreaFactory>(_props => {
         data-offset-scrollbars={local.offsetScrollbars === true ? 'xy' : local.offsetScrollbars || undefined}
         data-scrollbars={local.scrollbars || undefined}
         data-horizontal-hidden={
-          local.offsetScrollbars === 'present' && !horizontalThumbVisible ? 'true' : undefined
+          local.offsetScrollbars === 'present' && !horizontalThumbVisible() ? 'true' : undefined
         }
         data-vertical-hidden={
-          local.offsetScrollbars === 'present' && !verticalThumbVisible ? 'true' : undefined
+          local.offsetScrollbars === 'present' && !verticalThumbVisible() ? 'true' : undefined
         }
         onScroll={(e: any) => {
           if (typeof local.viewportProps?.onScroll === 'function') {
             local.viewportProps?.onScroll?.(e);
           }
           local.onScrollPositionChange?.({ x: e.currentTarget.scrollLeft, y: e.currentTarget.scrollTop });
-          const { scrollTop, scrollHeight, clientHeight } = e.currentTarget;
           // threshold of -0.6 is required for some browsers that use sub-pixel rendering
-          if (scrollTop - (scrollHeight - clientHeight) >= -0.6) {
+          if (e.currentTarget.scrollTop - (e.currentTarget.scrollHeight - e.currentTarget.clientHeight) >= -0.6) {
             local.onBottomReached?.();
           }
-          if (scrollTop === 0) {
+          if (e.currentTarget.scrollTop === 0) {
             local.onTopReached?.();
           }
         }}
@@ -209,7 +208,7 @@ export const ScrollArea = factory<ScrollAreaFactory>(_props => {
         {local.children}
       </ScrollAreaViewport>
 
-      {(local.scrollbars === 'xy' || local.scrollbars === 'x') && (
+      <Show when={local.scrollbars === 'xy' || local.scrollbars === 'x'}>
         <ScrollAreaScrollbar
           {...getStyles('scrollbar') as any}
           orientation="horizontal"
@@ -224,9 +223,9 @@ export const ScrollArea = factory<ScrollAreaFactory>(_props => {
         >
           <ScrollAreaThumb {...getStyles('thumb') as any} />
         </ScrollAreaScrollbar>
-      )}
+      </Show>
 
-      {(local.scrollbars === 'xy' || local.scrollbars === 'y') && (
+      <Show when={local.scrollbars === 'xy' || local.scrollbars === 'y'}>
         <ScrollAreaScrollbar
           {...getStyles('scrollbar') as any}
           orientation="vertical"
@@ -241,11 +240,11 @@ export const ScrollArea = factory<ScrollAreaFactory>(_props => {
         >
           <ScrollAreaThumb {...getStyles('thumb') as any} />
         </ScrollAreaScrollbar>
-      )}
+      </Show>
 
       <ScrollAreaCorner
         {...getStyles('corner') as any}
-        data-hovered={scrollbarHovered || undefined}
+        data-hovered={scrollbarHovered() || undefined}
         data-hidden={local.type === 'never' || undefined}
       />
     </ScrollAreaRoot>

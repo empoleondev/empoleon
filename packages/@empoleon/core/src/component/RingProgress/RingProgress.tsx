@@ -1,4 +1,4 @@
-import { splitProps, JSX } from 'solid-js';
+import { splitProps, JSX, For } from 'solid-js';
 import {
   Box,
   BoxProps,
@@ -113,31 +113,35 @@ export const RingProgress = factory<RingProgressFactory>(_props => {
     varsResolver,
   });
 
-  const clampedThickness = getClampedThickness(local.thickness!, local.size!);
+  const clampedThickness = () => getClampedThickness(local.thickness!, local.size!);
 
-  const curves = getCurves({
+  const curvesData = () => getCurves({
     size: local.size!,
-    thickness: clampedThickness,
+    thickness: clampedThickness(),
     sections: local.sections,
     renderRoundedLineCaps: local.roundCaps,
     rootColor: local.rootColor,
-  }).map(({ data, sum, root, lineRoundCaps, offset }, index) => (
-    <Curve
-      {...data}
-      size={local.size!}
-      thickness={clampedThickness}
-      sum={sum}
-      offset={offset}
-      color={data?.color}
-      root={root}
-      lineRoundCaps={lineRoundCaps}
-      getStyles={getStyles}
-    />
-  ));
+  });
 
   return (
     <Box {...getStyles('root')} size={local.size} ref={local.ref} {...others}>
-      <Box component='svg' {...getStyles('svg')}>{curves}</Box>
+      <Box component='svg' {...getStyles('svg')}>
+        <For each={curvesData()}>
+          {(item) => (
+            <Curve
+              {...item.data}
+              size={local.size!}
+              thickness={clampedThickness()}
+              sum={item.sum}
+              offset={item.offset}
+              color={item.data?.color}
+              root={item.root}
+              lineRoundCaps={item.lineRoundCaps}
+              getStyles={getStyles}
+            />
+          )}
+        </For>
+      </Box>
       {local.label && <Box component='div' {...getStyles('label')}>{local.label}</Box>}
     </Box>
   );

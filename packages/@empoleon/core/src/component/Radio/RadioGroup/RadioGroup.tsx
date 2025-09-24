@@ -69,7 +69,7 @@ export const RadioGroup = factory<RadioGroupFactory>(_props => {
     !local.readOnly && setValue(typeof event === 'string' ? event : (event.currentTarget as HTMLInputElement)?.value);
 
   return (
-    <RadioGroupProvider value={{ value: _value(), onChange: handleChange, size: local.size, name: _name }}>
+    <RadioGroupProvider value={{ value: _value, onChange: handleChange, size: local.size, name: _name }}>
       <Input.Wrapper
         size={local.size}
         ref={local.ref}

@@ -25,7 +25,7 @@ export function ScrollAreaScrollbarHover(props: ScrollAreaScrollbarHoverProps) {
     const el = ctx.scrollArea;
     if (!el) return;
 
-    let hideTimer: number;
+    let hideTimer: number = 0;
 
     const handlePointerEnter = () => {
       window.clearTimeout(hideTimer);

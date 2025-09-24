@@ -96,7 +96,7 @@ export const RadioCard = factory<RadioCardFactory>(_props => {
 
   const { dir } = useDirection();
   const ctx = useRadioGroupContext();
-  const _checked = typeof local.checked === 'boolean' ? local.checked : ctx?.value === local.value || false;
+  const _checked = () => typeof local.checked === 'boolean' ? local.checked : ctx?.value() === local.value || false;
   const _name = local.name || ctx?.name;
 
   const handleKeyDown = (event: KeyboardEvent & { currentTarget: HTMLButtonElement; target: Element }) => {
@@ -142,11 +142,11 @@ export const RadioCard = factory<RadioCardFactory>(_props => {
       {/* @ts-ignore */}
       <UnstyledButton
         ref={local.ref}
-        mod={[{ 'with-border': local.withBorder, checked: _checked }, local.mod]}
+        mod={[{ 'with-border': local.withBorder, checked: _checked() }, local.mod]}
         {...getStyles('card')}
         {...others}
         role="radio"
-        aria-checked={_checked}
+        aria-checked={_checked()}
         name={_name}
         onClick={(event: MouseEvent & {
           currentTarget: HTMLButtonElement;

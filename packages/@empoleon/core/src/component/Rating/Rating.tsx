@@ -171,7 +171,7 @@ export const Rating = factory<RatingFactory>(_props => {
   const [isOutside, setOutside] = createSignal(true);
 
   const _fractions = Math.floor(local.fractions!);
-  const _count = Math.floor(local.count!);
+  const _count = () => Math.floor(local.count!);
 
   const decimalUnit = 1 / _fractions;
   const stableValueRounded = createMemo(() =>
@@ -184,12 +184,12 @@ export const Rating = factory<RatingFactory>(_props => {
   const getRatingFromCoordinates = (x: number) => {
     const { left, right, width } = rootRef()!.getBoundingClientRect();
 
-    const symbolWidth = width / _count;
+    const symbolWidth = width / _count();
 
     const hoverPosition = dir === 'rtl' ? right - x : x - left;
     const hoverValue = hoverPosition / symbolWidth;
 
-    return clamp(roundValueTo(hoverValue + decimalUnit / 2, decimalUnit), decimalUnit, _count);
+    return clamp(roundValueTo(hoverValue + decimalUnit / 2, decimalUnit), decimalUnit, _count());
   };
 
   const handleMouseEnter = (event: MouseEvent & { currentTarget: HTMLDivElement; target: Element }) => {
@@ -279,7 +279,7 @@ export const Rating = factory<RatingFactory>(_props => {
         id={_id}
         {...others}
       >
-        <Index each={Array(_count).fill(0)}>
+        <Index each={Array(_count()).fill(0)}>
           {(_, index) => {
             const integerValue = index + 1;
             const fractionItems = Array.from(new Array(index === 0 ? _fractions + 1 : _fractions));

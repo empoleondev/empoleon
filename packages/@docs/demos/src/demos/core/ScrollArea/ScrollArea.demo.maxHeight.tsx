@@ -1,6 +1,7 @@
 import { Button, Group, ScrollArea } from '@empoleon/core';
 import { useCounter } from '@empoleon/hooks';
 import { EmpoleonDemo } from '@empoleonx/demo';
+import { For } from 'solid-js';
 
 const lorem =
   'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta perspiciatis reiciendis voluptate eaque itaque quos. Natus iure tenetur libero, reprehenderit ad, sequi, in aliquam eos necessitatibus expedita delectus veniam culpa!';
@@ -39,14 +40,13 @@ function Demo() {
 
 function Demo() {
   const [count, handlers] = useCounter(3, { min: 0, max: 10 });
-  const content = Array(count())
-    .fill(0)
-    .map((_, index) => <p >{lorem}</p>);
 
   return (
     <>
       <ScrollArea.Autosize mah={300} maw={400} mx="auto">
-        {content}
+        <For each={Array(count()).fill(0)}>
+          {_ => <p>{lorem}</p>}
+        </For>
       </ScrollArea.Autosize>
 
       <Group justify="center" mt="md">

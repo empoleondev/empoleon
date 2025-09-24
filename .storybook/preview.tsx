@@ -15,18 +15,6 @@
 
 import { render } from 'solid-js/web';
 import type { Preview } from '@storybook/html-vite';
-import { EmpoleonProvider, useEmpoleonColorScheme } from '../packages/@empoleon/core'; // Adjust path as needed
-
-// Theme sync component
-function ThemeSync(props: { theme: string; children: any }) {
-  // This will run in SolidJS context
-  const { setColorScheme } = useEmpoleonColorScheme();
-
-  // Set theme immediately
-  setColorScheme(props.theme === 'dark' ? 'dark' : 'light');
-
-  return props.children;
-}
 
 export const globalTypes = {
   theme: {
@@ -46,22 +34,10 @@ export const globalTypes = {
 
 export const decorators = [
   (Story: any, context: any) => {
-    const theme = context.globals.theme || 'light';
-
-    // Create container for SolidJS
     const container = document.createElement('div');
-    container.setAttribute('data-theme', theme);
-    container.style.minHeight = '100vh';
-    container.style.backgroundColor = theme === 'dark' ? '#1a1a1a' : '#ffffff';
-    container.style.color = theme === 'dark' ? '#ffffff' : '#000000';
 
-    // Render SolidJS component tree with providers
     render(() => (
-      <EmpoleonProvider>
-        <ThemeSync theme={theme}>
-          <Story />
-        </ThemeSync>
-      </EmpoleonProvider>
+      <Story {...context.args} />
     ), container);
 
     return container;

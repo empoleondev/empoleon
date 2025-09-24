@@ -1,8 +1,7 @@
 import {
   createSignal,
   splitProps,
-  Switch,
-  Match,
+  Show,
 } from 'solid-js';
 import { useDirection } from '../../../core';
 import { useScrollAreaContext } from '../ScrollArea.context';
@@ -67,8 +66,8 @@ export function ScrollAreaScrollbarVisible(props: ScrollAreaScrollbarVisibleProp
     getScrollPositionFromPointer(pointerPos, pointerOffset, sizes(), direction);
 
   return (
-    <Switch fallback={null}>
-      <Match when={(local.orientation ?? 'vertical') === 'horizontal'}>
+    <>
+      <Show when={local.orientation === 'horizontal'}>
         <ScrollAreaScrollbarX
           {...commonProps()}
           ref={local.ref}
@@ -95,9 +94,9 @@ export function ScrollAreaScrollbarVisible(props: ScrollAreaScrollbarVisibleProp
         >
           {local.children}
         </ScrollAreaScrollbarX>
-      </Match>
+      </Show>
 
-      <Match when={(local.orientation ?? 'vertical') === 'vertical'}>
+      <Show when={local.orientation === 'vertical'}>
         <ScrollAreaScrollbarY
           {...commonProps()}
           ref={local.ref}
@@ -111,10 +110,6 @@ export function ScrollAreaScrollbarVisible(props: ScrollAreaScrollbarVisibleProp
             if (ctx.viewport && thumbEl) {
               const scrollPos = ctx.viewport.scrollTop;
               const offset = getThumbOffsetFromScroll(scrollPos, sizes());
-              thumbEl.style.setProperty(
-                '--thumb-opacity',
-                sizes().scrollbar.size === 0 ? '0' : '1'
-              );
               thumbEl.style.transform = `translate3d(0, ${offset}px, 0)`;
             }
           }}
@@ -128,7 +123,7 @@ export function ScrollAreaScrollbarVisible(props: ScrollAreaScrollbarVisibleProp
         >
           {local.children}
         </ScrollAreaScrollbarY>
-      </Match>
-    </Switch>
+      </Show>
+    </>
   );
 }

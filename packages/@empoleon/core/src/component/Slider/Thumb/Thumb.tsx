@@ -52,8 +52,10 @@ export function Thumb(props: ThumbProps) {
 
   const [focused, setFocused] = createSignal(false);
 
+  const labelAlwaysOn = () => local.labelAlwaysOn;
+
   const isVisible = createMemo(() =>
-    local.labelAlwaysOn || local.dragging || focused() || (local.showLabelOnHover && local.isHovered)
+    labelAlwaysOn() || local.dragging || focused() || (local.showLabelOnHover && local.isHovered)
   );
 
   return (

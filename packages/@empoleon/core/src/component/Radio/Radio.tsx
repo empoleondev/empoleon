@@ -178,7 +178,7 @@ export const Radio = factory<RadioFactory>(_props => {
 
   const contextProps = ctx
     ? {
-        checked: ctx.value === rest.value,
+        checked: ctx.value() === rest.value,
         name: rest.name ?? ctx.name,
         onChange: (event: Event) => {
           ctx.onChange(event);
@@ -194,7 +194,7 @@ export const Radio = factory<RadioFactory>(_props => {
       __stylesApiProps={props}
       id={uuid}
       size={componentSize}
-      labelPosition={local.labelPosition}
+      labelPosition={() => local.labelPosition}
       label={local.label}
       description={local.description}
       error={local.error}

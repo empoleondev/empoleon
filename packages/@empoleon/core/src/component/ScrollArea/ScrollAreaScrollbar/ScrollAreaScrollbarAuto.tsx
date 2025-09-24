@@ -20,11 +20,10 @@ export function ScrollAreaScrollbarAuto(props: ScrollAreaScrollbarAutoProps) {
   const [local, others] = splitProps(props, [
     'forceMount',
     'ref',
-    'orientation'
   ]);
   const ctx = useScrollAreaContext();
   const [visible, setVisible] = createSignal(false);
-  const isHorizontal = () => local.orientation === 'horizontal';
+  const isHorizontal = () => props.orientation === 'horizontal';
 
   const handleResize = useDebouncedCallback(() => {
     if (ctx.viewport) {

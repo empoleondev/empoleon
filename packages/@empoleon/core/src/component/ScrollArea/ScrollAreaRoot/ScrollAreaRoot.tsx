@@ -1,4 +1,4 @@
-import { createSignal, splitProps } from 'solid-js';
+import { createEffect, createMemo, createSignal, splitProps } from 'solid-js';
 import { useMergedRef } from '@empoleon/hooks';
 import { Box, BoxProps, ElementProps, Factory, GetStylesApi, useProps } from '../../../core';
 import type { ScrollAreaFactory } from '../ScrollArea';
@@ -56,9 +56,9 @@ export function ScrollAreaRoot(_props: ScrollAreaRootProps) {
   const [scrollbarYEnabled, setScrollbarYEnabled] = createSignal(false);
   const rootRef = useMergedRef(local.ref, (node: HTMLDivElement) => setScrollArea(node));
 
-  const contextValue = {
-    type: local.type!,
-    scrollHideDelay: local.scrollHideDelay!,
+  const contextValue = createMemo(() => ({
+    get type() { return local.type!; },
+    get scrollHideDelay() { return local.scrollHideDelay; },
     get scrollArea() { return scrollArea(); },
     get viewport() { return viewport(); },
     onViewportChange: (element: HTMLDivElement | null) => {
@@ -79,10 +79,18 @@ export function ScrollAreaRoot(_props: ScrollAreaRootProps) {
     onCornerWidthChange: setCornerWidth,
     onCornerHeightChange: setCornerHeight,
     getStyles: local.getStyles,
-  };
+  }));
+
+  // createEffect(() => {
+  //   if (local.type === 'hover' && local.scrollbars === 'xy') {
+  //     // Set default scrollbar dimensions immediately for hover type
+  //     setCornerWidth(12); // or whatever your scrollbar width should be
+  //     setCornerHeight(12); // or whatever your scrollbar height should be
+  //   }
+  // });
 
   return (
-    <ScrollAreaProvider value={contextValue}>
+    <ScrollAreaProvider value={contextValue()}>
       <Box
         {...others}
         ref={rootRef}
