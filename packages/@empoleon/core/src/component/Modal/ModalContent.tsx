@@ -40,6 +40,7 @@ export const ModalContent = factory<ModalContentFactory>(_props => {
   return (
     <ModalBaseContent
       {...ctx.getStyles('content', { className: local.className, style: local.style, styles: local.styles, classNames: local.classNames })}
+      // @ts-ignore
       innerProps={ctx.getStyles('inner', { className: local.className, style: local.style, styles: local.styles, classNames: local.classNames })}
       data-full-screen={ctx.fullScreen || undefined}
       data-modal-content

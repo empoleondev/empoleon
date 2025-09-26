@@ -1,6 +1,7 @@
 import { JSX, splitProps } from 'solid-js';
 import { useMergedRef } from '@empoleon/hooks';
 import {
+  Box,
   BoxProps,
   CompoundStylesApiProps,
   createEventHandler,
@@ -137,16 +138,17 @@ export const MenuSubItem = polymorphicFactory<MenuSubItemFactory>(_props => {
       }}
     >
       {local.leftSection && (
-        <div {...ctx.getStyles('itemSection', { styles: local.styles, classNames: local.classNames })} data-position="left">
+        <Box component='div' {...ctx.getStyles('itemSection', { styles: local.styles, classNames: local.classNames })} data-position="left">
           {local.leftSection}
-        </div>
+        </Box>
       )}
 
-      {local.children && <div {...ctx.getStyles('itemLabel', { styles: local.styles, classNames: local.classNames })}>{local.children}</div>}
+      {local.children && <Box component='div' {...ctx.getStyles('itemLabel', { styles: local.styles, classNames: local.classNames })}>{local.children}</Box>}
 
-      <div {...ctx.getStyles('itemSection', { styles: local.styles, classNames: local.classNames })} data-position="right">
+      <Box component='div' {...ctx.getStyles('itemSection', { styles: local.styles, classNames: local.classNames })} data-position="right">
+        {/* @ts-ignore */}
         {local.rightSection || <AccordionChevron {...ctx.getStyles('chevron')} size={14} />}
-      </div>
+      </Box>
     </UnstyledButton>
   );
 });

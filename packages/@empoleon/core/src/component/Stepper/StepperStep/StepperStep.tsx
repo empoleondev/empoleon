@@ -9,6 +9,7 @@ import {
   EmpoleonColor,
   useEmpoleonTheme,
   useProps,
+  Box,
 } from '../../../core';
 import { CheckIcon } from '../../Checkbox';
 import { Loader } from '../../Loader';
@@ -224,11 +225,11 @@ export const StepperStep = factory<StepperStepFactory>(_props => {
       tabIndex={local.allowStepClick ? 0 : -1}
     >
       {local.withIcon && (
-        <span {...ctx.getStyles('stepWrapper', stylesApi)}>
-          <span {...ctx.getStyles('stepIcon', stylesApi)} {...dataAttributes()}>
+        <Box component='span' {...ctx.getStyles('stepWrapper', stylesApi)}>
+          <Box component='span' {...ctx.getStyles('stepIcon', stylesApi)} {...dataAttributes()}>
             <Transition mounted={mounted() && state() === 'stepCompleted'} transition="pop" duration={200}>
               {(transitionStyles) => (
-                <span
+                <Box component='span'
                   {...ctx.getStyles('stepCompletedIcon', { style: transitionStyles, ...stylesApi })}
                 >
                   {isLoading() ? (
@@ -244,7 +245,7 @@ export const StepperStep = factory<StepperStepFactory>(_props => {
                       ? getStepFragment(ctx.completedIcon as any, idx())
                       : <CheckIcon size="60%" />
                   )}
-                </span>
+                </Box>
               )}
             </Transition>
 
@@ -259,31 +260,31 @@ export const StepperStep = factory<StepperStepFactory>(_props => {
                 _icon()
               )
             ) : null}
-          </span>
+          </Box>
           {ctx.orientation === 'vertical' && (
-            <span
+            <Box component='span'
               {...ctx.getStyles('verticalSeparator', stylesApi)}
               data-active={state() === 'stepCompleted' || undefined}
             />
           )}
-        </span>
+        </Box>
       )}
 
       {(local.label || local.description) && (
-        <span
+        <Box component='span'
           {...ctx.getStyles('stepBody', stylesApi)}
           data-orientation={ctx.orientation}
           data-icon-position={local.iconPosition || ctx.iconPosition}
         >
           {local.label && (
-            <span {...ctx.getStyles('stepLabel', stylesApi)}>{getStepFragment(local.label, idx())}</span>
+            <Box component='span' {...ctx.getStyles('stepLabel', stylesApi)}>{getStepFragment(local.label, idx())}</Box>
           )}
           {local.description && (
-            <span {...ctx.getStyles('stepDescription', stylesApi)}>
+            <Box component='span' {...ctx.getStyles('stepDescription', stylesApi)}>
               {getStepFragment(local.description, idx())}
-            </span>
+            </Box>
           )}
-        </span>
+        </Box>
       )}
     </UnstyledButton>
   );

@@ -1,4 +1,5 @@
 import {
+  Box,
   BoxProps,
   CompoundStylesApiProps,
   ElementProps,
@@ -101,12 +102,12 @@ export const AccordionPanel = factory<AccordionPanelFactory>(_props => {
           local.onTransitionEnd?.();
         }}
       >
-        <div {...ctx.getStyles('content', {
+        <Box component='div' {...ctx.getStyles('content', {
           classNames: local.classNames,
           styles: local.styles
         })}>
           {local.children}
-        </div>
+        </Box>
       </Collapse>
     </>
   );

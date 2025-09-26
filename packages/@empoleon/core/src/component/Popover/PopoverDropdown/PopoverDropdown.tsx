@@ -132,6 +132,7 @@ export const PopoverDropdown = factory<PopoverDropdownFactory>(_props => {
               >
                 {local.children}
 
+                {/* @ts-ignore */}
                 <FloatingArrow
                   ref={() => ctx.arrowRef}
                   arrowX={ctx.arrowX}

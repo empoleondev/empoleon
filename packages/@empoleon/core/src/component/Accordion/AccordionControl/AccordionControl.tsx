@@ -110,7 +110,7 @@ export const AccordionControl = factory<AccordionControlFactory>(_props => {
       >
         <Chevron />
       </Box>
-      <span {...ctx.getStyles('label', { classNames: local.classNames, styles: local.styles })}>{local.children}</span>
+      <Box component='div' {...ctx.getStyles('label', { classNames: local.classNames, styles: local.styles })}>{local.children}</Box>
       {local.icon && (
         <Box
           component="span"
@@ -124,6 +124,7 @@ export const AccordionControl = factory<AccordionControlFactory>(_props => {
   );
 
   return shouldWrapWithHeading ? (
+    // @ts-ignore
     <Dynamic component={headingTag} {...ctx.getStyles('itemTitle', { classNames: local.classNames, styles: local.styles })}>{content}</Dynamic>
   ) : (
     content

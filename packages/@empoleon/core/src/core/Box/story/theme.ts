@@ -1,4 +1,4 @@
-import { createTheme, DEFAULT_THEME, virtualColor } from '@empoleon/core';
+import { createTheme, DEFAULT_THEME, virtualColor } from '../../';
 
 export const theme = createTheme({
   fontFamilyMonospace: `Menlo, Monaco, ${DEFAULT_THEME.fontFamilyMonospace}`,

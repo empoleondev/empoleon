@@ -51,7 +51,7 @@ export const ComboboxGroup = factory<ComboboxGroupFactory>(_props => {
       {...ctx.getStyles('group', { className: local.className, classNames: local.classNames, style: local.style, styles: local.styles })}
       {...others}
     >
-      {local.label && <div {...ctx.getStyles('groupLabel', { classNames: local.classNames, styles: local.styles })}>{local.label}</div>}
+      {local.label && <Box component='div' {...ctx.getStyles('groupLabel', { classNames: local.classNames, styles: local.styles })}>{local.label}</Box>}
       {local.children}
     </Box>
   );

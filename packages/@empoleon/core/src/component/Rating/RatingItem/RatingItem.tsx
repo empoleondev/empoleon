@@ -42,7 +42,7 @@ export function RatingItem(props: RatingItemProps) {
   return (
     <>
       {!local.readOnly && (
-        <input
+        <Box component='input'
           {...ctx.getStyles('input')}
           onKeyDown={(event) => event.key === ' ' && local.onChange(local.value)}
           id={local.id}
