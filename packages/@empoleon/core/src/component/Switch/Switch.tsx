@@ -204,7 +204,7 @@ export const Switch = factory<SwitchFactory>(_props => {
       __stylesApiProps={props}
       id={uuid}
       size={_size}
-      labelPosition={local.labelPosition}
+      labelPosition={() => local.labelPosition}
       label={local.label}
       description={local.description}
       error={local.error}
@@ -244,7 +244,7 @@ export const Switch = factory<SwitchFactory>(_props => {
       >
         <Box
           component="span"
-          mod={{ 'reduce-motion': true, 'with-thumb-indicator': local.withThumbIndicator && !local.thumbIcon }}
+          mod={{ 'reduce-motion': true, 'with-thumb-indicator': () => (local.withThumbIndicator && !local.thumbIcon) }}
           {...getStyles('thumb')}
         >
           {local.thumbIcon}

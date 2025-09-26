@@ -1,4 +1,4 @@
-import { JSX, splitProps } from 'solid-js';
+import { createEffect, JSX, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
@@ -64,7 +64,7 @@ export const TabsPanel = factory<TabsPanelFactory>(_props => {
         props,
       })}
       ref={local.ref}
-      mod={[{ orientation: ctx.orientation }, local.mod]}
+      mod={[{ orientation: ctx.orientation() }, local.mod]}
       role="tabpanel"
       id={ctx.getPanelId(local.value)}
       aria-labelledby={ctx.getTabId(local.value)}

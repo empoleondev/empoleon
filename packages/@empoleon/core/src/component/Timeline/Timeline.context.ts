@@ -8,6 +8,7 @@ interface TimelineContextValue {
   reverseActive: () => boolean;
   align: () => 'left' | 'right';
   unstyled: () => boolean;
+  totalItems: () => number;
 }
 
 export const [TimelineProvider, useTimelineContext] = createSafeContext<TimelineContextValue>(

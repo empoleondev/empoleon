@@ -1,4 +1,4 @@
-import { splitProps, JSX, onMount, createSignal, useContext } from 'solid-js';
+import { splitProps, JSX, onMount, createSignal, useContext, createEffect } from 'solid-js';
 import {
   Box,
   BoxProps,
@@ -95,16 +95,17 @@ export const TimelineItem = factory<TimelineItemFactory>(_props => {
   });
 
   const isActive = () => {
-    const activeIdx = ctx.activeIndex();
+    const activeIdx = () => ctx.activeIndex();
     return ctx.reverseActive()
-      ? activeIdx >= (ctx as any)._totalItems - idx() - 1
-      : activeIdx >= idx();
+      ? activeIdx() >= ctx.totalItems() - idx() - 1
+      : activeIdx() >= idx();
   };
+
   const isLineActive = () => {
-    const activeIdx = ctx.activeIndex();
+    const activeIdx = () => ctx.activeIndex();
     return ctx.reverseActive()
-      ? activeIdx >= (ctx as any)._totalItems - idx() - 1
-      : activeIdx - 1 >= idx();
+      ? activeIdx() >= ctx.totalItems() - idx() - 1
+      : activeIdx() - 1 >= idx();
   };
 
   return (
@@ -126,10 +127,10 @@ export const TimelineItem = factory<TimelineItemFactory>(_props => {
         {local.bullet}
       </Box>
 
-      <div {...ctx.getStyles('itemBody', stylesApiProps)}>
-        {local.title && <div {...ctx.getStyles('itemTitle', stylesApiProps)}>{local.title}</div>}
-        <div {...ctx.getStyles('itemContent', stylesApiProps)}>{local.children}</div>
-      </div>
+      <Box component='div' {...ctx.getStyles('itemBody', stylesApiProps)}>
+        {local.title && <Box component='div' {...ctx.getStyles('itemTitle', stylesApiProps)}>{local.title}</Box>}
+        <Box component='div' {...ctx.getStyles('itemContent', stylesApiProps)}>{local.children}</Box>
+      </Box>
     </Box>
   );
 });

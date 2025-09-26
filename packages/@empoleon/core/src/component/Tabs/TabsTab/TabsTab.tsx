@@ -10,6 +10,7 @@ import {
   useDirection,
   useEmpoleonTheme,
   useProps,
+  Box,
 } from '../../../core';
 import { UnstyledButton, UnstyledButtonProps } from '../../UnstyledButton';
 import { useTabsContext } from '../Tabs.context';
@@ -80,17 +81,17 @@ export const TabsTab = factory<TabsTabFactory>(_props => {
   return (
     <UnstyledButton
       {...others}
-      {...ctx.getStyles('tab', { className: local.className, style: local.style, variant: ctx.variant, ...stylesApiProps })}
+      {...ctx.getStyles('tab', { className: local.className, style: local.style, variant: ctx.variant(), ...stylesApiProps })}
       disabled={local.disabled}
       unstyled={ctx.unstyled}
-      variant={ctx.variant}
+      variant={ctx.variant()}
       mod={[
         {
           active: active(),
           disabled: local.disabled,
-          orientation: ctx.orientation,
+          orientation: ctx.orientation(),
           inverted: ctx.inverted,
-          placement: ctx.orientation === 'vertical' && ctx.placement,
+          placement: ctx.orientation() === 'vertical' && ctx.placement,
         },
         local.mod,
       ]}
@@ -107,21 +108,21 @@ export const TabsTab = factory<TabsTabFactory>(_props => {
         parentSelector: '[role="tablist"]',
         activateOnFocus: ctx.activateTabWithKeyboard,
         loop: ctx.loop,
-        orientation: ctx.orientation || 'horizontal',
+        orientation: ctx.orientation() || 'horizontal',
         dir,
         onKeyDown: local.onKeyDown as ((event: KeyboardEvent) => void) | undefined,
       })}
     >
       {local.leftSection && (
-        <span {...ctx.getStyles('tabSection', stylesApiProps)} data-position="left">
+        <Box component='span' {...ctx.getStyles('tabSection', stylesApiProps)} data-position="left">
           {local.leftSection}
-        </span>
+        </Box>
       )}
-      {local.children && <span {...ctx.getStyles('tabLabel', stylesApiProps)}>{local.children}</span>}
+      {local.children && <Box component='span' {...ctx.getStyles('tabLabel', stylesApiProps)}>{local.children}</Box>}
       {local.rightSection && (
-        <span {...ctx.getStyles('tabSection', stylesApiProps)} data-position="right">
+        <Box component='span' {...ctx.getStyles('tabSection', stylesApiProps)} data-position="right">
           {local.rightSection}
-        </span>
+        </Box>
       )}
     </UnstyledButton>
   );

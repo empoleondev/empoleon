@@ -5,7 +5,7 @@ import { EmpoleonDemo } from '@empoleonx/demo';
 function Wrapper(props: TabsProps) {
   const { dir } = useDirection();
   const panelProps =
-    props.orientation === 'vertical' ? { [dir === 'rtl' ? 'pr' : 'pl']: 'xs' } : { pt: 'xs' };
+    () => props.orientation === 'vertical' ? { [dir === 'rtl' ? 'pr' : 'pl']: 'xs' } : { pt: 'xs' };
 
   return (
     <Tabs defaultValue="gallery" {...props}>

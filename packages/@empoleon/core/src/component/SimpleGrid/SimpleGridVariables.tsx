@@ -1,3 +1,4 @@
+import { Accessor } from 'solid-js';
 import {
   filterProps,
   getBaseValue,
@@ -15,19 +16,14 @@ interface SimpleGridVariablesProps extends SimpleGridProps {
   selector: string;
 }
 
-export function SimpleGridMediaVariables({
-  spacing,
-  verticalSpacing,
-  cols,
-  selector,
-}: SimpleGridVariablesProps) {
+export function SimpleGridMediaVariables(props: SimpleGridVariablesProps) {
   const theme = useEmpoleonTheme();
-  const _verticalSpacing = verticalSpacing === undefined ? spacing : verticalSpacing;
+  const _verticalSpacing = () => props.verticalSpacing === undefined ? props.spacing : props.verticalSpacing;
 
-  const baseStyles: Record<string, string | undefined> = filterProps({
-    '--sg-spacing-x': getSpacing(getBaseValue(spacing)),
-    '--sg-spacing-y': getSpacing(getBaseValue(_verticalSpacing)),
-    '--sg-cols': getBaseValue(cols)?.toString(),
+  const baseStyles: Accessor<Record<string, string | undefined>> = () => filterProps({
+    '--sg-spacing-x': getSpacing(getBaseValue(props.spacing)),
+    '--sg-spacing-y': getSpacing(getBaseValue(_verticalSpacing())),
+    '--sg-cols': getBaseValue(props.cols)?.toString(),
   });
 
   const queries = keys(theme.breakpoints).reduce<Record<string, Record<string, any>>>(
@@ -36,16 +32,16 @@ export function SimpleGridMediaVariables({
         acc[breakpoint] = {};
       }
 
-      if (typeof spacing === 'object' && spacing[breakpoint] !== undefined) {
-        acc[breakpoint]['--sg-spacing-x'] = getSpacing(spacing[breakpoint]);
+      if (typeof props.spacing === 'object' && props.spacing[breakpoint] !== undefined) {
+        acc[breakpoint]['--sg-spacing-x'] = getSpacing(props.spacing[breakpoint]);
       }
 
       if (typeof _verticalSpacing === 'object' && _verticalSpacing[breakpoint] !== undefined) {
         acc[breakpoint]['--sg-spacing-y'] = getSpacing(_verticalSpacing[breakpoint]);
       }
 
-      if (typeof cols === 'object' && cols[breakpoint] !== undefined) {
-        acc[breakpoint]['--sg-cols'] = cols[breakpoint];
+      if (typeof props.cols === 'object' && props.cols[breakpoint] !== undefined) {
+        acc[breakpoint]['--sg-cols'] = props.cols[breakpoint];
       }
 
       return acc;
@@ -62,7 +58,7 @@ export function SimpleGridMediaVariables({
     styles: queries[breakpoint.value],
   }));
 
-  return <InlineStyles styles={baseStyles} media={media} selector={selector} />;
+  return <InlineStyles styles={baseStyles()} media={media} selector={props.selector} />;
 }
 
 function getBreakpoints(values: unknown) {
@@ -77,37 +73,28 @@ function sortBreakpoints(breakpoints: string[]) {
   return breakpoints.sort((a, b) => (px(a) as number) - (px(b) as number));
 }
 
-function getUniqueBreakpoints({
-  spacing,
-  verticalSpacing,
-  cols,
-}: Omit<SimpleGridVariablesProps, 'selector'>) {
+function getUniqueBreakpoints(props: Omit<SimpleGridVariablesProps, 'selector'>) {
   const breakpoints = Array.from(
     new Set([
-      ...getBreakpoints(spacing),
-      ...getBreakpoints(verticalSpacing),
-      ...getBreakpoints(cols),
+      ...getBreakpoints(props.spacing),
+      ...getBreakpoints(props.verticalSpacing),
+      ...getBreakpoints(props.cols),
     ])
   );
 
   return sortBreakpoints(breakpoints);
 }
 
-export function SimpleGridContainerVariables({
-  spacing,
-  verticalSpacing,
-  cols,
-  selector,
-}: SimpleGridVariablesProps) {
-  const _verticalSpacing = verticalSpacing === undefined ? spacing : verticalSpacing;
+export function SimpleGridContainerVariables(props: SimpleGridVariablesProps) {
+  const _verticalSpacing = () => props.verticalSpacing === undefined ? props.spacing : props.verticalSpacing;
 
-  const baseStyles: Record<string, string | undefined> = filterProps({
-    '--sg-spacing-x': getSpacing(getBaseValue(spacing)),
-    '--sg-spacing-y': getSpacing(getBaseValue(_verticalSpacing)),
-    '--sg-cols': getBaseValue(cols)?.toString(),
+  const baseStyles: Accessor<Record<string, string | undefined>> = () => filterProps({
+    '--sg-spacing-x': getSpacing(getBaseValue(props.spacing)),
+    '--sg-spacing-y': getSpacing(getBaseValue(_verticalSpacing())),
+    '--sg-cols': getBaseValue(props.cols)?.toString(),
   });
 
-  const uniqueBreakpoints = getUniqueBreakpoints({ spacing, verticalSpacing, cols });
+  const uniqueBreakpoints = getUniqueBreakpoints({ spacing: props.spacing, verticalSpacing: props.verticalSpacing, cols: props.cols });
 
   const queries = uniqueBreakpoints.reduce<Record<string, Record<string, any>>>(
     (acc, breakpoint) => {
@@ -115,16 +102,16 @@ export function SimpleGridContainerVariables({
         acc[breakpoint] = {};
       }
 
-      if (typeof spacing === 'object' && spacing[breakpoint] !== undefined) {
-        acc[breakpoint]['--sg-spacing-x'] = getSpacing(spacing[breakpoint]);
+      if (typeof props.spacing === 'object' && props.spacing[breakpoint] !== undefined) {
+        acc[breakpoint]['--sg-spacing-x'] = getSpacing(props.spacing[breakpoint]);
       }
 
       if (typeof _verticalSpacing === 'object' && _verticalSpacing[breakpoint] !== undefined) {
         acc[breakpoint]['--sg-spacing-y'] = getSpacing(_verticalSpacing[breakpoint]);
       }
 
-      if (typeof cols === 'object' && cols[breakpoint] !== undefined) {
-        acc[breakpoint]['--sg-cols'] = cols[breakpoint];
+      if (typeof props.cols === 'object' && props.cols[breakpoint] !== undefined) {
+        acc[breakpoint]['--sg-cols'] = props.cols[breakpoint];
       }
 
       return acc;
@@ -137,5 +124,5 @@ export function SimpleGridContainerVariables({
     styles: queries[breakpoint],
   }));
 
-  return <InlineStyles styles={baseStyles} container={media} selector={selector} />;
+  return <InlineStyles styles={baseStyles()} container={media} selector={props.selector} />;
 }

@@ -59,21 +59,21 @@ export const TabsList = factory<TabsListFactory>(_props => {
         classNames: local.classNames,
         styles: local.styles,
         props,
-        variant: ctx.variant,
+        variant: ctx.variant(),
       })}
       ref={local.ref}
       role="tablist"
-      variant={ctx.variant}
+      variant={ctx.variant()}
       mod={[
         {
           grow: local.grow,
-          orientation: ctx.orientation,
-          placement: ctx.orientation === 'vertical' && ctx.placement,
+          orientation: ctx.orientation(),
+          placement: ctx.orientation() === 'vertical' && ctx.placement,
           inverted: ctx.inverted,
         },
         local.mod,
       ]}
-      aria-orientation={ctx.orientation}
+      aria-orientation={ctx.orientation()}
       __vars={{ '--tabs-justify': local.justify }}
     >
       {local.children}

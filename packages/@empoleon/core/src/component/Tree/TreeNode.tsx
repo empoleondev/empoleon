@@ -1,5 +1,5 @@
 import { createSignal, For, Show, splitProps } from 'solid-js';
-import { findElementAncestor, GetStylesApi } from '../../core';
+import { Box, findElementAncestor, GetStylesApi } from '../../core';
 import type { RenderNode, TreeFactory, TreeNodeData } from './Tree';
 import type { TreeController } from './use-tree';
 
@@ -51,7 +51,7 @@ export function TreeNode(props: TreeNodeProps) {
     'checkOnSpace',
   ]);
 
-  const level = local.level || 1;
+  const level = () => local.level || 1;
 
   const handleKeyDown = (event: KeyboardEvent) => {
     if (event.code === 'ArrowRight') {
@@ -146,16 +146,16 @@ export function TreeNode(props: TreeNodeProps) {
   };
 
   return (
-    <li
+    <Box component='li'
       {...local.getStyles('node', {
-        style: { '--label-offset': `calc(var(--level-offset) * ${level - 1})` },
+        style: { '--label-offset': `calc(var(--level-offset) * ${level() - 1})` },
       })}
       role="treeitem"
       aria-selected={selected}
       data-value={local.node.value}
       data-selected={selected || undefined}
       data-hovered={local.controller.hoveredNode() === local.node.value || undefined}
-      data-level={level}
+      data-level={level()}
       tabIndex={local.rootIndex === 0 ? 0 : -1}
       onKeyDown={handleKeyDown}
       ref={setRef}
@@ -171,20 +171,21 @@ export function TreeNode(props: TreeNodeProps) {
       {typeof local.renderNode === 'function' ? (
         local.renderNode({
           node: local.node,
-          level,
+          level: level(),
           selected,
           tree: local.controller,
           expanded: local.controller.expandedState()[local.node.value] || false,
           hasChildren: Array.isArray(local.node.children) && local.node.children.length > 0,
+          // @ts-ignore
           elementProps,
         })
       ) : (
-        <div {...elementProps}>{local.node.label}</div>
+        <Box component='div' {...elementProps}>{local.node.label}</Box>
       )}
 
       <Show when={local.node.children && local.node.children.length > 0}>
         <Show when={local.controller.expandedState()[local.node.value]}>
-          <ul role="group" {...local.getStyles('subtree')} data-level={level}>
+          <Box component='ul' role="group" {...local.getStyles('subtree')} data-level={level}>
             <For each={local.node.children || []}>
               {(child) => (
                 <TreeNode
@@ -192,7 +193,7 @@ export function TreeNode(props: TreeNodeProps) {
                   flatValues={local.flatValues}
                   getStyles={local.getStyles}
                   rootIndex={undefined}
-                  level={level + 1}
+                  level={level() + 1}
                   controller={local.controller}
                   expandOnClick={local.expandOnClick}
                   isSubtree
@@ -204,10 +205,10 @@ export function TreeNode(props: TreeNodeProps) {
                 />
               )}
             </For>
-          </ul>
+          </Box>
         </Show>
       </Show>
-    </li>
+    </Box>
   );
 }
 

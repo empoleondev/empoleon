@@ -31,13 +31,8 @@ function mergeStyles(
   return styles;
 }
 
-export function getBoxStyle({
-  theme,
-  style,
-  vars,
-  styleProps,
-}: GetBoxStyleOptions): JSX.CSSProperties {
-  const _style = mergeStyles(style, theme);
-  const _vars = mergeStyles(vars, theme);
-  return { ..._style, ..._vars, ...styleProps };
+export function getBoxStyle(props: GetBoxStyleOptions): JSX.CSSProperties {
+  const _style = mergeStyles(props.style, props.theme);
+  const _vars = mergeStyles(props.vars, props.theme);
+  return { ..._style, ..._vars, ...props.styleProps };
 }

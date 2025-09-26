@@ -149,10 +149,10 @@ export const SemiCircleProgress = factory<SemiCircleProgressFactory>(_props => {
     varsResolver,
   });
 
-  const coordinateForCircle = local.size! / 2;
-  const radius = (local.size! - 2 * local.thickness!) / 2;
-  const circumference = Math.PI * radius;
-  const semiCirclePercentage = clamp(local.value, 0, 100) * (circumference / 100);
+  const coordinateForCircle = () => local.size! / 2;
+  const radius = () => ((local.size! - 2 * local.thickness!) / 2);
+  const circumference = () => Math.PI * radius();
+  const semiCirclePercentage = () => clamp(local.value, 0, 100) * (circumference() / 100);
 
   return (
     <Box ref={local.ref} size={local.size} {...getStyles('root')} {...others}>
@@ -164,25 +164,25 @@ export const SemiCircleProgress = factory<SemiCircleProgressFactory>(_props => {
 
       <Box component='svg' width={local.size} height={local.size! / 2} {...getStyles('svg')}>
         <Box component='circle'
-          cx={coordinateForCircle}
-          cy={coordinateForCircle}
-          r={radius}
+          cx={coordinateForCircle()}
+          cy={coordinateForCircle()}
+          r={radius()}
           fill="none"
           stroke="var(--scp-empty-segment-color)"
           stroke-width={local.thickness}
-          stroke-dasharray={`${circumference}`}
-          {...getStyles('emptySegment', { style: { 'stroke-dashoffset': `${circumference}` } })}
+          stroke-dasharray={`${circumference()}`}
+          {...getStyles('emptySegment', { style: { 'stroke-dashoffset': `${circumference()}` } })}
         />
 
         <Box component='circle'
-          cx={coordinateForCircle}
-          cy={coordinateForCircle}
-          r={radius}
+          cx={coordinateForCircle()}
+          cy={coordinateForCircle()}
+          r={radius()}
           fill="none"
           stroke="var(--scp-filled-segment-color)"
           stroke-width={local.thickness}
-          stroke-dasharray={`${circumference}`}
-          {...getStyles('filledSegment', { style: { 'stroke-dashoffset': `${semiCirclePercentage}` } })}
+          stroke-dasharray={`${circumference()}`}
+          {...getStyles('filledSegment', { style: { 'stroke-dashoffset': `${semiCirclePercentage()}` } })}
         />
       </Box>
     </Box>

@@ -3,11 +3,11 @@ import { EmpoleonDemo } from '@empoleonx/demo';
 
 function Wrapper(props: any) {
   return (
-    <>
-      <Text>First line</Text>
+    <div style={{ display: 'flex' }}>
+      <Text>First part</Text>
       <Space {...props} />
-      <Text>Second line</Text>
-    </>
+      <Text>Second part</Text>
+    </div>
   );
 }
 
@@ -16,11 +16,11 @@ import { Text, Space } from '@empoleon/core';
 
 function Demo() {
   return (
-    <>
+    <div style={{ display: 'flex' }}>
       <Text>First line</Text>
       <Space{{props}} />
       <Text>Second line</Text>
-    </>
+    </div>
   );
 }
 `;
@@ -29,5 +29,5 @@ export const horizontal: EmpoleonDemo = {
   type: 'configurator',
   component: Wrapper,
   code,
-  controls: [{ prop: 'h', type: 'size', initialValue: 'md', libraryValue: '__' }],
+  controls: [{ prop: 'w', type: 'size', initialValue: 'md', libraryValue: '__' }],
 };

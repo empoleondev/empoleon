@@ -1,4 +1,4 @@
-import { splitProps } from 'solid-js';
+import { createEffect, createMemo, splitProps } from 'solid-js';
 import {
   Box,
   BoxComponentProps,
@@ -43,7 +43,7 @@ export const UnstyledButton = polymorphicFactory<UnstyledButtonFactory>((_props:
       'ref'
     ]);
 
-    const getStyles = useStyles<UnstyledButtonFactory>({
+    const getStyles = createMemo(() => useStyles<UnstyledButtonFactory>({
       name: local.__staticSelector!,
       props,
       classes,
@@ -53,11 +53,11 @@ export const UnstyledButton = polymorphicFactory<UnstyledButtonFactory>((_props:
       styles: local.styles,
       unstyled: local.unstyled,
       attributes: local.attributes,
-    });
+    }));
 
     return (
       <Box
-        {...getStyles('root', { focusable: true })}
+        {...getStyles()('root', { focusable: true })}
         component={local.component ?? 'button'}
         ref={local.ref}
         type={local.component === 'button' ? 'button' : undefined}

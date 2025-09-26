@@ -181,7 +181,7 @@ export const Tabs = factory<TabsFactory>(_props => {
       value={{
         placement: local.placement,
         value: currentTab,
-        orientation: local.orientation,
+        orientation: () => local.orientation,
         id: uid,
         loop: local.loop,
         activateTabWithKeyboard: local.activateTabWithKeyboard,
@@ -189,7 +189,7 @@ export const Tabs = factory<TabsFactory>(_props => {
         getPanelId: getSafeId(`${uid}-panel`, VALUE_ERROR),
         onChange: setCurrentTab,
         allowTabDeactivation: local.allowTabDeactivation,
-        variant: local.variant,
+        variant: () => local.variant,
         color: local.color,
         radius: local.radius,
         inverted: local.inverted,

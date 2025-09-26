@@ -130,7 +130,7 @@ export const TimeGrid = factory<TimeGridFactory>(_props => {
     'ref'
   ]);
 
-  const withSeconds = local.withSeconds || false;
+  const withSeconds = () => local.withSeconds || false;
 
   const getStyles = useStyles<TimeGridFactory>({
     name: 'TimeGrid',
@@ -170,17 +170,17 @@ export const TimeGrid = factory<TimeGridFactory>(_props => {
                 (!!local.minTime && isTimeBefore(time, local.minTime)) ||
                 (!!local.maxTime && isTimeAfter(time, local.maxTime)) ||
                 (Array.isArray(local.disableTime)
-                  ? !!local.disableTime.find((t) => isSameTime({ time, compare: t, withSeconds }))
+                  ? !!local.disableTime.find((t) => isSameTime({ time, compare: t, withSeconds: withSeconds() }))
                   : !!local.disableTime?.(time));
 
               return (
                 <TimeGridControl
-                  active={isSameTime({ time, compare: _value() || '', withSeconds })}
+                  active={isSameTime({ time, compare: _value() || '', withSeconds: withSeconds() })}
                   time={time}
                   onClick={() => {
                     const nextValue =
                       local.allowDeselect &&
-                      (_value() === null ? time === _value() : isSameTime({ time, compare: _value()!, withSeconds }))
+                      (_value() === null ? time === _value() : isSameTime({ time, compare: _value()!, withSeconds: withSeconds() }))
                         ? null
                         : time;
                     nextValue !== _value() && setValue(nextValue);
@@ -189,7 +189,7 @@ export const TimeGrid = factory<TimeGridFactory>(_props => {
                   amPmLabels={local.amPmLabels!}
                   disabled={isDisabled}
                   data-disabled={isDisabled || undefined}
-                  withSeconds={withSeconds}
+                  withSeconds={withSeconds()}
                   {...local.getControlProps?.(time)}
                 />
               );

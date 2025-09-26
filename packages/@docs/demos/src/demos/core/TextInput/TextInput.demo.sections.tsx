@@ -29,19 +29,19 @@ function Demo() {
 `;
 
 function Demo() {
-  const icon = <IconAt size={16} />;
+  const icon = () => <IconAt size={16} />;
   return (
     <>
       <TextInput
         leftSectionPointerEvents="none"
-        leftSection={icon}
+        leftSection={icon()}
         label="Your email"
         placeholder="Your email"
       />
       <TextInput
         mt="md"
         rightSectionPointerEvents="none"
-        rightSection={icon}
+        rightSection={icon()}
         label="Your email"
         placeholder="Your email"
       />

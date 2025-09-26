@@ -5,14 +5,14 @@ import type { TabsFactory } from './Tabs';
 export interface TabsContextValue {
   id: string;
   value: Accessor<string | null>;
-  orientation: 'horizontal' | 'vertical' | undefined;
+  orientation: () => 'horizontal' | 'vertical' | undefined;
   loop: boolean | undefined;
   activateTabWithKeyboard: boolean | undefined;
   allowTabDeactivation: boolean | undefined;
   onChange: (value: string | null) => void;
   getTabId: (value: string) => string;
   getPanelId: (value: string) => string;
-  variant: string | undefined;
+  variant: () => string | undefined;
   color: string | undefined;
   radius: string | number | undefined;
   inverted: boolean | undefined;

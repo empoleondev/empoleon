@@ -26,7 +26,7 @@ function Demo() {
 
   return (
     <>
-      <SemiCircleProgress value={value()} transitionDuration={250} label={`${value}%`} />
+      <SemiCircleProgress value={value()} transitionDuration={250} label={`${value()}%`} />
 
       <Button onClick={() => setValue(Math.floor(Math.random() * 100))} mt="xl" fullWidth>
         Set random value

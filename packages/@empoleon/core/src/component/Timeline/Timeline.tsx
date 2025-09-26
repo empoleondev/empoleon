@@ -140,6 +140,7 @@ export const Timeline = factory<TimelineFactory>(_props => {
       reverseActive: () => local.reverseActive!,
       align: () => local.align!,
       unstyled: () => !!local.unstyled,
+      totalItems: count,
     }}>
       <Box {...getStyles('root')} mod={[{ align: local.align }, local.mod]} ref={local.ref} {...others}>
         {local.children}

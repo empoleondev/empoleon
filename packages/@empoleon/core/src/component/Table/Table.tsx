@@ -28,6 +28,7 @@ import { TableProvider } from './Table.context';
 import { TableDataRenderer } from './TableDataRenderer';
 import { TableScrollContainer } from './TableScrollContainer';
 import classes from './Table.module.css';
+import { createStore } from 'solid-js/store';
 
 export type TableVariant = 'default' | 'vertical';
 
@@ -200,16 +201,18 @@ export const Table = factory<TableFactory>(_props => {
     varsResolver,
   });
 
+  const [contextValue] = createStore({
+    getStyles,
+    get stickyHeader() { return local.stickyHeader; },
+    get striped() { return local.striped === true ? 'odd' : local.striped || undefined; },
+    get highlightOnHover() { return local.highlightOnHover; },
+    get withColumnBorders() { return local.withColumnBorders; },
+    get withRowBorders() { return local.withRowBorders; },
+    get captionSide() { return local.captionSide || 'bottom'; },
+  });
+
   return (
-    <TableProvider value={{
-      getStyles,
-      stickyHeader: local.stickyHeader,
-      striped: local.striped === true ? 'odd' : local.striped || undefined,
-      highlightOnHover: local.highlightOnHover,
-      withColumnBorders: local.withColumnBorders,
-      withRowBorders: local.withRowBorders,
-      captionSide: local.captionSide || 'bottom',
-    }}>
+    <TableProvider value={contextValue}>
       <Box
         component="table"
         variant={local.variant}

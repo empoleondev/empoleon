@@ -374,7 +374,7 @@ export const Select = factory<SelectFactory>(_props => {
           hiddenWhenEmpty={!local.nothingFoundMessage}
           withScrollArea={local.withScrollArea}
           maxDropdownHeight={local.maxDropdownHeight}
-          filterOptions={local.searchable && selectedOption()?.label !== search() && search().length > 0}
+          filterOptions={!!local.searchable && selectedOption()?.label !== search() && search().length > 0}
           value={_value()}
           checkIconPosition={local.checkIconPosition}
           withCheckIcon={local.withCheckIcon}

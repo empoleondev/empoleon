@@ -91,10 +91,15 @@ const _Box = <T extends HTMLElement = HTMLDivElement>(
 
   const theme = useEmpoleonTheme();
   const Element = () => local.component || 'div';
-  const { styleProps, rest } = extractStyleProps(others);
+  // const [_, rest] = splitProps(extractStyleProps(others), ['styleProps']);
+  // const extracted = () => extractStyleProps(others);
+  // const styleProps = () => extracted().styleProps;
+    const [{ rest }, _] = splitProps(extractStyleProps(others), ['rest']);
+  const extracted = () => extractStyleProps(others);
+  const styleProps = () => extracted().styleProps;
 
   const useSxTransform = useEmpoleonSxTransform();
-  const transformedSx = createMemo(() => useSxTransform?.()?.(styleProps.sx));
+  const transformedSx = createMemo(() => useSxTransform?.()?.(styleProps().sx));
   const responsiveClassName = useRandomClassName();
 
   let _innerEl: HTMLElement | undefined;
@@ -105,7 +110,7 @@ const _Box = <T extends HTMLElement = HTMLDivElement>(
 
   const parsedStyleProps = createMemo(() =>
     parseStyleProps({
-      styleProps,
+      styleProps: styleProps(),
       theme,
       data: STYlE_PROPS_DATA,
     })

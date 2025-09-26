@@ -1,4 +1,4 @@
-import { JSX } from 'solid-js';
+import { createEffect, JSX } from 'solid-js';
 import type { EmpoleonStyleProp } from '../../Box';
 import { FactoryPayload } from '../../factory';
 import {

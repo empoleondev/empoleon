@@ -5,11 +5,14 @@ import {
   IconMessageDots,
 } from '@tabler/icons-solidjs';
 import { Text, Timeline, TimelineProps } from '@empoleon/core';
+import { splitProps } from 'solid-js';
 
-export function TimelineBase({ noIcon, ...props }: Partial<TimelineProps> & { noIcon?: boolean }) {
-  const displayIcon = !noIcon;
+export function TimelineBase(props: Partial<TimelineProps> & { noIcon?: boolean }) {
+  const [local, others] = splitProps(props, ['noIcon'])
+
+  const displayIcon = !local.noIcon;
   return (
-    <Timeline active={1} bulletSize={24} lineWidth={2} {...props}>
+    <Timeline active={1} bulletSize={24} lineWidth={2} {...others}>
       <Timeline.Item bullet={displayIcon ? <IconGitBranch size={13} /> : null} title="New branch">
         <Text c="dimmed" size="sm">
           You&apos;ve created new branch{' '}
