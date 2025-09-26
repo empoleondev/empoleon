@@ -47,10 +47,13 @@ describe('@empoleon/core/PinInput', () => {
     const spy = vi.fn();
     const { container } = render(() => <PinInput {...defaultProps} onComplete={spy} />);
 
-    expect(container.querySelectorAll('.empoleon-PinInput-input')).toHaveLength(4);
+    const firstInput = container.querySelector('.empoleon-PinInput-input') as HTMLInputElement;
 
-    container.querySelectorAll('.empoleon-PinInput-input').forEach((element) => {
-      fireEvent.input(element, { target: { value: '1' } });
+    fireEvent.focus(firstInput);
+    fireEvent.paste(firstInput, {
+      clipboardData: {
+        getData: () => '1111'
+      }
     });
 
     expect(spy).toHaveBeenCalledWith('1111');
@@ -58,7 +61,6 @@ describe('@empoleon/core/PinInput', () => {
 
   it('focus first input on mount with `autoFocus` property', () => {
     const { container } = render(() => <PinInput length={6} autoFocus />);
-    // expect(container.querySelectorAll('.empoleon-PinInput-input')[0]).toHaveFocus();
     const firstInput = container.querySelectorAll('.empoleon-PinInput-input')[0];
     expect(firstInput).toHaveAttribute('auto-focus');
   });

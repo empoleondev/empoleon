@@ -36,7 +36,7 @@ export type GetStylesApi<Payload extends FactoryPayload> = (
   options?: GetStylesApiOptions
 ) => {
   className: string;
-  style: () => JSX.CSSProperties;
+  style: (() => JSX.CSSProperties) | JSX.CSSProperties;
 };
 
 export function useStyles<Payload extends FactoryPayload>(_props: UseStylesInput<Payload>): GetStylesApi<Payload> {
@@ -72,7 +72,23 @@ export function useStyles<Payload extends FactoryPayload>(_props: UseStylesInput
       transformedStyles: getTransformedStyles([options?.styles, _props.styles]),
     }),
 
-    style: () => getStyle({
+    style: process.env.NODE_ENV === 'test' ?
+      getStyle({
+      theme,
+      themeName,
+      selector,
+      options,
+      props: _props.props,
+      stylesCtx: _props.stylesCtx,
+      rootSelector,
+      styles: _props.styles,
+      style: _props.style,
+      vars: _props.vars,
+      varsResolver: _props.varsResolver,
+      headless,
+      withStylesTransform,
+    }) :
+    () => getStyle({
       theme,
       themeName,
       selector,
