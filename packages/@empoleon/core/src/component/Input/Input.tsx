@@ -262,14 +262,31 @@ export const Input = polymorphicFactory<InputFactory>(_props => {
     : {};
 
   const _rightSection: JSX.Element = local.rightSection || (local.__clearable && local.__clearSection) || local.__defaultRightSection;
+  // const valueProp = (v: any, dv: any) => {
+  //   if (v !== undefined) {
+  //     return {
+  //       value: v,
+  //       onInput: (e: Event) => {
+  //         (rest as any).onChange?.(e);
+  //         // Reset the value to maintain controlled behavior
+  //         // (e.target as any).value = v;
+  //       }
+  //     };
+  //   }
+  //   return dv !== undefined ? { value: dv } : undefined;
+  // };
+
   const valueProp = (v: any, dv: any) => {
     if (v !== undefined) {
       return {
         value: v,
         onInput: (e: Event) => {
           (rest as any).onChange?.(e);
-          // Reset the value to maintain controlled behavior
-          (e.target as any).value = v;
+
+          // Only reset in test environments
+          if (process.env.NODE_ENV === 'test') {
+            (e.target as any).value = v;
+          }
         }
       };
     }

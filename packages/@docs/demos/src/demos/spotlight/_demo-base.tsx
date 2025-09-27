@@ -1,6 +1,5 @@
 import { Button, Group } from '@empoleon/core';
 import { createSpotlight, Spotlight, SpotlightProps } from '@empoleon/spotlight';
-import { createMemo } from 'solid-js';
 
 export function SpotlightDemoBase(props: Partial<SpotlightProps>) {
   const [store, actions] = createSpotlight();

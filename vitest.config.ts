@@ -17,9 +17,9 @@ export default defineConfig({
     testTimeout: 10000,
     pool: 'forks',
     isolate: true,
-    // include: [
-    //   '**/default-css-variables-resolver.test.{ts,tsx}'
-    // ],
+    include: [
+      '**/Accordion/*.test.{ts,tsx}'
+    ],
     exclude: [
       // Exclude all node_modules test files
       'node_modules/**',

@@ -4,12 +4,12 @@ import type { AccordionFactory } from './Accordion';
 import { AccordionChevronPosition, AccordionHeadingOrder } from './Accordion.types';
 
 interface AccordionContext {
-  loop: boolean | undefined;
-  transitionDuration: number | undefined;
+  loop: () => boolean | undefined;
+  transitionDuration: () => number | undefined;
   disableChevronRotation: () => boolean | undefined;
   chevronPosition: () => AccordionChevronPosition | undefined;
-  order: AccordionHeadingOrder | undefined;
-  chevron: JSX.Element | Component | null;
+  order: () => AccordionHeadingOrder | undefined;
+  chevron: () => JSX.Element | Component | null;
   onChange: (value: string) => void;
   isItemActive: (value: string) => boolean;
   getControlId: (value: string) => string;

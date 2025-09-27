@@ -6,7 +6,7 @@ const originalWarn = console.warn;
     originalWarn(message, ...args);
   };
 
-import { Component, createEffect, createMemo, JSX, splitProps } from 'solid-js';
+import { Component, JSX, splitProps } from 'solid-js';
 import { useId, useUncontrolled } from '@empoleon/hooks';
 import {
   Box,
@@ -204,12 +204,12 @@ export function Accordion<Multiple extends boolean = false>(_props: AccordionPro
           `${uid}-panel`,
           'Accordion.Item component was rendered with invalid value or without value'
         ),
-        chevron: local.chevron === null ? null : local.chevron || (() => <AccordionChevron size={local.chevronIconSize} />),
-        transitionDuration: local.transitionDuration,
+        chevron: () => local.chevron === null ? null : local.chevron || (() => <AccordionChevron size={local.chevronIconSize} />),
+        transitionDuration: () => local.transitionDuration,
         disableChevronRotation: () => local.disableChevronRotation,
         chevronPosition: () => local.chevronPosition,
-        order: local.order,
-        loop: local.loop,
+        order: () => local.order,
+        loop: () => local.loop,
         getStyles,
         variant,
         unstyled: local.unstyled,

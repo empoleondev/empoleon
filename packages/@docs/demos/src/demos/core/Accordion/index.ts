@@ -8,3 +8,4 @@ export { customize } from './Accordion.demo.customize';
 export { disableTransitions, customTransitions } from './Accordion.demo.transitions';
 export { unstyled } from './Accordion.demo.unstyled';
 export { stylesApi } from './Accordion.demo.stylesApi';
+export { kitchensink } from './Accordion.demo.kitchenSink';

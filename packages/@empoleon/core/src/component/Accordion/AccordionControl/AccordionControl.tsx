@@ -1,4 +1,4 @@
-import { Component, createEffect, createMemo, JSX, splitProps } from 'solid-js';
+import { Component, createEffect, JSX, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
@@ -25,7 +25,7 @@ export interface AccordionControlProps
   disabled?: boolean;
 
   /** Custom chevron icon */
-  chevron?: JSX.Element;
+  chevron: () => (() => JSX.Element | Component | null);
 
   /** Control label */
   children?: JSX.Element;
@@ -64,10 +64,8 @@ export const AccordionControl = factory<AccordionControlFactory>(_props => {
   const { value } = useAccordionItemContext();
   const ctx = useAccordionContext();
   const isActive = () => ctx.isItemActive(value);
-  const shouldWrapWithHeading = typeof ctx.order === 'number';
-  const headingTag = `h${ctx.order!}` as const;
-  const raw = local.chevron || ctx.chevron;
-  const Chevron = typeof raw === 'function' ? raw : () => raw as JSX.Element;
+  const shouldWrapWithHeading = typeof ctx.order() === 'number';
+  const headingTag = () => `h${ctx.order()!}` as const;
 
   const content = (
     <UnstyledButton<'button'>
@@ -96,7 +94,7 @@ export const AccordionControl = factory<AccordionControlFactory>(_props => {
         siblingSelector: '[data-accordion-control]',
         parentSelector: '[data-accordion]',
         activateOnFocus: false,
-        loop: ctx.loop,
+        loop: ctx.loop(),
         orientation: 'vertical',
         onKeyDown: (event) => {
           typeof local.onKeyDown === "function" && local.onKeyDown(event as KeyboardEvent & { currentTarget: HTMLButtonElement; target: Element });
@@ -108,7 +106,14 @@ export const AccordionControl = factory<AccordionControlFactory>(_props => {
         mod={{ rotate: !ctx.disableChevronRotation() && isActive(), position: ctx.chevronPosition() }}
         {...ctx.getStyles('chevron', { classNames: local.classNames, styles: local.styles  })}
       >
-        <Chevron />
+        {(() => {
+          const chevronFn = local.chevron || ctx.chevron();
+          if (chevronFn === null) return null;
+          if (typeof chevronFn === 'function') {
+            return chevronFn();
+          }
+          return chevronFn;
+        })() as any}
       </Box>
       <Box component='div' {...ctx.getStyles('label', { classNames: local.classNames, styles: local.styles })}>{local.children}</Box>
       {local.icon && (
@@ -125,7 +130,7 @@ export const AccordionControl = factory<AccordionControlFactory>(_props => {
 
   return shouldWrapWithHeading ? (
     // @ts-ignore
-    <Dynamic component={headingTag} {...ctx.getStyles('itemTitle', { classNames: local.classNames, styles: local.styles })}>{content}</Dynamic>
+    <Dynamic component={headingTag()} {...ctx.getStyles('itemTitle', { classNames: local.classNames, styles: local.styles })}>{content}</Dynamic>
   ) : (
     content
   );

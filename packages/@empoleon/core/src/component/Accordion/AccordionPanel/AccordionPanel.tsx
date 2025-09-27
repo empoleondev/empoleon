@@ -11,7 +11,7 @@ import { Collapse } from '../../Collapse';
 import { useAccordionContext } from '../Accordion.context';
 import { useAccordionItemContext } from '../AccordionItem.context';
 import classes from '../Accordion.module.css';
-import { createEffect, createSignal, onMount, splitProps } from 'solid-js';
+import { onMount, splitProps } from 'solid-js';
 
 export type AccordionPanelStylesNames = 'panel' | 'content';
 
@@ -93,7 +93,7 @@ export const AccordionPanel = factory<AccordionPanelFactory>(_props => {
         })}
         {...others}
         in={active()}
-        transitionDuration={ctx.transitionDuration ?? 200}
+        transitionDuration={ctx.transitionDuration()}
         keepMounted={false}
         role="region"
         id={ctx.getRegionId(value)}

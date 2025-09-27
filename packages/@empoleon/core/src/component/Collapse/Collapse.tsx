@@ -1,4 +1,4 @@
-import { createMemo, JSX, Show, splitProps } from 'solid-js';
+import { createEffect, createMemo, JSX, Show, splitProps } from 'solid-js';
 import { useMergedRef, useReducedMotion } from '@empoleon/hooks';
 import {
   Box,
@@ -62,7 +62,7 @@ export const Collapse = factory<CollapseFactory>(_props => {
   const theme = useEmpoleonTheme();
   const shouldReduceMotion = useReducedMotion();
   const reduceMotion = theme.respectReducedMotion ? shouldReduceMotion : false;
-  const duration = reduceMotion ? 0 : local.transitionDuration;
+  const duration = () => reduceMotion ? 0 : local.transitionDuration;
 
   const getCollapseProps = useCollapse({
     opened,
@@ -73,7 +73,7 @@ export const Collapse = factory<CollapseFactory>(_props => {
   });
 
   // If animations are disabled, render directly
-  if (duration === 0) {
+  if (duration() === 0) {
     return (
       <Show when={opened()} fallback={local.keepMounted ?
         <Box {...others} style={{ display: 'none', ...getStyleObject(local.style, theme) }}>
@@ -101,7 +101,7 @@ export const Collapse = factory<CollapseFactory>(_props => {
         data-collapse-content
         style={{
           transition: local.animateOpacity
-            ? `opacity ${duration}ms ${local.transitionTimingFunction || 'ease'}`
+            ? `opacity ${duration()}ms ${local.transitionTimingFunction || 'ease'}`
             : undefined,
           opacity: local.animateOpacity ? (opened() ? 1 : 0) : 1,
         }}

@@ -2,7 +2,7 @@ import { createSignal, createEffect, onCleanup, batch, splitProps } from 'solid-
 
 export interface UseCollapseParams {
   opened: () => boolean;
-  transitionDuration?: number;
+  transitionDuration?: () => number;
   transitionTimingFunction?: string;
   onTransitionEnd?: () => void;
   keepMounted?: boolean;
@@ -17,7 +17,7 @@ export function useCollapse(props: UseCollapseParams) {
     'keepMounted'
   ]);
 
-  const transitionDuration = local.transitionDuration || 200;
+  const transitionDuration = () => (local.transitionDuration?.() || 0);
   const transitionTimingFunction = local.transitionTimingFunction || 'ease';
 
   const [elementRef, setElementRef] = createSignal<HTMLDivElement>();
@@ -130,7 +130,7 @@ export function useCollapse(props: UseCollapseParams) {
           if (local.opened() && !isAnimating()) {
             setupResizeObserver();
           }
-        }, transitionDuration + 50);
+        }, transitionDuration() + 50);
       } else {
         cleanupObserver();
 
@@ -144,7 +144,7 @@ export function useCollapse(props: UseCollapseParams) {
       const animationTimeout = setTimeout(() => {
         setIsAnimating(false);
         local.onTransitionEnd?.();
-      }, transitionDuration + 20);
+      }, transitionDuration() + 20);
 
       timeoutId = animationTimeout;
     });
@@ -164,7 +164,7 @@ export function useCollapse(props: UseCollapseParams) {
       setElementRef(el);
 
       el.style.overflow = 'hidden';
-      el.style.transition = `height ${transitionDuration}ms ${transitionTimingFunction}`;
+      el.style.transition = `height ${transitionDuration()}ms ${transitionTimingFunction}`;
 
       if (local.opened()) {
         setTimeout(() => {
@@ -185,7 +185,7 @@ export function useCollapse(props: UseCollapseParams) {
     },
     style: {
       overflow: 'hidden',
-      transition: `height ${transitionDuration}ms ${transitionTimingFunction}`,
+      transition: `height ${transitionDuration()}ms ${transitionTimingFunction}`,
     },
     onTransitionEnd: (e: TransitionEvent) => {
       const element = elementRef();
