@@ -72,7 +72,7 @@ export function useHoverCard(settings: UseHoverCard) {
       delay: withinGroup ? delayGroup.delay : { open: settings.openDelay, close: settings.closeDelay },
     }))(),
 
-    useRole(floating.context, { role: 'dialog' }),
+    useRole(floating.context, { role: 'dialog' })(),
 
     useDismiss(() => floating.context, {
       enabled: typeof settings.opened === 'undefined',

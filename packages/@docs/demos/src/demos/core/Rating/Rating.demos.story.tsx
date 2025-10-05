@@ -56,3 +56,8 @@ export const Demo_symbol = {
   name: '⭐ Demo: symbol',
   render: renderDemo(demos.symbol),
 };
+
+export const Demo_kitchenSink = {
+  name: '⭐ Demo: kitchenSink',
+  render: renderDemo(demos.kitchenSink),
+};

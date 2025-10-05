@@ -25,7 +25,7 @@ export function DrawerStack(props: DrawerStackProps) {
   return (
     <DrawerStackProvider
       value={{
-        stack: stack(),
+        get stack() { return stack(); },
         addModal: (id, zIndex) => {
           setStack((current) => [...new Set([...current, id])]);
           setMaxZIndex((current) =>
@@ -35,9 +35,9 @@ export function DrawerStack(props: DrawerStackProps) {
           );
         },
         removeModal: (id) => setStack((current) => current.filter((currentId) => currentId !== id)),
-        getZIndex: (id) => `calc(${maxZIndex} + ${stack().indexOf(id)} + 1)`,
-        currentId: stack()[stack().length - 1],
-        maxZIndex: maxZIndex(),
+        getZIndex: (id) => `calc(${maxZIndex()} + ${stack().indexOf(id)} + 1)`,
+        get currentId() { return stack()[stack().length - 1]; },
+        get maxZIndex() { return maxZIndex(); },
       }}
     >
       {props.children}

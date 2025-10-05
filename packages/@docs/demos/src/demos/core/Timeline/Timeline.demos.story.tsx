@@ -46,3 +46,8 @@ export const Demo_bullet = {
   name: '⭐ Demo: bullet',
   render: renderDemo(demos.bullet),
 };
+
+export const Demo_kitchenSink = {
+  name: '⭐ Demo: kitchenSink',
+  render: renderDemo(demos.kitchenSink),
+};

@@ -17,9 +17,9 @@ interface ModalBaseContextValue {
   opened: () => boolean;
   onClose: () => void;
 
-  closeOnEscape: boolean | undefined;
-  trapFocus: boolean | undefined;
-  closeOnClickOutside: boolean | undefined;
+  closeOnEscape: () => boolean | undefined;
+  trapFocus: () => boolean | undefined;
+  closeOnClickOutside: () => boolean | undefined;
 }
 
 export const [ModalBaseProvider, useModalBaseContext] = createSafeContext<ModalBaseContextValue>(

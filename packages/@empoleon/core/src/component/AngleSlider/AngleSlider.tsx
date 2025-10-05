@@ -1,4 +1,4 @@
-import { createSignal, For, JSX, splitProps } from 'solid-js';
+import { createSignal, For, JSX, Show, splitProps } from 'solid-js';
 import { normalizeRadialValue, useMergedRef, useRadialMove, useUncontrolled } from '@empoleon/hooks';
 import {
   Box,
@@ -222,7 +222,7 @@ export const AngleSlider = factory<AngleSliderFactory>(_props => {
       mod={[{ disabled: local.disabled }, local.mod]}
       {...others}
     >
-      {local.marks && local.marks.length > 0 && (
+      <Show when={local.marks && local.marks.length > 0}>
         <Box component='div' {...getStyles('marks')}>
           <For each={local.marks}>{(mark) => (
             <Box component='div'
@@ -232,13 +232,13 @@ export const AngleSlider = factory<AngleSliderFactory>(_props => {
           )}
           </For>
         </Box>
-      )}
+      </Show>
 
-      {local.withLabel && (
+      <Show when={local.withLabel}>
         <Box component='div' {...getStyles('label')}>
           {typeof local.formatLabel === 'function' ? local.formatLabel(_value()) : _value()}
         </Box>
-      )}
+      </Show>
       <Box component='div'
         tabIndex={local.tabIndex ?? (local.disabled ? -1 : 0)}
         role="slider"

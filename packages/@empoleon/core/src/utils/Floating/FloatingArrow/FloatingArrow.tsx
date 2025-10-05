@@ -1,17 +1,17 @@
-import { createEffect, createMemo, JSX, splitProps } from 'solid-js';
+import { Accessor, createEffect, createMemo, JSX, splitProps } from 'solid-js';
 import { useDirection } from '../../../core';
 import { ArrowPosition, FloatingPosition } from '../types';
 import { getArrowPositionStyles } from './get-arrow-position-styles';
 
 interface FloatingArrowProps extends JSX.HTMLAttributes<HTMLDivElement> {
-  position: FloatingPosition;
-  arrowSize: number;
-  arrowOffset: number;
-  arrowRadius: number;
-  arrowPosition: ArrowPosition;
-  arrowX: number | undefined;
-  arrowY: number | undefined;
-  visible: boolean | undefined;
+  position: Accessor<FloatingPosition>;
+  arrowSize: Accessor<number>;
+  arrowOffset: Accessor<number>;
+  arrowRadius: Accessor<number>;
+  arrowPosition: Accessor<ArrowPosition>;
+  arrowX: Accessor<number | undefined>;
+  arrowY: Accessor<number | undefined>;
+  visible: Accessor<boolean | undefined>;
   ref?: (element: HTMLDivElement) => void;
 }
 
@@ -31,21 +31,21 @@ export function FloatingArrow(props: FloatingArrowProps) {
 
   const { dir } = useDirection();
 
-  if (!local.visible) {
+  if (!local.visible()) {
     return null;
   }
 
   const finalStyles = createMemo(() => ({
     ...(typeof local.style === 'object' && local.style !== null ? local.style : {}),
     ...getArrowPositionStyles({
-      position: local.position,
-      arrowSize: local.arrowSize,
-      arrowOffset: local.arrowOffset,
-      arrowRadius: local.arrowRadius,
-      arrowPosition: local.arrowPosition,
+      position: local.position(),
+      arrowSize: local.arrowSize(),
+      arrowOffset: local.arrowOffset(),
+      arrowRadius: local.arrowRadius(),
+      arrowPosition: local.arrowPosition(),
       dir,
-      arrowX: local.arrowX,
-      arrowY: local.arrowY,
+      arrowX: local.arrowX(),
+      arrowY: local.arrowY(),
     }),
   }));
 

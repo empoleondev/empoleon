@@ -121,3 +121,8 @@ export const Demo_transitionEnd = {
   name: '⭐ Demo: transitionEnd',
   render: renderDemo(demos.transitionEnd),
 };
+
+export const Demo_kitchenSink = {
+  name: '⭐ Demo: kitchenSink',
+  render: renderDemo(demos.kitchenSink),
+};

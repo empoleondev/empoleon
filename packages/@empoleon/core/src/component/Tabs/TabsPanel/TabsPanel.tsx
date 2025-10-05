@@ -51,7 +51,7 @@ export const TabsPanel = factory<TabsPanelFactory>(_props => {
   const ctx = useTabsContext();
 
   const active = () => local.value === ctx.value();
-  const content = ctx.keepMounted || local.keepMounted ? local.children : active() ? local.children : null;
+  const content = ctx.keepMounted() || local.keepMounted ? local.children : active() ? local.children : null;
 
   return (
     <Box

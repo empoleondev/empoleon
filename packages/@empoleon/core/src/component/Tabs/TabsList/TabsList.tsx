@@ -69,7 +69,7 @@ export const TabsList = factory<TabsListFactory>(_props => {
           grow: local.grow,
           orientation: ctx.orientation(),
           placement: ctx.orientation() === 'vertical' && ctx.placement,
-          inverted: ctx.inverted,
+          inverted: ctx.inverted(),
         },
         local.mod,
       ]}

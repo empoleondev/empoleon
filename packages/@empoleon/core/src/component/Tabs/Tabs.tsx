@@ -192,8 +192,8 @@ export const Tabs = factory<TabsFactory>(_props => {
         variant: () => local.variant,
         color: local.color,
         radius: local.radius,
-        inverted: local.inverted,
-        keepMounted: local.keepMounted,
+        inverted: () => local.inverted,
+        keepMounted: () => local.keepMounted,
         unstyled: local.unstyled,
         getStyles,
       }}

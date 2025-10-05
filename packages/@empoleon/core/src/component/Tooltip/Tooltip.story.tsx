@@ -166,8 +166,8 @@ export const Unmount = () => {
 };
 
 export const HexColor = () => (
-  <Tooltip label="Tooltip 2" color="#F0F">
-    {(props) => <button type="button" {...props}>Button 2</button>}
+  <Tooltip label="Tooltip 2" color="#F0F" keepMounted>
+    {(props) => <button {...props} type="button">Button 2</button>}
   </Tooltip>
 );
 

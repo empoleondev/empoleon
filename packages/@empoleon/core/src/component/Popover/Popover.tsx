@@ -271,7 +271,7 @@ export function Popover(_props: PopoverProps) {
 
   const [dropdownVisible, setDropdownVisible] = createSignal(local.opened ?? local.defaultOpened ?? false);
   let positionRef: FloatingPosition = local.position!;
-  let arrowRef: HTMLElement | undefined = undefined;
+  const [arrowRef, setArrowRef] = createSignal<HTMLElement | undefined>(undefined);
   const [targetNode, setTargetNode] = createSignal<HTMLElement | null>(null);
   const [dropdownNode, setDropdownNode] = createSignal<HTMLElement | null>(null);
   const { dir } = useDirection();
@@ -281,14 +281,14 @@ export function Popover(_props: PopoverProps) {
   const popover = usePopover({
     middlewares: local.middlewares,
     width: local.width,
-    position: getFloatingPosition(dir, local.position!),
-    offset: typeof local.offset === 'number' ? local.offset + (local.withArrow ? local.arrowSize! / 2 : 0) : local.offset!,
-    arrowRef: () => arrowRef,
+    position: () => getFloatingPosition(dir, local.position!),
+    offset: () => typeof local.offset === 'number' ? local.offset + (local.withArrow ? local.arrowSize! / 2 : 0) : local.offset!,
+    arrowRef,
     arrowOffset: local.arrowOffset!,
     onPositionChange: local.onPositionChange,
     positionDependencies: local.positionDependencies,
     opened: () => local.opened,
-    defaultOpened: local.defaultOpened,
+    defaultOpened: () => local.defaultOpened,
     onChange: local.onChange,
     onOpen: local.onOpen,
     onClose: local.onClose,
@@ -297,7 +297,7 @@ export function Popover(_props: PopoverProps) {
     dropdownVisible: dropdownVisible(),
     setDropdownVisible,
     positionRef,
-    disabled: local.disabled,
+    disabled: () => local.disabled,
     preventPositionChangeWhenVisible: local.preventPositionChangeWhenVisible,
     keepMounted: local.keepMounted,
   });
@@ -350,24 +350,25 @@ export function Popover(_props: PopoverProps) {
     <PopoverContextProvider
       value={{
         returnFocus: local.returnFocus,
-        disabled: local.disabled,
+        disabled: () => local.disabled,
         controlled: popover.controlled,
         reference,
         floating,
         x: () => popover.floating().x,
         y: () => popover.floating().y,
-        arrowX: popover.floating()?.middlewareData?.arrow?.x,
-        arrowY: popover.floating()?.middlewareData?.arrow?.y,
+        arrowX: () => popover.floating()?.middlewareData?.arrow?.x,
+        arrowY: () => popover.floating()?.middlewareData?.arrow?.y,
         opened: popover.opened,
-        arrowRef: () => arrowRef,
+        arrowRef,
+        setArrowRef,
         transitionProps: { ...local.transitionProps, onExited, onEntered },
         width: local.width,
-        withArrow: local.withArrow,
-        arrowSize: local.arrowSize!,
-        arrowOffset: local.arrowOffset!,
-        arrowRadius: local.arrowRadius!,
-        arrowPosition: local.arrowPosition!,
-        placement: popover.floating().placement,
+        withArrow: () => local.withArrow,
+        arrowSize: () => local.arrowSize!,
+        arrowOffset: () => local.arrowOffset!,
+        arrowRadius: () => local.arrowRadius!,
+        arrowPosition: () => local.arrowPosition!,
+        placement: () => popover.floating().placement,
         trapFocus: local.trapFocus,
         withinPortal: local.withinPortal,
         portalProps: local.portalProps,

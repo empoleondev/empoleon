@@ -116,3 +116,8 @@ export const Demo_hold = {
   name: '⭐ Demo: hold',
   render: renderDemo(demos.hold),
 };
+
+export const Demo_kitchenSink = {
+  name: '⭐ Demo: kitchenSink',
+  render: renderDemo(demos.kitchenSink),
+};

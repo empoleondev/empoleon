@@ -61,3 +61,9 @@ export const Demo_deselect = {
   name: '⭐ Demo: deselect',
   render: renderDemo(demos.deselect),
 };
+
+export const Demo_kitchenSink = {
+  name: '⭐ Demo: kitchenSink',
+  render: renderDemo(demos.kitchenSink),
+};
+

@@ -149,9 +149,9 @@ export const PasswordInput = factory<PasswordInputFactory>(_props => {
   const VisibilityToggleIcon = local.visibilityToggleIcon!;
   const errorId = local.errorProps?.id || `${uuid}-error`;
   const descriptionId = local.descriptionProps?.id || `${uuid}-description`;
-  const hasError = !!local.error && typeof local.error !== 'boolean';
-  const hasDescription = !!local.description;
-  const _describedBy = `${hasError ? errorId : ''} ${hasDescription ? descriptionId : ''}`;
+  const hasError = () => !!local.error && typeof local.error !== 'boolean';
+  const hasDescription = () => !!local.description;
+  const _describedBy = `${hasError() ? errorId : ''} ${hasDescription() ? descriptionId : ''}`;
   const describedBy = _describedBy.trim().length > 0 ? _describedBy.trim() : undefined;
 
   const visibilityToggleButton = (

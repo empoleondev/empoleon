@@ -87,16 +87,19 @@ function Demo() {
       }}
     >
       <Combobox.Target targetType="button">
-        <InputBase
-          component="button"
-          type="button"
-          pointer
-          rightSection={<Combobox.Chevron />}
-          rightSectionPointerEvents="none"
-          onClick={() => combobox.toggleDropdown()}
-        >
-          {value() || <Input.Placeholder>Pick value</Input.Placeholder>}
-        </InputBase>
+        {(props) => (
+          <InputBase
+            {...props}
+            component="button"
+            type="button"
+            pointer
+            rightSection={<Combobox.Chevron />}
+            rightSectionPointerEvents="none"
+            onClick={() => combobox.toggleDropdown()}
+          >
+            {value() || <Input.Placeholder>Pick value</Input.Placeholder>}
+          </InputBase>
+        )}
       </Combobox.Target>
 
       <Combobox.Dropdown>

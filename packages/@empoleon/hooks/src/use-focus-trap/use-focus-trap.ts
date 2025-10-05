@@ -18,9 +18,28 @@ export function useFocusTrap(activeAccessor: Accessor<boolean> | boolean): (inst
     }
 
     const timeoutId = setTimeout(() => {
-      const firstFocusable = element.querySelector<HTMLElement>(FOCUS_SELECTOR);
-      if (firstFocusable) {
-        firstFocusable.focus();
+      const autofocusElement = element.querySelector<HTMLElement>('[data-autofocus]');
+
+      if (autofocusElement) {
+        // If the autofocus element is a FocusTrap.InitialFocus, focus the next focusable element instead
+        if (autofocusElement.classList.contains('empoleon-VisuallyHidden-root')) {
+          const allFocusable = element.querySelectorAll<HTMLElement>(FOCUS_SELECTOR);
+          const currentIndex = Array.from(allFocusable).indexOf(autofocusElement);
+          const nextFocusable = allFocusable[currentIndex + 1];
+
+          if (nextFocusable) {
+            nextFocusable.focus();
+          }
+        } else {
+          // Regular autofocus element - focus it directly
+          autofocusElement.focus();
+        }
+      } else {
+        // Fall back to the first focusable element
+        const firstFocusable = element.querySelector<HTMLElement>(FOCUS_SELECTOR);
+        if (firstFocusable) {
+          firstFocusable.focus();
+        }
       }
     }, 0);
 

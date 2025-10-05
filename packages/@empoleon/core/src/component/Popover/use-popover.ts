@@ -1,4 +1,4 @@
-import { Accessor, createEffect, createSignal, onCleanup } from 'solid-js';
+import { Accessor, createEffect, createMemo, createSignal, onCleanup } from 'solid-js';
 import {
   arrow,
   flip,
@@ -23,12 +23,12 @@ import { PopoverMiddlewares, PopoverWidth } from './Popover.types';
 import { useEmpoleonEnv } from '../../core';
 
 interface UsePopoverOptions {
-  offset: number | FloatingAxesOffsets;
-  position: FloatingPosition;
+  offset: () => number | FloatingAxesOffsets;
+  position: () => FloatingPosition;
   positionDependencies: any[] | undefined;
   onPositionChange?: (position: FloatingPosition) => void;
   opened: Accessor<boolean | undefined>;
-  defaultOpened: boolean | undefined;
+  defaultOpened: () => boolean | undefined;
   onChange?: (opened: boolean) => void;
   onClose?: () => void;
   onDismiss?: () => void;
@@ -41,7 +41,7 @@ interface UsePopoverOptions {
   dropdownVisible: boolean;
   setDropdownVisible: (visible: boolean) => void;
   positionRef: FloatingPosition;
-  disabled: boolean | undefined;
+  disabled: () => boolean | undefined;
   preventPositionChangeWhenVisible: boolean | undefined;
   keepMounted: boolean | undefined;
 }
@@ -69,7 +69,7 @@ function getPopoverMiddlewares(
   env: 'test' | 'default'
 ) {
   const middlewaresOptions = getDefaultMiddlewares(options.middlewares);
-  const middlewares: Middleware[] = [offset(options.offset), hide()];
+  const middlewares: Middleware[] = [offset(options.offset()), hide()];
 
   if (options.dropdownVisible && env !== 'test' && options.preventPositionChangeWhenVisible) {
     middlewaresOptions.flip = false;
@@ -141,7 +141,7 @@ export function usePopover(options: UsePopoverOptions) {
   const env = useEmpoleonEnv();
   const [_opened, setOpened] = useUncontrolled({
     value: options.opened,
-    defaultValue: options.defaultOpened!,
+    defaultValue: options.defaultOpened()!,
     finalValue: false,
     onChange: options.onChange,
   });
@@ -149,26 +149,30 @@ export function usePopover(options: UsePopoverOptions) {
   const [referenceElement, setReferenceElement] = createSignal<HTMLElement | null>(null);
   const [floatingElement, setFloatingElement] = createSignal<HTMLElement | null>(null);
   const [previouslyOpened, setPreviouslyOpened] = createSignal(_opened());
-  const [positionRef, setPositionRef] = createSignal<FloatingPosition>(options.position);
+  const [positionRef, setPositionRef] = createSignal<FloatingPosition>(options.position());
 
   const onClose = () => {
-    if (_opened() && !options.disabled) {
+    if (_opened() && !options.disabled()) {
       setOpened(false);
     }
   };
 
   const onToggle = () => {
-    if (!options.disabled) {
+    if (!options.disabled()) {
       setOpened(!_opened());
     }
   }
+
+  const middlewares = createMemo(() =>
+    getPopoverMiddlewares(options, () => floating, env)
+  );
 
   const floating: UseFloatingReturn = useFloating({
     strategy: options.strategy,
     placement: options.preventPositionChangeWhenVisible
       ? positionRef()
       : options.position,
-    middleware: getPopoverMiddlewares(options, () => floating, env),
+    middleware: () => middlewares(),
     elements: () => ({
       reference: referenceElement(),
       floating: floatingElement()
@@ -210,7 +214,7 @@ export function usePopover(options: UsePopoverOptions) {
     if (!options.keepMounted) {
       useFloatingAutoUpdate({
         opened: _opened,
-        position: options.position,
+        position: options.position(),
         positionDependencies: options.positionDependencies || [],
         floating: floatingWithRefs,
       });

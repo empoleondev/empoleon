@@ -20,16 +20,6 @@ export default {
   ],
 };
 
-// const largeOptionsList = (
-  // <For each={Array(100).fill(0)}>
-  //   {(_, index) => (
-  //     <Combobox.Option value={`option-${index()}`}>
-  //       Option {index()}
-  //     </Combobox.Option>
-  //   )}
-  // </For>
-// );
-
 const lorem = `
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod, nisl quis tincidunt
 sodales, leo sapien faucibus eros, eu tincidunt nisl quam eget mauris. Nulla facilisi. Nulla

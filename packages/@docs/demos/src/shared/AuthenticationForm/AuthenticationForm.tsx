@@ -20,12 +20,7 @@ export interface AuthenticationFormProps {
   style?: JSX.CSSProperties;
 }
 
-export function AuthenticationForm({
-  noShadow,
-  noPadding,
-  noSubmit,
-  style,
-}: AuthenticationFormProps) {
+export function AuthenticationForm(props: AuthenticationFormProps) {
   const [formType, setFormType] = createSignal<'register' | 'login'>('register');
   const [loading, setLoading] = createSignal(false);
   const [error, setError] = createSignal<string | null>(null);
@@ -61,10 +56,10 @@ export function AuthenticationForm({
 
   return (
     <Paper
-      p={noPadding ? 0 : 'lg'}
-      shadow={noShadow ? 'none' : 'sm'}
+      p={props.noPadding ? 0 : 'lg'}
+      shadow={props.noShadow ? 'none' : 'sm'}
       style={{
-        ...style,
+        ...props.style,
         position: 'relative',
         backgroundColor: 'var(--empoleon-color-body)',
       }}
@@ -132,13 +127,13 @@ export function AuthenticationForm({
           />
         )}
 
-        {error && (
+        {error() && (
           <Text c="red" size="sm" mt="sm">
             {error()}
           </Text>
         )}
 
-        {!noSubmit && (
+        {!props.noSubmit && (
           <Group justify="space-between" mt="xl">
             <Anchor component="button" type="button" c="dimmed" onClick={toggleFormType} size="sm">
               {formType() === 'register'

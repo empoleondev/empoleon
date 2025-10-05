@@ -14,3 +14,4 @@ export { variantColorsResolver } from './ActionIcon.demo.variantColorsResolver';
 export { autoContrast } from './ActionIcon.demo.autoContrast';
 export { inputSize } from './ActionIcon.demo.inputSize';
 export { groupSection } from './ActionIcon.demo.groupSection';
+export { kitchenSink } from './ActionIcon.demo.kitchenSink';

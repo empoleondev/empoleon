@@ -261,7 +261,7 @@ export const Select = factory<SelectFactory>(_props => {
     }
   });
 
-  const _clearable = local.clearable && !!_value() && !local.disabled && !local.readOnly;
+  const _clearable = () => local.clearable && !!_value() && !local.disabled && !local.readOnly;
 
   return (
     <>
@@ -321,9 +321,9 @@ export const Select = factory<SelectFactory>(_props => {
                     }}
                   />
                 }
-                __clearable={_clearable}
+                __clearable={_clearable()}
                 rightSection={local.rightSection}
-                rightSectionPointerEvents={local.rightSectionPointerEvents || (_clearable ? 'all' : 'none')}
+                rightSectionPointerEvents={local.rightSectionPointerEvents || (_clearable() ? 'all' : 'none')}
                 {...others}
                 size={local.size}
                 __staticSelector="Select"

@@ -23,7 +23,7 @@ export function GridVariables(props: GridVariablesProps) {
     '--grid-gutter': getSpacing(getBaseValue(props.gutter)),
   }));
 
-  const queries = keys(_breakpoints).reduce<Record<string, Record<string, any>>>(
+  const queries = () => keys(_breakpoints).reduce<Record<string, Record<string, any>>>(
     (acc, breakpoint) => {
       if (!acc[breakpoint]) {
         acc[breakpoint] = {};
@@ -39,7 +39,7 @@ export function GridVariables(props: GridVariablesProps) {
   );
 
   const sortedBreakpoints = getSortedBreakpoints(keys(queries), _breakpoints).filter(
-    (breakpoint) => keys(queries[breakpoint.value]).length > 0
+    (breakpoint) => keys(queries()[breakpoint.value]).length > 0
   );
 
   const values = sortedBreakpoints.map((breakpoint) => ({
@@ -47,7 +47,7 @@ export function GridVariables(props: GridVariablesProps) {
       props.type === 'container'
         ? `empoleon-grid (min-width: ${_breakpoints[breakpoint.value as keyof GridBreakpoints]})`
         : `(min-width: ${_breakpoints[breakpoint.value as keyof GridBreakpoints]})`,
-    styles: queries[breakpoint.value],
+    styles: queries()[breakpoint.value],
   }));
 
   return (

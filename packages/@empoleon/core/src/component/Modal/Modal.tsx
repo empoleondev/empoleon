@@ -91,31 +91,24 @@ export const Modal = factory<ModalFactory>(_props => {
     'ref'
   ]);
 
-  // const openedFn = () => {
-  //   const result = typeof local.opened === 'function' ? local.opened() : local.opened;
-  //   console.log('Modal opened check:', { stackId: local.stackId, result });
-  //   return result;
-  // };
-
   const openedFn = createMemo(() => (typeof local.opened === 'function' ? local.opened() : local.opened));
 
   const ctx = useModalStackContext();
   const isStacked = createMemo(() => !!(ctx && local.stackId));
   const isCurrent = createMemo(() => isStacked() && ctx?.currentId === local.stackId);
 
-
   const stackProps = createMemo(() => {
-  if (!isStacked()) {
-    return {};
-  }
-  return {
-    closeOnEscape: isCurrent(),
-    trapFocus: isCurrent(),
-    zIndex: ctx?.getZIndex(local.stackId!),
-  };
-});
+    if (!isStacked()) {
+      return {};
+    }
+    return {
+      closeOnEscape: isCurrent(),
+      trapFocus: isCurrent(),
+      zIndex: ctx?.getZIndex(local.stackId!),
+    };
+  });
 
-const hasHeader = () => !!local.title || local.withCloseButton;
+  const hasHeader = () => !!local.title || local.withCloseButton;
 
   const overlayVisible = createMemo(() =>
     local.withOverlay === false ? false :

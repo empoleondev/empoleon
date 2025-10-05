@@ -18,6 +18,8 @@ import {
   ConfiguratorSizeControlOptions,
   ConfiguratorStringControl,
   ConfiguratorStringControlOptions,
+  ConfiguratorTextareaControl,
+  ConfiguratorTextareaControlOptions
 } from './controls';
 import { Code, getCodeArray } from './get-code-array';
 import { Dynamic } from 'solid-js/web';
@@ -30,6 +32,7 @@ const ControlComponents = {
   select: ConfiguratorSelectControl,
   size: ConfiguratorSizeControl,
   number: ConfiguratorNumberControl,
+  textarea: ConfiguratorTextareaControl
 };
 
 export type ConfiguratorControlOptions =
@@ -39,7 +42,8 @@ export type ConfiguratorControlOptions =
   | ConfiguratorStringControlOptions
   | ConfiguratorSelectControlOptions
   | ConfiguratorSizeControlOptions
-  | ConfiguratorNumberControlOptions;
+  | ConfiguratorNumberControlOptions
+  | ConfiguratorTextareaControlOptions;
 
 export interface ConfiguratorDemoProps extends DemoAreaProps {
   code: Code;

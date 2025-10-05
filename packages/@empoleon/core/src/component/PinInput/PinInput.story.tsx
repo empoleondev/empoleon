@@ -75,11 +75,11 @@ export function AsyncReset() {
 }
 
 export function InputRef() {
-  let inputRef: HTMLInputElement | null = null;
+  let inputRef: HTMLInputElement | undefined;
 
   return (
     <div style={{ 'padding': '40px' }}>
-      <PinInput ref={inputRef} />
+      <PinInput ref={inputRef!} />
       <Button onClick={() => inputRef?.focus()}>Focus first input</Button>
     </div>
   );

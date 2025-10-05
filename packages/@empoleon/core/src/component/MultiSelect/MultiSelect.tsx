@@ -307,7 +307,7 @@ export const MultiSelect = factory<MultiSelectFactory>(_props => {
   );
 
   const filteredData = filterPickedValues({ data: parsedData, value: _value() });
-  const _clearable = local.clearable && _value().length > 0 && !local.disabled && !local.readOnly;
+  const _clearable = () => local.clearable && _value().length > 0 && !local.disabled && !local.readOnly;
 
   return (
     <>
@@ -356,7 +356,7 @@ export const MultiSelect = factory<MultiSelectFactory>(_props => {
               />
             }
             __clearSection={clearButton}
-            __clearable={_clearable}
+            __clearable={_clearable()}
             rightSection={local.rightSection}
             rightSectionPointerEvents={local.rightSectionPointerEvents || (clearButton ? 'all' : 'none')}
             rightSectionWidth={local.rightSectionWidth}
@@ -378,7 +378,7 @@ export const MultiSelect = factory<MultiSelectFactory>(_props => {
             withErrorStyles={local.withErrorStyles}
             __stylesApiProps={{
               ...props,
-              rightSectionPointerEvents: local.rightSectionPointerEvents || (_clearable ? 'all' : 'none'),
+              rightSectionPointerEvents: local.rightSectionPointerEvents || (_clearable() ? 'all' : 'none'),
               multiline: true,
             }}
             pointer={!local.searchable}

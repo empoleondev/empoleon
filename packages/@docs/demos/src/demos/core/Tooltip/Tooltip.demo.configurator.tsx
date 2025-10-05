@@ -4,7 +4,7 @@ import { EmpoleonDemo } from '@empoleonx/demo';
 function Wrapper(props: any) {
   return (
     <Tooltip label="Tooltip" {...props}>
-      <Button>With tooltip</Button>
+      {(props) => <Button {...props}>With tooltip</Button>}
     </Tooltip>
   );
 }

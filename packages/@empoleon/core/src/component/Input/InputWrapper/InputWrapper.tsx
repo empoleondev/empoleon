@@ -178,9 +178,9 @@ export const InputWrapper = factory<InputWrapperFactory>(_props => {
   const errorId = local.errorProps?.id || `${idBase}-error`;
   const descriptionId = local.descriptionProps?.id || `${idBase}-description`;
   const inputId = idBase;
-  const hasError = !!local.error && typeof local.error !== 'boolean';
-  const hasDescription = !!local.description;
-  const _describedBy = `${hasError ? errorId : ''} ${hasDescription ? descriptionId : ''}`;
+  const hasError = () => !!local.error && typeof local.error !== 'boolean';
+  const hasDescription = () => !!local.description;
+  const _describedBy = `${hasError() ? errorId : ''} ${hasDescription() ? descriptionId : ''}`;
   const describedBy = _describedBy.trim().length > 0 ? _describedBy.trim() : undefined;
   const labelId = local.labelProps?.id || `${idBase}-label`;
 
@@ -191,7 +191,7 @@ export const InputWrapper = factory<InputWrapperFactory>(_props => {
         describedBy,
         inputId,
         labelId,
-        ...getInputOffsets(local.inputWrapperOrder!, { hasDescription, hasError }),
+        ...getInputOffsets(local.inputWrapperOrder!, { hasDescription: hasDescription(), hasError: hasError() }),
       }}
     >
       <Box
@@ -223,7 +223,7 @@ export const InputWrapper = factory<InputWrapperFactory>(_props => {
                 <>{local.inputContainer!(local.children)}</>
               </Match>
               <Match when={part === 'description'}>{
-                hasDescription && (
+                hasDescription() && (
                   <InputDescription
                     {...local.descriptionProps}
                     {...sharedProps}

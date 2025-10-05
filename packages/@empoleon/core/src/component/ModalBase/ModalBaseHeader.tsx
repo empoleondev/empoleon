@@ -11,15 +11,17 @@ export function ModalBaseHeader(props: ModalBaseHeaderProps) {
     'className',
     'ref'
   ]);
+
   const ctx = useModalBaseContext();
-    return (
-      <Box
-        component="header"
-        ref={local.ref}
-        className={cx({ [classes.header]: !ctx.unstyled }, local.className)}
-        {...others}
-      />
-    );
+
+  return (
+    <Box
+      component="header"
+      ref={local.ref}
+      className={cx({ [classes.header]: !ctx.unstyled }, local.className)}
+      {...others}
+    />
+  );
 }
 
 ModalBaseHeader.displayName = '@empoleon/core/ModalBaseHeader';

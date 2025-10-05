@@ -41,3 +41,8 @@ export const Demo_lineWidth = {
   name: '⭐ Demo: lineWidth',
   render: renderDemo(demos.lineWidth),
 };
+
+export const Demo_kitchenSink = {
+  name: '⭐ Demo: kitchenSink',
+  render: renderDemo(demos.kitchenSink),
+};

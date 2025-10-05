@@ -56,3 +56,8 @@ export const Demo_variants = {
   name: '⭐ Demo: variants',
   render: renderDemo(demos.variants),
 };
+
+export const Demo_kitchenSink = {
+  name: '⭐ Demo: kitchenSink',
+  render: renderDemo(demos.kitchenSink),
+};

@@ -86,7 +86,9 @@ function Demo() {
         }}
       >
         <Combobox.Target>
-          <Button onClick={() => combobox.toggleDropdown()}>Pick item</Button>
+          {(props) => (
+            <Button {...props} onClick={() => combobox.toggleDropdown()}>Pick item</Button>
+          )}
         </Combobox.Target>
 
         <Combobox.Dropdown>

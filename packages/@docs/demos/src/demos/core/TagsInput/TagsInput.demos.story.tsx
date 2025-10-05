@@ -176,3 +176,8 @@ export const Demo_isDuplicate = {
   name: '⭐ Demo: isDuplicate',
   render: renderDemo(demos.isDuplicate),
 };
+
+export const Demo_kitchenSink = {
+  name: '⭐ Demo: kitchenSink',
+  render: renderDemo(demos.kitchenSink),
+};

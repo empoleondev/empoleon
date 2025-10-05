@@ -1,4 +1,4 @@
-import { createMemo, createSignal, JSX, splitProps } from 'solid-js';
+import { createEffect, createMemo, createSignal, JSX, splitProps } from 'solid-js';
 import { useMergedRef } from '@empoleon/hooks';
 import {
   Box,
@@ -8,7 +8,6 @@ import {
   getDefaultZIndex,
   getRadius,
   getRefProp,
-  getThemeColor,
   isElement,
   useDirection,
   useProps,
@@ -194,7 +193,7 @@ export const Tooltip = factory<TooltipFactory>(_props => {
   const [arrowRef, setArrowRef] = createSignal<HTMLDivElement>();
 
   const tooltip = useTooltip({
-    position: getFloatingPosition(dir, local.position!),
+    position: () => getFloatingPosition(dir, local.position!),
     closeDelay: local.closeDelay,
     openDelay: local.openDelay,
     onPositionChange: local.onPositionChange,
@@ -203,7 +202,7 @@ export const Tooltip = factory<TooltipFactory>(_props => {
     events: local.events,
     arrowRef: () => arrowRef(),
     arrowOffset: local.arrowOffset,
-    offset: typeof local.offset === 'number' ? local.offset! + (local.withArrow ? local.arrowSize! / 2 : 0) : local.offset!,
+    offset: () => typeof local.offset === 'number' ? local.offset! + (local.withArrow ? local.arrowSize! / 2 : 0) : local.offset!,
     positionDependencies: [...local.positionDependencies!, props.children],
     inline: local.inline,
     strategy: local.floatingStrategy,
@@ -259,7 +258,7 @@ export const Tooltip = factory<TooltipFactory>(_props => {
               {...tooltip.getFloatingProps({
                 ref: tooltip.floating,
                 style: {
-                  ...getStyles('tooltip').style,
+                  ...(getStyles('tooltip') as any).style(),
                   ...transitionStyles,
                   ['z-index']: local.zIndex as JSX.CSSProperties['z-index'],
                   ...coords(),
@@ -270,14 +269,14 @@ export const Tooltip = factory<TooltipFactory>(_props => {
 
               <FloatingArrow
                 ref={setArrowRef}
-                arrowX={tooltip.arrowX!}
-                arrowY={tooltip.arrowY!}
-                visible={local.withArrow!}
-                position={tooltip.placement!}
-                arrowSize={local.arrowSize!}
-                arrowOffset={local.arrowOffset!}
-                arrowRadius={local.arrowRadius!}
-                arrowPosition={local.arrowPosition!}
+                arrowX={() => tooltip.arrowX!}
+                arrowY={() => tooltip.arrowY!}
+                visible={() => local.withArrow!}
+                position={() => tooltip.placement!}
+                arrowSize={() => local.arrowSize!}
+                arrowOffset={() => local.arrowOffset!}
+                arrowRadius={() => local.arrowRadius!}
+                arrowPosition={() => local.arrowPosition!}
                 {...getStyles('arrow') as any}
               />
             </Box>
@@ -285,14 +284,24 @@ export const Tooltip = factory<TooltipFactory>(_props => {
         </Transition>
       </OptionalPortal>
 
-      {typeof props.children === 'function'
-        ? props.children({
-            ref: targetRef,
-            class: local.className,
-            ...tooltip.getReferenceProps(),
-            // ...restOthers,
-          })
-        : props.children}
+      {typeof props.children === 'function' ? (() => {
+        const refProps = tooltip.getReferenceProps();
+
+        // Merge event handlers from parent tooltips with current tooltip's handlers
+        ['onmouseenter', 'onmouseleave', 'onmousemove', 'onpointerdown', 'onpointerenter'].forEach(handler => {
+          const parent = (others as any)[handler];
+          const current = refProps[handler];
+          if (parent && current && typeof current === 'function') {
+            refProps[handler] = (e: any) => { current(e); parent(e); };
+          }
+        });
+
+        return props.children({
+          [local.refProp!]: targetRef,
+          class: local.className,
+          ...refProps,
+        });
+      })() : props.children}
     </>
   );
 });

@@ -41,3 +41,8 @@ export const Demo_preventGrowOverflow = {
   name: '⭐ Demo: preventGrowOverflow',
   render: renderDemo(demos.preventGrowOverflow),
 };
+
+export const Demo_kitchenSink = {
+  name: '⭐ Demo: kitchenSink',
+  render: renderDemo(demos.kitchenSink),
+};

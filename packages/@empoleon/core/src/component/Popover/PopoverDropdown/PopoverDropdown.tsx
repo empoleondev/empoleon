@@ -66,7 +66,7 @@ export const PopoverDropdown = factory<PopoverDropdownFactory>(_props => {
 
   const mergedRef = useMergedRef(local.ref, ctx.floating);
 
-  if (ctx.disabled) {
+  if (ctx.disabled()) {
     return null;
   }
 
@@ -134,9 +134,9 @@ export const PopoverDropdown = factory<PopoverDropdownFactory>(_props => {
 
                 {/* @ts-ignore */}
                 <FloatingArrow
-                  ref={() => ctx.arrowRef}
-                  arrowX={ctx.arrowX}
-                  arrowY={ctx.arrowY}
+                  ref={ctx.setArrowRef}
+                  arrowX={() => ctx.arrowX()}
+                  arrowY={() => ctx.arrowY()}
                   visible={ctx.withArrow}
                   position={ctx.placement}
                   arrowSize={ctx.arrowSize}

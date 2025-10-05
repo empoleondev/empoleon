@@ -102,9 +102,11 @@ export const CheckboxCard = factory<CheckboxCardFactory>(_props => {
   const groupStoreValue = () => ctx ? ctx.value().includes(local.value || '') : undefined;
   const _checked = () => typeof local.checked === 'boolean'? checked() : groupStoreValue();
 
+  const defaultChecked = () => local.defaultChecked;
+
   const [_value, setValue] = useUncontrolled({
     value: _checked,
-    defaultValue: local.defaultChecked ?? false,
+    defaultValue: defaultChecked() || false,
     finalValue: false,
     onChange: local.onChange,
   });

@@ -26,13 +26,13 @@ import { type TooltipMiddlewares } from './Tooltip.types';
 import { useTooltipGroupContext } from './TooltipGroup/TooltipGroup.context';
 
 interface UseTooltip {
-  position: FloatingPosition;
+  position: () => FloatingPosition;
   closeDelay?: number;
   openDelay?: number;
   onPositionChange?: (position: FloatingPosition) => void;
   opened?: Accessor<boolean>;
   defaultOpened?: boolean;
-  offset: number | FloatingAxesOffsets;
+  offset: () => number | FloatingAxesOffsets;
   arrowRef?: () => HTMLDivElement | undefined;
   arrowOffset?: number;
   events?: { hover: boolean; focus: boolean; touch: boolean };
@@ -61,7 +61,7 @@ function getDefaultMiddlewares(middlewares: TooltipMiddlewares | undefined): Too
 
 function getTooltipMiddlewares(settings: UseTooltip) {
   const middlewaresOptions = getDefaultMiddlewares(settings.middlewares);
-  const middlewares: Middleware[] = [offset(settings.offset)];
+  const middlewares: Middleware[] = [offset(settings.offset())];
 
   if (middlewaresOptions.shift) {
     middlewares.push(
@@ -147,7 +147,7 @@ export function useTooltip(settings: UseTooltip) {
       visibleOnly: true
     })(),
 
-    useRole(floating.context, { role: 'tooltip' }),
+    useRole(floating.context, { role: 'tooltip' })(),
 
     useDismiss(() => floating.context, {
       enabled: typeof settings.opened === 'undefined',
@@ -156,7 +156,7 @@ export function useTooltip(settings: UseTooltip) {
 
   useFloatingAutoUpdate({
     opened,
-    position: settings.position,
+    position: settings.position(),
     positionDependencies: settings.positionDependencies || [],
     floating: {
       update: floating.update,

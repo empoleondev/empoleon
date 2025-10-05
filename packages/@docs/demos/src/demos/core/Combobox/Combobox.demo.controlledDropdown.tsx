@@ -56,11 +56,14 @@ function Demo() {
 
       <Combobox store={combobox}>
         <Combobox.Target>
-          <TextInput
-            label="Autocomplete"
-            description="Dropdown is opened/closed when button is clicked"
-            placeholder="Click button to toggle dropdown"
-          />
+          {(props) => (
+            <TextInput
+              {...props}
+              label="Autocomplete"
+              description="Dropdown is opened/closed when button is clicked"
+              placeholder="Click button to toggle dropdown"
+            />
+          )}
         </Combobox.Target>
 
         <Combobox.Dropdown>

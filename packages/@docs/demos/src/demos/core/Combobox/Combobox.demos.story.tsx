@@ -116,3 +116,8 @@ export const Demo_dropdownPosition = {
   name: '⭐ Demo: dropdownPosition',
   render: renderDemo(demos.dropdownPosition),
 };
+
+export const Demo_kitchenSink = {
+  name: '⭐ Demo: kitchenSink',
+  render: renderDemo(demos.kitchenSink),
+};

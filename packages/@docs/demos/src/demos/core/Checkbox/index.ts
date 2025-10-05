@@ -12,3 +12,8 @@ export { tooltip } from './Checkbox.demo.tooltip';
 export { customSize } from './Checkbox.demo.customSize';
 export { cardGroup } from './Checkbox.demo.cardGroup';
 export { indicator } from './Checkbox.demo.indicator';
+
+export { kitchenSink } from './Checkbox.demo.kitchenSink';
+export { kitchenSink as GroupKitchenSink } from './Checkbox.demo.group.kitchenSink';
+export { kitchenSink as IndicatorKitchenSink } from './Checkbox.demo.indicator.kitchenSink';
+export { kitchenSink as CardKitchenSink } from './Checkbox.demo.card.kitchenSink';

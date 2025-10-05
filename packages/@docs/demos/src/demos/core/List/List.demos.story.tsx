@@ -46,3 +46,8 @@ export const Demo_nested = {
   name: '⭐ Demo: nested',
   render: renderDemo(demos.nested),
 };
+
+export const Demo_kitchenSink = {
+  name: '⭐ Demo: kitchenSink',
+  render: renderDemo(demos.kitchenSink),
+};

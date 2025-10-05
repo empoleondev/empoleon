@@ -1,4 +1,4 @@
-import { splitProps, JSX, createMemo } from 'solid-js';
+import { splitProps, JSX, Show } from 'solid-js';
 import {
   Box,
   BoxProps,
@@ -119,25 +119,24 @@ export const Grid = factory<GridFactory>(_props => {
 
   const responsiveClassName = useRandomClassName();
 
-  if (local.type === 'container' && local.breakpoints) {
-    return (
-      <GridProvider value={contextValue}>
-        <GridVariables selector={`.${responsiveClassName}`} {...local} />
+  return (
+    <GridProvider value={contextValue}>
+      <Show when={local.type === 'container' && local.breakpoints} fallback={
+        <>
+          <GridVariables selector={`.${responsiveClassName}`} {...props} />
+          <Box ref={local.ref} {...getStyles('root', { className: responsiveClassName })} {...others}>
+            <Box component='div' {...getStyles('inner')}>{local.children}</Box>
+          </Box>
+        </>
+      }>
+        <GridVariables selector={`.${responsiveClassName}`} {...props} />
         <Box component='div' {...getStyles('container')}>
           <Box ref={local.ref} {...getStyles('root', { className: responsiveClassName })} {...others}>
             <Box component='div' {...getStyles('inner')}>{local.children}</Box>
           </Box>
         </Box>
-      </GridProvider>
-    );
-  }
+      </Show>
 
-  return (
-    <GridProvider value={contextValue}>
-      <GridVariables selector={`.${responsiveClassName}`} {...props} />
-      <Box ref={local.ref} {...getStyles('root', { className: responsiveClassName })} {...others}>
-        <Box component='div' {...getStyles('inner')}>{local.children}</Box>
-      </Box>
     </GridProvider>
   );
 });

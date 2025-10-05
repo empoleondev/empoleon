@@ -148,3 +148,8 @@ export const Demo_autoSelectOnBlur = {
   name: '⭐ Demo: autoSelectOnBlur',
   render: renderDemo(demos.autoSelectOnBlur),
 };
+
+export const Demo_kitchenSink = {
+  name: '⭐ Demo: kitchenSink',
+  render: renderDemo(demos.kitchenSink),
+};

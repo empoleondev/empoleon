@@ -15,3 +15,4 @@ export { fixOnBlur } from './ColorInput.demo.fixOnBlur';
 export { onChangeEnd } from './ColorInput.demo.onChangeEnd';
 export { readOnly } from './ColorInput.demo.readOnly';
 export { withPicker } from './ColorInput.demo.withPicker';
+export { kitchenSink } from './ColorInput.demo.kitchenSink';

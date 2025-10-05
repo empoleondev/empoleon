@@ -1,4 +1,4 @@
-import { splitProps, JSX } from 'solid-js';
+import { splitProps, JSX, Show, createEffect } from 'solid-js';
 import {
   BoxProps,
   createVarsResolver,
@@ -127,9 +127,9 @@ export const Dialog = factory<DialogFactory>(_props => {
             {...getStyles('root', { style: transitionStyles })}
             {...others}
           >
-            {local.withCloseButton && (
+            <Show when={local.withCloseButton}>
               <CloseButton onClick={local.onClose} unstyled={local.unstyled} {...getStyles('closeButton')} />
-            )}
+            </Show>
             {local.children}
           </Paper>
         )}

@@ -1,4 +1,4 @@
-import { children, Component, createMemo, createSignal, JSX, splitProps } from 'solid-js';
+import { children, Component, createEffect, createMemo, createSignal, For, JSX, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
@@ -216,7 +216,6 @@ export const Stepper = factory<StepperFactory>(_props => {
       icon: local.icon,
       completedIcon: local.completedIcon,
       progressIcon: local.progressIcon,
-      color: local.color,
       iconSize: local.iconSize,
       wrap: () => !!local.wrap,
       stepChildren: stepContents,
@@ -249,8 +248,8 @@ interface StepNodeProps {
 }
 
 function StepNodes(props: StepNodeProps) {
-  const steps = createMemo(() => {
-    const _children = children(() => props.children)
+  const filteredSteps = createMemo(() => {
+    return children(() => props.children)
       .toArray()
       .filter((item) => {
         if (!item) return false;
@@ -265,28 +264,25 @@ function StepNodes(props: StepNodeProps) {
 
         return true;
       });
-
-    const acc: any[] = [];
-
-    _children.forEach((step, index) => {
-      acc.push(step);
-
-      if (props.orientation === 'horizontal' && index !== _children.length - 1) {
-        acc.push(
-          <div
-            style={props.style}
-            class={props.className}
-            data-active={index < props.active || undefined}
-            data-orientation={props.orientation}
-          />
-        );
-      }
-    });
-
-    return acc;
   });
 
-  return steps()
+  return (
+    <For each={filteredSteps()}>
+      {(step, index) => (
+        <>
+          {step}
+          {props.orientation === 'horizontal' && index() !== filteredSteps().length - 1 && (
+            <div
+              style={props.style}
+              class={props.className}
+              data-active={index() < props.active || undefined}
+              data-orientation={props.orientation}
+            />
+          )}
+        </>
+      )}
+    </For>
+  );
 }
 
 interface CompletedProps {

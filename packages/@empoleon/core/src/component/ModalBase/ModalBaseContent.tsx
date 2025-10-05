@@ -34,59 +34,53 @@ export function ModalBaseContent(props: _ModalBaseContentProps) {
 
   const ctx = useModalBaseContext();
 
-  // console.log('Inner classes:', {
-  //   baseInner: classes.inner,
-  //   fromProps: local.innerProps.class,
-  //   unstyled: ctx.unstyled
-  // });
-
-    return (
-      <Transition
-        mounted={ctx.opened()}
-        transition="pop"
-        {...ctx.transitionProps}
-        onExited={() => {
-          ctx.onExitTransitionEnd?.();
-          ctx.transitionProps?.onExited?.();
-        }}
-        onEntered={() => {
-          ctx.onEnterTransitionEnd?.();
-          ctx.transitionProps?.onEntered?.();
-        }}
-        {...local.transitionProps}
-      >
-        {(transitionStyles) => (
-          <div
-            {...local.innerProps}
-            class={cx(
-              { [classes.inner]: !ctx.unstyled },
-              local.innerProps.class,
-              (local.innerProps as any).className
+  return (
+    <Transition
+      mounted={ctx.opened()}
+      transition="pop"
+      {...ctx.transitionProps}
+      onExited={() => {
+        ctx.onExitTransitionEnd?.();
+        ctx.transitionProps?.onExited?.();
+      }}
+      onEntered={() => {
+        ctx.onEnterTransitionEnd?.();
+        ctx.transitionProps?.onEntered?.();
+      }}
+      {...local.transitionProps}
+    >
+      {(transitionStyles) => (
+        <div
+          {...local.innerProps}
+          class={cx(
+            { [classes.inner]: !ctx.unstyled },
+            local.innerProps.class,
+            (local.innerProps as any).className
+          )}
+        >
+          <FocusTrap active={ctx.opened() && ctx.trapFocus()!} innerRef={local.ref}>
+            {(focusTrapProps) => (
+              <Paper
+                {...focusTrapProps}
+                {...others}
+                // component="section"
+                role="dialog"
+                tabIndex={-1}
+                aria-modal
+                aria-describedby={ctx.bodyMounted ? ctx.getBodyId() : undefined}
+                aria-labelledby={ctx.titleMounted ? ctx.getTitleId() : undefined}
+                style={[local.style, transitionStyles]}
+                className={cx({ [classes.content]: !ctx.unstyled }, local.className)}
+                unstyled={ctx.unstyled}
+              >
+                {others.children}
+              </Paper>
             )}
-          >
-            <FocusTrap active={ctx.opened() && ctx.trapFocus!} innerRef={local.ref}>
-              {(focusTrapProps) => (
-                <Paper
-                  {...focusTrapProps}
-                  {...others}
-                  // component="section"
-                  role="dialog"
-                  tabIndex={-1}
-                  aria-modal
-                  aria-describedby={ctx.bodyMounted ? ctx.getBodyId() : undefined}
-                  aria-labelledby={ctx.titleMounted ? ctx.getTitleId() : undefined}
-                  style={[local.style, transitionStyles]}
-                  className={cx({ [classes.content]: !ctx.unstyled }, local.className)}
-                  unstyled={ctx.unstyled}
-                >
-                  {others.children}
-                </Paper>
-              )}
-            </FocusTrap>
-          </div>
-        )}
-      </Transition>
-    );
+          </FocusTrap>
+        </div>
+      )}
+    </Transition>
+  );
 }
 
 ModalBaseContent.displayName = '@empoleon/core/ModalBaseContent';

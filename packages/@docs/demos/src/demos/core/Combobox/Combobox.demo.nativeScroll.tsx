@@ -130,20 +130,23 @@ function Demo() {
       }}
     >
       <Combobox.Target>
-        <InputBase
-          component="button"
-          type="button"
-          pointer
-          rightSection={<Combobox.Chevron />}
-          rightSectionPointerEvents="none"
-          onClick={() => combobox.toggleDropdown()}
-        >
-          {value() || <Input.Placeholder>Pick value</Input.Placeholder>}
-        </InputBase>
+        {(props) => (
+          <InputBase
+            {...props}
+            component="button"
+            type="button"
+            pointer
+            rightSection={<Combobox.Chevron />}
+            rightSectionPointerEvents="none"
+            onClick={() => combobox.toggleDropdown()}
+          >
+            {value() || <Input.Placeholder>Pick value</Input.Placeholder>}
+          </InputBase>
+        )}
       </Combobox.Target>
 
       <Combobox.Dropdown>
-        <Combobox.Options mah={200} style={{ overflowY: 'auto' }}>
+        <Combobox.Options mah={200} style={{ 'overflow-y': 'auto' }}>
           <For each={groceries}>
             {(item) => (
               <Combobox.Option value={item}>

@@ -121,6 +121,29 @@ function hslStringToRgba(hslaString: string): RGBA {
   };
 }
 
+function namedColorToRgba(color: string): RGBA | null {
+  if (typeof document === 'undefined') {
+    return null;
+  }
+
+  const temp = document.createElement('div');
+  temp.style.color = color;
+
+  if (!temp.style.color) {
+    return null;
+  }
+
+  document.body.appendChild(temp);
+  const computedColor = getComputedStyle(temp).color;
+  document.body.removeChild(temp);
+
+  if (computedColor && computedColor.startsWith('rgb')) {
+    return rgbStringToRgba(computedColor);
+  }
+
+  return null;
+}
+
 export function toRgba(color: string): RGBA {
   if (isHexColor(color)) {
     return hexToRgba(color);
@@ -132,6 +155,11 @@ export function toRgba(color: string): RGBA {
 
   if (color.startsWith('hsl')) {
     return hslStringToRgba(color);
+  }
+
+  const namedColor = namedColorToRgba(color);
+  if (namedColor) {
+    return namedColor;
   }
 
   return {

@@ -261,20 +261,7 @@ export const Input = polymorphicFactory<InputFactory>(_props => {
       }
     : {};
 
-  const _rightSection: JSX.Element = local.rightSection || (local.__clearable && local.__clearSection) || local.__defaultRightSection;
-  // const valueProp = (v: any, dv: any) => {
-  //   if (v !== undefined) {
-  //     return {
-  //       value: v,
-  //       onInput: (e: Event) => {
-  //         (rest as any).onChange?.(e);
-  //         // Reset the value to maintain controlled behavior
-  //         // (e.target as any).value = v;
-  //       }
-  //     };
-  //   }
-  //   return dv !== undefined ? { value: dv } : undefined;
-  // };
+  const _rightSection = () => local.rightSection || (local.__clearable && local.__clearSection) || local.__defaultRightSection;
 
   const valueProp = (v: any, dv: any) => {
     if (v !== undefined) {
@@ -313,7 +300,7 @@ export const Input = polymorphicFactory<InputFactory>(_props => {
             pointer: local.pointer,
             disabled: local.disabled,
             multiline: local.multiline,
-            'data-with-right-section': !!_rightSection,
+            'data-with-right-section': !!_rightSection(),
             'data-with-left-section': !!local.leftSection,
           },
           local.mod,
@@ -351,7 +338,7 @@ export const Input = polymorphicFactory<InputFactory>(_props => {
           {...rest}
         />
 
-        {_rightSection && (
+        {_rightSection() && (
           <Box
             component='div'
             {...local.rightSectionProps}
@@ -361,7 +348,7 @@ export const Input = polymorphicFactory<InputFactory>(_props => {
               style: local.rightSectionProps?.style as any,
             })}
           >
-            {_rightSection}
+            {_rightSection()}
           </Box>
         )}
       </Box>

@@ -111,3 +111,9 @@ export const Demo_domain = {
   name: '⭐ Demo: domain',
   render: renderDemo(demos.domain),
 };
+
+export const Demo_kitchenSink = {
+  name: '⭐ Demo: kitchenSink',
+  render: renderDemo(demos.kitchenSink),
+};
+

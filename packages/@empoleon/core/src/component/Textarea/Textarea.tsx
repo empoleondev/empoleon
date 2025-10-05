@@ -50,12 +50,12 @@ export const Textarea = factory<TextareaFactory>(_props => {
     'ref'
   ]);
 
-  const shouldAutosize = local.autosize && getEnv() !== 'test';
-  const autosizeProps = shouldAutosize ? { maxRows: local.maxRows, minRows: local.minRows } : {};
+  const shouldAutosize = () => local.autosize && getEnv() !== 'test';
+  const autosizeProps = shouldAutosize() ? { maxRows: local.maxRows, minRows: local.minRows } : {};
 
   return (
     <InputBase<any>
-      component={shouldAutosize ? TextareaAutosize : 'textarea'}
+      component={shouldAutosize() ? TextareaAutosize : 'textarea'}
       ref={local.ref}
       {...others}
       __staticSelector={local.__staticSelector || 'Textarea'}

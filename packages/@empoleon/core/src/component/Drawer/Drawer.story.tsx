@@ -22,7 +22,7 @@ const lorem =
   'Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum tenetur, atque animi ducimus tempora iste distinctio harum nostrum eos tempore voluptatem, voluptas dolorem eveniet fugiat pariatur! Repellendus minus nulla non?';
 const content = Array(20)
   .fill(0)
-  .map((_, index) => (
+  .map(_ => (
     <p style={{ margin: 0 }}>
       {lorem}
     </p>

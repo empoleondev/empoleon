@@ -113,22 +113,15 @@ export function ModalBase(props: ModalBaseProps) {
     return result;
   };
 
-  const [modalProps] = splitProps(useModal({
+  const modalProps = useModal({
     id: local.id,
     transitionProps: local.transitionProps,
     opened: openedFn,
-    trapFocus: local.trapFocus,
-    closeOnEscape: local.closeOnEscape,
+    trapFocus: () => local.trapFocus,
+    closeOnEscape: () => local.closeOnEscape,
     onClose: local.onClose,
-    returnFocus: local.returnFocus
-  }), [
-    '_id',
-    'titleMounted',
-    'bodyMounted',
-    'shouldLockScroll',
-    'setTitleMounted',
-    'setBodyMounted'
-  ])
+    returnFocus: () => local.returnFocus
+  })
 
   const { ...otherRemoveScrollProps } = local.removeScrollProps || {};
 
@@ -138,7 +131,7 @@ export function ModalBase(props: ModalBaseProps) {
         value={{
           opened: openedFn,
           onClose: local.onClose,
-          closeOnClickOutside: local.closeOnClickOutside,
+          closeOnClickOutside: () => local.closeOnClickOutside,
           onExitTransitionEnd: local.onEnterTransitionEnd,
           onEnterTransitionEnd: local.onEnterTransitionEnd,
           transitionProps: { ...local.transitionProps, keepMounted: local.keepMounted },
@@ -148,8 +141,8 @@ export function ModalBase(props: ModalBaseProps) {
           bodyMounted: modalProps.bodyMounted(),
           setTitleMounted: modalProps.setTitleMounted,
           setBodyMounted: modalProps.setBodyMounted,
-          trapFocus: local.trapFocus ?? true,
-          closeOnEscape: local.closeOnEscape,
+          trapFocus: () => local.trapFocus ?? true,
+          closeOnEscape: () => local.closeOnEscape,
           zIndex: local.zIndex,
           unstyled: local.unstyled,
         }}

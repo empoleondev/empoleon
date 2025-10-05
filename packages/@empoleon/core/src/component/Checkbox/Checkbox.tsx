@@ -212,10 +212,11 @@ export const Checkbox = factory<CheckboxFactory>(_props => {
     if (inputRef) inputRef.indeterminate = indeterminate() || false;
   });
 
-  const toolTipEvents = {
-    onmouseenter: others.onmouseenter,
-    onMouseLeave: others.onmouseleave
-  }
+  const tooltipEvents = ['onmouseenter', 'onmouseleave', 'onmousemove', 'onpointerdown', 'onpointerenter']
+    .reduce((acc, key) => (others[key as keyof typeof others] ? { ...acc, [key]: others[key as keyof typeof others] } : acc), {});
+
+  const toolTipEventsForRoot = local.rootRef ? tooltipEvents : {};
+  const toolTipEventsForInput = !local.rootRef ? tooltipEvents : {};
 
   return (
     <InlineInput
@@ -238,7 +239,7 @@ export const Checkbox = factory<CheckboxFactory>(_props => {
       mod={local.mod}
       {...styleProps()}
       {...local.wrapperProps as any}
-      {...toolTipEvents}
+      {...toolTipEventsForRoot}
     >
       <Box {...getStyles('inner')} mod={{ 'data-label-position': local.labelPosition }}>
         <Box
@@ -255,6 +256,7 @@ export const Checkbox = factory<CheckboxFactory>(_props => {
           {...getStyles('input', { focusable: true, variant: local.variant })}
           {...rest()}
           {...contextProps()}
+          {...toolTipEventsForInput}
           onChange={contextProps().onChange}
           type="checkbox"
         />

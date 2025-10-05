@@ -51,3 +51,8 @@ export const Demo_autoContrast = {
   name: '⭐ Demo: autoContrast',
   render: renderDemo(demos.autoContrast),
 };
+
+export const Demo_kitchenSink = {
+  name: '⭐ Demo: kitchenSink',
+  render: renderDemo(demos.kitchenSink),
+};

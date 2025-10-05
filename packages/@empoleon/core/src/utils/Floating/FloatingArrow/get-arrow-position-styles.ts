@@ -30,15 +30,15 @@ function verticalSide(
   dir: 'rtl' | 'ltr'
 ) {
   if (placement === 'center' || arrowPosition === 'center') {
-    return { left: arrowX };
+    return { left: arrowX !== undefined ? `${arrowX}px` : undefined };
   }
 
   if (placement === 'end') {
-    return { [dir === 'ltr' ? 'right' : 'left']: arrowOffset };
+    return { [dir === 'ltr' ? 'right' : 'left']: `${arrowOffset}px` };
   }
 
   if (placement === 'start') {
-    return { [dir === 'ltr' ? 'left' : 'right']: arrowOffset };
+    return { [dir === 'ltr' ? 'left' : 'right']: `${arrowOffset}px` };
   }
 
   return {};
@@ -71,12 +71,13 @@ export function getArrowPositionStyles(props: {
   dir: 'rtl' | 'ltr';
 }) {
   const [side, placement = 'center'] = props.position.split('-') as [FloatingSide, FloatingPlacement];
+
   const baseStyles = {
     width: `${props.arrowSize}px`,
     height: `${props.arrowSize}px`,
     transform: 'rotate(45deg)',
     position: 'absolute',
-    [radiusByFloatingSide[side]]: props.arrowRadius,
+    [radiusByFloatingSide[side]]: props.arrowRadius !== undefined ? `${props.arrowRadius}px` : undefined,
   };
 
   const arrowPlacement = -props.arrowSize / 2;

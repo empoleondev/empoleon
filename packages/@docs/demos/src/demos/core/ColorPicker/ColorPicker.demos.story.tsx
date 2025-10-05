@@ -81,3 +81,8 @@ export const Demo_alphaSlider = {
   name: '⭐ Demo: alphaSlider',
   render: renderDemo(demos.alphaSlider),
 };
+
+export const Demo_kitchenSink = {
+  name: '⭐ Demo: kitchenSink',
+  render: renderDemo(demos.kitchenSink),
+};

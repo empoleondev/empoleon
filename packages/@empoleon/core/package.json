@@ -39,7 +39,7 @@
     "directory": "packages/@empoleon/core"
   },
   "dependencies": {
-    "@empoleon/solid-floating-ui": "0.0.5",
+    "@empoleon/solid-floating-ui": "0.0.6",
     "@empoleon/solid-number-format": "0.0.4",
     "@empoleon/solid-remove-scroll": "^0.0.4-0",
     "@solid-primitives/presence": "0.1.1",

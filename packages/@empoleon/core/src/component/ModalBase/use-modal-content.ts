@@ -6,7 +6,7 @@ export function useModalContentProps() {
   const handleKeyDown = (event: KeyboardEvent) => {
     const shouldTrigger =
       (event.target as HTMLElement)?.getAttribute('data-empoleon-stop-propagation') !== 'true';
-    shouldTrigger && event.key === 'Escape' && ctx.closeOnEscape && ctx.onClose();
+    shouldTrigger && event.key === 'Escape' && ctx.closeOnEscape() && ctx.onClose();
   };
 
   return {

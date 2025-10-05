@@ -9,3 +9,4 @@ export { states } from './Radio.demo.states';
 export { card } from './Radio.demo.card';
 export { cardGroup } from './Radio.demo.cardGroup';
 export { indicator } from './Radio.demo.indicator';
+export { kitchenSink } from './Radio.demo.kitchenSink';

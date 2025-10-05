@@ -75,19 +75,22 @@ function Demo() {
       store={combobox}
     >
       <Combobox.Target>
-        <TextInput
-          label="Pick value or type anything"
-          placeholder="Pick value or type anything"
-          value={value()}
-          onChange={(event) => {
-            setValue(event.currentTarget.value);
-            combobox.openDropdown();
-            combobox.updateSelectedOptionIndex();
-          }}
-          onClick={() => combobox.openDropdown()}
-          onFocus={() => combobox.openDropdown()}
-          onBlur={() => combobox.closeDropdown()}
-        />
+        {(props) => (
+          <TextInput
+            {...props}
+            label="Pick value or type anything"
+            placeholder="Pick value or type anything"
+            value={value()}
+            onChange={(event) => {
+              setValue(event.currentTarget.value);
+              combobox.openDropdown();
+              combobox.updateSelectedOptionIndex();
+            }}
+            onClick={() => combobox.openDropdown()}
+            onFocus={() => combobox.openDropdown()}
+            onBlur={() => combobox.closeDropdown()}
+          />
+        )}
       </Combobox.Target>
 
       <Combobox.Dropdown>

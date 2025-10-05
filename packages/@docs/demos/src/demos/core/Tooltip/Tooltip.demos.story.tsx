@@ -32,6 +32,7 @@ export default {
     ),
   ],
 };
+
 export const Demo_configurator = {
   name: '⭐ Demo: configurator',
   render: renderDemo(demos.configurator),

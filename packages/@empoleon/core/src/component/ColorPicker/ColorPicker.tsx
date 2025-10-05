@@ -178,7 +178,7 @@ export const ColorPicker = factory<ColorPickerFactory>(_props => {
   let valueRef: string = '';
   let scrubTimeoutRef: number = -1;
   const [isScrubbingRef, setScrubbingRef] = createSignal(false);
-  const withAlpha = local.format === 'hexa' || local.format === 'rgba' || local.format === 'hsla';
+  const withAlpha = () => local.format === 'hexa' || local.format === 'rgba' || local.format === 'hsla';
 
   const [_value, setValue, controlled] = useUncontrolled({
     value: () => local.value,
@@ -262,7 +262,7 @@ export const ColorPicker = factory<ColorPickerFactory>(_props => {
                   onScrubEnd={stopScrubbing}
                 />
 
-                {withAlpha && (
+                {withAlpha() && (
                   <AlphaSlider
                     value={parsed().a}
                     onChange={(a) => handleChange({ a })}
@@ -279,7 +279,7 @@ export const ColorPicker = factory<ColorPickerFactory>(_props => {
                 )}
               </Box>
 
-              {withAlpha && (
+              {withAlpha() && (
                 <ColorSwatch
                   color={_value()}
                   radius="sm"

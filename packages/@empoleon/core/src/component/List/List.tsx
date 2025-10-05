@@ -111,9 +111,9 @@ export const List = factory<ListFactory>(_props => {
   });
 
   return (
-    <ListProvider value={{ center: local.center, icon: local.icon, getStyles }}>
+    <ListProvider value={{ center: () => local.center, icon: () => local.icon, getStyles }}>
       <Box<any>
-        {...getStyles('root', { style: { listStyleType: local.listStyleType } })}
+        {...getStyles('root', { style: { 'list-style-type': local.listStyleType } })}
         component={local.type === 'unordered' ? ('ul' as const) : ('ol' as const)}
         mod={[{ 'with-padding': local.withPadding }, local.mod]}
         ref={local.ref}

@@ -116,3 +116,9 @@ export const Demo_groupSection = {
   name: '⭐ Demo: groupSection',
   render: renderDemo(demos.groupSection),
 };
+
+export const Demo_kitchenSink = {
+  name: '⭐ Demo: kitchenSink',
+  render: renderDemo(demos.kitchenSink),
+};
+

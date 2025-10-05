@@ -89,6 +89,7 @@ export const ColorSwatch = polymorphicFactory<ColorSwatchFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
+    attributes: local.attributes,
     vars: local.vars,
     varsResolver,
   });

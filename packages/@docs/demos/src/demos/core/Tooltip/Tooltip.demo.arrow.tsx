@@ -16,7 +16,7 @@ function Demo() {
 function Wrapper(props: any) {
   return (
     <Tooltip label="Tooltip" withArrow opened position="top-start" {...props}>
-      <Button>Button with tooltip</Button>
+      {(props) => <Button {...props}>Button with tooltip</Button>}
     </Tooltip>
   );
 }

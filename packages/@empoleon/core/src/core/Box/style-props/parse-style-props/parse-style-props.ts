@@ -65,13 +65,9 @@ function camelToKebab(str: string) {
   return str.replace(/[A-Z]/g, (m) => '-' + m.toLowerCase());
 }
 
-export function parseStyleProps({
-  styleProps,
-  data,
-  theme,
-}: ParseStylePropsOptions): SortMediaQueriesResult {
+export function parseStyleProps(props: ParseStylePropsOptions): SortMediaQueriesResult {
   return sortMediaQueries(
-    keys(styleProps).reduce<{
+    keys(props.styleProps).reduce<{
       hasResponsiveStyles: boolean;
       inlineStyles: JSX.CSSProperties;
       styles: JSX.CSSProperties;
@@ -86,16 +82,16 @@ export function parseStyleProps({
           return acc;
         }
 
-        const propertyData = data[styleProp];
+        const propertyData = props.data[styleProp];
         const properties = Array.isArray(propertyData.property)
           ? propertyData.property
           : [propertyData.property];
-        const baseValue = getBaseValue(styleProps[styleProp]);
+        const baseValue = getBaseValue(props.styleProps[styleProp]);
 
-        if (!hasResponsiveStyles(styleProps[styleProp])) {
+        if (!hasResponsiveStyles(props.styleProps[styleProp])) {
           properties.forEach((property) => {
             // change from camelCase to kebab-case
-            (acc.inlineStyles as any)[camelToKebab(property)] = resolvers[propertyData.type](baseValue, theme);
+            (acc.inlineStyles as any)[camelToKebab(property)] = resolvers[propertyData.type](baseValue, props.theme);
           });
 
           return acc;
@@ -103,20 +99,20 @@ export function parseStyleProps({
 
         acc.hasResponsiveStyles = true;
 
-        const breakpoints = getBreakpointKeys(styleProps[styleProp]);
+        const breakpoints = getBreakpointKeys(props.styleProps[styleProp]);
 
         properties.forEach((property) => {
           if (baseValue) {
-            (acc.styles as any)[property] = resolvers[propertyData.type](baseValue, theme);
+            (acc.styles as any)[property] = resolvers[propertyData.type](baseValue, props.theme);
           }
 
           breakpoints.forEach((breakpoint) => {
-            const bp = `(min-width: ${theme.breakpoints[breakpoint]})`;
+            const bp = `(min-width: ${props.theme.breakpoints[breakpoint]})`;
             acc.media[bp] = {
               ...acc.media[bp],
               [property]: resolvers[propertyData.type](
-                getBreakpointValue(styleProps[styleProp], breakpoint),
-                theme
+                getBreakpointValue(props.styleProps[styleProp], breakpoint),
+                props.theme
               ),
             };
           });

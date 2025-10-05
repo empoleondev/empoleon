@@ -19,14 +19,14 @@ import {
 } from '../../core';
 import classes from './Text.module.css';
 
-type TextTruncate = 'end' | 'start' | boolean;
+type TextTruncate = 'end' | 'start' | 'none' | boolean;
 
 function getTextTruncate(truncate: TextTruncate | undefined) {
   if (truncate === 'start') {
     return 'start';
   }
 
-  if (truncate === 'end' || truncate) {
+  if (truncate === 'end' || truncate === true) {
     return 'end';
   }
 

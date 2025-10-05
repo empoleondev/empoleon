@@ -5,7 +5,6 @@ import { inputControls } from '../../../shared';
 const code = `
 import { MultiSelect } from '@empoleon/core';
 
-
 function Demo() {
   return (
     <MultiSelect

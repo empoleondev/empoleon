@@ -46,3 +46,8 @@ export const Demo_regexp = {
   name: '⭐ Demo: regexp',
   render: renderDemo(demos.regexp),
 };
+
+export const Demo_kitchenSink = {
+  name: '⭐ Demo: kitchenSink',
+  render: renderDemo(demos.kitchenSink),
+};

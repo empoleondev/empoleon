@@ -244,12 +244,15 @@ export const RangeSlider = factory<RangeSliderFactory>(_props => {
   const thumbs = [] as HTMLDivElement[];
   const root = null as HTMLDivElement | null;
   let thumbIndex = undefined as number | undefined;
-  const [domainMin, domainMax] = local.domain || [local.min!, local.max!];
+  const domain = createMemo(() => local.domain || [local.min!, local.max!]);
+  const domainMin = () => domain()[0];
+  const domainMax = () => domain()[1];
+
   const positions = createMemo(() => {
     const [v0, v1] = _value();
     return [
-      getPosition({ value: v0, min: domainMin, max: domainMax }),
-      getPosition({ value: v1, min: domainMin, max: domainMax }),
+      getPosition({ value: v0, min: domainMin(), max: domainMax() }),
+      getPosition({ value: v1, min: domainMin(), max: domainMax() }),
     ];
   });
 
@@ -358,8 +361,8 @@ export const RangeSlider = factory<RangeSliderFactory>(_props => {
     if (!local.disabled) {
       const nextValue = getChangeValue({
         value: val,
-        min: domainMin,
-        max: domainMax,
+        min: domainMin(),
+        max: domainMax(),
         step: local.step!,
         precision,
       });
@@ -541,8 +544,8 @@ export const RangeSlider = factory<RangeSliderFactory>(_props => {
           filled={positions()[1] - positions()[0]}
           marks={local.marks}
           inverted={local.inverted}
-          min={domainMin}
-          max={domainMax}
+          min={domainMin()}
+          max={domainMax()}
           value={_value()[1]}
           disabled={local.disabled}
           containerProps={{

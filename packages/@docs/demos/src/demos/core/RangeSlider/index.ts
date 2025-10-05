@@ -8,3 +8,4 @@ export { marks } from './RangeSlider.demo.marks';
 export { pushOnOverlap } from './RangeSlider.demo.pushOnOverlap';
 export { restrictToMarks } from './RangeSlider.demo.restrictToMarks';
 export { step } from './RangeSlider.demo.step';
+export { kitchenSink } from './RangeSlider.demo.kitchenSink';

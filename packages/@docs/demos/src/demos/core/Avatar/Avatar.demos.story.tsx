@@ -78,3 +78,8 @@ export const Demo_allowedColors = {
   name: '⭐ Demo: allowedColors',
   render: renderDemo(demos.allowedColors),
 };
+
+export const Demo_kitchenSink = {
+  name: '⭐ Demo: kitchenSink',
+  render: renderDemo(demos.kitchenSink),
+};

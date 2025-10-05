@@ -101,3 +101,23 @@ export const Demo_indicator = {
   name: '⭐ Demo: indicator',
   render: renderDemo(demos.indicator),
 };
+
+export const Demo_kitchenSink = {
+  name: '⭐ Demo: kitchenSink',
+  render: renderDemo(demos.kitchenSink),
+};
+
+export const Demo_group_kitchenSink = {
+  name: '⭐ Demo: groupKitchenSink',
+  render: renderDemo(demos.GroupKitchenSink),
+};
+
+export const Demo_indicator_kitchenSink = {
+  name: '⭐ Demo: indicatorKitchenSink',
+  render: renderDemo(demos.IndicatorKitchenSink),
+};
+
+export const Demo_card_kitchenSink = {
+  name: '⭐ Demo: cardKitchenSink',
+  render: renderDemo(demos.CardKitchenSink),
+};

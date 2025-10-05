@@ -1,4 +1,4 @@
-import { JSX, splitProps } from 'solid-js';
+import { createEffect, JSX, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,

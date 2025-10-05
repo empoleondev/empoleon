@@ -36,7 +36,13 @@ export const Demo_usage = {
   name: '⭐ Demo: usage',
   render: renderDemo(demos.usage),
 };
+
 export const Demo_icon = {
   name: '⭐ Demo: icon',
   render: renderDemo(demos.icon),
+};
+
+export const Demo_kitchenSink = {
+  name: '⭐ Demo: kitchenSink',
+  render: renderDemo(demos.kitchenSink),
 };

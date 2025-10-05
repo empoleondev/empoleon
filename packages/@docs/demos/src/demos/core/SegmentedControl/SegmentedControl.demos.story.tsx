@@ -71,3 +71,8 @@ export const Demo_readOnly = {
   name: '⭐ Demo: readOnly',
   render: renderDemo(demos.readOnly),
 };
+
+export const Demo_kitchenSink = {
+  name: '⭐ Demo: kitchenSink',
+  render: renderDemo(demos.kitchenSink),
+};

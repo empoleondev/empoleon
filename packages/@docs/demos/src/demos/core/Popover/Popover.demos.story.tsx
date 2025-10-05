@@ -96,3 +96,9 @@ export const Demo_hideDetached = {
   name: '⭐ Demo: hideDetached',
   render: renderDemo(demos.hideDetached),
 };
+
+export const Demo_kitchenSink = {
+  name: '⭐ Demo: kitchenSink',
+  render: renderDemo(demos.kitchenSink),
+};
+

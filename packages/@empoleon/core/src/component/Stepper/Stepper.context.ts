@@ -13,7 +13,6 @@ interface StepperContextValue {
   icon: unknown;
   completedIcon: unknown;
   progressIcon: unknown;
-  color: string | undefined;
   iconSize: string | number | undefined;
   wrap: () => boolean;
 

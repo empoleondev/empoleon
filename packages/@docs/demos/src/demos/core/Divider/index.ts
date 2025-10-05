@@ -3,3 +3,4 @@ export { labels } from './Divider.demo.labels';
 export { sizes } from './Divider.demo.sizes';
 export { orientation } from './Divider.demo.orientation';
 export { variants } from './Divider.demo.variants';
+export { kitchenSink } from './Divider.demo.kitchenSink';

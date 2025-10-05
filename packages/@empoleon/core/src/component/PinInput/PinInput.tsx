@@ -1,4 +1,4 @@
-import { createSignal, createEffect, JSX, For, splitProps } from "solid-js";
+import { createSignal, createEffect, JSX, splitProps, Index, createMemo } from "solid-js";
 import { Ref } from "@solid-primitives/refs";
 import { useId, useUncontrolled } from '@empoleon/hooks';
 import {
@@ -213,8 +213,13 @@ export const PinInput = factory<PinInputFactory>(_props => {
 
   const [focusedIndex, setFocusedIndex] = createSignal(-1);
 
+  const controlledValue = createMemo(() => {
+    if (local.value === undefined) return undefined;
+    return createPinArray(local.length ?? 0, local.value);
+  });
+
   const [_value, setValues] = useUncontrolled<string[]>({
-    value: () => local.value ? createPinArray(local.length ?? 0, local.value) : undefined,
+    value: controlledValue,
     defaultValue: local.defaultValue?.split('').slice(0, local.length ?? 0)!,
     finalValue: createPinArray(local.length ?? 0, ''),
     onChange:
@@ -224,11 +229,16 @@ export const PinInput = factory<PinInputFactory>(_props => {
           }
         : undefined,
   });
+
   const _valueToString = _value().join('').trim();
 
-  const [inputsRef, setInputsRef] = createSignal<Array<HTMLInputElement | null>>(
-    Array(local.length || 0).fill(null)
-  );
+  let inputRefs: (HTMLInputElement | null)[] = Array(local.length || 0).fill(null);
+
+  createEffect(() => {
+    if (typeof _props.ref === 'function' && inputRefs[0]) {
+      _props.ref(inputRefs[0]);
+    }
+  });
 
   const validate = (code: string) => {
     const re = local.type instanceof RegExp ? local.type : local.type && local.type in regex ? regex[local.type] : null;
@@ -249,7 +259,7 @@ export const PinInput = factory<PinInputFactory>(_props => {
     if (dir === 'next') {
       const nextIndex = index + 1;
       const canFocusNext = nextIndex < (local.length ?? 0);
-      const refs = inputsRef();
+      const refs = inputRefs;
 
       if (canFocusNext && refs[nextIndex]) {
         event?.preventDefault();
@@ -260,7 +270,7 @@ export const PinInput = factory<PinInputFactory>(_props => {
     if (dir === 'prev') {
       const nextIndex = index - 1;
       const canFocusNext = nextIndex > -1;
-      const refs = inputsRef();
+      const refs = inputRefs;
 
       if (canFocusNext && refs[nextIndex]) {
         event?.preventDefault();
@@ -338,15 +348,18 @@ export const PinInput = factory<PinInputFactory>(_props => {
 
   const handleFocus = (event: Event, index: number) => {
     (event.target as HTMLInputElement)?.select();
-    setFocusedIndex(index);
+    if (local.autoFocus) {
+      setFocusedIndex(index);
+    }
   };
 
   createEffect(() => {
     if (local.autoFocus) {
-      const refs = inputsRef();
-      if (refs[0]) {
-        refs[0].focus();
-      }
+      queueMicrotask(() => {
+        if (inputRefs[0]) {
+          inputRefs[0].focus();
+        }
+      });
     }
   });
 
@@ -409,52 +422,57 @@ export const PinInput = factory<PinInputFactory>(_props => {
         __size={local.size}
         dir="ltr"
       >
-        <For each={_value()}>
-          {(char, index) => (
-            <Input
-              component="input"
-              {...getStyles('pinInput', {
-                style: {
-                  '--input-padding': '0',
-                  '--input-text-align': 'center',
-                } as JSX.CSSProperties,
-              })}
-              classNames={resolvedClassNames}
-              styles={resolvedStyles}
-              size={local.size}
-              __staticSelector="PinInput"
-              id={`${uuid}-${index() + 1}`}
-              inputMode={local.inputMode || (local.type === 'number' ? 'numeric' : 'text')}
-              onInput={(event: Event) => handleChange(event, index())}
-              onKeyDown={(event: KeyboardEvent) => handleKeyDown(event, index())}
-              onFocus={(event: Event) => handleFocus(event, index())}
-              onBlur={handleBlur}
-              onPaste={handlePaste}
-              type={typeof local.inputType === "string" ? local.inputType : (local.mask?"password": local.type==="number"?"tel":"text")}
-              radius={local.radius}
-              error={local.error}
-              variant={local.variant}
-              disabled={local.disabled}
-              ref={(el: HTMLInputElement) => {
-                if (typeof local.ref === 'function') local.ref(el);
+        <Index each={_value()}>
+          {(char, index) => {
+            return (
+              <Input
+                component="input"
+                {...getStyles('pinInput', {
+                  style: {
+                    '--input-padding': '0',
+                    '--input-text-align': 'center',
+                  } as JSX.CSSProperties,
+                })}
+                classNames={resolvedClassNames}
+                styles={resolvedStyles}
+                size={local.size}
+                __staticSelector="PinInput"
+                id={`${uuid}-${index + 1}`}
+                inputMode={local.inputMode || (local.type === 'number' ? 'numeric' : 'text')}
+                onInput={(event: Event) => handleChange(event, index)}
+                onKeyDown={(event: KeyboardEvent) => handleKeyDown(event, index)}
+                onFocus={(event: Event) => handleFocus(event, index)}
+                onBlur={handleBlur}
+                onPaste={handlePaste}
+                type={typeof local.inputType === "string" ? local.inputType : (local.mask?"password": local.type==="number"?"tel":"text")}
+                radius={local.radius}
+                error={local.error}
+                variant={local.variant}
+                disabled={local.disabled}
+                ref={(el: HTMLInputElement) => {
+                  inputRefs[index] = el;
 
-                setInputsRef(prev => {
-                  const next = [...prev];
-                  next[index()] = el;
-                  return next;
-                });
-              }}
-              auto-complete={local.oneTimeCode ? 'one-time-code' : 'off'}
-              placeholder={focusedIndex === index ? '' : local.placeholder}
-              value={char}
-              auto-focus={local.autoFocus && index() === 0}
-              unstyled={local.unstyled}
-              aria-label={local.ariaLabel}
-              read-only={local.readOnly}
-              {...local.getInputProps?.(index())}
-            />
-          )}
-        </For>
+                  if (index === 0 && el) {
+                    if (local.autoFocus) {
+                      queueMicrotask(() => el.focus());
+                    }
+                    else {
+                      queueMicrotask(() => el.blur());
+                    }
+                  }
+                }}
+                auto-complete={local.oneTimeCode ? 'one-time-code' : 'off'}
+                placeholder={focusedIndex() === index ? '' : local.placeholder}
+                value={char()}
+                autofocus={local.autoFocus && index === 0}
+                unstyled={local.unstyled}
+                aria-label={local.ariaLabel}
+                read-only={local.readOnly}
+                {...local.getInputProps?.(index)}
+              />
+            )
+          }}
+        </Index>
       </Group>
 
       <input type="hidden" name={local.name} form={local.form} value={_valueToString} {...local.hiddenInputProps} />

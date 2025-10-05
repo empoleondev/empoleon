@@ -90,36 +90,44 @@ export const Drawer = factory<DrawerFactory>(_props => {
   const openedFn = createMemo(() => (typeof local.opened === 'function' ? local.opened() : local.opened));
 
   const ctx = useDrawerStackContext();
-  const hasHeader = !!local.title || local.withCloseButton;
-  const stackProps =
-    ctx && local.stackId
-      ? {
-          closeOnEscape: ctx.currentId === local.stackId,
-          trapFocus: ctx.currentId === local.stackId,
-          zIndex: ctx.getZIndex(local.stackId),
-        }
-      : {};
+  const isStacked = createMemo(() => !!(ctx && local.stackId));
+  const isCurrent = createMemo(() => isStacked() && ctx?.currentId === local.stackId);
+
+  const stackProps = createMemo(() => {
+    if (!isStacked()) {
+      return {};
+    }
+    return {
+      closeOnEscape: isCurrent(),
+      trapFocus: isCurrent(),
+      zIndex: ctx?.getZIndex(local.stackId!),
+    };
+  });
+
+  const hasHeader = () => !!local.title || local.withCloseButton;
 
   const overlayVisible = createMemo(() =>
-      local.withOverlay === false ? false :
-      (local.stackId && ctx ? ctx.currentId === local.stackId : openedFn())
-    );
+    local.withOverlay === false ? false :
+    (local.stackId && ctx ? ctx.currentId === local.stackId : openedFn())
+  );
 
   createEffect(() => {
     if (ctx && local.stackId) {
-      local.opened
-        ? ctx.addModal(local.stackId, local.zIndex || getDefaultZIndex('modal'))
-        : ctx.removeModal(local.stackId);
+      if (openedFn()) {
+        ctx.addModal(local.stackId, local.zIndex || getDefaultZIndex('modal'));
+      } else {
+        ctx.removeModal(local.stackId);
+      }
     }
   });
 
   return (
     <DrawerRoot
       ref={local.ref}
-      opened={local.opened}
+      opened={openedFn}
       zIndex={ctx && local.stackId ? ctx.getZIndex(local.stackId) : local.zIndex}
       {...others}
-      {...stackProps}
+      {...stackProps()}
     >
       {local.withOverlay && (
         <DrawerOverlay
@@ -128,8 +136,8 @@ export const Drawer = factory<DrawerFactory>(_props => {
           {...local.overlayProps}
         />
       )}
-      <DrawerContent __hidden={ctx && local.stackId && local.opened ? local.stackId !== ctx.currentId : false}>
-        {hasHeader && (
+      <DrawerContent __hidden={!openedFn() || (!!(ctx && local.stackId) && ctx.currentId !== local.stackId)}>
+        {hasHeader() && (
           <DrawerHeader>
             {local.title && <DrawerTitle>{local.title}</DrawerTitle>}
             {local.withCloseButton && <DrawerCloseButton {...local.closeButtonProps} />}

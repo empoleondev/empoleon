@@ -100,24 +100,30 @@ export const Pagination = factory<PaginationFactory>(_props => {
     'ref'
   ]);
 
-  if (local.total <= 0 || (local.hideWithOnePage && local.total === 1)) {
-    return null;
-  }
-
   const hasControls = createMemo(() => local.withControls);
   const hasEdges = createMemo(() => local.withEdges);
 
   return (
     <PaginationRoot ref={local.ref} total={local.total} {...others}>
-      <Group gap={local.gap}>
-        {hasEdges() && <PaginationFirst icon={local.firstIcon} {...local.getControlProps?.('first')} />}
-        {hasControls() && (
-          <PaginationPrevious icon={local.previousIcon} {...local.getControlProps?.('previous')} />
-        )}
-        {local.withPages && <PaginationItems dotsIcon={local.dotsIcon} />}
-        <Show when={hasControls()}><PaginationNext icon={local.nextIcon} /></Show>
-        {hasEdges() && <PaginationLast icon={local.lastIcon} {...local.getControlProps?.('last')} />}
-      </Group>
+      <Show when={local.total > 0 && (!local.hideWithOnePage || local.total !== 1)} fallback={null}>
+        <Group gap={local.gap}>
+          <Show when={hasEdges()}>
+            <PaginationFirst icon={local.firstIcon} {...local.getControlProps?.('first')} />
+          </Show>
+          <Show when={hasControls()}>
+            <PaginationPrevious icon={local.previousIcon} {...local.getControlProps?.('previous')} />
+          </Show>
+          <Show when={local.withPages}>
+            <PaginationItems dotsIcon={local.dotsIcon} />
+          </Show>
+          <Show when={hasControls()}>
+            <PaginationNext icon={local.nextIcon} />
+          </Show>
+          <Show when={hasEdges()}>
+            <PaginationLast icon={local.lastIcon} {...local.getControlProps?.('last')} />
+          </Show>
+        </Group>
+      </Show>
     </PaginationRoot>
   );
 });

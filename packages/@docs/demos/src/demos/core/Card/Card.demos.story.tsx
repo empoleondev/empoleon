@@ -51,3 +51,8 @@ export const Demo_section = {
   name: '⭐ Demo: section',
   render: renderDemo(demos.section),
 };
+
+export const Demo_kitchenSink = {
+  name: '⭐ Demo: kitchenSink',
+  render: renderDemo(demos.kitchenSink),
+};

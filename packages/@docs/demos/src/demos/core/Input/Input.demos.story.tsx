@@ -116,3 +116,8 @@ export const Demo_clearButton = {
   name: '⭐ Demo: clearButton',
   render: renderDemo(demos.clearButton),
 };
+
+export const Demo_kitchenSink = {
+  name: '⭐ Demo: kitchenSink',
+  render: renderDemo(demos.kitchenSink),
+};

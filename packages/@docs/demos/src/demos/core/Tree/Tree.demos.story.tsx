@@ -66,3 +66,8 @@ export const Demo_checkAllNodes = {
   name: '⭐ Demo: checkAllNodes',
   render: renderDemo(demos.checkAllNodes),
 };
+
+export const Demo_kitchenSink = {
+  name: '⭐ Demo: kitchenSink',
+  render: renderDemo(demos.kitchenSink),
+};

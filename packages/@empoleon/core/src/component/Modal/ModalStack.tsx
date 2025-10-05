@@ -1,4 +1,4 @@
-import { createSignal, JSX, splitProps } from 'solid-js';
+import { createSignal, JSX } from 'solid-js';
 import { createOptionalContext, getDefaultZIndex } from '../../core';
 
 interface ModalStackContext {
@@ -19,7 +19,6 @@ export interface ModalStackProps {
 }
 
 export function ModalStack(props: ModalStackProps) {
-  const [local] = splitProps(props, ['children']);
   const [stack, setStack] = createSignal<string[]>([]);
   const [maxZIndex, setMaxZIndex] = createSignal<number | string>(getDefaultZIndex('modal'));
 
@@ -41,7 +40,7 @@ export function ModalStack(props: ModalStackProps) {
         get maxZIndex() { return maxZIndex(); },
       }}
     >
-      {local.children}
+      {props.children}
     </ModalStackProvider>
   );
 }

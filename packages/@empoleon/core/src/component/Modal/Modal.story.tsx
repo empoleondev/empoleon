@@ -28,7 +28,7 @@ const lorem =
 function generateContent(count: number) {
   return Array(count)
     .fill(0)
-    .map((_, index) => (
+    .map(_ => (
       <p style={{ margin: 0 }}>
         {lorem}
       </p>

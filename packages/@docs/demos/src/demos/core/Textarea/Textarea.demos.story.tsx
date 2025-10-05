@@ -61,3 +61,9 @@ export const Demo_resize = {
   name: '⭐ Demo: resize',
   render: renderDemo(demos.resize),
 };
+
+export const Demo_kitchenSink = {
+  name: '⭐ Demo: kitchenSink',
+  render: renderDemo(demos.kitchenSink),
+};
+

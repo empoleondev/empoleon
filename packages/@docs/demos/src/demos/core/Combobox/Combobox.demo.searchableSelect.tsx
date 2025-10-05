@@ -90,22 +90,25 @@ function Demo() {
       }}
     >
       <Combobox.Target>
-        <InputBase
-          rightSection={<Combobox.Chevron />}
-          rightSectionPointerEvents="none"
-          onClick={() => combobox.openDropdown()}
-          onFocus={() => combobox.openDropdown()}
-          onBlur={() => {
-            combobox.closeDropdown();
-            setSearch(value() || '');
-          }}
-          placeholder="Search value"
-          value={search()}
-          onChange={(event) => {
-            combobox.updateSelectedOptionIndex();
-            setSearch(event.currentTarget.value);
-          }}
-        />
+        {(props) => (
+          <InputBase
+            {...props}
+            rightSection={<Combobox.Chevron />}
+            rightSectionPointerEvents="none"
+            onClick={() => combobox.openDropdown()}
+            onFocus={() => combobox.openDropdown()}
+            onBlur={() => {
+              combobox.closeDropdown();
+              setSearch(value() || '');
+            }}
+            placeholder="Search value"
+            value={search()}
+            onChange={(event) => {
+              combobox.updateSelectedOptionIndex();
+              setSearch(event.currentTarget.value);
+            }}
+          />
+        )}
       </Combobox.Target>
 
       <Combobox.Dropdown>

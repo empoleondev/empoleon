@@ -61,3 +61,8 @@ export const Demo_truncate = {
   name: '⭐ Demo: truncate',
   render: renderDemo(demos.truncate),
 };
+
+export const Demo_kitchenSink = {
+  name: '⭐ Demo: kitchenSink',
+  render: renderDemo(demos.kitchenSink),
+};

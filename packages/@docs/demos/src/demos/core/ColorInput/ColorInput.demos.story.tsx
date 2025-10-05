@@ -116,3 +116,8 @@ export const Demo_withPicker = {
   name: '⭐ Demo: withPicker',
   render: renderDemo(demos.withPicker),
 };
+
+export const Demo_kitchenSink = {
+  name: '⭐ Demo: kitchenSink',
+  render: renderDemo(demos.kitchenSink),
+};

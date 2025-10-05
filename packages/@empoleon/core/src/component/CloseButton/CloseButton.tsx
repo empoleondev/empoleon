@@ -118,6 +118,7 @@ export const CloseButton = polymorphicFactory<CloseButtonFactory>(_props => {
       disabled={local.disabled}
       mod={[{ disabled: local.disabled || local["data-disabled"] }, local.mod]}
       {...getStyles('root', { variant: local.variant, active: !local.disabled && !local["data-disabled"] })}
+      tabIndex={-1}
     >
       {local.icon || <CloseIcon />}
       {local.children}

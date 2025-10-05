@@ -71,7 +71,7 @@ export function BottomReachedDecimal() {
         Scroll position: <Code>{`{ x: ${scrollPosition().x}, y: ${scrollPosition().y} }`}</Code>
       </div>
       <div>
-        Has Reached Bottom: <Code>{`{ ${hasReachedBottom} }`}</Code>
+        Has Reached Bottom: <Code>{`{ ${hasReachedBottom()} }`}</Code>
       </div>
     </Stack>
   );

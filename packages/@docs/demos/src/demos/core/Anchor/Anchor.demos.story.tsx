@@ -48,3 +48,8 @@ export const Demo_textProps = {
   name: '⭐ Demo: textProps',
   render: renderDemo(demos.textProps),
 };
+
+export const Demo_kitchenSink = {
+  name: '⭐ Demo: kitchenSink',
+  render: renderDemo(demos.kitchenSink),
+};

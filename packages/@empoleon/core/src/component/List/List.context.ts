@@ -4,8 +4,8 @@ import type { ListFactory } from './List';
 
 interface ListContextValue {
   getStyles: GetStylesApi<ListFactory>;
-  center: boolean | undefined;
-  icon: (() => JSX.Element) |  undefined;
+  center: () => boolean | undefined;
+  icon: () => (() => JSX.Element) | undefined
 }
 
 export const [ListProvider, useListContext] = createSafeContext<ListContextValue>(

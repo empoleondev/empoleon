@@ -51,3 +51,8 @@ export const Demo_textWrap = {
   name: '⭐ Demo: textWrap',
   render: renderDemo(demos.textWrap),
 };
+
+export const Demo_kitchenSink = {
+  name: '⭐ Demo: kitchenSink',
+  render: renderDemo(demos.kitchenSink),
+};

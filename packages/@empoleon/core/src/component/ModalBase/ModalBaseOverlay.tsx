@@ -42,7 +42,7 @@ export function ModalBaseOverlay(props: ModalBaseOverlayProps) {
           unstyled={ctx.unstyled}
           onClick={(event) => {
             typeof local.onClick === "function" && local.onClick?.(event);
-            ctx.closeOnClickOutside && ctx.onClose();
+            ctx.closeOnClickOutside() && ctx.onClose();
           }}
           {...others}
         />

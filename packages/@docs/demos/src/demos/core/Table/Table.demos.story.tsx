@@ -96,3 +96,8 @@ export const Demo_tabularNums = {
   name: '⭐ Demo: tabularNums',
   render: renderDemo(demos.tabularNums),
 };
+
+export const Demo_kitchenSink = {
+  name: '⭐ Demo: kitchenSink',
+  render: renderDemo(demos.kitchenSink),
+};

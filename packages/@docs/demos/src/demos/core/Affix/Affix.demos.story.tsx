@@ -38,3 +38,8 @@ export const Demo_usage = {
   name: '⭐ Demo: usage',
   render: renderDemo(demos.usage),
 };
+
+export const Demo_kitchensink = {
+  name: '⭐ Demo: kitchenSink',
+  render: renderDemo(demos.kitchenSink),
+};

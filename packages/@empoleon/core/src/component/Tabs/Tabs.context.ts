@@ -15,8 +15,8 @@ export interface TabsContextValue {
   variant: () => string | undefined;
   color: string | undefined;
   radius: string | number | undefined;
-  inverted: boolean | undefined;
-  keepMounted: boolean | undefined;
+  inverted: () => boolean | undefined;
+  keepMounted: () => boolean | undefined;
   placement: 'right' | 'left' | undefined;
   unstyled: boolean | undefined;
   getStyles: GetStylesApi<TabsFactory>;

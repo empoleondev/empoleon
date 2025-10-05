@@ -204,7 +204,11 @@ export const StepperStep = factory<StepperStepFactory>(_props => {
         ...stylesApi
       })}
       mod={[
-        { 'icon-position': local.iconPosition || ctx.iconPosition, 'allow-click': local.allowStepClick, 'type': 'step' },
+        {
+          'icon-position': local.iconPosition || ctx.iconPosition,
+          'allow-click': local.allowStepClick,
+          'type': 'step'
+        },
         local.mod,
       ]}
       ref={local.ref}
@@ -215,13 +219,7 @@ export const StepperStep = factory<StepperStepFactory>(_props => {
           ctx.onStepClick?.(idx());
         }
       }}
-      __vars={{
-        '--step-color': local.color
-          ? getThemeColor(local.color, theme)
-          : ctx.color
-          ? getThemeColor(ctx.color, theme)
-          : undefined,
-      }}
+      __vars={{ '--step-color': local.color ? getThemeColor(local.color, theme) : undefined }}
       tabIndex={local.allowStepClick ? 0 : -1}
     >
       {local.withIcon && (
@@ -254,7 +252,7 @@ export const StepperStep = factory<StepperStepFactory>(_props => {
                 <Loader
                   {...ctx.getStyles('stepLoader', stylesApi)}
                   size="calc(var(--stepper-icon-size) / 2)"
-                  color={local.color ?? ctx.color}
+                  color={local.color}
                 />
               ) : (
                 _icon()

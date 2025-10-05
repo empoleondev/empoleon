@@ -61,3 +61,8 @@ export const Demo_segments = {
   name: '⭐ Demo: segments',
   render: renderDemo(demos.segments),
 };
+
+export const Demo_kitchenSink = {
+  name: '⭐ Demo: kitchenSink',
+  render: renderDemo(demos.kitchenSink),
+};

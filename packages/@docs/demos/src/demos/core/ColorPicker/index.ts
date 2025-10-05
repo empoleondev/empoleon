@@ -8,3 +8,4 @@ export { fullWidth } from './ColorPicker.demo.fullWidth';
 export { stylesApi } from './ColorPicker.demo.stylesApi';
 export { alphaSlider } from './ColorPicker.demo.alphaSlider';
 export { hueSlider } from './ColorPicker.demo.hueSlider';
+export { kitchenSink } from './ColorPicker.demo.kitchenSink';

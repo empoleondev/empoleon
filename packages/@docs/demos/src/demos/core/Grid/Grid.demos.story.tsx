@@ -91,3 +91,9 @@ export const Demo_container = {
   name: '⭐ Demo: container',
   render: renderDemo(demos.container),
 };
+
+export const Demo_kitchenSink = {
+  name: '⭐ Demo: kitchenSink',
+  render: renderDemo(demos.kitchenSink),
+};
+

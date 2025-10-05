@@ -195,6 +195,17 @@ export const Chip = factory<ChipFactory>(_props => {
   const _checked = () => contextProps().checked || _value();
   const _type = () => contextProps().type || local.type;
 
+  const tooltipEventKeys = ['onmouseenter', 'onmouseleave', 'onmousemove', 'onpointerdown', 'onpointerenter'] as const;
+
+  const tooltipEvents = tooltipEventKeys
+    .reduce((acc, key) => {
+      const handler = (others as any)[key];
+      return handler ? { ...acc, [key]: handler } : acc;
+    }, {});
+
+  const toolTipEventsForRoot = local.rootRef ? tooltipEvents : {};
+  const toolTipEventsForInput = !local.rootRef ? tooltipEvents : {};
+
   return (
     <Box
       size={local.size}
@@ -204,6 +215,7 @@ export const Chip = factory<ChipFactory>(_props => {
       {...getStyles('root')}
       {...styleProps}
       {...local.wrapperProps as EmpoleonStyleProps}
+      {...toolTipEventsForRoot}
     >
       <Box component='input'
         type={_type()}
@@ -220,6 +232,7 @@ export const Chip = factory<ChipFactory>(_props => {
         value={local.value}
         {...contextProps}
         {...rest}
+        {...toolTipEventsForInput}
       />
 
       <Box component='label'

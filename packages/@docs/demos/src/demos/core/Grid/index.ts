@@ -10,3 +10,4 @@ export { auto } from './Grid.demo.auto';
 export { content } from './Grid.demo.content';
 export { gutter } from './Grid.demo.gutter';
 export { container } from './Grid.demo.container';
+export { kitchenSink } from './Grid.demo.kitchenSink';
