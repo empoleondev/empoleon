@@ -54,7 +54,7 @@ function Demo() {
   return (
     <div>
       {/* @ts-ignore */}
-      {fetch.error && <Text c="red">{fetch.error().message}</Text>}
+      {fetch.error() && <Text c="red">{fetch.error().message}</Text>}
 
       <Group>
         <Button onClick={fetch.refetch} color="blue">
@@ -66,9 +66,9 @@ function Demo() {
       </Group>
       <Box pos="relative" mt="md">
         {/* @ts-ignore */}
-        <Code block>{fetch.data ? JSON.stringify(fetch.data.slice(0, 3), null, 2) : 'Fetching'}</Code>
+        <Code block>{fetch.data() ? JSON.stringify(fetch.data().slice(0, 3), null, 2) : 'Fetching'}</Code>
         {/* @ts-ignore */}
-        <LoadingOverlay visible={fetch.loading} />
+        <LoadingOverlay visible={fetch.loading()} />
       </Box>
     </div>
   );

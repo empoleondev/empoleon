@@ -1,7 +1,7 @@
 import { Button } from '@empoleon/core';
 import { randomId, useDocumentTitle } from '@empoleon/hooks';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal } from 'solid-js';
+import { createSignal, createEffect } from 'solid-js';
 
 const code = `
 import { useState } from 'react';
@@ -22,6 +22,15 @@ function Demo() {
 function Demo() {
   const [title, setTitle] = createSignal('');
   useDocumentTitle(title());
+
+  createEffect(() => {
+    const t = title();
+    if (t && t.trim().length > 0) {
+      if (window.parent && window.parent !== window && window.parent.document) {
+        window.parent.document.title = t.trim();
+      }
+    }
+  });
 
   return <Button onClick={() => setTitle(randomId())}>Set document title to random id</Button>;
 }

@@ -21,7 +21,7 @@ function Demo() {
     <>
       <div>Select some text here or anywhere on the page and it will be displayed below</div>
       <div>
-        Selected text: <b>{selection?.toString()}</b>
+        Selected text: <b>{selection()?.toString()}</b>
       </div>
     </>
   );

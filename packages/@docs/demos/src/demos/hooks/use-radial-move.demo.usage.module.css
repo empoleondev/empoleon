@@ -1,4 +1,4 @@
-.root {
+/* .root {
   position: relative;
   width: 160px;
   height: 160px;
@@ -32,6 +32,58 @@
   width: 14px;
   height: 160px;
   transform: rotate(var(--angle, 0deg));
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background-color: light-dark(var(--empoleon-color-white), var(--filled-color));
+    border: 2px solid light-dark(var(--filled-color), var(--empoleon-color-white));
+    border-radius: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+} */
+
+.root {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  border-radius: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer; /* Add this */
+  user-select: none; /* Add this */
+
+  --empty-color: light-dark(var(--empoleon-color-gray-2), var(--empoleon-color-dark-6));
+  --filled-color: light-dark(var(--empoleon-color-blue-6), var(--empoleon-color-blue-8));
+
+  background-image: conic-gradient(
+    var(--filled-color) 0deg,
+    var(--filled-color) var(--angle, 0deg),
+    var(--empty-color) var(--angle, 0deg)
+  );
+}
+
+.value {
+  background-color: var(--empoleon-color-body);
+  width: 132px;
+  height: 132px;
+  border-radius: 132px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none; /* Add this - critical! */
+}
+
+.thumb {
+  position: absolute;
+  width: 14px;
+  height: 160px;
+  transform: rotate(var(--angle, 0deg));
+  pointer-events: none; /* Add this - critical! */
 
   &::before {
     content: '';

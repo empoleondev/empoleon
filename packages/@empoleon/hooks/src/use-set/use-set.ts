@@ -1,29 +1,28 @@
 import { createSignal } from 'solid-js';
 
 export function useSet<T>(values?: T[]): Set<T> {
-  const [, setTrigger] = createSignal(0);
-  const set = new Set(values);
+  const [trigger, setTrigger] = createSignal(0);
+  const internalSet = new Set(values);
 
-  const forceUpdate = () => {
-    setTrigger(prev => prev + 1);
-  };
+  const mutatingMethods = ['add', 'delete', 'clear'];
+  const readMethods = ['size', 'has', 'values', 'keys', 'entries', Symbol.iterator];
 
-  set.add = (...args) => {
-    const res = Set.prototype.add.apply(set, args);
-    forceUpdate();
-    return res;
-  };
+  return new Proxy(internalSet, {
+    get(target, prop) {
+      if (readMethods.includes(prop as any)) {
+        trigger();
+      }
 
-  set.clear = (...args) => {
-    Set.prototype.clear.apply(set, args);
-    forceUpdate();
-  };
+      if (mutatingMethods.includes(prop as string)) {
+        return (...args: any[]) => {
+          const result = (target as any)[prop](...args);
+          setTrigger(prev => prev + 1);
+          return result;
+        };
+      }
 
-  set.delete = (...args) => {
-    const res = Set.prototype.delete.apply(set, args);
-    forceUpdate();
-    return res;
-  };
-
-  return set;
+      const value = (target as any)[prop];
+      return typeof value === 'function' ? value.bind(target) : value;
+    }
+  });
 }

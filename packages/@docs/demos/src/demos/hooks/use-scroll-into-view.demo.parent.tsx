@@ -42,13 +42,13 @@ function Demo() {
 
   return (
     <Group justify="center">
-      <Paper ref={scrollableRef} h={300} style={{ overflowY: 'scroll', flex: 1 }}>
+      <Paper ref={scrollableRef} h={300} style={{ 'overflow-y': 'scroll', flex: 1 }}>
         <Box pt={260} pb={450}>
           <Paper
             ref={targetRef}
             p="xl"
             style={{
-              backgroundColor: 'var(--empoleon-color-blue-light)',
+              'background-color': 'var(--empoleon-color-blue-light)',
               width: '100%',
             }}
           >

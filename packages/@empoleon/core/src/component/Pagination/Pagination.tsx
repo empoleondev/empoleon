@@ -102,10 +102,13 @@ export const Pagination = factory<PaginationFactory>(_props => {
 
   const hasControls = createMemo(() => local.withControls);
   const hasEdges = createMemo(() => local.withEdges);
+  const shouldRender = createMemo(() =>
+    local.total > 0 && (!local.hideWithOnePage || local.total !== 1)
+  );
 
   return (
-    <PaginationRoot ref={local.ref} total={local.total} {...others}>
-      <Show when={local.total > 0 && (!local.hideWithOnePage || local.total !== 1)} fallback={null}>
+    <Show when={shouldRender()} fallback={null}>
+      <PaginationRoot ref={local.ref} total={local.total} {...others}>
         <Group gap={local.gap}>
           <Show when={hasEdges()}>
             <PaginationFirst icon={local.firstIcon} {...local.getControlProps?.('first')} />
@@ -117,14 +120,14 @@ export const Pagination = factory<PaginationFactory>(_props => {
             <PaginationItems dotsIcon={local.dotsIcon} />
           </Show>
           <Show when={hasControls()}>
-            <PaginationNext icon={local.nextIcon} />
+            <PaginationNext icon={local.nextIcon} {...local.getControlProps?.('next')} />
           </Show>
           <Show when={hasEdges()}>
             <PaginationLast icon={local.lastIcon} {...local.getControlProps?.('last')} />
           </Show>
         </Group>
-      </Show>
-    </PaginationRoot>
+      </PaginationRoot>
+    </Show>
   );
 });
 

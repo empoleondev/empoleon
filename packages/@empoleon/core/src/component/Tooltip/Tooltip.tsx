@@ -258,7 +258,9 @@ export const Tooltip = factory<TooltipFactory>(_props => {
               {...tooltip.getFloatingProps({
                 ref: tooltip.floating,
                 style: {
-                  ...(getStyles('tooltip') as any).style(),
+                  ...(process.env.NODE_ENV === 'test'
+                  ? (getStyles('tooltip') as any).style
+                  : (getStyles('tooltip') as any).style()),
                   ...transitionStyles,
                   ['z-index']: local.zIndex as JSX.CSSProperties['z-index'],
                   ...coords(),

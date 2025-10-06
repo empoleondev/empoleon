@@ -1,28 +1,37 @@
 import { createSignal } from 'solid-js';
 
-export function useMap<T, V>(initialState?: [T, V][]): Map<T, V> {
+type ReactiveMap<T, V> = Omit<Map<T, V>, 'entries'> & {
+  entries: () => [T, V][]
+};
+
+export function useMap<T, V>(initialState?: [T, V][]): ReactiveMap<T, V> {
   const mapRef = new Map<T, V>(initialState);
-  const [, setUpdate] = createSignal(0);
 
-  const forceUpdate = () => setUpdate(prev => prev + 1);
+  // Save original method before overriding
+  const originalEntries = mapRef.entries.bind(mapRef);
 
-  mapRef.set = (...args) => {
+  const [entries, setEntries] = createSignal(Array.from(originalEntries()));
+
+  const updateEntries = () => {
+    setEntries(Array.from(originalEntries()));
+  };
+
+  mapRef.set = function(...args) {
     Map.prototype.set.apply(mapRef, args);
-    forceUpdate();
+    updateEntries();
     return mapRef;
   };
 
-  mapRef.clear = (...args) => {
+  mapRef.clear = function(...args) {
     Map.prototype.clear.apply(mapRef, args);
-    forceUpdate();
+    updateEntries();
   };
 
-  mapRef.delete = (...args) => {
+  mapRef.delete = function(...args) {
     const res = Map.prototype.delete.apply(mapRef, args);
-    forceUpdate();
-
+    updateEntries();
     return res;
   };
 
-  return mapRef;
+  return Object.assign(mapRef, { entries: () => entries() });
 }

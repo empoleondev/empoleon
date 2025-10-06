@@ -2,6 +2,7 @@ import { IconPlus, IconTrash } from '@tabler/icons-solidjs';
 import { ActionIcon, Group, Table } from '@empoleon/core';
 import { useMap } from '@empoleon/hooks';
 import { EmpoleonDemo } from '@empoleonx/demo';
+import { For } from 'solid-js';
 
 const code = `
 import { IconPlus, IconTrash } from '@tabler/icons-solidjs';
@@ -54,23 +55,6 @@ function Demo() {
     ['/hooks/use-fetch', 9001],
   ]);
 
-  const rows = Array.from(map.entries()).map(([key, value]) => (
-    <Table.Tr>
-      <Table.Td>{key}</Table.Td>
-      <Table.Td>{value}</Table.Td>
-      <Table.Td>
-        <Group>
-          <ActionIcon variant="default" onClick={() => map.set(key, value + 1)} fw={500}>
-            <IconPlus stroke='1.5' size={18} />
-          </ActionIcon>
-          <ActionIcon variant="default" onClick={() => map.delete(key)} c="red">
-            <IconTrash stroke='1.5' size={18} />
-          </ActionIcon>
-        </Group>
-      </Table.Td>
-    </Table.Tr>
-  ));
-
   return (
     <Table layout="fixed">
       <Table.Thead>
@@ -80,7 +64,26 @@ function Demo() {
           <Table.Th />
         </Table.Tr>
       </Table.Thead>
-      <Table.Tbody>{rows}</Table.Tbody>
+      <Table.Tbody>
+        <For each={map.entries()}>
+          {([key, value]) => (
+            <Table.Tr>
+              <Table.Td>{key}</Table.Td>
+              <Table.Td>{value}</Table.Td>
+              <Table.Td>
+                <Group>
+                  <ActionIcon variant="default" onClick={() => map.set(key, value + 1)} fw={500}>
+                    <IconPlus stroke='1.5' size={18} />
+                  </ActionIcon>
+                  <ActionIcon variant="default" onClick={() => map.delete(key)} c="red">
+                    <IconTrash stroke='1.5' size={18} />
+                  </ActionIcon>
+                </Group>
+              </Table.Td>
+            </Table.Tr>
+          )}
+        </For>
+      </Table.Tbody>
     </Table>
   );
 }

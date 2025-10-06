@@ -4,6 +4,7 @@ import * as demos from './index';
 import { EmpoleonProvider, useEmpoleonColorScheme } from '@empoleon/core';
 import { createShikiAdapter } from '@empoleon/code-highlight';
 import { CodeHighlightAdapterProvider } from '@empoleon/code-highlight';
+import { Notifications } from '@empoleon/notifications';
 
 const shikiAdapter = createShikiAdapter();
 
@@ -24,6 +25,7 @@ export default {
     (Story: () => JSX.Element, context: any) => (
       <CodeHighlightAdapterProvider adapter={shikiAdapter}>
         <EmpoleonProvider>
+          <Notifications zIndex={10000} />
           <ColorSchemeWrapper globals={context.globals}>
             <Story />
           </ColorSchemeWrapper>

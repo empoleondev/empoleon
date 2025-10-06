@@ -55,7 +55,7 @@ function Demo() {
         style={{
           width: '100%',
           height: '50vh',
-          backgroundColor: 'var(--empoleon-color-blue-light)',
+          'background-color': 'var(--empoleon-color-blue-light)',
         }}
       />
       <Text ref={targetRef}>Hello there</Text>

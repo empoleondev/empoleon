@@ -22,15 +22,28 @@ function Demo() {
 
 function Demo() {
   const [value, setValue] = createSignal('');
-  const throttledValue = useThrottledValue(value(), 1000);
+  console.log('[Demo] Current value:', value());
+
+  // Pass the signal accessor (value) not the value itself (value())
+  const throttledValue = useThrottledValue(value, 1000);
+  console.log('[Demo] Throttled value:', throttledValue());
 
   return (
     <>
-      <TextInput placeholder="Search" onChange={(event) => setValue(event.currentTarget.value)} />
-      <Text>Throttled value: {throttledValue() || '–'}</Text>
+      <TextInput
+        placeholder="Search"
+        onInput={(event) => {
+          const newValue = event.currentTarget.value;
+          console.log('[Demo] Input changed to:', newValue);
+          setValue(newValue);
+        }}
+      />
+      <Text>Value: {value()}</Text>
+      <Text>Throttled value: {throttledValue() || '—'}</Text>
     </>
   );
 }
+
 
 export const useThrottledValueUsage: EmpoleonDemo = {
   type: 'code',

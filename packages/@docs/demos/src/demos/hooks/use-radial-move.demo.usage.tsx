@@ -76,7 +76,7 @@ function Demo() {
   const { ref } = useRadialMove(setValue);
 
   return (
-    <Box className={classes.root} ref={ref} style={{ '--angle': `${value}deg` }}>
+    <Box className={classes.root} ref={ref} style={{ '--angle': `${value()}deg` }}>
       <div class={classes.value}>{value()}°</div>
       <div class={classes.thumb} />
     </Box>

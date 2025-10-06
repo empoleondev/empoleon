@@ -1,6 +1,7 @@
 import { Text } from '@empoleon/core';
 import { useDocumentTitle, useDocumentVisibility } from '@empoleon/hooks';
 import { EmpoleonDemo } from '@empoleonx/demo';
+import { createEffect } from 'solid-js';
 
 const code = `
 import { Text } from '@empoleon/core';
@@ -15,7 +16,18 @@ function Demo() {
 
 function Demo() {
   const documentState = useDocumentVisibility();
-  useDocumentTitle(`Document is ${documentState}`);
+  const title = () => `Document is ${documentState()}`;
+  useDocumentTitle(title());
+
+  createEffect(() => {
+    const t = title();
+    if (t && t.trim().length > 0) {
+      if (window.parent && window.parent !== window && window.parent.document) {
+        window.parent.document.title = t.trim();
+      }
+    }
+  });
+
   return <Text>Switch to another tab to see document title change</Text>;
 }
 

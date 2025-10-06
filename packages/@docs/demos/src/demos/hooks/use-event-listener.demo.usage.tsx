@@ -18,10 +18,8 @@ function Demo() {
 
 function Demo() {
   const [count, setCount] = createSignal(0);
-  // @ts-ignore
   const increment = () => setCount((c) => c + 1);
   const ref = useEventListener('click', increment);
-  // @ts-ignore
   return <Button ref={ref}>Button clicks: {count()}</Button>;
 }
 

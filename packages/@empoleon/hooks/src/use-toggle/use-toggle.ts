@@ -5,13 +5,17 @@ export function useToggle<T = boolean>(options: readonly T[] = [false, true] as 
 
   const toggle = (action?: T | ((current: T) => T)) => {
     setState(prevState => {
+      if (action === undefined) {
+        return prevState.slice(1).concat(prevState[0]);
+      }
+
       const value = typeof action === 'function'
         ? (action as (current: T) => T)(prevState[0])
-        : action !== undefined
-          ? action
-          : prevState[0];
+        : action;
 
-      const index = Math.abs(prevState.indexOf(value));
+      const index = prevState.indexOf(value);
+      if (index === -1) return prevState;
+
       return prevState.slice(index).concat(prevState.slice(0, index));
     });
   };

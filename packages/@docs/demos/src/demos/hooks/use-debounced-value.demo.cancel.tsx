@@ -33,7 +33,7 @@ function Demo() {
 
 function Demo() {
   const [value, setValue] = createSignal('');
-  const [debounced, cancel] = useDebouncedValue(value(), 1000);
+  const [debounced, cancel] = useDebouncedValue(value, 1000);
 
   return (
     <Box maw={400} mx="auto">

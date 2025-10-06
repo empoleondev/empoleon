@@ -28,7 +28,7 @@ export function useValidatedState<T>(
       setValid(false);
     }
 
-    setLastValidValue(() => val);
+    setValue(() => val);
   };
 
   return [{ value, lastValidValue, valid }, onChange];

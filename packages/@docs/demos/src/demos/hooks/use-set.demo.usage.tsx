@@ -1,7 +1,7 @@
 import { Code, Stack, TextInput } from '@empoleon/core';
 import { useSet } from '@empoleon/hooks';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal } from 'solid-js';
+import { createSignal, For } from 'solid-js';
 
 const code = `
 import { useState } from 'react';
@@ -43,11 +43,10 @@ function Demo() {
 
 function Demo() {
   const [input, setInput] = createSignal('');
+  // Call useSet ONCE, not inside a function
   const scopes = useSet<string>(['@empoleon', '@empoleon-tests', '@empoleonx']);
 
-  const isDuplicate = scopes.has(input().trim().toLowerCase());
-
-  const items = Array.from(scopes).map((scope) => <Code>{scope}</Code>);
+  const isDuplicate = () => scopes.has(input().trim().toLowerCase());
 
   return (
     <>
@@ -57,9 +56,9 @@ function Demo() {
         description="Duplicate scopes are not allowed"
         value={input()}
         onChange={(event) => setInput(event.currentTarget.value)}
-        error={isDuplicate && 'Scope already exists'}
+        error={isDuplicate() && 'Scope already exists'}
         onKeyDown={(event) => {
-          if (event.code === 'Enter' && !isDuplicate) {
+          if (event.code === 'Enter' && !isDuplicate()) {
             scopes.add(input().trim().toLowerCase());
             setInput('');
           }
@@ -67,7 +66,9 @@ function Demo() {
       />
 
       <Stack gap={5} align="flex-start" mt="md">
-        {items}
+        <For each={Array.from(scopes)}>
+          {(scope) => <Code>{scope}</Code>}
+        </For>
       </Stack>
     </>
   );

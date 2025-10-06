@@ -1,23 +1,24 @@
-import { createEffect, createSignal } from 'solid-js';
+import { createEffect, createSignal, onCleanup, Accessor } from 'solid-js';
 import { useThrottledCallbackWithClearTimeout } from '../use-throttled-callback/use-throttled-callback';
 
-export function useThrottledValue<T>(value: T, wait: number) {
-  const [throttledValue, setThrottledValue] = createSignal(value);
-  let valueRef = value;
+export function useThrottledValue<T>(valueAccessor: Accessor<T>, wait: number) {
+  const [throttledValue, setThrottledValue] = createSignal(valueAccessor());
 
   const [throttledSetValue, clearTimeout] = useThrottledCallbackWithClearTimeout(
-    (newValue: T) => setThrottledValue(() => newValue),
+    (newValue: T) => {
+      setThrottledValue(() => newValue);
+    },
     wait
   );
 
   createEffect(() => {
-    if (value !== valueRef) {
-      valueRef = value;
-      throttledSetValue()(value);
-    }
+    const currentValue = valueAccessor();
+    throttledSetValue()(currentValue);
   });
 
-  createEffect(() => clearTimeout);
+  onCleanup(() => {
+    clearTimeout();
+  });
 
   return throttledValue;
 }

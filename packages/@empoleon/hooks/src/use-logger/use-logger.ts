@@ -1,21 +1,14 @@
-/* eslint-disable no-console */
-import { onMount, onCleanup, createEffect, on } from 'solid-js';
+import { onMount, onCleanup, createEffect } from 'solid-js';
 
-export function useLogger(componentName: string, props: any[]) {
+export function useLogger(componentName: string, props: () => any[]) {
   onMount(() => {
-    console.log(`${componentName} mounted`, ...props);
+    console.log(`${componentName} mounted`, ...props());
     onCleanup(() => console.log(`${componentName} unmounted`));
   });
 
-  createEffect(
-    on(
-      () => props,
-      () => {
-        console.log(`${componentName} updated`, ...props);
-      },
-      { defer: true }
-    )
-  );
+  createEffect(() => {
+    console.log(`${componentName} updated`, ...props());
+  });
 
   return null;
 }

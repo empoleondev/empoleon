@@ -1,4 +1,5 @@
-import { createEffect, onCleanup } from 'solid-js';
+import { createEffect } from 'solid-js';
+import type { Accessor } from 'solid-js';
 
 const MIME_TYPES: Record<string, string> = {
   ico: 'image/x-icon',
@@ -7,36 +8,39 @@ const MIME_TYPES: Record<string, string> = {
   gif: 'image/gif',
 };
 
-export function useFavicon(url: string) {
-  let link: HTMLLinkElement | null = null;
-
+export function useFavicon(url: Accessor<string> | string): void {
   createEffect(() => {
-    if (!url) {
+    const currentUrl = typeof url === 'function' ? url() : url;
+    const trimmedUrl = typeof currentUrl === 'string' ? currentUrl.trim() : '';
+
+    if (!trimmedUrl) {
       return;
     }
 
-    if (!link) {
-      const existingElements = document.querySelectorAll<HTMLLinkElement>('link[rel*="icon"]');
-      existingElements.forEach((element) => document.head.removeChild(element));
+    const targetDocument = window.parent && window.parent !== window && window.parent.document
+      ? window.parent.document
+      : document;
 
-      const element = document.createElement('link');
-      element.rel = 'shortcut icon';
-      link = element;
-      document.querySelector('head')!.appendChild(element);
+    const existingElements = targetDocument.querySelectorAll<HTMLLinkElement>('link[rel*="icon"]');
+
+    existingElements.forEach((element) => {
+      if (element.parentNode) {
+        element.parentNode.removeChild(element);
+      }
+    });
+
+    const link = targetDocument.createElement('link');
+    link.rel = 'shortcut icon';
+
+    const splittedUrl = trimmedUrl.split('.');
+    const extension = splittedUrl[splittedUrl.length - 1].toLowerCase();
+
+    if (MIME_TYPES[extension]) {
+      link.type = MIME_TYPES[extension];
     }
 
-    const splittedUrl = url.split('.');
-    link.setAttribute(
-      'type',
-      MIME_TYPES[splittedUrl[splittedUrl.length - 1].toLowerCase()]
-    );
-    link.setAttribute('href', url);
-  });
+    link.href = trimmedUrl;
 
-  onCleanup(() => {
-    if (link) {
-      document.head.removeChild(link);
-      link = null;
-    }
+    targetDocument.head.appendChild(link);
   });
 }

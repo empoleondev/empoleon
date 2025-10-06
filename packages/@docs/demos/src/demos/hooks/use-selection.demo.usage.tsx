@@ -1,7 +1,7 @@
 import { Checkbox, Table } from '@empoleon/core';
 import { useSelection } from '@empoleon/hooks';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createMemo } from 'solid-js';
+import { createEffect, createMemo, For } from 'solid-js';
 
 const code = `
 import { Checkbox, Table } from '@empoleon/core';
@@ -94,31 +94,6 @@ function Demo() {
     defaultSelection: [39, 56],
   });
 
-  const rows = elements.map((element) => {
-    const isSelected = selection().includes(element.position);
-    return (
-      <Table.Tr bg={isSelected ? 'var(--empoleon-color-blue-light)' : undefined}>
-        <Table.Td>
-          <Checkbox
-            aria-label="Select row"
-            checked={isSelected}
-            onChange={(event) => {
-              if (event.target.checked) {
-                handlers.select(element.position);
-              } else {
-                handlers.deselect(element.position);
-              }
-            }}
-          />
-        </Table.Td>
-        <Table.Td>{element.position}</Table.Td>
-        <Table.Td>{element.name}</Table.Td>
-        <Table.Td>{element.symbol}</Table.Td>
-        <Table.Td>{element.mass}</Table.Td>
-      </Table.Tr>
-    );
-  });
-
   return (
     <Table>
       <Table.Thead>
@@ -126,7 +101,7 @@ function Demo() {
           <Table.Th>
             <Checkbox
               aria-label="Select deselect all rows"
-              indeterminate={handlers.isSomeSelected()}
+              indeterminate={handlers.isSomeSelected() && !handlers.isAllSelected()}
               checked={handlers.isAllSelected()}
               onChange={() => {
                 if (handlers.isAllSelected()) {
@@ -143,7 +118,34 @@ function Demo() {
           <Table.Th>Atomic mass</Table.Th>
         </Table.Tr>
       </Table.Thead>
-      <Table.Tbody>{rows}</Table.Tbody>
+      <Table.Tbody>
+        <For each={elements}>
+          {(element) => {
+            const isSelected = () => selection().includes(element.position);
+            return (
+              <Table.Tr bg={isSelected() ? 'var(--empoleon-color-blue-light)' : undefined}>
+                <Table.Td>
+                  <Checkbox
+                    aria-label="Select row"
+                    checked={isSelected()}
+                    onChange={(event) => {
+                      if (event.target.checked) {
+                        handlers.select(element.position);
+                      } else {
+                        handlers.deselect(element.position);
+                      }
+                    }}
+                  />
+                </Table.Td>
+                <Table.Td>{element.position}</Table.Td>
+                <Table.Td>{element.name}</Table.Td>
+                <Table.Td>{element.symbol}</Table.Td>
+                <Table.Td>{element.mass}</Table.Td>
+              </Table.Tr>
+            );
+          }}
+        </For>
+      </Table.Tbody>
     </Table>
   );
 }

@@ -1,31 +1,34 @@
-import { createSignal, createEffect, onCleanup } from 'solid-js';
+import { createSignal, createEffect, onCleanup, Accessor } from 'solid-js';
 
-export function useDebouncedValue<T = any>(value: T, wait: number, options = { leading: false }) {
-  const [_value, setValue] = createSignal(value);
-  let mountedRef = false;
+export function useDebouncedValue<T = any>(
+  valueAccessor: Accessor<T>,
+  wait: number,
+  options = { leading: false }
+) {
+  const [_value, setValue] = createSignal(valueAccessor());
   let timeoutRef: number | null = null;
   let cooldownRef = false;
 
-  const cancel = () => window.clearTimeout(timeoutRef!);
-
-  createEffect(() => {
-    if (mountedRef) {
-      if (!cooldownRef && options.leading) {
-        cooldownRef = true;
-        setValue(() => value);
-      } else {
-        cancel();
-        timeoutRef = window.setTimeout(() => {
-          cooldownRef = false;
-          setValue(() => value);
-        }, wait);
-      }
+  const cancel = () => {
+    if (timeoutRef !== null) {
+      window.clearTimeout(timeoutRef);
+      timeoutRef = null;
     }
-  });
+  };
 
-  // Mount effect
   createEffect(() => {
-    mountedRef = true;
+    const value = valueAccessor();
+
+    if (!cooldownRef && options.leading) {
+      cooldownRef = true;
+      setValue(() => value);
+    } else {
+      cancel();
+      timeoutRef = window.setTimeout(() => {
+        cooldownRef = false;
+        setValue(() => value);
+      }, wait);
+    }
   });
 
   onCleanup(cancel);

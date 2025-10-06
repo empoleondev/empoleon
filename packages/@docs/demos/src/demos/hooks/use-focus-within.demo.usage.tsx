@@ -34,7 +34,7 @@ function Demo() {
       <Box
         p="xl"
         style={{
-          backgroundColor: focused() ? 'var(--empoleon-color-blue-light)' : 'transparent',
+          'background-color': focused() ? 'var(--empoleon-color-blue-light)' : 'transparent',
         }}
       >
         <Text size="sm">One of elements has focus: {focused().toString()}</Text>

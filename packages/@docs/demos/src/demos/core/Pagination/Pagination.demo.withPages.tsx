@@ -12,11 +12,11 @@ const totalPages = Math.ceil(total / limit);
 
 function Demo() {
   const [page, setPage] = useState(1);
-  const message = \`Showing \${limit * (page - 1) + 1} – \${Math.min(total, limit * page)} of \${total}\`;
+  const message = () => \`Showing \${limit * (page - 1) + 1} – \${Math.min(total, limit * page)} of \${total}\`;
 
   return (
     <Group justify="flex-end">
-      <Text size="sm">{message}</Text>
+      <Text size="sm">{message()}</Text>
       <Pagination total={totalPages} value={page} onChange={setPage} withPages={false} />
     </Group>
   );
@@ -29,11 +29,11 @@ const totalPages = Math.ceil(total / limit);
 
 function Demo() {
   const [page, setPage] = createSignal(1);
-  const message = `Showing ${limit * (page() - 1) + 1} – ${Math.min(total, limit * page())} of ${total}`;
+  const message = () => `Showing ${limit * (page() - 1) + 1} – ${Math.min(total, limit * page())} of ${total}`;
 
   return (
     <Group justify="flex-end">
-      <Text size="sm">{message}</Text>
+      <Text size="sm">{message()}</Text>
       <Pagination total={totalPages} value={page()} onChange={setPage} withPages={false} />
     </Group>
   );

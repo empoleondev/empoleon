@@ -1,7 +1,7 @@
 import { Box, Paper, Text } from '@empoleon/core';
 import { useIntersection } from '@empoleon/hooks';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal } from 'solid-js';
+import { createEffect, createSignal } from 'solid-js';
 
 const code = `
 import { useRef } from 'react';
@@ -47,16 +47,18 @@ function Demo() {
   });
 
   return (
-    <Paper ref={setContainerRef} h={300} style={{ overflowY: 'scroll' }}>
+    <Paper ref={setContainerRef} h={300} style={{ 'overflow-y': 'scroll' }}>
       <Box pt={260} pb={280}>
         <Paper
           ref={ref}
           p="xl"
           style={{
-            backgroundColor: entry()?.isIntersecting
-              ? 'var(--empoleon-color-teal-7)'
-              : 'var(--empoleon-color-red-7)',
-            minWidth: '50%',
+            get 'background-color'() {
+              return entry()?.isIntersecting
+                ? 'var(--empoleon-color-teal-7)'
+                : 'var(--empoleon-color-red-7)';
+            },
+            'min-width': '50%',
           }}
         >
           <Text c="#fff" fw={700}>

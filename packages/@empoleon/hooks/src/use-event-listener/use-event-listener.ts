@@ -1,20 +1,15 @@
-import { onMount, onCleanup } from 'solid-js';
+import { onCleanup } from 'solid-js';
 
-export function useEventListener<K extends keyof HTMLElementEventMap>(
+export function useEventListener<
+  K extends keyof HTMLElementEventMap,
+  T extends HTMLElement = HTMLElement
+>(
   type: K,
-  listener: (this: HTMLDivElement, ev: HTMLElementEventMap[K]) => any,
+  listener: (this: T, ev: HTMLElementEventMap[K]) => any,
   options?: boolean | AddEventListenerOptions
 ) {
-  let ref: HTMLDivElement | undefined;
-
-  onMount(() => {
-    const node = ref;
-
-    if (node) {
-      node.addEventListener(type, listener as any, options);
-      onCleanup(() => node?.removeEventListener(type, listener as any, options));
-    }
-  });
-
-  return ref;
+  return (el: T) => {
+    el.addEventListener(type, listener as any, options);
+    onCleanup(() => el.removeEventListener(type, listener as any, options));
+  };
 }

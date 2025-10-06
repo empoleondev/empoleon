@@ -1,4 +1,4 @@
-import { splitProps, JSX, Show, createMemo, For, Switch, Match } from 'solid-js';
+import { splitProps, JSX, Show, For, Switch, Match, children as resolveChildren } from 'solid-js';
 import { useId } from '@empoleon/hooks';
 import {
   Box,
@@ -183,6 +183,7 @@ export const InputWrapper = factory<InputWrapperFactory>(_props => {
   const _describedBy = `${hasError() ? errorId : ''} ${hasDescription() ? descriptionId : ''}`;
   const describedBy = _describedBy.trim().length > 0 ? _describedBy.trim() : undefined;
   const labelId = local.labelProps?.id || `${idBase}-label`;
+  const resolved = resolveChildren(() => local.children);
 
   return (
     <InputWrapperProvider
@@ -220,7 +221,7 @@ export const InputWrapper = factory<InputWrapperFactory>(_props => {
                 )
               }</Match>
               <Match when={part === 'input'}>
-                <>{local.inputContainer!(local.children)}</>
+                {local.inputContainer!(resolved())}
               </Match>
               <Match when={part === 'description'}>{
                 hasDescription() && (

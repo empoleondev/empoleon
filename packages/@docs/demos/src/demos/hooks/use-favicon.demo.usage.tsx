@@ -29,7 +29,7 @@ function Demo() {
   const setMantineFavicon = () => setFavicon('https://mantine.dev/favicon.svg');
   const setMantineUIFavicon = () => setFavicon('https://ui.mantine.dev/favicon.svg');
 
-  useFavicon(favicon());
+  useFavicon(favicon);
 
   return (
     <Group justify="center">

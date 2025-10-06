@@ -29,7 +29,7 @@ function Demo() {
 
 function Demo() {
   const [value, setValue] = createSignal('');
-  const [debounced] = useDebouncedValue(value(), 200, { leading: true });
+  const [debounced] = useDebouncedValue(value, 200, { leading: true });
 
   return (
     <Box maw={400} mx="auto">

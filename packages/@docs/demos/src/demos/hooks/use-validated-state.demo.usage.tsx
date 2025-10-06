@@ -1,6 +1,7 @@
 import { Box, Text, TextInput } from '@empoleon/core';
 import { useValidatedState } from '@empoleon/hooks';
 import { EmpoleonDemo } from '@empoleonx/demo';
+import { createMemo } from 'solid-js';
 
 const code = `
 import { TextInput, Text, Box } from '@empoleon/core';
@@ -49,13 +50,15 @@ function Demo() {
     true
   );
 
+  const emailError = createMemo(() => !valid());
+
   return (
-    <Box maw={320} mx="auto" style={{ overflowWrap: 'break-word' }}>
+    <Box maw={320} mx="auto" style={{ 'overflow-wrap': 'break-word' }}>
       <TextInput
         value={value()}
         onChange={(event) => setEmail(event.currentTarget.value)}
         withAsterisk
-        error={!valid}
+        error={emailError()}
         placeholder="email@example.com"
         label="Your email"
       />

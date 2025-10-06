@@ -28,7 +28,7 @@ function Demo() {
     <>
       <TextInput
         placeholder="Search"
-        onChange={(event) => setThrottledValue()(event.currentTarget.value)}
+        onInput={(event) => setThrottledValue()(event.currentTarget.value)}
       />
       <Text>Throttled value: {throttledValue() || '–'}</Text>
     </>

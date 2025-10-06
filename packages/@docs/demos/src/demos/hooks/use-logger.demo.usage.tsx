@@ -17,7 +17,7 @@ function Demo() {
 
 function Demo() {
   const [count, setCount] = createSignal(0);
-  useLogger('Demo', [{ count, hello: 'world' }]);
+  useLogger('Demo', () => [{ count: count(), hello: 'world' }]);
   return <Button onClick={() => setCount((c) => c + 1)}>Update state ({count()})</Button>;
 }
 

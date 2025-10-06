@@ -14,7 +14,7 @@ function Demo() {
       <TextInput
         label="Enter value to see debounce effect"
         defaultValue={value}
-        onChange={(event) => setValue(event.currentTarget.value)}
+        onInput={(event) => setValue(event.currentTarget.value)}
       />
 
       <Text>Debounced value: {value}</Text>
@@ -32,7 +32,7 @@ function Demo() {
         label="Enter value to see debounce effect"
         placeholder="Enter value to see debounce effect"
         default-value={value()}
-        onChange={(event) => setValue(event.currentTarget.value)}
+        onInput={(event) => setValue(event.currentTarget.value)}
       />
       <Text mt="sm">
         <Text component="span" c="dimmed" size="sm">
