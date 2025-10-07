@@ -1,16 +1,16 @@
-import { createSignal, createEffect, JSX, splitProps, Index, createMemo } from "solid-js";
-import { Ref } from "@solid-primitives/refs";
+import { Ref } from '@solid-primitives/refs';
+import { createEffect, createMemo, createSignal, Index, JSX, splitProps } from 'solid-js';
 import { useId, useUncontrolled } from '@empoleon/hooks';
 import {
   BoxProps,
   createVarsResolver,
   ElementProps,
-  Factory,
-  factory,
-  getSize,
   EmpoleonRadius,
   EmpoleonSize,
   EmpoleonSpacing,
+  Factory,
+  factory,
+  getSize,
   StylesApiProps,
   useProps,
   useResolvedStylesApi,
@@ -149,7 +149,7 @@ const varsResolver = createVarsResolver<PinInputFactory>((_, props) => ({
   },
 }));
 
-export const PinInput = factory<PinInputFactory>(_props => {
+export const PinInput = factory<PinInputFactory>((_props) => {
   const props = useProps('PinInput', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'name',
@@ -186,7 +186,7 @@ export const PinInput = factory<PinInputFactory>(_props => {
     'rootRef',
     'getInputProps',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const uuid = useId(local.id);
@@ -241,16 +241,17 @@ export const PinInput = factory<PinInputFactory>(_props => {
   });
 
   const validate = (code: string) => {
-    const re = local.type instanceof RegExp ? local.type : local.type && local.type in regex ? regex[local.type] : null;
+    const re =
+      local.type instanceof RegExp
+        ? local.type
+        : local.type && local.type in regex
+          ? regex[local.type]
+          : null;
 
     return re?.test(code);
   };
 
-  const focusInputField = (
-    dir: 'next' | 'prev',
-    index: number,
-    event?: Event
-  ) => {
+  const focusInputField = (dir: 'next' | 'prev', index: number, event?: Event) => {
     if (!local.manageFocus) {
       event?.preventDefault();
       return;
@@ -344,7 +345,7 @@ export const PinInput = factory<PinInputFactory>(_props => {
     } else if (inputValue.length > 0 && key === _value()[index]) {
       focusInputField('next', index, event);
     }
-  };
+  }
 
   const handleFocus = (event: Event, index: number) => {
     (event.target as HTMLInputElement)?.select();
@@ -370,7 +371,7 @@ export const PinInput = factory<PinInputFactory>(_props => {
   const handlePaste = (event: ClipboardEvent) => {
     event.preventDefault();
     const copyValue = event.clipboardData?.getData('text/plain').replace(/[\n\r\s]+/g, '');
-    if (copyValue){
+    if (copyValue) {
       const isValid = validate(copyValue.trim());
 
       if (isValid) {
@@ -444,7 +445,15 @@ export const PinInput = factory<PinInputFactory>(_props => {
                 onFocus={(event: Event) => handleFocus(event, index)}
                 onBlur={handleBlur}
                 onPaste={handlePaste}
-                type={typeof local.inputType === "string" ? local.inputType : (local.mask?"password": local.type==="number"?"tel":"text")}
+                type={
+                  typeof local.inputType === 'string'
+                    ? local.inputType
+                    : local.mask
+                      ? 'password'
+                      : local.type === 'number'
+                        ? 'tel'
+                        : 'text'
+                }
                 radius={local.radius}
                 error={local.error}
                 variant={local.variant}
@@ -455,8 +464,7 @@ export const PinInput = factory<PinInputFactory>(_props => {
                   if (index === 0 && el) {
                     if (local.autoFocus) {
                       queueMicrotask(() => el.focus());
-                    }
-                    else {
+                    } else {
                       queueMicrotask(() => el.blur());
                     }
                   }
@@ -470,12 +478,18 @@ export const PinInput = factory<PinInputFactory>(_props => {
                 read-only={local.readOnly}
                 {...local.getInputProps?.(index)}
               />
-            )
+            );
           }}
         </Index>
       </Group>
 
-      <input type="hidden" name={local.name} form={local.form} value={_valueToString} {...local.hiddenInputProps} />
+      <input
+        type="hidden"
+        name={local.name}
+        form={local.form}
+        value={_valueToString}
+        {...local.hiddenInputProps}
+      />
     </>
   );
 });

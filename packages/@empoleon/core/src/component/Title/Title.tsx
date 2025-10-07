@@ -1,12 +1,12 @@
-import { splitProps, JSX } from 'solid-js';
+import { JSX, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
   createVarsResolver,
   ElementProps,
+  EmpoleonFontSize,
   factory,
   Factory,
-  EmpoleonFontSize,
   StylesApiProps,
   useProps,
   useStyles,
@@ -57,13 +57,14 @@ const varsResolver = createVarsResolver<TitleFactory>((_, props) => {
       '--title-fw': sizeVariables.fontWeight,
       '--title-lh': sizeVariables.lineHeight,
       '--title-fz': sizeVariables.fontSize,
-      '--title-line-clamp': typeof props.lineClamp === 'number' ? props.lineClamp.toString() : undefined,
+      '--title-line-clamp':
+        typeof props.lineClamp === 'number' ? props.lineClamp.toString() : undefined,
       '--title-text-wrap': props.textWrap,
     },
   };
 });
 
-export const Title = factory<TitleFactory>(_props => {
+export const Title = factory<TitleFactory>((_props) => {
   const props = useProps('Title', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -79,7 +80,7 @@ export const Title = factory<TitleFactory>(_props => {
     'textWrap',
     'mod',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<TitleFactory>({
@@ -105,7 +106,10 @@ export const Title = factory<TitleFactory>(_props => {
       component={`h${local.order!}`}
       variant={local.variant}
       ref={local.ref}
-      mod={[{ order: local.order, 'data-line-clamp': typeof local.lineClamp === 'number' }, local.mod]}
+      mod={[
+        { order: local.order, 'data-line-clamp': typeof local.lineClamp === 'number' },
+        local.mod,
+      ]}
       size={local.size}
       {...others}
     />

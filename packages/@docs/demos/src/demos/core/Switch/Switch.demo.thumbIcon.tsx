@@ -1,7 +1,7 @@
 import { IconCheck, IconX } from '@tabler/icons-solidjs';
+import { createSignal } from 'solid-js';
 import { Switch } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal } from 'solid-js';
 
 const code = `
 import { createSignal } from 'solid-js';
@@ -42,9 +42,9 @@ function Demo() {
       label="Switch with thumb icon"
       thumbIcon={
         checked() ? (
-          <IconCheck size={12} color="var(--empoleon-color-teal-6)" stroke='3' />
+          <IconCheck size={12} color="var(--empoleon-color-teal-6)" stroke="3" />
         ) : (
-          <IconX size={12} color="var(--empoleon-color-red-6)" stroke='3' />
+          <IconX size={12} color="var(--empoleon-color-red-6)" stroke="3" />
         )
       }
     />

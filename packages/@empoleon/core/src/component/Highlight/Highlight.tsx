@@ -1,4 +1,4 @@
-import { For, splitProps, JSX } from 'solid-js';
+import { For, JSX, splitProps } from 'solid-js';
 import {
   EmpoleonColor,
   EmpoleonTheme,
@@ -34,7 +34,7 @@ export type HighlightFactory = PolymorphicFactory<{
 
 const defaultProps: Partial<HighlightProps> = {};
 
-export const Highlight = polymorphicFactory<HighlightFactory>(_props => {
+export const Highlight = polymorphicFactory<HighlightFactory>((_props) => {
   const props = useProps('Highlight', null, _props);
   const [local, others] = splitProps(props, [
     'unstyled',
@@ -42,7 +42,7 @@ export const Highlight = polymorphicFactory<HighlightFactory>(_props => {
     'highlight',
     'highlightStyles',
     'color',
-    'ref'
+    'ref',
   ]);
 
   const highlightChunks = () => highlighter(local.children, local.highlight);

@@ -1,8 +1,8 @@
 import { IconClock } from '@tabler/icons-solidjs';
+import { createSignal } from 'solid-js';
 import { ActionIcon } from '@empoleon/core';
 import { TimeInput } from '@empoleon/dates';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal } from 'solid-js';
 
 const code = `
 import { useRef } from 'react';
@@ -30,12 +30,16 @@ function Demo() {
 
   const pickerControl = (
     <ActionIcon variant="subtle" color="gray" onClick={() => ref()?.showPicker()}>
-      <IconClock size={16} stroke='1.5' />
+      <IconClock size={16} stroke="1.5" />
     </ActionIcon>
   );
 
   return (
-    <TimeInput label="Click icon to show browser picker" ref={setRef} rightSection={pickerControl} />
+    <TimeInput
+      label="Click icon to show browser picker"
+      ref={setRef}
+      rightSection={pickerControl}
+    />
   );
 }
 

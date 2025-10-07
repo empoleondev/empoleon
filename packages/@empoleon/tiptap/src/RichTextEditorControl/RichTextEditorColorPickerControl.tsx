@@ -1,3 +1,4 @@
+import { createSignal, For, splitProps } from 'solid-js';
 import {
   ActionIcon,
   BoxProps,
@@ -17,7 +18,6 @@ import { useDisclosure } from '@empoleon/hooks';
 import { IconCheck, IconCircleOff, IconColorPicker, IconPalette, IconX } from '../icons/Icons';
 import { useRichTextEditorContext } from '../RichTextEditor.context';
 import { RichTextEditorControl } from './RichTextEditorControl';
-import { createSignal, For, splitProps } from 'solid-js';
 
 export interface RichTextEditorColorPickerControlProps extends BoxProps, ElementProps<'button'> {
   /** Props added to Popover component */
@@ -32,17 +32,13 @@ export interface RichTextEditorColorPickerControlProps extends BoxProps, Element
 
 export function RichTextEditorColorPickerControl(_props: RichTextEditorColorPickerControlProps) {
   const props = useProps('RichTextEditorColorPickerControl', null, _props);
-  const [local, others] = splitProps(props, [
-    'popoverProps',
-    'colors',
-    'colorPickerProps',
-    'ref'
-  ]);
+  const [local, others] = splitProps(props, ['popoverProps', 'colors', 'colorPickerProps', 'ref']);
 
   const richTextEditorContext = useRichTextEditorContext();
   const [opened, { toggle, close }] = useDisclosure(false);
   const [state, setState] = createSignal<'palette' | 'colorPicker'>('palette');
-  const currentColor = richTextEditorContext.editor?.getAttributes('textStyle').color || 'var(--empoleon-color-text)';
+  const currentColor =
+    richTextEditorContext.editor?.getAttributes('textStyle').color || 'var(--empoleon-color-text)';
 
   const handleChange = (value: string, shouldClose = true) => {
     (richTextEditorContext.editor?.chain() as any).focus().setColor(value).run();
@@ -160,6 +156,6 @@ export function RichTextEditorColorPickerControl(_props: RichTextEditorColorPick
       </Popover.Dropdown>
     </Popover>
   );
-};
+}
 
 RichTextEditorColorPickerControl.displayName = '@empoleon/tiptap/ColorPickerControl';

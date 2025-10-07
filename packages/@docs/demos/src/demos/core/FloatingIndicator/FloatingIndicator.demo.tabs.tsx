@@ -1,7 +1,7 @@
+import { createSignal } from 'solid-js';
 import { FloatingIndicator, Tabs } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
 import classes from './FloatingIndicator.demo.tabs.module.css';
-import { createSignal } from 'solid-js';
 
 const cssCode = `
 .list {
@@ -86,7 +86,9 @@ function Demo() {
 function Demo() {
   const [rootRef, setRootRef] = createSignal<HTMLDivElement | null>(null);
   const [value, setValue] = createSignal<string>('1');
-  const [controlsRefs, setControlsRefs] = createSignal<Record<string, HTMLButtonElement | null>>({});
+  const [controlsRefs, setControlsRefs] = createSignal<Record<string, HTMLButtonElement | null>>(
+    {}
+  );
   const setControlRef = (val: string) => (node: HTMLButtonElement) => {
     controlsRefs()[val] = node;
     setControlsRefs(controlsRefs);

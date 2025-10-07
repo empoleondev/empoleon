@@ -1,6 +1,6 @@
-import { Divider, DividerProps, Text, Flex } from '@empoleon/core';
-import { EmpoleonDemo } from '@empoleonx/demo';
 import { Show } from 'solid-js';
+import { Divider, DividerProps, Flex, Text } from '@empoleon/core';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { Divider, Text, Flex } from '@empoleon/core';
@@ -46,29 +46,25 @@ function Demo(props: DividerProps) {
     <>
       <Show when={props.orientation === 'horizontal'}>
         <Text>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, officiis! Fugit minus ea,
-          perferendis eum consectetur quae vitae. Aliquid, quam reprehenderit? Maiores sed pariatur
-          aliquid commodi atque sunt officiis natus?
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, officiis! Fugit minus
+          ea, perferendis eum consectetur quae vitae. Aliquid, quam reprehenderit? Maiores sed
+          pariatur aliquid commodi atque sunt officiis natus?
         </Text>
 
         <Divider {...props} />
 
         <Text>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, officiis! Fugit minus ea,
-          perferendis eum consectetur quae vitae. Aliquid, quam reprehenderit? Maiores sed pariatur
-          aliquid commodi atque sunt officiis natus?
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, officiis! Fugit minus
+          ea, perferendis eum consectetur quae vitae. Aliquid, quam reprehenderit? Maiores sed
+          pariatur aliquid commodi atque sunt officiis natus?
         </Text>
       </Show>
 
       <Show when={props.orientation === 'vertical'}>
         <Flex align="center">
-          <Text style={{ flex: 1 }}>
-            Lorem ipsum dolor sit amet,
-          </Text>
+          <Text style={{ flex: 1 }}>Lorem ipsum dolor sit amet,</Text>
           <Divider {...props} />
-          <Text style={{ flex: 1 }}>
-            consectetur adipisicing elit.
-          </Text>
+          <Text style={{ flex: 1 }}>consectetur adipisicing elit.</Text>
         </Flex>
       </Show>
     </>
@@ -97,13 +93,13 @@ export const kitchenSink: EmpoleonDemo = {
       prop: 'color',
       type: 'color',
       initialValue: 'gray',
-      libraryValue: undefined
+      libraryValue: undefined,
     },
     {
       prop: 'size',
       type: 'size',
       initialValue: 'xs',
-      libraryValue: 'xs'
+      libraryValue: 'xs',
     },
     {
       prop: 'orientation',
@@ -119,7 +115,7 @@ export const kitchenSink: EmpoleonDemo = {
       prop: 'label',
       type: 'string',
       initialValue: '',
-      libraryValue: undefined
+      libraryValue: undefined,
     },
     {
       prop: 'labelPosition',

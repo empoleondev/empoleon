@@ -69,7 +69,7 @@ export type CodeHighlightTabsFactory = Factory<{
 
 const defaultProps: Partial<CodeHighlightTabsProps> = {};
 
-export const CodeHighlightTabs = factory<CodeHighlightTabsFactory>(_props => {
+export const CodeHighlightTabs = factory<CodeHighlightTabsFactory>((_props) => {
   const props = useProps('CodeHighlightTabs', defaultProps, _props);
 
   const [local, others] = splitProps(props, [
@@ -100,7 +100,7 @@ export const CodeHighlightTabs = factory<CodeHighlightTabsFactory>(_props => {
     'controls',
     'codeColorScheme',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<CodeHighlightTabsFactory>({

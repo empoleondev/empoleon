@@ -1,12 +1,13 @@
-import { splitProps, JSX, Show } from 'solid-js';
+import { JSX, Show, splitProps } from 'solid-js';
+import { createStore } from 'solid-js/store';
 import {
   Box,
   BoxProps,
   createVarsResolver,
   ElementProps,
+  EmpoleonSpacing,
   factory,
   Factory,
-  EmpoleonSpacing,
   StyleProp,
   StylesApiProps,
   useProps,
@@ -17,7 +18,6 @@ import { GridBreakpoints, GridProvider } from './Grid.context';
 import { GridCol } from './GridCol/GridCol';
 import { GridVariables } from './GridVariables';
 import classes from './Grid.module.css';
-import { createStore } from 'solid-js/store';
 
 export type GridStylesNames = 'root' | 'col' | 'inner' | 'container';
 export type GridCssVariables = {
@@ -74,7 +74,7 @@ const varsResolver = createVarsResolver<GridFactory>((_, props) => ({
   },
 }));
 
-export const Grid = factory<GridFactory>(_props => {
+export const Grid = factory<GridFactory>((_props) => {
   const props = useProps('Grid', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -92,7 +92,7 @@ export const Grid = factory<GridFactory>(_props => {
     'breakpoints',
     'type',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<GridFactory>({
@@ -111,32 +111,54 @@ export const Grid = factory<GridFactory>(_props => {
 
   const [contextValue] = createStore({
     getStyles,
-    get grow() { return local.grow; },
-    get columns() { return local.columns || 12; },
-    get breakpoints() { return local.breakpoints; },
-    get type() { return local.type; }
+    get grow() {
+      return local.grow;
+    },
+    get columns() {
+      return local.columns || 12;
+    },
+    get breakpoints() {
+      return local.breakpoints;
+    },
+    get type() {
+      return local.type;
+    },
   });
 
   const responsiveClassName = useRandomClassName();
 
   return (
     <GridProvider value={contextValue}>
-      <Show when={local.type === 'container' && local.breakpoints} fallback={
-        <>
-          <GridVariables selector={`.${responsiveClassName}`} {...props} />
-          <Box ref={local.ref} {...getStyles('root', { className: responsiveClassName })} {...others}>
-            <Box component='div' {...getStyles('inner')}>{local.children}</Box>
-          </Box>
-        </>
-      }>
+      <Show
+        when={local.type === 'container' && local.breakpoints}
+        fallback={
+          <>
+            <GridVariables selector={`.${responsiveClassName}`} {...props} />
+            <Box
+              ref={local.ref}
+              {...getStyles('root', { className: responsiveClassName })}
+              {...others}
+            >
+              <Box component="div" {...getStyles('inner')}>
+                {local.children}
+              </Box>
+            </Box>
+          </>
+        }
+      >
         <GridVariables selector={`.${responsiveClassName}`} {...props} />
-        <Box component='div' {...getStyles('container')}>
-          <Box ref={local.ref} {...getStyles('root', { className: responsiveClassName })} {...others}>
-            <Box component='div' {...getStyles('inner')}>{local.children}</Box>
+        <Box component="div" {...getStyles('container')}>
+          <Box
+            ref={local.ref}
+            {...getStyles('root', { className: responsiveClassName })}
+            {...others}
+          >
+            <Box component="div" {...getStyles('inner')}>
+              {local.children}
+            </Box>
           </Box>
         </Box>
       </Show>
-
     </GridProvider>
   );
 });

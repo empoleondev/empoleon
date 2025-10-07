@@ -34,7 +34,7 @@ export type TabsPanelFactory = Factory<{
   compound: true;
 }>;
 
-export const TabsPanel = factory<TabsPanelFactory>(_props => {
+export const TabsPanel = factory<TabsPanelFactory>((_props) => {
   const props = useProps('TabsPanel', null, _props);
   const [local, others] = splitProps(props, [
     'children',
@@ -45,13 +45,14 @@ export const TabsPanel = factory<TabsPanelFactory>(_props => {
     'style',
     'mod',
     'keepMounted',
-    'ref'
+    'ref',
   ]);
 
   const ctx = useTabsContext();
 
   const active = () => local.value === ctx.value();
-  const content = ctx.keepMounted() || local.keepMounted ? local.children : active() ? local.children : null;
+  const content =
+    ctx.keepMounted() || local.keepMounted ? local.children : active() ? local.children : null;
 
   return (
     <Box

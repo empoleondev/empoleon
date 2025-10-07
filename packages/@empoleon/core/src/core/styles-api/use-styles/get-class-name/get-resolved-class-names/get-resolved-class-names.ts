@@ -8,5 +8,10 @@ interface GetResolvedClassNamesOptions extends ResolveClassNamesInput {
 }
 
 export function getResolvedClassNames(_props: GetResolvedClassNamesOptions) {
-  return resolveClassNames({ theme: _props.theme, classNames: _props.classNames, props: _props.props, stylesCtx: _props.stylesCtx })[_props.selector];
+  return resolveClassNames({
+    theme: _props.theme,
+    classNames: _props.classNames,
+    props: _props.props,
+    stylesCtx: _props.stylesCtx,
+  })[_props.selector];
 }

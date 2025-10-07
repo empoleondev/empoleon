@@ -1,9 +1,22 @@
-import { children, Component, createEffect, createMemo, createSignal, For, JSX, splitProps } from 'solid-js';
+import {
+  children,
+  Component,
+  createEffect,
+  createMemo,
+  createSignal,
+  For,
+  JSX,
+  splitProps,
+} from 'solid-js';
 import {
   Box,
   BoxProps,
   createVarsResolver,
   ElementProps,
+  EmpoleonColor,
+  EmpoleonRadius,
+  EmpoleonSize,
+  EmpoleonSpacing,
   factory,
   Factory,
   getAutoContrastValue,
@@ -13,10 +26,6 @@ import {
   getSize,
   getSpacing,
   getThemeColor,
-  EmpoleonColor,
-  EmpoleonRadius,
-  EmpoleonSize,
-  EmpoleonSpacing,
   rem,
   StylesApiProps,
   useProps,
@@ -126,24 +135,22 @@ const defaultProps = {
   wrap: true,
 } satisfies Partial<StepperProps>;
 
-const varsResolver = createVarsResolver<StepperFactory>(
-  (theme, props) => ({
-    root: {
-      '--stepper-color': props.color ? getThemeColor(props.color, theme) : undefined,
-      '--stepper-icon-color': getAutoContrastValue(props.autoContrast, theme)
-        ? getContrastColor({ color: props.color, theme, autoContrast: props.autoContrast })
-        : undefined,
-      '--stepper-icon-size':
-        props.iconSize === undefined ? getSize(props.size, 'stepper-icon-size') : rem(props.iconSize),
-      '--stepper-content-padding': getSpacing(props.contentPadding),
-      '--stepper-radius': props.radius === undefined ? undefined : getRadius(props.radius),
-      '--stepper-fz': getFontSize(props.size),
-      '--stepper-spacing': getSpacing(props.size),
-    },
-  })
-);
+const varsResolver = createVarsResolver<StepperFactory>((theme, props) => ({
+  root: {
+    '--stepper-color': props.color ? getThemeColor(props.color, theme) : undefined,
+    '--stepper-icon-color': getAutoContrastValue(props.autoContrast, theme)
+      ? getContrastColor({ color: props.color, theme, autoContrast: props.autoContrast })
+      : undefined,
+    '--stepper-icon-size':
+      props.iconSize === undefined ? getSize(props.size, 'stepper-icon-size') : rem(props.iconSize),
+    '--stepper-content-padding': getSpacing(props.contentPadding),
+    '--stepper-radius': props.radius === undefined ? undefined : getRadius(props.radius),
+    '--stepper-fz': getFontSize(props.size),
+    '--stepper-spacing': getSpacing(props.size),
+  },
+}));
 
-export const Stepper = factory<StepperFactory>(_props => {
+export const Stepper = factory<StepperFactory>((_props) => {
   const props = useProps('Stepper', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -169,7 +176,7 @@ export const Stepper = factory<StepperFactory>(_props => {
     'wrap',
     'autoContrast',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<StepperFactory>({
@@ -197,7 +204,7 @@ export const Stepper = factory<StepperFactory>(_props => {
   const [stepContents, setStepContents] = createSignal<JSX.Element[]>([]);
 
   const registerStepContent = (idx: number, content: JSX.Element) => {
-    setStepContents(prev => {
+    setStepContents((prev) => {
       const arr = [...prev];
       arr[idx] = content;
       return arr;
@@ -205,22 +212,24 @@ export const Stepper = factory<StepperFactory>(_props => {
   };
 
   return (
-    <StepperProvider value={{
-      getStyles,
-      orientation: local.orientation,
-      iconPosition: local.iconPosition,
-      registerStep,
-      activeIndex: () => local.active,
-      onStepClick: local.onStepClick,
-      allowNextStepsSelect: () => !!local.allowNextStepsSelect,
-      icon: local.icon,
-      completedIcon: local.completedIcon,
-      progressIcon: local.progressIcon,
-      iconSize: local.iconSize,
-      wrap: () => !!local.wrap,
-      stepChildren: stepContents,
-      registerStepContent,
-    }}>
+    <StepperProvider
+      value={{
+        getStyles,
+        orientation: local.orientation,
+        iconPosition: local.iconPosition,
+        registerStep,
+        activeIndex: () => local.active,
+        onStepClick: local.onStepClick,
+        allowNextStepsSelect: () => !!local.allowNextStepsSelect,
+        icon: local.icon,
+        completedIcon: local.completedIcon,
+        progressIcon: local.progressIcon,
+        iconSize: local.iconSize,
+        wrap: () => !!local.wrap,
+        stepChildren: stepContents,
+        registerStepContent,
+      }}
+    >
       <Box {...getStyles('root')} ref={local.ref} size={local.size} {...others}>
         <Box
           {...getStyles('steps')}
@@ -230,9 +239,19 @@ export const Stepper = factory<StepperFactory>(_props => {
             wrap: local.wrap && local.orientation !== 'vertical',
           }}
         >
-          <StepNodes {...getStyles('separator') as any} active={local.active} orientation={local.orientation} children={local.children} getStyles={getStyles} />
+          <StepNodes
+            {...(getStyles('separator') as any)}
+            active={local.active}
+            orientation={local.orientation}
+            children={local.children}
+            getStyles={getStyles}
+          />
         </Box>
-        <CompletedNode {...getStyles('content') as any} active={local.active} children={local.children} />
+        <CompletedNode
+          {...(getStyles('content') as any)}
+          active={local.active}
+          children={local.children}
+        />
       </Box>
     </StepperProvider>
   );
@@ -294,8 +313,16 @@ interface CompletedProps {
 
 function CompletedNode(props: CompletedProps) {
   const ctx = useStepperContext();
-  const steps = createMemo(() => children(() => props.children).toArray().filter((item) => item !== undefined && (item as any).dataset?.type === "step"));
-  const completed = createMemo(() => children(() => props.children).toArray().filter((item) => item !== undefined && (item as any).dataset?.type === "completed"));
+  const steps = createMemo(() =>
+    children(() => props.children)
+      .toArray()
+      .filter((item) => item !== undefined && (item as any).dataset?.type === 'step')
+  );
+  const completed = createMemo(() =>
+    children(() => props.children)
+      .toArray()
+      .filter((item) => item !== undefined && (item as any).dataset?.type === 'completed')
+  );
 
   const lastIndex = createMemo(() => steps().length - 1);
   const stepContentsSignal = ctx.stepChildren ?? (() => []);
@@ -311,13 +338,11 @@ function CompletedNode(props: CompletedProps) {
     }
 
     if (item.childNodes != null && item.childNodes.length > 0) {
-      const clones: Node[] = Array.from(item.childNodes).map((node: any) =>
-        node.cloneNode(true)
-      );
+      const clones: Node[] = Array.from(item.childNodes).map((node: any) => node.cloneNode(true));
       return <>{clones}</>;
     }
 
-    if (typeof item.innerHTML === "string") {
+    if (typeof item.innerHTML === 'string') {
       return <>{item.innerHTML}</>;
     }
 
@@ -333,7 +358,11 @@ function CompletedNode(props: CompletedProps) {
     }
   });
 
-  return <div style={props.style} class={props.className}>{content()}</div>
+  return (
+    <div style={props.style} class={props.className}>
+      {content()}
+    </div>
+  );
 }
 
 Stepper.classes = classes;

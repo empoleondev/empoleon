@@ -1,8 +1,8 @@
 import { For, JSX } from 'solid-js';
+import { EmpoleonProvider } from '../../core';
 import { Checkbox } from '../Checkbox';
 import { Stack } from '../Stack';
 import { Radio } from './Radio';
-import { EmpoleonProvider } from '../../core';
 
 export default {
   title: 'Radio',
@@ -17,7 +17,7 @@ export default {
 
 export function Usage() {
   return (
-    <div style={{ 'padding': '20px', 'display': 'flex', 'gap': '40px' }}>
+    <div style={{ padding: '20px', display: 'flex', gap: '40px' }}>
       <Radio iconColor="dark.8" color="lime.4" label="React" value="react" name="hello" />
       <Radio iconColor="dark.8" color="lime.4" label="Angular" value="nu" name="hello" />
       <Radio
@@ -34,7 +34,7 @@ export function Usage() {
 
 export function AutoContrast() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Radio
         label="Auto contrast icon color"
         value="hello"
@@ -48,7 +48,7 @@ export function AutoContrast() {
 
 export function OutlineVariant() {
   return (
-    <div style={{ 'padding': '20px', 'display': 'flex', 'gap': '40px' }}>
+    <div style={{ padding: '20px', display: 'flex', gap: '40px' }}>
       <Radio variant="outline" label="React" value="react" name="hello" default-checked />
       <Radio variant="outline" label="Angular" value="nu" name="hello" disabled />
       <Radio variant="outline" label="Svelte" value="sv" disabled={false} name="hello" />
@@ -58,7 +58,7 @@ export function OutlineVariant() {
 
 export function Unstyled() {
   return (
-    <div style={{ 'padding': '20px' }}>
+    <div style={{ padding: '20px' }}>
       <Radio label="React" value="react" name="hello" unstyled />
     </div>
   );
@@ -66,7 +66,7 @@ export function Unstyled() {
 
 export function RadioGroup() {
   return (
-    <div style={{ 'padding': '20px' }}>
+    <div style={{ padding: '20px' }}>
       <Radio.Group defaultValue="ng" readOnly>
         <Radio label="React" value="react" />
         <Radio label="Angular" value="ng" />
@@ -77,10 +77,10 @@ export function RadioGroup() {
 }
 
 export function Sizes() {
-  const items = (['xs', 'sm', 'md', 'lg', 'xl'] as const);
+  const items = ['xs', 'sm', 'md', 'lg', 'xl'] as const;
 
   return (
-    <div style={{ 'padding': '20px' }}>
+    <div style={{ padding: '20px' }}>
       <Stack>
         <div>
           Independent Radio buttons:
@@ -93,7 +93,7 @@ export function Sizes() {
         <div>
           Radio Group:
           <For each={items}>
-            {size => (
+            {(size) => (
               <Radio.Group defaultValue="ng" size={size}>
                 <Radio label="React" value="react" />
                 <Radio label="Angular" value="ng" />
@@ -121,7 +121,7 @@ export function Sizes() {
 
 export function ComparedToCheckbox() {
   return (
-    <div style={{ 'padding': '20px' }}>
+    <div style={{ padding: '20px' }}>
       <Radio.Group defaultValue="ng">
         <Radio label="React" value="react" name="hello" />
         <Radio label="Angular" value="ng" name="hello" />
@@ -139,7 +139,7 @@ export function ComparedToCheckbox() {
 
 export function Asterisk() {
   return (
-    <div style={{ 'width': '300px', 'padding': '20px' }}>
+    <div style={{ width: '300px', padding: '20px' }}>
       <Radio.Group label="With required asterisk" withAsterisk>
         <Radio value="1" />
       </Radio.Group>
@@ -158,7 +158,7 @@ export function Asterisk() {
 
 export function WithNameAttribute() {
   return (
-    <div style={{ 'width': '300', 'padding': '20px' }}>
+    <div style={{ width: '300', padding: '20px' }}>
       <Radio.Group label="group1" name="group1">
         <Radio value="1" label="1" />
         <Radio value="2" label="2" />
@@ -175,7 +175,7 @@ export function WithNameAttribute() {
 
 export function labelPosition() {
   return (
-    <Stack style={{ 'width': '300px', 'padding': '20px' }}>
+    <Stack style={{ width: '300px', padding: '20px' }}>
       <Radio labelPosition="left" label="Hello from left" value="1" />
       <Radio labelPosition="right" label="Hello from right" value="1" />
     </Stack>
@@ -184,7 +184,7 @@ export function labelPosition() {
 
 export function WithDesciprtion() {
   return (
-    <Stack style={{ 'width': '300px', 'padding': '20px' }}>
+    <Stack style={{ width: '300px', padding: '20px' }}>
       <Radio
         description="This is left Checkbox"
         labelPosition="left"
@@ -203,7 +203,7 @@ export function WithDesciprtion() {
 
 export function WithError() {
   return (
-    <Stack style={{ 'width': '300px', 'padding': '20px' }}>
+    <Stack style={{ width: '300px', padding: '20px' }}>
       <Radio label="Invalid Radio without message" value="1" error />
       <Radio error="This is error message" labelPosition="right" label="Invalid Radio" value="1" />
       <Radio error="Radio with error without label" value="1" />

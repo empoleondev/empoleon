@@ -11,12 +11,12 @@ export default {
         <Story />
       </EmpoleonProvider>
     ),
-  ]
+  ],
 };
 
 export function Usage() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Box bg="orange.4" ms="xl" fz="h2" lh="h1">
         Visible from sm
       </Box>
@@ -25,7 +25,7 @@ export function Usage() {
 }
 export function VirtualColor() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Box bg="virtual.4" p="xl">
         Virtual bg
       </Box>
@@ -35,7 +35,7 @@ export function VirtualColor() {
 
 export function ColorMix() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Box bg={rgba(DEFAULT_THEME.colors.pink[5], 1)} h={200} w={200}>
         Pink.6
       </Box>

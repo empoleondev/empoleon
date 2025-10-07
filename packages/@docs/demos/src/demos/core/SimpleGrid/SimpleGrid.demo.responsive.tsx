@@ -1,7 +1,7 @@
+import { For } from 'solid-js';
 import { SimpleGrid } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
 import { defaultItems, GridItem } from './_demo-item';
-import { For } from 'solid-js';
 
 const code = `
 import { SimpleGrid } from '@empoleon/core';
@@ -30,11 +30,7 @@ function Demo() {
       spacing={{ base: 10, sm: 'xl' }}
       verticalSpacing={{ base: 'md', sm: 'xl' }}
     >
-      <For each={defaultItems}>
-        {(_, index) => (
-          <GridItem>{index() + 1}</GridItem>
-        )}
-      </For>
+      <For each={defaultItems}>{(_, index) => <GridItem>{index() + 1}</GridItem>}</For>
     </SimpleGrid>
   );
 }

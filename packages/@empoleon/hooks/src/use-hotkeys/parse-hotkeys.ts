@@ -115,7 +115,7 @@ type HotkeyItem = [string, (event: KeyboardEvent) => void, HotkeyItemOptions?];
 
 export function getHotkeyHandler(hotkeys: HotkeyItem[]) {
   return (event: KeyboardEvent) => {
-    const _event = 'nativeEvent' in event ? (event as any).nativeEvent as KeyboardEvent : event;
+    const _event = 'nativeEvent' in event ? ((event as any).nativeEvent as KeyboardEvent) : event;
     hotkeys.forEach(
       ([hotkey, handler, options = { preventDefault: true, usePhysicalKeys: false }]) => {
         if (getHotkeyMatcher(hotkey, options.usePhysicalKeys)(_event)) {

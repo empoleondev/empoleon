@@ -25,11 +25,20 @@ export function getCSSColorVariables(props: GetColorVariablesInput) {
       [`--empoleon-color-${props.name}-filled-hover`]: `var(--empoleon-color-${props.name}-${
         primaryShade === 9 ? 8 : primaryShade + 1
       })`,
-      [`--empoleon-color-${props.name}-light`]: alpha(props.theme.colors[props.color][primaryShade], 0.1),
-      [`--empoleon-color-${props.name}-light-hover`]: alpha(props.theme.colors[props.color][primaryShade], 0.12),
+      [`--empoleon-color-${props.name}-light`]: alpha(
+        props.theme.colors[props.color][primaryShade],
+        0.1
+      ),
+      [`--empoleon-color-${props.name}-light-hover`]: alpha(
+        props.theme.colors[props.color][primaryShade],
+        0.12
+      ),
       [`--empoleon-color-${props.name}-light-color`]: `var(--empoleon-color-${props.name}-${primaryShade})`,
       [`--empoleon-color-${props.name}-outline`]: `var(--empoleon-color-${props.name}-${primaryShade})`,
-      [`--empoleon-color-${props.name}-outline-hover`]: alpha(props.theme.colors[props.color][primaryShade], 0.05),
+      [`--empoleon-color-${props.name}-outline-hover`]: alpha(
+        props.theme.colors[props.color][primaryShade],
+        0.05
+      ),
     };
 
     if (!withColorValues) {

@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
+import { createSignal } from 'solid-js';
 import { MonthPicker, MonthPickerProps } from '@empoleon/dates';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal } from 'solid-js';
 
 const code = `
 import dayjs from 'dayjs';

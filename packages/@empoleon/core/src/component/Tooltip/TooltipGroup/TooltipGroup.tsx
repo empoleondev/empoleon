@@ -1,6 +1,6 @@
 import { JSX } from 'solid-js';
 import { FloatingDelayGroup } from '@empoleon/solid-floating-ui';
-import { ExtendComponent, Factory, EmpoleonThemeComponent, useProps } from '../../../core';
+import { EmpoleonThemeComponent, ExtendComponent, Factory, useProps } from '../../../core';
 import { TooltipGroupProvider } from './TooltipGroup.context';
 
 export interface TooltipGroupProps {

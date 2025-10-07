@@ -205,7 +205,9 @@ describe('@empoleon/core/Menu', () => {
     const onClose = vi.fn();
     const onChange = vi.fn();
 
-    render(() => <TestContainer onChange={onChange} onOpen={onOpen} onClose={onClose} opened={false} />);
+    render(() => (
+      <TestContainer onChange={onChange} onOpen={onOpen} onClose={onClose} opened={false} />
+    ));
     expectClosed();
 
     expect(onOpen).not.toHaveBeenCalled();
@@ -219,7 +221,9 @@ describe('@empoleon/core/Menu', () => {
     expect(onClose).not.toHaveBeenCalled();
     expect(onChange).not.toHaveBeenCalled();
 
-    render(() => <TestContainer onChange={onChange} onOpen={onOpen} onClose={onClose} opened={false} />);
+    render(() => (
+      <TestContainer onChange={onChange} onOpen={onOpen} onClose={onClose} opened={false} />
+    ));
 
     () => expect(screen.queryAllByRole('menu')).toHaveLength(1);
     expect(onOpen).not.toHaveBeenCalled();
@@ -232,9 +236,9 @@ describe('@empoleon/core/Menu', () => {
     const onClose = vi.fn();
     const onChange = vi.fn();
 
-    const { rerender } = render(
-      () => <TestContainer onChange={onChange} onOpen={onOpen} onClose={onClose} opened={false} />
-    );
+    const { rerender } = render(() => (
+      <TestContainer onChange={onChange} onOpen={onOpen} onClose={onClose} opened={false} />
+    ));
 
     await userEvent.click(getControl());
 
@@ -258,9 +262,9 @@ describe('@empoleon/core/Menu', () => {
     expect(onChange).toHaveBeenCalledTimes(1);
     expect(onChange).toHaveBeenLastCalledWith(false);
 
-    rerender(
-      () => <TestContainer onChange={onChange} onOpen={onOpen} onClose={onClose} opened={false} />
-    );
+    rerender(() => (
+      <TestContainer onChange={onChange} onOpen={onOpen} onClose={onClose} opened={false} />
+    ));
     () => expect(screen.queryAllByRole('menu')).toHaveLength(1);
   });
 });

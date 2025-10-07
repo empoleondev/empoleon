@@ -1,4 +1,5 @@
 import { Accessor, createEffect, createMemo, createSignal, onCleanup } from 'solid-js';
+import { useUncontrolled } from '@empoleon/hooks';
 import {
   arrow,
   flip,
@@ -12,7 +13,7 @@ import {
   useFloating,
   UseFloatingReturn,
 } from '@empoleon/solid-floating-ui';
-import { useUncontrolled } from '@empoleon/hooks';
+import { useEmpoleonEnv } from '../../core';
 import {
   FloatingAxesOffsets,
   FloatingPosition,
@@ -20,7 +21,6 @@ import {
   useFloatingAutoUpdate,
 } from '../../utils/Floating';
 import { PopoverMiddlewares, PopoverWidth } from './Popover.types';
-import { useEmpoleonEnv } from '../../core';
 
 interface UsePopoverOptions {
   offset: () => number | FloatingAxesOffsets;
@@ -161,21 +161,17 @@ export function usePopover(options: UsePopoverOptions) {
     if (!options.disabled()) {
       setOpened(!_opened());
     }
-  }
+  };
 
-  const middlewares = createMemo(() =>
-    getPopoverMiddlewares(options, () => floating, env)
-  );
+  const middlewares = createMemo(() => getPopoverMiddlewares(options, () => floating, env));
 
   const floating: UseFloatingReturn = useFloating({
     strategy: options.strategy,
-    placement: options.preventPositionChangeWhenVisible
-      ? positionRef()
-      : options.position,
+    placement: options.preventPositionChangeWhenVisible ? positionRef() : options.position,
     middleware: () => middlewares(),
     elements: () => ({
       reference: referenceElement(),
-      floating: floatingElement()
+      floating: floatingElement(),
     }),
   });
 

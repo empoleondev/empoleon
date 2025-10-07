@@ -11,9 +11,7 @@ export interface RichTextEditorColorControlProps extends BoxProps, ElementProps<
 
 export const RichTextEditorColorControl: Component<RichTextEditorColorControlProps> = (_props) => {
   const props = useProps('RichTextEditorColorControl', null, _props);
-  const [local, others] = splitProps(props, [
-    'color', 'ref'
-  ]);
+  const [local, others] = splitProps(props, ['color', 'ref']);
 
   const textEditorProps = useRichTextEditorContext();
 

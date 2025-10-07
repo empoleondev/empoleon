@@ -33,7 +33,7 @@ function Demo() {
 
 function Demo() {
   return (
-    <Menu width='200px' shadow="md">
+    <Menu width="200px" shadow="md">
       <Menu.Target>
         <Button>Toggle menu</Button>
       </Menu.Target>

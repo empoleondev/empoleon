@@ -1,6 +1,6 @@
 import type { CSSProperties, EmpoleonStyleProp } from '../Box';
-import type { FactoryPayload } from '../factory';
 import type { EmpoleonTheme } from '../EmpoleonProvider';
+import type { FactoryPayload } from '../factory';
 import { PartialVarsResolver } from './create-vars-resolver/create-vars-resolver';
 
 export interface GetStylesApiOptions {

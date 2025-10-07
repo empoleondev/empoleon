@@ -1,18 +1,18 @@
+import { JSX } from 'solid-js';
 import { Checkbox, EmpoleonProvider, TextInput } from '@empoleon/core';
 import { FORM_INDEX } from '../form-index';
 import { useForm } from '../use-form';
 import { FormBase } from './_base';
-import { JSX } from 'solid-js';
 
 export default {
-   title: 'Form',
-   decorators: [
+  title: 'Form',
+  decorators: [
     (Story: () => JSX.Element) => (
       <EmpoleonProvider>
         <Story />
       </EmpoleonProvider>
     ),
-  ]
+  ],
 };
 
 export function ValidateOnChange() {

@@ -1,6 +1,6 @@
 import { JSX } from 'solid-js';
-import { Portal } from './Portal';
 import { EmpoleonProvider } from '../../core';
+import { Portal } from './Portal';
 
 export default {
   title: 'Portal',

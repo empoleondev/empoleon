@@ -4,10 +4,10 @@ import {
   BoxProps,
   createVarsResolver,
   ElementProps,
+  EmpoleonSize,
   factory,
   Factory,
   getSize,
-  EmpoleonSize,
   StylesApiProps,
   useProps,
   useStyles,
@@ -48,7 +48,7 @@ const varsResolver = createVarsResolver<ContainerFactory>((_, props) => ({
   },
 }));
 
-export const Container = factory<ContainerFactory>(_props => {
+export const Container = factory<ContainerFactory>((_props) => {
   const props = useProps('Container', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -61,7 +61,7 @@ export const Container = factory<ContainerFactory>(_props => {
     'mod',
     'attributes',
     'strategy',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<ContainerFactory>({
@@ -78,12 +78,14 @@ export const Container = factory<ContainerFactory>(_props => {
     varsResolver,
   });
 
-  return <Box
-    ref={local.ref}
-    mod={[{ fluid: local.fluid, strategy: local.strategy }, local.mod]}
-    {...getStyles('root')}
-    {...others}
-  />;
+  return (
+    <Box
+      ref={local.ref}
+      mod={[{ fluid: local.fluid, strategy: local.strategy }, local.mod]}
+      {...getStyles('root')}
+      {...others}
+    />
+  );
 });
 
 Container.classes = classes;

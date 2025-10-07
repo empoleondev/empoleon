@@ -1,16 +1,16 @@
-import { createSignal, Index, JSX, onCleanup, onMount, splitProps, createEffect } from 'solid-js';
 import type { EmblaCarouselType, EmblaOptionsType, EmblaPluginType } from 'embla-carousel';
 import createEmblaCarousel from 'embla-carousel-solid';
+import { createEffect, createSignal, Index, JSX, onCleanup, onMount, splitProps } from 'solid-js';
 import {
   AccordionChevron,
   Box,
   BoxProps,
   createVarsResolver,
   ElementProps,
+  EmpoleonSpacing,
   factory,
   Factory,
   getSpacing,
-  EmpoleonSpacing,
   rem,
   StyleProp,
   StylesApiProps,
@@ -152,17 +152,15 @@ const defaultEmblaOptions: EmblaOptionsType = {
   containScroll: 'trimSnaps',
 };
 
-const varsResolver = createVarsResolver<CarouselFactory>(
-  (_, props) => ({
-    root: {
-      '--carousel-height': rem(props.height),
-      '--carousel-control-size': rem(props.controlSize),
-      '--carousel-controls-offset': getSpacing(props.controlsOffset),
-    },
-  })
-);
+const varsResolver = createVarsResolver<CarouselFactory>((_, props) => ({
+  root: {
+    '--carousel-height': rem(props.height),
+    '--carousel-control-size': rem(props.controlSize),
+    '--carousel-controls-offset': getSpacing(props.controlsOffset),
+  },
+}));
 
-export const Carousel = factory<CarouselFactory>(_props => {
+export const Carousel = factory<CarouselFactory>((_props) => {
   const props = useProps('Carousel', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -197,7 +195,7 @@ export const Carousel = factory<CarouselFactory>(_props => {
     'type',
     'emblaOptions',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<CarouselFactory>({
@@ -351,7 +349,10 @@ export const Carousel = factory<CarouselFactory>(_props => {
         ref={local.ref}
         {...getStyles('root', { className: responsiveClassName })}
         {...others}
-        mod={[{ orientation: local.orientation, 'include-gap-in-size': local.includeGapInSize }, local.mod]}
+        mod={[
+          { orientation: local.orientation, 'include-gap-in-size': local.includeGapInSize },
+          local.mod,
+        ]}
         onKeyDown={handleKeydown}
       >
         <div {...getStyles('viewport')} ref={emblaRefElement} data-type={local.type}>
@@ -369,15 +370,15 @@ export const Carousel = factory<CarouselFactory>(_props => {
             <Index each={Array(slidesCount()).fill(0)}>
               {(_, index) => (
                 <>
-                <UnstyledButton
-                  {...getStyles('indicator')}
-                  data-active={index === selected() || undefined}
-                  aria-hidden
-                  tabIndex={-1}
-                  onClick={() => handleScroll(index)}
-                  data-orientation={local.orientation}
-                  onMouseDown={(event) => event.preventDefault()}
-                />
+                  <UnstyledButton
+                    {...getStyles('indicator')}
+                    data-active={index === selected() || undefined}
+                    aria-hidden
+                    tabIndex={-1}
+                    onClick={() => handleScroll(index)}
+                    data-orientation={local.orientation}
+                    onMouseDown={(event) => event.preventDefault()}
+                  />
                 </>
               )}
             </Index>
@@ -394,7 +395,8 @@ export const Carousel = factory<CarouselFactory>(_props => {
               })}
               onClick={(event) => {
                 handlePrevious();
-                typeof local.previousControlProps?.onClick === "function" && local.previousControlProps?.onClick?.(event);
+                typeof local.previousControlProps?.onClick === 'function' &&
+                  local.previousControlProps?.onClick?.(event);
               }}
               data-inactive={!canScrollPrev() || undefined}
               tabIndex={canScrollPrev() ? 0 : -1}
@@ -422,7 +424,8 @@ export const Carousel = factory<CarouselFactory>(_props => {
               })}
               onClick={(event) => {
                 handleNext();
-                typeof local.nextControlProps?.onClick === "function" && local.nextControlProps?.onClick?.(event);
+                typeof local.nextControlProps?.onClick === 'function' &&
+                  local.nextControlProps?.onClick?.(event);
               }}
               data-inactive={!canScrollNext() || undefined}
               tabIndex={canScrollNext() ? 0 : -1}

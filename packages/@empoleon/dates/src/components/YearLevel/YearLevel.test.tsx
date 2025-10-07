@@ -67,9 +67,9 @@ describe('@empoleon/dates/YearLevel', () => {
   });
 
   it('supports changing year label with callback', () => {
-    render(
-      () => <YearLevel {...defaultProps} yearLabelFormat={(date) => `${dayjs(date).format('MM/YYYY')}`} />
-    );
+    render(() => (
+      <YearLevel {...defaultProps} yearLabelFormat={(date) => `${dayjs(date).format('MM/YYYY')}`} />
+    ));
 
     const button = screen.getByRole('button', { name: /level-control/i });
     expect(button.textContent).toBe('04/2022');

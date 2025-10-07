@@ -7,7 +7,12 @@ export function getMod(props: Record<string, any>) {
     const value = props[key];
 
     const resolvedValue = typeof value === 'function' ? value() : value;
-    if (resolvedValue === undefined || resolvedValue === '' || resolvedValue === false || resolvedValue === null) {
+    if (
+      resolvedValue === undefined ||
+      resolvedValue === '' ||
+      resolvedValue === false ||
+      resolvedValue === null
+    ) {
       return acc;
     }
 

@@ -1,4 +1,4 @@
-import { onMount, onCleanup } from 'solid-js';
+import { onCleanup, onMount } from 'solid-js';
 import { useModalBaseContext } from './ModalBase.context';
 
 export function useModalTitle() {

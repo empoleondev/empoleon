@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
+import { createSignal } from 'solid-js';
 import { YearPicker, YearPickerProps } from '@empoleon/dates';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal } from 'solid-js';
 
 const code = `
 import dayjs from 'dayjs';
@@ -50,7 +50,9 @@ const getYearControlProps: YearPickerProps['getYearControlProps'] = (date) => {
 
 function Demo() {
   const [value, setValue] = createSignal<string | null>(null);
-  return <YearPicker value={value()} onChange={setValue} getYearControlProps={getYearControlProps} />;
+  return (
+    <YearPicker value={value()} onChange={setValue} getYearControlProps={getYearControlProps} />
+  );
 }
 
 export const controlProps: EmpoleonDemo = {

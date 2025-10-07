@@ -56,9 +56,9 @@ describe('@empoleon/core/TabsTab', () => {
   });
 
   it('renders given right and left sections', () => {
-    render(
-      () => <TestContainer {...defaultProps} rightSection="test-right-section" leftSection="test-icon" />
-    );
+    render(() => (
+      <TestContainer {...defaultProps} rightSection="test-right-section" leftSection="test-icon" />
+    ));
     expect(screen.getByText('test-right-section')).toBeInTheDocument();
     expect(screen.getByText('test-icon')).toBeInTheDocument();
   });

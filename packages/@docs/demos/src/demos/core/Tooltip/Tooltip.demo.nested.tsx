@@ -22,13 +22,19 @@ function Demo() {
 function Demo() {
   return (
     <Tooltip label="top" position="top" closeDelay={1500}>
-      {(props) => <Tooltip {...props} label="bottom" position="bottom" openDelay={500} closeDelay={1000}>
-        {(props) => <Tooltip {...props} label="left" position="left" openDelay={1000} closeDelay={500}>
-          {(props) => <Tooltip {...props} label="right" position="right" openDelay={1500}>
-            {(props) => <Button {...props}>Nested Tooltips</Button>}
-          </Tooltip>}
-        </Tooltip>}
-      </Tooltip>}
+      {(props) => (
+        <Tooltip {...props} label="bottom" position="bottom" openDelay={500} closeDelay={1000}>
+          {(props) => (
+            <Tooltip {...props} label="left" position="left" openDelay={1000} closeDelay={500}>
+              {(props) => (
+                <Tooltip {...props} label="right" position="right" openDelay={1500}>
+                  {(props) => <Button {...props}>Nested Tooltips</Button>}
+                </Tooltip>
+              )}
+            </Tooltip>
+          )}
+        </Tooltip>
+      )}
     </Tooltip>
   );
 }

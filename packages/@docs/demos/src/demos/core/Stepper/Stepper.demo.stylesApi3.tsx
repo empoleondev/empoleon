@@ -1,7 +1,7 @@
+import { createSignal } from 'solid-js';
 import { Stepper } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
 import classes from './Stepper.demo.stylesApi3.module.css';
-import { createSignal } from 'solid-js';
 
 const cssCode = `.separator {
   height: 2px;

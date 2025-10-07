@@ -1,6 +1,6 @@
 import { screen } from '@solidjs/testing-library';
-import { render } from '@empoleon-tests/core';
 import { JSX } from 'solid-js';
+import { render } from '@empoleon-tests/core';
 
 interface Options {
   component: (props: any) => JSX.Element;

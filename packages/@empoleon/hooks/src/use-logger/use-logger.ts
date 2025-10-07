@@ -1,4 +1,4 @@
-import { onMount, onCleanup, createEffect } from 'solid-js';
+import { createEffect, onCleanup, onMount } from 'solid-js';
 
 export function useLogger(componentName: string, props: () => any[]) {
   onMount(() => {

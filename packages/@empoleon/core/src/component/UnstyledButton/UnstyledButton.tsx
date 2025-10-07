@@ -29,7 +29,8 @@ export type UnstyledButtonFactory = PolymorphicFactory<{
   defaultRef: HTMLButtonElement;
 }>;
 
-export const UnstyledButton = polymorphicFactory<UnstyledButtonFactory>((_props: UnstyledButtonProps & { component?: any, ref?: any }) => {
+export const UnstyledButton = polymorphicFactory<UnstyledButtonFactory>(
+  (_props: UnstyledButtonProps & { component?: any; ref?: any }) => {
     const props = useProps('UnstyledButton', defaultProps, _props);
     const [local, others] = splitProps(props, [
       'className',
@@ -40,20 +41,22 @@ export const UnstyledButton = polymorphicFactory<UnstyledButtonFactory>((_props:
       'styles',
       'style',
       'attributes',
-      'ref'
+      'ref',
     ]);
 
-    const getStyles = createMemo(() => useStyles<UnstyledButtonFactory>({
-      name: local.__staticSelector!,
-      props,
-      classes,
-      className: local.className,
-      style: local.style,
-      classNames: local.classNames,
-      styles: local.styles,
-      unstyled: local.unstyled,
-      attributes: local.attributes,
-    }));
+    const getStyles = createMemo(() =>
+      useStyles<UnstyledButtonFactory>({
+        name: local.__staticSelector!,
+        props,
+        classes,
+        className: local.className,
+        style: local.style,
+        classNames: local.classNames,
+        styles: local.styles,
+        unstyled: local.unstyled,
+        attributes: local.attributes,
+      })
+    );
 
     return (
       <Box

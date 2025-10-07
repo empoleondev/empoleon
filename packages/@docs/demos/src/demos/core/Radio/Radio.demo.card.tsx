@@ -1,7 +1,7 @@
+import { createSignal } from 'solid-js';
 import { Group, Radio, Text } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
 import classes from './Radio.demo.card.module.css';
-import { createSignal } from 'solid-js';
 
 const cssCode = `.root {
   position: relative;

@@ -1,8 +1,8 @@
 import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight';
-import { useEditor } from '@empoleon/solid-tiptap';
 import StarterKit from '@tiptap/starter-kit';
 import tsLanguageSyntax from 'highlight.js/lib/languages/typescript';
 import { createLowlight } from 'lowlight';
+import { useEditor } from '@empoleon/solid-tiptap';
 import { RichTextEditor } from '@empoleon/tiptap';
 import { EmpoleonDemo } from '@empoleonx/demo';
 

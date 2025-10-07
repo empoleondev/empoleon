@@ -1,6 +1,6 @@
 import { JSX } from 'solid-js';
-import { Title } from './Title';
 import { EmpoleonProvider } from '../../core';
+import { Title } from './Title';
 
 export default {
   title: 'Title',
@@ -15,7 +15,7 @@ export default {
 
 export function Usage() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Title order={1}>Heading 1</Title>
       <Title order={2}>Heading 2</Title>
       <Title order={3}>Heading 3</Title>
@@ -28,7 +28,7 @@ export function Usage() {
 
 export function TextWrap() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Title order={1} textWrap="balance">
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nobis reiciendis, commodi placeat
         doloribus iusto autem, odit maxime, at dolor blanditiis est ea incidunt nostrum esse quod

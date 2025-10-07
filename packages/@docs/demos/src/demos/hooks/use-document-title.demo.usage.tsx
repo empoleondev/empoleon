@@ -1,7 +1,7 @@
+import { createEffect, createSignal } from 'solid-js';
 import { Button } from '@empoleon/core';
 import { randomId, useDocumentTitle } from '@empoleon/hooks';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal, createEffect } from 'solid-js';
 
 const code = `
 import { useState } from 'react';

@@ -30,7 +30,7 @@ function Demo() {
 `;
 
 function Demo() {
-  const icon = <IconFileCv size={18} stroke='1.5' />;
+  const icon = <IconFileCv size={18} stroke="1.5" />;
 
   return (
     <>

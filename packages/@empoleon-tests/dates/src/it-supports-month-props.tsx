@@ -3,11 +3,11 @@ import 'dayjs/locale/ru';
 import dayjs from 'dayjs';
 import { screen } from '@solidjs/testing-library';
 import userEvent from '@testing-library/user-event';
+import { JSX } from 'solid-js';
+import { vi } from 'vitest';
 import { DatesProvider, useDatesContext } from '@empoleon/dates';
 import { render } from '@empoleon-tests/core';
 import { itSupportsWeekdaysProps } from './it-supports-weekdays-props';
-import { JSX } from 'solid-js';
-import { vi } from 'vitest';
 
 interface Options {
   component: (props: any) => JSX.Element;
@@ -43,7 +43,9 @@ export function itSupportsMonthProps(options: Options, name = 'supports month pr
     });
 
     it('renders correct days when firstDayOfWeek is set', () => {
-      const { container } = render(() => <options.component {...options.props} firstDayOfWeek={6} />);
+      const { container } = render(() => (
+        <options.component {...options.props} firstDayOfWeek={6} />
+      ));
 
       const days = getDays(container as any);
       expect(days).toHaveLength(42);
@@ -66,11 +68,11 @@ export function itSupportsMonthProps(options: Options, name = 'supports month pr
         return <options.component {...options.props} firstDayOfWeek={ctx.firstDayOfWeek} />;
       };
 
-      const { container } = render(
-        () => <DatesProvider settings={{ firstDayOfWeek: 6 }}>
+      const { container } = render(() => (
+        <DatesProvider settings={{ firstDayOfWeek: 6 }}>
           <TestConsumer />
         </DatesProvider>
-      );
+      ));
 
       const days = getDays(container as any);
       expect(days).toHaveLength(42);
@@ -118,7 +120,9 @@ export function itSupportsMonthProps(options: Options, name = 'supports month pr
     });
 
     it('detects weekends correctly with custom weekendDays value', () => {
-      const { container } = render(() => <options.component {...options.props} weekendDays={[3, 4]} />);
+      const { container } = render(() => (
+        <options.component {...options.props} weekendDays={[3, 4]} />
+      ));
       const days = getDays(container as any);
 
       expect(days[7]).not.toHaveAttribute('data-weekend');
@@ -133,11 +137,11 @@ export function itSupportsMonthProps(options: Options, name = 'supports month pr
         return <options.component {...options.props} weekendDays={ctx.weekendDays} />;
       };
 
-      const { container } = render(
-        () => <DatesProvider settings={{ weekendDays: [3, 4] }}>
+      const { container } = render(() => (
+        <DatesProvider settings={{ weekendDays: [3, 4] }}>
           <TestConsumer />
         </DatesProvider>
-      );
+      ));
 
       const days = getDays(container as any);
       expect(days[7]).not.toHaveAttribute('data-weekend');
@@ -148,15 +152,15 @@ export function itSupportsMonthProps(options: Options, name = 'supports month pr
 
     it('supports getDayProps', async () => {
       const spy = vi.fn();
-      const { container } = render(
-        () => <options.component
+      const { container } = render(() => (
+        <options.component
           {...options.props}
           getDayProps={(date: string) => ({
             selected: dayjs(date).isSame('2022-04-15'),
             onClick: spy,
           })}
         />
-      );
+      ));
 
       const days = getDays(container as any);
 
@@ -169,12 +173,12 @@ export function itSupportsMonthProps(options: Options, name = 'supports month pr
     });
 
     it('adds disabled prop to Day components based on excludeDate callback', () => {
-      const { container } = render(
-        () => <options.component
+      const { container } = render(() => (
+        <options.component
           {...options.props}
           excludeDate={(date: string) => dayjs(date).day() === 0}
         />
-      );
+      ));
       const days = getDays(container as any);
 
       expect(days[5]).not.toHaveAttribute('data-disabled');
@@ -183,7 +187,9 @@ export function itSupportsMonthProps(options: Options, name = 'supports month pr
     });
 
     it('supports minDate', () => {
-      const { container } = render(() => <options.component {...options.props} minDate="2022-04-10" />);
+      const { container } = render(() => (
+        <options.component {...options.props} minDate="2022-04-10" />
+      ));
       const days = getDays(container as any);
 
       expect(days[0]).toHaveAttribute('data-disabled');
@@ -195,7 +201,9 @@ export function itSupportsMonthProps(options: Options, name = 'supports month pr
     });
 
     it('supports maxDate', () => {
-      const { container } = render(() => <options.component {...options.props} maxDate="2022-04-22" />);
+      const { container } = render(() => (
+        <options.component {...options.props} maxDate="2022-04-22" />
+      ));
       const days = getDays(container as any);
 
       expect(days[34]).toHaveAttribute('data-disabled');
@@ -208,9 +216,9 @@ export function itSupportsMonthProps(options: Options, name = 'supports month pr
     });
 
     it('supports renderDay', () => {
-      const { container } = render(
-        () => <options.component {...options.props} renderDay={(date: string) => dayjs(date).year()} />
-      );
+      const { container } = render(() => (
+        <options.component {...options.props} renderDay={(date: string) => dayjs(date).year()} />
+      ));
       const days = getDays(container as any);
 
       days.forEach((day) => {
@@ -249,12 +257,12 @@ export function itSupportsMonthProps(options: Options, name = 'supports month pr
     });
 
     it('allows changing days aria-label with getDayAriaLabel prop', () => {
-      const { container } = render(
-        () => <options.component
+      const { container } = render(() => (
+        <options.component
           {...options.props}
           getDayAriaLabel={(date: string) => dayjs(date).format('DD/MM/YYYY')}
         />
-      );
+      ));
 
       const days = getDays(container as any);
       expect(days[0]).toHaveAttribute('aria-label', '28/03/2022');
@@ -267,11 +275,11 @@ export function itSupportsMonthProps(options: Options, name = 'supports month pr
         return <options.component {...options.props} locale={ctx.locale} />;
       };
 
-      const { container } = render(
-        () => <DatesProvider settings={{ locale: 'ru' }}>
+      const { container } = render(() => (
+        <DatesProvider settings={{ locale: 'ru' }}>
           <TestConsumer />
         </DatesProvider>
-      );
+      ));
 
       const days = getDays(container as any);
       expect(days[0]).toHaveAttribute('aria-label', '28 марта 2022');

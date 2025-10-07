@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
+import { For, JSX } from 'solid-js';
 import { Button, EmpoleonProvider } from '@empoleon/core';
 import { YearPickerInput } from './YearPickerInput';
-import { For, JSX } from 'solid-js';
 
 export default {
   title: 'YearPickerInput',
@@ -114,15 +114,11 @@ export function Clearable() {
 }
 
 export function Sizes() {
- const sizes = ['xs', 'sm', 'md', 'lg', 'xl'] as const;
+  const sizes = ['xs', 'sm', 'md', 'lg', 'xl'] as const;
 
- return (
-   <div style={{ padding: '40px' }}>
-     <For each={sizes}>
-       {(size) => (
-         <YearPickerInput size={size} />
-       )}
-     </For>
-   </div>
- );
+  return (
+    <div style={{ padding: '40px' }}>
+      <For each={sizes}>{(size) => <YearPickerInput size={size} />}</For>
+    </div>
+  );
 }

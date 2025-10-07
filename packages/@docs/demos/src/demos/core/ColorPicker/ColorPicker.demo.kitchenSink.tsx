@@ -1,6 +1,6 @@
+import { createSignal } from 'solid-js';
 import { ColorPicker, ColorPickerProps, Text } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal } from 'solid-js';
 
 const code = `
 import { useState } from 'react';
@@ -25,7 +25,22 @@ function Demo(props: ColorPickerProps) {
     <>
       <ColorPicker
         {...props}
-        swatches={['#2e2e2e', '#868e96', '#fa5252', '#e64980', '#be4bdb', '#7950f2', '#4c6ef5', '#228be6', '#15aabf', '#12b886', '#40c057', '#82c91e', '#fab005', '#fd7e14']}
+        swatches={[
+          '#2e2e2e',
+          '#868e96',
+          '#fa5252',
+          '#e64980',
+          '#be4bdb',
+          '#7950f2',
+          '#4c6ef5',
+          '#228be6',
+          '#15aabf',
+          '#12b886',
+          '#40c057',
+          '#82c91e',
+          '#fab005',
+          '#fd7e14',
+        ]}
         value={value()}
         onChange={onChange}
       />
@@ -58,25 +73,25 @@ export const kitchenSink: EmpoleonDemo = {
       prop: 'size',
       type: 'size',
       initialValue: 'md',
-      libraryValue: 'md'
+      libraryValue: 'md',
     },
     {
       prop: 'withPicker',
       type: 'boolean',
       initialValue: true,
-      libraryValue: true
+      libraryValue: true,
     },
     {
       prop: 'fullWidth',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'focusable',
       type: 'boolean',
       initialValue: true,
-      libraryValue: true
+      libraryValue: true,
     },
     {
       prop: 'swatchesPerRow',
@@ -85,7 +100,7 @@ export const kitchenSink: EmpoleonDemo = {
       libraryValue: 7,
       min: 1,
       max: 20,
-      step: 1
+      step: 1,
     },
   ],
 };

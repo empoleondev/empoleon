@@ -6,13 +6,7 @@ import { getThumbSize, isScrollingWithinScrollbarBounds, toInt } from '../utils'
 import { Scrollbar } from './Scrollbar';
 
 export function ScrollAreaScrollbarY(props: ScrollAreaScrollbarAxisProps) {
-  const [local, others] = splitProps(props, [
-    'children',
-    'sizes',
-    'onSizesChange',
-    'style',
-    'ref',
-  ]);
+  const [local, others] = splitProps(props, ['children', 'sizes', 'onSizesChange', 'style', 'ref']);
 
   const ctx = useScrollAreaContext();
   const [computedStyle, setComputedStyle] = createSignal<CSSStyleDeclaration>();
@@ -36,19 +30,14 @@ export function ScrollAreaScrollbarY(props: ScrollAreaScrollbarAxisProps) {
       ref={useMergedRef(local.ref, setRef)}
       sizes={local.sizes}
       style={{
-        "--sa-thumb-height": `${getThumbSize(local.sizes)}px`,
-        ...(typeof local.style === 'object' && local.style !== null ? local.style : {})
+        '--sa-thumb-height': `${getThumbSize(local.sizes)}px`,
+        ...(typeof local.style === 'object' && local.style !== null ? local.style : {}),
       }}
       onThumbPointerDown={(pointerPos: { x: number; y: number }) =>
         props.onThumbPointerDown(pointerPos.y)
       }
-      onDragScroll={(pointerPos: { x: number; y: number }) =>
-        props.onDragScroll(pointerPos.y)
-      }
-      onWheelScroll={(
-        event: WheelEvent,
-        maxScrollPos: number
-      ) => {
+      onDragScroll={(pointerPos: { x: number; y: number }) => props.onDragScroll(pointerPos.y)}
+      onWheelScroll={(event: WheelEvent, maxScrollPos: number) => {
         if (ctx.viewport) {
           const scrollPos = ctx.viewport.scrollTop + event.deltaY;
           props.onWheelScroll(scrollPos);

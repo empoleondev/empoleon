@@ -1,7 +1,7 @@
+import { createSignal } from 'solid-js';
 import { Image, SimpleGrid, Text } from '@empoleon/core';
 import { Dropzone, FileWithPath, IMAGE_MIME_TYPE } from '@empoleon/dropzone';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal } from 'solid-js';
 
 const code = `
 import { useState } from 'react';

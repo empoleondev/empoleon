@@ -28,9 +28,13 @@ function mergeClassNames(objects: Partial<Record<string, string>>[]) {
 }
 
 export function resolveClassNames(_props: ResolveClassNamesInput) {
-  const arrayClassNames = Array.isArray(_props.classNames) ? _props.classNames : [_props.classNames];
+  const arrayClassNames = Array.isArray(_props.classNames)
+    ? _props.classNames
+    : [_props.classNames];
   const resolvedClassNames = arrayClassNames.map((item) =>
-    typeof item === 'function' ? item(_props.theme, _props.props, _props.stylesCtx) : item || EMPTY_CLASS_NAMES
+    typeof item === 'function'
+      ? item(_props.theme, _props.props, _props.stylesCtx)
+      : item || EMPTY_CLASS_NAMES
   );
 
   return mergeClassNames(resolvedClassNames);

@@ -8,8 +8,8 @@ type ElementType = keyof JSX.IntrinsicElements | Component<any>;
 type PropsOf<C extends ElementType> = C extends keyof JSX.IntrinsicElements
   ? JSX.IntrinsicElements[C]
   : C extends Component<infer P>
-  ? P
-  : never;
+    ? P
+    : never;
 
 type ComponentProp<C> = {
   component?: C;
@@ -20,8 +20,8 @@ type InheritedProps<C extends ElementType, Props = {}> = ExtendedProps<PropsOf<C
 export type PolymorphicRef<C> = C extends keyof JSX.IntrinsicElements
   ? JSX.IntrinsicElements[C]['ref']
   : C extends Component<any>
-  ? any
-  : never;
+    ? any
+    : never;
 
 export type PolymorphicComponentProps<C, Props = {}> = C extends ElementType
   ? InheritedProps<C, Props & ComponentProp<C>> & {
@@ -37,9 +37,7 @@ export function createPolymorphicComponent<
 >(component: any) {
   type ComponentProps<C> = PolymorphicComponentProps<C, Props>;
 
-  type _PolymorphicComponent = <C = ComponentDefaultType>(
-    props: ComponentProps<C>
-  ) => JSX.Element;
+  type _PolymorphicComponent = <C = ComponentDefaultType>(props: ComponentProps<C>) => JSX.Element;
 
   type ComponentProperties = Omit<Component<ComponentProps<any>>, never>;
 

@@ -1,11 +1,11 @@
+import { createSignal, JSX, mergeProps } from 'solid-js';
+import { Dynamic } from 'solid-js/web';
 import { Text, UnstyledButton } from '@empoleon/core';
 import { DemoAreaProps } from '../DemoArea';
 import { DemoCode } from '../DemoCode';
 import { DemoColumns } from '../DemoColumns';
 import { DemoRoot } from '../DemoRoot';
 import classes from './StylesApiDemo.module.css';
-import { createSignal, JSX, mergeProps } from 'solid-js';
-import { Dynamic } from 'solid-js/web';
 
 export interface StylesApiDemoProps extends DemoAreaProps {
   data: { selectors: Record<string, string> };

@@ -35,24 +35,26 @@ describe('@empoleon/core/Pill', () => {
   });
 
   it('supports removeButtonProps', () => {
-    const { container } = render(
-      () => <Pill removeButtonProps={{ 'data-test': true } as any} withRemoveButton />
-    );
+    const { container } = render(() => (
+      <Pill removeButtonProps={{ 'data-test': true } as any} withRemoveButton />
+    ));
     expect(container.querySelector('[data-test="true"]')).toBeInTheDocument();
   });
 
   it('supports onClick in removeButtonProps', async () => {
     const spy = vi.fn();
-    const { container } = render(() => <Pill removeButtonProps={{ onClick: spy }} withRemoveButton />);
+    const { container } = render(() => (
+      <Pill removeButtonProps={{ onClick: spy }} withRemoveButton />
+    ));
     await userEvent.click(container.querySelector('.empoleon-Pill-remove')!);
     expect(spy).toHaveBeenCalled();
   });
 
   it('supports onMouseDown in removeButtonProps', async () => {
     const spy = vi.fn();
-    const { container } = render(
-      () => <Pill removeButtonProps={{ onMouseDown: spy }} withRemoveButton />
-    );
+    const { container } = render(() => (
+      <Pill removeButtonProps={{ onMouseDown: spy }} withRemoveButton />
+    ));
     await userEvent.click(container.querySelector('.empoleon-Pill-remove')!);
     expect(spy).toHaveBeenCalled();
   });

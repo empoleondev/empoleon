@@ -4,7 +4,7 @@ import { getPropsValue } from './get-props-value';
 
 interface Options<Props = any> {
   component: (props: Props) => JSX.Element;
-  props: Props | (() => Props)
+  props: Props | (() => Props);
   refType: any;
   refProp?: string;
   selector?: string;
@@ -18,8 +18,12 @@ export function itSupportsRef<Props>(options: Options<Props>, name = 'supports r
     };
 
     const baseProps = getPropsValue(options.props);
-    const propsWithRef = { ...baseProps, [options.refProp || 'ref']: refCallback } as Props & { [K in string]: (el: typeof options.refType) => void };
-    render(() => <options.component {...propsWithRef} {...{ [options.refProp || 'ref']: refCallback }} />);
+    const propsWithRef = { ...baseProps, [options.refProp || 'ref']: refCallback } as Props & {
+      [K in string]: (el: typeof options.refType) => void;
+    };
+    render(() => (
+      <options.component {...propsWithRef} {...{ [options.refProp || 'ref']: refCallback }} />
+    ));
     expect(ref).toBeInstanceOf(options.refType);
   });
 }

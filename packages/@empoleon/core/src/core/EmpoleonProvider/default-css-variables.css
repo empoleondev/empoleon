@@ -14,12 +14,14 @@
   --empoleon-color-white: #fff;
   --empoleon-color-black: #000;
   --empoleon-line-height: 1.55;
-  --empoleon-font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial,
-    sans-serif, Apple Color Emoji, Segoe UI Emoji;
-  --empoleon-font-family-monospace: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-    Liberation Mono, Courier New, monospace;
-  --empoleon-font-family-headings: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica,
-    Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
+  --empoleon-font-family:
+    -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif,
+    Apple Color Emoji, Segoe UI Emoji;
+  --empoleon-font-family-monospace:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+  --empoleon-font-family-headings:
+    -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif,
+    Apple Color Emoji, Segoe UI Emoji;
   --empoleon-heading-font-weight: 700;
   --empoleon-heading-text-wrap: wrap;
   --empoleon-radius-default: calc(0.25rem * var(--empoleon-scale));
@@ -48,32 +50,37 @@
   --empoleon-line-height-md: 1.55;
   --empoleon-line-height-lg: 1.6;
   --empoleon-line-height-xl: 1.65;
-  --empoleon-shadow-xs: 0 calc(0.0625rem * var(--empoleon-scale))
-      calc(0.1875rem * var(--empoleon-scale)) rgba(0, 0, 0, 0.05),
+  --empoleon-shadow-xs:
+    0 calc(0.0625rem * var(--empoleon-scale)) calc(0.1875rem * var(--empoleon-scale))
+      rgba(0, 0, 0, 0.05),
     0 calc(0.0625rem * var(--empoleon-scale)) calc(0.125rem * var(--empoleon-scale))
       rgba(0, 0, 0, 0.1);
-  --empoleon-shadow-sm: 0 calc(0.0625rem * var(--empoleon-scale))
-      calc(0.1875rem * var(--empoleon-scale)) rgba(0, 0, 0, 0.05),
+  --empoleon-shadow-sm:
+    0 calc(0.0625rem * var(--empoleon-scale)) calc(0.1875rem * var(--empoleon-scale))
+      rgba(0, 0, 0, 0.05),
     rgba(0, 0, 0, 0.05) 0 calc(0.625rem * var(--empoleon-scale))
       calc(0.9375rem * var(--empoleon-scale)) calc(-0.3125rem * var(--empoleon-scale)),
     rgba(0, 0, 0, 0.04) 0 calc(0.4375rem * var(--empoleon-scale))
       calc(0.4375rem * var(--empoleon-scale)) calc(-0.3125rem * var(--empoleon-scale));
-  --empoleon-shadow-md: 0 calc(0.0625rem * var(--empoleon-scale))
-      calc(0.1875rem * var(--empoleon-scale)) rgba(0, 0, 0, 0.05),
+  --empoleon-shadow-md:
+    0 calc(0.0625rem * var(--empoleon-scale)) calc(0.1875rem * var(--empoleon-scale))
+      rgba(0, 0, 0, 0.05),
     rgba(0, 0, 0, 0.05) 0 calc(1.25rem * var(--empoleon-scale))
       calc(1.5625rem * var(--empoleon-scale)) calc(-0.3125rem * var(--empoleon-scale)),
     rgba(0, 0, 0, 0.04) 0 calc(0.625rem * var(--empoleon-scale))
       calc(0.625rem * var(--empoleon-scale)) calc(-0.3125rem * var(--empoleon-scale));
-  --empoleon-shadow-lg: 0 calc(0.0625rem * var(--empoleon-scale))
-      calc(0.1875rem * var(--empoleon-scale)) rgba(0, 0, 0, 0.05),
+  --empoleon-shadow-lg:
+    0 calc(0.0625rem * var(--empoleon-scale)) calc(0.1875rem * var(--empoleon-scale))
+      rgba(0, 0, 0, 0.05),
     rgba(0, 0, 0, 0.05) 0 calc(1.75rem * var(--empoleon-scale))
       calc(1.4375rem * var(--empoleon-scale)) calc(-0.4375rem * var(--empoleon-scale)),
-    rgba(0, 0, 0, 0.04) 0 calc(0.75rem * var(--empoleon-scale)) calc(0.75rem * var(--empoleon-scale))
-      calc(-0.4375rem * var(--empoleon-scale));
-  --empoleon-shadow-xl: 0 calc(0.0625rem * var(--empoleon-scale))
-      calc(0.1875rem * var(--empoleon-scale)) rgba(0, 0, 0, 0.05),
-    rgba(0, 0, 0, 0.05) 0 calc(2.25rem * var(--empoleon-scale)) calc(1.75rem * var(--empoleon-scale))
-      calc(-0.4375rem * var(--empoleon-scale)),
+    rgba(0, 0, 0, 0.04) 0 calc(0.75rem * var(--empoleon-scale))
+      calc(0.75rem * var(--empoleon-scale)) calc(-0.4375rem * var(--empoleon-scale));
+  --empoleon-shadow-xl:
+    0 calc(0.0625rem * var(--empoleon-scale)) calc(0.1875rem * var(--empoleon-scale))
+      rgba(0, 0, 0, 0.05),
+    rgba(0, 0, 0, 0.05) 0 calc(2.25rem * var(--empoleon-scale))
+      calc(1.75rem * var(--empoleon-scale)) calc(-0.4375rem * var(--empoleon-scale)),
     rgba(0, 0, 0, 0.04) 0 calc(1.0625rem * var(--empoleon-scale))
       calc(1.0625rem * var(--empoleon-scale)) calc(-0.4375rem * var(--empoleon-scale));
   --empoleon-radius-xs: calc(0.125rem * var(--empoleon-scale));

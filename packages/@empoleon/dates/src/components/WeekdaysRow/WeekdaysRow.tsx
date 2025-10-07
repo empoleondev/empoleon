@@ -1,13 +1,15 @@
+import { For, splitProps } from 'solid-js';
+import { Dynamic } from 'solid-js/web';
 import {
   Box,
   BoxProps,
   createVarsResolver,
   ElementProps,
+  EmpoleonSize,
   factory,
   Factory,
   getFontSize,
   getSpacing,
-  EmpoleonSize,
   StylesApiProps,
   useProps,
   useStyles,
@@ -16,8 +18,6 @@ import type { DateLabelFormat, DayOfWeek } from '../../types';
 import { useDatesContext } from '../DatesProvider';
 import { getWeekdayNames } from './get-weekdays-names/get-weekdays-names';
 import classes from './WeekdaysRow.module.css';
-import { For, splitProps } from 'solid-js';
-import { Dynamic } from 'solid-js/web';
 
 export type WeekdaysRowStylesNames = 'weekday' | 'weekdaysRow';
 export type WeekdaysRowCssVariables = {
@@ -65,7 +65,7 @@ const varsResolver = createVarsResolver<WeekdaysRowFactory>((_, props) => ({
   },
 }));
 
-export const WeekdaysRow = factory<WeekdaysRowFactory>(_props => {
+export const WeekdaysRow = factory<WeekdaysRowFactory>((_props) => {
   const props = useProps('WeekdaysRow', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -81,7 +81,7 @@ export const WeekdaysRow = factory<WeekdaysRowFactory>(_props => {
     '__staticSelector',
     'withWeekNumbers',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const CellComponent = local.cellComponent || 'th';
@@ -113,7 +113,7 @@ export const WeekdaysRow = factory<WeekdaysRowFactory>(_props => {
     <Box component="tr" ref={local.ref} {...getStyles('weekdaysRow')} {...others}>
       {local.withWeekNumbers && <CellComponent {...getStyles('weekday')}>#</CellComponent>}
       <For each={weekdayNames}>
-        {weekday => (
+        {(weekday) => (
           <Dynamic component={CellComponent} {...getStyles('weekday')}>
             {weekday}
           </Dynamic>

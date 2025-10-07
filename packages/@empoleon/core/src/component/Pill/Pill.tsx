@@ -1,14 +1,15 @@
+import { createEffect, createMemo, JSX, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
   createVarsResolver,
   ElementProps,
+  EmpoleonRadius,
+  EmpoleonSize,
   factory,
   Factory,
   getRadius,
   getSize,
-  EmpoleonRadius,
-  EmpoleonSize,
   StylesApiProps,
   useProps,
   useStyles,
@@ -18,7 +19,6 @@ import { usePillsInputContext } from '../PillsInput/PillsInput.context';
 import { usePillGroupContext } from './PillGroup.context';
 import { PillGroup } from './PillGroup/PillGroup';
 import classes from './Pill.module.css';
-import { createEffect, createMemo, JSX, splitProps } from 'solid-js';
 
 export type PillStylesNames = 'root' | 'label' | 'remove';
 export type PillVariant = 'default' | 'contrast';
@@ -70,7 +70,7 @@ const varsResolver = createVarsResolver<PillFactory>((_, props, props2) => ({
   },
 }));
 
-export const Pill = factory<PillFactory>(_props => {
+export const Pill = factory<PillFactory>((_props) => {
   const props = useProps('Pill', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -89,12 +89,12 @@ export const Pill = factory<PillFactory>(_props => {
     'disabled',
     'mod',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const ctx = usePillGroupContext();
   const pillsInputCtx = usePillsInputContext();
-  const _size = () => (local.size || ctx?.size() || undefined);
+  const _size = () => local.size || ctx?.size() || undefined;
   const _variant = pillsInputCtx?.variant === 'filled' ? 'contrast' : local.variant || 'default';
 
   const stylesCtx = createMemo(() => ({ size: _size() }));
@@ -111,7 +111,9 @@ export const Pill = factory<PillFactory>(_props => {
     attributes: local.attributes,
     vars: local.vars,
     varsResolver,
-    get stylesCtx() { return stylesCtx(); }
+    get stylesCtx() {
+      return stylesCtx();
+    },
   });
 
   return (
@@ -122,12 +124,17 @@ export const Pill = factory<PillFactory>(_props => {
       size={_size()}
       {...getStyles('root', { variant: _variant })}
       mod={[
-        { 'with-remove': local.withRemoveButton && !local.disabled, disabled: local.disabled || ctx?.disabled },
+        {
+          'with-remove': local.withRemoveButton && !local.disabled,
+          disabled: local.disabled || ctx?.disabled,
+        },
         local.mod,
       ]}
       {...others}
     >
-      <Box component='span' {...getStyles('label')}>{local.children}</Box>
+      <Box component="span" {...getStyles('label')}>
+        {local.children}
+      </Box>
       {local.withRemoveButton && (
         <CloseButton
           variant="transparent"
@@ -140,21 +147,27 @@ export const Pill = factory<PillFactory>(_props => {
             className: local.removeButtonProps?.className,
             style: local.removeButtonProps?.style,
           })}
-          onMouseDown={(event: MouseEvent & {
-            currentTarget: HTMLButtonElement;
-            target: Element;
-          }) => {
+          onMouseDown={(
+            event: MouseEvent & {
+              currentTarget: HTMLButtonElement;
+              target: Element;
+            }
+          ) => {
             event.preventDefault();
             event.stopPropagation();
-            typeof local.removeButtonProps?.onMouseDown === "function" && local.removeButtonProps?.onMouseDown?.(event);
+            typeof local.removeButtonProps?.onMouseDown === 'function' &&
+              local.removeButtonProps?.onMouseDown?.(event);
           }}
-          onClick={(event: MouseEvent & {
-            currentTarget: HTMLButtonElement;
-            target: Element;
-          }) => {
+          onClick={(
+            event: MouseEvent & {
+              currentTarget: HTMLButtonElement;
+              target: Element;
+            }
+          ) => {
             event.stopPropagation();
             local.onRemove?.();
-            typeof local.removeButtonProps?.onClick === "function" && local.removeButtonProps?.onClick?.(event);
+            typeof local.removeButtonProps?.onClick === 'function' &&
+              local.removeButtonProps?.onClick?.(event);
           }}
         />
       )}

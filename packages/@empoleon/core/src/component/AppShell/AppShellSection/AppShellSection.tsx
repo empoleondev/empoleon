@@ -29,7 +29,7 @@ export type AppShellSectionFactory = PolymorphicFactory<{
 
 const defaultProps: Partial<AppShellSectionProps> = {};
 
-export const AppShellSection = polymorphicFactory<AppShellSectionFactory>(_props => {
+export const AppShellSection = polymorphicFactory<AppShellSectionFactory>((_props) => {
   const props = useProps('AppShellSection', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -39,7 +39,7 @@ export const AppShellSection = polymorphicFactory<AppShellSectionFactory>(_props
     'vars',
     'grow',
     'mod',
-    'ref'
+    'ref',
   ]);
 
   const ctx = useAppShellContext();
@@ -48,7 +48,12 @@ export const AppShellSection = polymorphicFactory<AppShellSectionFactory>(_props
     <Box
       ref={local.ref}
       mod={[{ grow: local.grow }, local.mod]}
-      {...ctx.getStyles('section', { className: local.className, style: local.style, classNames: local.classNames, styles: local.styles })}
+      {...ctx.getStyles('section', {
+        className: local.className,
+        style: local.style,
+        classNames: local.classNames,
+        styles: local.styles,
+      })}
       {...others}
     />
   );

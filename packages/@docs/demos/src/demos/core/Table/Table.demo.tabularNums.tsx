@@ -1,6 +1,6 @@
+import { For } from 'solid-js';
 import { NumberFormatter, Table } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { For } from 'solid-js';
 
 const code = `
 import { NumberFormatter, Table } from '@empoleon/core';

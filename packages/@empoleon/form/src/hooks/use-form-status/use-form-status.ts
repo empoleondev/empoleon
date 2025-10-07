@@ -1,5 +1,5 @@
-import { createMemo, createSignal } from 'solid-js';
 import isEqual from 'fast-deep-equal';
+import { createMemo, createSignal } from 'solid-js';
 import { getStatus } from '../../get-status';
 import { clearListState } from '../../lists';
 import { getPath } from '../../paths';
@@ -22,7 +22,10 @@ export interface $FormStatus<Values extends Record<string, any>> {
   touchedRef: { current: FormStatus }; // Keep React-like interface
   dirtyRef: { current: FormStatus }; // Keep React-like interface
   setTouched: (value: FormStatus | ((current: FormStatus) => FormStatus)) => void;
-  setDirty: (value: FormStatus | ((current: FormStatus) => FormStatus), forceUpdate?: boolean) => void;
+  setDirty: (
+    value: FormStatus | ((current: FormStatus) => FormStatus),
+    forceUpdate?: boolean
+  ) => void;
   resetDirty: ResetStatus;
   resetTouched: ResetStatus;
   isTouched: GetFieldStatus<Values>;
@@ -44,7 +47,9 @@ interface UseFormStatusInput<Values extends Record<string, any>> {
   $values: $FormValues<Values>;
 }
 
-export function useFormStatus<Values extends Record<string, any>>(props: UseFormStatusInput<Values>): $FormStatus<Values> {
+export function useFormStatus<Values extends Record<string, any>>(
+  props: UseFormStatusInput<Values>
+): $FormStatus<Values> {
   const [touchedState, setTouchedState] = createSignal(props.initialTouched);
   const [dirtyState, setDirtyState] = createSignal(props.initialDirty);
 
@@ -53,13 +58,21 @@ export function useFormStatus<Values extends Record<string, any>>(props: UseForm
   let dirtyRefData = props.initialDirty;
 
   const touchedRef = {
-    get current() { return touchedRefData; },
-    set current(value: FormStatus) { touchedRefData = value; }
+    get current() {
+      return touchedRefData;
+    },
+    set current(value: FormStatus) {
+      touchedRefData = value;
+    },
   };
 
   const dirtyRef = {
-    get current() { return dirtyRefData; },
-    set current(value: FormStatus) { dirtyRefData = value; }
+    get current() {
+      return dirtyRefData;
+    },
+    set current(value: FormStatus) {
+      dirtyRefData = value;
+    },
   };
 
   const setTouched = (values: FormStatus | ((current: FormStatus) => FormStatus)) => {
@@ -71,7 +84,10 @@ export function useFormStatus<Values extends Record<string, any>>(props: UseForm
     }
   };
 
-  const setDirty = (values: FormStatus | ((current: FormStatus) => FormStatus), forceUpdate = false) => {
+  const setDirty = (
+    values: FormStatus | ((current: FormStatus) => FormStatus),
+    forceUpdate = false
+  ) => {
     const resolvedValues = typeof values === 'function' ? values(dirtyRef.current) : values;
     dirtyRef.current = resolvedValues;
 

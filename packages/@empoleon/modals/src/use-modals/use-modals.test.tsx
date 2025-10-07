@@ -1,5 +1,5 @@
-import { createEffect, onMount, ParentProps } from 'solid-js';
 import { render, renderHook, screen } from '@solidjs/testing-library';
+import { createEffect, onMount, ParentProps } from 'solid-js';
 import { EmpoleonProvider } from '@empoleon/core';
 import { ContextModalProps } from '../context';
 import { ModalsProvider } from '../ModalsProvider';

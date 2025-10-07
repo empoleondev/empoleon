@@ -71,39 +71,39 @@ describe('@empoleon/dates/MonthPickerInput', () => {
   });
 
   it('supports valueFormat prop', () => {
-    const { container, rerender } = render(
-      () => <MonthPickerInput {...defaultProps} valueFormat="MMMM" value="2022-04-11" />
-    );
+    const { container, rerender } = render(() => (
+      <MonthPickerInput {...defaultProps} valueFormat="MMMM" value="2022-04-11" />
+    ));
     expectValue(container, 'April');
 
-    rerender(
-      () => <MonthPickerInput
+    rerender(() => (
+      <MonthPickerInput
         {...defaultProps}
         type="multiple"
         valueFormat="MMMM"
         value={['2022-04-11', '2022-05-11']}
       />
-    );
+    ));
     expectValue(container, 'April, May');
 
-    rerender(
-      () => <MonthPickerInput
+    rerender(() => (
+      <MonthPickerInput
         {...defaultProps}
         type="range"
         valueFormat="MMMM"
         value={['2022-04-11', '2022-05-11']}
       />
-    );
+    ));
     expectValue(container, 'April – May');
   });
 
   it('has correct default __staticSelector', () => {
-    const { container } = render(
-      () => <MonthPickerInput
+    const { container } = render(() => (
+      <MonthPickerInput
         {...defaultProps}
         popoverProps={{ opened: true, withinPortal: false, transitionProps: { duration: 0 } }}
       />
-    );
+    ));
     expect(container.querySelector('[data-dates-input]')).toHaveClass(
       'empoleon-MonthPickerInput-input'
     );

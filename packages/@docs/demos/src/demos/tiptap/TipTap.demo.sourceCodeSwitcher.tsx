@@ -1,8 +1,8 @@
-import { useEditor } from '@empoleon/solid-tiptap';
 import StarterKit from '@tiptap/starter-kit';
+import { createSignal } from 'solid-js';
+import { useEditor } from '@empoleon/solid-tiptap';
 import { RichTextEditor } from '@empoleon/tiptap';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal } from 'solid-js';
 
 const code = `
 import { useEditor } from '@empoleon/solid-tiptap';

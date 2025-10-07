@@ -33,7 +33,7 @@ function Demo() {
 
 function Demo() {
   return (
-    <Popover width='300px' position="bottom" withArrow shadow="md">
+    <Popover width="300px" position="bottom" withArrow shadow="md">
       <Popover.Target>
         <Button>Toggle popover</Button>
       </Popover.Target>

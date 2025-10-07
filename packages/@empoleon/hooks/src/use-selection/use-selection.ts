@@ -1,4 +1,4 @@
-import { createSignal, createEffect, createMemo } from 'solid-js';
+import { createEffect, createMemo, createSignal } from 'solid-js';
 
 export interface UseSelectionInput<T> {
   /** The array of items to select from */
@@ -37,7 +37,9 @@ export interface UseSelectionHandlers<T> {
 export type UseSelectionReturnValue<T> = readonly [() => T[], UseSelectionHandlers<T>];
 
 export function useSelection<T>(input: UseSelectionInput<T>): UseSelectionReturnValue<T> {
-  const [selectionSet, setSelectionSet] = createSignal(new Set(input.defaultSelection || []) as Set<T>);
+  const [selectionSet, setSelectionSet] = createSignal(
+    new Set(input.defaultSelection || []) as Set<T>
+  );
 
   let isFirstRun = true;
   createEffect(() => {

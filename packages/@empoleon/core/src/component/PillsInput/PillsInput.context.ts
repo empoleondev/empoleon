@@ -1,7 +1,7 @@
 import { Ref } from '@solid-primitives/refs';
+import { Accessor } from 'solid-js';
 import { createOptionalContext, EmpoleonSize } from '../../core';
 import { InputVariant } from '../Input';
-import { Accessor } from 'solid-js';
 
 export interface PillsInputContextValue {
   fieldRef: Ref<HTMLInputElement | null>;

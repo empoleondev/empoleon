@@ -1,6 +1,6 @@
 import { For, JSX } from 'solid-js';
-import { DecadeLevelGroup } from './DecadeLevelGroup';
 import { EmpoleonProvider } from '@empoleon/core';
+import { DecadeLevelGroup } from './DecadeLevelGroup';
 
 export default {
   title: 'DecadeLevelGroup',
@@ -34,9 +34,7 @@ export function Sizes() {
   return (
     <div style={{ padding: '40px' }}>
       <For each={sizes}>
-        {(size) => (
-          <DecadeLevelGroup numberOfColumns={3} size={size} mt="xl" decade="2022-04-11" />
-        )}
+        {(size) => <DecadeLevelGroup numberOfColumns={3} size={size} mt="xl" decade="2022-04-11" />}
       </For>
     </div>
   );

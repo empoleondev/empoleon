@@ -1,13 +1,13 @@
-import { createSignal, JSX } from 'solid-js';
 import { IconSearch, IconTable } from '@tabler/icons-solidjs';
+import { createSignal, JSX } from 'solid-js';
 import { useDisclosure } from '@empoleon/hooks';
+import { EmpoleonProvider } from '../../core';
 import { Button } from '../Button';
+import { Group } from '../Group';
 import { Input } from '../Input';
 import { Text } from '../Text';
 import { Tooltip } from '../Tooltip';
 import { Menu } from './Menu';
-import { EmpoleonProvider } from '../../core';
-import { Group } from '../Group';
 
 export default {
   title: 'Menu',
@@ -23,9 +23,7 @@ export default {
 export function DisabledFirstItem() {
   return (
     <Menu>
-      <Menu.Target>
-        {(props) => <Button {...props}>Toggle menu</Button>}
-      </Menu.Target>
+      <Menu.Target>{(props) => <Button {...props}>Toggle menu</Button>}</Menu.Target>
 
       <Menu.Dropdown>
         <Menu.Item disabled>Disabled</Menu.Item>
@@ -44,9 +42,7 @@ export function FormTab() {
       </form>
 
       <Menu keepMounted>
-        <Menu.Target>
-          {(props) => <Button {...props}>Hey</Button>}
-        </Menu.Target>
+        <Menu.Target>{(props) => <Button {...props}>Hey</Button>}</Menu.Target>
         <Menu.Dropdown>
           <Menu.Item>Item 2</Menu.Item>
           <Menu.Item>Item 3</Menu.Item>
@@ -64,9 +60,7 @@ export function FormTab() {
 export function Unstyled() {
   return (
     <Menu unstyled>
-      <Menu.Target>
-        {(props) => <Button {...props}>Toggle menu</Button>}
-      </Menu.Target>
+      <Menu.Target>{(props) => <Button {...props}>Toggle menu</Button>}</Menu.Target>
 
       <Menu.Dropdown>
         <Menu.Item disabled>Disabled</Menu.Item>
@@ -80,9 +74,7 @@ export function Unstyled() {
 export function KeepMounted() {
   return (
     <Menu keepMounted>
-      <Menu.Target>
-        {(props) => <Button {...props}>Toggle menu</Button>}
-      </Menu.Target>
+      <Menu.Target>{(props) => <Button {...props}>Toggle menu</Button>}</Menu.Target>
 
       <Menu.Dropdown>
         <Menu.Item disabled>Disabled</Menu.Item>
@@ -96,10 +88,8 @@ export function KeepMounted() {
 export function Usage() {
   return (
     <div style={{ padding: '40px', display: 'flex', 'justify-content': 'center' }}>
-      <Menu width='200px' shadow="md">
-        <Menu.Target>
-          {(props) => <Button {...props}>Toggle menu</Button>}
-        </Menu.Target>
+      <Menu width="200px" shadow="md">
+        <Menu.Target>{(props) => <Button {...props}>Toggle menu</Button>}</Menu.Target>
 
         <Menu.Dropdown>
           <Menu.Label>Label 1</Menu.Label>
@@ -154,7 +144,9 @@ export function MenuTargetWithTooltip() {
           <Menu.Target>
             <Tooltip label="Tooltip last">
               {(props) => (
-                <Button ml="xl" {...props}>Tooltip last</Button>
+                <Button ml="xl" {...props}>
+                  Tooltip last
+                </Button>
               )}
             </Tooltip>
           </Menu.Target>
@@ -174,9 +166,7 @@ export function Controlled() {
   return (
     <div style={{ padding: '100px' }}>
       <Menu opened={opened()} onChange={setOpened}>
-        <Menu.Target>
-          {(props) => <Button {...props}>Toggle controlled menu</Button>}
-        </Menu.Target>
+        <Menu.Target>{(props) => <Button {...props}>Toggle controlled menu</Button>}</Menu.Target>
         <Menu.Dropdown>
           <Menu.Item>Item 1</Menu.Item>
           <Menu.Item>Item 2</Menu.Item>
@@ -210,9 +200,7 @@ export function WithKeepMounted() {
       <Menu keepMounted>
         {/* Menu without keepMounted will let you 'TAB' through form-fields */}
         {/* <Menu> */}
-        <Menu.Target>
-          {(props) => <Button {...props}>Hey</Button>}
-        </Menu.Target>
+        <Menu.Target>{(props) => <Button {...props}>Hey</Button>}</Menu.Target>
         <Menu.Dropdown>
           <Menu.Item>Baby</Menu.Item>
           <Menu.Item>Girl</Menu.Item>
@@ -229,10 +217,8 @@ export function WithKeepMounted() {
 export function WithSubMenu() {
   return (
     <div style={{ padding: '400px' }}>
-      <Menu width='200px' position="bottom-start">
-        <Menu.Target>
-          {(props) => <Button {...props}>Toggle menu</Button>}
-        </Menu.Target>
+      <Menu width="200px" position="bottom-start">
+        <Menu.Target>{(props) => <Button {...props}>Toggle menu</Button>}</Menu.Target>
         <Menu.Dropdown>
           <Menu.Item>Item 1</Menu.Item>
           <Menu.Item>Item 2</Menu.Item>

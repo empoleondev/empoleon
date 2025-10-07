@@ -34,14 +34,41 @@ export interface GetStyleInput {
 
 export function getStyle(_props: GetStyleInput): JSX.CSSProperties {
   return {
-    ...(!_props.withStylesTransform && getThemeStyles({ theme: _props.theme, themeName: _props.themeName, props: _props.props, stylesCtx: _props.stylesCtx, selector: _props.selector })),
-    ...(!_props.withStylesTransform && resolveStyles({ theme: _props.theme, styles: _props.styles, props: _props.props, stylesCtx: _props.stylesCtx })[_props.selector]),
     ...(!_props.withStylesTransform &&
-      resolveStyles({ theme: _props.theme, styles: _props.options?.styles, props: _props.options?.props || _props.props, stylesCtx: _props.stylesCtx })[
-        _props.selector
-      ]),
-    ...resolveVars({ theme: _props.theme, props: _props.props, stylesCtx: _props.stylesCtx, vars: _props.vars, varsResolver: _props.varsResolver, selector: _props.selector, themeName: _props.themeName, headless: _props.headless }),
-    ...(_props.rootSelector === _props.selector ? resolveStyle({ style: _props.style, theme: _props.theme }) : null),
+      getThemeStyles({
+        theme: _props.theme,
+        themeName: _props.themeName,
+        props: _props.props,
+        stylesCtx: _props.stylesCtx,
+        selector: _props.selector,
+      })),
+    ...(!_props.withStylesTransform &&
+      resolveStyles({
+        theme: _props.theme,
+        styles: _props.styles,
+        props: _props.props,
+        stylesCtx: _props.stylesCtx,
+      })[_props.selector]),
+    ...(!_props.withStylesTransform &&
+      resolveStyles({
+        theme: _props.theme,
+        styles: _props.options?.styles,
+        props: _props.options?.props || _props.props,
+        stylesCtx: _props.stylesCtx,
+      })[_props.selector]),
+    ...resolveVars({
+      theme: _props.theme,
+      props: _props.props,
+      stylesCtx: _props.stylesCtx,
+      vars: _props.vars,
+      varsResolver: _props.varsResolver,
+      selector: _props.selector,
+      themeName: _props.themeName,
+      headless: _props.headless,
+    }),
+    ...(_props.rootSelector === _props.selector
+      ? resolveStyle({ style: _props.style, theme: _props.theme })
+      : null),
     ...resolveStyle({ style: _props.options?.style, theme: _props.theme }),
   };
 }

@@ -52,8 +52,8 @@ describe('@empoleon/core/PinInput', () => {
     fireEvent.focus(firstInput);
     fireEvent.paste(firstInput, {
       clipboardData: {
-        getData: () => '1111'
-      }
+        getData: () => '1111',
+      },
     });
 
     expect(spy).toHaveBeenCalledWith('1111');
@@ -77,7 +77,7 @@ describe('@empoleon/core/PinInput', () => {
         const event = new Event('input', { bubbles: true });
         Object.defineProperty(event, 'currentTarget', {
           writable: false,
-          value: { value: key.toString() }
+          value: { value: key.toString() },
         });
         input.$$input(event);
       }
@@ -96,11 +96,11 @@ describe('@empoleon/core/PinInput', () => {
       const event = new KeyboardEvent('keydown', {
         key: 'Backspace',
         bubbles: true,
-        cancelable: true
+        cancelable: true,
       });
       Object.defineProperty(event, 'target', {
         writable: false,
-        value: lastInput
+        value: lastInput,
       });
       lastInputEl.$$keydown(event);
     }
@@ -123,7 +123,7 @@ describe('@empoleon/core/PinInput', () => {
         const event = new Event('input', { bubbles: true });
         Object.defineProperty(event, 'currentTarget', {
           writable: false,
-          value: { value: key.toString() }
+          value: { value: key.toString() },
         });
         input.$$input(event);
       }
@@ -140,7 +140,11 @@ describe('@empoleon/core/PinInput', () => {
     // Backspace on input 3 -> move to input 2
     let currentInputEl = fourthInput as any;
     if (currentInputEl.$$keydown) {
-      const event = new KeyboardEvent('keydown', { key: 'Backspace', bubbles: true, cancelable: true });
+      const event = new KeyboardEvent('keydown', {
+        key: 'Backspace',
+        bubbles: true,
+        cancelable: true,
+      });
       Object.defineProperty(event, 'target', { writable: false, value: fourthInput });
       currentInputEl.$$keydown(event);
     }
@@ -151,7 +155,11 @@ describe('@empoleon/core/PinInput', () => {
     // Backspace on input 2 -> move to input 1
     currentInputEl = inputs[2] as any;
     if (currentInputEl.$$keydown) {
-      const event = new KeyboardEvent('keydown', { key: 'Backspace', bubbles: true, cancelable: true });
+      const event = new KeyboardEvent('keydown', {
+        key: 'Backspace',
+        bubbles: true,
+        cancelable: true,
+      });
       Object.defineProperty(event, 'target', { writable: false, value: inputs[2] });
       currentInputEl.$$keydown(event);
     }
@@ -162,7 +170,11 @@ describe('@empoleon/core/PinInput', () => {
     // Backspace on input 1 -> move to input 0
     currentInputEl = inputs[1] as any;
     if (currentInputEl.$$keydown) {
-      const event = new KeyboardEvent('keydown', { key: 'Backspace', bubbles: true, cancelable: true });
+      const event = new KeyboardEvent('keydown', {
+        key: 'Backspace',
+        bubbles: true,
+        cancelable: true,
+      });
       Object.defineProperty(event, 'target', { writable: false, value: inputs[1] });
       currentInputEl.$$keydown(event);
     }
@@ -176,7 +188,11 @@ describe('@empoleon/core/PinInput', () => {
     // Backspace on input 0 -> stay on input 0
     currentInputEl = inputs[0] as any;
     if (currentInputEl.$$keydown) {
-      const event = new KeyboardEvent('keydown', { key: 'Backspace', bubbles: true, cancelable: true });
+      const event = new KeyboardEvent('keydown', {
+        key: 'Backspace',
+        bubbles: true,
+        cancelable: true,
+      });
       Object.defineProperty(event, 'target', { writable: false, value: inputs[0] });
       currentInputEl.$$keydown(event);
     }

@@ -1,5 +1,5 @@
-import { JSX, splitProps } from 'solid-js';
 import dayjs from 'dayjs';
+import { JSX, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
@@ -53,7 +53,7 @@ const defaultProps = {
   yearLabelFormat: 'YYYY',
 } satisfies Partial<YearLevelProps>;
 
-export const YearLevel = factory<YearLevelFactory>(_props => {
+export const YearLevel = factory<YearLevelFactory>((_props) => {
   const props = useProps('YearLevel', defaultProps, _props);
   const [local, others] = splitProps(props, [
     // MonthsList settings
@@ -95,7 +95,7 @@ export const YearLevel = factory<YearLevelFactory>(_props => {
     'styles',
     'unstyled',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const ctx = useDatesContext();

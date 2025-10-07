@@ -3,7 +3,7 @@ import { JSX } from 'solid-js';
 import type { NotificationsProps } from './Notifications';
 
 interface NotificationStateStylesProps {
-  state: any; /*TransitionStatus;*/
+  state: any /*TransitionStatus;*/;
   maxHeight: number | string;
   position: NotificationsProps['position'];
   transitionDuration: number;
@@ -39,7 +39,8 @@ export function getNotificationStateStyles({
     'max-height': `${maxHeight}px`,
     transform: transforms[property],
     'transition-duration': `${transitionDuration}ms, ${transitionDuration}ms, ${transitionDuration}ms`,
-    'transition-timing-function': 'cubic-bezier(.51,.3,0,1.21), cubic-bezier(.51,.3,0,1.21), linear',
+    'transition-timing-function':
+      'cubic-bezier(.51,.3,0,1.21), cubic-bezier(.51,.3,0,1.21), linear',
     'transition-property': 'opacity, transform, max-height',
   };
 

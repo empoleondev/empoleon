@@ -18,7 +18,11 @@ function Demo() {
   return (
     <>
       <Tooltip target="#hover-me" label="Tooltip over button">
-        {(props) => <Button {...props}  id="hover-me">Hover me to see tooltip</Button>}
+        {(props) => (
+          <Button {...props} id="hover-me">
+            Hover me to see tooltip
+          </Button>
+        )}
       </Tooltip>
     </>
   );

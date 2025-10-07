@@ -1,14 +1,14 @@
-import { splitProps, JSX } from 'solid-js';
+import { JSX, splitProps } from 'solid-js';
 import { clamp } from '@empoleon/hooks';
 import {
   Box,
   BoxProps,
   createVarsResolver,
   ElementProps,
+  EmpoleonColor,
   factory,
   Factory,
   getThemeColor,
-  EmpoleonColor,
   rem,
   StylesApiProps,
   useProps,
@@ -96,23 +96,26 @@ function getRotation(props: Pick<SemiCircleProgressProps, 'orientation' | 'fillD
   return undefined;
 }
 
-const varsResolver = createVarsResolver<SemiCircleProgressFactory>(
-  (theme, props) => ({
-    root: {
-      '--scp-filled-segment-color': props.filledSegmentColor
-        ? getThemeColor(props.filledSegmentColor, theme)
-        : undefined,
-      '--scp-empty-segment-color': props.emptySegmentColor
-        ? getThemeColor(props.emptySegmentColor, theme)
-        : undefined,
-      '--scp-rotation': getRotation({ orientation: props.orientation, fillDirection: props.fillDirection }),
-      '--scp-transition-duration': props.transitionDuration ? `${props.transitionDuration}ms` : undefined,
-      '--scp-thickness': rem(props.thickness),
-    },
-  })
-);
+const varsResolver = createVarsResolver<SemiCircleProgressFactory>((theme, props) => ({
+  root: {
+    '--scp-filled-segment-color': props.filledSegmentColor
+      ? getThemeColor(props.filledSegmentColor, theme)
+      : undefined,
+    '--scp-empty-segment-color': props.emptySegmentColor
+      ? getThemeColor(props.emptySegmentColor, theme)
+      : undefined,
+    '--scp-rotation': getRotation({
+      orientation: props.orientation,
+      fillDirection: props.fillDirection,
+    }),
+    '--scp-transition-duration': props.transitionDuration
+      ? `${props.transitionDuration}ms`
+      : undefined,
+    '--scp-thickness': rem(props.thickness),
+  },
+}));
 
-export const SemiCircleProgress = factory<SemiCircleProgressFactory>(_props => {
+export const SemiCircleProgress = factory<SemiCircleProgressFactory>((_props) => {
   const props = useProps('SemiCircleProgress', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -132,7 +135,7 @@ export const SemiCircleProgress = factory<SemiCircleProgressFactory>(_props => {
     'label',
     'labelPosition',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<SemiCircleProgressFactory>({
@@ -150,20 +153,26 @@ export const SemiCircleProgress = factory<SemiCircleProgressFactory>(_props => {
   });
 
   const coordinateForCircle = () => local.size! / 2;
-  const radius = () => ((local.size! - 2 * local.thickness!) / 2);
+  const radius = () => (local.size! - 2 * local.thickness!) / 2;
   const circumference = () => Math.PI * radius();
   const semiCirclePercentage = () => clamp(local.value, 0, 100) * (circumference() / 100);
 
   return (
     <Box ref={local.ref} size={local.size} {...getStyles('root')} {...others}>
       {local.label && (
-        <Box component='p' {...getStyles('label')} data-position={local.labelPosition} data-orientation={local.orientation}>
+        <Box
+          component="p"
+          {...getStyles('label')}
+          data-position={local.labelPosition}
+          data-orientation={local.orientation}
+        >
           {local.label}
         </Box>
       )}
 
-      <Box component='svg' width={local.size} height={local.size! / 2} {...getStyles('svg')}>
-        <Box component='circle'
+      <Box component="svg" width={local.size} height={local.size! / 2} {...getStyles('svg')}>
+        <Box
+          component="circle"
           cx={coordinateForCircle()}
           cy={coordinateForCircle()}
           r={radius()}
@@ -174,7 +183,8 @@ export const SemiCircleProgress = factory<SemiCircleProgressFactory>(_props => {
           {...getStyles('emptySegment', { style: { 'stroke-dashoffset': `${circumference()}` } })}
         />
 
-        <Box component='circle'
+        <Box
+          component="circle"
           cx={coordinateForCircle()}
           cy={coordinateForCircle()}
           r={radius()}
@@ -182,7 +192,9 @@ export const SemiCircleProgress = factory<SemiCircleProgressFactory>(_props => {
           stroke="var(--scp-filled-segment-color)"
           stroke-width={local.thickness}
           stroke-dasharray={`${circumference()}`}
-          {...getStyles('filledSegment', { style: { 'stroke-dashoffset': `${semiCirclePercentage()}` } })}
+          {...getStyles('filledSegment', {
+            style: { 'stroke-dashoffset': `${semiCirclePercentage()}` },
+          })}
         />
       </Box>
     </Box>

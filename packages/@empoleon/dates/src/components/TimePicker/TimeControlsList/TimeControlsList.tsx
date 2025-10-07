@@ -1,7 +1,7 @@
+import { createEffect, createSignal, For } from 'solid-js';
 import { ScrollArea } from '@empoleon/core';
 import { useTimePickerContext } from '../TimePicker.context';
 import { TimeControl } from './TimeControl';
-import { createEffect, createSignal, For } from 'solid-js';
 
 function isElementVisibleInScrollContainer(
   element: HTMLElement | null | undefined,
@@ -70,7 +70,7 @@ export function TimeControlsList(props: TimeControlsListProps) {
               onSelect={props.onSelect}
             />
           )}
-     </For>
+        </For>
       </div>
     </ScrollArea>
   );

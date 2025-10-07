@@ -1,9 +1,9 @@
 import { IconBadge } from '@tabler/icons-solidjs';
+import { JSX } from 'solid-js';
 import { Box, EmpoleonProvider } from '../../core';
 import { Group } from '../Group';
 import { Stack } from '../Stack';
 import { Switch } from './Switch';
-import { JSX } from 'solid-js';
 
 export default {
   title: 'Switch',
@@ -18,7 +18,7 @@ export default {
 
 export function WithinDisabledFieldset() {
   return (
-    <fieldset disabled style={{ 'padding': '40px' }}>
+    <fieldset disabled style={{ padding: '40px' }}>
       <legend>Disabled fieldset</legend>
       <Switch label="Disabled by fieldset" />
       <Switch label="Disabled by prop" disabled mt="md" />
@@ -28,7 +28,7 @@ export function WithinDisabledFieldset() {
 
 export function Usage() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Switch label="Default Switch" default-checked />
     </div>
   );
@@ -36,7 +36,7 @@ export function Usage() {
 
 export function Sizes() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Switch size="xs" label="xs" variant="test" />
       <Switch size="sm" label="sm" />
       <Switch size="md" label="md" />
@@ -48,7 +48,7 @@ export function Sizes() {
 
 export function Unstyled() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Switch label="Unstyled" unstyled />
     </div>
   );
@@ -87,7 +87,7 @@ export function SwitchGroup() {
 
 export function labelPosition() {
   return (
-    <Stack style={{ 'width': '300px', 'padding': '20px' }}>
+    <Stack style={{ width: '300px', padding: '20px' }}>
       <Switch labelPosition="left" label="Hello from left" value="1" />
       <Switch labelPosition="right" label="Hello from right" value="1" />
     </Stack>
@@ -96,7 +96,7 @@ export function labelPosition() {
 
 export function WithDescription() {
   return (
-    <Stack style={{ 'width': '300px', 'padding': '20px' }}>
+    <Stack style={{ width: '300px', padding: '20px' }}>
       <Switch
         description="This is left Checkbox, pretty big descriptions, make it more big"
         labelPosition="left"
@@ -115,7 +115,7 @@ export function WithDescription() {
 
 export function WithError() {
   return (
-    <Stack style={{ 'width': '300px', 'padding': '20px' }}>
+    <Stack style={{ width: '300px', padding: '20px' }}>
       <Switch label="Error without message" value="1" error />
       <Switch
         error="This is another error"

@@ -74,21 +74,21 @@ describe('@empoleon/core/NumberInput', () => {
     ));
 
     // Wait a tick for the ref to be set
-    await new Promise(resolve => setTimeout(resolve, 0));
+    await new Promise((resolve) => setTimeout(resolve, 0));
 
     expect(typeof handlersRef?.decrement).toBe('function');
     expect(typeof handlersRef?.increment).toBe('function');
 
     handlersRef?.increment();
-    await new Promise(resolve => setTimeout(resolve, 0));
+    await new Promise((resolve) => setTimeout(resolve, 0));
     expect(spy).toHaveBeenLastCalledWith(0);
 
     handlersRef?.increment();
-    await new Promise(resolve => setTimeout(resolve, 0));
+    await new Promise((resolve) => setTimeout(resolve, 0));
     expect(spy).toHaveBeenLastCalledWith(2);
 
     handlersRef?.decrement();
-    await new Promise(resolve => setTimeout(resolve, 0));
+    await new Promise((resolve) => setTimeout(resolve, 0));
     expect(spy).toHaveBeenLastCalledWith(0);
   });
 
@@ -201,7 +201,9 @@ describe('@empoleon/core/NumberInput', () => {
 
   it('does not allow negative numbers if the allowNegative prop is false', async () => {
     const spy = vi.fn();
-    const { container } = render(() => <NumberInput onChange={spy} value={0} allowNegative={false} />);
+    const { container } = render(() => (
+      <NumberInput onChange={spy} value={0} allowNegative={false} />
+    ));
 
     await clickDecrement(container);
 

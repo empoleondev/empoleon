@@ -14,8 +14,8 @@ function Demo() {
 `;
 
 function Demo(props: any) {
-  const at = <IconAt size={16} stroke='1.5' />;
-  const chevron = <IconChevronDown size={16} stroke='1.5' />;
+  const at = <IconAt size={16} stroke="1.5" />;
+  const chevron = <IconChevronDown size={16} stroke="1.5" />;
   return <Input placeholder="Input component" leftSection={at} rightSection={chevron} {...props} />;
 }
 

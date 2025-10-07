@@ -19,7 +19,7 @@ function Demo() {
 
 function Demo() {
   return (
-    <Carousel orientation="vertical" height='200px' withIndicators>
+    <Carousel orientation="vertical" height="200px" withIndicators>
       <Slides count={5} />
     </Carousel>
   );

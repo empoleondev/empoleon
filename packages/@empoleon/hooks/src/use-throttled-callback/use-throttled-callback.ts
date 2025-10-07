@@ -1,5 +1,5 @@
 import { createEffect, createMemo } from 'solid-js';
-import { useCallbackRef } from "../use-callback-ref/use-callback-ref";
+import { useCallbackRef } from '../use-callback-ref/use-callback-ref';
 
 export function useThrottledCallbackWithClearTimeout<T extends (...args: any[]) => any>(
   callback: T,
@@ -14,14 +14,12 @@ export function useThrottledCallbackWithClearTimeout<T extends (...args: any[]) 
 
   const clearTimeout = () => window.clearTimeout(timeoutRef);
 
-  const callThrottledCallback = createMemo(() =>
-    (...args: Parameters<T>) => {
-      handleCallback(...(args as any));
-      latestInArgsRef = args;
-      latestOutArgsRef = args;
-      active = false;
-    }
-  );
+  const callThrottledCallback = createMemo(() => (...args: Parameters<T>) => {
+    handleCallback(...(args as any));
+    latestInArgsRef = args;
+    latestOutArgsRef = args;
+    active = false;
+  });
 
   const timerCallback = createMemo(() => () => {
     if (latestInArgsRef && latestInArgsRef !== latestOutArgsRef) {
@@ -33,16 +31,14 @@ export function useThrottledCallbackWithClearTimeout<T extends (...args: any[]) 
     }
   });
 
-  const throttled = createMemo(() =>
-    (...args: Parameters<T>) => {
-      if (active) {
-        callThrottledCallback().apply(null, args);
-        timeoutRef = window.setTimeout(timerCallback(), waitRef);
-      } else {
-        latestInArgsRef = args;
-      }
+  const throttled = createMemo(() => (...args: Parameters<T>) => {
+    if (active) {
+      callThrottledCallback().apply(null, args);
+      timeoutRef = window.setTimeout(timerCallback(), waitRef);
+    } else {
+      latestInArgsRef = args;
     }
-  );
+  });
 
   createEffect(() => {
     waitRef = wait;

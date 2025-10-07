@@ -10,17 +10,12 @@ interface UseFocusReturnParams {
  * Internally, it tracks `opened` going from true→false (after the first “mount”)
  * and, if `shouldReturnFocus` is true, schedules focus return.
  */
-export function useFocusReturn(
-  params: UseFocusReturnParams
-): () => void {
+export function useFocusReturn(params: UseFocusReturnParams): () => void {
   let lastActiveElement: HTMLElement | null = null;
   let isFirstRun = true;
 
   const returnFocus = () => {
-    if (
-      lastActiveElement &&
-      typeof lastActiveElement.focus === 'function'
-    ) {
+    if (lastActiveElement && typeof lastActiveElement.focus === 'function') {
       lastActiveElement.focus({ preventScroll: true });
     }
   };
@@ -28,9 +23,7 @@ export function useFocusReturn(
   createEffect(() => {
     const opened = params.opened();
     const shouldReturn =
-      typeof params.shouldReturnFocus === 'function'
-        ? params.shouldReturnFocus()
-        : true;
+      typeof params.shouldReturnFocus === 'function' ? params.shouldReturnFocus() : true;
 
     // Skip on initial mount
     if (isFirstRun) {

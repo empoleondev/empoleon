@@ -1,8 +1,7 @@
+import { createSignal, JSX } from 'solid-js';
+import { EmpoleonProvider } from '../../core';
 import { Button } from '../Button';
 import { Autocomplete } from './Autocomplete';
-import { JSX } from 'solid-js';
-import { EmpoleonProvider } from '../../core';
-import { createSignal } from 'solid-js';
 
 export default {
   title: 'Autocomplete',
@@ -39,9 +38,9 @@ const options = [
 
 export function Usage() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Autocomplete
-      defaultDropdownOpened
+        defaultDropdownOpened
         data={[
           'React',
           'Angular',
@@ -62,7 +61,7 @@ export function Usage() {
 
 export function WithinForm() {
   return (
-    <div style={{ 'padding': '40px', 'max-width': '400px' }}>
+    <div style={{ padding: '40px', 'max-width': '400px' }}>
       <form
         onSubmit={(event) => {
           event.preventDefault();
@@ -77,7 +76,7 @@ export function WithinForm() {
 
 export function Unstyled() {
   return (
-    <div style={{ 'padding': '40px', 'max-width': '400px' }}>
+    <div style={{ padding: '40px', 'max-width': '400px' }}>
       <Autocomplete
         label="Test"
         placeholder="Test autocomplete"
@@ -92,7 +91,7 @@ export function Unstyled() {
 export function Controlled() {
   const [value, setValue] = createSignal<string>('React');
   return (
-    <div style={{ 'padding': '40px', 'max-width': '400px' }}>
+    <div style={{ padding: '40px', 'max-width': '400px' }}>
       <Autocomplete
         value={value()}
         onChange={setValue}
@@ -108,7 +107,7 @@ export function Controlled() {
 
 export function EmptyData() {
   return (
-    <div style={{ 'padding': '40px', 'max-width': '400px' }}>
+    <div style={{ padding: '40px', 'max-width': '400px' }}>
       <Autocomplete label="Test" placeholder="Test autocomplete" data={[]} dropdownOpened />
     </div>
   );
@@ -116,7 +115,7 @@ export function EmptyData() {
 
 export function StylesBasedOnProps() {
   return (
-    <div style={{ 'padding': '40px', 'max-width': '400px' }}>
+    <div style={{ padding: '40px', 'max-width': '400px' }}>
       <Autocomplete
         label="Test"
         placeholder="Test autocomplete"
@@ -135,7 +134,7 @@ export function StylesBasedOnProps() {
 
 export function OptionWithOverflow() {
   return (
-    <div style={{ 'padding': '40px', 'max-width': '400px' }}>
+    <div style={{ padding: '40px', 'max-width': '400px' }}>
       <Autocomplete
         label="Test"
         placeholder="Test autocomplete"
@@ -151,7 +150,7 @@ export function OptionWithOverflow() {
 
 export function WithoutScrollArea() {
   return (
-    <div style={{ 'padding': '40px', 'max-width': '400px' }}>
+    <div style={{ padding: '40px', 'max-width': '400px' }}>
       <Autocomplete
         label="Test"
         placeholder="Test autocomplete"
@@ -164,7 +163,7 @@ export function WithoutScrollArea() {
 
 export function CustomMaxHeight() {
   return (
-    <div style={{ 'padding': '40px', 'max-width': '400px' }}>
+    <div style={{ padding: '40px', 'max-width': '400px' }}>
       <Autocomplete
         label="Test"
         placeholder="Test autocomplete"
@@ -177,7 +176,7 @@ export function CustomMaxHeight() {
 
 export function ReadOnly() {
   return (
-    <div style={{ 'padding': '40px', 'max-width': '400px' }}>
+    <div style={{ padding: '40px', 'max-width': '400px' }}>
       <Autocomplete
         label="Test"
         placeholder="React only autocomplete"
@@ -190,7 +189,7 @@ export function ReadOnly() {
 
 export function Disabled() {
   return (
-    <div style={{ 'padding': '40px', 'max-width': '400px' }}>
+    <div style={{ padding: '40px', 'max-width': '400px' }}>
       <Autocomplete
         label="Test"
         placeholder="Disabled autocomplete"

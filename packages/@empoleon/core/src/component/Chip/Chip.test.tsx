@@ -43,7 +43,7 @@ describe('@empoleon/core/Chip', () => {
 
   it('supports rootRef', () => {
     let ref;
-    render(() => <Chip {...defaultProps} rootRef={(el) => ref = el} />);
+    render(() => <Chip {...defaultProps} rootRef={(el) => (ref = el)} />);
     expect(ref).toBeInstanceOf(HTMLDivElement);
   });
 });

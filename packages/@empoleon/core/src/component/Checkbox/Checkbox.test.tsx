@@ -59,37 +59,37 @@ describe('@empoleon/core/Checkbox', () => {
   });
 
   it('sets data-checked attribute on the root element if checkbox is checked within Checkbox.Group', () => {
-    const { container, rerender } = render(
-      () => <Checkbox.Group value={[]}>
+    const { container, rerender } = render(() => (
+      <Checkbox.Group value={[]}>
         <Checkbox value="test-value" />
       </Checkbox.Group>
-    );
+    ));
 
     expect(container.querySelector('.empoleon-Checkbox-root')).not.toHaveAttribute('data-checked');
 
-    rerender(
-      () => <Checkbox.Group value={['test-value']}>
+    rerender(() => (
+      <Checkbox.Group value={['test-value']}>
         <Checkbox value="test-value" />
       </Checkbox.Group>
-    );
+    ));
 
     expect(container.querySelector('.empoleon-Checkbox-root')).toHaveAttribute('data-checked');
   });
 
   it('sets checked attribute on input if checkbox is checked within Checkbox.Group', () => {
-    const { rerender } = render(
-      () => <Checkbox.Group value={[]}>
+    const { rerender } = render(() => (
+      <Checkbox.Group value={[]}>
         <Checkbox value="test-value" />
       </Checkbox.Group>
-    );
+    ));
 
     expect(screen.getByRole('checkbox')).not.toBeChecked();
 
-    rerender(
-      () => <Checkbox.Group value={['test-value']}>
+    rerender(() => (
+      <Checkbox.Group value={['test-value']}>
         <Checkbox value="test-value" />
       </Checkbox.Group>
-    );
+    ));
 
     expect(screen.getByRole('checkbox')).toBeChecked();
   });
@@ -129,7 +129,7 @@ describe('@empoleon/core/Checkbox', () => {
 
   it('supports rootRef', () => {
     let ref;
-    render(() => <Checkbox {...defaultProps} rootRef={(el) => ref = el} />);
+    render(() => <Checkbox {...defaultProps} rootRef={(el) => (ref = el)} />);
     expect(ref).toBeInstanceOf(HTMLDivElement);
   });
 });

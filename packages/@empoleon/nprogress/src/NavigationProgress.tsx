@@ -1,8 +1,8 @@
 import { createEffect, JSX, mergeProps, splitProps } from 'solid-js';
 import {
   ElementProps,
-  getDefaultZIndex,
   EmpoleonColor,
+  getDefaultZIndex,
   OptionalPortal,
   PortalProps,
   Progress,
@@ -42,14 +42,17 @@ export interface NavigationProgressProps extends ElementProps<'div'> {
 }
 
 export function NavigationProgress(_props: NavigationProgressProps) {
-  const props = mergeProps({
-    initialProgress: 0,
-    size: 3,
-    stepInterval: 500,
-    withinPortal: true,
-    zIndex: getDefaultZIndex('max'),
-    store: nprogressStore,
-  }, _props);
+  const props = mergeProps(
+    {
+      initialProgress: 0,
+      size: 3,
+      stepInterval: 500,
+      withinPortal: true,
+      zIndex: getDefaultZIndex('max'),
+      store: nprogressStore,
+    },
+    _props
+  );
 
   const [local, others] = splitProps(props, [
     'initialProgress',

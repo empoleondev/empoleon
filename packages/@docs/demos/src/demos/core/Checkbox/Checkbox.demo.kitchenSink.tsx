@@ -34,19 +34,19 @@ export const kitchenSink: EmpoleonDemo = {
       prop: 'color',
       type: 'color',
       initialValue: 'blue',
-      libraryValue: 'blue'
+      libraryValue: 'blue',
     },
     {
       prop: 'size',
       type: 'size',
       initialValue: 'sm',
-      libraryValue: 'sm'
+      libraryValue: 'sm',
     },
     {
       prop: 'radius',
       type: 'size',
       initialValue: 'sm',
-      libraryValue: 'sm'
+      libraryValue: 'sm',
     },
     {
       prop: 'labelPosition',
@@ -62,37 +62,37 @@ export const kitchenSink: EmpoleonDemo = {
       prop: 'label',
       type: 'string',
       initialValue: 'I agree to sell my privacy',
-      libraryValue: ''
+      libraryValue: '',
     },
     {
       prop: 'description',
       type: 'string',
       initialValue: '',
-      libraryValue: ''
+      libraryValue: '',
     },
     {
       prop: 'error',
       type: 'string',
       initialValue: '',
-      libraryValue: ''
+      libraryValue: '',
     },
     {
       prop: 'disabled',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'indeterminate',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'autoContrast',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
   ],
 };

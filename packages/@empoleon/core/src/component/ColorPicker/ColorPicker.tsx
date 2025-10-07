@@ -1,14 +1,15 @@
+import { createEffect, createSignal, splitProps } from 'solid-js';
 import { useUncontrolled } from '@empoleon/hooks';
 import {
   Box,
   BoxProps,
   createVarsResolver,
   ElementProps,
+  EmpoleonSize,
   factory,
   Factory,
   getSize,
   getSpacing,
-  EmpoleonSize,
   StylesApiProps,
   useProps,
   useStyles,
@@ -22,7 +23,6 @@ import { HueSlider } from './HueSlider/HueSlider';
 import { Saturation } from './Saturation/Saturation';
 import { Swatches } from './Swatches/Swatches';
 import classes from './ColorPicker.module.css';
-import { createEffect, createSignal, splitProps } from 'solid-js';
 
 export type ColorPickerStylesNames =
   | 'wrapper'
@@ -130,7 +130,7 @@ const varsResolver = createVarsResolver<ColorPickerFactory>((_, props) => ({
   },
 }));
 
-export const ColorPicker = factory<ColorPickerFactory>(_props => {
+export const ColorPicker = factory<ColorPickerFactory>((_props) => {
   const props = useProps('ColorPicker', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -157,7 +157,7 @@ export const ColorPicker = factory<ColorPickerFactory>(_props => {
     '__staticSelector',
     'mod',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<ColorPickerFactory>({
@@ -178,7 +178,8 @@ export const ColorPicker = factory<ColorPickerFactory>(_props => {
   let valueRef: string = '';
   let scrubTimeoutRef: number = -1;
   const [isScrubbingRef, setScrubbingRef] = createSignal(false);
-  const withAlpha = () => local.format === 'hexa' || local.format === 'rgba' || local.format === 'hsla';
+  const withAlpha = () =>
+    local.format === 'hexa' || local.format === 'rgba' || local.format === 'hsla';
 
   const [_value, setValue, controlled] = useUncontrolled({
     value: () => local.value,
@@ -247,8 +248,8 @@ export const ColorPicker = factory<ColorPickerFactory>(_props => {
               onScrubEnd={stopScrubbing}
             />
 
-            <Box component='div' {...getStyles('body')}>
-              <Box component='div' {...getStyles('sliders')}>
+            <Box component="div" {...getStyles('body')}>
+              <Box component="div" {...getStyles('sliders')}>
                 <HueSlider
                   value={parsed().h}
                   onChange={(h) => handleChange({ h })}

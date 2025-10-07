@@ -1,5 +1,5 @@
-import { EmpoleonDemo } from '@empoleonx/demo';
 import { Component, createSignal } from 'solid-js';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const getCode = (name: string) => `
 import { createSignal } from 'solid-js';

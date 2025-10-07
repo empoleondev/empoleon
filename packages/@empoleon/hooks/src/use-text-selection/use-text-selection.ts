@@ -19,7 +19,7 @@
 //   return selection;
 // }
 
-import { createSignal, onMount, onCleanup } from 'solid-js';
+import { createSignal, onCleanup, onMount } from 'solid-js';
 
 export function useTextSelection(): () => string {
   const [selection, setSelection] = createSignal<string>('');

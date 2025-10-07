@@ -1,13 +1,13 @@
-import { JSX, splitProps } from 'solid-js';
 import dayjs from 'dayjs';
+import { JSX, splitProps } from 'solid-js';
 import {
   BoxProps,
   createVarsResolver,
   ElementProps,
+  EmpoleonSize,
   factory,
   Factory,
   getSize,
-  EmpoleonSize,
   StylesApiProps,
   UnstyledButton,
   useProps,
@@ -78,7 +78,7 @@ const varsResolver = createVarsResolver<DayFactory>((_, props) => ({
   },
 }));
 
-export const Day = factory<DayFactory>(_props => {
+export const Day = factory<DayFactory>((_props) => {
   const props = useProps('Day', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -101,7 +101,7 @@ export const Day = factory<DayFactory>(_props => {
     'static',
     'highlightToday',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<DayFactory>({

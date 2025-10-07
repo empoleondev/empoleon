@@ -1,6 +1,6 @@
-import { Box, Text, TextProps, rgba } from '@empoleon/core';
-import { EmpoleonDemo } from '@empoleonx/demo';
 import { createEffect } from 'solid-js';
+import { Box, rgba, Text, TextProps } from '@empoleon/core';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 function Demo(props: TextProps & { c?: string; color2?: string; gradientType?: boolean }) {
   const textProps = () => {
@@ -13,7 +13,7 @@ function Demo(props: TextProps & { c?: string; color2?: string; gradientType?: b
       const baseProps = {
         ...rest,
         variant: 'gradient',
-        gradient: { from: color1, to: color2Converted, deg: 90 }
+        gradient: { from: color1, to: color2Converted, deg: 90 },
       };
 
       return baseProps;

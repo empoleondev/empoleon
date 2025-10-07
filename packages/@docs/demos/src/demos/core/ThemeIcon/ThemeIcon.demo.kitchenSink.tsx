@@ -1,6 +1,6 @@
-import { ThemeIcon, ThemeIconProps, rgba } from '@empoleon/core';
+import { IconEdit, IconHeart, IconPhoto, IconStar, IconTrash } from '@tabler/icons-solidjs';
+import { rgba, ThemeIcon, ThemeIconProps } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { IconPhoto, IconHeart, IconTrash, IconEdit, IconStar } from '@tabler/icons-solidjs';
 
 const code = `
 import { ThemeIcon } from '@empoleon/core';
@@ -15,15 +15,17 @@ function Demo() {
 }
 `;
 
-function Demo(props: ThemeIconProps & {
-  iconType?: string;
-  iconSize?: number;
-  gradientType?: boolean;
-  color2?: string;
-}) {
+function Demo(
+  props: ThemeIconProps & {
+    iconType?: string;
+    iconSize?: number;
+    gradientType?: boolean;
+    color2?: string;
+  }
+) {
   const getIcon = () => {
     const iconProps = {
-      style: { width: `${props.iconSize || 70}%`, height: `${props.iconSize || 70}%` }
+      style: { width: `${props.iconSize || 70}%`, height: `${props.iconSize || 70}%` },
     };
 
     switch (props.iconType) {
@@ -50,7 +52,7 @@ function Demo(props: ThemeIconProps & {
       return {
         ...rest,
         variant: 'gradient',
-        gradient: { from: color1, to: color2Converted, deg: 90 }
+        gradient: { from: color1, to: color2Converted, deg: 90 },
       };
     }
 
@@ -60,9 +62,7 @@ function Demo(props: ThemeIconProps & {
 
   return (
     <div style={{ display: 'flex', 'align-items': 'center', 'justify-content': 'center' }}>
-      <ThemeIcon {...themeIconProps()}>
-        {getIcon()()}
-      </ThemeIcon>
+      <ThemeIcon {...themeIconProps()}>{getIcon()()}</ThemeIcon>
     </div>
   );
 }
@@ -97,31 +97,31 @@ export const kitchenSink: EmpoleonDemo = {
       prop: 'color',
       type: 'color',
       initialValue: 'blue',
-      libraryValue: 'blue'
+      libraryValue: 'blue',
     },
     {
       prop: 'color2',
       type: 'color',
       initialValue: 'cyan',
-      libraryValue: 'cyan'
+      libraryValue: 'cyan',
     },
     {
       prop: 'size',
       type: 'size',
       initialValue: 'md',
-      libraryValue: 'md'
+      libraryValue: 'md',
     },
     {
       prop: 'radius',
       type: 'size',
       initialValue: 'sm',
-      libraryValue: 'sm'
+      libraryValue: 'sm',
     },
     {
       prop: 'autoContrast',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'iconType',
@@ -143,7 +143,7 @@ export const kitchenSink: EmpoleonDemo = {
       libraryValue: 70,
       min: 50,
       max: 100,
-      step: 5
-    }
+      step: 5,
+    },
   ],
 };

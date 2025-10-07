@@ -1,6 +1,6 @@
 import { IconCalendar } from '@tabler/icons-solidjs';
-import { EmpoleonDemo } from '@empoleonx/demo';
 import { Component, createSignal } from 'solid-js';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const getCode = (name: string) => `
 import { createSignal } from 'solid-js';
@@ -28,7 +28,7 @@ function getDemo(Component: Component<any>) {
     const [value, setValue] = createSignal<string | null>(null);
     return (
       <Component
-        leftSection={<IconCalendar size={18} stroke='1.5px' />}
+        leftSection={<IconCalendar size={18} stroke="1.5px" />}
         leftSectionPointerEvents="none"
         label="Pick date"
         placeholder="Pick date"

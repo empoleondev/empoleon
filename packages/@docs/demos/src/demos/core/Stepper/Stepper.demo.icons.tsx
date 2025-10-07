@@ -4,9 +4,9 @@ import {
   IconShieldCheck,
   IconUserCheck,
 } from '@tabler/icons-solidjs';
+import { createSignal } from 'solid-js';
 import { Stepper } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal } from 'solid-js';
 
 const code = `
 import { createSignal } from 'solid-js';
@@ -51,7 +51,11 @@ function Demo() {
   const [active, setActive] = createSignal(1);
 
   return (
-    <Stepper active={active()} onStepClick={setActive} completedIcon={<IconCircleCheck size={18} />}>
+    <Stepper
+      active={active()}
+      onStepClick={setActive}
+      completedIcon={<IconCircleCheck size={18} />}
+    >
       <Stepper.Step
         icon={<IconUserCheck size={18} />}
         label="Step 1"

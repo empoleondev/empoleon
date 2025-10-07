@@ -1,7 +1,7 @@
+import { IconAdjustments, IconEdit, IconHeart, IconStar, IconTrash } from '@tabler/icons-solidjs';
+import { createEffect, createSignal } from 'solid-js';
 import { ActionIcon, ActionIconProps } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { IconAdjustments, IconHeart, IconTrash, IconEdit, IconStar } from '@tabler/icons-solidjs';
-import { createSignal, createEffect } from 'solid-js';
 
 const code = `
 import { ActionIcon } from '@empoleon/core';
@@ -42,10 +42,12 @@ function Demo() {
 }
 `;
 
-function Demo(props: ActionIconProps & {
-  iconType?: string;
-  iconSize?: number;
-}) {
+function Demo(
+  props: ActionIconProps & {
+    iconType?: string;
+    iconSize?: number;
+  }
+) {
   const [loading, setLoading] = createSignal(props.loading || false);
 
   createEffect(() => {
@@ -55,7 +57,7 @@ function Demo(props: ActionIconProps & {
   const getIcon = () => {
     const iconProps = {
       style: { width: `${props.iconSize || 70}%`, height: `${props.iconSize || 70}%` },
-      stroke: '1.5'
+      stroke: '1.5',
     };
 
     switch (props.iconType) {
@@ -73,11 +75,7 @@ function Demo(props: ActionIconProps & {
   };
 
   return (
-    <ActionIcon
-      {...props}
-      loading={loading()}
-      aria-label="Demo ActionIcon"
-    >
+    <ActionIcon {...props} loading={loading()} aria-label="Demo ActionIcon">
       {getIcon()()}
     </ActionIcon>
   );
@@ -109,37 +107,37 @@ export const kitchenSink: EmpoleonDemo = {
       prop: 'color',
       type: 'color',
       initialValue: 'blue',
-      libraryValue: 'blue'
+      libraryValue: 'blue',
     },
     {
       prop: 'size',
       type: 'size',
       initialValue: 'md',
-      libraryValue: 'md'
+      libraryValue: 'md',
     },
     {
       prop: 'radius',
       type: 'size',
       initialValue: 'sm',
-      libraryValue: 'sm'
+      libraryValue: 'sm',
     },
     {
       prop: 'disabled',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'loading',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'autoContrast',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'iconType',
@@ -153,6 +151,6 @@ export const kitchenSink: EmpoleonDemo = {
         { label: 'Edit', value: 'edit' },
         { label: 'Star', value: 'star' },
       ],
-    }
+    },
   ],
 };

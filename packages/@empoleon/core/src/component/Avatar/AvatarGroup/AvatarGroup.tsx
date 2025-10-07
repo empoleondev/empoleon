@@ -1,19 +1,19 @@
+import { splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
   createVarsResolver,
   ElementProps,
+  EmpoleonSpacing,
   factory,
   Factory,
   getSpacing,
-  EmpoleonSpacing,
   StylesApiProps,
   useProps,
   useStyles,
 } from '../../../core';
 import { AvatarGroupProvider } from './AvatarGroup.context';
 import classes from '../Avatar.module.css';
-import { splitProps } from 'solid-js';
 
 export type AvatarGroupStylesNames = 'group';
 export type AvatarGroupCssVariables = {
@@ -41,7 +41,7 @@ const varsResolver = createVarsResolver<AvatarGroupFactory>((_, props) => ({
   },
 }));
 
-export const AvatarGroup = factory<AvatarGroupFactory>(_props => {
+export const AvatarGroup = factory<AvatarGroupFactory>((_props) => {
   const props = useProps('AvatarGroup', null, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -52,7 +52,7 @@ export const AvatarGroup = factory<AvatarGroupFactory>(_props => {
     'attributes',
     'vars',
     'spacing',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<AvatarGroupFactory>({

@@ -46,12 +46,12 @@ describe('@empoleon/core/Switch', () => {
   });
 
   it('render onLabel and offLabel if provided', () => {
-    const { container: unChecked } = render(
-      () => <Switch offLabel={<span class="offLabel">Off</span>} />
-    );
-    const { container: checked } = render(
-      () => <Switch checked onLabel={<span class="onLabel">On</span>} />
-    );
+    const { container: unChecked } = render(() => (
+      <Switch offLabel={<span class="offLabel">Off</span>} />
+    ));
+    const { container: checked } = render(() => (
+      <Switch checked onLabel={<span class="onLabel">On</span>} />
+    ));
 
     expect(checked.querySelectorAll('.onLabel')).toHaveLength(1);
     expect(unChecked.querySelectorAll('.offLabel')).toHaveLength(1);
@@ -68,7 +68,7 @@ describe('@empoleon/core/Switch', () => {
 
   it('supports rootRef', () => {
     let ref;
-    render(() => <Switch {...defaultProps} rootRef={(el) => ref = el} />);
+    render(() => <Switch {...defaultProps} rootRef={(el) => (ref = el)} />);
     expect(ref).toBeInstanceOf(HTMLDivElement);
   });
 });

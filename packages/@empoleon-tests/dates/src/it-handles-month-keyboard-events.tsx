@@ -1,6 +1,6 @@
 import userEvent from '@testing-library/user-event';
-import { render } from '@empoleon-tests/core';
 import { JSX } from 'solid-js';
+import { render } from '@empoleon-tests/core';
 
 interface Options {
   component: (props: any) => JSX.Element;
@@ -13,7 +13,9 @@ export function itHandlesMonthKeyboardEvents(
   name = 'handles month arrow keyboard events correctly'
 ) {
   it(`${name} (numberOfColumns=1)`, async () => {
-    const { container } = render(() => <options.component {...options.props} numberOfColumns={1} />);
+    const { container } = render(() => (
+      <options.component {...options.props} numberOfColumns={1} />
+    ));
     const days = container.querySelectorAll('table button');
 
     await userEvent.click(days[0]);
@@ -33,7 +35,9 @@ export function itHandlesMonthKeyboardEvents(
   });
 
   it(`${name} (numberOfColumns=2)`, async () => {
-    const { container } = render(() => <options.component {...options.props} numberOfColumns={2} />);
+    const { container } = render(() => (
+      <options.component {...options.props} numberOfColumns={2} />
+    ));
     const months = container.querySelectorAll(`.empoleon-${options.name}-month`);
     const firstMonthDays = months[0].querySelectorAll('button');
     const secondMonthDays = months[1].querySelectorAll('button');
@@ -58,7 +62,9 @@ export function itHandlesMonthKeyboardEvents(
   });
 
   it(`${name} at month edges`, async () => {
-    const { container } = render(() => <options.component {...options.props} numberOfColumns={1} />);
+    const { container } = render(() => (
+      <options.component {...options.props} numberOfColumns={1} />
+    ));
     const days = container.querySelectorAll('table button');
 
     await userEvent.type(days[6], '{ArrowRight}');

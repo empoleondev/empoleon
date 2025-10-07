@@ -1,8 +1,8 @@
 import { IconArrowRight } from '@tabler/icons-solidjs';
+import { JSX } from 'solid-js';
 import { Button, ButtonProps, Group } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
 import classes from './Styles.demo.dataAttributes.module.css';
-import { JSX } from 'solid-js';
 
 const code = `
 import { Button, ButtonProps, Group } from '@empoleon/core';

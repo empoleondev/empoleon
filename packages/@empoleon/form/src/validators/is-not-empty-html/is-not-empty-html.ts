@@ -1,4 +1,4 @@
-import { JSX } from "solid-js";
+import { JSX } from 'solid-js';
 
 function removeHtmlTags(input: string): string {
   return input.replace(/<\/?[^>]+(>|$)/g, '');

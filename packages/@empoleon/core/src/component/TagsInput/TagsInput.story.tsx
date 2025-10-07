@@ -1,8 +1,7 @@
+import { createSignal, JSX } from 'solid-js';
+import { EmpoleonProvider } from '../../core';
 import { Button } from '../Button';
 import { TagsInput } from './TagsInput';
-import { JSX } from 'solid-js';
-import { EmpoleonProvider } from '../../core';
-import { createSignal } from 'solid-js';
 
 export default {
   title: 'TagsInput',
@@ -17,7 +16,7 @@ export default {
 
 export function Usage() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <TagsInput
         data={[
           'React',
@@ -39,7 +38,7 @@ export function Usage() {
 
 export function Disabled() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <TagsInput
         disabled
         label="disabled"
@@ -59,7 +58,7 @@ export function Disabled() {
 
 export function Clearable() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <TagsInput
         placeholder="Clearable"
         data={['React', 'Angular', 'Svelte']}
@@ -90,7 +89,7 @@ export function Clearable() {
 
 export function Unstyled() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <TagsInput defaultValue={['React', 'Angular']} placeholder="Enter tags" unstyled />
     </div>
   );
@@ -99,7 +98,7 @@ export function Unstyled() {
 export function Controlled() {
   const [value, setValue] = createSignal<string[]>(['React']);
   return (
-    <div style={{ 'padding': '40px', 'max-width': '400px' }}>
+    <div style={{ padding: '40px', 'max-width': '400px' }}>
       <TagsInput
         value={value()}
         onChange={setValue}
@@ -115,7 +114,7 @@ export function Controlled() {
 
 export function MaxTags() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <TagsInput
         defaultValue={['React', 'Angular']}
         placeholder="Enter tags"
@@ -128,7 +127,7 @@ export function MaxTags() {
 
 export function SplitChars() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <TagsInput
         defaultValue={['React', 'Angular']}
         placeholder="Enter tags"
@@ -140,7 +139,7 @@ export function SplitChars() {
 
 export function AllowDuplicates() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <TagsInput defaultValue={['React', 'Angular']} placeholder="Enter tags" allowDuplicates />
     </div>
   );
@@ -148,7 +147,7 @@ export function AllowDuplicates() {
 
 export function WithData() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <TagsInput
         defaultValue={['React', 'Angular']}
         placeholder="Enter tags"

@@ -27,7 +27,7 @@ function Demo() {
   return (
     <Carousel
       withIndicators
-      height='200px'
+      height="200px"
       slideSize="33.333333%"
       slideGap="md"
       emblaOptions={{ loop: true, align: 'start', slidesToScroll: 3 }}

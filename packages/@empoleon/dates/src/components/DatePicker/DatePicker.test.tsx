@@ -63,9 +63,9 @@ describe('@empoleon/dates/DatePicker', () => {
 
   it('can be controlled (type="default")', async () => {
     const spy = vi.fn();
-    const { container } = render(
-      () => <DatePicker {...defaultProps} date="2022-04-11" value="2022-04-11" onChange={spy} />
-    );
+    const { container } = render(() => (
+      <DatePicker {...defaultProps} date="2022-04-11" value="2022-04-11" onChange={spy} />
+    ));
 
     expect(container.querySelector('[data-selected]')!.textContent).toBe('11');
 
@@ -74,9 +74,9 @@ describe('@empoleon/dates/DatePicker', () => {
   });
 
   it('can be uncontrolled (type="multiple")', async () => {
-    const { container } = render(
-      () => <DatePicker {...defaultProps} type="multiple" date="2022-04-11" />
-    );
+    const { container } = render(() => (
+      <DatePicker {...defaultProps} type="multiple" date="2022-04-11" />
+    ));
     expect(container.querySelectorAll('[data-selected]')).toHaveLength(0);
     await userEvent.click(container.querySelectorAll('table button')[0]);
     expect(container.querySelectorAll('[data-selected]')).toHaveLength(1);
@@ -91,15 +91,15 @@ describe('@empoleon/dates/DatePicker', () => {
 
   it('can be controlled (type="multiple")', async () => {
     const spy = vi.fn();
-    const { container } = render(
-      () => <DatePicker
+    const { container } = render(() => (
+      <DatePicker
         {...defaultProps}
         type="multiple"
         date="2022-04-11"
         value={['2022-04-11']}
         onChange={spy}
       />
-    );
+    ));
 
     await userEvent.click(container.querySelector('table button')!);
     expect(spy).toHaveBeenCalledWith(['2022-04-11', '2022-03-28']);
@@ -122,27 +122,27 @@ describe('@empoleon/dates/DatePicker', () => {
 
   it('can be controlled (type="range")', async () => {
     const spy = vi.fn();
-    const { container } = render(
-      () => <DatePicker {...defaultProps} type="range" value={[null, null]} onChange={spy} />
-    );
+    const { container } = render(() => (
+      <DatePicker {...defaultProps} type="range" value={[null, null]} onChange={spy} />
+    ));
     await userEvent.click(container.querySelector('table button')!);
     expect(spy).toHaveBeenLastCalledWith(['2022-03-28', null]);
   });
 
   it('supports onClick handler from getDayProps', async () => {
     const spy = vi.fn();
-    const { container } = render(
-      () => <DatePicker {...defaultProps} getDayProps={() => ({ onClick: spy })} />
-    );
+    const { container } = render(() => (
+      <DatePicker {...defaultProps} getDayProps={() => ({ onClick: spy })} />
+    ));
     await userEvent.click(container.querySelector('table button')!);
     expect(spy).toHaveBeenCalled();
   });
 
   it('handles allowSingleDateInRange={true} correctly', async () => {
     const spy = vi.fn();
-    const { container } = render(
-      () => <DatePicker {...defaultProps} type="range" allowSingleDateInRange onChange={spy} />
-    );
+    const { container } = render(() => (
+      <DatePicker {...defaultProps} type="range" allowSingleDateInRange onChange={spy} />
+    ));
     await userEvent.click(container.querySelectorAll('table button')[2]);
     expect(spy).toHaveBeenCalledWith(['2022-03-30', null]);
     await userEvent.click(container.querySelectorAll('table button')[2]);
@@ -151,9 +151,9 @@ describe('@empoleon/dates/DatePicker', () => {
 
   it('handles allowSingleDateInRange={false} correctly', async () => {
     const spy = vi.fn();
-    const { container } = render(
-      () => <DatePicker {...defaultProps} type="range" allowSingleDateInRange={false} onChange={spy} />
-    );
+    const { container } = render(() => (
+      <DatePicker {...defaultProps} type="range" allowSingleDateInRange={false} onChange={spy} />
+    ));
     await userEvent.click(container.querySelectorAll('table button')[2]);
     expect(spy).toHaveBeenCalledWith(['2022-03-30', null]);
     await userEvent.click(container.querySelectorAll('table button')[2]);
@@ -166,7 +166,9 @@ describe('@empoleon/dates/DatePicker', () => {
   });
 
   it('supports custom __staticSelector', () => {
-    const { container } = render(() => <DatePicker {...defaultProps} __staticSelector="Calendar" />);
+    const { container } = render(() => (
+      <DatePicker {...defaultProps} __staticSelector="Calendar" />
+    ));
     expect(container.querySelector('.empoleon-Calendar-month')).toBeInTheDocument();
   });
 });

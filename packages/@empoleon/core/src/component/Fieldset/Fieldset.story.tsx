@@ -1,7 +1,7 @@
 import { JSX } from 'solid-js';
+import { EmpoleonProvider } from '../../core';
 import { TextInput } from '../TextInput';
 import { Fieldset } from './Fieldset';
-import { EmpoleonProvider } from '../../core';
 
 export default {
   title: 'Fieldset',
@@ -16,7 +16,7 @@ export default {
 
 export function Usage() {
   return (
-    <div style={{ 'padding': '40px', 'max-width': '500px' }}>
+    <div style={{ padding: '40px', 'max-width': '500px' }}>
       <Fieldset legend="Unstyled fieldset" variant="unstyled" disabled>
         <TextInput label="Name" placeholder="Name" />
         <TextInput label="Email" placeholder="Email" mt="md" />

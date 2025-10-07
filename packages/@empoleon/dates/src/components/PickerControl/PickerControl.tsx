@@ -3,11 +3,11 @@ import {
   BoxProps,
   createVarsResolver,
   ElementProps,
+  EmpoleonSize,
   factory,
   Factory,
   getFontSize,
   getSize,
-  EmpoleonSize,
   StylesApiProps,
   UnstyledButton,
   useProps,
@@ -62,7 +62,7 @@ const varsResolver = createVarsResolver<PickerControlFactory>((_, props) => ({
   },
 }));
 
-export const PickerControl = factory<PickerControlFactory>(_props => {
+export const PickerControl = factory<PickerControlFactory>((_props) => {
   const props = useProps('PickerControl', null, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -78,7 +78,7 @@ export const PickerControl = factory<PickerControlFactory>(_props => {
     'selected',
     'disabled',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<PickerControlFactory>({

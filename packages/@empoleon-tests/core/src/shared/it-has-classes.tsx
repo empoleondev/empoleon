@@ -1,4 +1,4 @@
-import { JSX } from "solid-js";
+import { JSX } from 'solid-js';
 
 interface Options {
   component: (props: any) => JSX.Element;

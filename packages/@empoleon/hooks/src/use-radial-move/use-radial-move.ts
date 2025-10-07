@@ -1,5 +1,5 @@
-import { createSignal, onCleanup } from 'solid-js';
 import { Ref } from '@solid-primitives/refs';
+import { createSignal, onCleanup } from 'solid-js';
 import { clamp } from '../utils';
 
 function radiansToDegrees(radians: number) {

@@ -1,4 +1,4 @@
-import { splitProps, JSX } from 'solid-js';
+import { JSX, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
@@ -54,17 +54,19 @@ const defaultProps = {
   animate: true,
 } satisfies Partial<SkeletonProps>;
 
-const varsResolver = createVarsResolver<SkeletonFactory>(
-  (_, props) => ({
-    root: {
-      '--skeleton-height': rem(props.height),
-      '--skeleton-width': props.circle ? rem(props.height) : rem(props.width),
-      '--skeleton-radius': props.circle ? '1000px' : props.radius === undefined ? undefined : getRadius(props.radius),
-    },
-  })
-);
+const varsResolver = createVarsResolver<SkeletonFactory>((_, props) => ({
+  root: {
+    '--skeleton-height': rem(props.height),
+    '--skeleton-width': props.circle ? rem(props.height) : rem(props.width),
+    '--skeleton-radius': props.circle
+      ? '1000px'
+      : props.radius === undefined
+        ? undefined
+        : getRadius(props.radius),
+  },
+}));
 
-export const Skeleton = factory<SkeletonFactory>(_props => {
+export const Skeleton = factory<SkeletonFactory>((_props) => {
   const props = useProps('Skeleton', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -81,7 +83,7 @@ export const Skeleton = factory<SkeletonFactory>(_props => {
     'animate',
     'mod',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<SkeletonFactory>({
@@ -98,7 +100,14 @@ export const Skeleton = factory<SkeletonFactory>(_props => {
     varsResolver,
   });
 
-  return <Box ref={local.ref} {...getStyles('root')} mod={[{ visible: local.visible, animate: local.animate }, local.mod]} {...others} />;
+  return (
+    <Box
+      ref={local.ref}
+      {...getStyles('root')}
+      mod={[{ visible: local.visible, animate: local.animate }, local.mod]}
+      {...others}
+    />
+  );
 });
 
 Skeleton.classes = classes;

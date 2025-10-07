@@ -10,9 +10,11 @@ const defaultProps: ColorSwatchProps = {
 describe('@empoleon/core/ColorSwatch', () => {
   tests.axe([
     () => <ColorSwatch color="#000" component="button" type="button" aria-label="test-color" />,
-    () => <ColorSwatch color="#000" component="button" type="button">
-      test-color
-    </ColorSwatch>,
+    () => (
+      <ColorSwatch color="#000" component="button" type="button">
+        test-color
+      </ColorSwatch>
+    ),
   ]);
 
   tests.itSupportsSystemProps<ColorSwatchProps, ColorSwatchStylesNames>({
@@ -40,7 +42,9 @@ describe('@empoleon/core/ColorSwatch', () => {
   });
 
   it('renders shadow overlay only when withShadow is true', () => {
-    const { container, rerender } = render(() => <ColorSwatch {...defaultProps} withShadow={false} />);
+    const { container, rerender } = render(() => (
+      <ColorSwatch {...defaultProps} withShadow={false} />
+    ));
     expect(container.querySelector('.empoleon-ColorSwatch-shadowOverlay')).not.toBeInTheDocument();
 
     rerender(() => <ColorSwatch {...defaultProps} withShadow />);

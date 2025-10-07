@@ -1,10 +1,9 @@
 import { createEffect, JSX } from 'solid-js';
+import { CodeHighlightAdapterProvider, createShikiAdapter } from '@empoleon/code-highlight';
+import { EmpoleonProvider, useEmpoleonColorScheme } from '@empoleon/core';
 import { renderDemo } from '../../render-demo';
 import { highlightjs } from './CodeHighlight.demo.highlightjs';
 import * as demos from './index';
-import { EmpoleonProvider, useEmpoleonColorScheme } from '@empoleon/core';
-import { createShikiAdapter } from '@empoleon/code-highlight';
-import { CodeHighlightAdapterProvider } from '@empoleon/code-highlight';
 
 const shikiAdapter = createShikiAdapter();
 
@@ -31,7 +30,7 @@ export default {
         </EmpoleonProvider>
       </CodeHighlightAdapterProvider>
     ),
-  ]
+  ],
 };
 
 export const Demo_usage = {

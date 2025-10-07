@@ -1,6 +1,6 @@
+import { createSignal } from 'solid-js';
 import { Box, Popover, ScrollArea, Text, TextInput, UnstyledButton } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal } from 'solid-js';
 
 const code = `
 import { createSignal } from 'solid-js';
@@ -141,7 +141,7 @@ const groceries = [
 ];
 
 function Demo() {
-  const [viewportRef, setViewportRef] = createSignal<HTMLDivElement|null>(null)
+  const [viewportRef, setViewportRef] = createSignal<HTMLDivElement | null>(null);
   const [query, setQuery] = createSignal('');
   const [opened, setOpened] = createSignal(false);
   const [hovered, setHovered] = createSignal(-1);
@@ -149,7 +149,6 @@ function Demo() {
   const items = filtered.map((item, index) => (
     <UnstyledButton
       data-list-item
-
       display="block"
       bg={index === hovered() ? 'var(--empoleon-color-blue-light)' : undefined}
       w="100%"

@@ -61,39 +61,39 @@ describe('@empoleon/dates/YearPickerInput', () => {
   });
 
   it('supports valueFormat prop', () => {
-    const { container, rerender } = render(
-      () => <YearPickerInput {...defaultProps} valueFormat="YY" value="2022-04-11" />
-    );
+    const { container, rerender } = render(() => (
+      <YearPickerInput {...defaultProps} valueFormat="YY" value="2022-04-11" />
+    ));
     expectValue(container, '22');
 
-    rerender(
-      () => <YearPickerInput
+    rerender(() => (
+      <YearPickerInput
         {...defaultProps}
         type="multiple"
         valueFormat="YY"
         value={['2022-04-11', '2024-04-11']}
       />
-    );
+    ));
     expectValue(container, '22, 24');
 
-    rerender(
-      () => <YearPickerInput
+    rerender(() => (
+      <YearPickerInput
         {...defaultProps}
         type="range"
         valueFormat="YY"
         value={['2022-04-11', '2024-04-11']}
       />
-    );
+    ));
     expectValue(container, '22 – 24');
   });
 
   it('has correct default __staticSelector', () => {
-    const { container } = render(
-      () => <YearPickerInput
+    const { container } = render(() => (
+      <YearPickerInput
         {...defaultProps}
         popoverProps={{ opened: true, withinPortal: false, transitionProps: { duration: 0 } }}
       />
-    );
+    ));
     expect(container.querySelector('[data-dates-input]')).toHaveClass(
       'empoleon-YearPickerInput-input'
     );

@@ -1,4 +1,5 @@
 import dayjs from 'dayjs';
+import { createSignal, JSX } from 'solid-js';
 import {
   Autocomplete,
   Button,
@@ -18,7 +19,6 @@ import {
 } from '@empoleon/core';
 import { DatesProvider } from '../DatesProvider';
 import { DatePickerInput } from './DatePickerInput';
-import { createSignal, JSX } from 'solid-js';
 
 export default {
   title: 'DatePickerInput',
@@ -223,13 +223,7 @@ export function Clearable() {
 
 export function Sizes() {
   const sizes = (['xs', 'sm', 'md', 'lg', 'xl'] as const).map((size) => (
-    <DatePickerInput
-      size={size}
-      placeholder={size}
-      label={size}
-      mt="xl"
-      dropdownType="modal"
-    />
+    <DatePickerInput size={size} placeholder={size} label={size} mt="xl" dropdownType="modal" />
   ));
   return <div style={{ padding: '40px' }}>{sizes}</div>;
 }

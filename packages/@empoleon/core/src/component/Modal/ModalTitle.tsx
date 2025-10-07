@@ -19,7 +19,7 @@ export type ModalTitleFactory = Factory<{
 
 const defaultProps: Partial<ModalTitleProps> = {};
 
-export const ModalTitle = factory<ModalTitleFactory>(_props => {
+export const ModalTitle = factory<ModalTitleFactory>((_props) => {
   const props = useProps('ModalTitle', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -27,7 +27,7 @@ export const ModalTitle = factory<ModalTitleFactory>(_props => {
     'style',
     'styles',
     'vars',
-    'ref'
+    'ref',
   ]);
 
   const ctx = useModalContext();
@@ -35,7 +35,12 @@ export const ModalTitle = factory<ModalTitleFactory>(_props => {
   return (
     <ModalBaseTitle
       ref={local.ref}
-      {...ctx.getStyles('title', { classNames: local.classNames, style: local.style, styles: local.styles, className: local.className })}
+      {...ctx.getStyles('title', {
+        classNames: local.classNames,
+        style: local.style,
+        styles: local.styles,
+        className: local.className,
+      })}
       {...others}
     />
   );

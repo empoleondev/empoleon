@@ -30,9 +30,7 @@ import { shouldValidateOnChange, validateFieldValue, validateValues } from './va
 export function useForm<
   Values extends Record<string, any> = Record<string, any>,
   TransformValues extends _TransformValues<Values> = (values: Values) => Values,
->(
-  input: UseFormInput<Values, TransformValues> = {}
-): UseFormReturnType<Values, TransformValues> {
+>(input: UseFormInput<Values, TransformValues> = {}): UseFormReturnType<Values, TransformValues> {
   // Use mergeProps to preserve reactivity
   const props = mergeProps(
     {
@@ -55,13 +53,13 @@ export function useForm<
   const $values = useFormValues<Values>({
     initialValues: props.initialValues,
     onValuesChange: props.onValuesChange,
-    mode: props.mode
+    mode: props.mode,
   });
   const $status = useFormStatus<Values>({
     initialDirty: props.initialDirty,
     initialTouched: props.initialTouched,
     $values,
-    mode: props.mode
+    mode: props.mode,
   });
   const $list = useFormList<Values>({ $values, $errors, $status });
   const $watch = useFormWatch<Values>({ $status, cascadeUpdates: props.cascadeUpdates });
@@ -99,7 +97,10 @@ export function useForm<
 
   const initialize: Initialize<Values> = (values) => {
     const previousValues = $values.refValues.current;
-    $values.initialize(values, () => props.mode === 'uncontrolled' && setFormKey(prev => prev + 1));
+    $values.initialize(
+      values,
+      () => props.mode === 'uncontrolled' && setFormKey((prev) => prev + 1)
+    );
     handleValuesChanges(previousValues);
   };
 
@@ -120,7 +121,11 @@ export function useForm<
         ...$watch.getFieldSubscribers(path),
         shouldValidate
           ? (payload) => {
-              const validationResults = validateFieldValue(path, props.validate, payload.updatedValues);
+              const validationResults = validateFieldValue(
+                path,
+                props.validate,
+                payload.updatedValues
+              );
               validationResults.hasError
                 ? $errors.setFieldError(path, validationResults.error)
                 : $errors.clearFieldError(path);
@@ -128,7 +133,7 @@ export function useForm<
           : null,
         options?.forceUpdate !== false && props.mode !== 'controlled'
           ? () =>
-              setFieldKeys(prev => ({
+              setFieldKeys((prev) => ({
                 ...prev,
                 [path as string]: (prev[path as string] || 0) + 1,
               }))
@@ -140,7 +145,7 @@ export function useForm<
   const setValues: SetValues<Values> = (values) => {
     const previousValues = $values.refValues.current;
     $values.setValues({ values, updateState: false });
-    setExternalUpdateTrigger(prev => prev + 1);
+    setExternalUpdateTrigger((prev) => prev + 1);
     handleValuesChanges(previousValues);
   };
 
@@ -156,10 +161,7 @@ export function useForm<
     return results;
   };
 
-  const getInputProps: GetInputProps<Values> = (
-    path,
-    options = {}
-  ) => {
+  const getInputProps: GetInputProps<Values> = (path, options = {}) => {
     const { type = 'input', withError = true, withFocus = true, ...otherOptions } = options;
 
     const fieldValue = () => {
@@ -193,7 +195,11 @@ export function useForm<
       payload.onFocus = () => $status.setFieldTouched(path, true);
       payload.onBlur = () => {
         if (shouldValidateOnChange(path, props.validateInputOnBlur)) {
-          const validationResults = validateFieldValue(path, props.validate, $values.refValues.current);
+          const validationResults = validateFieldValue(
+            path,
+            props.validate,
+            $values.refValues.current
+          );
 
           validationResults.hasError
             ? $errors.setFieldError(path, validationResults.error)
@@ -267,8 +273,12 @@ export function useForm<
   const form: UseFormReturnType<Values, TransformValues> = {
     watch: $watch.watch,
 
-    get initialized() { return $values.initialized(); },
-    get values() { return $values.stateValues(); },
+    get initialized() {
+      return $values.initialized();
+    },
+    get values() {
+      return $values.stateValues();
+    },
     getValues: $values.getValues,
     getInitialValues: $values.getValuesSnapshot,
     setInitialValues: $values.setValuesSnapshot,
@@ -276,10 +286,14 @@ export function useForm<
     setValues,
     setFieldValue,
 
-    get submitting() { return submitting(); },
+    get submitting() {
+      return submitting();
+    },
     setSubmitting,
 
-    get errors() { return $errors.errorsState(); },
+    get errors() {
+      return $errors.errorsState();
+    },
     setErrors: $errors.setErrors,
     setFieldError: $errors.setFieldError,
     clearFieldError: $errors.clearFieldError,

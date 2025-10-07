@@ -1,4 +1,4 @@
-import { createEffect, onCleanup, Accessor } from 'solid-js';
+import { Accessor, createEffect, onCleanup } from 'solid-js';
 
 export function useResizeObserver(
   element: Accessor<HTMLElement | null> | HTMLElement | null,

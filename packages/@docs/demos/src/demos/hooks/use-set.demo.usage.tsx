@@ -1,7 +1,7 @@
+import { createSignal, For } from 'solid-js';
 import { Code, Stack, TextInput } from '@empoleon/core';
 import { useSet } from '@empoleon/hooks';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal, For } from 'solid-js';
 
 const code = `
 import { useState } from 'react';
@@ -66,9 +66,7 @@ function Demo() {
       />
 
       <Stack gap={5} align="flex-start" mt="md">
-        <For each={Array.from(scopes)}>
-          {(scope) => <Code>{scope}</Code>}
-        </For>
+        <For each={Array.from(scopes)}>{(scope) => <Code>{scope}</Code>}</For>
       </Stack>
     </>
   );

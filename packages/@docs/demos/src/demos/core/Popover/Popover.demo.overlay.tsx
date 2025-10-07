@@ -54,7 +54,7 @@ function Demo() {
 function Demo() {
   return (
     <Popover
-      width='320px'
+      width="320px"
       shadow="md"
       withArrow
       withOverlay

@@ -1,15 +1,17 @@
+import { JSX } from 'solid-js';
 import { render, screen, tests, userEvent } from '@empoleon-tests/core';
 import { Checkbox } from '../Checkbox';
 import { CheckboxGroup, CheckboxGroupProps, CheckboxGroupStylesNames } from './CheckboxGroup';
-import { JSX } from 'solid-js';
 
 describe('@empoleon/core/CheckboxGroup', () => {
   tests.axe([
-    () => <CheckboxGroup>
-      <Checkbox value="test-1" label="test-1" />
-      <Checkbox value="test-2" label="test-2" />
-      <Checkbox value="test-3" label="test-3" />
-    </CheckboxGroup>,
+    () => (
+      <CheckboxGroup>
+        <Checkbox value="test-1" label="test-1" />
+        <Checkbox value="test-2" label="test-2" />
+        <Checkbox value="test-3" label="test-3" />
+      </CheckboxGroup>
+    ),
   ]);
 
   tests.itSupportsSystemProps<CheckboxGroupProps, CheckboxGroupStylesNames>({
@@ -19,11 +21,13 @@ describe('@empoleon/core/CheckboxGroup', () => {
       description: 'test-description',
       error: 'test-error',
       withAsterisk: true,
-      children: (() => <CheckboxGroup>
-        <Checkbox value="test-1" label="test-1" />
-        <Checkbox value="test-2" label="test-2" />
-        <Checkbox value="test-3" label="test-3" />
-      </CheckboxGroup>) as unknown as JSX.Element,
+      children: (() => (
+        <CheckboxGroup>
+          <Checkbox value="test-1" label="test-1" />
+          <Checkbox value="test-2" label="test-2" />
+          <Checkbox value="test-3" label="test-3" />
+        </CheckboxGroup>
+      )) as unknown as JSX.Element,
     }),
     mod: true,
     styleProps: true,
@@ -37,20 +41,22 @@ describe('@empoleon/core/CheckboxGroup', () => {
   });
 
   it('supports uncontrolled state', async () => {
-    render(() => <CheckboxGroup
-      label='test-label'
-      description='test-description'
-      error='test-error'
-      withAsterisk={true}
-      defaultValue={['test-value-1']}
-      children={
-        <>
-          <Checkbox value="test-value-1" label="test-label-1" />
-          <Checkbox value="test-value-2" label="test-label-2" />
-          <Checkbox value="test-value-3" label="test-label-3" />
-        </>
-      }
-    />);
+    render(() => (
+      <CheckboxGroup
+        label="test-label"
+        description="test-description"
+        error="test-error"
+        withAsterisk={true}
+        defaultValue={['test-value-1']}
+        children={
+          <>
+            <Checkbox value="test-value-1" label="test-label-1" />
+            <Checkbox value="test-value-2" label="test-label-2" />
+            <Checkbox value="test-value-3" label="test-label-3" />
+          </>
+        }
+      />
+    ));
 
     const checkboxes = screen.getAllByRole('checkbox', { hidden: true });
     expect(checkboxes[0]).toHaveAttribute('data-checked', 'true');
@@ -69,9 +75,9 @@ describe('@empoleon/core/CheckboxGroup', () => {
     const TestComponent = () => {
       return (
         <CheckboxGroup
-          label='test-label'
-          description='test-description'
-          error='test-error'
+          label="test-label"
+          description="test-description"
+          error="test-error"
           withAsterisk={true}
           value={currentValue}
           children={
@@ -100,5 +106,4 @@ describe('@empoleon/core/CheckboxGroup', () => {
     expect(checkboxesAfter[0]).not.toHaveAttribute('data-checked');
     expect(spy).toHaveBeenCalledWith(['test-value-2', 'test-value-1']);
   });
-
 });

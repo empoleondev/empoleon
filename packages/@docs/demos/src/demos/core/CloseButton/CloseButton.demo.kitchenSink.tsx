@@ -1,6 +1,6 @@
+import { IconXboxX } from '@tabler/icons-solidjs';
 import { CloseButton } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { IconXboxX } from '@tabler/icons-solidjs';
 
 const code = `
 import { CloseButton } from '@empoleon/core';
@@ -13,7 +13,7 @@ function Demo() {
 function Wrapper(props: any) {
   const getIcon = () => {
     if (props.iconType === 'xbox') {
-      return <IconXboxX size={props.size} stroke='1.5' />;
+      return <IconXboxX size={props.size} stroke="1.5" />;
     }
     return undefined;
   };

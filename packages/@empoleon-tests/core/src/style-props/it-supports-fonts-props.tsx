@@ -4,7 +4,7 @@ import { getPropsValue } from '../shared/get-props-value';
 
 interface Options<Props = any> {
   component: (props: Props) => JSX.Element;
-  props: Props | (() => Props)
+  props: Props | (() => Props);
   selector?: string;
 }
 
@@ -16,7 +16,7 @@ export function itSupportsFontsProps<Props>(
   const baseProps = getPropsValue(options.props);
 
   it(name, () => {
-    const propsWithFzTheme = { ...baseProps, fz: "xs" } as Props & { fz: string };
+    const propsWithFzTheme = { ...baseProps, fz: 'xs' } as Props & { fz: string };
     const { container: theme } = render(() => <options.component {...propsWithFzTheme} />);
 
     const propsWithFz = { ...baseProps, fz: 32 } as Props & { fz: number };
@@ -25,25 +25,25 @@ export function itSupportsFontsProps<Props>(
     const propsWithFw = { ...baseProps, fw: 700 } as Props & { fw: number };
     const { container: fw } = render(() => <options.component {...propsWithFw} />);
 
-    const propsWithFf = { ...baseProps, ff: "sans-serif" } as Props & { ff: string };
+    const propsWithFf = { ...baseProps, ff: 'sans-serif' } as Props & { ff: string };
     const { container: ff } = render(() => <options.component {...propsWithFf} />);
 
     const propsWithLts = { ...baseProps, lts: 16 } as Props & { lts: number };
     const { container: lts } = render(() => <options.component {...propsWithLts} />);
 
-    const propsWithTa = { ...baseProps, ta: "right" } as Props & { ta: string };
+    const propsWithTa = { ...baseProps, ta: 'right' } as Props & { ta: string };
     const { container: ta } = render(() => <options.component {...propsWithTa} />);
 
     const propsWithLh = { ...baseProps, lh: 2.25 } as Props & { lh: number };
     const { container: lh } = render(() => <options.component {...propsWithLh} />);
 
-    const propsWithFs = { ...baseProps, fs: "italic" } as Props & { fs: string };
+    const propsWithFs = { ...baseProps, fs: 'italic' } as Props & { fs: string };
     const { container: fs } = render(() => <options.component {...propsWithFs} />);
 
-    const propsWithTt = { ...baseProps, tt: "uppercase" } as Props & { tt: string };
+    const propsWithTt = { ...baseProps, tt: 'uppercase' } as Props & { tt: string };
     const { container: tt } = render(() => <options.component {...propsWithTt} />);
 
-    const propsWithTd = { ...baseProps, td: "underline" } as Props & { td: string };
+    const propsWithTd = { ...baseProps, td: 'underline' } as Props & { td: string };
     const { container: td } = render(() => <options.component {...propsWithTd} />);
 
     expect(theme.querySelector(selector)).toHaveStyle({ fontSize: 'var(--empoleon-font-size-xs)' });

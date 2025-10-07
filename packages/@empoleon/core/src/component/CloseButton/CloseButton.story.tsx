@@ -1,6 +1,6 @@
 import { JSX } from 'solid-js';
-import { CloseButton } from './CloseButton';
 import { EmpoleonProvider } from '../../core';
+import { CloseButton } from './CloseButton';
 
 export default {
   title: 'CloseButton',

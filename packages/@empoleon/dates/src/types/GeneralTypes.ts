@@ -1,4 +1,4 @@
-import { JSX } from "solid-js";
+import { JSX } from 'solid-js';
 
 /** Date value used by all Empoleon components, format: `YYYY-MM-DD` */
 export type DateStringValue = string;

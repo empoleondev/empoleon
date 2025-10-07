@@ -27,7 +27,7 @@ export function Usage() {
         },
       }}
     >
-      <div style={{ 'padding': '40px' }}>
+      <div style={{ padding: '40px' }}>
         <UnstyledButton styles={() => ({ root: { color: 'red' } })}>Button</UnstyledButton>
       </div>
     </EmpoleonThemeProvider>

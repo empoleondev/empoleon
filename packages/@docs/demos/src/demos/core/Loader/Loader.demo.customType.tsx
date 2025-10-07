@@ -1,4 +1,4 @@
-import { createTheme, Loader, EmpoleonThemeProvider } from '@empoleon/core';
+import { createTheme, EmpoleonThemeProvider, Loader } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
 import { RingLoader, ringLoaderCode } from './_RingLoader';
 

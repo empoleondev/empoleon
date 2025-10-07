@@ -1,7 +1,7 @@
+import { createSignal } from 'solid-js';
 import { Checkbox } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
 import classes from './Checkbox.demo.customize.module.css';
-import { createSignal } from 'solid-js';
 
 const cssCode = `
 .root {

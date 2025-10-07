@@ -1,7 +1,7 @@
+import { createSignal, For, JSX } from 'solid-js';
 import { ActionIcon, Button, EmpoleonProvider, Group, Stack } from '@empoleon/core';
 import { TimePicker } from './TimePicker';
 import { getTimeRange } from './utils/get-time-range/get-time-range';
-import { createSignal, For, JSX } from 'solid-js';
 
 export default {
   title: 'TimePicker',
@@ -17,13 +17,7 @@ export default {
 export function Usage() {
   return (
     <div style={{ padding: '40px' }}>
-      <TimePicker
-        label="Enter time"
-        withSeconds
-        minutesStep={5}
-        secondsStep={5}
-        withDropdown
-      />
+      <TimePicker label="Enter time" withSeconds minutesStep={5} secondsStep={5} withDropdown />
     </div>
   );
 }
@@ -144,7 +138,7 @@ export function Sizes() {
               variant="filled"
             />
           )}
-          </For>
+        </For>
       </Stack>
     </div>
   );

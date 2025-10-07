@@ -30,7 +30,7 @@ function Demo() {
 
 function Demo() {
   return (
-    <Carousel height='200px' classNames={classes}>
+    <Carousel height="200px" classNames={classes}>
       <Slides count={5} />
     </Carousel>
   );

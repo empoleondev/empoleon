@@ -34,9 +34,9 @@ describe('@empoleon/core/Badge', () => {
   });
 
   it('renders given left and right sections', () => {
-    const { container } = render(
-      () => <Badge {...defaultProps} leftSection="test-left" rightSection="test-right" />
-    );
+    const { container } = render(() => (
+      <Badge {...defaultProps} leftSection="test-left" rightSection="test-right" />
+    ));
 
     const leftSection = container.querySelector('.empoleon-Badge-section[data-position="left"]');
     const rightSection = container.querySelector('.empoleon-Badge-section[data-position="right"]');

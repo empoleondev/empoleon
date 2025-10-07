@@ -13,10 +13,7 @@ export interface ScrollAreaScrollbarProps extends ScrollAreaScrollbarVisibleProp
 }
 
 export function ScrollAreaScrollbar(props: ScrollAreaScrollbarProps) {
-  const [local, others] = splitProps(props, [
-    'forceMount',
-    'ref'
-  ]);
+  const [local, others] = splitProps(props, ['forceMount', 'ref']);
 
   const ctx = useScrollAreaContext();
   const isHorizontal = () => props.orientation === 'horizontal';
@@ -33,16 +30,16 @@ export function ScrollAreaScrollbar(props: ScrollAreaScrollbarProps) {
 
   return (
     <>
-      <Show when={ctx.type === "hover"}>
+      <Show when={ctx.type === 'hover'}>
         <ScrollAreaScrollbarHover {...others} ref={local.ref} forceMount={local.forceMount} />
       </Show>
-      <Show when={ctx.type === "scroll"}>
+      <Show when={ctx.type === 'scroll'}>
         <ScrollAreaScrollbarScroll {...others} ref={local.ref} forceMount={local.forceMount} />
       </Show>
-      <Show when={ctx.type === "auto"}>
+      <Show when={ctx.type === 'auto'}>
         <ScrollAreaScrollbarAuto {...others} ref={local.ref} forceMount={local.forceMount} />
       </Show>
-      <Show when={ctx.type === "always"}>
+      <Show when={ctx.type === 'always'}>
         <ScrollAreaScrollbarVisible {...others} ref={local.ref} />
       </Show>
     </>

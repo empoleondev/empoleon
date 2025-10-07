@@ -1,6 +1,6 @@
 import { JSX } from 'solid-js';
-import { InlineInput, InlineInputProps } from './InlineInput';
 import { EmpoleonProvider } from '../../core';
+import { InlineInput, InlineInputProps } from './InlineInput';
 
 export default {
   title: 'InlineInput',
@@ -28,7 +28,7 @@ const defaultProps: InlineInputProps = {
 
 export function Usage() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <InlineInput {...defaultProps} labelPosition="right" />
       <InlineInput {...defaultProps} labelPosition="left" />
     </div>

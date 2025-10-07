@@ -68,17 +68,8 @@ function Demo() {
 
   return (
     <form onSubmit={form.onSubmit(console.log)}>
-      <TextInput
-        label="Name"
-        placeholder="Name"
-        {...form.getInputProps('name')}
-      />
-      <TextInput
-        mt="sm"
-        label="Email"
-        placeholder="Email"
-        {...form.getInputProps('email')}
-      />
+      <TextInput label="Name" placeholder="Name" {...form.getInputProps('name')} />
+      <TextInput mt="sm" label="Email" placeholder="Email" {...form.getInputProps('email')} />
       <NumberInput
         mt="sm"
         label="Age"

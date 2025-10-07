@@ -25,7 +25,7 @@ export type MenuLabelFactory = Factory<{
   compound: true;
 }>;
 
-export const MenuLabel = factory<MenuLabelFactory>(_props => {
+export const MenuLabel = factory<MenuLabelFactory>((_props) => {
   const props = useProps('MenuLabel', null, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -33,14 +33,19 @@ export const MenuLabel = factory<MenuLabelFactory>(_props => {
     'style',
     'styles',
     'vars',
-    'ref'
+    'ref',
   ]);
   const ctx = useMenuContext();
 
   return (
     <Box
       ref={local.ref}
-      {...ctx.getStyles('label', { className: local.className, style: local.style, styles: local.styles, classNames: local.classNames })}
+      {...ctx.getStyles('label', {
+        className: local.className,
+        style: local.style,
+        styles: local.styles,
+        classNames: local.classNames,
+      })}
       {...others}
     />
   );

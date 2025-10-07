@@ -1,7 +1,7 @@
 import userEvent from '@testing-library/user-event';
-import { render } from '@empoleon-tests/core';
-import { vi } from 'vitest';
 import { JSX } from 'solid-js';
+import { vi } from 'vitest';
+import { render } from '@empoleon-tests/core';
 
 interface Options {
   component: (props: any) => JSX.Element;
@@ -14,14 +14,14 @@ export function itSupportsOnControlMouseEnter(
 ) {
   it(name, async () => {
     const spy = vi.fn();
-    const { container } = render(
-      () => <options.component
+    const { container } = render(() => (
+      <options.component
         {...options.props}
         __onControlMouseEnter={(_event: any, date: any) => {
           spy(date);
         }}
       />
-    );
+    ));
 
     await userEvent.hover(container.querySelector('table button')!);
     expect(spy).toHaveBeenCalledWith(expect.any(String));

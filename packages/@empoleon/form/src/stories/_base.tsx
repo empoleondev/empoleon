@@ -1,11 +1,16 @@
-import { Box, Button, Code, Group, rem } from '@empoleon/core';
 import { createSignal } from 'solid-js';
+import { Box, Button, Code, Group, rem } from '@empoleon/core';
 
 export function FormBase({ children, form }: any) {
   const [values, setValues] = createSignal({});
   return (
     <form
-      style={{ padding: rem(40), 'max-width': rem(400), 'margin-left': 'auto', 'margin-right': 'auto' }}
+      style={{
+        padding: rem(40),
+        'max-width': rem(400),
+        'margin-left': 'auto',
+        'margin-right': 'auto',
+      }}
       onSubmit={form.onSubmit(setValues)}
       onReset={form.onReset}
     >

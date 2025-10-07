@@ -19,7 +19,7 @@ export type ModalHeaderFactory = Factory<{
 
 const defaultProps: Partial<ModalHeaderProps> = {};
 
-export const ModalHeader = factory<ModalHeaderFactory>(_props => {
+export const ModalHeader = factory<ModalHeaderFactory>((_props) => {
   const props = useProps('ModalHeader', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -27,7 +27,7 @@ export const ModalHeader = factory<ModalHeaderFactory>(_props => {
     'style',
     'styles',
     'vars',
-    'ref'
+    'ref',
   ]);
 
   const ctx = useModalContext();
@@ -35,7 +35,12 @@ export const ModalHeader = factory<ModalHeaderFactory>(_props => {
   return (
     <ModalBaseHeader
       ref={local.ref}
-      {...ctx.getStyles('header', { classNames: local.classNames, style: local.style, styles: local.styles, className: local.className })}
+      {...ctx.getStyles('header', {
+        classNames: local.classNames,
+        style: local.style,
+        styles: local.styles,
+        className: local.className,
+      })}
       {...others}
     />
   );

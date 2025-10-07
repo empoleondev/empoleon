@@ -1,9 +1,9 @@
+import { For } from 'solid-js';
 import { Carousel, CarouselProps } from '@empoleon/carousel';
 import { Button, Paper, Text, Title, useEmpoleonTheme } from '@empoleon/core';
 import { useMediaQuery } from '@empoleon/hooks';
 import { EmpoleonDemo } from '@empoleonx/demo';
 import classes from './Carousel.demo.cards.module.css';
-import { For } from 'solid-js';
 
 const cssCode = `.card {
   height: 440px;

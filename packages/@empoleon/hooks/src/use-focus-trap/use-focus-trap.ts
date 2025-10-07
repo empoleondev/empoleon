@@ -1,8 +1,10 @@
-import { createEffect, createSignal, onCleanup, Accessor } from 'solid-js';
+import { Accessor, createEffect, createSignal, onCleanup } from 'solid-js';
 import { scopeTab } from './scope-tab';
 import { FOCUS_SELECTOR } from './tabbable';
 
-export function useFocusTrap(activeAccessor: Accessor<boolean> | boolean): (instance: HTMLElement | null) => void {
+export function useFocusTrap(
+  activeAccessor: Accessor<boolean> | boolean
+): (instance: HTMLElement | null) => void {
   const [ref, setRef] = createSignal<HTMLElement | null>(null);
 
   const setRefCallback = (node: HTMLElement | null) => {

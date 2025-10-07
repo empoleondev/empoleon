@@ -1,4 +1,4 @@
-import { createSignal, createEffect } from 'solid-js';
+import { createEffect, createSignal } from 'solid-js';
 
 interface EyeDropperOpenOptions {
   signal?: AbortSignal;
@@ -11,7 +11,7 @@ export interface EyeDropperOpenReturnType {
 declare global {
   interface Window {
     EyeDropper?: {
-      new(): {
+      new (): {
         open(options?: EyeDropperOpenOptions): Promise<EyeDropperOpenReturnType>;
       };
     };
@@ -19,11 +19,13 @@ declare global {
 }
 
 function checkSupport(): boolean {
-  return typeof window !== 'undefined' &&
+  return (
+    typeof window !== 'undefined' &&
     !navigator.userAgent.includes('OPR') &&
     'EyeDropper' in window &&
     typeof window.EyeDropper === 'function' &&
-    window.isSecureContext;
+    window.isSecureContext
+  );
 }
 
 export function useEyeDropper() {
@@ -37,7 +39,9 @@ export function useEyeDropper() {
     }
   });
 
-  const open = async (options: EyeDropperOpenOptions = {}): Promise<EyeDropperOpenReturnType | undefined> => {
+  const open = async (
+    options: EyeDropperOpenOptions = {}
+  ): Promise<EyeDropperOpenReturnType | undefined> => {
     if (!supported()) return undefined;
 
     try {

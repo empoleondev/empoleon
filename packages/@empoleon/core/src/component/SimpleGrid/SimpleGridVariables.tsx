@@ -1,12 +1,12 @@
 import { Accessor } from 'solid-js';
 import {
+  EmpoleonBreakpoint,
   filterProps,
   getBaseValue,
   getSortedBreakpoints,
   getSpacing,
   InlineStyles,
   keys,
-  EmpoleonBreakpoint,
   px,
   useEmpoleonTheme,
 } from '../../core';
@@ -18,13 +18,15 @@ interface SimpleGridVariablesProps extends SimpleGridProps {
 
 export function SimpleGridMediaVariables(props: SimpleGridVariablesProps) {
   const theme = useEmpoleonTheme();
-  const _verticalSpacing = () => props.verticalSpacing === undefined ? props.spacing : props.verticalSpacing;
+  const _verticalSpacing = () =>
+    props.verticalSpacing === undefined ? props.spacing : props.verticalSpacing;
 
-  const baseStyles: Accessor<Record<string, string | undefined>> = () => filterProps({
-    '--sg-spacing-x': getSpacing(getBaseValue(props.spacing)),
-    '--sg-spacing-y': getSpacing(getBaseValue(_verticalSpacing())),
-    '--sg-cols': getBaseValue(props.cols)?.toString(),
-  });
+  const baseStyles: Accessor<Record<string, string | undefined>> = () =>
+    filterProps({
+      '--sg-spacing-x': getSpacing(getBaseValue(props.spacing)),
+      '--sg-spacing-y': getSpacing(getBaseValue(_verticalSpacing())),
+      '--sg-cols': getBaseValue(props.cols)?.toString(),
+    });
 
   const queries = keys(theme.breakpoints).reduce<Record<string, Record<string, any>>>(
     (acc, breakpoint) => {
@@ -86,15 +88,21 @@ function getUniqueBreakpoints(props: Omit<SimpleGridVariablesProps, 'selector'>)
 }
 
 export function SimpleGridContainerVariables(props: SimpleGridVariablesProps) {
-  const _verticalSpacing = () => props.verticalSpacing === undefined ? props.spacing : props.verticalSpacing;
+  const _verticalSpacing = () =>
+    props.verticalSpacing === undefined ? props.spacing : props.verticalSpacing;
 
-  const baseStyles: Accessor<Record<string, string | undefined>> = () => filterProps({
-    '--sg-spacing-x': getSpacing(getBaseValue(props.spacing)),
-    '--sg-spacing-y': getSpacing(getBaseValue(_verticalSpacing())),
-    '--sg-cols': getBaseValue(props.cols)?.toString(),
+  const baseStyles: Accessor<Record<string, string | undefined>> = () =>
+    filterProps({
+      '--sg-spacing-x': getSpacing(getBaseValue(props.spacing)),
+      '--sg-spacing-y': getSpacing(getBaseValue(_verticalSpacing())),
+      '--sg-cols': getBaseValue(props.cols)?.toString(),
+    });
+
+  const uniqueBreakpoints = getUniqueBreakpoints({
+    spacing: props.spacing,
+    verticalSpacing: props.verticalSpacing,
+    cols: props.cols,
   });
-
-  const uniqueBreakpoints = getUniqueBreakpoints({ spacing: props.spacing, verticalSpacing: props.verticalSpacing, cols: props.cols });
 
   const queries = uniqueBreakpoints.reduce<Record<string, Record<string, any>>>(
     (acc, breakpoint) => {

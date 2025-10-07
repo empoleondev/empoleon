@@ -1,6 +1,6 @@
+import { createSignal } from 'solid-js';
 import { Select, SelectProps } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal } from 'solid-js';
 
 const code = `
 import { Select } from '@empoleon/core';
@@ -14,10 +14,12 @@ function Demo() {
 }
 `;
 
-function Demo(props: SelectProps & {
-  hasLeftSection?: boolean;
-  hasRightSection?: boolean;
-}) {
+function Demo(
+  props: SelectProps & {
+    hasLeftSection?: boolean;
+    hasRightSection?: boolean;
+  }
+) {
   const getLeftSection = () => {
     if (!props.hasLeftSection) return undefined;
     return '🔽';
@@ -49,37 +51,37 @@ export const kitchenSink: EmpoleonDemo = {
       prop: 'label',
       type: 'string',
       initialValue: 'Select your framework',
-      libraryValue: ''
+      libraryValue: '',
     },
     {
       prop: 'description',
       type: 'string',
       initialValue: '',
-      libraryValue: ''
+      libraryValue: '',
     },
     {
       prop: 'error',
       type: 'string',
       initialValue: '',
-      libraryValue: ''
+      libraryValue: '',
     },
     {
       prop: 'placeholder',
       type: 'string',
       initialValue: 'Pick one',
-      libraryValue: ''
+      libraryValue: '',
     },
     {
       prop: 'withAsterisk',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'required',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'variant',
@@ -89,56 +91,56 @@ export const kitchenSink: EmpoleonDemo = {
       data: [
         { label: 'Default', value: 'default' },
         { label: 'Filled', value: 'filled' },
-        { label: 'Unstyled', value: 'unstyled' }
-      ]
+        { label: 'Unstyled', value: 'unstyled' },
+      ],
     },
     {
       prop: 'size',
       type: 'size',
       initialValue: 'sm',
-      libraryValue: 'sm'
+      libraryValue: 'sm',
     },
     {
       prop: 'radius',
       type: 'size',
       initialValue: 'sm',
-      libraryValue: 'sm'
+      libraryValue: 'sm',
     },
     {
       prop: 'disabled',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'readOnly',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'searchable',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'clearable',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'allowDeselect',
       type: 'boolean',
       initialValue: true,
-      libraryValue: true
+      libraryValue: true,
     },
     {
       prop: 'withCheckIcon',
       type: 'boolean',
       initialValue: true,
-      libraryValue: true
+      libraryValue: true,
     },
     {
       prop: 'checkIconPosition',
@@ -147,14 +149,14 @@ export const kitchenSink: EmpoleonDemo = {
       libraryValue: 'left',
       data: [
         { label: 'Left', value: 'left' },
-        { label: 'Right', value: 'right' }
-      ]
+        { label: 'Right', value: 'right' },
+      ],
     },
     {
       prop: 'withScrollArea',
       type: 'boolean',
       initialValue: true,
-      libraryValue: true
+      libraryValue: true,
     },
     {
       prop: 'maxDropdownHeight',
@@ -163,7 +165,7 @@ export const kitchenSink: EmpoleonDemo = {
       libraryValue: 220,
       min: 100,
       max: 500,
-      step: 20
+      step: 20,
     },
     {
       prop: 'limit',
@@ -172,31 +174,31 @@ export const kitchenSink: EmpoleonDemo = {
       libraryValue: undefined,
       min: 1,
       max: 20,
-      step: 1
+      step: 1,
     },
     {
       prop: 'nothingFoundMessage',
       type: 'string',
       initialValue: '',
-      libraryValue: ''
+      libraryValue: '',
     },
     {
       prop: 'withErrorStyles',
       type: 'boolean',
       initialValue: true,
-      libraryValue: true
+      libraryValue: true,
     },
     {
       prop: 'hasLeftSection',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'hasRightSection',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'leftSectionWidth',
@@ -205,7 +207,7 @@ export const kitchenSink: EmpoleonDemo = {
       libraryValue: undefined,
       min: 0,
       max: 100,
-      step: 5
+      step: 5,
     },
     {
       prop: 'rightSectionWidth',
@@ -214,7 +216,7 @@ export const kitchenSink: EmpoleonDemo = {
       libraryValue: undefined,
       min: 0,
       max: 100,
-      step: 5
-    }
-  ]
+      step: 5,
+    },
+  ],
 };

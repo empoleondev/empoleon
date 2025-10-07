@@ -1,3 +1,4 @@
+import { createEffect, splitProps } from 'solid-js';
 import {
   BoxProps,
   CompoundStylesApiProps,
@@ -7,11 +8,10 @@ import {
   ScrollArea,
   useProps,
 } from '@empoleon/core';
+import { useId } from '@empoleon/hooks';
 import { useSpotlightContext } from './Spotlight.context';
 import { spotlightActions } from './spotlight.store';
 import classes from './Spotlight.module.css';
-import { createEffect, splitProps } from 'solid-js';
-import { useId } from '@empoleon/hooks';
 
 export type SpotlightActionsListStylesNames = 'actionsList' | 'actionsListInner';
 
@@ -27,7 +27,7 @@ export type SpotlightActionsListFactory = Factory<{
   compound: true;
 }>;
 
-export const SpotlightActionsList = factory<SpotlightActionsListFactory>(_props => {
+export const SpotlightActionsList = factory<SpotlightActionsListFactory>((_props) => {
   const props = useProps('SpotlightActionsList', null, _props);
   const [local, others] = splitProps(props, [
     'className',
@@ -37,7 +37,7 @@ export const SpotlightActionsList = factory<SpotlightActionsListFactory>(_props 
     'vars',
     'classNames',
     'styles',
-    'ref'
+    'ref',
   ]);
   const ctx = useSpotlightContext();
   const generatedId = `empoleon-${useId().replace(/:/g, '')}`;
@@ -50,7 +50,12 @@ export const SpotlightActionsList = factory<SpotlightActionsListFactory>(_props 
 
   return (
     <ScrollArea.Autosize
-      {...ctx.getStyles('actionsList', { className: local.className, style: local.style, classNames: local.classNames, styles: local.styles })}
+      {...ctx.getStyles('actionsList', {
+        className: local.className,
+        style: local.style,
+        classNames: local.classNames,
+        styles: local.styles,
+      })}
       ref={local.ref}
       type="scroll"
       scrollbarSize="var(--spotlight-actions-list-padding)"

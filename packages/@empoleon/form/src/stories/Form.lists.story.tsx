@@ -1,6 +1,14 @@
-import { ActionIcon, Button, Group, EmpoleonProvider, Switch, Text, TextInput } from '@empoleon/core';
+import { Component, For, JSX } from 'solid-js';
+import {
+  ActionIcon,
+  Button,
+  EmpoleonProvider,
+  Group,
+  Switch,
+  Text,
+  TextInput,
+} from '@empoleon/core';
 import { randomId } from '@empoleon/hooks';
-import { For, Component, JSX } from 'solid-js';
 import { useForm } from '../use-form';
 import { FormBase } from './_base';
 
@@ -15,14 +23,14 @@ interface FormValues {
 }
 
 export default {
-   title: 'Form',
-   decorators: [
+  title: 'Form',
+  decorators: [
     (Story: () => JSX.Element) => (
       <EmpoleonProvider>
         <Story />
       </EmpoleonProvider>
     ),
-  ]
+  ],
 };
 
 export const Lists: Component = () => {
@@ -155,10 +163,7 @@ export const ListsUncontrolled: Component = () => {
         >
           Add employee
         </Button>
-        <Button
-          type="button"
-          onClick={() => form.reorderListItem('employees', { from: 0, to: 2 })}
-        >
+        <Button type="button" onClick={() => form.reorderListItem('employees', { from: 0, to: 2 })}>
           Reorder
         </Button>
       </Group>

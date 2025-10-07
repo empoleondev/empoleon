@@ -4,14 +4,13 @@ export function useToggle<T = boolean>(options: readonly T[] = [false, true] as 
   const [state, setState] = createSignal<T[]>(options as T[]);
 
   const toggle = (action?: T | ((current: T) => T)) => {
-    setState(prevState => {
+    setState((prevState) => {
       if (action === undefined) {
         return prevState.slice(1).concat(prevState[0]);
       }
 
-      const value = typeof action === 'function'
-        ? (action as (current: T) => T)(prevState[0])
-        : action;
+      const value =
+        typeof action === 'function' ? (action as (current: T) => T)(prevState[0]) : action;
 
       const index = prevState.indexOf(value);
       if (index === -1) return prevState;

@@ -1,12 +1,12 @@
 import { JSX, splitProps } from 'solid-js';
 import {
   createVarsResolver,
+  EmpoleonRadius,
   factory,
   Factory,
   getDefaultZIndex,
   getRadius,
   getSize,
-  EmpoleonRadius,
   rem,
   StylesApiProps,
   useProps,
@@ -66,18 +66,16 @@ const defaultProps: Partial<ModalRootProps> = {
   yOffset: '5dvh',
 };
 
-const varsResolver = createVarsResolver<ModalRootFactory>(
-  (_, props) => ({
-    root: {
-      '--modal-radius': props.radius === undefined ? undefined : getRadius(props.radius),
-      '--modal-size': getSize(props.size, 'modal-size'),
-      '--modal-y-offset': rem(props.yOffset),
-      '--modal-x-offset': rem(props.xOffset),
-    },
-  })
-);
+const varsResolver = createVarsResolver<ModalRootFactory>((_, props) => ({
+  root: {
+    '--modal-radius': props.radius === undefined ? undefined : getRadius(props.radius),
+    '--modal-size': getSize(props.size, 'modal-size'),
+    '--modal-y-offset': rem(props.yOffset),
+    '--modal-x-offset': rem(props.xOffset),
+  },
+}));
 
-export const ModalRoot = factory<ModalRootFactory>(_props => {
+export const ModalRoot = factory<ModalRootFactory>((_props) => {
   const props = useProps('ModalRoot', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -93,7 +91,7 @@ export const ModalRoot = factory<ModalRootFactory>(_props => {
     'centered',
     'xOffset',
     '__staticSelector',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<ModalRootFactory>({
@@ -110,7 +108,14 @@ export const ModalRoot = factory<ModalRootFactory>(_props => {
   });
 
   return (
-    <ModalProvider value={{ yOffset: local.yOffset, scrollAreaComponent: local.scrollAreaComponent, getStyles, fullScreen: local.fullScreen }}>
+    <ModalProvider
+      value={{
+        yOffset: local.yOffset,
+        scrollAreaComponent: local.scrollAreaComponent,
+        getStyles,
+        fullScreen: local.fullScreen,
+      }}
+    >
       <ModalBase
         ref={local.ref}
         {...getStyles('root')}

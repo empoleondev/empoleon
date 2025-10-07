@@ -1,6 +1,6 @@
 import { CssVariable } from '../../Box';
-import { FactoryPayload } from '../../factory';
 import { EmpoleonTheme } from '../../EmpoleonProvider';
+import { FactoryPayload } from '../../factory';
 
 export type TransformVars<V> = {
   [Key in keyof V]: V[Key] extends CssVariable ? Record<V[Key], string | undefined> : never;

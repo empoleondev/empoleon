@@ -1,3 +1,4 @@
+import { splitProps } from 'solid-js';
 import { useMergedRef } from '@empoleon/hooks';
 import {
   BoxProps,
@@ -11,7 +12,6 @@ import {
 import { Popover } from '../../Popover';
 import { useMenuContext } from '../Menu.context';
 import classes from '../Menu.module.css';
-import { splitProps } from 'solid-js';
 
 export type MenuDropdownStylesNames = 'dropdown';
 
@@ -27,7 +27,7 @@ export type MenuDropdownFactory = Factory<{
   compound: true;
 }>;
 
-export const MenuDropdown = factory<MenuDropdownFactory>(_props => {
+export const MenuDropdown = factory<MenuDropdownFactory>((_props) => {
   const props = useProps('MenuDropdown', null, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -39,8 +39,8 @@ export const MenuDropdown = factory<MenuDropdownFactory>(_props => {
     'onMouseLeave',
     'onKeyDown',
     'children',
-    'ref'
-  ])
+    'ref',
+  ]);
 
   let wrapperRef: HTMLDivElement | undefined;
   const ctx = useMenuContext();
@@ -48,7 +48,8 @@ export const MenuDropdown = factory<MenuDropdownFactory>(_props => {
   const handleKeyDown = createEventHandler<any>(local.onKeyDown, (event: any) => {
     if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
       event.preventDefault();
-      wrapperRef?.querySelectorAll<HTMLButtonElement>('[data-menu-item]:not(:disabled)')[0]
+      wrapperRef
+        ?.querySelectorAll<HTMLButtonElement>('[data-menu-item]:not(:disabled)')[0]
         ?.focus();
     }
   });

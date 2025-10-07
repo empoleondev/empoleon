@@ -1,9 +1,9 @@
+import { createEffect, createSignal, JSX } from 'solid-js';
 import { useDisclosure, useInterval } from '@empoleon/hooks';
+import { EmpoleonProvider } from '../../core';
 import { Button } from '../Button';
 import { Modal } from '../Modal';
 import { FloatingIndicator } from './FloatingIndicator';
-import { createEffect, createSignal, JSX } from 'solid-js';
-import { EmpoleonProvider } from '../../core';
 
 export default {
   title: 'FloatingIndicator',

@@ -1,3 +1,4 @@
+import { createEffect, splitProps } from 'solid-js';
 import { useId } from '@empoleon/hooks';
 import {
   Box,
@@ -10,7 +11,6 @@ import {
 } from '../../../core';
 import { useComboboxContext } from '../Combobox.context';
 import classes from '../Combobox.module.css';
-import { createEffect, splitProps } from 'solid-js';
 
 export type ComboboxOptionsStylesNames = 'options';
 
@@ -31,7 +31,7 @@ export type ComboboxOptionsFactory = Factory<{
 
 const defaultProps: Partial<ComboboxOptionsProps> = {};
 
-export const ComboboxOptions = factory<ComboboxOptionsFactory>(_props => {
+export const ComboboxOptions = factory<ComboboxOptionsFactory>((_props) => {
   const props = useProps('ComboboxOptions', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -41,7 +41,7 @@ export const ComboboxOptions = factory<ComboboxOptionsFactory>(_props => {
     'id',
     'onMouseDown',
     'labelledBy',
-    'ref'
+    'ref',
   ]);
   const ctx = useComboboxContext();
   const _id = useId(local.id);
@@ -53,14 +53,19 @@ export const ComboboxOptions = factory<ComboboxOptionsFactory>(_props => {
   return (
     <Box
       ref={local.ref}
-      {...ctx.getStyles('options', { className: local.className, style: local.style, classNames: local.classNames, styles: local.styles })}
+      {...ctx.getStyles('options', {
+        className: local.className,
+        style: local.style,
+        classNames: local.classNames,
+        styles: local.styles,
+      })}
       {...others}
       id={_id}
       role="listbox"
       aria-labelledby={local.labelledBy}
       onMouseDown={(event) => {
         event.preventDefault();
-        typeof local.onMouseDown === "function" && local.onMouseDown?.(event);
+        typeof local.onMouseDown === 'function' && local.onMouseDown?.(event);
       }}
     />
   );

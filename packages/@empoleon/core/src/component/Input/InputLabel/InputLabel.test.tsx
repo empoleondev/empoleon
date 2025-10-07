@@ -49,9 +49,17 @@ describe('@empoleon/core/InputLabel', () => {
   });
 
   it('sets htmlFor attribute if labelElement is label', () => {
-    const { container, rerender } = render(() => <InputLabel labelElement="label" for="test">Label</InputLabel>);
+    const { container, rerender } = render(() => (
+      <InputLabel labelElement="label" for="test">
+        Label
+      </InputLabel>
+    ));
     expect(container.querySelector('label')).toHaveAttribute('html-for', 'test');
-    rerender(() => <InputLabel labelElement="div" for="test">Label</InputLabel>);
+    rerender(() => (
+      <InputLabel labelElement="div" for="test">
+        Label
+      </InputLabel>
+    ));
     expect(container.querySelector('div')).not.toHaveAttribute('html-for');
   });
 

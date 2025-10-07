@@ -1,8 +1,8 @@
 import { IconColorPicker } from '@tabler/icons-solidjs';
 import { Color } from '@tiptap/extension-color';
 import TextStyle from '@tiptap/extension-text-style';
-import { useEditor } from '@empoleon/solid-tiptap';
 import StarterKit from '@tiptap/starter-kit';
+import { useEditor } from '@empoleon/solid-tiptap';
 import { RichTextEditor } from '@empoleon/tiptap';
 import { EmpoleonDemo } from '@empoleonx/demo';
 
@@ -92,7 +92,7 @@ function Demo() {
 
         <RichTextEditor.ControlsGroup>
           <RichTextEditor.Control interactive={false}>
-            <IconColorPicker size={16} stroke='1.5' />
+            <IconColorPicker size={16} stroke="1.5" />
           </RichTextEditor.Control>
           <RichTextEditor.Color color="#F03E3E" />
           <RichTextEditor.Color color="#7048E8" />

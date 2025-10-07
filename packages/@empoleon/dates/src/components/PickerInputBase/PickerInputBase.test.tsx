@@ -26,17 +26,17 @@ describe('@empoleon/dates/PickerInputBase', () => {
   datesTests.itSupportsClearableProps({ component: PickerInputBase, props: defaultProps });
 
   it('supports __staticSelector', () => {
-    const { container } = render(
-      () => <PickerInputBase {...defaultProps} __staticSelector="TestStaticSelector" />
-    );
+    const { container } = render(() => (
+      <PickerInputBase {...defaultProps} __staticSelector="TestStaticSelector" />
+    ));
     expect(container.querySelector('*:not(style)')).toHaveClass('empoleon-TestStaticSelector-root');
     expect(screen.getByText('test-value')).toHaveClass('empoleon-TestStaticSelector-input');
   });
 
   it('changes between Popover and Modal based on dropdownType prop', () => {
-    const { rerender, container } = render(
-      () => <PickerInputBase {...defaultProps} dropdownOpened dropdownType="popover" />
-    );
+    const { rerender, container } = render(() => (
+      <PickerInputBase {...defaultProps} dropdownOpened dropdownType="popover" />
+    ));
 
     expect(container.querySelector('.empoleon-Popover-dropdown')).toBeInTheDocument();
     expect(container.querySelector('.empoleon-Modal-content')).not.toBeInTheDocument();
@@ -56,53 +56,53 @@ describe('@empoleon/dates/PickerInputBase', () => {
   });
 
   it('displays placeholder if formattedValue is not provided', () => {
-    const { rerender } = render(
-      () => <PickerInputBase {...defaultProps} formattedValue={null} placeholder="test-placeholder" />
-    );
+    const { rerender } = render(() => (
+      <PickerInputBase {...defaultProps} formattedValue={null} placeholder="test-placeholder" />
+    ));
 
     expect(screen.getByText('test-placeholder')).toBeInTheDocument();
-    rerender(
-      () => <PickerInputBase
+    rerender(() => (
+      <PickerInputBase
         {...defaultProps}
         formattedValue="test-value"
         placeholder="test-placeholder"
       />
-    );
+    ));
     expect(screen.getByText('test-value')).toBeInTheDocument();
     expect(screen.queryAllByText('test-placeholder')).toHaveLength(0);
   });
 
   it('renders clear button if both clearable and shouldClear props are set', () => {
-    const { rerender } = render(
-      () => <PickerInputBase
+    const { rerender } = render(() => (
+      <PickerInputBase
         {...defaultProps}
         clearable
         shouldClear
         clearButtonProps={{ 'aria-label': 'test-clear' }}
       />
-    );
+    ));
 
     expect(screen.getByLabelText('test-clear')).toBeInTheDocument();
 
-    rerender(
-      () => <PickerInputBase
+    rerender(() => (
+      <PickerInputBase
         {...defaultProps}
         clearable={false}
         shouldClear
         clearButtonProps={{ 'aria-label': 'test-clear' }}
       />
-    );
+    ));
 
     expect(screen.queryAllByLabelText('test-clear')).toHaveLength(0);
 
-    rerender(
-      () => <PickerInputBase
+    rerender(() => (
+      <PickerInputBase
         {...defaultProps}
         clearable
         shouldClear={false}
         clearButtonProps={{ 'aria-label': 'test-clear' }}
       />
-    );
+    ));
 
     expect(screen.queryAllByLabelText('test-clear')).toHaveLength(0);
   });
@@ -110,15 +110,15 @@ describe('@empoleon/dates/PickerInputBase', () => {
   it('calls onClear when clear button is clicked', async () => {
     const spy = vi.fn();
 
-    render(
-      () => <PickerInputBase
+    render(() => (
+      <PickerInputBase
         {...defaultProps}
         clearable
         shouldClear
         onClear={spy}
         clearButtonProps={{ 'aria-label': 'test-clear' }}
       />
-    );
+    ));
 
     await userEvent.click(screen.getByLabelText('test-clear'));
     expect(spy).toHaveBeenCalled();

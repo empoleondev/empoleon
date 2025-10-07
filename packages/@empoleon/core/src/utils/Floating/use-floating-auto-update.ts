@@ -1,4 +1,4 @@
-import { createSignal, createEffect, onCleanup, Accessor } from 'solid-js';
+import { Accessor, createEffect, createSignal, onCleanup } from 'solid-js';
 import { autoUpdate } from '@empoleon/solid-floating-ui';
 import { FloatingPosition } from './types';
 
@@ -58,7 +58,7 @@ export function useFloatingAutoUpdate({
   createEffect(() => {
     // Only increment when opened changes (not on initial run)
     if (opened !== undefined) {
-      setDelayedUpdate(c => c + 1);
+      setDelayedUpdate((c) => c + 1);
     }
   });
 }

@@ -1,7 +1,7 @@
+import { splitProps } from 'solid-js';
 import { BoxProps, ElementProps, Switch } from '@empoleon/core';
 import { getControlLabel } from './get-control-label';
 import { ConfiguratorControl } from './types';
-import { splitProps } from 'solid-js';
 
 export type ConfiguratorBooleanControlOptions = ConfiguratorControl<
   'boolean',
@@ -17,11 +17,7 @@ export interface ConfiguratorBooleanControlProps
 }
 
 export function ConfiguratorBooleanControl(props: ConfiguratorBooleanControlProps) {
-  const [local, others] = splitProps(props, [
-    'value',
-    'onChange',
-    'prop'
-  ]);
+  const [local, others] = splitProps(props, ['value', 'onChange', 'prop']);
 
   return (
     <Switch

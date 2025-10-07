@@ -1,18 +1,8 @@
-import {
-  createSignal,
-  createEffect,
-  onCleanup,
-  splitProps,
-  Show,
-} from 'solid-js';
+import { createEffect, createSignal, onCleanup, Show, splitProps } from 'solid-js';
 import { useScrollAreaContext } from '../ScrollArea.context';
-import {
-  ScrollAreaScrollbarAuto,
-  ScrollAreaScrollbarAutoProps,
-} from './ScrollAreaScrollbarAuto';
+import { ScrollAreaScrollbarAuto, ScrollAreaScrollbarAutoProps } from './ScrollAreaScrollbarAuto';
 
-export interface ScrollAreaScrollbarHoverProps
-  extends ScrollAreaScrollbarAutoProps {
+export interface ScrollAreaScrollbarHoverProps extends ScrollAreaScrollbarAutoProps {
   forceMount?: true;
 }
 

@@ -1,4 +1,4 @@
-import { createSignal, createEffect, onCleanup } from 'solid-js';
+import { createEffect, createSignal, onCleanup } from 'solid-js';
 
 export type EmpoleonStoreSubscriber<Value> = (value: Value) => void;
 type SetStateCallback<Value> = (value: Value) => Value;

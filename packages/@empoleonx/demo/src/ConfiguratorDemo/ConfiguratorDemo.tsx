@@ -1,4 +1,5 @@
 import { createEffect, createMemo, createSignal, For, JSX } from 'solid-js';
+import { Dynamic } from 'solid-js/web';
 import { DemoAreaProps } from '../DemoArea';
 import { DemoCode } from '../DemoCode';
 import { DemoColumns } from '../DemoColumns';
@@ -19,10 +20,9 @@ import {
   ConfiguratorStringControl,
   ConfiguratorStringControlOptions,
   ConfiguratorTextareaControl,
-  ConfiguratorTextareaControlOptions
+  ConfiguratorTextareaControlOptions,
 } from './controls';
 import { Code, getCodeArray } from './get-code-array';
-import { Dynamic } from 'solid-js/web';
 
 const ControlComponents = {
   boolean: ConfiguratorBooleanControl,
@@ -32,7 +32,7 @@ const ControlComponents = {
   select: ConfiguratorSelectControl,
   size: ConfiguratorSizeControl,
   number: ConfiguratorNumberControl,
-  textarea: ConfiguratorTextareaControl
+  textarea: ConfiguratorTextareaControl,
 };
 
 export type ConfiguratorControlOptions =
@@ -62,7 +62,9 @@ export function ConfiguratorDemo(props: ConfiguratorDemoProps) {
   const setStateField = (field: string, value: any) =>
     setState((current) => ({ ...current, [field]: value }));
 
-  const code = createMemo(() => getCodeArray({ code: props.code, controls: props.controls, state: state() }));
+  const code = createMemo(() =>
+    getCodeArray({ code: props.code, controls: props.controls, state: state() })
+  );
 
   return (
     <DemoRoot>

@@ -1,7 +1,7 @@
+import { createEffect, createMemo, For } from 'solid-js';
 import { Checkbox, Table } from '@empoleon/core';
 import { useSelection } from '@empoleon/hooks';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createEffect, createMemo, For } from 'solid-js';
 
 const code = `
 import { Checkbox, Table } from '@empoleon/core';

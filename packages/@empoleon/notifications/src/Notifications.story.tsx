@@ -1,7 +1,7 @@
 import { JSX } from 'solid-js';
-import { Button, Group, EmpoleonProvider } from '@empoleon/core';
-import { showNotification } from './notifications.store';
+import { Button, EmpoleonProvider, Group } from '@empoleon/core';
 import { Notifications } from './Notifications';
+import { showNotification } from './notifications.store';
 
 export default {
   title: 'Notifications',
@@ -12,7 +12,7 @@ export default {
         <Story />
       </EmpoleonProvider>
     ),
-  ]
+  ],
 };
 
 export function Usage() {

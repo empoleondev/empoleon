@@ -119,9 +119,9 @@ function FileIcon({ name, isFolder, expanded }: FileIconProps) {
 
   if (isFolder) {
     return expanded ? (
-      <IconFolderOpen color="var(--empoleon-color-yellow-9)" size={14} stroke='2.5' />
+      <IconFolderOpen color="var(--empoleon-color-yellow-9)" size={14} stroke="2.5" />
     ) : (
-      <IconFolder color="var(--empoleon-color-yellow-9)" size={14} stroke='2.5' />
+      <IconFolder color="var(--empoleon-color-yellow-9)" size={14} stroke="2.5" />
     );
   }
 

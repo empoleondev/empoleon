@@ -1,4 +1,4 @@
-import { JSX, splitProps, children as getChildren } from 'solid-js';
+import { children as getChildren, JSX, splitProps } from 'solid-js';
 import { createEventHandler, isElement, useProps } from '../../../core';
 import { Popover, PopoverTargetProps } from '../../Popover';
 import { useHoverCardContext } from '../HoverCard.context';
@@ -16,11 +16,7 @@ const defaultProps = {
 export function HoverCardTarget(_props: HoverCardTargetProps) {
   const props = useProps('HoverCardTarget', defaultProps, _props);
 
-  const [local, others] = splitProps(props, [
-    'children',
-    'refProp',
-    'eventPropsWrapperName',
-  ]);
+  const [local, others] = splitProps(props, ['children', 'refProp', 'eventPropsWrapperName']);
 
   if (!isElement(local.children)) {
     throw new Error(
@@ -46,14 +42,10 @@ export function HoverCardTarget(_props: HoverCardTargetProps) {
           const mergedProps = {
             ...targetProps,
             ...referenceProps,
-            ref: combinedRef
+            ref: combinedRef,
           };
 
-          return (
-            <span {...mergedProps}>
-              {local.children}
-            </span>
-          );
+          return <span {...mergedProps}>{local.children}</span>;
         }}
       </Popover.Target>
     );

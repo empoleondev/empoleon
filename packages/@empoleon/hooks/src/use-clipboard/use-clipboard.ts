@@ -1,4 +1,4 @@
-import { createSignal } from "solid-js";
+import { createSignal } from 'solid-js';
 
 export function useClipboard({ timeout = 2000 } = {}) {
   const [error, setError] = createSignal<Error | null>(null);

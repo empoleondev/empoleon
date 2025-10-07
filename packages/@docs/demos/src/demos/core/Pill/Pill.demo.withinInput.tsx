@@ -1,6 +1,6 @@
+import { For } from 'solid-js';
 import { InputBase, Pill } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { For } from 'solid-js';
 
 const code = `
 import { Pill, InputBase } from '@empoleon/core';
@@ -27,11 +27,7 @@ function Demo() {
     <InputBase component="div" multiline>
       <Pill.Group>
         <For each={Array(10).fill(0)}>
-          {(_, index) => (
-            <Pill withRemoveButton>
-              Item {index()}
-            </Pill>
-          )}
+          {(_, index) => <Pill withRemoveButton>Item {index()}</Pill>}
         </For>
       </Pill.Group>
     </InputBase>

@@ -24,8 +24,8 @@ const OverlayContainer = createModalContextContainer(ModalOverlay);
 const TitleContainer = createModalContextContainer(ModalTitle);
 
 beforeEach(() => {
-    window.scrollTo = vi.fn();
-  });
+  window.scrollTo = vi.fn();
+});
 
 describe('@empoleon/core/Modal', () => {
   tests.itSupportsSystemProps<ModalProps, ModalStylesNames>({
@@ -53,83 +53,117 @@ describe('@empoleon/core/Modal', () => {
   });
 
   it('sets data-centered attribute when centered prop is passed', () => {
-    const { container, rerender } = render(() => <Modal
-      opened={true}
-      onClose={() => {}}
-      title='test-title'
-      withinPortal={false}
-      centered
-    />);
+    const { container, rerender } = render(() => (
+      <Modal opened={true} onClose={() => {}} title="test-title" withinPortal={false} centered />
+    ));
     expect(container.querySelector('.empoleon-Modal-root')).toHaveAttribute('data-centered');
 
-    rerender(() => <Modal opened={true}
-      onClose={() => {}}
-      title='test-title'
-      withinPortal={false}
-      centered={false} />);
+    rerender(() => (
+      <Modal
+        opened={true}
+        onClose={() => {}}
+        title="test-title"
+        withinPortal={false}
+        centered={false}
+      />
+    ));
     expect(container.querySelector('.empoleon-Modal-root')).not.toHaveAttribute('data-centered');
   });
 
   it('sets data-full-screen attribute when fullScreen prop is passed', () => {
-    const { container, rerender } = render(() => <Modal opened={true}
-      onClose={() => {}}
-      title='test-title'
-      withinPortal={false}
-      centered fullScreen />);
+    const { container, rerender } = render(() => (
+      <Modal
+        opened={true}
+        onClose={() => {}}
+        title="test-title"
+        withinPortal={false}
+        centered
+        fullScreen
+      />
+    ));
     expect(container.querySelector('.empoleon-Modal-root')).toHaveAttribute('data-full-screen');
 
-    rerender(() => <Modal opened={true}
-      onClose={() => {}}
-      title='test-title'
-      withinPortal={false}
-      centered fullScreen={false} />);
+    rerender(() => (
+      <Modal
+        opened={true}
+        onClose={() => {}}
+        title="test-title"
+        withinPortal={false}
+        centered
+        fullScreen={false}
+      />
+    ));
     expect(container.querySelector('.empoleon-Modal-root')).not.toHaveAttribute('data-full-screen');
   });
 
   it('does not render overlay when withOverlay is false', () => {
-    const { container, rerender } = render(() => <Modal opened={true}
-      onClose={() => {}}
-      title='test-title'
-      withinPortal={false}
-      centered withOverlay={false} />);
+    const { container, rerender } = render(() => (
+      <Modal
+        opened={true}
+        onClose={() => {}}
+        title="test-title"
+        withinPortal={false}
+        centered
+        withOverlay={false}
+      />
+    ));
     expect(container.querySelector('.empoleon-Modal-overlay')).not.toBeInTheDocument();
 
-    rerender(() => <Modal opened={true}
-      onClose={() => {}}
-      title='test-title'
-      withinPortal={false}
-      centered withOverlay />);
+    rerender(() => (
+      <Modal
+        opened={true}
+        onClose={() => {}}
+        title="test-title"
+        withinPortal={false}
+        centered
+        withOverlay
+      />
+    ));
     expect(container.querySelector('.empoleon-Modal-overlay')).toBeInTheDocument();
   });
 
   it('does not render header if title and withCloseButton are not provided', () => {
-    const { container, rerender } = render(
-      () => <Modal opened={true}
-      onClose={() => {}}
-      withinPortal={false}
-      centered title={null} withCloseButton />
-    );
+    const { container, rerender } = render(() => (
+      <Modal
+        opened={true}
+        onClose={() => {}}
+        withinPortal={false}
+        centered
+        title={null}
+        withCloseButton
+      />
+    ));
     expect(container.querySelector('.empoleon-Modal-header')).toBeInTheDocument();
 
-    rerender(() => <Modal opened={true}
-      onClose={() => {}}
-      withinPortal={false}
-      centered withCloseButton={false} title="test-title" />);
+    rerender(() => (
+      <Modal
+        opened={true}
+        onClose={() => {}}
+        withinPortal={false}
+        centered
+        withCloseButton={false}
+        title="test-title"
+      />
+    ));
     expect(container.querySelector('.empoleon-Modal-header')).toBeInTheDocument();
 
-    rerender(() => <Modal opened={true}
-      onClose={() => {}}
-      withinPortal={false}
-      centered withCloseButton={false} title={null} />);
+    rerender(() => (
+      <Modal
+        opened={true}
+        onClose={() => {}}
+        withinPortal={false}
+        centered
+        withCloseButton={false}
+        title={null}
+      />
+    ));
     expect(container.querySelector('.empoleon-Modal-header')).not.toBeInTheDocument();
   });
 
   it('renders given title', () => {
-    const { container } = render(() => <Modal opened={true}
-      onClose={() => {}}
-      title='test-title'
-      withinPortal={false}
-      centered />);
+    const { container } = render(() => (
+      <Modal opened={true} onClose={() => {}} title="test-title" withinPortal={false} centered />
+    ));
     expect(container.querySelector('.empoleon-Modal-title')?.textContent).toBe('test-title');
   });
 

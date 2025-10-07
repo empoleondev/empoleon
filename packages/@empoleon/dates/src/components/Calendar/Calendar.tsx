@@ -1,4 +1,5 @@
 import dayjs from 'dayjs';
+import { createEffect, createMemo, Ref, Show, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
@@ -20,7 +21,6 @@ import { MonthLevelGroup, MonthLevelGroupStylesNames } from '../MonthLevelGroup'
 import { YearLevelSettings } from '../YearLevel';
 import { YearLevelGroup, YearLevelGroupStylesNames } from '../YearLevelGroup';
 import { clampLevel } from './clamp-level/clamp-level';
-import { createEffect, createMemo, Ref, Show, splitProps } from 'solid-js';
 
 export type CalendarStylesNames =
   | MonthLevelGroupStylesNames
@@ -164,9 +164,9 @@ const defaultProps = {
   minLevel: 'month',
   __updateDateOnYearSelect: true,
   __updateDateOnMonthSelect: true,
-} satisfies Partial<CalendarProps>;;
+} satisfies Partial<CalendarProps>;
 
-export const Calendar = factory<CalendarFactory>(_props  => {
+export const Calendar = factory<CalendarFactory>((_props) => {
   const props = useProps('Calendar', defaultProps, _props);
   const [local, others] = splitProps(props, [
     // CalendarLevel props
@@ -242,7 +242,7 @@ export const Calendar = factory<CalendarFactory>(_props  => {
     'onPreviousMonth',
     'static',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const { resolvedClassNames, resolvedStyles } = useResolvedStylesApi<CalendarFactory>({
@@ -252,7 +252,8 @@ export const Calendar = factory<CalendarFactory>(_props  => {
   });
 
   const [_level, setLevel] = useUncontrolled({
-    value: () => local.level ? clampLevel(local.level, local.minLevel,local. maxLevel) : undefined,
+    value: () =>
+      local.level ? clampLevel(local.level, local.minLevel, local.maxLevel) : undefined,
     defaultValue: clampLevel(local.defaultLevel, local.minLevel, local.maxLevel),
     finalValue: clampLevel(undefined, local.minLevel, local.maxLevel),
     onChange: local.onLevelChange,
@@ -271,14 +272,16 @@ export const Calendar = factory<CalendarFactory>(_props  => {
     classNames: resolvedClassNames,
     unstyled: local.unstyled,
     size: local.size,
-    attributes: local.attributes
+    attributes: local.attributes,
   };
 
   const _columnsToScroll = local.columnsToScroll || local.numberOfColumns || 1;
 
   const now = new Date();
   const fallbackDate =
-    local.minDate && dayjs(now).isAfter(local.minDate) ? local.minDate : dayjs(now).format('YYYY-MM-DD');
+    local.minDate && dayjs(now).isAfter(local.minDate)
+      ? local.minDate
+      : dayjs(now).format('YYYY-MM-DD');
   const currentDate = createMemo(() => _date() || fallbackDate);
 
   const handleNextMonth = () => {
@@ -393,7 +396,6 @@ export const Calendar = factory<CalendarFactory>(_props  => {
           __stopPropagation={local.__stopPropagation}
           withCellSpacing={local.withCellSpacing}
           headerControlsOrder={local.headerControlsOrder}
-
           {...stylesApiProps}
         />
       </Show>
@@ -426,7 +428,6 @@ export const Calendar = factory<CalendarFactory>(_props  => {
           __stopPropagation={local.__stopPropagation}
           withCellSpacing={local.withCellSpacing}
           headerControlsOrder={local.headerControlsOrder}
-
           {...stylesApiProps}
         />
       </Show>

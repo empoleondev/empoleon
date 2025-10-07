@@ -1,4 +1,4 @@
-import { onCleanup } from "solid-js";
+import { onCleanup } from 'solid-js';
 
 export interface UseDelayedHoverInput {
   open: () => void;

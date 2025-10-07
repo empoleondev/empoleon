@@ -1,7 +1,7 @@
-import { IconInfoCircle, IconAlertCircle, IconCheck, IconX } from '@tabler/icons-solidjs';
+import { IconAlertCircle, IconCheck, IconInfoCircle, IconX } from '@tabler/icons-solidjs';
+import { createEffect, createSignal } from 'solid-js';
 import { Alert, AlertProps } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal, createEffect } from 'solid-js';
 
 const code = `
 import { Alert } from '@empoleon/core';
@@ -17,9 +17,11 @@ function Demo() {
 }
 `;
 
-function Demo(props: AlertProps & {
-  iconType?: string;
-}) {
+function Demo(
+  props: AlertProps & {
+    iconType?: string;
+  }
+) {
   const [withCloseButton, setWithCloseButton] = createSignal(props.withCloseButton || false);
 
   createEffect(() => {
@@ -76,31 +78,32 @@ export const kitchenSink: EmpoleonDemo = {
       prop: 'color',
       type: 'color',
       initialValue: 'blue',
-      libraryValue: 'blue'
+      libraryValue: 'blue',
     },
     {
       prop: 'radius',
       type: 'size',
       initialValue: 'sm',
-      libraryValue: 'sm'
+      libraryValue: 'sm',
     },
     {
       prop: 'title',
       type: 'string',
       initialValue: 'Alert title',
-      libraryValue: null
+      libraryValue: null,
     },
     {
       prop: 'children',
       type: 'string',
-      initialValue: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. At officiis, quae tempore necessitatibus placeat saepe.',
+      initialValue:
+        'Lorem ipsum dolor sit, amet consectetur adipisicing elit. At officiis, quae tempore necessitatibus placeat saepe.',
       libraryValue: null,
     },
     {
       prop: 'withCloseButton',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'iconType',
@@ -118,7 +121,7 @@ export const kitchenSink: EmpoleonDemo = {
       prop: 'autoContrast',
       type: 'boolean',
       initialValue: true,
-      libraryValue: true
+      libraryValue: true,
     },
   ],
 };

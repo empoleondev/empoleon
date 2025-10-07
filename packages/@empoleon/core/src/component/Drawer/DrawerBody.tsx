@@ -19,7 +19,7 @@ export type DrawerBodyFactory = Factory<{
 
 const defaultProps: Partial<DrawerBodyProps> = {};
 
-export const DrawerBody = factory<DrawerBodyFactory>(_props => {
+export const DrawerBody = factory<DrawerBodyFactory>((_props) => {
   const props = useProps('DrawerBody', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -27,7 +27,7 @@ export const DrawerBody = factory<DrawerBodyFactory>(_props => {
     'style',
     'styles',
     'vars',
-    'ref'
+    'ref',
   ]);
 
   const ctx = useDrawerContext();
@@ -35,7 +35,12 @@ export const DrawerBody = factory<DrawerBodyFactory>(_props => {
   return (
     <ModalBaseBody
       ref={local.ref}
-      {...ctx.getStyles('body', { classNames: local.classNames, style: local.style, styles: local.styles, className: local.className })}
+      {...ctx.getStyles('body', {
+        classNames: local.classNames,
+        style: local.style,
+        styles: local.styles,
+        className: local.className,
+      })}
       {...others}
     />
   );

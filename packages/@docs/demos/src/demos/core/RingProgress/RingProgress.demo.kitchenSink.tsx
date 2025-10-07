@@ -1,6 +1,6 @@
+import { createEffect, createSignal, JSX } from 'solid-js';
 import { RingProgress, RingProgressProps, Text } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal, createEffect, JSX } from 'solid-js';
 
 const code = `
 import { RingProgress, Text } from '@empoleon/core';
@@ -24,16 +24,18 @@ function Demo() {
 }
 `;
 
-function Demo(props: RingProgressProps & {
-  showLabel?: boolean;
-  labelText?: string;
-  section1Value?: number;
-  section2Value?: number;
-  section3Value?: number;
-  section1Color?: string;
-  section2Color?: string;
-  section3Color?: string;
-}) {
+function Demo(
+  props: RingProgressProps & {
+    showLabel?: boolean;
+    labelText?: string;
+    section1Value?: number;
+    section2Value?: number;
+    section3Value?: number;
+    section1Color?: string;
+    section2Color?: string;
+    section3Color?: string;
+  }
+) {
   const [sections, setSections] = createSignal([
     { value: props.section1Value || 40, color: props.section1Color || 'cyan' },
     { value: props.section2Value || 15, color: props.section2Color || 'orange' },
@@ -59,13 +61,7 @@ function Demo(props: RingProgressProps & {
     );
   };
 
-  return (
-    <RingProgress
-      {...props}
-      sections={sections()}
-      label={getLabel()}
-    />
-  );
+  return <RingProgress {...props} sections={sections()} label={getLabel()} />;
 }
 
 export const kitchenSink: EmpoleonDemo = {

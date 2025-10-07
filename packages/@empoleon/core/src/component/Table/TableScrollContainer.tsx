@@ -1,4 +1,4 @@
-import { splitProps, JSX } from 'solid-js';
+import { JSX, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
@@ -46,17 +46,15 @@ const defaultProps = {
   type: 'scrollarea',
 } satisfies Partial<TableScrollContainerProps>;
 
-const varsResolver = createVarsResolver<TableScrollContainerFactory>(
-  (_, props) => ({
-    scrollContainer: {
-      '--table-min-width': rem(props.minWidth),
-      '--table-max-height': rem(props.maxHeight),
-      '--table-overflow': props.type === 'native' ? 'auto' : undefined,
-    },
-  })
-);
+const varsResolver = createVarsResolver<TableScrollContainerFactory>((_, props) => ({
+  scrollContainer: {
+    '--table-min-width': rem(props.minWidth),
+    '--table-max-height': rem(props.maxHeight),
+    '--table-overflow': props.type === 'native' ? 'auto' : undefined,
+  },
+}));
 
-export const TableScrollContainer = factory<TableScrollContainerFactory>(_props => {
+export const TableScrollContainer = factory<TableScrollContainerFactory>((_props) => {
   const props = useProps('TableScrollContainer', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -71,7 +69,7 @@ export const TableScrollContainer = factory<TableScrollContainerFactory>(_props 
     'type',
     'scrollAreaProps',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<TableScrollContainerFactory>({
@@ -101,7 +99,9 @@ export const TableScrollContainer = factory<TableScrollContainerFactory>(_props 
       {...getStyles('scrollContainer')}
       {...others}
     >
-      <Box component='div' {...getStyles('scrollContainerInner')}>{local.children}</Box>
+      <Box component="div" {...getStyles('scrollContainerInner')}>
+        {local.children}
+      </Box>
     </Box>
   );
 });

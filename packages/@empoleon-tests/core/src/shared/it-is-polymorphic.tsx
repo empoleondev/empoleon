@@ -4,7 +4,7 @@ import { getPropsValue } from './get-props-value';
 
 interface Options<Props = any> {
   component: (props: Props) => JSX.Element;
-  props: Props | (() => Props)
+  props: Props | (() => Props);
   selector?: string;
 }
 
@@ -18,10 +18,12 @@ export function itIsPolymorphic<Props>(options: Options<Props>, name = 'is polym
 
   it(`${name}: html element`, () => {
     const baseProps = getPropsValue(options.props);
-    const propsWithComponentAndHref = { ...baseProps, component: "a", href: "#test-link" } as Props & { component: string; href: string };
-    const { container } = render(
-      () => <options.component {...propsWithComponentAndHref} />
-    );
+    const propsWithComponentAndHref = {
+      ...baseProps,
+      component: 'a',
+      href: '#test-link',
+    } as Props & { component: string; href: string };
+    const { container } = render(() => <options.component {...propsWithComponentAndHref} />);
 
     const target = getTarget(container as HTMLElement);
     expect(target.tagName).toBe('A');
@@ -30,10 +32,14 @@ export function itIsPolymorphic<Props>(options: Options<Props>, name = 'is polym
 
   it(`${name}: React component`, () => {
     const baseProps = getPropsValue(options.props);
-    const propsWithComponentAndDataAttribute = { ...baseProps, component: TestComponent, "data-parent-prop": true } as Props & { component: typeof TestComponent; "data-parent-prop": boolean };
-    const { container } = render(
-      () => <options.component {...propsWithComponentAndDataAttribute} />
-    );
+    const propsWithComponentAndDataAttribute = {
+      ...baseProps,
+      component: TestComponent,
+      'data-parent-prop': true,
+    } as Props & { component: typeof TestComponent; 'data-parent-prop': boolean };
+    const { container } = render(() => (
+      <options.component {...propsWithComponentAndDataAttribute} />
+    ));
 
     const target = getTarget(container as HTMLElement);
     expect(target.tagName).toBe('MARK');
@@ -43,10 +49,11 @@ export function itIsPolymorphic<Props>(options: Options<Props>, name = 'is polym
 
   it(`${name}: renderRoot`, () => {
     const baseProps = getPropsValue(options.props);
-    const propsWithRenderRoot = { ...baseProps, renderRoot: (props: any) => <a href="#test-link" {...props} /> } as Props & { renderRoot: (props: any) => JSX.Element };
-    const { container } = render(
-      () => <options.component {...propsWithRenderRoot} />
-    );
+    const propsWithRenderRoot = {
+      ...baseProps,
+      renderRoot: (props: any) => <a href="#test-link" {...props} />,
+    } as Props & { renderRoot: (props: any) => JSX.Element };
+    const { container } = render(() => <options.component {...propsWithRenderRoot} />);
 
     const target = getTarget(container as HTMLElement);
     expect(target.tagName).toBe('A');

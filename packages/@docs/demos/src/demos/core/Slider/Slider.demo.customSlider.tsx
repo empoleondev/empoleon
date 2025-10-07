@@ -1,8 +1,8 @@
 import { IconGripVertical } from '@tabler/icons-solidjs';
+import { createSignal } from 'solid-js';
 import { clamp, useMove } from '@empoleon/hooks';
 import { EmpoleonDemo } from '@empoleonx/demo';
 import classes from './Slider.demo.customSlider.module.css';
-import { createSignal } from 'solid-js';
 
 const cssCode = `
 .root {
@@ -171,7 +171,7 @@ function Demo() {
           class={classes.thumb}
           style={{ left: `calc(${value() * 100}% - var(--thumb-width) / 2)` }}
         >
-          <IconGripVertical stroke='1.5' />
+          <IconGripVertical stroke="1.5" />
         </div>
       </div>
     </div>

@@ -33,21 +33,27 @@ function Demo() {
   return (
     <Progress.Root size={40}>
       <Tooltip label="Documents – 33Gb">
-        {(props) => <Progress.Section {...props} value={33} color="cyan">
-          <Progress.Label>Documents</Progress.Label>
-        </Progress.Section>}
+        {(props) => (
+          <Progress.Section {...props} value={33} color="cyan">
+            <Progress.Label>Documents</Progress.Label>
+          </Progress.Section>
+        )}
       </Tooltip>
 
       <Tooltip label="Photos – 28Gb">
-        {(props) => <Progress.Section {...props} value={28} color="pink">
-          <Progress.Label>Photos</Progress.Label>
-        </Progress.Section>}
+        {(props) => (
+          <Progress.Section {...props} value={28} color="pink">
+            <Progress.Label>Photos</Progress.Label>
+          </Progress.Section>
+        )}
       </Tooltip>
 
       <Tooltip label="Other – 15Gb">
-        {(props) => <Progress.Section {...props} value={15} color="orange">
-          <Progress.Label>Other</Progress.Label>
-        </Progress.Section>}
+        {(props) => (
+          <Progress.Section {...props} value={15} color="orange">
+            <Progress.Label>Other</Progress.Label>
+          </Progress.Section>
+        )}
       </Tooltip>
     </Progress.Root>
   );

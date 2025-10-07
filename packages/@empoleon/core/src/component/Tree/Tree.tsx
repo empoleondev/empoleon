@@ -5,10 +5,10 @@ import {
   BoxProps,
   createVarsResolver,
   ElementProps,
+  EmpoleonSpacing,
   factory,
   Factory,
   getSpacing,
-  EmpoleonSpacing,
   StylesApiProps,
   useProps,
   useStyles,
@@ -122,7 +122,7 @@ const varsResolver = createVarsResolver<TreeFactory>((_theme, props) => ({
   },
 }));
 
-export const Tree = factory<TreeFactory>(_props => {
+export const Tree = factory<TreeFactory>((_props) => {
   const props = useProps('Tree', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -142,7 +142,7 @@ export const Tree = factory<TreeFactory>(_props => {
     'levelOffset',
     'checkOnSpace',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const defaultController = useTree();

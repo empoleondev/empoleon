@@ -1,4 +1,4 @@
-import { createSignal, createMemo } from 'solid-js';
+import { createMemo, createSignal } from 'solid-js';
 import { ClearErrors, ClearFieldError, FormErrors, SetErrors, SetFieldError } from '../../types';
 import { filterErrors } from './filter-errors/filter-errors';
 
@@ -27,7 +27,7 @@ export function useFormErrors<Values extends Record<string, any>>(
   const clearFieldError: ClearFieldError = (path) => {
     const current = errorsState();
     if (current[path as string] === undefined) {
-      setErrors(current => current);
+      setErrors((current) => current);
       return;
     }
 

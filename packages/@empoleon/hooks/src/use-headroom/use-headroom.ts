@@ -1,4 +1,4 @@
-import { createSignal, createEffect, onMount, onCleanup } from 'solid-js';
+import { createEffect, createSignal, onCleanup, onMount } from 'solid-js';
 import { useWindowScroll } from '../use-window-scroll/use-window-scroll';
 
 export const isFixed = (current: number, fixedAt: number) => current <= fixedAt;

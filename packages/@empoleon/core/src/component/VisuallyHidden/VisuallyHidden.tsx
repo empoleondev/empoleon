@@ -24,7 +24,7 @@ export type VisuallyHiddenFactory = Factory<{
   stylesNames: VisuallyHiddenStylesNames;
 }>;
 
-export const VisuallyHidden = factory<VisuallyHiddenFactory>(_props => {
+export const VisuallyHidden = factory<VisuallyHiddenFactory>((_props) => {
   const props = useProps('VisuallyHidden', null, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -34,7 +34,7 @@ export const VisuallyHidden = factory<VisuallyHiddenFactory>(_props => {
     'unstyled',
     'vars',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<VisuallyHiddenFactory>({

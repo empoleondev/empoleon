@@ -4,16 +4,10 @@ import { ColorSlider, ColorSliderProps } from '../ColorSlider/ColorSlider';
 
 export interface HueSliderProps extends Omit<ColorSliderProps, 'maxValue' | 'overlays' | 'round'> {}
 
-export const HueSlider = ((_props: HueSliderProps) => {
+export const HueSlider = (_props: HueSliderProps) => {
   const props = useProps('HueSlider', {}, _props);
 
-  const [local, others] = splitProps(props, [
-    'value',
-    'onChange',
-    'onChangeEnd',
-    'color',
-    'ref'
-  ]);
+  const [local, others] = splitProps(props, ['value', 'onChange', 'onChangeEnd', 'color', 'ref']);
 
   return (
     <ColorSlider
@@ -37,6 +31,6 @@ export const HueSlider = ((_props: HueSliderProps) => {
       ]}
     />
   );
-});
+};
 
 (HueSlider as any).displayName = '@empoleon/core/HueSlider';

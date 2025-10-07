@@ -1,4 +1,4 @@
-import { splitProps, JSX } from 'solid-js';
+import { JSX, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
@@ -31,7 +31,7 @@ export type InputPlaceholderFactory = Factory<{
 
 const defaultProps: Partial<InputPlaceholderProps> = {};
 
-export const InputPlaceholder = factory<InputPlaceholderFactory>(_props => {
+export const InputPlaceholder = factory<InputPlaceholderFactory>((_props) => {
   const props = useProps('InputPlaceholder', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -45,7 +45,7 @@ export const InputPlaceholder = factory<InputPlaceholderFactory>(_props => {
     'error',
     'mod',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<InputPlaceholderFactory>({

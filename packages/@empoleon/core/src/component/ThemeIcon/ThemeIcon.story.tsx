@@ -16,24 +16,26 @@ export default {
 function Colors({ index, ...others }: ThemeIconProps & { index?: number }) {
   const colors = Object.keys(DEFAULT_THEME.colors);
 
-  return <div style={{ 'display': 'flex', 'gap': '20px', 'padding': '40px' }}>
-    <For each={colors}>
-      {(color) => (
-        <ThemeIcon
-          color={`${color}${typeof index === 'number' ? `.${index}` : ''}`}
-          {...others}
-          size="lg"
-        >
-          $$
-        </ThemeIcon>
-      )}
-    </For>
-  </div>;
+  return (
+    <div style={{ display: 'flex', gap: '20px', padding: '40px' }}>
+      <For each={colors}>
+        {(color) => (
+          <ThemeIcon
+            color={`${color}${typeof index === 'number' ? `.${index}` : ''}`}
+            {...others}
+            size="lg"
+          >
+            $$
+          </ThemeIcon>
+        )}
+      </For>
+    </div>
+  );
 }
 
 export function SingleElement() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <ThemeIcon>$$</ThemeIcon>
     </div>
   );
@@ -76,7 +78,7 @@ export function Usage() {
 
 export function CssColor() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       Filled variant
       <div>
         <ThemeIcon size="xl" radius="xl" color="#ff00ff">
@@ -119,7 +121,7 @@ export function CssColor() {
 
 export function GradientVariant() {
   return (
-    <div style={{ 'padding': '40px', 'display': 'flex', 'gap': '40px' }}>
+    <div style={{ padding: '40px', display: 'flex', gap: '40px' }}>
       <ThemeIcon size="lg" variant="gradient">
         $$
       </ThemeIcon>

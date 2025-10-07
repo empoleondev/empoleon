@@ -1,6 +1,6 @@
 import { JSX } from 'solid-js';
-import { Kbd } from './Kbd';
 import { EmpoleonProvider } from '../../core';
+import { Kbd } from './Kbd';
 
 export default {
   title: 'Kbd',
@@ -15,7 +15,7 @@ export default {
 
 export function Usage() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Kbd size={30}>Shift</Kbd>
     </div>
   );

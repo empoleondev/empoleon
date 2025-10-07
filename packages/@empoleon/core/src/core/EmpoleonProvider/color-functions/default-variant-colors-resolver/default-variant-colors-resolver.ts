@@ -28,7 +28,8 @@ export type VariantColorsResolver = (
 export const defaultVariantColorsResolver: VariantColorsResolver = (props) => {
   const parsed = parseThemeColor({ color: props.color, theme: props.theme });
 
-  const _autoContrast = typeof props.autoContrast === 'boolean' ? props.autoContrast : props.theme.autoContrast;
+  const _autoContrast =
+    typeof props.autoContrast === 'boolean' ? props.autoContrast : props.theme.autoContrast;
 
   if (props.variant === 'none') {
     return {

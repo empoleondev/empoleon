@@ -13,11 +13,11 @@ export function itSupportsClassName<Props>(
 ) {
   it(name, () => {
     const baseProps = getPropsValue(options.props);
-    const propsWithClassName = { ...baseProps, className: "test-class-name" } as Props & { className: string };
+    const propsWithClassName = { ...baseProps, className: 'test-class-name' } as Props & {
+      className: string;
+    };
 
-    const { container } = render(
-      () => <options.component {...propsWithClassName} />
-    );
+    const { container } = render(() => <options.component {...propsWithClassName} />);
 
     expect(container.querySelector('.test-class-name')).toBeInTheDocument();
   });

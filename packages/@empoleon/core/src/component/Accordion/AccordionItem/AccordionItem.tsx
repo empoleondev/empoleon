@@ -1,3 +1,4 @@
+import { splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
@@ -10,7 +11,6 @@ import {
 import { useAccordionContext } from '../Accordion.context';
 import { AccordionItemProvider } from '../AccordionItem.context';
 import classes from '../Accordion.module.css';
-import { splitProps } from 'solid-js';
 
 export type AccordionItemStylesNames = 'item';
 
@@ -31,7 +31,7 @@ export type AccordionItemFactory = Factory<{
 
 const defaultProps: Partial<AccordionItemProps> = {};
 
-export const AccordionItem = factory<AccordionItemFactory>(_props => {
+export const AccordionItem = factory<AccordionItemFactory>((_props) => {
   const props = useProps('AccordionItem', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -41,7 +41,7 @@ export const AccordionItem = factory<AccordionItemFactory>(_props => {
     'vars',
     'value',
     'mod',
-    'ref'
+    'ref',
   ]);
   const ctx = useAccordionContext();
 
@@ -50,7 +50,13 @@ export const AccordionItem = factory<AccordionItemFactory>(_props => {
       <Box
         ref={local.ref}
         mod={[{ active: ctx.isItemActive(local.value) }, local.mod]}
-        {...ctx.getStyles('item', { className: local.className, classNames: local.classNames, styles: local.styles, style: local.style, variant: ctx.variant() })}
+        {...ctx.getStyles('item', {
+          className: local.className,
+          classNames: local.classNames,
+          styles: local.styles,
+          style: local.style,
+          variant: ctx.variant(),
+        })}
         {...others}
       />
     </AccordionItemProvider>

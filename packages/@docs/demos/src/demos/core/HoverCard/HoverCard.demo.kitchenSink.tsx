@@ -1,6 +1,6 @@
+import { createEffect, createSignal } from 'solid-js';
 import { Button, HoverCard, HoverCardProps, Text } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal, createEffect } from 'solid-js';
 
 const code = `
 import { HoverCard, Button, Text } from '@empoleon/core';
@@ -56,8 +56,8 @@ function Demo(props: HoverCardProps) {
       </HoverCard.Target>
       <HoverCard.Dropdown>
         <Text size="sm">
-          Hover card is revealed when user hovers over target element, it will be hidden once
-          mouse is not over both target and dropdown elements
+          Hover card is revealed when user hovers over target element, it will be hidden once mouse
+          is not over both target and dropdown elements
         </Text>
       </HoverCard.Dropdown>
     </HoverCard>

@@ -1,3 +1,4 @@
+import { splitProps } from 'solid-js';
 import { usePagination } from '@empoleon/hooks';
 import {
   Box,
@@ -5,6 +6,9 @@ import {
   createEventHandler,
   createVarsResolver,
   ElementProps,
+  EmpoleonColor,
+  EmpoleonRadius,
+  EmpoleonSize,
   factory,
   Factory,
   getAutoContrastValue,
@@ -13,16 +17,12 @@ import {
   getRadius,
   getSize,
   getThemeColor,
-  EmpoleonColor,
-  EmpoleonRadius,
-  EmpoleonSize,
   StylesApiProps,
   useProps,
   useStyles,
 } from '../../../core';
 import { PaginationProvider } from '../Pagination.context';
 import classes from '../Pagination.module.css';
-import { splitProps } from 'solid-js';
 
 export type PaginationRootStylesNames = 'root' | 'control' | 'dots';
 export type PaginationRootCssVariables = {
@@ -99,21 +99,19 @@ const defaultProps = {
   boundaries: 1,
 } satisfies Partial<PaginationRootProps>;
 
-const varsResolver = createVarsResolver<PaginationRootFactory>(
-  (theme, props) => ({
-    root: {
-      '--pagination-control-radius': props.radius === undefined ? undefined : getRadius(props.radius),
-      '--pagination-control-size': getSize(props.size, 'pagination-control-size'),
-      '--pagination-control-fz': getFontSize(props.size),
-      '--pagination-active-bg': props.color ? getThemeColor(props.color, theme) : undefined,
-      '--pagination-active-color': getAutoContrastValue(props.autoContrast, theme)
-        ? getContrastColor({ color: props.color, theme, autoContrast: props.autoContrast })
-        : undefined,
-    },
-  })
-);
+const varsResolver = createVarsResolver<PaginationRootFactory>((theme, props) => ({
+  root: {
+    '--pagination-control-radius': props.radius === undefined ? undefined : getRadius(props.radius),
+    '--pagination-control-size': getSize(props.size, 'pagination-control-size'),
+    '--pagination-control-fz': getFontSize(props.size),
+    '--pagination-active-bg': props.color ? getThemeColor(props.color, theme) : undefined,
+    '--pagination-active-color': getAutoContrastValue(props.autoContrast, theme)
+      ? getContrastColor({ color: props.color, theme, autoContrast: props.autoContrast })
+      : undefined,
+  },
+}));
 
-export const PaginationRoot = factory<PaginationRootFactory>(_props => {
+export const PaginationRoot = factory<PaginationRootFactory>((_props) => {
   const props = useProps('PaginationRoot', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -138,7 +136,7 @@ export const PaginationRoot = factory<PaginationRootFactory>(_props => {
     'getItemProps',
     'autoContrast',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<PaginationRootFactory>({
@@ -170,19 +168,21 @@ export const PaginationRoot = factory<PaginationRootFactory>(_props => {
   const handleLastPage = createEventHandler(local.onLastPage, pagination.last);
 
   return (
-    <PaginationProvider value={{
-      total: () => local.total,
-      range: pagination.range,
-      active: pagination.active,
-      disabled: () => local.disabled,
-      getItemProps: local.getItemProps,
-      onChange: pagination.setPage,
-      onNext: handleNextPage,
-      onPrevious: handlePreviousPage,
-      onFirst: handleFirstPage,
-      onLast: handleLastPage,
-      getStyles,
-    }}>
+    <PaginationProvider
+      value={{
+        total: () => local.total,
+        range: pagination.range,
+        active: pagination.active,
+        disabled: () => local.disabled,
+        getItemProps: local.getItemProps,
+        onChange: pagination.setPage,
+        onNext: handleNextPage,
+        onPrevious: handlePreviousPage,
+        onFirst: handleFirstPage,
+        onLast: handleLastPage,
+        getStyles,
+      }}
+    >
       <Box ref={local.ref} {...getStyles('root')} {...others} />
     </PaginationProvider>
   );

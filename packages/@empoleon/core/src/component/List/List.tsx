@@ -1,15 +1,16 @@
+import { JSX, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
   createVarsResolver,
   ElementProps,
+  EmpoleonSize,
+  EmpoleonSpacing,
   factory,
   Factory,
   getFontSize,
   getLineHeight,
   getSpacing,
-  EmpoleonSize,
-  EmpoleonSpacing,
   StylesApiProps,
   useProps,
   useStyles,
@@ -17,7 +18,6 @@ import {
 import { ListProvider } from './List.context';
 import { ListItem, ListItemStylesNames } from './ListItem/ListItem';
 import classes from './List.module.css';
-import { JSX, splitProps } from 'solid-js';
 
 export type ListStylesNames = 'root' | ListItemStylesNames;
 export type ListCssVariables = {
@@ -75,7 +75,7 @@ const varsResolver = createVarsResolver<ListFactory>((_, props) => ({
   },
 }));
 
-export const List = factory<ListFactory>(_props => {
+export const List = factory<ListFactory>((_props) => {
   const props = useProps('List', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -93,7 +93,7 @@ export const List = factory<ListFactory>(_props => {
     'listStyleType',
     'mod',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<ListFactory>({

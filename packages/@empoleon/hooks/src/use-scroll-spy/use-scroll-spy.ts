@@ -1,4 +1,4 @@
-import { createSignal, createEffect, onCleanup } from 'solid-js';
+import { createEffect, createSignal, onCleanup } from 'solid-js';
 import { randomId } from '../utils';
 
 function getHeadingsData(
@@ -101,9 +101,7 @@ export function useScrollSpy({
   let headingsRef: UseScrollSpyHeadingData[] = [];
 
   const handleScroll = () => {
-    setActive(
-      getActiveElement(headingsRef.map((d) => d.getNode().getBoundingClientRect()))
-    );
+    setActive(getActiveElement(headingsRef.map((d) => d.getNode().getBoundingClientRect())));
   };
 
   const initialize = () => {

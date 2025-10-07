@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
-import { MonthsList } from './MonthsList';
 import { createSignal, For, JSX } from 'solid-js';
 import { EmpoleonProvider } from '@empoleon/core';
+import { MonthsList } from './MonthsList';
 
 export default {
   title: 'MonthsList',
@@ -79,20 +79,20 @@ export function WithRange() {
 }
 
 export function Sizes() {
- const sizes = ['xs', 'sm', 'md', 'lg', 'xl'] as const;
+  const sizes = ['xs', 'sm', 'md', 'lg', 'xl'] as const;
 
- return (
-   <div style={{ padding: '40px' }}>
-     <For each={sizes}>
-       {(size) => (
-         <MonthsList
-           year={dayjs().format('YYYY-MM-DD')}
-           size={size}
-           getMonthControlProps={() => ({ selected: true })}
-           mt="xl"
-         />
-       )}
-     </For>
-   </div>
- );
+  return (
+    <div style={{ padding: '40px' }}>
+      <For each={sizes}>
+        {(size) => (
+          <MonthsList
+            year={dayjs().format('YYYY-MM-DD')}
+            size={size}
+            getMonthControlProps={() => ({ selected: true })}
+            mt="xl"
+          />
+        )}
+      </For>
+    </div>
+  );
 }

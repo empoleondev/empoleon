@@ -1,7 +1,7 @@
+import { For } from 'solid-js';
 import { Table } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
 import { elements } from './_data';
-import { For } from 'solid-js';
 
 const code = `
 import { Table } from '@empoleon/core';

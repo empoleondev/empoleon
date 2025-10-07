@@ -1,4 +1,5 @@
 import cx from 'clsx';
+import { splitProps } from 'solid-js';
 import { RemoveScroll } from '@empoleon/solid-remove-scroll';
 import {
   Box,
@@ -12,7 +13,6 @@ import {
 import { useAppShellContext } from '../AppShell.context';
 import { AppShellCompoundProps } from '../AppShell.types';
 import classes from '../AppShell.module.css';
-import { splitProps } from 'solid-js';
 
 export type AppShellFooterStylesNames = 'footer';
 
@@ -30,7 +30,7 @@ export type AppShellFooterFactory = Factory<{
 
 const defaultProps: Partial<AppShellFooterProps> = {};
 
-export const AppShellFooter = factory<AppShellFooterFactory>(_props => {
+export const AppShellFooter = factory<AppShellFooterFactory>((_props) => {
   const props = useProps('AppShellFooter', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -42,7 +42,7 @@ export const AppShellFooter = factory<AppShellFooterFactory>(_props => {
     'withBorder',
     'zIndex',
     'mod',
-    'ref'
+    'ref',
   ]);
 
   const ctx = useAppShellContext();
@@ -57,7 +57,10 @@ export const AppShellFooter = factory<AppShellFooterFactory>(_props => {
       ref={local.ref}
       mod={[{ 'with-border': local.withBorder ?? ctx.withBorder }, local.mod]}
       {...ctx.getStyles('footer', {
-        className: cx({ [RemoveScroll.classNames.zeroRight]: ctx.offsetScrollbars }, local.className),
+        className: cx(
+          { [RemoveScroll.classNames.zeroRight]: ctx.offsetScrollbars },
+          local.className
+        ),
         classNames: local.classNames,
         styles: local.styles,
         style: local.style,

@@ -30,7 +30,7 @@ function Demo() {
 `;
 
 function Demo() {
-  const icon = <IconColorPicker size={18} stroke='1.5' />;
+  const icon = <IconColorPicker size={18} stroke="1.5" />;
 
   return (
     <>

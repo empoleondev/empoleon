@@ -11,17 +11,15 @@ interface AmPmControlsListProps {
 export function AmPmControlsList(props: AmPmControlsListProps) {
   const ctx = useTimePickerContext();
 
-  return <div {...ctx.getStyles('controlsList')}>
-    <For each={[props.labels.am, props.labels.pm]}>
-      {(control) => (
-        <TimeControl
-          value={control}
-          active={props.value === control}
-          onSelect={props.onSelect}
-        />
-      )}
-    </For>
-  </div>;
+  return (
+    <div {...ctx.getStyles('controlsList')}>
+      <For each={[props.labels.am, props.labels.pm]}>
+        {(control) => (
+          <TimeControl value={control} active={props.value === control} onSelect={props.onSelect} />
+        )}
+      </For>
+    </div>
+  );
 }
 
 AmPmControlsList.displayName = '@empoleon/dates/AmPmControlsList';

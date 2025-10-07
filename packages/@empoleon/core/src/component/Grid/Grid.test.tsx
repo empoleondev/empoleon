@@ -1,7 +1,7 @@
+import { JSX } from 'solid-js';
 import { tests } from '@empoleon-tests/core';
 import { Grid, GridProps, GridStylesNames } from './Grid';
 import { GridCol } from './GridCol/GridCol';
-import { JSX } from 'solid-js';
 
 describe('@empoleon/core/Grid', () => {
   tests.itSupportsSystemProps<GridProps, GridStylesNames>({

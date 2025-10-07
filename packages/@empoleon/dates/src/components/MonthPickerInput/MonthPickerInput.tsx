@@ -2,10 +2,10 @@ import { JSX, splitProps } from 'solid-js';
 import {
   __InputStylesNames,
   BoxProps,
+  EmpoleonComponentStaticProperties,
   factory,
   Factory,
   InputVariant,
-  EmpoleonComponentStaticProperties,
   StylesApiProps,
   useProps,
   useResolvedStylesApi,
@@ -47,104 +47,110 @@ const defaultProps: Partial<MonthPickerInputProps> = {
 };
 
 type MonthPickerInputComponent = (<Type extends DatePickerType = 'default'>(
-  props: MonthPickerInputProps<Type> & { ref?: HTMLButtonElement | ((el: HTMLButtonElement) => void) }
+  props: MonthPickerInputProps<Type> & {
+    ref?: HTMLButtonElement | ((el: HTMLButtonElement) => void);
+  }
 ) => JSX.Element) & {
   displayName?: string;
 } & EmpoleonComponentStaticProperties<MonthPickerInputFactory>;
 
-export const MonthPickerInput: MonthPickerInputComponent = factory<MonthPickerInputFactory>(_props => {
-  const props = useProps('MonthPickerInput', defaultProps, _props);
-  const [local, rest] = splitProps(props, [
-    'type',
-    'value',
-    'defaultValue',
-    'onChange',
-    'valueFormat',
-    'labelSeparator',
-    'locale',
-    'classNames',
-    'styles',
-    'unstyled',
-    'closeOnChange',
-    'size',
-    'variant',
-    'dropdownType',
-    'sortDates',
-    'minDate',
-    'maxDate',
-    'vars',
-    'valueFormatter',
-    'attributes',
-    'ref'
-  ]);
+export const MonthPickerInput: MonthPickerInputComponent = factory<MonthPickerInputFactory>(
+  (_props) => {
+    const props = useProps('MonthPickerInput', defaultProps, _props);
+    const [local, rest] = splitProps(props, [
+      'type',
+      'value',
+      'defaultValue',
+      'onChange',
+      'valueFormat',
+      'labelSeparator',
+      'locale',
+      'classNames',
+      'styles',
+      'unstyled',
+      'closeOnChange',
+      'size',
+      'variant',
+      'dropdownType',
+      'sortDates',
+      'minDate',
+      'maxDate',
+      'vars',
+      'valueFormatter',
+      'attributes',
+      'ref',
+    ]);
 
-  const { resolvedClassNames, resolvedStyles } = useResolvedStylesApi<MonthPickerInputFactory>({
-    classNames: local.classNames,
-    styles: local.styles,
-    props,
-  });
+    const { resolvedClassNames, resolvedStyles } = useResolvedStylesApi<MonthPickerInputFactory>({
+      classNames: local.classNames,
+      styles: local.styles,
+      props,
+    });
 
-  const { calendarProps, others } = pickCalendarProps(rest);
+    const { calendarProps, others } = pickCalendarProps(rest);
 
-  const datesInput = useDatesInput({
-    type: local.type as any,
-    value: local.value,
-    defaultValue: local.defaultValue,
-    onChange: local.onChange as any,
-    locale: local.locale,
-    format: local.valueFormat,
-    labelSeparator: local.labelSeparator,
-    closeOnChange: local.closeOnChange,
-    sortDates: local.sortDates,
-    valueFormatter: local.valueFormatter,
-  });
+    const datesInput = useDatesInput({
+      type: local.type as any,
+      value: local.value,
+      defaultValue: local.defaultValue,
+      onChange: local.onChange as any,
+      locale: local.locale,
+      format: local.valueFormat,
+      labelSeparator: local.labelSeparator,
+      closeOnChange: local.closeOnChange,
+      sortDates: local.sortDates,
+      valueFormatter: local.valueFormatter,
+    });
 
-  return (
-    <PickerInputBase
-      formattedValue={datesInput.formattedValue()}
-      dropdownOpened={datesInput.dropdownOpened()}
-      dropdownHandlers={datesInput.dropdownHandlers}
-      classNames={resolvedClassNames}
-      styles={resolvedStyles}
-      unstyled={local.unstyled}
-      ref={local.ref}
-      onClear={datesInput.onClear}
-      shouldClear={datesInput.shouldClear}
-      value={datesInput._value()}
-      size={local.size!}
-      variant={local.variant}
-      dropdownType={local.dropdownType}
-      {...others}
-      attributes={local.attributes}
-      type={local.type as any}
-      __staticSelector="MonthPickerInput"
-    >
-      <MonthPicker
-        {...calendarProps}
-        size={local.size}
-        variant={local.variant}
-        type={local.type}
-        value={datesInput._value()}
-        defaultDate={
-          calendarProps.defaultDate ||
-          (Array.isArray(datesInput._value())
-            ? datesInput._value()[0] || getDefaultClampedDate({ maxDate: local.maxDate, minDate: local.minDate })
-            : datesInput._value() || getDefaultClampedDate({ maxDate: local.maxDate, minDate: local.minDate }))
-        }
-        onChange={datesInput.setValue}
-        locale={local.locale}
+    return (
+      <PickerInputBase
+        formattedValue={datesInput.formattedValue()}
+        dropdownOpened={datesInput.dropdownOpened()}
+        dropdownHandlers={datesInput.dropdownHandlers}
         classNames={resolvedClassNames}
         styles={resolvedStyles}
         unstyled={local.unstyled}
-        __staticSelector="MonthPickerInput"
-        __stopPropagation={local.dropdownType === 'popover'}
-        minDate={local.minDate}
-        maxDate={local.maxDate}
+        ref={local.ref}
+        onClear={datesInput.onClear}
+        shouldClear={datesInput.shouldClear}
+        value={datesInput._value()}
+        size={local.size!}
+        variant={local.variant}
+        dropdownType={local.dropdownType}
+        {...others}
         attributes={local.attributes}
-      />
-    </PickerInputBase>
-  );
-}) as any;
+        type={local.type as any}
+        __staticSelector="MonthPickerInput"
+      >
+        <MonthPicker
+          {...calendarProps}
+          size={local.size}
+          variant={local.variant}
+          type={local.type}
+          value={datesInput._value()}
+          defaultDate={
+            calendarProps.defaultDate ||
+            (Array.isArray(datesInput._value())
+              ? datesInput._value()[0] ||
+                getDefaultClampedDate({ maxDate: local.maxDate, minDate: local.minDate })
+              : datesInput._value() ||
+                getDefaultClampedDate({ maxDate: local.maxDate, minDate: local.minDate }))
+          }
+          onChange={datesInput.setValue}
+          locale={local.locale}
+          classNames={resolvedClassNames}
+          styles={resolvedStyles}
+          unstyled={local.unstyled}
+          __staticSelector="MonthPickerInput"
+          __stopPropagation={local.dropdownType === 'popover'}
+          minDate={local.minDate}
+          maxDate={local.maxDate}
+          attributes={local.attributes}
+        />
+      </PickerInputBase>
+    );
+  }
+) as any;
 
 MonthPickerInput.classes = { ...PickerInputBase.classes, ...MonthPicker.classes };
 MonthPickerInput.displayName = '@empoleon/dates/MonthPickerInput';

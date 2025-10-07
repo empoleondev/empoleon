@@ -20,7 +20,6 @@ const pressArrow = async (kind: 'right' | 'left') => {
   await userEvent.keyboard(kind === 'right' ? '{ArrowRight}' : '{ArrowLeft}');
 };
 
-
 describe('@empoleon/core/Slider', () => {
   tests.axe([() => <Slider {...defaultProps} />]);
   tests.itSupportsSystemProps<SliderProps, SliderStylesNames>({
@@ -108,15 +107,15 @@ describe('@empoleon/core/Slider', () => {
   });
 
   it('renders label with current value based on callback', async () => {
-    render(
-      () => <Slider
+    render(() => (
+      <Slider
         defaultValue={50}
         step={10}
         label={(val) => `test-label-${val}`}
         labelTransitionProps={{ duration: 0 }}
         labelAlwaysOn
       />
-    );
+    ));
     expect(screen.getByText('test-label-50')).toBeInTheDocument();
     await pressArrow('left');
     expect(screen.getByText('test-label-40')).toBeInTheDocument();
@@ -139,14 +138,14 @@ describe('@empoleon/core/Slider', () => {
     const changeSpy = vi.fn();
     const endSpy = vi.fn();
 
-    render(
-      () => <Slider
+    render(() => (
+      <Slider
         value={50}
         step={10}
         onChange={(value) => changeSpy(performance.now(), value)}
         onChangeEnd={(value) => endSpy(performance.now(), value)}
       />
-    );
+    ));
 
     await pressArrow('right');
 

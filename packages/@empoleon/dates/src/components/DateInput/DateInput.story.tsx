@@ -3,12 +3,12 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/ru';
 
 import customParseFormat from 'dayjs/plugin/customParseFormat';
+import { createSignal, JSX } from 'solid-js';
 import { Button, EmpoleonProvider, Group, TextInput } from '@empoleon/core';
 import { DateStringValue } from '../../types';
 import { DatePickerInput } from '../DatePickerInput';
 import { DatesProvider } from '../DatesProvider';
 import { DateInput } from './DateInput';
-import { createSignal, JSX } from 'solid-js';
 
 dayjs.extend(customParseFormat);
 

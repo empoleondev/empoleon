@@ -1,4 +1,4 @@
-import { createEffect, splitProps, JSX, createMemo } from 'solid-js';
+import { createEffect, createMemo, JSX, splitProps } from 'solid-js';
 import { useId, useUncontrolled } from '@empoleon/hooks';
 import {
   BoxProps,
@@ -78,7 +78,7 @@ export type AutocompleteFactory = Factory<{
 
 const defaultProps: Partial<AutocompleteProps> = {};
 
-export const Autocomplete = factory<AutocompleteFactory>(_props => {
+export const Autocomplete = factory<AutocompleteFactory>((_props) => {
   const props = useProps('Autocomplete', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -117,7 +117,7 @@ export const Autocomplete = factory<AutocompleteFactory>(_props => {
     'rightSection',
     'autoSelectOnBlur',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const _id = useId(local.id);
@@ -188,7 +188,9 @@ export const Autocomplete = factory<AutocompleteFactory>(_props => {
       <Combobox.Target autoComplete={local.autocomplete}>
         {(props) => {
           const inputRef = (el: HTMLInputElement | null) => {
-            (props.ref as ((n: HTMLElement | null) => void) | undefined)?.(el as unknown as HTMLElement | null);
+            (props.ref as ((n: HTMLElement | null) => void) | undefined)?.(
+              el as unknown as HTMLElement | null
+            );
             (local.ref as ((n: HTMLInputElement | null) => void) | undefined)?.(el);
           };
 
@@ -236,8 +238,8 @@ export const Autocomplete = factory<AutocompleteFactory>(_props => {
               attributes={local.attributes}
               id={_id}
             />
-          )}
-        }
+          );
+        }}
       </Combobox.Target>
       <OptionsDropdown
         data={parsedData()}

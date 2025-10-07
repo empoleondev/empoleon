@@ -1,10 +1,4 @@
-import {
-  type Accessor,
-  createSignal,
-  type Setter,
-  type Signal,
-  untrack,
-} from 'solid-js'
+import { createSignal, untrack, type Accessor, type Setter, type Signal } from 'solid-js';
 
 /**
  * Creates a simple reactive state with a getter and setter. Can be controlled by providing your own state through the `value` prop.
@@ -16,49 +10,48 @@ import {
  * ```
  */
 function useUncontrolled<T>(props: {
-  value?: Accessor<T | undefined>
-  onChange?: (value: T, ...payload: any[]) => void
-}): [Accessor<T | undefined>, (value: T | undefined, ...payload: any[]) => void, boolean]
+  value?: Accessor<T | undefined>;
+  onChange?: (value: T, ...payload: any[]) => void;
+}): [Accessor<T | undefined>, (value: T | undefined, ...payload: any[]) => void, boolean];
 function useUncontrolled<T>(props: {
-  value?: Accessor<T | undefined>
-  defaultValue: T
-  finalValue: T
-  onChange?: (value: T, ...payload: any[]) => void
-}): [Accessor<T>, (value: T, ...payload: any[]) => void, boolean]
+  value?: Accessor<T | undefined>;
+  defaultValue: T;
+  finalValue: T;
+  onChange?: (value: T, ...payload: any[]) => void;
+}): [Accessor<T>, (value: T, ...payload: any[]) => void, boolean];
 function useUncontrolled<T>(props: {
-  value?: Accessor<T | undefined>
-  defaultValue?: T
-  finalValue?: T
-  onChange?: (value: T, ...payload: any[]) => void
+  value?: Accessor<T | undefined>;
+  defaultValue?: T;
+  finalValue?: T;
+  onChange?: (value: T, ...payload: any[]) => void;
 }): [Accessor<T | undefined>, (value: T | undefined, ...payload: any[]) => void, boolean] {
   const [uncontrolledSignal, setUncontrolledSignal] = createSignal(
-    props.defaultValue !== undefined? props.defaultValue : props.finalValue,
-  )
+    props.defaultValue !== undefined ? props.defaultValue : props.finalValue
+  );
 
-  const isControlled = () => props.value?.() !== undefined
-  const value = () =>
-    isControlled() ? (props.value?.() as T) : uncontrolledSignal()
+  const isControlled = () => props.value?.() !== undefined;
+  const value = () => (isControlled() ? (props.value?.() as T) : uncontrolledSignal());
 
   const setValue: Setter<T | undefined> = (next?: unknown, ...payload: any[]) => {
     return untrack(() => {
-      let nextValue: Exclude<T, Function>
+      let nextValue: Exclude<T, Function>;
       if (typeof next === 'function') {
-        nextValue = next(value()) as Exclude<T, Function>
+        nextValue = next(value()) as Exclude<T, Function>;
       } else {
-        nextValue = next as Exclude<T, Function>
+        nextValue = next as Exclude<T, Function>;
       }
 
       if (!Object.is(nextValue, value())) {
         if (!isControlled()) {
-          setUncontrolledSignal(nextValue)
+          setUncontrolledSignal(nextValue);
         }
-        props.onChange?.(nextValue, ...payload)
+        props.onChange?.(nextValue, ...payload);
       }
-      return nextValue as never
-    })
-  }
+      return nextValue as never;
+    });
+  };
 
-  return [value, setValue, isControlled()]
+  return [value, setValue, isControlled()];
 }
 
-export { useUncontrolled }
+export { useUncontrolled };

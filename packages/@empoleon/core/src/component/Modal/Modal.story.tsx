@@ -1,4 +1,6 @@
+import { JSX } from 'solid-js';
 import { useDisclosure } from '@empoleon/hooks';
+import { EmpoleonProvider } from '../../core';
 import { Button } from '../Button';
 import { Card } from '../Card';
 import { Menu } from '../Menu';
@@ -8,8 +10,6 @@ import { Stack } from '../Stack';
 import { Tabs } from '../Tabs';
 import { Modal } from './Modal';
 import { useModalsStack } from './use-modals-stack';
-import { JSX } from 'solid-js';
-import { EmpoleonProvider } from '../../core';
 
 export default {
   title: 'Modal',
@@ -28,11 +28,7 @@ const lorem =
 function generateContent(count: number) {
   return Array(count)
     .fill(0)
-    .map(_ => (
-      <p style={{ margin: 0 }}>
-        {lorem}
-      </p>
-    ));
+    .map((_) => <p style={{ margin: 0 }}>{lorem}</p>);
 }
 
 const content = generateContent(20);

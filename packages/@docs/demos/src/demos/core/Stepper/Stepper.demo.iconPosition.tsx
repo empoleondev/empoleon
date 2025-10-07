@@ -1,6 +1,6 @@
+import { createSignal } from 'solid-js';
 import { Stepper } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal } from 'solid-js';
 
 const code = `
 import { createSignal } from 'solid-js';

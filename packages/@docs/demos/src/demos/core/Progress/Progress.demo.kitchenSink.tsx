@@ -33,37 +33,37 @@ export const kitchenSink: EmpoleonDemo = {
       prop: 'color',
       type: 'color',
       initialValue: 'blue',
-      libraryValue: 'blue'
+      libraryValue: 'blue',
     },
     {
       prop: 'size',
       type: 'size',
       initialValue: 'md',
-      libraryValue: 'md'
+      libraryValue: 'md',
     },
     {
       prop: 'radius',
       type: 'size',
       initialValue: 'sm',
-      libraryValue: 'sm'
+      libraryValue: 'sm',
     },
     {
       prop: 'striped',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'animated',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'autoContrast',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'transitionDuration',
@@ -72,7 +72,7 @@ export const kitchenSink: EmpoleonDemo = {
       max: 1000,
       min: 0,
       step: 100,
-      libraryValue: 0
+      libraryValue: 0,
     },
   ],
 };

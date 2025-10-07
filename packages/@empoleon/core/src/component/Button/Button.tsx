@@ -1,15 +1,15 @@
-import { splitProps, JSX, createEffect } from 'solid-js';
+import { createEffect, JSX, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
   createVarsResolver,
-  getFontSize,
-  getRadius,
-  getSize,
   EmpoleonColor,
   EmpoleonGradient,
   EmpoleonRadius,
   EmpoleonSize,
+  getFontSize,
+  getRadius,
+  getSize,
   polymorphicFactory,
   PolymorphicFactory,
   rem,
@@ -112,36 +112,34 @@ const loaderTransition: EmpoleonTransition = {
   transitionProperty: 'transform, opacity',
 };
 
-const varsResolver = createVarsResolver<ButtonFactory>(
-  (theme, props) => {
-    const colors = theme.variantColorResolver({
-      color: props.color || theme.primaryColor,
-      theme,
-      gradient: props.gradient,
-      variant: props.variant || 'filled',
-      autoContrast: props.autoContrast,
-    });
+const varsResolver = createVarsResolver<ButtonFactory>((theme, props) => {
+  const colors = theme.variantColorResolver({
+    color: props.color || theme.primaryColor,
+    theme,
+    gradient: props.gradient,
+    variant: props.variant || 'filled',
+    autoContrast: props.autoContrast,
+  });
 
-    return {
-      root: {
-        '--button-justify': props.justify,
-        '--button-height': getSize(props.size, 'button-height'),
-        '--button-padding-x': getSize(props.size, 'button-padding-x'),
-        '--button-fz': props.size?.includes('compact')
-          ? getFontSize(props.size.replace('compact-', ''))
-          : getFontSize(props.size),
-        '--button-radius': props.radius === undefined ? undefined : getRadius(props.radius),
-        '--button-bg': props.color || props.variant ? colors.background : undefined,
-        '--button-hover': props.color || props.variant ? colors.hover : undefined,
-        '--button-color': colors.color,
-        '--button-bd': props.color || props.variant ? colors.border : undefined,
-        '--button-hover-color': props.color || props.variant ? colors.hoverColor : undefined,
-      },
-    };
-  }
-);
+  return {
+    root: {
+      '--button-justify': props.justify,
+      '--button-height': getSize(props.size, 'button-height'),
+      '--button-padding-x': getSize(props.size, 'button-padding-x'),
+      '--button-fz': props.size?.includes('compact')
+        ? getFontSize(props.size.replace('compact-', ''))
+        : getFontSize(props.size),
+      '--button-radius': props.radius === undefined ? undefined : getRadius(props.radius),
+      '--button-bg': props.color || props.variant ? colors.background : undefined,
+      '--button-hover': props.color || props.variant ? colors.hover : undefined,
+      '--button-color': colors.color,
+      '--button-bd': props.color || props.variant ? colors.border : undefined,
+      '--button-hover-color': props.color || props.variant ? colors.hoverColor : undefined,
+    },
+  };
+});
 
-export const Button = polymorphicFactory<ButtonFactory>(_props => {
+export const Button = polymorphicFactory<ButtonFactory>((_props) => {
   const props = useProps('Button', null, _props);
   const [local, others] = splitProps(props, [
     'style',
@@ -165,7 +163,7 @@ export const Button = polymorphicFactory<ButtonFactory>(_props => {
     'autoContrast',
     'mod',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<ButtonFactory>({
@@ -187,13 +185,15 @@ export const Button = polymorphicFactory<ButtonFactory>(_props => {
   return (
     <UnstyledButton
       ref={local.ref}
-      {...getStyles('root', { active: !local.disabled && !local.loading && !local["data-disabled"] })}
+      {...getStyles('root', {
+        active: !local.disabled && !local.loading && !local['data-disabled'],
+      })}
       unstyled={local.unstyled}
       variant={local.variant}
       disabled={local.disabled || local.loading}
       mod={[
         {
-          disabled: local.disabled || local["data-disabled"],
+          disabled: local.disabled || local['data-disabled'],
           loading: local.loading,
           block: local.fullWidth,
           'with-left-section': hasLeftSection,

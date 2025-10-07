@@ -4,9 +4,9 @@ import {
   BoxProps,
   createVarsResolver,
   ElementProps,
+  EmpoleonColor,
   factory,
   Factory,
-  EmpoleonColor,
   StylesApiProps,
   useProps,
   useStyles,
@@ -42,7 +42,7 @@ const varsResolver = createVarsResolver<MarkFactory>((theme, props) => ({
   },
 }));
 
-export const Mark = factory<MarkFactory>(_props => {
+export const Mark = factory<MarkFactory>((_props) => {
   const props = useProps('Mark', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -54,7 +54,7 @@ export const Mark = factory<MarkFactory>(_props => {
     'color',
     'variant',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<MarkFactory>({
@@ -71,7 +71,15 @@ export const Mark = factory<MarkFactory>(_props => {
     varsResolver,
   });
 
-  return <Box component="mark" ref={local.ref} variant={local.variant} {...getStyles('root')} {...others} />;
+  return (
+    <Box
+      component="mark"
+      ref={local.ref}
+      variant={local.variant}
+      {...getStyles('root')}
+      {...others}
+    />
+  );
 });
 
 Mark.classes = classes;

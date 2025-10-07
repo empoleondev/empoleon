@@ -4,9 +4,7 @@ import { EmpoleonDemo } from '@empoleonx/demo';
 function Wrapper(props: BackgroundImageProps) {
   return (
     <Box maw={300} mx="auto">
-      <BackgroundImage
-        {...props}
-      >
+      <BackgroundImage {...props}>
         <Center p="md">
           <Text c="white">
             BackgroundImage component can be used to add any content on image. It is useful for hero
@@ -49,13 +47,30 @@ export const usage: EmpoleonDemo = {
     {
       prop: 'src',
       type: 'select',
-      initialValue: 'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-6.png',
+      initialValue:
+        'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-6.png',
       libraryValue: '__none__',
       data: [
-        { value: 'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-6.png', label: 'Lighthouse' },
-        { value: 'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-7.png', label: 'Sail boat' },
-        { value: 'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-10.png', label: 'Statue of liberty' },
-        { value: 'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-9.png', label: 'Tropical' },
+        {
+          value:
+            'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-6.png',
+          label: 'Lighthouse',
+        },
+        {
+          value:
+            'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-7.png',
+          label: 'Sail boat',
+        },
+        {
+          value:
+            'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-10.png',
+          label: 'Statue of liberty',
+        },
+        {
+          value:
+            'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-9.png',
+          label: 'Tropical',
+        },
       ],
     },
   ],

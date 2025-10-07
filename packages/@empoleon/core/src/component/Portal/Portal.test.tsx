@@ -29,26 +29,26 @@ describe('@empoleon/core/Portal', () => {
   });
 
   it('syncs its className to the generated Portal node', () => {
-    render(
-      () => <Portal class="test-portal" reuseTargetNode={false}>
+    render(() => (
+      <Portal class="test-portal" reuseTargetNode={false}>
         test-portal
       </Portal>
-    );
+    ));
     const portal = document.querySelector('[data-portal]:not([data-empoleon-shared-portal-node])')!;
     expect(portal.classList).toContain('test-portal');
   });
 
   it('does not crash when className is empty or contains extra spaces', () => {
-    render(
-      () => <Portal class="" reuseTargetNode={false}>
+    render(() => (
+      <Portal class="" reuseTargetNode={false}>
         empty-className
       </Portal>
-    );
-    render(
-      () => <Portal class="hello  world" reuseTargetNode={false}>
+    ));
+    render(() => (
+      <Portal class="hello  world" reuseTargetNode={false}>
         className-with-spaces
       </Portal>
-    );
+    ));
     expect(
       document.querySelectorAll('[data-portal]:not([data-empoleon-shared-portal-node])')
     ).toHaveLength(2);

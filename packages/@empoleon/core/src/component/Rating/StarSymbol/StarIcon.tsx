@@ -1,15 +1,12 @@
-import { JSX, splitProps } from "solid-js";
+import { JSX, splitProps } from 'solid-js';
 
 export function StarIcon(props: JSX.SvgSVGAttributes<SVGSVGElement>) {
-  const [local, others] = splitProps(props, [
-    'width',
-    'height',
-    'style',
-  ]);
+  const [local, others] = splitProps(props, ['width', 'height', 'style']);
 
-  const mergedStyle = typeof local.style === 'object'
-    ? { width: local.width, height: local.height, ...local.style }
-    : { width: local.width, height: local.height };
+  const mergedStyle =
+    typeof local.style === 'object'
+      ? { width: local.width, height: local.height, ...local.style }
+      : { width: local.width, height: local.height };
 
   return (
     <svg

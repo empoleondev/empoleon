@@ -1,6 +1,6 @@
+import { For, JSX } from 'solid-js';
 import { Carousel } from '@empoleon/carousel';
 import { Box } from '@empoleon/core';
-import { For, JSX } from 'solid-js';
 
 function Slide({ children }: { children: JSX.Element }) {
   return (
@@ -23,11 +23,13 @@ function Slide({ children }: { children: JSX.Element }) {
 }
 
 export function Slides({ count }: { count: number }) {
-  return <For each={Array(count).fill(0)}>
-    {(_, index) => (
-      <Carousel.Slide>
-        <Slide>{index() + 1}</Slide>
-      </Carousel.Slide>
-    )}
-  </For>;
+  return (
+    <For each={Array(count).fill(0)}>
+      {(_, index) => (
+        <Carousel.Slide>
+          <Slide>{index() + 1}</Slide>
+        </Carousel.Slide>
+      )}
+    </For>
+  );
 }

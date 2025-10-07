@@ -1,6 +1,6 @@
 import { JSX } from 'solid-js';
-import { TimeValue } from './TimeValue';
 import { EmpoleonProvider } from '@empoleon/core';
+import { TimeValue } from './TimeValue';
 
 export default {
   title: 'TimeValue',
@@ -15,7 +15,7 @@ export default {
 
 export function Usage() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <TimeValue value="12:30" withSeconds />
     </div>
   );

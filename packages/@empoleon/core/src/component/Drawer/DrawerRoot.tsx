@@ -1,11 +1,11 @@
 import { splitProps } from 'solid-js';
 import {
   createVarsResolver,
+  EmpoleonRadius,
   factory,
   Factory,
   getDefaultZIndex,
   getSize,
-  EmpoleonRadius,
   rem,
   StylesApiProps,
   useDirection,
@@ -110,7 +110,7 @@ const varsResolver = createVarsResolver<DrawerRootFactory>((_, props) => ({
   },
 }));
 
-export const DrawerRoot = factory<DrawerRootFactory>(_props => {
+export const DrawerRoot = factory<DrawerRootFactory>((_props) => {
   const props = useProps('DrawerRoot', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -124,7 +124,7 @@ export const DrawerRoot = factory<DrawerRootFactory>(_props => {
     'transitionProps',
     'radius',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const { dir } = useDirection();
@@ -146,7 +146,9 @@ export const DrawerRoot = factory<DrawerRootFactory>(_props => {
   const drawerTransition = (dir === 'rtl' ? rtlTransitions : transitions)[local.position!];
 
   return (
-    <DrawerProvider value={{ scrollAreaComponent: local.scrollAreaComponent, getStyles, radius: local.radius }}>
+    <DrawerProvider
+      value={{ scrollAreaComponent: local.scrollAreaComponent, getStyles, radius: local.radius }}
+    >
       <ModalBase
         ref={local.ref}
         {...getStyles('root')}

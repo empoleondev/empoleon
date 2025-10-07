@@ -1,4 +1,5 @@
 import { Component, createEffect, JSX, splitProps } from 'solid-js';
+import { useUncontrolled } from '@empoleon/hooks';
 import {
   BoxProps,
   ElementProps,
@@ -12,7 +13,6 @@ import { CloseButton } from '../CloseButton';
 import { FileButton } from '../FileButton';
 import { __BaseInputProps, __InputStylesNames, Input, InputVariant } from '../Input';
 import { InputBase } from '../InputBase/InputBase';
-import { useUncontrolled } from '@empoleon/hooks';
 
 export interface FileInputProps<Multiple = false>
   extends BoxProps,
@@ -75,7 +75,7 @@ export type FileInputFactory = Factory<{
 }>;
 
 const DefaultValue: FileInputProps['valueComponent'] = ({ value }) => (
-  <div style={{ 'overflow': 'hidden', 'text-overflow': 'ellipsis', 'white-space': 'nowrap' }}>
+  <div style={{ overflow: 'hidden', 'text-overflow': 'ellipsis', 'white-space': 'nowrap' }}>
     {Array.isArray(value) ? value.map((file) => file.name).join(', ') : value?.name}
   </div>
 );
@@ -84,7 +84,7 @@ const defaultProps: Partial<FileInputProps> = {
   valueComponent: DefaultValue,
 };
 
-const _FileInput = factory<FileInputFactory>(_props => {
+const _FileInput = factory<FileInputFactory>((_props) => {
   const props = useProps('FileInput', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'unstyled',
@@ -110,7 +110,7 @@ const _FileInput = factory<FileInputFactory>(_props => {
     'classNames',
     'styles',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   let resetFn: (() => void) | undefined;
@@ -155,7 +155,7 @@ const _FileInput = factory<FileInputFactory>(_props => {
     local.rightSection ||
     (local.clearable && hasValue() && !local.readOnly ? (
       <CloseButton
-        {...local.clearButtonProps as any}
+        {...(local.clearButtonProps as any)}
         variant="subtle"
         onClick={() => setValue(local.multiple ? [] : null)}
         size={local.size}

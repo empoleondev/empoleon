@@ -43,7 +43,7 @@ describe('@empoleon/dropzone/Dropzone', () => {
 
   it('assigns open function to given openRef', () => {
     let ref;
-    render(() => <Dropzone {...defaultProps} openRef={(el) => ref = el} />);
+    render(() => <Dropzone {...defaultProps} openRef={(el) => (ref = el)} />);
     expect(ref).toBeInstanceOf(Function);
   });
 

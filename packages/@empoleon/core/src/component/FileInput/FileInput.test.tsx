@@ -24,7 +24,7 @@ describe('@empoleon/core/FileInput', () => {
     refType: HTMLButtonElement,
     displayName: '@empoleon/core/FileInput',
     stylesApiSelectors: [...inputStylesApiSelectors],
-    selector: '*:not(style):not([style*="display: none"])'
+    selector: '*:not(style):not([style*="display: none"])',
   });
 
   tests.itSupportsInputProps<FileInputProps>({

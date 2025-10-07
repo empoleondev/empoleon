@@ -20,9 +20,11 @@ function Demo() {
 function Demo() {
   return (
     <Tooltip label="Tooltip for disabled button">
-      {(props) => <ActionIcon {...props} size="xl" data-disabled onClick={(event) => event.preventDefault()}>
-        <IconHeart />
-      </ActionIcon>}
+      {(props) => (
+        <ActionIcon {...props} size="xl" data-disabled onClick={(event) => event.preventDefault()}>
+          <IconHeart />
+        </ActionIcon>
+      )}
     </Tooltip>
   );
 }

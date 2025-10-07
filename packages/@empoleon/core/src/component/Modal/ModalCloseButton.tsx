@@ -19,7 +19,7 @@ export type ModalCloseButtonFactory = Factory<{
 
 const defaultProps: Partial<ModalCloseButtonProps> = {};
 
-export const ModalCloseButton = factory<ModalCloseButtonFactory>(_props => {
+export const ModalCloseButton = factory<ModalCloseButtonFactory>((_props) => {
   const props = useProps('ModalCloseButton', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -27,7 +27,7 @@ export const ModalCloseButton = factory<ModalCloseButtonFactory>(_props => {
     'style',
     'styles',
     'vars',
-    'ref'
+    'ref',
   ]);
 
   const ctx = useModalContext();
@@ -35,7 +35,12 @@ export const ModalCloseButton = factory<ModalCloseButtonFactory>(_props => {
   return (
     <ModalBaseCloseButton
       ref={local.ref}
-      {...ctx.getStyles('close', { classNames: local.classNames, style: local.style, styles: local.styles, className: local.className })}
+      {...ctx.getStyles('close', {
+        classNames: local.classNames,
+        style: local.style,
+        styles: local.styles,
+        className: local.className,
+      })}
       {...others}
     />
   );

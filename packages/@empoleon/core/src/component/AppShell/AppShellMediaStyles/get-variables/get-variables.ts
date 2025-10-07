@@ -1,4 +1,4 @@
-import { em, getSortedBreakpoints, keys, EmpoleonTheme } from '../../../../core';
+import { em, EmpoleonTheme, getSortedBreakpoints, keys } from '../../../../core';
 import type { AppShellProps } from '../../AppShell';
 import { assignAsideVariables } from '../assign-aside-variables/assign-aside-variables';
 import { assignFooterVariables } from '../assign-footer-variables/assign-footer-variables';

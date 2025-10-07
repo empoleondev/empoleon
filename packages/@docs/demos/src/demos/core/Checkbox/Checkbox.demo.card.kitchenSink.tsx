@@ -1,6 +1,6 @@
+import { createEffect, createSignal } from 'solid-js';
 import { Checkbox, Group, Text } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal, createEffect } from 'solid-js';
 
 const code = `
 import { Checkbox, Group, Text } from '@empoleon/core';
@@ -78,19 +78,19 @@ export const kitchenSink: EmpoleonDemo = {
       prop: 'checked',
       type: 'boolean',
       initialValue: true,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'withBorder',
       type: 'boolean',
       initialValue: true,
-      libraryValue: true
+      libraryValue: true,
     },
     {
       prop: 'radius',
       type: 'size',
       initialValue: 'sm',
-      libraryValue: 'sm'
+      libraryValue: 'sm',
     },
   ],
 };

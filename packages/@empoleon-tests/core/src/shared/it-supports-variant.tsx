@@ -4,16 +4,20 @@ import { getPropsValue } from './get-props-value';
 
 interface Options<Props = any> {
   component: (props: Props) => JSX.Element;
-  props: Props | (() => Props)
+  props: Props | (() => Props);
   selector?: string;
 }
 
 export function itSupportsVariant<Props>(options: Options<Props>, name = 'supports variant') {
   it(name, () => {
     const baseProps = getPropsValue(options.props);
-    const propsWithVariant = { ...baseProps, variant: "__test-variant" } as Props & { variant: string };
+    const propsWithVariant = { ...baseProps, variant: '__test-variant' } as Props & {
+      variant: string;
+    };
 
-    const { container } = render(() => <options.component {...propsWithVariant} variant="__test-variant" />);
+    const { container } = render(() => (
+      <options.component {...propsWithVariant} variant="__test-variant" />
+    ));
     expect(container.querySelector(options.selector || '*:not(style)')!).toHaveAttribute(
       'data-variant',
       '__test-variant'

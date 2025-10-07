@@ -1,7 +1,7 @@
 import { JSX } from 'solid-js';
+import { EmpoleonProvider } from '../../core';
 import { Button } from '../Button';
 import { SimpleGrid } from './SimpleGrid';
-import { EmpoleonProvider } from '../../core';
 
 export default {
   title: 'SimpleGrid',
@@ -16,7 +16,7 @@ export default {
 
 export function Usage() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <SimpleGrid cols={{ sm: 2, md: 5 }} spacing={{ sm: 100 }} verticalSpacing={{ sm: 10 }}>
         {Array(10)
           .fill(0)
@@ -30,7 +30,7 @@ export function Usage() {
 
 export function ContainerQueries() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <SimpleGrid
         type="container"
         cols={{ '1000px': 5, '700px': 2 }}

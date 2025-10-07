@@ -1,11 +1,11 @@
+import { JSX } from 'solid-js';
 import { rem } from '@empoleon/core';
 import { render } from '../render';
-import { JSX } from 'solid-js';
 import { getPropsValue } from '../shared/get-props-value';
 
 interface Options<Props = any> {
   component: (props: Props) => JSX.Element;
-  props: Props | (() => Props)
+  props: Props | (() => Props);
   selector?: string;
 }
 
@@ -20,7 +20,7 @@ export function itSupportsMarginsProps<Props>(
     const propsWithM = { ...baseProps, m: 45 } as Props & { m: number };
     const { container: m } = render(() => <options.component {...propsWithM} />);
 
-    const propsWithMTheme = { ...baseProps, m: "xl" } as Props & { m: string };
+    const propsWithMTheme = { ...baseProps, m: 'xl' } as Props & { m: string };
     const { container: theme } = render(() => <options.component {...propsWithMTheme} />);
 
     const propsWithMx = { ...baseProps, mx: 34 } as Props & { mx: number };

@@ -1,8 +1,8 @@
+import { waitFor } from '@solidjs/testing-library';
 import { render, tests } from '@empoleon-tests/core';
-import { Card, CardSection, CardProps, CardStylesNames } from './Card';
 // import { CardSection } from './CardSection/CardSection';
 import { DEFAULT_THEME, EmpoleonProvider } from '../../core';
-import { waitFor } from '@solidjs/testing-library';
+import { Card, CardProps, CardSection, CardStylesNames } from './Card';
 
 describe('@empoleon/core/Card', () => {
   tests.itSupportsSystemProps<CardProps, CardStylesNames>({
@@ -25,16 +25,16 @@ describe('@empoleon/core/Card', () => {
     stylesApiSelectors: ['root', 'section'],
   });
 
-  it('sets data-fist-section and data-last-section props to first and last Card.Section components', async() => {
-    const { container } = render(
-      () => <Card>
+  it('sets data-fist-section and data-last-section props to first and last Card.Section components', async () => {
+    const { container } = render(() => (
+      <Card>
         <Card.Section />
         <div>Content</div>
         <Card.Section />
         <div>Content</div>
         <Card.Section />
       </Card>
-    );
+    ));
 
     const sections = container.querySelectorAll('.empoleon-Card-section');
 

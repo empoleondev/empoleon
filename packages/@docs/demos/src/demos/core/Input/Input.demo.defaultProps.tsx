@@ -1,4 +1,4 @@
-import { createTheme, Input, EmpoleonThemeProvider, NativeSelect, TextInput } from '@empoleon/core';
+import { createTheme, EmpoleonThemeProvider, Input, NativeSelect, TextInput } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `

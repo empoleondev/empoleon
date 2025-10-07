@@ -1,7 +1,7 @@
+import { createSignal } from 'solid-js';
 import { Loader, Text, TextInput } from '@empoleon/core';
 import { useDebouncedCallback } from '@empoleon/hooks';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal } from 'solid-js';
 
 const code = `
 import { useState } from 'react';
@@ -81,7 +81,7 @@ function Demo() {
     setLoading(false);
   }, 500);
 
-  const handleChange = (event: Event & { currentTarget: HTMLInputElement; target: Element; }) => {
+  const handleChange = (event: Event & { currentTarget: HTMLInputElement; target: Element }) => {
     setSearch(event.currentTarget.value);
     handleSearch(event.currentTarget.value);
   };
@@ -95,9 +95,7 @@ function Demo() {
         rightSection={loading() && <Loader size={20} />}
       />
       {searchResults().map((result) => (
-        <Text size="sm">
-          {result.title}
-        </Text>
+        <Text size="sm">{result.title}</Text>
       ))}
     </>
   );

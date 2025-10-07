@@ -1,7 +1,7 @@
+import { createSignal } from 'solid-js';
 import { Button, Code, Text, TextInput } from '@empoleon/core';
 import { hasLength, isEmail, useForm } from '@empoleon/form';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal } from 'solid-js';
 
 const code = `
 import { useState } from 'react';
@@ -63,17 +63,8 @@ function Demo() {
 
   return (
     <form onSubmit={form.onSubmit(setSubmittedValues)}>
-      <TextInput
-        {...form.getInputProps('name')}
-        label="Name"
-        placeholder="Name"
-      />
-      <TextInput
-        {...form.getInputProps('email')}
-        mt="md"
-        label="Email"
-        placeholder="Email"
-      />
+      <TextInput {...form.getInputProps('name')} label="Name" placeholder="Name" />
+      <TextInput {...form.getInputProps('email')} mt="md" label="Email" placeholder="Email" />
       <Button type="submit" mt="md">
         Submit
       </Button>

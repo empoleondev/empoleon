@@ -52,7 +52,7 @@ export type MenuSubItemFactory = PolymorphicFactory<{
   compound: true;
 }>;
 
-export const MenuSubItem = polymorphicFactory<MenuSubItemFactory>(_props => {
+export const MenuSubItem = polymorphicFactory<MenuSubItemFactory>((_props) => {
   const props = useProps('MenuSubItem', null, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -67,8 +67,8 @@ export const MenuSubItem = polymorphicFactory<MenuSubItemFactory>(_props => {
     'disabled',
     'data-disabled',
     'closeMenuOnClick',
-    'ref'
-  ])
+    'ref',
+  ]);
 
   const dataDisabled = local['data-disabled'];
 
@@ -79,7 +79,9 @@ export const MenuSubItem = polymorphicFactory<MenuSubItemFactory>(_props => {
   const itemRef: HTMLButtonElement | null = null;
   const _others: any = others;
 
-  const colors = local.color ? theme.variantColorResolver({ color: local.color, theme, variant: 'light' }) : undefined;
+  const colors = local.color
+    ? theme.variantColorResolver({ color: local.color, theme, variant: 'light' })
+    : undefined;
   const parsedThemeColor = local.color ? parseThemeColor({ color: local.color, theme }) : null;
 
   const handleKeydown = createEventHandler<any>(_others.onKeyDown, (event: any) => {
@@ -109,7 +111,12 @@ export const MenuSubItem = polymorphicFactory<MenuSubItemFactory>(_props => {
       {...others}
       unstyled={ctx.unstyled}
       tabIndex={ctx.menuItemTabIndex}
-      {...ctx.getStyles('item', { className: local.className, style: local.style, styles: local.styles, classNames: local.classNames })}
+      {...ctx.getStyles('item', {
+        className: local.className,
+        style: local.style,
+        styles: local.styles,
+        classNames: local.classNames,
+      })}
       ref={useMergedRef(itemRef, local.ref)}
       role="menuitem"
       disabled={local.disabled}
@@ -138,14 +145,29 @@ export const MenuSubItem = polymorphicFactory<MenuSubItemFactory>(_props => {
       }}
     >
       {local.leftSection && (
-        <Box component='div' {...ctx.getStyles('itemSection', { styles: local.styles, classNames: local.classNames })} data-position="left">
+        <Box
+          component="div"
+          {...ctx.getStyles('itemSection', { styles: local.styles, classNames: local.classNames })}
+          data-position="left"
+        >
           {local.leftSection}
         </Box>
       )}
 
-      {local.children && <Box component='div' {...ctx.getStyles('itemLabel', { styles: local.styles, classNames: local.classNames })}>{local.children}</Box>}
+      {local.children && (
+        <Box
+          component="div"
+          {...ctx.getStyles('itemLabel', { styles: local.styles, classNames: local.classNames })}
+        >
+          {local.children}
+        </Box>
+      )}
 
-      <Box component='div' {...ctx.getStyles('itemSection', { styles: local.styles, classNames: local.classNames })} data-position="right">
+      <Box
+        component="div"
+        {...ctx.getStyles('itemSection', { styles: local.styles, classNames: local.classNames })}
+        data-position="right"
+      >
         {/* @ts-ignore */}
         {local.rightSection || <AccordionChevron {...ctx.getStyles('chevron')} size={14} />}
       </Box>

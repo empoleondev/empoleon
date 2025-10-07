@@ -4,7 +4,7 @@ import { getPropsValue } from '../shared/get-props-value';
 
 interface Options<Props = any> {
   component: (props: Props) => JSX.Element;
-  props: Props | (() => Props)
+  props: Props | (() => Props);
   selector?: string;
 }
 
@@ -16,10 +16,10 @@ export function itSupportsColorsProps<Props>(
   const baseProps = getPropsValue(options.props);
 
   it(name, () => {
-    const propsWithC = { ...baseProps, c: "#FEFEFE" } as Props & { c: string };
+    const propsWithC = { ...baseProps, c: '#FEFEFE' } as Props & { c: string };
     const { container: c } = render(() => <options.component {...propsWithC} />);
 
-    const propsWithBg = { ...baseProps, bg: "#DCDCDC" } as Props & { bg: string };
+    const propsWithBg = { ...baseProps, bg: '#DCDCDC' } as Props & { bg: string };
     const { container: bg } = render(() => <options.component {...propsWithBg} />);
 
     const propsWithOpacity = { ...baseProps, opacity: 0.85 } as Props & { opacity: number };

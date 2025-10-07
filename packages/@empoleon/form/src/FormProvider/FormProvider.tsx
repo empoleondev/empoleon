@@ -17,7 +17,7 @@ export function createFormContext<
 
   const FormProvider: Component<FormProviderProps<Form>> = (props) => {
     return <FormContext.Provider value={props.form}>{props.children}</FormContext.Provider>;
-  }
+  };
 
   function useFormContext() {
     const ctx = useContext(FormContext);

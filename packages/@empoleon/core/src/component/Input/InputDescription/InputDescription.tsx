@@ -1,12 +1,13 @@
+import { splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
   createVarsResolver,
   ElementProps,
+  EmpoleonFontSize,
   factory,
   Factory,
   getFontSize,
-  EmpoleonFontSize,
   rem,
   StylesApiProps,
   useProps,
@@ -14,7 +15,6 @@ import {
 } from '../../../core';
 import { useInputWrapperContext } from '../InputWrapper.context';
 import classes from '../Input.module.css';
-import { splitProps } from 'solid-js';
 
 export type InputDescriptionStylesNames = 'description';
 export type InputDescriptionCssVariables = {
@@ -46,7 +46,7 @@ const varsResolver = createVarsResolver<InputDescriptionFactory>((_, props) => (
   },
 }));
 
-export const InputDescription = factory<InputDescriptionFactory>(_props => {
+export const InputDescription = factory<InputDescriptionFactory>((_props) => {
   const props = useProps('InputDescription', null, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -60,7 +60,7 @@ export const InputDescription = factory<InputDescriptionFactory>(_props => {
     '__inheritStyles',
     'attributes',
     'variant',
-    'ref'
+    'ref',
   ]);
 
   const __inheritStyles = local.__inheritStyles || true;
@@ -89,7 +89,10 @@ export const InputDescription = factory<InputDescriptionFactory>(_props => {
       ref={local.ref}
       variant={local.variant}
       size={local.size}
-      {...getStyles('description', ctx?.getStyles ? { className: local.className, style: local.style } : undefined)}
+      {...getStyles(
+        'description',
+        ctx?.getStyles ? { className: local.className, style: local.style } : undefined
+      )}
       {...others}
     />
   );

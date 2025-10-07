@@ -1,6 +1,6 @@
+import { createSignal } from 'solid-js';
 import { Button, Drawer, Group } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal } from 'solid-js';
 
 function Demo() {
   const [opened, setOpened] = createSignal(false);

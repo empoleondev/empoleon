@@ -15,7 +15,13 @@ function Demo() {
 function Wrapper(props: any) {
   const [opened, { toggle }] = useDisclosure();
   return (
-    <Burger {...props} size="xl" opened={opened()} onClick={toggle} aria-label="Toggle navigation" />
+    <Burger
+      {...props}
+      size="xl"
+      opened={opened()}
+      onClick={toggle}
+      aria-label="Toggle navigation"
+    />
   );
 }
 

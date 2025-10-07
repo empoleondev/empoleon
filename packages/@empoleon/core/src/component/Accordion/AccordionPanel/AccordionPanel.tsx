@@ -1,3 +1,4 @@
+import { onMount, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
@@ -11,7 +12,6 @@ import { Collapse } from '../../Collapse';
 import { useAccordionContext } from '../Accordion.context';
 import { useAccordionItemContext } from '../AccordionItem.context';
 import classes from '../Accordion.module.css';
-import { onMount, splitProps } from 'solid-js';
 
 export type AccordionPanelStylesNames = 'panel' | 'content';
 
@@ -30,7 +30,7 @@ export type AccordionPanelFactory = Factory<{
   compound: true;
 }>;
 
-export const AccordionPanel = factory<AccordionPanelFactory>(_props => {
+export const AccordionPanel = factory<AccordionPanelFactory>((_props) => {
   const props = useProps('AccordionPanel', null, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -40,7 +40,7 @@ export const AccordionPanel = factory<AccordionPanelFactory>(_props => {
     'vars',
     'children',
     'ref',
-    'onTransitionEnd'
+    'onTransitionEnd',
   ]);
 
   const { value } = useAccordionItemContext();
@@ -58,9 +58,9 @@ export const AccordionPanel = factory<AccordionPanelFactory>(_props => {
       const parentEvent = new CustomEvent('nested-accordion-resize', {
         detail: {
           source: value,
-          newHeight: event.detail.newHeight
+          newHeight: event.detail.newHeight,
         },
-        bubbles: true
+        bubbles: true,
       });
 
       if (local.ref) {
@@ -89,7 +89,7 @@ export const AccordionPanel = factory<AccordionPanelFactory>(_props => {
           className: local.className,
           classNames: local.classNames,
           style: local.style,
-          styles: local.styles
+          styles: local.styles,
         })}
         {...others}
         in={active()}
@@ -102,10 +102,13 @@ export const AccordionPanel = factory<AccordionPanelFactory>(_props => {
           local.onTransitionEnd?.();
         }}
       >
-        <Box component='div' {...ctx.getStyles('content', {
-          classNames: local.classNames,
-          styles: local.styles
-        })}>
+        <Box
+          component="div"
+          {...ctx.getStyles('content', {
+            classNames: local.classNames,
+            styles: local.styles,
+          })}
+        >
           {local.children}
         </Box>
       </Collapse>

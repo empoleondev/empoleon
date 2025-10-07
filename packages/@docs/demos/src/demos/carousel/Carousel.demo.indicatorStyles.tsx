@@ -32,7 +32,7 @@ function Demo() {
 
 function Demo() {
   return (
-    <Carousel withIndicators height='200px' classNames={classes}>
+    <Carousel withIndicators height="200px" classNames={classes}>
       <Slides count={5} />
     </Carousel>
   );

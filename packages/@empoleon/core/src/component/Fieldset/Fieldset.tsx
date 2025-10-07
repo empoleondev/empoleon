@@ -1,18 +1,18 @@
+import { JSX, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
   createVarsResolver,
   ElementProps,
+  EmpoleonRadius,
   factory,
   Factory,
   getRadius,
-  EmpoleonRadius,
   StylesApiProps,
   useProps,
   useStyles,
 } from '../../core';
 import classes from './Fieldset.module.css';
-import { splitProps, JSX } from 'solid-js';
 
 export type FieldsetStylesNames = 'root' | 'legend';
 export type FieldsetVariant = 'default' | 'filled' | 'unstyled';
@@ -49,7 +49,7 @@ const varsResolver = createVarsResolver<FieldsetFactory>((_, props) => ({
   },
 }));
 
-export const Fieldset = factory<FieldsetFactory>(_props => {
+export const Fieldset = factory<FieldsetFactory>((_props) => {
   const props = useProps('Fieldset', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -62,7 +62,7 @@ export const Fieldset = factory<FieldsetFactory>(_props => {
     'variant',
     'children',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<FieldsetFactory>({
@@ -87,7 +87,11 @@ export const Fieldset = factory<FieldsetFactory>(_props => {
       {...getStyles('root', { variant: local.variant })}
       {...others}
     >
-      {local.legend && <Box component='legend' {...getStyles('legend', { variant: local.variant })}>{local.legend}</Box>}
+      {local.legend && (
+        <Box component="legend" {...getStyles('legend', { variant: local.variant })}>
+          {local.legend}
+        </Box>
+      )}
       {local.children}
     </Box>
   );

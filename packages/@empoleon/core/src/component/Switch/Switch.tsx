@@ -1,4 +1,4 @@
-import { splitProps, JSX, createMemo } from 'solid-js';
+import { createMemo, JSX, splitProps } from 'solid-js';
 import { useId, useUncontrolled } from '@empoleon/hooks';
 import {
   Box,
@@ -6,15 +6,15 @@ import {
   createVarsResolver,
   DataAttributes,
   ElementProps,
+  EmpoleonColor,
+  EmpoleonRadius,
+  EmpoleonSize,
   extractStyleProps,
   factory,
   Factory,
   getRadius,
   getSize,
   getThemeColor,
-  EmpoleonColor,
-  EmpoleonRadius,
-  EmpoleonSize,
   StylesApiProps,
   useProps,
   useStyles,
@@ -126,7 +126,7 @@ const varsResolver = createVarsResolver<SwitchFactory>((theme, props) => ({
   },
 }));
 
-export const Switch = factory<SwitchFactory>(_props => {
+export const Switch = factory<SwitchFactory>((_props) => {
   const props = useProps('Switch', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -156,7 +156,7 @@ export const Switch = factory<SwitchFactory>(_props => {
     'mod',
     'withThumbIndicator',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const ctx = useSwitchGroupContext();
@@ -180,11 +180,11 @@ export const Switch = factory<SwitchFactory>(_props => {
   const uuid = useId(local.id);
 
   const contextProps = ctx
-  ? {
-      checked: () => ctx.value.includes(rest.value as string),
-      onChange: ctx.onChange,
-    }
-  : { checked: undefined };
+    ? {
+        checked: () => ctx.value.includes(rest.value as string),
+        onChange: ctx.onChange,
+      }
+    : { checked: undefined };
 
   const [_checked, handleChange] = useUncontrolled({
     value: () => contextProps.checked ?? local.checked,
@@ -219,15 +219,18 @@ export const Switch = factory<SwitchFactory>(_props => {
       ref={local.rootRef}
       mod={local.mod}
       {...styleProps}
-      {...local.wrapperProps as any}
+      {...(local.wrapperProps as any)}
     >
-      <Box component='input'
+      <Box
+        component="input"
         {...rest}
         disabled={local.disabled}
         checked={dataChecked()}
         data-checked={dataChecked()}
         onChange={(event) => {
-          ctx ? contextProps.onChange?.(event) : typeof local.onChange === "function" && local.onChange?.(event);
+          ctx
+            ? contextProps.onChange?.(event)
+            : typeof local.onChange === 'function' && local.onChange?.(event);
           handleChange(event.currentTarget.checked);
         }}
         id={uuid}
@@ -239,17 +242,26 @@ export const Switch = factory<SwitchFactory>(_props => {
 
       <Box
         aria-hidden="true"
-        mod={{ error: local.error, 'label-position': local.labelPosition, 'without-labels': !local.onLabel && !local.offLabel }}
+        mod={{
+          error: local.error,
+          'label-position': local.labelPosition,
+          'without-labels': !local.onLabel && !local.offLabel,
+        }}
         {...getStyles('track')}
       >
         <Box
           component="span"
-          mod={{ 'reduce-motion': true, 'with-thumb-indicator': () => (local.withThumbIndicator && !local.thumbIcon) }}
+          mod={{
+            'reduce-motion': true,
+            'with-thumb-indicator': () => local.withThumbIndicator && !local.thumbIcon,
+          }}
           {...getStyles('thumb')}
         >
           {local.thumbIcon}
         </Box>
-        <Box component='span' {...getStyles('trackLabel')}>{_checked() ? local.onLabel : local.offLabel}</Box>
+        <Box component="span" {...getStyles('trackLabel')}>
+          {_checked() ? local.onLabel : local.offLabel}
+        </Box>
       </Box>
     </InlineInput>
   );

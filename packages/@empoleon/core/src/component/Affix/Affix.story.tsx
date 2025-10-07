@@ -15,7 +15,7 @@ export default {
 
 export function Usage() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Affix position={{ bottom: 'xl', right: 90 }}>
         <Box bg="blue" p="xl">
           Affix box

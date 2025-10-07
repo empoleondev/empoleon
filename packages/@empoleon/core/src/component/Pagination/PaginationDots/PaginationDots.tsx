@@ -33,7 +33,7 @@ const defaultProps = {
   icon: PaginationDotsIcon,
 } satisfies Partial<PaginationDotsProps>;
 
-export const PaginationDots = factory<PaginationDotsFactory>(_props => {
+export const PaginationDots = factory<PaginationDotsFactory>((_props) => {
   const props = useProps('PaginationDots', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -42,20 +42,23 @@ export const PaginationDots = factory<PaginationDotsFactory>(_props => {
     'styles',
     'vars',
     'icon',
-    'ref'
+    'ref',
   ]);
 
   const ctx = usePaginationContext();
   const Icon = local.icon!;
 
   return (
-    <Box ref={local.ref}
+    <Box
+      ref={local.ref}
       {...ctx.getStyles('dots', {
         className: local.className,
         style: local.style,
         styles: local.styles,
-        classNames: local.classNames
-      })} {...others}>
+        classNames: local.classNames,
+      })}
+      {...others}
+    >
       <Icon
         style={{
           width: 'calc(var(--pagination-control-size) / 1.8)',

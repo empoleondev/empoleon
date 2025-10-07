@@ -1,6 +1,6 @@
+import { createEffect, createSignal } from 'solid-js';
 import { RangeSlider } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal, createEffect } from 'solid-js';
 
 const code = `
 import { RangeSlider } from '@empoleon/core';
@@ -85,19 +85,19 @@ export const kitchenSink: EmpoleonDemo = {
       prop: 'color',
       type: 'color',
       initialValue: 'blue',
-      libraryValue: 'blue'
+      libraryValue: 'blue',
     },
     {
       prop: 'size',
       type: 'size',
       initialValue: 'md',
-      libraryValue: 'md'
+      libraryValue: 'md',
     },
     {
       prop: 'radius',
       type: 'size',
       initialValue: 'xl',
-      libraryValue: 'xl'
+      libraryValue: 'xl',
     },
     {
       prop: 'min',
@@ -106,7 +106,7 @@ export const kitchenSink: EmpoleonDemo = {
       libraryValue: 0,
       min: 0,
       max: 50,
-      step: 1
+      step: 1,
     },
     {
       prop: 'max',
@@ -115,7 +115,7 @@ export const kitchenSink: EmpoleonDemo = {
       libraryValue: 100,
       min: 50,
       max: 200,
-      step: 10
+      step: 10,
     },
     {
       prop: 'step',
@@ -124,7 +124,7 @@ export const kitchenSink: EmpoleonDemo = {
       libraryValue: 1,
       min: 1,
       max: 10,
-      step: 1
+      step: 1,
     },
     {
       prop: 'minRange',
@@ -133,19 +133,19 @@ export const kitchenSink: EmpoleonDemo = {
       libraryValue: 10,
       min: 0,
       max: 50,
-      step: 5
+      step: 5,
     },
     {
       prop: 'showLabelOnHover',
       type: 'boolean',
       initialValue: true,
-      libraryValue: true
+      libraryValue: true,
     },
     {
       prop: 'labelAlwaysOn',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'labelFormat',
@@ -162,31 +162,31 @@ export const kitchenSink: EmpoleonDemo = {
       prop: 'disabled',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'inverted',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'showMarks',
       type: 'boolean',
       initialValue: true,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'showMarkLabels',
       type: 'boolean',
       initialValue: true,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'restrictToMarks',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'thumbSize',
@@ -195,13 +195,13 @@ export const kitchenSink: EmpoleonDemo = {
       libraryValue: 16,
       min: 10,
       max: 32,
-      step: 2
+      step: 2,
     },
     {
       prop: 'pushOnOverlap',
       type: 'boolean',
       initialValue: true,
-      libraryValue: true
+      libraryValue: true,
     },
   ],
 };

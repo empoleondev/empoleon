@@ -1,6 +1,6 @@
 {
   "name": "empoleon",
-  "version": "8.0.0",
+  "version": "8.2.0",
   "description": "Empoleon Components Monorepo",
   "packageManager": "yarn@4.5.3",
   "license": "MIT",
@@ -31,8 +31,7 @@
     "release:patch": "npm run release patch",
     "release:minor": "npm run release minor",
     "release:major": "npm run release major",
-    "_test": "npm run prettier:test && npm run syncpack && npm run lint && npm run jest",
-    "__test": "node --experimental-vm-modules node_modules/.bin/jest",
+    "_test": "npm run prettier:test && npm run syncpack && npm run lint && vitest",
     "test:exports": "tsx scripts/tests/exports",
     "test:conflicts": "tsx scripts/tests/conflicts",
     "test:validate-package-json": "tsx scripts/tests/validate-package-json",
@@ -60,11 +59,11 @@
     "embla-carousel-solid": "^8.6.0",
     "framer-motion": "^11.0.22",
     "highlight.js": "^11.10.0",
-    "klona": "^2.0.6",
+    "klona": "2.0.6",
     "lowlight": "^3.1.0",
     "shiki": "^3.1.0",
     "solid-imask": "^7.6.1",
-    "solid-textarea-autosize": "^0.0.5",
+    "solid-textarea-autosize": "0.0.5",
     "type-fest": "^4.27.0"
   },
   "devDependencies": {

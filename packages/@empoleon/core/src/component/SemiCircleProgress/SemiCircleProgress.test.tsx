@@ -42,7 +42,9 @@ describe('@empoleon/core/SemiCircleProgress', () => {
   });
 
   it('assigns labelPosition prop to label data-position attribute', () => {
-    render(() => <SemiCircleProgress {...defaultProps} label="test-label" labelPosition="center" />);
+    render(() => (
+      <SemiCircleProgress {...defaultProps} label="test-label" labelPosition="center" />
+    ));
     expect(screen.getByText('test-label')).toHaveAttribute('data-position', 'center');
   });
 });

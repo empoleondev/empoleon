@@ -12,7 +12,7 @@ function Demo() {
 `;
 
 function Demo() {
-  return <TimeInput leftSection={<IconClock size={16} stroke='1.5' />} />;
+  return <TimeInput leftSection={<IconClock size={16} stroke="1.5" />} />;
 }
 
 export const icon: EmpoleonDemo = {

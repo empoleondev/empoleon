@@ -1,8 +1,8 @@
 import { IconStar } from '@tabler/icons-solidjs';
+import { Show } from 'solid-js';
 import { Avatar, AvatarProps } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
 import { avatars } from './_mockdata';
-import { Show } from 'solid-js';
 
 const code = `
 import { Avatar } from '@empoleon/core';
@@ -29,9 +29,11 @@ function Demo() {
 }
 `;
 
-function Demo(props: AvatarProps & {
-  content?: 'icon' | 'image' | 'name' | 'none';
-}) {
+function Demo(
+  props: AvatarProps & {
+    content?: 'icon' | 'image' | 'name' | 'none';
+  }
+) {
   const getSrc = () => {
     return props.content === 'image' ? avatars[0] : undefined;
   };
@@ -40,14 +42,7 @@ function Demo(props: AvatarProps & {
     return props.content === 'name' ? 'John Doe' : undefined;
   };
 
-  return (
-    <Avatar
-      {...props}
-      src={getSrc()}
-      name={getName()}
-      alt="Demo Avatar"
-    />
-  );
+  return <Avatar {...props} src={getSrc()} name={getName()} alt="Demo Avatar" />;
 }
 
 export const kitchenSink: EmpoleonDemo = {
@@ -75,19 +70,19 @@ export const kitchenSink: EmpoleonDemo = {
       prop: 'color',
       type: 'color',
       initialValue: 'gray',
-      libraryValue: 'gray'
+      libraryValue: 'gray',
     },
     {
       prop: 'size',
       type: 'size',
       initialValue: 'sm',
-      libraryValue: 'sm'
+      libraryValue: 'sm',
     },
     {
       prop: 'radius',
       type: 'size',
       initialValue: 'sm',
-      libraryValue: 'sm'
+      libraryValue: 'sm',
     },
     {
       prop: 'content',
@@ -104,7 +99,7 @@ export const kitchenSink: EmpoleonDemo = {
       prop: 'autoContrast',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
   ],
 };

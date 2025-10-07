@@ -1,15 +1,15 @@
-import { splitProps, JSX } from 'solid-js';
+import { JSX, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
   createVarsResolver,
   ElementProps,
+  EmpoleonColor,
+  EmpoleonRadius,
   factory,
   Factory,
   getRadius,
   getThemeColor,
-  EmpoleonColor,
-  EmpoleonRadius,
   parseThemeColor,
   rem,
   rgba,
@@ -79,7 +79,7 @@ const varsResolver = createVarsResolver<BlockquoteFactory>((theme, props) => {
   };
 });
 
-export const Blockquote = factory<BlockquoteFactory>(_props => {
+export const Blockquote = factory<BlockquoteFactory>((_props) => {
   const props = useProps('Blockquote', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -93,7 +93,7 @@ export const Blockquote = factory<BlockquoteFactory>(_props => {
     'iconSize',
     'cite',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<BlockquoteFactory>({
@@ -112,9 +112,17 @@ export const Blockquote = factory<BlockquoteFactory>(_props => {
 
   return (
     <Box component="blockquote" ref={local.ref} {...getStyles('root')} {...others}>
-      {local.icon && <Box component="span" {...getStyles('icon')}>{local.icon}</Box>}
+      {local.icon && (
+        <Box component="span" {...getStyles('icon')}>
+          {local.icon}
+        </Box>
+      )}
       {local.children}
-      {local.cite && <Box component="cite" {...getStyles('cite')}>{local.cite}</Box>}
+      {local.cite && (
+        <Box component="cite" {...getStyles('cite')}>
+          {local.cite}
+        </Box>
+      )}
     </Box>
   );
 });

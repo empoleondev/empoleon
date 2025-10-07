@@ -1,3 +1,4 @@
+import { createSignal, splitProps } from 'solid-js';
 import {
   BoxProps,
   Button,
@@ -18,7 +19,6 @@ import { IconExternalLink, IconLink } from '../icons/Icons';
 import { useRichTextEditorContext } from '../RichTextEditor.context';
 import { RichTextEditorControlBase, RichTextEditorControlBaseProps } from './RichTextEditorControl';
 import classes from '../RichTextEditor.module.css';
-import { createSignal, splitProps } from 'solid-js';
 
 export type RichTextEditorLinkControlStylesNames =
   | 'control'
@@ -51,7 +51,7 @@ export type RichTextEditorLinkControlFactory = Factory<{
 
 const LinkIcon: RichTextEditorControlBaseProps['icon'] = (props) => <IconLink {...props} />;
 
-export const RichTextEditorLinkControl = factory<RichTextEditorLinkControlFactory>(_props => {
+export const RichTextEditorLinkControl = factory<RichTextEditorLinkControlFactory>((_props) => {
   const props = useProps('RichTextEditorLinkControl', null, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -63,7 +63,7 @@ export const RichTextEditorLinkControl = factory<RichTextEditorLinkControlFactor
     'popoverProps',
     'disableTooltips',
     'initialExternal',
-    'ref'
+    'ref',
   ]);
 
   const ctx = useRichTextEditorContext();
@@ -109,7 +109,11 @@ export const RichTextEditorLinkControl = factory<RichTextEditorLinkControlFactor
   useWindowEvent('edit-link', handleOpen, false);
 
   const { resolvedClassNames, resolvedStyles } =
-    useResolvedStylesApi<RichTextEditorLinkControlFactory>({ classNames: local.classNames, styles: local.styles, props });
+    useResolvedStylesApi<RichTextEditorLinkControlFactory>({
+      classNames: local.classNames,
+      styles: local.styles,
+      props,
+    });
 
   return (
     <Popover

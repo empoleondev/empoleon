@@ -1,6 +1,6 @@
 import { JSX } from 'solid-js';
-import { CopyButton } from './CopyButton';
 import { EmpoleonProvider } from '../../core';
+import { CopyButton } from './CopyButton';
 
 export default {
   title: 'CopyButton',

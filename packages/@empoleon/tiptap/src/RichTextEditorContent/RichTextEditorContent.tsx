@@ -1,4 +1,4 @@
-import { EditorContent } from '@empoleon/solid-tiptap';
+import { splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
@@ -9,9 +9,9 @@ import {
   Typography,
   useProps,
 } from '@empoleon/core';
+import { EditorContent } from '@empoleon/solid-tiptap';
 import { useRichTextEditorContext } from '../RichTextEditor.context';
 import classes from '../RichTextEditor.module.css';
-import { splitProps } from 'solid-js';
 
 export type RichTextEditorContentStylesNames = 'root';
 export interface RichTextEditorContentProps
@@ -26,7 +26,7 @@ export type RichTextEditorContentFactory = Factory<{
   compound: true;
 }>;
 
-export const RichTextEditorContent = factory<RichTextEditorContentFactory>(_props => {
+export const RichTextEditorContent = factory<RichTextEditorContentFactory>((_props) => {
   const props = useProps('RichTextEditorContent', null, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -34,7 +34,7 @@ export const RichTextEditorContent = factory<RichTextEditorContentFactory>(_prop
     'style',
     'styles',
     'vars',
-    'ref'
+    'ref',
   ]);
 
   const ctx = useRichTextEditorContext();
@@ -42,7 +42,12 @@ export const RichTextEditorContent = factory<RichTextEditorContentFactory>(_prop
   if (ctx.withTypographyStyles) {
     return (
       <Typography
-        {...ctx.getStyles('Typography', { className: local.className, style: local.style, styles: local.styles, classNames: local.classNames })}
+        {...ctx.getStyles('Typography', {
+          className: local.className,
+          style: local.style,
+          styles: local.styles,
+          classNames: local.classNames,
+        })}
         unstyled={ctx.unstyled}
         ref={local.ref}
       >

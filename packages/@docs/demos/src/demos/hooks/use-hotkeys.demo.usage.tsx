@@ -1,8 +1,8 @@
+import { createSignal } from 'solid-js';
 import { TextInput } from '@empoleon/core';
 import { getHotkeyHandler } from '@empoleon/hooks';
 import { notifications } from '@empoleon/notifications';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal } from 'solid-js';
 
 const code = `
 import { useState } from 'react';

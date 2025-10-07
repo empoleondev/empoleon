@@ -71,14 +71,14 @@ describe('@empoleon/dates/YearLevelGroup', () => {
   });
 
   it('supports levelControlAriaLabel as function', () => {
-    render(
-      () => <YearLevelGroup
+    render(() => (
+      <YearLevelGroup
         {...defaultProps}
         levelControlAriaLabel={(date) =>
           `${new Date(date).getMonth()}/${new Date(date).getFullYear()}`
         }
       />
-    );
+    ));
     expect(screen.getByText('2022')).toHaveAttribute('aria-label', '3/2022');
   });
 
@@ -90,7 +90,9 @@ describe('@empoleon/dates/YearLevelGroup', () => {
   });
 
   it('supports custom __staticSelector', () => {
-    const { container } = render(() => <YearLevelGroup {...defaultProps} __staticSelector="Calendar" />);
+    const { container } = render(() => (
+      <YearLevelGroup {...defaultProps} __staticSelector="Calendar" />
+    ));
     expect(container.querySelector('table button')).toHaveClass(
       'empoleon-Calendar-monthsListControl'
     );

@@ -19,14 +19,16 @@ describe('@empoleon/core/Input', () => {
     () => <Input aria-label="test-input" />,
     () => <Input placeholder="test-input" />,
     () => <Input placeholder="test-input" error />,
-    () => <Input.Wrapper
-      id="test-id"
-      label="test-label"
-      description="test-description"
-      error="test-error"
-    >
-      <Input id="test-id" />
-    </Input.Wrapper>,
+    () => (
+      <Input.Wrapper
+        id="test-id"
+        label="test-label"
+        description="test-description"
+        error="test-error"
+      >
+        <Input id="test-id" />
+      </Input.Wrapper>
+    ),
   ]);
 
   tests.itSupportsSystemProps<InputProps, InputStylesNames>({
@@ -126,11 +128,11 @@ describe('@empoleon/core/Input', () => {
   });
 
   it('has aria-describedby attribute with id of description element', () => {
-    render(
-      () => <Input.Wrapper label="test" description="test-description" id="test-id">
+    render(() => (
+      <Input.Wrapper label="test" description="test-description" id="test-id">
         <Input id="test-id" />
       </Input.Wrapper>
-    );
+    ));
 
     expect(screen.getByRole('textbox')).toHaveAttribute(
       'aria-describedby',
@@ -139,11 +141,11 @@ describe('@empoleon/core/Input', () => {
   });
 
   it('has aria-describedby attribute with id of error element', () => {
-    render(
-      () => <Input.Wrapper label="test" error="test-error" id="test-id">
+    render(() => (
+      <Input.Wrapper label="test" error="test-error" id="test-id">
         <Input id="test-id" />
       </Input.Wrapper>
-    );
+    ));
 
     expect(screen.getByRole('textbox')).toHaveAttribute(
       'aria-describedby',
@@ -179,30 +181,30 @@ describe('@empoleon/core/Input', () => {
   });
 
   it('displays __defaultRightSection if __clearable is false and __clearSection is set', () => {
-    const { rerender } = render(
-      () => <Input
+    const { rerender } = render(() => (
+      <Input
         __clearable={false}
         __clearSection="clear"
         __defaultRightSection="default-right-section"
       />
-    );
+    ));
     expect(screen.getByText('default-right-section')).toBeInTheDocument();
     expect(screen.queryByText('clear')).not.toBeInTheDocument();
 
-    rerender(
-      () => <Input __clearable __clearSection="clear" __defaultRightSection="default-right-section" />
-    );
+    rerender(() => (
+      <Input __clearable __clearSection="clear" __defaultRightSection="default-right-section" />
+    ));
     expect(screen.queryByText('default-right-section')).not.toBeInTheDocument();
     expect(screen.getByText('clear')).toBeInTheDocument();
 
-    rerender(
-      () => <Input
+    rerender(() => (
+      <Input
         rightSection="right-section"
         __clearable
         __clearSection="clear"
         __defaultRightSection="default-right-section"
       />
-    );
+    ));
     expect(screen.queryByText('default-right-section')).not.toBeInTheDocument();
     expect(screen.queryByText('clear')).not.toBeInTheDocument();
     expect(screen.getByText('right-section')).toBeInTheDocument();

@@ -33,19 +33,19 @@ describe('@empoleon/core/ComboboxEventsTarget', () => {
     expect(() => render(() => <TestContainer>Hello</TestContainer>)).toThrow(error);
     expect(() => render(() => <TestContainer>{2}</TestContainer>)).toThrow(error);
     expect(() =>
-      render(
-        () => <TestContainer>
+      render(() => (
+        <TestContainer>
           <>fragment</>
         </TestContainer>
-      )
+      ))
     ).toThrow(error);
     expect(() =>
-      render(
-       () => <TestContainer>
+      render(() => (
+        <TestContainer>
           <div>node 1</div>
           <div>node 2</div>
         </TestContainer>
-      )
+      ))
     ).toThrow(error);
     patchConsoleError.release();
   });

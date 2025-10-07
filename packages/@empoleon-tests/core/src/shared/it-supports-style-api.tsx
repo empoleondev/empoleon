@@ -1,6 +1,6 @@
+import { JSX } from 'solid-js';
 import { DEFAULT_THEME, EmpoleonTheme } from '@empoleon/core';
 import { render } from '../render';
-import { JSX } from 'solid-js';
 import { getPropsValue } from './get-props-value';
 
 const randomNumber = (min = 10, max = 100) => Math.floor(Math.random() * (max - min + 1) + min);
@@ -23,7 +23,7 @@ const getTestFunctionClassNames = (selectors: string[]) => (theme: EmpoleonTheme
 
 interface Options<Props extends Record<string, any> = any, Selectors extends string = string> {
   component: (props: Props) => JSX.Element;
-  props: Props | (() => Props)
+  props: Props | (() => Props);
   selectors: Selectors[];
   providerName: string;
   providerStylesApi?: boolean;
@@ -44,7 +44,9 @@ export function itSupportsStylesApi<
       try {
         expect(container.querySelector(`.${classNames[selector]}`)).toBeInTheDocument();
       } catch (e) {
-        throw new Error(`Missing selector: .${classNames[selector]} - Check if this component actually renders elements with the '${selector}' selector`);
+        throw new Error(
+          `Missing selector: .${classNames[selector]} - Check if this component actually renders elements with the '${selector}' selector`
+        );
       }
     });
   });
@@ -53,9 +55,9 @@ export function itSupportsStylesApi<
     it(`${name}: classNames (inline function)`, () => {
       const classNames = getTestFunctionClassNames(options.selectors);
       const baseProps = getPropsValue(options.props);
-      const { container } = render(
-        () => <options.component {...baseProps} data-test="__test" classNames={classNames} />
-      );
+      const { container } = render(() => (
+        <options.component {...baseProps} data-test="__test" classNames={classNames} />
+      ));
       options.selectors.forEach((selector) => {
         expect(
           container.querySelector(
@@ -68,18 +70,15 @@ export function itSupportsStylesApi<
 
   it(`${name}: styles (inline object)`, () => {
     const classNames = getTestObjectClassNames(options.selectors);
-    const styles = options.selectors.reduce<Record<string, JSX.CSSProperties>>(
-      (acc, selector) => {
-        acc[selector] = { 'font-size': `${randomNumber()}px` };
-        return acc;
-      },
-      {}
-    );
+    const styles = options.selectors.reduce<Record<string, JSX.CSSProperties>>((acc, selector) => {
+      acc[selector] = { 'font-size': `${randomNumber()}px` };
+      return acc;
+    }, {});
 
     const baseProps = getPropsValue(options.props);
-    const { container } = render(
-      () => <options.component {...baseProps} classNames={classNames} styles={styles} />
-    );
+    const { container } = render(() => (
+      <options.component {...baseProps} classNames={classNames} styles={styles} />
+    ));
 
     options.selectors.forEach((selector) => {
       expect(container.querySelector(`.${classNames[selector]}`)).toHaveStyle({
@@ -101,14 +100,14 @@ export function itSupportsStylesApi<
         }, {});
 
       const baseProps = getPropsValue(options.props);
-      const { container } = render(
-        () => <options.component
+      const { container } = render(() => (
+        <options.component
           {...baseProps}
           data-test="orange"
           classNames={classNames}
           styles={styles}
         />
-      );
+      ));
 
       options.selectors.forEach((selector) => {
         expect(container.querySelector(`.${classNames[selector]}`)).toHaveStyle({
@@ -212,18 +211,23 @@ export function itSupportsStylesApi<
           return acc;
         }, {});
 
-      const { container } = render(() => {
-        const baseProps = getPropsValue(options.props);
-        const propsWithDataTest = { ...baseProps, "data-test": "orange" } as Props & { "data-test": string };
-        return <options.component {...propsWithDataTest} data-test="orange" />;
-      }, {
-        components: {
-          [options.providerName]: {
-            styles: styles as any,
-            classNames: classNames as any,
-          },
+      const { container } = render(
+        () => {
+          const baseProps = getPropsValue(options.props);
+          const propsWithDataTest = { ...baseProps, 'data-test': 'orange' } as Props & {
+            'data-test': string;
+          };
+          return <options.component {...propsWithDataTest} data-test="orange" />;
         },
-      });
+        {
+          components: {
+            [options.providerName]: {
+              styles: styles as any,
+              classNames: classNames as any,
+            },
+          },
+        }
+      );
 
       options.selectors.forEach((selector) => {
         try {

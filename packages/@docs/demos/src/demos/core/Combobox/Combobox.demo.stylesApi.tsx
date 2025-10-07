@@ -49,9 +49,7 @@ function Demo(props: any) {
   return (
     <Combobox store={combobox} {...props} middlewares={{ flip: false, shift: false }}>
       <Combobox.Target>
-        {(props) => (
-          <TextInput {...props} placeholder="Pick value" />
-        )}
+        {(props) => <TextInput {...props} placeholder="Pick value" />}
       </Combobox.Target>
 
       <Combobox.Dropdown>

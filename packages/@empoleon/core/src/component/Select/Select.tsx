@@ -1,10 +1,11 @@
+import { ComponentProps, createEffect, createMemo, JSX, splitProps } from 'solid-js';
 import { useId, usePrevious, useUncontrolled } from '@empoleon/hooks';
 import {
   BoxProps,
   ElementProps,
+  EmpoleonColor,
   Factory,
   factory,
-  EmpoleonColor,
   StylesApiProps,
   useProps,
   useResolvedStylesApi,
@@ -28,7 +29,6 @@ import {
 } from '../Input';
 import { InputBase } from '../InputBase';
 import { ScrollAreaProps } from '../ScrollArea';
-import { ComponentProps, createEffect, createMemo, JSX, splitProps } from 'solid-js';
 
 export type SelectStylesNames = __InputStylesNames | ComboboxLikeStylesNames;
 
@@ -109,7 +109,7 @@ const defaultProps = {
   checkIconPosition: 'left',
 } satisfies Partial<SelectProps>;
 
-export const Select = factory<SelectFactory>(_props => {
+export const Select = factory<SelectFactory>((_props) => {
   const props = useProps('Select', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -164,7 +164,7 @@ export const Select = factory<SelectFactory>(_props => {
     'chevronColor',
     'autoSelectOnBlur',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const parsedData = createMemo(() => getParsedComboboxData(local.data));
@@ -198,7 +198,7 @@ export const Select = factory<SelectFactory>(_props => {
   });
 
   // For non-searchable selects, override search to be empty when dropdown is open
-  const effectiveSearch = () => local.searchable ? search() : '';
+  const effectiveSearch = () => (local.searchable ? search() : '');
 
   const combobox = useCombobox({
     opened: () => local.dropdownOpened!,
@@ -291,10 +291,15 @@ export const Select = factory<SelectFactory>(_props => {
         }}
         {...local.comboboxProps}
       >
-        <Combobox.Target targetType={local.searchable ? 'input' : 'button'} autoComplete={local.autocomplete}>
+        <Combobox.Target
+          targetType={local.searchable ? 'input' : 'button'}
+          autoComplete={local.autocomplete}
+        >
           {(props) => {
             const inputRef = (el: HTMLInputElement | null) => {
-              (props.ref as ((n: HTMLElement | null) => void) | undefined)?.(el as unknown as HTMLElement | null);
+              (props.ref as ((n: HTMLElement | null) => void) | undefined)?.(
+                el as unknown as HTMLElement | null
+              );
               (local.ref as ((n: HTMLInputElement | null) => void) | undefined)?.(el);
             };
 
@@ -323,7 +328,9 @@ export const Select = factory<SelectFactory>(_props => {
                 }
                 __clearable={_clearable()}
                 rightSection={local.rightSection}
-                rightSectionPointerEvents={local.rightSectionPointerEvents || (_clearable() ? 'all' : 'none')}
+                rightSectionPointerEvents={
+                  local.rightSectionPointerEvents || (_clearable() ? 'all' : 'none')
+                }
                 {...others}
                 size={local.size}
                 __staticSelector="Select"
@@ -336,11 +343,13 @@ export const Select = factory<SelectFactory>(_props => {
                   local.selectFirstOptionOnChange && combobox.selectFirstOption();
                 }}
                 onChange={(event) => {
-                  handleSearchChange(_value() != null ? optionsLockup()[_value()!]?.label || '' : '');
+                  handleSearchChange(
+                    _value() != null ? optionsLockup()[_value()!]?.label || '' : ''
+                  );
                 }}
                 onFocus={(event) => {
                   local.searchable && combobox.openDropdown();
-                  typeof local.onFocus === "function" && local.onFocus?.(event);
+                  typeof local.onFocus === 'function' && local.onFocus?.(event);
                 }}
                 onBlur={(event) => {
                   if (local.autoSelectOnBlur) {
@@ -348,12 +357,14 @@ export const Select = factory<SelectFactory>(_props => {
                   }
 
                   local.searchable && combobox.closeDropdown();
-                  handleSearchChange(_value() != null ? optionsLockup()[_value()!]?.label || '' : '');
-                  typeof local.onBlur === "function" &&  local.onBlur?.(event);
+                  handleSearchChange(
+                    _value() != null ? optionsLockup()[_value()!]?.label || '' : ''
+                  );
+                  typeof local.onBlur === 'function' && local.onBlur?.(event);
                 }}
                 onClick={(event) => {
                   local.searchable ? combobox.openDropdown() : combobox.toggleDropdown();
-                  typeof local.onClick === "function" &&  local.onClick?.(event);
+                  typeof local.onClick === 'function' && local.onClick?.(event);
                 }}
                 classNames={resolvedClassNames}
                 styles={resolvedStyles}
@@ -374,7 +385,9 @@ export const Select = factory<SelectFactory>(_props => {
           hiddenWhenEmpty={!local.nothingFoundMessage}
           withScrollArea={local.withScrollArea}
           maxDropdownHeight={local.maxDropdownHeight}
-          filterOptions={!!local.searchable && selectedOption()?.label !== search() && search().length > 0}
+          filterOptions={
+            !!local.searchable && selectedOption()?.label !== search() && search().length > 0
+          }
           value={_value()}
           checkIconPosition={local.checkIconPosition}
           withCheckIcon={local.withCheckIcon}

@@ -47,7 +47,8 @@ export function createFormActions<FormValues extends Record<string, any> = Recor
   const setInitialValues: SetInitialValues<FormValues> = (values) =>
     dispatchEvent(`empoleon-form:${name}:set-initial-values`, values);
 
-  const setErrors: SetErrors = (errors) => dispatchEvent(`empoleon-form:${name}:set-errors`, errors);
+  const setErrors: SetErrors = (errors) =>
+    dispatchEvent(`empoleon-form:${name}:set-errors`, errors);
 
   const setFieldError: SetFieldError<FormValues> = (path, error) =>
     dispatchEvent(`empoleon-form:${name}:set-field-error`, { path, error });
@@ -73,7 +74,8 @@ export function createFormActions<FormValues extends Record<string, any> = Recor
   const insertListItem: InsertListItem<FormValues> = (path, item, index) =>
     dispatchEvent(`empoleon-form:${name}:insert-list-item`, { path, index, item });
 
-  const setDirty: SetFormStatus = (value) => dispatchEvent(`empoleon-form:${name}:set-dirty`, value);
+  const setDirty: SetFormStatus = (value) =>
+    dispatchEvent(`empoleon-form:${name}:set-dirty`, value);
 
   const setTouched: SetFormStatus = (value) =>
     dispatchEvent(`empoleon-form:${name}:set-touched`, value);

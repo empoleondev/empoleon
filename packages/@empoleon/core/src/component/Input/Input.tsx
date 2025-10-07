@@ -1,15 +1,15 @@
-import { splitProps, JSX, createMemo } from 'solid-js';
+import { createMemo, JSX, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
   createVarsResolver,
   DataAttributes,
+  EmpoleonRadius,
+  EmpoleonSize,
   extractStyleProps,
   getFontSize,
   getRadius,
   getSize,
-  EmpoleonRadius,
-  EmpoleonSize,
   polymorphicFactory,
   PolymorphicFactory,
   rem,
@@ -192,7 +192,7 @@ const varsResolver = createVarsResolver<InputFactory>((_, props, ctx) => ({
   },
 }));
 
-export const Input = polymorphicFactory<InputFactory>(_props => {
+export const Input = polymorphicFactory<InputFactory>((_props) => {
   const props = useProps('Input', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -228,7 +228,7 @@ export const Input = polymorphicFactory<InputFactory>(_props => {
     '__clearSection',
     '__clearable',
     '__defaultRightSection',
-    'ref'
+    'ref',
   ]);
 
   const { styleProps, rest } = extractStyleProps(others);
@@ -250,18 +250,22 @@ export const Input = polymorphicFactory<InputFactory>(_props => {
     varsResolver,
   });
 
-  const ariaAttributes = () => local.withAria
-    ? {
-        required: local.required,
-        disabled: local.disabled,
-        'aria-invalid': !!local.error,
-        'aria-describedby': ctx?.describedBy,
-        'aria-labelledby': ctx?.labelId, // for solidjs
-        id: ctx?.inputId || local.id,
-      }
-    : {};
+  const ariaAttributes = () =>
+    local.withAria
+      ? {
+          required: local.required,
+          disabled: local.disabled,
+          'aria-invalid': !!local.error,
+          'aria-describedby': ctx?.describedBy,
+          'aria-labelledby': ctx?.labelId, // for solidjs
+          id: ctx?.inputId || local.id,
+        }
+      : {};
 
-  const _rightSection = () => local.rightSection || (local.__clearable && local.__clearSection) || local.__defaultRightSection;
+  const _rightSection = () =>
+    local.rightSection ||
+    (local.__clearable && local.__clearSection) ||
+    local.__defaultRightSection;
 
   const valueProp = (v: any, dv: any) => {
     if (v !== undefined) {
@@ -274,7 +278,7 @@ export const Input = polymorphicFactory<InputFactory>(_props => {
           if (process.env.NODE_ENV === 'test') {
             (e.target as any).value = v;
           }
-        }
+        },
       };
     }
     return dv !== undefined ? { value: dv } : undefined;
@@ -283,7 +287,8 @@ export const Input = polymorphicFactory<InputFactory>(_props => {
   const { value: v, defaultValue: dv } = rest;
 
   const errorMod = createMemo(() => {
-    const errorValue = typeof local.error === 'function' ? (local.error as () => any)() : local.error;
+    const errorValue =
+      typeof local.error === 'function' ? (local.error as () => any)() : local.error;
     const result = !!errorValue && local.withErrorStyles;
     return result;
   });
@@ -292,7 +297,7 @@ export const Input = polymorphicFactory<InputFactory>(_props => {
     <InputContext value={{ size: local.size || 'sm' }}>
       <Box
         {...getStyles('wrapper')}
-        {...styleProps as any}
+        {...(styleProps as any)}
         {...local.wrapperProps}
         mod={[
           {
@@ -310,7 +315,7 @@ export const Input = polymorphicFactory<InputFactory>(_props => {
       >
         {local.leftSection && (
           <Box
-            component='div'
+            component="div"
             {...local.leftSectionProps}
             data-position="left"
             {...getStyles('section', {
@@ -340,7 +345,7 @@ export const Input = polymorphicFactory<InputFactory>(_props => {
 
         {_rightSection() && (
           <Box
-            component='div'
+            component="div"
             {...local.rightSectionProps}
             data-position="right"
             {...getStyles('section', {

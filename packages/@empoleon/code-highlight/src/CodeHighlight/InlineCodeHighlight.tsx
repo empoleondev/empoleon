@@ -1,20 +1,20 @@
+import { splitProps } from 'solid-js';
 import {
   BoxProps,
   createVarsResolver,
   ElementProps,
+  EmpoleonColor,
+  EmpoleonRadius,
   factory,
   Factory,
   getRadius,
   getThemeColor,
-  EmpoleonColor,
-  EmpoleonRadius,
   StylesApiProps,
   useProps,
   useStyles,
 } from '@empoleon/core';
 import { CodeHighlight } from './CodeHighlight';
 import classes from '../CodeHighlight.module.css';
-import { splitProps } from 'solid-js';
 
 export type InlineCodeHighlightStylesNames = 'inlineCodeHighlight';
 export type InlineCodeHighlightCssVariables = {
@@ -50,16 +50,14 @@ export type InlineCodeHighlightFactory = Factory<{
 
 const defaultProps: Partial<InlineCodeHighlightProps> = {};
 
-const varsResolver = createVarsResolver<InlineCodeHighlightFactory>(
-  (theme, props) => ({
-    inlineCodeHighlight: {
-      '--ch-background': props.background ? getThemeColor(props.background, theme) : undefined,
-      '--ch-radius': typeof props.radius !== 'undefined' ? getRadius(props.radius) : undefined,
-    },
-  })
-);
+const varsResolver = createVarsResolver<InlineCodeHighlightFactory>((theme, props) => ({
+  inlineCodeHighlight: {
+    '--ch-background': props.background ? getThemeColor(props.background, theme) : undefined,
+    '--ch-radius': typeof props.radius !== 'undefined' ? getRadius(props.radius) : undefined,
+  },
+}));
 
-export const InlineCodeHighlight = factory<InlineCodeHighlightFactory>(_props => {
+export const InlineCodeHighlight = factory<InlineCodeHighlightFactory>((_props) => {
   const props = useProps('InlineCodeHighlight', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -69,7 +67,7 @@ export const InlineCodeHighlight = factory<InlineCodeHighlightFactory>(_props =>
     'unstyled',
     'vars',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<InlineCodeHighlightFactory>({

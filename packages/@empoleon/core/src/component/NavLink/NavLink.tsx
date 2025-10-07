@@ -4,9 +4,9 @@ import {
   Box,
   BoxProps,
   createVarsResolver,
-  getSpacing,
   EmpoleonColor,
   EmpoleonSpacing,
+  getSpacing,
   polymorphicFactory,
   PolymorphicFactory,
   StylesApiProps,
@@ -95,30 +95,28 @@ export type NavLinkFactory = PolymorphicFactory<{
   variant: NavLinkVariant;
 }>;
 
-const varsResolver = createVarsResolver<NavLinkFactory>(
-  (theme, props) => {
-    const colors = theme.variantColorResolver({
-      color: props.color || theme.primaryColor,
-      theme,
-      variant: props.variant || 'light',
-      autoContrast: props.autoContrast,
-    });
+const varsResolver = createVarsResolver<NavLinkFactory>((theme, props) => {
+  const colors = theme.variantColorResolver({
+    color: props.color || theme.primaryColor,
+    theme,
+    variant: props.variant || 'light',
+    autoContrast: props.autoContrast,
+  });
 
-    return {
-      root: {
-        '--nl-bg': props.color || props.variant ? colors.background : undefined,
-        '--nl-hover': props.color || props.variant ? colors.hover : undefined,
-        '--nl-color': props.color || props.variant ? colors.color : undefined,
-      },
+  return {
+    root: {
+      '--nl-bg': props.color || props.variant ? colors.background : undefined,
+      '--nl-hover': props.color || props.variant ? colors.hover : undefined,
+      '--nl-color': props.color || props.variant ? colors.color : undefined,
+    },
 
-      children: {
-        '--nl-offset': getSpacing(props.childrenOffset),
-      },
-    };
-  }
-);
+    children: {
+      '--nl-offset': getSpacing(props.childrenOffset),
+    },
+  };
+});
 
-export const NavLink = polymorphicFactory<NavLinkFactory>(_props => {
+export const NavLink = polymorphicFactory<NavLinkFactory>((_props) => {
   const props = useProps('NavLink', null, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -218,14 +216,16 @@ export const NavLink = polymorphicFactory<NavLinkFactory>(_props => {
             mod={{ rotate: _opened() && !local.disableRightSectionRotation, position: 'right' }}
           >
             {withChildren
-              ? local.rightSection || <AccordionChevron {...getStyles('chevron') as any} />
+              ? local.rightSection || <AccordionChevron {...(getStyles('chevron') as any)} />
               : local.rightSection}
           </Box>
         )}
       </UnstyledButton>
       {withChildren && (
         <Collapse in={_opened()} {...getStyles('collapse')}>
-          <Box component='div' {...getStyles('children')}>{local.children}</Box>
+          <Box component="div" {...getStyles('children')}>
+            {local.children}
+          </Box>
         </Collapse>
       )}
     </>

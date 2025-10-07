@@ -1,11 +1,12 @@
+import { ComponentProps, createEffect, For, JSX, splitProps } from 'solid-js';
 import { useId, useUncontrolled } from '@empoleon/hooks';
 import {
   BoxProps,
   ElementProps,
+  EmpoleonColor,
   extractStyleProps,
   factory,
   Factory,
-  EmpoleonColor,
   StylesApiProps,
   useProps,
   useResolvedStylesApi,
@@ -28,7 +29,6 @@ import { Pill } from '../Pill';
 import { PillsInput } from '../PillsInput';
 import { ScrollAreaProps } from '../ScrollArea';
 import { filterPickedValues } from './filter-picked-values';
-import { ComponentProps, createEffect, For, JSX, splitProps } from 'solid-js';
 
 export type MultiSelectStylesNames =
   | __InputStylesNames
@@ -120,7 +120,7 @@ const defaultProps = {
   hiddenInputValuesDivider: ',',
 } satisfies Partial<MultiSelectProps>;
 
-export const MultiSelect = factory<MultiSelectFactory>(_props => {
+export const MultiSelect = factory<MultiSelectFactory>((_props) => {
   const props = useProps('MultiSelect', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -197,7 +197,7 @@ export const MultiSelect = factory<MultiSelectFactory>(_props => {
     'scrollAreaProps',
     'chevronColor',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const _id = useId(local.id);
@@ -254,8 +254,10 @@ export const MultiSelect = factory<MultiSelectFactory>(_props => {
     classNames: local.classNames,
   });
 
-  const handleInputKeydown = (event: KeyboardEvent & { currentTarget: HTMLInputElement; target: Element; }) => {
-    typeof local.onKeyDown === "function" && local.onKeyDown?.(event);
+  const handleInputKeydown = (
+    event: KeyboardEvent & { currentTarget: HTMLInputElement; target: Element }
+  ) => {
+    typeof local.onKeyDown === 'function' && local.onKeyDown?.(event);
 
     if (event.key === ' ' && !local.searchable) {
       event.preventDefault();
@@ -307,7 +309,8 @@ export const MultiSelect = factory<MultiSelectFactory>(_props => {
   );
 
   const filteredData = filterPickedValues({ data: parsedData, value: _value() });
-  const _clearable = () => local.clearable && _value().length > 0 && !local.disabled && !local.readOnly;
+  const _clearable = () =>
+    local.clearable && _value().length > 0 && !local.disabled && !local.readOnly;
 
   return (
     <>
@@ -358,7 +361,9 @@ export const MultiSelect = factory<MultiSelectFactory>(_props => {
             __clearSection={clearButton}
             __clearable={_clearable()}
             rightSection={local.rightSection}
-            rightSectionPointerEvents={local.rightSectionPointerEvents || (clearButton ? 'all' : 'none')}
+            rightSectionPointerEvents={
+              local.rightSectionPointerEvents || (clearButton ? 'all' : 'none')
+            }
             rightSectionWidth={local.rightSectionWidth}
             rightSectionProps={local.rightSectionProps}
             leftSection={local.leftSection}
@@ -378,7 +383,8 @@ export const MultiSelect = factory<MultiSelectFactory>(_props => {
             withErrorStyles={local.withErrorStyles}
             __stylesApiProps={{
               ...props,
-              rightSectionPointerEvents: local.rightSectionPointerEvents || (_clearable() ? 'all' : 'none'),
+              rightSectionPointerEvents:
+                local.rightSectionPointerEvents || (_clearable() ? 'all' : 'none'),
               multiline: true,
             }}
             pointer={!local.searchable}
@@ -407,11 +413,11 @@ export const MultiSelect = factory<MultiSelectFactory>(_props => {
                   {...getStyles('inputField')}
                   unstyled={local.unstyled}
                   onFocus={(event) => {
-                    typeof local.onFocus === "function" && local.onFocus?.(event);
+                    typeof local.onFocus === 'function' && local.onFocus?.(event);
                     local.searchable && combobox.openDropdown();
                   }}
                   onBlur={(event) => {
-                    typeof local.onBlur === "function" && local.onBlur?.(event);
+                    typeof local.onBlur === 'function' && local.onBlur?.(event);
                     combobox.closeDropdown();
                     handleSearchChange('');
                   }}

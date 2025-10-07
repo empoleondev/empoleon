@@ -1,5 +1,5 @@
 import { createMemo, Show, splitProps } from 'solid-js';
-import { factory, Factory, EmpoleonSpacing, useProps } from '../../core';
+import { EmpoleonSpacing, factory, Factory, useProps } from '../../core';
 import { Group } from '../Group/Group';
 import { PaginationIcon } from './Pagination.icons';
 import { PaginationControl } from './PaginationControl/PaginationControl';
@@ -82,7 +82,7 @@ const defaultProps = {
   gap: 8,
 } satisfies Partial<PaginationProps>;
 
-export const Pagination = factory<PaginationFactory>(_props => {
+export const Pagination = factory<PaginationFactory>((_props) => {
   const props = useProps('Pagination', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'withEdges',
@@ -97,13 +97,13 @@ export const Pagination = factory<PaginationFactory>(_props => {
     'gap',
     'hideWithOnePage',
     'withPages',
-    'ref'
+    'ref',
   ]);
 
   const hasControls = createMemo(() => local.withControls);
   const hasEdges = createMemo(() => local.withEdges);
-  const shouldRender = createMemo(() =>
-    local.total > 0 && (!local.hideWithOnePage || local.total !== 1)
+  const shouldRender = createMemo(
+    () => local.total > 0 && (!local.hideWithOnePage || local.total !== 1)
   );
 
   return (
@@ -114,7 +114,10 @@ export const Pagination = factory<PaginationFactory>(_props => {
             <PaginationFirst icon={local.firstIcon} {...local.getControlProps?.('first')} />
           </Show>
           <Show when={hasControls()}>
-            <PaginationPrevious icon={local.previousIcon} {...local.getControlProps?.('previous')} />
+            <PaginationPrevious
+              icon={local.previousIcon}
+              {...local.getControlProps?.('previous')}
+            />
           </Show>
           <Show when={local.withPages}>
             <PaginationItems dotsIcon={local.dotsIcon} />

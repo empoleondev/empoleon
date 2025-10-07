@@ -1,6 +1,6 @@
+import { createSignal, For } from 'solid-js';
 import { Button, Combobox, TextInput, useCombobox } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal, For } from 'solid-js';
 
 const code = `
 import { createSignal, For } from 'solid-js';
@@ -70,12 +70,8 @@ function Demo() {
         </Combobox.Target>
 
         <Combobox.Dropdown>
-           <For each={groceries}>
-            {(item) => (
-              <Combobox.Option value={item}>
-                {item}
-              </Combobox.Option>
-            )}
+          <For each={groceries}>
+            {(item) => <Combobox.Option value={item}>{item}</Combobox.Option>}
           </For>
         </Combobox.Dropdown>
       </Combobox>

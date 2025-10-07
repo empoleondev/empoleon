@@ -1,4 +1,4 @@
-import { JSX } from "solid-js";
+import { JSX } from 'solid-js';
 
 export function matchesField(field: string, error?: JSX.Element) {
   const _error = error || true;

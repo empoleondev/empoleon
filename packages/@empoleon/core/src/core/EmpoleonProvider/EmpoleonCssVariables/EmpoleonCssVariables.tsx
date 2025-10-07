@@ -21,7 +21,8 @@ export function EmpoleonCssVariables(props: EmpoleonCssVariablesProps) {
   const nonce = useEmpoleonStyleNonce();
   const generator = useEmpoleonCssVariablesResolver();
   const mergedVariables = getMergedVariables({ theme, generator });
-  const shouldCleanVariables = props.cssVariablesSelector === ':root' && props.deduplicateCssVariables;
+  const shouldCleanVariables =
+    props.cssVariablesSelector === ':root' && props.deduplicateCssVariables;
   const cleanedVariables = shouldCleanVariables
     ? removeDefaultVariables(mergedVariables)
     : mergedVariables;

@@ -1,6 +1,6 @@
 import { JSX } from 'solid-js';
-import { Code } from './Code';
 import { EmpoleonProvider } from '../../core';
+import { Code } from './Code';
 
 export default {
   title: 'Code',
@@ -15,7 +15,7 @@ export default {
 
 export function Usage() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Code>Some code</Code>
       <Code color="blue.4">Code with color</Code>
     </div>
@@ -23,7 +23,7 @@ export function Usage() {
 }
 export function Unstyled() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Code unstyled>Some code</Code>
     </div>
   );
@@ -42,7 +42,7 @@ export function Usage() {
 
 export function Block() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Code block>{code}</Code>
     </div>
   );

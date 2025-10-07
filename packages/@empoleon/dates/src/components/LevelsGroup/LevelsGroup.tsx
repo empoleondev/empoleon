@@ -1,16 +1,16 @@
+import { splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
   ElementProps,
+  EmpoleonSize,
   factory,
   Factory,
-  EmpoleonSize,
   StylesApiProps,
   useProps,
   useStyles,
 } from '@empoleon/core';
 import classes from './LevelsGroup.module.css';
-import { splitProps } from 'solid-js';
 
 export type LevelsGroupStylesNames = 'levelsGroup';
 
@@ -30,7 +30,7 @@ export type LevelsGroupFactory = Factory<{
 
 const defaultProps: Partial<LevelsGroupProps> = {};
 
-export const LevelsGroup = factory<LevelsGroupFactory>(_props => {
+export const LevelsGroup = factory<LevelsGroupFactory>((_props) => {
   const props = useProps('LevelsGroup', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -41,7 +41,7 @@ export const LevelsGroup = factory<LevelsGroupFactory>(_props => {
     'vars',
     '__staticSelector',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<LevelsGroupFactory>({

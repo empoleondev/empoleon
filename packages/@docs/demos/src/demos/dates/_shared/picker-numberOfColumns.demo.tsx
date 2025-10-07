@@ -1,6 +1,6 @@
+import { Component, createSignal } from 'solid-js';
 import { Text } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { Component, createSignal } from 'solid-js';
 
 const getCode = (name: string) => `
 import { createSignal } from 'solid-js';

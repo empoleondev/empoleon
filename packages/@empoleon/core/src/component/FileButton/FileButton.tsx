@@ -1,4 +1,4 @@
-import { splitProps, JSX } from 'solid-js';
+import { JSX, splitProps } from 'solid-js';
 import { useProps } from '../../core';
 
 export interface FileButtonProps<Multiple extends boolean = false> {
@@ -53,7 +53,7 @@ export function FileButton<Multiple extends boolean = false>(_props: FileButtonP
     'disabled',
     'capture',
     'inputProps',
-    'ref'
+    'ref',
   ]);
 
   let inputRef: HTMLInputElement | undefined;
@@ -93,19 +93,19 @@ export function FileButton<Multiple extends boolean = false>(_props: FileButtonP
         accept={local.accept}
         multiple={local.multiple}
         onChange={handleChange}
-        ref={el => {
+        ref={(el) => {
           inputRef = el!;
           local.ref?.(el!);
         }}
         name={local.name}
         form={local.form}
-        capture={local.capture === true ? "environment" : local.capture || undefined}
+        capture={local.capture === true ? 'environment' : local.capture || undefined}
         {...local.inputProps}
       />
 
       {local.children({ onClick, ...others })}
     </>
   );
-};
+}
 
 FileButton.displayName = '@empoleon/core/FileButton';

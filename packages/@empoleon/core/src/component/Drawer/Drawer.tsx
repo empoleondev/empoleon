@@ -70,9 +70,9 @@ const defaultProps = {
   zIndex: getDefaultZIndex('modal'),
   withOverlay: true,
   withCloseButton: true,
-} satisfies Partial<DrawerProps>;;
+} satisfies Partial<DrawerProps>;
 
-export const Drawer = factory<DrawerFactory>(_props => {
+export const Drawer = factory<DrawerFactory>((_props) => {
   const props = useProps('Drawer', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'title',
@@ -84,10 +84,12 @@ export const Drawer = factory<DrawerFactory>(_props => {
     'opened',
     'stackId',
     'zIndex',
-    'ref'
-  ])
+    'ref',
+  ]);
 
-  const openedFn = createMemo(() => (typeof local.opened === 'function' ? local.opened() : local.opened));
+  const openedFn = createMemo(() =>
+    typeof local.opened === 'function' ? local.opened() : local.opened
+  );
 
   const ctx = useDrawerStackContext();
   const isStacked = createMemo(() => !!(ctx && local.stackId));
@@ -107,8 +109,11 @@ export const Drawer = factory<DrawerFactory>(_props => {
   const hasHeader = () => !!local.title || local.withCloseButton;
 
   const overlayVisible = createMemo(() =>
-    local.withOverlay === false ? false :
-    (local.stackId && ctx ? ctx.currentId === local.stackId : openedFn())
+    local.withOverlay === false
+      ? false
+      : local.stackId && ctx
+        ? ctx.currentId === local.stackId
+        : openedFn()
   );
 
   createEffect(() => {
@@ -136,7 +141,9 @@ export const Drawer = factory<DrawerFactory>(_props => {
           {...local.overlayProps}
         />
       )}
-      <DrawerContent __hidden={!openedFn() || (!!(ctx && local.stackId) && ctx.currentId !== local.stackId)}>
+      <DrawerContent
+        __hidden={!openedFn() || (!!(ctx && local.stackId) && ctx.currentId !== local.stackId)}
+      >
         {hasHeader() && (
           <DrawerHeader>
             {local.title && <DrawerTitle>{local.title}</DrawerTitle>}

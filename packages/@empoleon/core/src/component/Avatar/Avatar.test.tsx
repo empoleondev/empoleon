@@ -6,10 +6,7 @@ import { AvatarGroup } from './AvatarGroup/AvatarGroup';
 const defaultProps: AvatarProps = {};
 
 describe('@empoleon/core/Avatar', () => {
-  tests.axe([
-    () => <Avatar src="test.png" alt="test" />,
-    () => <Avatar alt="test" />
-  ]);
+  tests.axe([() => <Avatar src="test.png" alt="test" />, () => <Avatar alt="test" />]);
   tests.itSupportsSystemProps<AvatarProps, AvatarStylesNames>({
     component: Avatar,
     props: defaultProps,
@@ -29,11 +26,11 @@ describe('@empoleon/core/Avatar', () => {
   });
 
   it('sets data-within-group attribute when Avatar is rendered inside Avatar.Group', () => {
-    const { container, rerender } = render(
-      () => <Avatar.Group>
+    const { container, rerender } = render(() => (
+      <Avatar.Group>
         <Avatar />
       </Avatar.Group>
-    );
+    ));
 
     expect(container.querySelector('.empoleon-Avatar-root')).toHaveAttribute('data-within-group');
 
@@ -71,9 +68,9 @@ describe('@empoleon/core/Avatar', () => {
   });
 
   it('passes down imageProps to img element', () => {
-    const { container } = render(
-      () => <Avatar src="image.png" alt="test-alt" imageProps={{ 'aria-label': 'test-label' }} />
-    );
+    const { container } = render(() => (
+      <Avatar src="image.png" alt="test-alt" imageProps={{ 'aria-label': 'test-label' }} />
+    ));
     expect(container.querySelector('img')).toHaveAttribute('aria-label', 'test-label');
   });
 

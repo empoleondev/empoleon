@@ -1,5 +1,5 @@
-import { createEffect, For, JSX, splitProps } from 'solid-js';
 import dayjs from 'dayjs';
+import { createEffect, For, JSX, splitProps } from 'solid-js';
 import { BoxProps, ElementProps, factory, Factory, StylesApiProps, useProps } from '@empoleon/core';
 import { DateStringValue } from '../../types';
 import { handleControlKeyDown } from '../../utils';
@@ -37,7 +37,7 @@ const defaultProps = {
   numberOfColumns: 1,
 } satisfies Partial<YearLevelGroupProps>;
 
-export const YearLevelGroup = factory<YearLevelGroupFactory>(_props => {
+export const YearLevelGroup = factory<YearLevelGroupFactory>((_props) => {
   const props = useProps('YearLevelGroup', defaultProps, _props);
   const [local, others] = splitProps(props, [
     // YearLevel settings
@@ -77,7 +77,7 @@ export const YearLevelGroup = factory<YearLevelGroupFactory>(_props => {
     'size',
     'vars',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   let controlsRef: HTMLButtonElement[][][] = [];
@@ -93,7 +93,11 @@ export const YearLevelGroup = factory<YearLevelGroupFactory>(_props => {
       attributes={local.attributes}
       {...others}
     >
-      <For each={Array(local.numberOfColumns).fill(0).map((_, index) => index)}>
+      <For
+        each={Array(local.numberOfColumns)
+          .fill(0)
+          .map((_, index) => index)}
+      >
         {(yearIndex) => {
           const currentYear = () => dayjs(local.year).add(yearIndex, 'years').format('YYYY-MM-DD');
 

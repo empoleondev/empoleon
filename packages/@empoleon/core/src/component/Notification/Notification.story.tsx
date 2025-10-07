@@ -5,9 +5,9 @@ import {
   IconMoodSmile,
   IconX,
 } from '@tabler/icons-solidjs';
-import { Notification } from './Notification';
 import { JSX } from 'solid-js';
 import { EmpoleonProvider } from '../../core';
+import { Notification } from './Notification';
 
 export default {
   title: 'Notification',
@@ -22,7 +22,7 @@ export default {
 
 export function SingleNotification() {
   return (
-    <div style={{ 'padding': '40px', 'max-width': '500px' }}>
+    <div style={{ padding: '40px', 'max-width': '500px' }}>
       <Notification onClose={() => {}} title="Notification title">
         Notification body
       </Notification>
@@ -32,7 +32,7 @@ export function SingleNotification() {
 
 export function Usage() {
   return (
-    <div style={{ 'padding': '60px' }}>
+    <div style={{ padding: '60px' }}>
       <div style={{ 'max-width': '400px', 'margin-left': 'auto', 'margin-right': 'auto' }}>
         <Notification
           loading
@@ -216,7 +216,7 @@ export function Usage() {
 
 export function Unstyled() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Notification withBorder color="gray" onClose={() => {}} mt="xl" unstyled>
         Notification with border
       </Notification>

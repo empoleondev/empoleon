@@ -1,4 +1,4 @@
-import { createSignal, onMount, onCleanup } from 'solid-js';
+import { createSignal, onCleanup, onMount } from 'solid-js';
 
 export function useHover<T extends HTMLElement = any>() {
   const [hovered, setHovered] = createSignal(false);

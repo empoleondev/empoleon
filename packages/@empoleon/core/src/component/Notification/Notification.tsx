@@ -4,12 +4,12 @@ import {
   BoxProps,
   createVarsResolver,
   ElementProps,
+  EmpoleonColor,
+  EmpoleonRadius,
   factory,
   Factory,
   getRadius,
   getThemeColor,
-  EmpoleonColor,
-  EmpoleonRadius,
   StylesApiProps,
   useProps,
   useStyles,
@@ -88,7 +88,7 @@ const varsResolver = createVarsResolver<NotificationFactory>((theme, props) => (
   },
 }));
 
-export const Notification = factory<NotificationFactory>(_props => {
+export const Notification = factory<NotificationFactory>((_props) => {
   const props = useProps('Notification', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'className',
@@ -112,7 +112,7 @@ export const Notification = factory<NotificationFactory>(_props => {
     'loaderProps',
     'role',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<NotificationFactory>({
@@ -132,17 +132,30 @@ export const Notification = factory<NotificationFactory>(_props => {
   return (
     <Box
       {...getStyles('root')}
-      mod={[{ 'data-with-icon': !!local.icon || local.loading, 'data-with-border': local.withBorder }, local.mod]}
+      mod={[
+        { 'data-with-icon': !!local.icon || local.loading, 'data-with-border': local.withBorder },
+        local.mod,
+      ]}
       ref={local.ref}
       variant={local.variant}
       role={local.role || 'alert'}
       {...others}
     >
-      {local.icon && !local.loading && <Box component='div' {...getStyles('icon')}>{local.icon}</Box>}
-      {local.loading && <Loader size={28} color={local.color} {...local.loaderProps} {...getStyles('loader')} />}
+      {local.icon && !local.loading && (
+        <Box component="div" {...getStyles('icon')}>
+          {local.icon}
+        </Box>
+      )}
+      {local.loading && (
+        <Loader size={28} color={local.color} {...local.loaderProps} {...getStyles('loader')} />
+      )}
 
-      <Box component='div' {...getStyles('body')}>
-        {local.title && <Box component='div' {...getStyles('title')}>{local.title}</Box>}
+      <Box component="div" {...getStyles('body')}>
+        {local.title && (
+          <Box component="div" {...getStyles('title')}>
+            {local.title}
+          </Box>
+        )}
 
         <Box {...getStyles('description')} mod={{ 'data-with-title': !!local.title }}>
           {local.children}

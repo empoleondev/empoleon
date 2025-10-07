@@ -3,14 +3,14 @@ import {
   Box,
   BoxProps,
   createVarsResolver,
-  getFontSize,
-  getGradient,
-  getLineHeight,
-  getThemeColor,
   EmpoleonColor,
   EmpoleonFontSize,
   EmpoleonGradient,
   EmpoleonLineHeight,
+  getFontSize,
+  getGradient,
+  getLineHeight,
+  getThemeColor,
   polymorphicFactory,
   PolymorphicFactory,
   StylesApiProps,
@@ -80,17 +80,17 @@ const defaultProps: Partial<TextProps> = {
   inherit: false,
 };
 
-const varsResolver = createVarsResolver<TextFactory>(
-  (theme, props) => ({
-    root: {
-      '--text-fz': getFontSize(props.size),
-      '--text-lh': getLineHeight(props.size),
-      '--text-gradient': props.variant === 'gradient' ? getGradient(props.gradient, theme) : undefined,
-      '--text-line-clamp': typeof props.lineClamp === 'number' ? props.lineClamp.toString() : undefined,
-      '--text-color': props.color ? getThemeColor(props.color, theme) : undefined,
-    },
-  })
-);
+const varsResolver = createVarsResolver<TextFactory>((theme, props) => ({
+  root: {
+    '--text-fz': getFontSize(props.size),
+    '--text-lh': getLineHeight(props.size),
+    '--text-gradient':
+      props.variant === 'gradient' ? getGradient(props.gradient, theme) : undefined,
+    '--text-line-clamp':
+      typeof props.lineClamp === 'number' ? props.lineClamp.toString() : undefined,
+    '--text-color': props.color ? getThemeColor(props.color, theme) : undefined,
+  },
+}));
 
 export const Text = polymorphicFactory<TextFactory>((_props) => {
   const props = useProps('Text', defaultProps, _props);
@@ -112,7 +112,7 @@ export const Text = polymorphicFactory<TextFactory>((_props) => {
     'mod',
     'size',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<TextFactory>({

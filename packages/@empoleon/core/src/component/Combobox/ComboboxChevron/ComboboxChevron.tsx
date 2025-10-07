@@ -4,12 +4,12 @@ import {
   BoxProps,
   createVarsResolver,
   ElementProps,
+  EmpoleonColor,
+  EmpoleonSize,
   Factory,
   factory,
   getSize,
   getThemeColor,
-  EmpoleonColor,
-  EmpoleonSize,
   StylesApiProps,
   useProps,
   useStyles,
@@ -48,7 +48,7 @@ const varsResolver = createVarsResolver<ComboboxChevronFactory>((theme, props) =
   },
 }));
 
-export const ComboboxChevron = factory<ComboboxChevronFactory>(_props => {
+export const ComboboxChevron = factory<ComboboxChevronFactory>((_props) => {
   const props = useProps('ComboboxChevron', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'size',
@@ -60,7 +60,7 @@ export const ComboboxChevron = factory<ComboboxChevronFactory>(_props => {
     'unstyled',
     'vars',
     'mod',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<ComboboxChevronFactory>({

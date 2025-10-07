@@ -5,11 +5,11 @@ import {
   BoxProps,
   createVarsResolver,
   ElementProps,
+  EmpoleonSize,
   factory,
   Factory,
   getFontSize,
   getSize,
-  EmpoleonSize,
   StylesApiProps,
   UnstyledButton,
   useProps,
@@ -112,7 +112,7 @@ const varsResolver = createVarsResolver<CalendarHeaderFactory>((_, props) => ({
   },
 }));
 
-export const CalendarHeader = factory<CalendarHeaderFactory>(_props => {
+export const CalendarHeader = factory<CalendarHeaderFactory>((_props) => {
   const props = useProps('CalendarHeader', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -140,7 +140,7 @@ export const CalendarHeader = factory<CalendarHeaderFactory>(_props => {
     '__preventFocus',
     '__stopPropagation',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<CalendarHeaderFactory>({

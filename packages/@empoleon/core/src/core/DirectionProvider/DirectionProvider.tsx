@@ -59,5 +59,7 @@ export function DirectionProvider(props: DirectionProviderProps) {
     setDirection,
   };
 
-  return <DirectionContext.Provider value={contextValue}>{props.children}</DirectionContext.Provider>;
+  return (
+    <DirectionContext.Provider value={contextValue}>{props.children}</DirectionContext.Provider>
+  );
 }

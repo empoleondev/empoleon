@@ -1,3 +1,4 @@
+import { Component, JSX, Ref, splitProps } from 'solid-js';
 import { useId } from '@empoleon/hooks';
 import {
   Box,
@@ -5,6 +6,9 @@ import {
   createVarsResolver,
   DataAttributes,
   ElementProps,
+  EmpoleonColor,
+  EmpoleonRadius,
+  EmpoleonSize,
   extractStyleProps,
   factory,
   Factory,
@@ -13,9 +17,6 @@ import {
   getRadius,
   getSize,
   getThemeColor,
-  EmpoleonColor,
-  EmpoleonRadius,
-  EmpoleonSize,
   parseThemeColor,
   StylesApiProps,
   useProps,
@@ -28,7 +29,6 @@ import { RadioGroup } from './RadioGroup/RadioGroup';
 import { RadioIcon, RadioIconProps } from './RadioIcon';
 import { RadioIndicator } from './RadioIndicator/RadioIndicator';
 import classes from './Radio.module.css';
-import { Component, JSX, Ref, splitProps } from 'solid-js';
 
 export type RadioVariant = 'filled' | 'outline';
 export type RadioStylesNames = InlineInputStylesNames | 'inner' | 'radio' | 'icon';
@@ -99,31 +99,30 @@ const defaultProps: Partial<RadioProps> = {
   labelPosition: 'right',
 };
 
-const varsResolver = createVarsResolver<RadioFactory>(
-  (theme, props) => {
-    const parsedColor = parseThemeColor({ color: props.color || theme.primaryColor, theme });
-    const outlineColor =
-      parsedColor.isThemeColor && parsedColor.shade === undefined
-        ? `var(--empoleon-color-${parsedColor.color}-outline)`
-        : parsedColor.color;
+const varsResolver = createVarsResolver<RadioFactory>((theme, props) => {
+  const parsedColor = parseThemeColor({ color: props.color || theme.primaryColor, theme });
+  const outlineColor =
+    parsedColor.isThemeColor && parsedColor.shade === undefined
+      ? `var(--empoleon-color-${parsedColor.color}-outline)`
+      : parsedColor.color;
 
-    return {
-      root: {
-        '--radio-size': getSize(props.size, 'radio-size'),
-        '--radio-radius': props.radius === undefined ? undefined : getRadius(props.radius),
-        '--radio-color': props.variant === 'outline' ? outlineColor : getThemeColor(props.color, theme),
-        '--radio-icon-color': props.iconColor
-          ? getThemeColor(props.iconColor, theme)
-          : getAutoContrastValue(props.autoContrast, theme)
-            ? getContrastColor({ color: props.color, theme, autoContrast: props.autoContrast })
-            : undefined,
-        '--radio-icon-size': getSize(props.size, 'radio-icon-size'),
-      },
-    };
-  }
-);
+  return {
+    root: {
+      '--radio-size': getSize(props.size, 'radio-size'),
+      '--radio-radius': props.radius === undefined ? undefined : getRadius(props.radius),
+      '--radio-color':
+        props.variant === 'outline' ? outlineColor : getThemeColor(props.color, theme),
+      '--radio-icon-color': props.iconColor
+        ? getThemeColor(props.iconColor, theme)
+        : getAutoContrastValue(props.autoContrast, theme)
+          ? getContrastColor({ color: props.color, theme, autoContrast: props.autoContrast })
+          : undefined,
+      '--radio-icon-size': getSize(props.size, 'radio-icon-size'),
+    },
+  };
+});
 
-export const Radio = factory<RadioFactory>(_props => {
+export const Radio = factory<RadioFactory>((_props) => {
   const props = useProps('Radio', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -149,7 +148,7 @@ export const Radio = factory<RadioFactory>(_props => {
     'onChange',
     'mod',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const Icon = props.icon ?? RadioIcon;
@@ -182,7 +181,10 @@ export const Radio = factory<RadioFactory>(_props => {
         name: rest.name ?? ctx.name,
         onChange: (event: Event) => {
           ctx.onChange(event);
-          typeof local.onChange === "function" && local.onChange?.(event as Event & { currentTarget: HTMLInputElement; target: HTMLInputElement });
+          typeof local.onChange === 'function' &&
+            local.onChange?.(
+              event as Event & { currentTarget: HTMLInputElement; target: HTMLInputElement }
+            );
         },
       }
     : {};
@@ -207,7 +209,7 @@ export const Radio = factory<RadioFactory>(_props => {
       ref={local.rootRef}
       mod={local.mod}
       {...styleProps}
-      {...local.wrapperProps as any}
+      {...(local.wrapperProps as any)}
     >
       <Box {...getStyles('inner')} mod={{ 'label-position': local.labelPosition }}>
         <Box
@@ -222,7 +224,7 @@ export const Radio = factory<RadioFactory>(_props => {
           disabled={local.disabled}
           type="radio"
         />
-        <Icon {...getStyles('icon') as any} aria-hidden />
+        <Icon {...(getStyles('icon') as any)} aria-hidden />
       </Box>
     </InlineInput>
   );

@@ -20,7 +20,7 @@ function Demo() {
 
 function Wrapper(props: any) {
   return (
-    <Popover width='20px' {...props}>
+    <Popover width="20px" {...props}>
       <Popover.Target>
         <Button>Toggle popover</Button>
       </Popover.Target>

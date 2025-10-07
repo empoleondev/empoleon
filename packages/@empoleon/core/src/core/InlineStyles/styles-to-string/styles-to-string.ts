@@ -14,17 +14,14 @@ export interface InlineStylesInput {
 }
 
 export function stylesToString(props: InlineStylesInput) {
-  const [local] = splitProps(props, [
-    'selector',
-    'styles',
-    'media',
-    'container'
-  ]);
+  const [local] = splitProps(props, ['selector', 'styles', 'media', 'container']);
 
   const baseStyles = local.styles ? cssObjectToString(local.styles) : '';
   const mediaQueryStyles = !Array.isArray(local.media)
     ? []
-    : local.media.map((item) => `@media${item.query}{${local.selector}{${cssObjectToString(item.styles)}}}`);
+    : local.media.map(
+        (item) => `@media${item.query}{${local.selector}{${cssObjectToString(item.styles)}}}`
+      );
 
   const containerStyles = !Array.isArray(local.container)
     ? []

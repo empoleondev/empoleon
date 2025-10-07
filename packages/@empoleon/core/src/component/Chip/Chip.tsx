@@ -1,3 +1,4 @@
+import { createSignal, JSX, splitProps } from 'solid-js';
 import { useId, useUncontrolled } from '@empoleon/hooks';
 import {
   Box,
@@ -5,16 +6,16 @@ import {
   createVarsResolver,
   DataAttributes,
   ElementProps,
+  EmpoleonColor,
+  EmpoleonRadius,
+  EmpoleonSize,
+  EmpoleonStyleProps,
   extractStyleProps,
   factory,
   Factory,
   getFontSize,
   getRadius,
   getSize,
-  EmpoleonColor,
-  EmpoleonRadius,
-  EmpoleonSize,
-  EmpoleonStyleProps,
   StylesApiProps,
   useProps,
   useStyles,
@@ -23,7 +24,6 @@ import { CheckIcon } from '../Checkbox';
 import { useChipGroupContext } from './ChipGroup.context';
 import { ChipGroup } from './ChipGroup/ChipGroup';
 import classes from './Chip.module.css';
-import { createSignal, splitProps, JSX } from 'solid-js';
 
 export type ChipStylesNames = 'root' | 'input' | 'iconWrapper' | 'checkIcon' | 'label';
 export type ChipVariant = 'outline' | 'filled' | 'light';
@@ -101,34 +101,32 @@ const defaultProps: Partial<ChipProps> = {
   type: 'checkbox',
 };
 
-const varsResolver = createVarsResolver<ChipFactory>(
-  (theme, props) => {
-    const colors = theme.variantColorResolver({
-      color: props.color || theme.primaryColor,
-      theme,
-      variant: props.variant || 'filled',
-      autoContrast: props.autoContrast,
-    });
+const varsResolver = createVarsResolver<ChipFactory>((theme, props) => {
+  const colors = theme.variantColorResolver({
+    color: props.color || theme.primaryColor,
+    theme,
+    variant: props.variant || 'filled',
+    autoContrast: props.autoContrast,
+  });
 
-    return {
-      root: {
-        '--chip-fz': getFontSize(props.size),
-        '--chip-size': getSize(props.size, 'chip-size'),
-        '--chip-radius': props.radius === undefined ? undefined : getRadius(props.radius),
-        '--chip-checked-padding': getSize(props.size, 'chip-checked-padding'),
-        '--chip-padding': getSize(props.size, 'chip-padding'),
-        '--chip-icon-size': getSize(props.size, 'chip-icon-size'),
-        '--chip-bg': props.color || props.variant ? colors.background : undefined,
-        '--chip-hover': props.color || props.variant ? colors.hover : undefined,
-        '--chip-color': props.color || props.variant ? colors.color : undefined,
-        '--chip-bd': props.color || props.variant ? colors.border : undefined,
-        '--chip-spacing': getSize(props.size, 'chip-spacing'),
-      },
-    };
-  }
-);
+  return {
+    root: {
+      '--chip-fz': getFontSize(props.size),
+      '--chip-size': getSize(props.size, 'chip-size'),
+      '--chip-radius': props.radius === undefined ? undefined : getRadius(props.radius),
+      '--chip-checked-padding': getSize(props.size, 'chip-checked-padding'),
+      '--chip-padding': getSize(props.size, 'chip-padding'),
+      '--chip-icon-size': getSize(props.size, 'chip-icon-size'),
+      '--chip-bg': props.color || props.variant ? colors.background : undefined,
+      '--chip-hover': props.color || props.variant ? colors.hover : undefined,
+      '--chip-color': props.color || props.variant ? colors.color : undefined,
+      '--chip-bd': props.color || props.variant ? colors.border : undefined,
+      '--chip-spacing': getSize(props.size, 'chip-spacing'),
+    },
+  };
+});
 
-export const Chip = factory<ChipFactory>(_props => {
+export const Chip = factory<ChipFactory>((_props) => {
   const props = useProps('Chip', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -153,7 +151,7 @@ export const Chip = factory<ChipFactory>(_props => {
     'autoContrast',
     'mod',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<ChipFactory>({
@@ -180,28 +178,34 @@ export const Chip = factory<ChipFactory>(_props => {
     onChange: local.onChange,
   });
 
-  const contextProps = () => ctx
-    ? {
-        checked: ctx.isChipSelected(local.value as string),
-        onChange: (event: Event) => {
-          const target = event.currentTarget as HTMLInputElement;
-          ctx.onChange(event);
-          local.onChange?.(target.checked);
-        },
-        type: ctx.multiple ? 'checkbox' : 'radio',
-      }
-    : {};
+  const contextProps = () =>
+    ctx
+      ? {
+          checked: ctx.isChipSelected(local.value as string),
+          onChange: (event: Event) => {
+            const target = event.currentTarget as HTMLInputElement;
+            ctx.onChange(event);
+            local.onChange?.(target.checked);
+          },
+          type: ctx.multiple ? 'checkbox' : 'radio',
+        }
+      : {};
 
   const _checked = () => contextProps().checked || _value();
   const _type = () => contextProps().type || local.type;
 
-  const tooltipEventKeys = ['onmouseenter', 'onmouseleave', 'onmousemove', 'onpointerdown', 'onpointerenter'] as const;
+  const tooltipEventKeys = [
+    'onmouseenter',
+    'onmouseleave',
+    'onmousemove',
+    'onpointerdown',
+    'onpointerenter',
+  ] as const;
 
-  const tooltipEvents = tooltipEventKeys
-    .reduce((acc, key) => {
-      const handler = (others as any)[key];
-      return handler ? { ...acc, [key]: handler } : acc;
-    }, {});
+  const tooltipEvents = tooltipEventKeys.reduce((acc, key) => {
+    const handler = (others as any)[key];
+    return handler ? { ...acc, [key]: handler } : acc;
+  }, {});
 
   const toolTipEventsForRoot = local.rootRef ? tooltipEvents : {};
   const toolTipEventsForInput = !local.rootRef ? tooltipEvents : {};
@@ -214,10 +218,11 @@ export const Chip = factory<ChipFactory>(_props => {
       mod={local.mod}
       {...getStyles('root')}
       {...styleProps}
-      {...local.wrapperProps as EmpoleonStyleProps}
+      {...(local.wrapperProps as EmpoleonStyleProps)}
       {...toolTipEventsForRoot}
     >
-      <Box component='input'
+      <Box
+        component="input"
         type={_type()}
         {...getStyles('input')}
         checked={_checked()}
@@ -235,15 +240,16 @@ export const Chip = factory<ChipFactory>(_props => {
         {...toolTipEventsForInput}
       />
 
-      <Box component='label'
+      <Box
+        component="label"
         for={uuid}
         data-checked={_checked() || undefined}
         data-disabled={local.disabled || undefined}
         {...getStyles('label', { variant: local.variant || 'filled' })}
       >
         {_checked() && (
-          <Box component='span' {...getStyles('iconWrapper')}>
-            {local.icon || <CheckIcon {...getStyles('checkIcon') as any} />}
+          <Box component="span" {...getStyles('iconWrapper')}>
+            {local.icon || <CheckIcon {...(getStyles('checkIcon') as any)} />}
           </Box>
         )}
         <span>{local.children}</span>

@@ -4,8 +4,8 @@ import { EmpoleonDemo } from '@empoleonx/demo';
 
 function Wrapper(props: TabsProps) {
   const { dir } = useDirection();
-  const panelProps =
-    () => props.orientation === 'vertical' ? { [dir === 'rtl' ? 'pr' : 'pl']: 'xs' } : { pt: 'xs' };
+  const panelProps = () =>
+    props.orientation === 'vertical' ? { [dir === 'rtl' ? 'pr' : 'pl']: 'xs' } : { pt: 'xs' };
 
   return (
     <Tabs defaultValue="gallery" {...props}>
@@ -95,7 +95,7 @@ export const kitchenSink: EmpoleonDemo = {
       prop: 'color',
       type: 'color',
       initialValue: 'blue',
-      libraryValue: 'blue'
+      libraryValue: 'blue',
     },
     {
       prop: 'variant',
@@ -112,7 +112,7 @@ export const kitchenSink: EmpoleonDemo = {
       prop: 'radius',
       type: 'size',
       initialValue: 'sm',
-      libraryValue: 'sm'
+      libraryValue: 'sm',
     },
     {
       prop: 'orientation',
@@ -138,37 +138,37 @@ export const kitchenSink: EmpoleonDemo = {
       prop: 'inverted',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'keepMounted',
       type: 'boolean',
       initialValue: true,
-      libraryValue: true
+      libraryValue: true,
     },
     {
       prop: 'activateTabWithKeyboard',
       type: 'boolean',
       initialValue: true,
-      libraryValue: true
+      libraryValue: true,
     },
     {
       prop: 'allowTabDeactivation',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'autoContrast',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'loop',
       type: 'boolean',
       initialValue: true,
-      libraryValue: true
+      libraryValue: true,
     },
   ],
 };

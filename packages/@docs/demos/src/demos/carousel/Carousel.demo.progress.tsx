@@ -1,5 +1,5 @@
-import { createEffect, createSignal } from 'solid-js';
 import { EmblaCarouselType } from 'embla-carousel';
+import { createEffect, createSignal } from 'solid-js';
 import { Carousel } from '@empoleon/carousel';
 import { Progress } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
@@ -87,7 +87,7 @@ function Demo() {
         emblaOptions={{ dragFree: true }}
         slideSize="50%"
         slideGap="md"
-        height='200px'
+        height="200px"
         getEmblaApi={setEmbla}
         initialSlide={2}
       >

@@ -9,10 +9,10 @@ import {
   IconArrowUpRight,
   IconCircle,
 } from '@tabler/icons-solidjs';
+import { createSignal } from 'solid-js';
 import { FloatingIndicator, UnstyledButton } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
 import classes from './FloatingIndicator.demo.direction.module.css';
-import { createSignal } from 'solid-js';
 
 const code = `
 import { createSignal } from 'solid-js';
@@ -177,7 +177,9 @@ const cssCode = `.root {
 
 function Demo() {
   const [rootRef, setRootRef] = createSignal<HTMLDivElement | null>(null);
-  const [controlsRefs, setControlsRefs] = createSignal<Record<string, HTMLButtonElement | null>>({});
+  const [controlsRefs, setControlsRefs] = createSignal<Record<string, HTMLButtonElement | null>>(
+    {}
+  );
   const [active, setActive] = createSignal('center');
 
   const setControlRef = (name: string) => (node: HTMLButtonElement) => {
@@ -200,7 +202,7 @@ function Demo() {
           ref={setControlRef('up-left')}
           mod={{ active: active() === 'up-left' }}
         >
-          <IconArrowUpLeft size={26} stroke='1.5' />
+          <IconArrowUpLeft size={26} stroke="1.5" />
         </UnstyledButton>
         <UnstyledButton
           className={classes.control}
@@ -208,7 +210,7 @@ function Demo() {
           ref={setControlRef('up')}
           mod={{ active: active() === 'up' }}
         >
-          <IconArrowUp size={26} stroke='1.5' />
+          <IconArrowUp size={26} stroke="1.5" />
         </UnstyledButton>
         <UnstyledButton
           className={classes.control}
@@ -216,7 +218,7 @@ function Demo() {
           ref={setControlRef('up-right')}
           mod={{ active: active() === 'up-right' }}
         >
-          <IconArrowUpRight size={26} stroke='1.5' />
+          <IconArrowUpRight size={26} stroke="1.5" />
         </UnstyledButton>
       </div>
       <div class={classes.controlsGroup}>
@@ -226,7 +228,7 @@ function Demo() {
           ref={setControlRef('left')}
           mod={{ active: active() === 'left' }}
         >
-          <IconArrowLeft size={26} stroke='1.5' />
+          <IconArrowLeft size={26} stroke="1.5" />
         </UnstyledButton>
         <UnstyledButton
           className={classes.control}
@@ -234,7 +236,7 @@ function Demo() {
           ref={setControlRef('center')}
           mod={{ active: active() === 'center' }}
         >
-          <IconCircle size={26} stroke='1.5' />
+          <IconCircle size={26} stroke="1.5" />
         </UnstyledButton>
         <UnstyledButton
           className={classes.control}
@@ -242,7 +244,7 @@ function Demo() {
           ref={setControlRef('right')}
           mod={{ active: active() === 'right' }}
         >
-          <IconArrowRight size={26} stroke='1.5' />
+          <IconArrowRight size={26} stroke="1.5" />
         </UnstyledButton>
       </div>
       <div class={classes.controlsGroup}>
@@ -252,7 +254,7 @@ function Demo() {
           ref={setControlRef('down-left')}
           mod={{ active: active() === 'down-left' }}
         >
-          <IconArrowDownLeft size={26} stroke='1.5' />
+          <IconArrowDownLeft size={26} stroke="1.5" />
         </UnstyledButton>
         <UnstyledButton
           className={classes.control}
@@ -260,7 +262,7 @@ function Demo() {
           ref={setControlRef('down')}
           mod={{ active: active() === 'down' }}
         >
-          <IconArrowDown size={26} stroke='1.5' />
+          <IconArrowDown size={26} stroke="1.5" />
         </UnstyledButton>
         <UnstyledButton
           className={classes.control}
@@ -268,7 +270,7 @@ function Demo() {
           ref={setControlRef('down-right')}
           mod={{ active: active() === 'down-right' }}
         >
-          <IconArrowDownRight size={26} stroke='1.5' />
+          <IconArrowDownRight size={26} stroke="1.5" />
         </UnstyledButton>
       </div>
     </div>

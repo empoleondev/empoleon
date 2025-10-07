@@ -21,7 +21,7 @@ export type ModalContentFactory = Factory<{
 
 const defaultProps: Partial<ModalContentProps> = {};
 
-export const ModalContent = factory<ModalContentFactory>(_props => {
+export const ModalContent = factory<ModalContentFactory>((_props) => {
   const props = useProps('ModalContent', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -31,7 +31,7 @@ export const ModalContent = factory<ModalContentFactory>(_props => {
     'vars',
     'children',
     '__hidden',
-    'ref'
+    'ref',
   ]);
 
   const ctx = useModalContext();
@@ -39,18 +39,30 @@ export const ModalContent = factory<ModalContentFactory>(_props => {
 
   return (
     <ModalBaseContent
-      {...ctx.getStyles('content', { className: local.className, style: local.style, styles: local.styles, classNames: local.classNames })}
+      {...ctx.getStyles('content', {
+        className: local.className,
+        style: local.style,
+        styles: local.styles,
+        classNames: local.classNames,
+      })}
       // @ts-ignore
-      innerProps={ctx.getStyles('inner', { className: local.className, style: local.style, styles: local.styles, classNames: local.classNames })}
+      innerProps={ctx.getStyles('inner', {
+        className: local.className,
+        style: local.style,
+        styles: local.styles,
+        classNames: local.classNames,
+      })}
       data-full-screen={ctx.fullScreen || undefined}
       data-modal-content
       data-hidden={local.__hidden || undefined}
       ref={local.ref}
       {...others}
     >
-      <Scroll style={{
-        'max-height': ctx.fullScreen ? '100dvh' : `calc(100dvh - (${rem(ctx.yOffset)} * 2))`,
-      }}>
+      <Scroll
+        style={{
+          'max-height': ctx.fullScreen ? '100dvh' : `calc(100dvh - (${rem(ctx.yOffset)} * 2))`,
+        }}
+      >
         {local.children}
       </Scroll>
     </ModalBaseContent>

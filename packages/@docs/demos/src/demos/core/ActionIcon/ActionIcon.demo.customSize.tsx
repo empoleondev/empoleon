@@ -1,5 +1,5 @@
 import { IconHeart } from '@tabler/icons-solidjs';
-import { ActionIcon, createTheme, Group, EmpoleonThemeProvider } from '@empoleon/core';
+import { ActionIcon, createTheme, EmpoleonThemeProvider, Group } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
 import classes from './ActionIcon.demo.customSize.module.css';
 

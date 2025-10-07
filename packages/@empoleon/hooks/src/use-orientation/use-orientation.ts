@@ -1,4 +1,4 @@
-import { createSignal, onMount, onCleanup } from 'solid-js';
+import { createSignal, onCleanup, onMount } from 'solid-js';
 
 interface UseOrientationOptions {
   /** Default angle value, used until the real can be retrieved
@@ -65,7 +65,9 @@ export function useOrientation({
 
   onMount(() => {
     window.screen.orientation?.addEventListener('change', handleOrientationChange);
-    onCleanup(() => window.screen.orientation?.removeEventListener('change', handleOrientationChange));
+    onCleanup(() =>
+      window.screen.orientation?.removeEventListener('change', handleOrientationChange)
+    );
   });
 
   return orientation;

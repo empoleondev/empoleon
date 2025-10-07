@@ -25,7 +25,9 @@ export function ModalStack(props: ModalStackProps) {
   return (
     <ModalStackProvider
       value={{
-        get stack() { return stack(); },
+        get stack() {
+          return stack();
+        },
         addModal: (id, zIndex) => {
           setStack((current) => [...new Set([...current, id])]);
           setMaxZIndex((current) =>
@@ -36,8 +38,12 @@ export function ModalStack(props: ModalStackProps) {
         },
         removeModal: (id) => setStack((current) => current.filter((currentId) => currentId !== id)),
         getZIndex: (id) => `calc(${maxZIndex()} + ${stack().indexOf(id)} + 1)`,
-        get currentId() { return stack()[stack().length - 1]; },
-        get maxZIndex() { return maxZIndex(); },
+        get currentId() {
+          return stack()[stack().length - 1];
+        },
+        get maxZIndex() {
+          return maxZIndex();
+        },
       }}
     >
       {props.children}

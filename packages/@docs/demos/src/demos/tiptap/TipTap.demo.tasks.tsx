@@ -1,7 +1,7 @@
 import TaskItem from '@tiptap/extension-task-item';
 import TipTapTaskList from '@tiptap/extension-task-list';
-import { useEditor } from '@empoleon/solid-tiptap';
 import StarterKit from '@tiptap/starter-kit';
+import { useEditor } from '@empoleon/solid-tiptap';
 import { getTaskListExtension, RichTextEditor } from '@empoleon/tiptap';
 import { EmpoleonDemo } from '@empoleonx/demo';
 

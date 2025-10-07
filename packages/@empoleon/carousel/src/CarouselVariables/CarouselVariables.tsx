@@ -1,16 +1,16 @@
+import { createMemo } from 'solid-js';
 import {
+  EmpoleonBreakpoint,
   filterProps,
   getBaseValue,
   getSortedBreakpoints,
   getSpacing,
   InlineStyles,
   keys,
-  EmpoleonBreakpoint,
   px,
   rem,
   useEmpoleonTheme,
 } from '@empoleon/core';
-import { createMemo } from 'solid-js';
 import type { CarouselProps } from '../Carousel';
 
 interface CarouselVariablesProps extends CarouselProps {
@@ -20,13 +20,15 @@ interface CarouselVariablesProps extends CarouselProps {
 export function CarouselVariables(props: CarouselVariablesProps) {
   const theme = useEmpoleonTheme();
 
-  const baseStyles = createMemo(() => filterProps({
-    '--carousel-slide-gap': getSpacing(getBaseValue(props.slideGap)),
-    '--carousel-slide-size': rem(getBaseValue(props.slideSize)),
-  }));
+  const baseStyles = createMemo(() =>
+    filterProps({
+      '--carousel-slide-gap': getSpacing(getBaseValue(props.slideGap)),
+      '--carousel-slide-size': rem(getBaseValue(props.slideSize)),
+    })
+  );
 
-  const queries = createMemo(() => keys(theme.breakpoints).reduce<Record<string, Record<string, any>>>(
-    (acc, breakpoint) => {
+  const queries = createMemo(() =>
+    keys(theme.breakpoints).reduce<Record<string, Record<string, any>>>((acc, breakpoint) => {
       if (!acc[breakpoint]) {
         acc[breakpoint] = {};
       }
@@ -40,9 +42,8 @@ export function CarouselVariables(props: CarouselVariablesProps) {
       }
 
       return acc;
-    },
-    {}
-  ));
+    }, {})
+  );
 
   const sortedBreakpoints = createMemo(() =>
     getSortedBreakpoints(keys(queries()), theme.breakpoints).filter(
@@ -50,10 +51,12 @@ export function CarouselVariables(props: CarouselVariablesProps) {
     )
   );
 
-  const media = createMemo(() => sortedBreakpoints().map((breakpoint) => ({
-    query: `(min-width: ${theme.breakpoints[breakpoint.value as EmpoleonBreakpoint]})`,
-    styles: queries()[breakpoint.value],
-  })));
+  const media = createMemo(() =>
+    sortedBreakpoints().map((breakpoint) => ({
+      query: `(min-width: ${theme.breakpoints[breakpoint.value as EmpoleonBreakpoint]})`,
+      styles: queries()[breakpoint.value],
+    }))
+  );
 
   return <InlineStyles styles={baseStyles()} media={media()} selector={props.selector} />;
 }
@@ -79,10 +82,12 @@ function getUniqueBreakpoints(props: Omit<CarouselVariablesProps, 'selector'>) {
 }
 
 export function CarouselContainerVariables(props: CarouselVariablesProps) {
-  const baseStyles = createMemo(() => filterProps({
-    '--carousel-slide-gap': getSpacing(getBaseValue(props.slideGap)),
-    '--carousel-slide-size': rem(getBaseValue(props.slideSize)),
-  }));
+  const baseStyles = createMemo(() =>
+    filterProps({
+      '--carousel-slide-gap': getSpacing(getBaseValue(props.slideGap)),
+      '--carousel-slide-size': rem(getBaseValue(props.slideSize)),
+    })
+  );
 
   const queries = createMemo(() =>
     getUniqueBreakpoints({ slideGap: props.slideGap, slideSize: props.slideSize }).reduce<
@@ -104,10 +109,12 @@ export function CarouselContainerVariables(props: CarouselVariablesProps) {
     }, {})
   );
 
-  const media = createMemo(() => Object.keys(queries()).map((breakpoint) => ({
-    query: `carousel (min-width: ${breakpoint})`,
-    styles: queries()[breakpoint],
-  })));
+  const media = createMemo(() =>
+    Object.keys(queries()).map((breakpoint) => ({
+      query: `carousel (min-width: ${breakpoint})`,
+      styles: queries()[breakpoint],
+    }))
+  );
 
   return <InlineStyles styles={baseStyles()} container={media()} selector={props.selector} />;
 }

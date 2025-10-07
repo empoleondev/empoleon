@@ -1,3 +1,4 @@
+import { ComponentProps, createEffect, createMemo, For, JSX, splitProps } from 'solid-js';
 import { PossibleRef, useId, useMergedRef, useUncontrolled } from '@empoleon/hooks';
 import {
   BoxProps,
@@ -29,7 +30,6 @@ import { PillsInput } from '../PillsInput';
 import { ScrollAreaProps } from '../ScrollArea';
 import { filterPickedTags } from './filter-picked-tags';
 import { getSplittedTags } from './get-splitted-tags';
-import { ComponentProps, createEffect, createMemo, For, JSX, splitProps } from 'solid-js';
 
 export type TagsInputStylesNames =
   | __InputStylesNames
@@ -121,7 +121,7 @@ const defaultProps = {
   hiddenInputValuesDivider: ',',
 } satisfies Partial<TagsInputProps>;
 
-export const TagsInput = factory<TagsInputFactory>(_props => {
+export const TagsInput = factory<TagsInputFactory>((_props) => {
   const props = useProps('TagsInput', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -196,7 +196,7 @@ export const TagsInput = factory<TagsInputFactory>(_props => {
     'acceptValueOnBlur',
     'isDuplicate',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const _id = useId(local.id);
@@ -221,7 +221,7 @@ export const TagsInput = factory<TagsInputFactory>(_props => {
 
   const finalStyleProps = {
     ...styleProps,
-    style: local.style
+    style: local.style,
   };
 
   const [_value, setValue] = useUncontrolled({
@@ -267,7 +267,10 @@ export const TagsInput = factory<TagsInputFactory>(_props => {
       local.onDuplicate?.(val);
     }
 
-    if ((!isDuplicated || (isDuplicated && local.allowDuplicates)) && _value().length < local.maxTags!) {
+    if (
+      (!isDuplicated || (isDuplicated && local.allowDuplicates)) &&
+      _value().length < local.maxTags!
+    ) {
       local.onOptionSubmit?.(val);
       handleSearchChange('');
       if (val.length > 0) {
@@ -276,8 +279,10 @@ export const TagsInput = factory<TagsInputFactory>(_props => {
     }
   };
 
-  const handleInputKeydown = (event: KeyboardEvent & { currentTarget: HTMLInputElement; target: Element }) => {
-    typeof local.onKeyDown === "function" && local.onKeyDown?.(event);
+  const handleInputKeydown = (
+    event: KeyboardEvent & { currentTarget: HTMLInputElement; target: Element }
+  ) => {
+    typeof local.onKeyDown === 'function' && local.onKeyDown?.(event);
 
     if ((event as any).isPropagationStopped?.() || event.defaultPrevented) {
       return;
@@ -314,19 +319,16 @@ export const TagsInput = factory<TagsInputFactory>(_props => {
       handleValueSelect(inputValue);
     }
 
-    if (
-      event.key === 'Backspace' &&
-      length === 0 &&
-      _value().length > 0 &&
-      !event.isComposing
-    ) {
+    if (event.key === 'Backspace' && length === 0 && _value().length > 0 && !event.isComposing) {
       local.onRemove?.(_value()[_value().length - 1]);
       setValue(_value().slice(0, _value().length - 1));
     }
   };
 
-  const handlePaste = (event: ClipboardEvent & { currentTarget: HTMLInputElement; target: Element }) => {
-    typeof local.onPaste === "function" && local.onPaste?.(event);
+  const handlePaste = (
+    event: ClipboardEvent & { currentTarget: HTMLInputElement; target: Element }
+  ) => {
+    typeof local.onPaste === 'function' && local.onPaste?.(event);
     event.preventDefault();
 
     if (event.clipboardData) {
@@ -396,7 +398,9 @@ export const TagsInput = factory<TagsInputFactory>(_props => {
                 }}
               />
             }
-            __clearable={local.clearable && _value().length > 0 && !local.disabled && !local.readOnly}
+            __clearable={
+              local.clearable && _value().length > 0 && !local.disabled && !local.readOnly
+            }
             rightSectionWidth={local.rightSectionWidth}
             rightSectionPointerEvents={local.rightSectionPointerEvents}
             rightSectionProps={local.rightSectionProps}
@@ -421,7 +425,11 @@ export const TagsInput = factory<TagsInputFactory>(_props => {
             mod={local.mod}
             attributes={local.attributes}
           >
-            <Pill.Group disabled={local.disabled} unstyled={local.unstyled} {...getStyles('pillsList')}>
+            <Pill.Group
+              disabled={local.disabled}
+              unstyled={local.unstyled}
+              {...getStyles('pillsList')}
+            >
               {
                 <span>
                   <For each={_value()}>
@@ -455,11 +463,11 @@ export const TagsInput = factory<TagsInputFactory>(_props => {
                   unstyled={local.unstyled}
                   onKeyDown={handleInputKeydown}
                   onFocus={(event: any) => {
-                    typeof local.onFocus === "function" && local.onFocus?.(event);
+                    typeof local.onFocus === 'function' && local.onFocus?.(event);
                     combobox.openDropdown();
                   }}
                   onBlur={(event: any) => {
-                    typeof local.onBlur === "function" && local.onBlur?.(event);
+                    typeof local.onBlur === 'function' && local.onBlur?.(event);
                     local.acceptValueOnBlur && handleValueSelect(_searchValue());
                     combobox.closeDropdown();
                   }}
@@ -471,7 +479,9 @@ export const TagsInput = factory<TagsInputFactory>(_props => {
                     local.selectFirstOptionOnChange && combobox.selectFirstOption();
                   }}
                   onChange={(event) => {
-                    handleSearchChange(_value() != null ? optionsLockup()[_value()[0]!]?.label || '' : '');
+                    handleSearchChange(
+                      _value() != null ? optionsLockup()[_value()[0]!]?.label || '' : ''
+                    );
                   }}
                   required={local.required && _value().length === 0}
                   disabled={local.disabled}

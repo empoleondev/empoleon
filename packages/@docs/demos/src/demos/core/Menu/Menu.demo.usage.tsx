@@ -64,7 +64,7 @@ function Demo() {
 
 function Demo() {
   return (
-    <Menu shadow="md" width='200px' withinPortal>
+    <Menu shadow="md" width="200px" withinPortal>
       <DemoMenuItems />
     </Menu>
   );

@@ -1,4 +1,4 @@
-import { splitProps, JSX } from 'solid-js';
+import { JSX, splitProps } from 'solid-js';
 import {
   BoxProps,
   DataAttributes,
@@ -44,14 +44,10 @@ const defaultProps = {
   withAria: true,
 } satisfies Partial<InputBaseProps>;
 
-export const InputBase = polymorphicFactory<InputBaseFactory>(_props => {
+export const InputBase = polymorphicFactory<InputBaseFactory>((_props) => {
   const props = useInputProps('InputBase', defaultProps, _props);
 
-  const [local, others] = splitProps(props, [
-    'inputProps',
-    'wrapperProps',
-    'ref',
-  ]);
+  const [local, others] = splitProps(props, ['inputProps', 'wrapperProps', 'ref']);
 
   return (
     <Input.Wrapper {...local.wrapperProps}>

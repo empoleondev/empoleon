@@ -1,7 +1,7 @@
+import { IconHeart, IconMoon, IconStar, IconSun } from '@tabler/icons-solidjs';
+import { createEffect, createSignal } from 'solid-js';
 import { Rating, RatingProps } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { IconStar, IconHeart, IconSun, IconMoon } from '@tabler/icons-solidjs';
-import { createSignal, createEffect } from 'solid-js';
 
 const code = `
 import { Rating } from '@empoleon/core';
@@ -11,9 +11,11 @@ function Demo() {
 }
 `;
 
-function Demo(props: RatingProps & {
-  symbolType?: string;
-}) {
+function Demo(
+  props: RatingProps & {
+    symbolType?: string;
+  }
+) {
   const [value, setValue] = createSignal(props.value ?? props.defaultValue ?? 0);
 
   createEffect(() => {
@@ -30,7 +32,7 @@ function Demo(props: RatingProps & {
   const getEmptySymbol = () => {
     const symbolProps = {
       style: { width: '100%', height: '100%' },
-      stroke: '1.5'
+      stroke: '1.5',
     };
 
     switch (props.symbolType) {
@@ -49,7 +51,7 @@ function Demo(props: RatingProps & {
     const symbolProps = {
       style: { width: '100%', height: '100%' },
       stroke: '1.5',
-      fill: 'currentColor'
+      fill: 'currentColor',
     };
 
     switch (props.symbolType) {
@@ -85,13 +87,13 @@ export const kitchenSink: EmpoleonDemo = {
       prop: 'color',
       type: 'color',
       initialValue: 'yellow',
-      libraryValue: 'yellow'
+      libraryValue: 'yellow',
     },
     {
       prop: 'size',
       type: 'size',
       initialValue: 'md',
-      libraryValue: 'md'
+      libraryValue: 'md',
     },
     {
       prop: 'count',
@@ -99,7 +101,7 @@ export const kitchenSink: EmpoleonDemo = {
       initialValue: 5,
       libraryValue: 5,
       min: 1,
-      max: 10
+      max: 10,
     },
     {
       prop: 'fractions',
@@ -108,7 +110,7 @@ export const kitchenSink: EmpoleonDemo = {
       libraryValue: 1,
       min: 1,
       max: 4,
-      step: 1
+      step: 1,
     },
     {
       prop: 'value',
@@ -117,19 +119,19 @@ export const kitchenSink: EmpoleonDemo = {
       libraryValue: 0,
       min: 0,
       max: 5,
-      step: 0.5
+      step: 0.5,
     },
     {
       prop: 'highlightSelectedOnly',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'readOnly',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
-    }
+      libraryValue: false,
+    },
   ],
 };

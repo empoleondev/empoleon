@@ -1,7 +1,7 @@
-import { Button, Group, EmpoleonProvider, Text, TextInput } from '@empoleon/core';
+import { JSX } from 'solid-js';
+import { Button, EmpoleonProvider, Group, Text, TextInput } from '@empoleon/core';
 import { useDisclosure } from '@empoleon/hooks';
 import { Dialog } from './Dialog';
-import { JSX } from 'solid-js';
 
 export default {
   title: 'Dialog',

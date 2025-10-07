@@ -1,14 +1,11 @@
-import { JSX, splitProps } from "solid-js";
+import { JSX, splitProps } from 'solid-js';
 
 interface ExpandIconProps extends JSX.SvgSVGAttributes<SVGSVGElement> {
   expanded: boolean;
 }
 
 export function ExpandIcon(props: ExpandIconProps) {
-  const [local, others] = splitProps(props, [
-    'expanded',
-    'style'
-  ]);
+  const [local, others] = splitProps(props, ['expanded', 'style']);
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

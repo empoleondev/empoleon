@@ -35,7 +35,7 @@ const defaultProps = {
   withPadding: true,
 } satisfies Partial<PaginationControlProps>;
 
-export const PaginationControl = factory<PaginationControlFactory>(_props => {
+export const PaginationControl = factory<PaginationControlFactory>((_props) => {
   const props = useProps('PaginationControl', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -47,18 +47,27 @@ export const PaginationControl = factory<PaginationControlFactory>(_props => {
     'disabled',
     'withPadding',
     'mod',
-    'ref'
+    'ref',
   ]);
 
   const ctx = usePaginationContext();
-  const _disabled = () => (local.disabled || !!ctx.disabled());
+  const _disabled = () => local.disabled || !!ctx.disabled();
 
   return (
     <UnstyledButton
       ref={local.ref}
       disabled={_disabled()}
-      mod={[{ active: local.active, disabled: _disabled(), 'with-padding': local.withPadding }, local.mod]}
-      {...ctx.getStyles('control', { className: local.className, style: local.style, classNames: local.classNames, styles: local.styles, active: !_disabled() })}
+      mod={[
+        { active: local.active, disabled: _disabled(), 'with-padding': local.withPadding },
+        local.mod,
+      ]}
+      {...ctx.getStyles('control', {
+        className: local.className,
+        style: local.style,
+        classNames: local.classNames,
+        styles: local.styles,
+        active: !_disabled(),
+      })}
       {...others}
     />
   );

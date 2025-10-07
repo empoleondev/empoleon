@@ -1,13 +1,13 @@
-import { children, splitProps, JSX, createEffect } from 'solid-js';
+import { children, createEffect, JSX, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
   createVarsResolver,
   ElementProps,
+  EmpoleonSpacing,
   factory,
   Factory,
   getSpacing,
-  EmpoleonSpacing,
   StylesApiProps,
   useProps,
   useStyles,
@@ -50,7 +50,7 @@ const varsResolver = createVarsResolver<BreadcrumbsFactory>((_, props) => ({
   },
 }));
 
-export const Breadcrumbs = factory<BreadcrumbsFactory>(_props => {
+export const Breadcrumbs = factory<BreadcrumbsFactory>((_props) => {
   const props = useProps('Breadcrumbs', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -63,7 +63,7 @@ export const Breadcrumbs = factory<BreadcrumbsFactory>(_props => {
     'separator',
     'separatorMargin',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<BreadcrumbsFactory>({
@@ -81,22 +81,16 @@ export const Breadcrumbs = factory<BreadcrumbsFactory>(_props => {
   });
 
   const items = () => {
-    const c = children(() => props.children).toArray().filter((item) => !!item);
+    const c = children(() => props.children)
+      .toArray()
+      .filter((item) => !!item);
     const result: JSX.Element[] = [];
 
     c.forEach((child, i) => {
-      result.push(
-        <Box {...getStyles('breadcrumb')}>
-          {child}
-        </Box>
-      );
+      result.push(<Box {...getStyles('breadcrumb')}>{child}</Box>);
 
       if (i < c.length - 1) {
-        result.push(
-          <Box {...getStyles('separator')}>
-            {local.separator}
-          </Box>
-        );
+        result.push(<Box {...getStyles('separator')}>{local.separator}</Box>);
       }
     });
 

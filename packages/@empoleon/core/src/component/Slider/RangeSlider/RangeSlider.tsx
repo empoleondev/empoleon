@@ -4,15 +4,15 @@ import {
   BoxProps,
   createVarsResolver,
   ElementProps,
+  EmpoleonColor,
+  EmpoleonRadius,
+  EmpoleonSize,
   factory,
   Factory,
   findClosestNumber,
   getRadius,
   getSize,
   getThemeColor,
-  EmpoleonColor,
-  EmpoleonRadius,
-  EmpoleonSize,
   rem,
   StylesApiProps,
   useDirection,
@@ -144,17 +144,15 @@ export type RangeSliderFactory = Factory<{
   vars: SliderCssVariables;
 }>;
 
-const varsResolver = createVarsResolver<RangeSliderFactory>(
-  (theme, props) => ({
-    root: {
-      '--slider-size': getSize(props.size, 'slider-size'),
-      '--slider-color': props.color ? getThemeColor(props.color, theme) : undefined,
-      '--slider-radius': props.radius === undefined ? undefined : getRadius(props.radius),
-      '--slider-thumb-size':
-        props.thumbSize !== undefined ? rem(props.thumbSize) : 'calc(var(--slider-size) * 2)',
-    },
-  })
-);
+const varsResolver = createVarsResolver<RangeSliderFactory>((theme, props) => ({
+  root: {
+    '--slider-size': getSize(props.size, 'slider-size'),
+    '--slider-color': props.color ? getThemeColor(props.color, theme) : undefined,
+    '--slider-radius': props.radius === undefined ? undefined : getRadius(props.radius),
+    '--slider-thumb-size':
+      props.thumbSize !== undefined ? rem(props.thumbSize) : 'calc(var(--slider-size) * 2)',
+  },
+}));
 
 const defaultProps = {
   min: 0,
@@ -173,7 +171,7 @@ const defaultProps = {
   maxRange: Infinity,
 } satisfies Partial<RangeSliderProps>;
 
-export const RangeSlider = factory<RangeSliderFactory>(_props => {
+export const RangeSlider = factory<RangeSliderFactory>((_props) => {
   const props = useProps('RangeSlider', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -214,8 +212,8 @@ export const RangeSlider = factory<RangeSliderFactory>(_props => {
     'thumbProps',
     'pushOnOverlap',
     'attributes',
-    'ref'
-   ]);
+    'ref',
+  ]);
 
   const getStyles = useStyles<RangeSliderFactory>({
     name: 'Slider',
@@ -382,9 +380,7 @@ export const RangeSlider = factory<RangeSliderFactory>(_props => {
     thumbIndex = index;
   }
 
-  const handleTrackMouseDownCapture = (
-    event: MouseEvent | TouchEvent
-  ) => {
+  const handleTrackMouseDownCapture = (event: MouseEvent | TouchEvent) => {
     containerRef?.focus();
     const rect = containerRef?.getBoundingClientRect();
     const changePosition = getClientPosition(event);
@@ -433,7 +429,7 @@ export const RangeSlider = factory<RangeSliderFactory>(_props => {
           const focusedIndex = getFocusedThumbIndex();
           thumbs[focusedIndex].focus();
           const nextValue =
-          local.restrictToMarks && local.marks
+            local.restrictToMarks && local.marks
               ? getNextMarkValue(valueRef[focusedIndex], local.marks)
               : Math.min(Math.max(valueRef[focusedIndex] + local.step!, local.min!), local.max!);
           setRangedValue(getFloatingValue(nextValue, precision), focusedIndex, true);
@@ -446,7 +442,7 @@ export const RangeSlider = factory<RangeSliderFactory>(_props => {
           thumbs[focusedIndex].focus();
 
           const nextValue =
-          local.restrictToMarks && local.marks
+            local.restrictToMarks && local.marks
               ? (dir === 'rtl' ? getPreviousMarkValue : getNextMarkValue)(
                   valueRef[focusedIndex],
                   local.marks
@@ -456,7 +452,7 @@ export const RangeSlider = factory<RangeSliderFactory>(_props => {
                     dir === 'rtl'
                       ? valueRef[focusedIndex] - local.step!
                       : valueRef[focusedIndex] + local.step!,
-                      local.min!
+                    local.min!
                   ),
                   local.max!
                 );
@@ -470,7 +466,7 @@ export const RangeSlider = factory<RangeSliderFactory>(_props => {
           const focusedIndex = getFocusedThumbIndex();
           thumbs[focusedIndex].focus();
           const nextValue =
-          local.restrictToMarks && local.marks
+            local.restrictToMarks && local.marks
               ? getPreviousMarkValue(valueRef[focusedIndex], local.marks)
               : Math.min(Math.max(valueRef[focusedIndex] - local.step!, local.min!), local.max!);
           setRangedValue(getFloatingValue(nextValue, precision), focusedIndex, true);
@@ -483,7 +479,7 @@ export const RangeSlider = factory<RangeSliderFactory>(_props => {
           thumbs[focusedIndex].focus();
 
           const nextValue =
-          local.restrictToMarks && local.marks
+            local.restrictToMarks && local.marks
               ? (dir === 'rtl' ? getNextMarkValue : getPreviousMarkValue)(
                   valueRef[focusedIndex],
                   local.marks
@@ -493,7 +489,7 @@ export const RangeSlider = factory<RangeSliderFactory>(_props => {
                     dir === 'rtl'
                       ? valueRef[focusedIndex] + local.step!
                       : valueRef[focusedIndex] - local.step!,
-                      local.min!
+                    local.min!
                   ),
                   local.max!
                 );
@@ -619,8 +615,18 @@ export const RangeSlider = factory<RangeSliderFactory>(_props => {
           </Thumb>
         </Track>
 
-        <input type="hidden" name={`${local.name}_from`} value={_value()[0]} {...local.hiddenInputProps} />
-        <input type="hidden" name={`${local.name}_to`} value={_value()[1]} {...local.hiddenInputProps} />
+        <input
+          type="hidden"
+          name={`${local.name}_from`}
+          value={_value()[0]}
+          {...local.hiddenInputProps}
+        />
+        <input
+          type="hidden"
+          name={`${local.name}_to`}
+          value={_value()[1]}
+          {...local.hiddenInputProps}
+        />
       </SliderRoot>
     </SliderProvider>
   );

@@ -131,7 +131,9 @@ describe('@empoleon/dates/DateTimePicker', () => {
   });
 
   it('closes dropdown when user presses Enter in TimePicker', async () => {
-    const { container } = render(() => <DateTimePicker {...defaultProps} defaultValue="2022-04-11" />);
+    const { container } = render(() => (
+      <DateTimePicker {...defaultProps} defaultValue="2022-04-11" />
+    ));
     await clickInput(container);
     expectOpenedPopover(container);
 
@@ -140,7 +142,9 @@ describe('@empoleon/dates/DateTimePicker', () => {
   });
 
   it('closes dropdown when user clicks on submit button', async () => {
-    const { container } = render(() => <DateTimePicker {...defaultProps} defaultValue="2022-04-11" />);
+    const { container } = render(() => (
+      <DateTimePicker {...defaultProps} defaultValue="2022-04-11" />
+    ));
     await clickInput(container);
     expectOpenedPopover(container);
 
@@ -150,15 +154,15 @@ describe('@empoleon/dates/DateTimePicker', () => {
 
   it('closes when a submit button onClick handler is provided', async () => {
     const spy = vi.fn();
-    const { container } = render(
-      () => <DateTimePicker
+    const { container } = render(() => (
+      <DateTimePicker
         {...defaultProps}
         submitButtonProps={{
           onClick: spy,
           'aria-label': defaultProps.submitButtonProps!['aria-label'],
         }}
       />
-    );
+    ));
     await clickInput(container);
     expectOpenedPopover(container);
 
@@ -181,7 +185,9 @@ describe('@empoleon/dates/DateTimePicker', () => {
   // });
 
   it('supports uncontrolled state', async () => {
-    const { container } = render(() => <DateTimePicker {...defaultProps} defaultValue="2022-04-11" />);
+    const { container } = render(() => (
+      <DateTimePicker {...defaultProps} defaultValue="2022-04-11" />
+    ));
 
     const buttonInput = container.querySelector('button');
 
@@ -203,7 +209,7 @@ describe('@empoleon/dates/DateTimePicker', () => {
       timePicker.dispatchEvent(new Event('change', { bubbles: true }));
     }
 
-    await new Promise(resolve => setTimeout(resolve, 100));
+    await new Promise((resolve) => setTimeout(resolve, 100));
 
     // Check if the manual approach worked
     if (buttonInput?.textContent === '11/04/2022 14:45') {
@@ -217,9 +223,9 @@ describe('@empoleon/dates/DateTimePicker', () => {
   it('supports controlled state', async () => {
     const spy = vi.fn();
 
-    const { container } = render(
-      () => <DateTimePicker {...defaultProps} value="2022-04-11" onChange={spy} />
-    );
+    const { container } = render(() => (
+      <DateTimePicker {...defaultProps} value="2022-04-11" onChange={spy} />
+    ));
 
     await clickInput(container);
     await userEvent.click(container.querySelectorAll('table button')[6]);
@@ -228,48 +234,48 @@ describe('@empoleon/dates/DateTimePicker', () => {
   });
 
   it('displays correct value when withSeconds is set', () => {
-    const { container } = render(
-      () => <DateTimePicker {...defaultProps} value="2022-04-11T14:45:54" withSeconds />
-    );
+    const { container } = render(() => (
+      <DateTimePicker {...defaultProps} value="2022-04-11T14:45:54" withSeconds />
+    ));
 
     expectValue(container, '11/04/2022 14:45:54');
   });
 
   it('supports custom valueFormat', () => {
-    const { container } = render(
-      () => <DateTimePicker
+    const { container } = render(() => (
+      <DateTimePicker
         {...defaultProps}
         value="2022-04-11T14:45:54"
         valueFormat="DD MMMM, YYYY hh:mm:ss A"
       />
-    );
+    ));
 
     expectValue(container, '11 April, 2022 02:45:54 PM');
   });
 
   it('supports localization for custom valueFormat', () => {
-    const { container } = render(
-      () => <DateTimePicker
+    const { container } = render(() => (
+      <DateTimePicker
         {...defaultProps}
         value="2022-04-11T14:45:54"
         valueFormat="DD MMMM, YYYY hh:mm:ss"
         locale="ru"
       />
-    );
+    ));
 
     expectValue(container, '11 апреля, 2022 02:45:54');
   });
 
   it('supports localization for custom valueFormat om DatesProvider', () => {
-    const { container } = render(
-      () => <DatesProvider settings={{ locale: 'ru' }}>
+    const { container } = render(() => (
+      <DatesProvider settings={{ locale: 'ru' }}>
         <DateTimePicker
           {...defaultProps}
           value="2022-04-11T14:45:54"
           valueFormat="DD MMMM, YYYY hh:mm:ss"
         />
       </DatesProvider>
-    );
+    ));
 
     expectValue(container, '11 апреля, 2022 02:45:54');
   });
@@ -282,7 +288,9 @@ describe('@empoleon/dates/DateTimePicker', () => {
   });
 
   it('renders clear button based on clearable prop and current value', () => {
-    const { rerender } = render(() => <DateTimePicker {...defaultProps} value="2022-04-11" clearable />);
+    const { rerender } = render(() => (
+      <DateTimePicker {...defaultProps} value="2022-04-11" clearable />
+    ));
 
     expect(getClearButton()).toBeInTheDocument();
 
@@ -294,9 +302,9 @@ describe('@empoleon/dates/DateTimePicker', () => {
   });
 
   it('clears input when clear button is clicked', async () => {
-    const { container } = render(
-      () => <DateTimePicker {...defaultProps} defaultValue="2022-04-11" clearable />
-    );
+    const { container } = render(() => (
+      <DateTimePicker {...defaultProps} defaultValue="2022-04-11" clearable />
+    ));
 
     const buttonInput = container.querySelector('button');
 
@@ -315,9 +323,9 @@ describe('@empoleon/dates/DateTimePicker', () => {
 
   it('calls onChange with null when controlled input is cleared', async () => {
     const spy = vi.fn();
-    const { container } = render(
-      () => <DateTimePicker {...defaultProps} value="2022-04-11" clearable onChange={spy} />
-    );
+    const { container } = render(() => (
+      <DateTimePicker {...defaultProps} value="2022-04-11" clearable onChange={spy} />
+    ));
 
     expectValue(container, '11/04/2022 00:00');
     await userEvent.click(getClearButton());
@@ -333,7 +341,9 @@ describe('@empoleon/dates/DateTimePicker', () => {
   });
 
   it('allows changing levels in popover', async () => {
-    const { container } = render(() => <DateTimePicker {...defaultProps} defaultValue="2022-04-11" />);
+    const { container } = render(() => (
+      <DateTimePicker {...defaultProps} defaultValue="2022-04-11" />
+    ));
 
     const buttonInput = container.querySelector('button');
 
@@ -355,14 +365,14 @@ describe('@empoleon/dates/DateTimePicker', () => {
   });
 
   it('render hidden input with given value', () => {
-    const { container } = render(
-      () => <DateTimePicker
+    const { container } = render(() => (
+      <DateTimePicker
         {...defaultProps}
         value="2022-04-11 14:56:45"
         name="hidden-name"
         form="hidden-form"
       />
-    );
+    ));
     const input = container.querySelector('input[type="hidden"]');
     expect(input).toHaveValue('2022-04-11 14:56:45');
     expect(input).toHaveAttribute('name', 'hidden-name');
@@ -370,12 +380,12 @@ describe('@empoleon/dates/DateTimePicker', () => {
   });
 
   it('has correct default __staticSelector', () => {
-    const { container } = render(
-      () => <DateTimePicker
+    const { container } = render(() => (
+      <DateTimePicker
         {...defaultProps}
         popoverProps={{ opened: true, withinPortal: false, transitionProps: { duration: 0 } }}
       />
-    );
+    ));
 
     expect(container.querySelector('[data-dates-input]')).toHaveClass(
       'empoleon-DateTimePicker-input'

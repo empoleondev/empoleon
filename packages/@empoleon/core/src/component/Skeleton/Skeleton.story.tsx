@@ -1,6 +1,6 @@
 import { JSX } from 'solid-js';
-import { Skeleton } from './Skeleton';
 import { EmpoleonProvider } from '../../core';
+import { Skeleton } from './Skeleton';
 
 export default {
   title: 'Skeleton',
@@ -15,16 +15,16 @@ export default {
 
 export function Usage() {
   return (
-    <div style={{ 'padding': '40px' }}>
-      <Skeleton height={"200px"} />
+    <div style={{ padding: '40px' }}>
+      <Skeleton height={'200px'} />
     </div>
   );
 }
 
 export function Circle() {
   return (
-    <div style={{ 'padding': '40px' }}>
-      <Skeleton height={"200px"} circle />
+    <div style={{ padding: '40px' }}>
+      <Skeleton height={'200px'} circle />
     </div>
   );
 }

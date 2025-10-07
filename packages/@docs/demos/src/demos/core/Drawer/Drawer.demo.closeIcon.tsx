@@ -43,7 +43,7 @@ function Demo() {
         onClose={close}
         title="Authentication"
         closeButtonProps={{
-          icon: <IconXboxX size={20} stroke='1.5' />,
+          icon: <IconXboxX size={20} stroke="1.5" />,
         }}
       >
         <AuthenticationForm noShadow noPadding />

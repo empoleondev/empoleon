@@ -1,6 +1,6 @@
+import { createSignal, For } from 'solid-js';
 import { Combobox, Input, InputBase, ScrollArea, useCombobox } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal, For } from 'solid-js';
 
 const code = `
 import { useState } from 'react';
@@ -154,11 +154,7 @@ function Demo() {
         <Combobox.Options>
           <ScrollArea.Autosize type="scroll" mah={200}>
             <For each={groceries}>
-              {(item) => (
-                <Combobox.Option value={item}>
-                  {item}
-                </Combobox.Option>
-              )}
+              {(item) => <Combobox.Option value={item}>{item}</Combobox.Option>}
             </For>
           </ScrollArea.Autosize>
         </Combobox.Options>

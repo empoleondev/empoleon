@@ -1,6 +1,6 @@
+import { JSX } from 'solid-js';
 import { createTheme, EmpoleonThemeProvider, useProps } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { JSX } from 'solid-js';
 
 const code = `
 import { useProps, EmpoleonThemeProvider, createTheme } from '@empoleon/core';

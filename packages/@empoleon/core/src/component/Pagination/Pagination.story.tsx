@@ -1,8 +1,8 @@
 import { createSignal, JSX } from 'solid-js';
+import { EmpoleonProvider } from '../../core';
 import { Button } from '../Button';
 import { Group } from '../Group';
 import { Pagination } from './Pagination';
-import { EmpoleonProvider } from '../../core';
 
 export default {
   title: 'Pagination',
@@ -18,7 +18,7 @@ export default {
 export function DynamicTotal() {
   const [total, setTotal] = createSignal(20);
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Pagination total={total()} mb="xl" />
       <Group>
         <Button onClick={() => setTotal(30)}>Set 30</Button>

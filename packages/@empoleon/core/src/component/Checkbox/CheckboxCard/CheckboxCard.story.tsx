@@ -1,9 +1,9 @@
+import { createSignal, JSX } from 'solid-js';
 import { useForm } from '@empoleon/form';
 import { EmpoleonProvider } from '../../../core';
 import { CheckboxGroup } from '../CheckboxGroup/CheckboxGroup';
 import { CheckboxIndicator } from '../CheckboxIndicator/CheckboxIndicator';
 import { CheckboxCard } from './CheckboxCard';
-import { createSignal, JSX } from 'solid-js';
 
 export default {
   title: 'CheckboxCard',
@@ -19,7 +19,7 @@ export default {
 export function Usage() {
   const [checked, setChecked] = createSignal(false);
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <CheckboxCard p="md" checked={checked()} onClick={() => setChecked((c) => !c)}>
         <CheckboxIndicator />
         Some label
@@ -32,7 +32,7 @@ export function WithinGroup() {
   const [value, setValue] = createSignal<string[]>(['1']);
 
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <CheckboxGroup value={value()} onChange={setValue}>
         <CheckboxCard value="1">
           <CheckboxIndicator />
@@ -54,11 +54,8 @@ export function WithUseForm() {
   const form = useForm({ mode: 'uncontrolled', initialValues: { checkbox: true } });
 
   return (
-    <div style={{ 'padding': '40px' }}>
-      <CheckboxCard
-        p="md"
-        {...form.getInputProps('checkbox', { type: 'checkbox' })}
-      >
+    <div style={{ padding: '40px' }}>
+      <CheckboxCard p="md" {...form.getInputProps('checkbox', { type: 'checkbox' })}>
         <CheckboxIndicator />
         Some label
       </CheckboxCard>

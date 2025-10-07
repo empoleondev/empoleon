@@ -1,14 +1,14 @@
-import { splitProps, JSX } from 'solid-js';
+import { JSX, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
   createVarsResolver,
-  getRadius,
-  getSize,
   EmpoleonColor,
   EmpoleonGradient,
   EmpoleonRadius,
   EmpoleonSize,
+  getRadius,
+  getSize,
   polymorphicFactory,
   PolymorphicFactory,
   StylesApiProps,
@@ -21,7 +21,6 @@ import { UnstyledButton } from '../UnstyledButton';
 import { ActionIconGroup } from './ActionIconGroup/ActionIconGroup';
 import { ActionIconGroupSection } from './ActionIconGroupSection/ActionIconGroupSection';
 import classes from './ActionIcon.module.css';
-
 
 export type ActionIconVariant =
   | 'filled'
@@ -92,31 +91,29 @@ export type ActionIconFactory = PolymorphicFactory<{
 
 const defaultProps: Partial<ActionIconProps> = {};
 
-const varsResolver = createVarsResolver<ActionIconFactory>(
-  (theme, props) => {
-    const colors = theme.variantColorResolver({
-      color: props.color || theme.primaryColor,
-      theme,
-      gradient: props.gradient,
-      variant: props.variant || 'filled',
-      autoContrast: props.autoContrast,
-    });
+const varsResolver = createVarsResolver<ActionIconFactory>((theme, props) => {
+  const colors = theme.variantColorResolver({
+    color: props.color || theme.primaryColor,
+    theme,
+    gradient: props.gradient,
+    variant: props.variant || 'filled',
+    autoContrast: props.autoContrast,
+  });
 
-    return {
-      root: {
-        '--ai-size': getSize(props.size, 'ai-size'),
-        '--ai-radius': props.radius === undefined ? undefined : getRadius(props.radius),
-        '--ai-bg': props.color || props.variant ? colors.background : undefined,
-        '--ai-hover': props.color || props.variant ? colors.hover : undefined,
-        '--ai-hover-color': props.color || props.variant ? colors.hoverColor : undefined,
-        '--ai-color': colors.color,
-        '--ai-bd': props.color || props.variant ? colors.border : undefined,
-      },
-    };
-  }
-);
+  return {
+    root: {
+      '--ai-size': getSize(props.size, 'ai-size'),
+      '--ai-radius': props.radius === undefined ? undefined : getRadius(props.radius),
+      '--ai-bg': props.color || props.variant ? colors.background : undefined,
+      '--ai-hover': props.color || props.variant ? colors.hover : undefined,
+      '--ai-hover-color': props.color || props.variant ? colors.hoverColor : undefined,
+      '--ai-color': colors.color,
+      '--ai-bd': props.color || props.variant ? colors.border : undefined,
+    },
+  };
+});
 
-export const ActionIcon = polymorphicFactory<ActionIconFactory>(_props => {
+export const ActionIcon = polymorphicFactory<ActionIconFactory>((_props) => {
   const props = useProps('ActionIcon', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'className',
@@ -139,7 +136,7 @@ export const ActionIcon = polymorphicFactory<ActionIconFactory>(_props => {
     'autoContrast',
     'mod',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<ActionIconFactory>({
@@ -158,19 +155,28 @@ export const ActionIcon = polymorphicFactory<ActionIconFactory>(_props => {
 
   return (
     <UnstyledButton
-      {...getStyles('root', { active: !local.disabled && !local.loading && !local["data-disabled"] })}
+      {...getStyles('root', {
+        active: !local.disabled && !local.loading && !local['data-disabled'],
+      })}
       {...others}
       unstyled={local.unstyled}
       variant={local.variant}
       size={local.size}
       disabled={local.disabled || local.loading}
       ref={local.ref}
-      mod={[{ loading: local.loading, disabled: local.disabled || local["data-disabled"] }, local.mod]}
+      mod={[
+        { loading: local.loading, disabled: local.disabled || local['data-disabled'] },
+        local.mod,
+      ]}
     >
       <Transition mounted={!!local.loading} transition="slide-down" duration={150}>
         {(transitionStyles) => (
           <Box component="span" {...getStyles('loader', { style: transitionStyles })} aria-hidden>
-            <Loader color="var(--ai-color)" size="calc(var(--ai-size) * 0.55)" {...local.loaderProps} />
+            <Loader
+              color="var(--ai-color)"
+              size="calc(var(--ai-size) * 0.55)"
+              {...local.loaderProps}
+            />
           </Box>
         )}
       </Transition>

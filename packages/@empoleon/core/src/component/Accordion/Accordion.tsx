@@ -1,11 +1,3 @@
-const originalWarn = console.warn;
-  console.warn = (message, ...args) => {
-    if (typeof message === 'string' && message.includes('computations created outside a `createRoot` or `render` will never be disposed')) {
-      return;
-    }
-    originalWarn(message, ...args);
-  };
-
 import { Component, JSX, splitProps } from 'solid-js';
 import { useId, useUncontrolled } from '@empoleon/hooks';
 import {
@@ -13,13 +5,13 @@ import {
   BoxProps,
   createVarsResolver,
   ElementProps,
+  EmpoleonRadius,
+  EmpoleonThemeComponent,
   ExtendComponent,
   Factory,
   getRadius,
   getSafeId,
   getWithProps,
-  EmpoleonRadius,
-  EmpoleonThemeComponent,
   rem,
   StylesApiProps,
   useProps,
@@ -32,6 +24,19 @@ import { AccordionControl } from './AccordionControl/AccordionControl';
 import { AccordionItem } from './AccordionItem/AccordionItem';
 import { AccordionPanel } from './AccordionPanel/AccordionPanel';
 import classes from './Accordion.module.css';
+
+const originalWarn = console.warn;
+console.warn = (message, ...args) => {
+  if (
+    typeof message === 'string' &&
+    message.includes(
+      'computations created outside a `createRoot` or `render` will never be disposed'
+    )
+  ) {
+    return;
+  }
+  originalWarn(message, ...args);
+};
 
 export type AccordionStylesNames =
   | 'root'
@@ -110,16 +115,15 @@ const defaultProps: Partial<AccordionProps> = {
   chevronIconSize: 16,
 };
 
-const varsResolver = createVarsResolver<AccordionFactory>(
-  (_, props) => ({
-    root: {
-      '--accordion-transition-duration':
-        props.transitionDuration === undefined ? undefined : `${props.transitionDuration}ms`,
-      '--accordion-chevron-size': props.chevronSize === undefined ? undefined : rem(props.chevronSize),
-      '--accordion-radius': props.radius === undefined ? undefined : getRadius(props.radius),
-    },
-  })
-);
+const varsResolver = createVarsResolver<AccordionFactory>((_, props) => ({
+  root: {
+    '--accordion-transition-duration':
+      props.transitionDuration === undefined ? undefined : `${props.transitionDuration}ms`,
+    '--accordion-chevron-size':
+      props.chevronSize === undefined ? undefined : rem(props.chevronSize),
+    '--accordion-radius': props.radius === undefined ? undefined : getRadius(props.radius),
+  },
+}));
 
 export function Accordion<Multiple extends boolean = false>(_props: AccordionProps<Multiple>) {
   const props = useProps('Accordion', defaultProps as AccordionProps<Multiple>, _props);
@@ -159,7 +163,9 @@ export function Accordion<Multiple extends boolean = false>(_props: AccordionPro
 
   const isItemActive = (itemValue: string) => {
     const currentValue = _value();
-    return Array.isArray(currentValue) ? currentValue.includes(itemValue) : itemValue === currentValue;
+    return Array.isArray(currentValue)
+      ? currentValue.includes(itemValue)
+      : itemValue === currentValue;
   };
 
   const handleItemChange = (itemValue: string) => {
@@ -194,7 +200,9 @@ export function Accordion<Multiple extends boolean = false>(_props: AccordionPro
   return (
     <AccordionProvider
       value={{
-        get isItemActive() { return isItemActive; },
+        get isItemActive() {
+          return isItemActive;
+        },
         onChange: handleItemChange,
         getControlId: getSafeId(
           `${uid}-control`,
@@ -204,7 +212,10 @@ export function Accordion<Multiple extends boolean = false>(_props: AccordionPro
           `${uid}-panel`,
           'Accordion.Item component was rendered with invalid value or without value'
         ),
-        chevron: () => local.chevron === null ? null : local.chevron || (() => <AccordionChevron size={local.chevronIconSize} />),
+        chevron: () =>
+          local.chevron === null
+            ? null
+            : local.chevron || (() => <AccordionChevron size={local.chevronIconSize} />),
         transitionDuration: () => local.transitionDuration,
         disableChevronRotation: () => local.disableChevronRotation,
         chevronPosition: () => local.chevronPosition,
@@ -215,7 +226,13 @@ export function Accordion<Multiple extends boolean = false>(_props: AccordionPro
         unstyled: local.unstyled,
       }}
     >
-      <Box {...getStyles('root', { variant: variant() })} id={uid} {...others} variant={variant()} data-accordion>
+      <Box
+        {...getStyles('root', { variant: variant() })}
+        id={uid}
+        {...others}
+        variant={variant()}
+        data-accordion
+      >
         {local.children}
       </Box>
     </AccordionProvider>

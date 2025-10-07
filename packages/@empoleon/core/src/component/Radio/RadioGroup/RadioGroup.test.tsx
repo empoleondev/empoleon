@@ -1,15 +1,17 @@
+import { createSignal } from 'solid-js';
 import { render, screen, tests, userEvent } from '@empoleon-tests/core';
 import { Radio } from '../Radio';
 import { RadioGroup, RadioGroupProps, RadioGroupStylesNames } from './RadioGroup';
-import { createSignal } from 'solid-js';
 
 describe('@empoleon/core/RadioGroup', () => {
   tests.axe([
-    () => <RadioGroup>
-      <Radio value="test-1" label="test-1" />
-      <Radio value="test-2" label="test-2" />
-      <Radio value="test-3" label="test-3" />
-    </RadioGroup>,
+    () => (
+      <RadioGroup>
+        <Radio value="test-1" label="test-1" />
+        <Radio value="test-2" label="test-2" />
+        <Radio value="test-3" label="test-3" />
+      </RadioGroup>
+    ),
   ]);
 
   tests.itSupportsSystemProps<RadioGroupProps, RadioGroupStylesNames>({
@@ -37,20 +39,22 @@ describe('@empoleon/core/RadioGroup', () => {
   });
 
   it('supports uncontrolled state', async () => {
-    render(() => <RadioGroup
-      label='test-label'
-      description='test-description'
-      error='test-error'
-      withAsterisk={true}
-      children={
-        <>
-          <Radio value="test-value-1" label="test-label-1" />
-          <Radio value="test-value-2" label="test-label-2" />
-          <Radio value="test-value-3" label="test-label-3" />
-        </>
-      }
-      defaultValue="test-value-1" />
-    );
+    render(() => (
+      <RadioGroup
+        label="test-label"
+        description="test-description"
+        error="test-error"
+        withAsterisk={true}
+        children={
+          <>
+            <Radio value="test-value-1" label="test-label-1" />
+            <Radio value="test-value-2" label="test-label-2" />
+            <Radio value="test-value-3" label="test-label-3" />
+          </>
+        }
+        defaultValue="test-value-1"
+      />
+    ));
     expect(screen.getAllByRole('radio')[0]).toBeChecked();
     await userEvent.click(screen.getAllByRole('radio')[1]);
     expect(screen.getAllByRole('radio')[1]).toBeChecked();
@@ -58,7 +62,7 @@ describe('@empoleon/core/RadioGroup', () => {
 
   it('supports controlled state', async () => {
     const spy = vi.fn();
-    let currentValue = "test-value-2";
+    let currentValue = 'test-value-2';
 
     // Create a wrapper component that manages the controlled state
     const ControlledRadioGroup = () => {
@@ -66,9 +70,9 @@ describe('@empoleon/core/RadioGroup', () => {
 
       return (
         <RadioGroup
-          label='test-label'
-          description='test-description'
-          error='test-error'
+          label="test-label"
+          description="test-description"
+          error="test-error"
           withAsterisk={true}
           value={value()}
           onChange={(newValue) => {
@@ -95,39 +99,43 @@ describe('@empoleon/core/RadioGroup', () => {
   });
 
   it('sets given name to all radio inputs', () => {
-    render(() => <RadioGroup
-      label='test-label'
-      description='test-description'
-      error='test-error'
-      withAsterisk={true}
-      children={
-        <>
-          <Radio value="test-value-1" label="test-label-1" />
-          <Radio value="test-value-2" label="test-label-2" />
-          <Radio value="test-value-3" label="test-label-3" />
-        </>
-      }
-      name="test-name"
-    />);
+    render(() => (
+      <RadioGroup
+        label="test-label"
+        description="test-description"
+        error="test-error"
+        withAsterisk={true}
+        children={
+          <>
+            <Radio value="test-value-1" label="test-label-1" />
+            <Radio value="test-value-2" label="test-label-2" />
+            <Radio value="test-value-3" label="test-label-3" />
+          </>
+        }
+        name="test-name"
+      />
+    ));
     screen.getAllByRole('radio').forEach((radio) => {
       expect(radio).toHaveAttribute('name', 'test-name');
     });
   });
 
   it('generates unique name if name prop was not set', () => {
-    render(() => <RadioGroup
-      label='test-label'
-      description='test-description'
-      error='test-error'
-      withAsterisk={true}
-      children={
-        <>
-          <Radio value="test-value-1" label="test-label-1" />
-          <Radio value="test-value-2" label="test-label-2" />
-          <Radio value="test-value-3" label="test-label-3" />
-        </>
-      }
-    />);
+    render(() => (
+      <RadioGroup
+        label="test-label"
+        description="test-description"
+        error="test-error"
+        withAsterisk={true}
+        children={
+          <>
+            <Radio value="test-value-1" label="test-label-1" />
+            <Radio value="test-value-2" label="test-label-2" />
+            <Radio value="test-value-3" label="test-label-3" />
+          </>
+        }
+      />
+    ));
     expect(screen.getAllByRole('radio')?.[1]?.getAttribute('name')?.includes('empoleon-')).toBe(
       true
     );

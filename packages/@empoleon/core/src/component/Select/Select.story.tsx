@@ -1,8 +1,7 @@
+import { createSignal, JSX } from 'solid-js';
+import { EmpoleonProvider } from '../../core';
 import { Button } from '../Button';
 import { Select } from './Select';
-import { JSX } from 'solid-js';
-import { EmpoleonProvider } from '../../core';
-import { createSignal } from 'solid-js';
 
 export default {
   title: 'Select',

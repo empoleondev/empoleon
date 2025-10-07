@@ -1,7 +1,7 @@
 import { renderHook } from '@solidjs/testing-library';
+import { JSX } from 'solid-js';
 import { EmpoleonProvider } from '../EmpoleonProvider';
 import { useProps } from './use-props';
-import { JSX } from 'solid-js';
 
 function Wrapper(props: { children: JSX.Element }) {
   return (

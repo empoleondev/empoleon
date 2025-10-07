@@ -1,6 +1,6 @@
+import { createSignal, For } from 'solid-js';
 import { Checkbox, Table } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal, For } from 'solid-js';
 
 const code = `
 import { createSignal, For } from 'solid-js';
@@ -86,7 +86,11 @@ function Demo() {
         <For each={elements}>
           {(element) => (
             <Table.Tr
-              bg={selectedRows().includes(element.position) ? 'var(--empoleon-color-blue-light)' : undefined}
+              bg={
+                selectedRows().includes(element.position)
+                  ? 'var(--empoleon-color-blue-light)'
+                  : undefined
+              }
             >
               <Table.Td>
                 <Checkbox

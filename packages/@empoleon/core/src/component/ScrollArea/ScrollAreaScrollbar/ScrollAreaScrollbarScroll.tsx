@@ -1,10 +1,4 @@
-import {
-  createSignal,
-  createEffect,
-  onCleanup,
-  splitProps,
-  Show,
-} from 'solid-js';
+import { createEffect, createSignal, onCleanup, Show, splitProps } from 'solid-js';
 import { useDebouncedCallback } from '@empoleon/hooks';
 import { useScrollAreaContext } from '../ScrollArea.context';
 import { composeEventHandlers } from '../utils';
@@ -13,8 +7,7 @@ import {
   ScrollAreaScrollbarVisibleProps,
 } from './ScrollAreaScrollbarVisible';
 
-export interface ScrollAreaScrollbarScrollProps
-  extends ScrollAreaScrollbarVisibleProps {
+export interface ScrollAreaScrollbarScrollProps extends ScrollAreaScrollbarVisibleProps {
   forceMount?: true;
 }
 
@@ -58,7 +51,9 @@ export function ScrollAreaScrollbarScroll(props: ScrollAreaScrollbarScrollProps)
         data-state={state() === 'hidden' ? 'hidden' : 'visible'}
         {...others}
         ref={local.ref}
-        onPointerEnter={composeEventHandlers(others.onPointerEnter as any, () => setState('interacting'))}
+        onPointerEnter={composeEventHandlers(others.onPointerEnter as any, () =>
+          setState('interacting')
+        )}
         onPointerLeave={composeEventHandlers(others.onPointerLeave as any, () => setState('idle'))}
       />
     </Show>

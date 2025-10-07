@@ -32,10 +32,7 @@ export interface EmpoleonThemeProviderProps {
 
 // Don't destructure props, otherwise they lose their reactivity
 export function EmpoleonThemeProvider(props: EmpoleonThemeProviderProps) {
-  const [local] = splitProps(props, [
-    'theme',
-    'inherit',
-  ]);
+  const [local] = splitProps(props, ['theme', 'inherit']);
 
   const inherit = local.inherit ?? true;
 
@@ -45,7 +42,9 @@ export function EmpoleonThemeProvider(props: EmpoleonThemeProviderProps) {
   );
 
   return (
-    <EmpoleonThemeContext.Provider value={mergedTheme()}>{props.children}</EmpoleonThemeContext.Provider>
+    <EmpoleonThemeContext.Provider value={mergedTheme()}>
+      {props.children}
+    </EmpoleonThemeContext.Provider>
   );
 }
 

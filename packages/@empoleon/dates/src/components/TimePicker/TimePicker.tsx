@@ -171,7 +171,10 @@ export interface TimePickerProps
   secondsRef?: HTMLInputElement | ((el: HTMLInputElement) => void);
 
   /** A ref object to get node reference of the am/pm select */
-  amPmRef?: HTMLInputElement | HTMLSelectElement | ((el: HTMLInputElement | HTMLSelectElement) => void);
+  amPmRef?:
+    | HTMLInputElement
+    | HTMLSelectElement
+    | ((el: HTMLInputElement | HTMLSelectElement) => void);
 
   /** Time presets to display in the dropdown */
   presets?: TimePickerPresets;
@@ -208,7 +211,7 @@ const varsResolver = createVarsResolver<TimePickerFactory>((_theme, props) => ({
   },
 }));
 
-export const TimePicker = factory<TimePickerFactory>(_props => {
+export const TimePicker = factory<TimePickerFactory>((_props) => {
   const props = useProps('TimePicker', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -263,7 +266,7 @@ export const TimePicker = factory<TimePickerFactory>(_props => {
     'maxDropdownContentHeight',
     'scrollAreaProps',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   let timePickerRef: HTMLDivElement | undefined;
@@ -337,8 +340,10 @@ export const TimePicker = factory<TimePickerFactory>(_props => {
     const handleClickOutside = (event: Event) => {
       const target = event.target as Element;
 
-      if (!timePickerRef.contains(target as Node) &&
-          !target.closest('.empoleon-TimePicker-controlsList')) {
+      if (
+        !timePickerRef.contains(target as Node) &&
+        !target.closest('.empoleon-TimePicker-controlsList')
+      ) {
         setHasFocus(false);
       }
     };
@@ -352,23 +357,25 @@ export const TimePicker = factory<TimePickerFactory>(_props => {
   // })
 
   const ClearButtonSection = () => {
-  console.log('ClearButtonSection render: isClearable =', controller.isClearable());
+    console.log('ClearButtonSection render: isClearable =', controller.isClearable());
 
-  return controller.isClearable() ? (
-    <CloseButton
-      {...local.clearButtonProps}
-      size={local.size}
-      onClick={(event) => {
-        controller.clear();
-        typeof local.clearButtonProps?.onClick === "function" && local.clearButtonProps?.onClick?.(event);
-      }}
-      onMouseDown={(event) => {
-        event.preventDefault();
-        typeof local.clearButtonProps?.onMouseDown === "function" && local.clearButtonProps?.onMouseDown?.(event);
-      }}
-    />
-  ) : null;
-};
+    return controller.isClearable() ? (
+      <CloseButton
+        {...local.clearButtonProps}
+        size={local.size}
+        onClick={(event) => {
+          controller.clear();
+          typeof local.clearButtonProps?.onClick === 'function' &&
+            local.clearButtonProps?.onClick?.(event);
+        }}
+        onMouseDown={(event) => {
+          event.preventDefault();
+          typeof local.clearButtonProps?.onMouseDown === 'function' &&
+            local.clearButtonProps?.onMouseDown?.(event);
+        }}
+      />
+    ) : null;
+  };
 
   return (
     <div ref={timePickerRef}>
@@ -376,7 +383,7 @@ export const TimePicker = factory<TimePickerFactory>(_props => {
         value={{
           getStyles,
           scrollAreaProps: local.scrollAreaProps,
-          maxDropdownContentHeight: local.maxDropdownContentHeight!
+          maxDropdownContentHeight: local.maxDropdownContentHeight!,
         }}
       >
         <Popover
@@ -396,7 +403,7 @@ export const TimePicker = factory<TimePickerFactory>(_props => {
                   disabled={local.disabled}
                   ref={local.ref}
                   onClick={(event) => {
-                    typeof local.onClick === "function" && local.onClick?.(event);
+                    typeof local.onClick === 'function' && local.onClick?.(event);
 
                     // Only force focus to hours if clicking the container, not a SpinInput
                     if (!event.target.closest('[role="spinbutton"]')) {
@@ -406,7 +413,7 @@ export const TimePicker = factory<TimePickerFactory>(_props => {
                   }}
                   onMouseDown={(event) => {
                     event.preventDefault();
-                    typeof local.onMouseDown === "function" && local.onMouseDown?.(event);
+                    typeof local.onMouseDown === 'function' && local.onMouseDown?.(event);
                   }}
                   rightSection={
                     local.rightSection || (
@@ -419,11 +426,13 @@ export const TimePicker = factory<TimePickerFactory>(_props => {
                             setTimeout(() => {
                               controller.focus('hours');
                             }, 0);
-                            typeof local.clearButtonProps?.onClick === "function" && local.clearButtonProps?.onClick?.(event);
+                            typeof local.clearButtonProps?.onClick === 'function' &&
+                              local.clearButtonProps?.onClick?.(event);
                           }}
                           onMouseDown={(event) => {
                             event.preventDefault();
-                            typeof local.clearButtonProps?.onMouseDown === "function" && local.clearButtonProps?.onMouseDown?.(event);
+                            typeof local.clearButtonProps?.onMouseDown === 'function' &&
+                              local.clearButtonProps?.onMouseDown?.(event);
                           }}
                         />
                       </Show>
@@ -460,7 +469,8 @@ export const TimePicker = factory<TimePickerFactory>(_props => {
                         onPaste={controller.onPaste}
                         onFocus={(event) => {
                           handleFocus(event);
-                          typeof local.hoursInputProps?.onFocus === "function" && local.hoursInputProps?.onFocus?.(event);
+                          typeof local.hoursInputProps?.onFocus === 'function' &&
+                            local.hoursInputProps?.onFocus?.(event);
                         }}
                       />
                       <span>:</span>
@@ -488,7 +498,8 @@ export const TimePicker = factory<TimePickerFactory>(_props => {
                         onPaste={controller.onPaste}
                         onFocus={(event) => {
                           handleFocus(event);
-                          typeof local.minutesInputProps?.onFocus === "function" && local.minutesInputProps?.onFocus?.(event);
+                          typeof local.minutesInputProps?.onFocus === 'function' &&
+                            local.minutesInputProps?.onFocus?.(event);
                         }}
                       />
 
@@ -537,7 +548,9 @@ export const TimePicker = factory<TimePickerFactory>(_props => {
                           ref={_amPmRef}
                           aria-label={local.amPmInputLabel}
                           onPreviousInput={() =>
-                            local.withSeconds ? controller.focus('seconds') : controller.focus('minutes')
+                            local.withSeconds
+                              ? controller.focus('seconds')
+                              : controller.focus('minutes')
                           }
                           readOnly={local.readOnly}
                           disabled={local.disabled}
@@ -553,7 +566,10 @@ export const TimePicker = factory<TimePickerFactory>(_props => {
                           onBlur={(event) => {
                             // Only call handleBlur if relatedTarget is null (focus leaving component entirely)
                             // or relatedTarget is outside the TimePicker component
-                            if (!event.relatedTarget || !timePickerRef?.contains(event.relatedTarget as Node)) {
+                            if (
+                              !event.relatedTarget ||
+                              !timePickerRef?.contains(event.relatedTarget as Node)
+                            ) {
                               handleBlur(event);
                             }
                             const userOnBlur = local.amPmSelectProps?.onBlur;

@@ -12,12 +12,7 @@ export interface HoverCardDropdownProps extends PopoverDropdownProps {
 export function HoverCardDropdown(_props: HoverCardDropdownProps) {
   const props = useProps('HoverCardDropdown', null, _props);
 
-  const [local, others] = splitProps(props, [
-    'onMouseEnter',
-    'onMouseLeave',
-    'children',
-    'style'
-  ]);
+  const [local, others] = splitProps(props, ['onMouseEnter', 'onMouseLeave', 'children', 'style']);
 
   const ctx = useHoverCardContext();
   const withinGroup = useHoverCardGroupContext();
@@ -36,7 +31,7 @@ export function HoverCardDropdown(_props: HoverCardDropdownProps) {
           top: 0,
           left: 0,
           transform: `translate(${ctx.x?.() ?? 0}px, ${ctx.y?.() ?? 0}px)`,
-          ...local.style
+          ...local.style,
         }}
         {...others}
       >
@@ -45,20 +40,14 @@ export function HoverCardDropdown(_props: HoverCardDropdownProps) {
     );
   }
 
-  const handleMouseEnter = createEventHandler<any>((local.onMouseEnter as any), ctx.openDropdown);
-  const handleMouseLeave = createEventHandler<any>((local.onMouseLeave as any), ctx.closeDropdown);
+  const handleMouseEnter = createEventHandler<any>(local.onMouseEnter as any, ctx.openDropdown);
+  const handleMouseLeave = createEventHandler<any>(local.onMouseLeave as any, ctx.closeDropdown);
 
   return (
-    <Popover.Dropdown
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      {...others}
-    >
+    <Popover.Dropdown onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} {...others}>
       {local.children}
     </Popover.Dropdown>
   );
 }
 
 HoverCardDropdown.displayName = '@empoleon/core/HoverCardDropdown';
-
-

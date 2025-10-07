@@ -23,7 +23,7 @@ function Demo() {
 `;
 
 function Demo() {
-  const icon = <IconCurrencyDram size={20} stroke='1.5' />;
+  const icon = <IconCurrencyDram size={20} stroke="1.5" />;
   return (
     <>
       <NumberInput leftSection={icon} label="With left section" placeholder="With left section" />

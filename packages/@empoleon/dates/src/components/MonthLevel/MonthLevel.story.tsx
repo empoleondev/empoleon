@@ -1,9 +1,9 @@
 import 'dayjs/locale/ru';
 
 import dayjs from 'dayjs';
-import { MonthLevel, MonthLevelProps } from './MonthLevel';
 import { createSignal, For, JSX } from 'solid-js';
 import { EmpoleonProvider } from '@empoleon/core';
+import { MonthLevel, MonthLevelProps } from './MonthLevel';
 
 export default {
   title: 'MonthLevel',
@@ -58,9 +58,5 @@ export function MaxDate() {
 export function Sizes() {
   const sizes = ['xs', 'sm', 'md', 'lg', 'xl'] as const;
 
-  return (
-    <For each={sizes}>
-      {(size) => <Wrapper size={size} />}
-    </For>
-  );
+  return <For each={sizes}>{(size) => <Wrapper size={size} />}</For>;
 }

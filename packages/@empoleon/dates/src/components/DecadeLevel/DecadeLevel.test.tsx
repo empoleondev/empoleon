@@ -67,14 +67,14 @@ describe('@empoleon/dates/DecadeLevel', () => {
   });
 
   it('supports changing decade label with callback', () => {
-    render(
-      () => <DecadeLevel
+    render(() => (
+      <DecadeLevel
         {...defaultProps}
         decadeLabelFormat={(startOfDecade, endOfDecade) =>
           `${dayjs(startOfDecade).month()}/${dayjs(startOfDecade).year()} – ${dayjs(endOfDecade).month()}/${dayjs(endOfDecade).year()}`
         }
       />
-    );
+    ));
 
     const levelControl = screen.getByLabelText(/level-control/i);
     expect(levelControl.textContent).toBe('0/2020 – 0/2029');
@@ -91,7 +91,9 @@ describe('@empoleon/dates/DecadeLevel', () => {
   });
 
   it('supports custom __staticSelector', () => {
-    const { container } = render(() => <DecadeLevel {...defaultProps} __staticSelector="Calendar" />);
+    const { container } = render(() => (
+      <DecadeLevel {...defaultProps} __staticSelector="Calendar" />
+    ));
     expect(container.querySelector('table td button')).toHaveClass(
       'empoleon-Calendar-yearsListControl'
     );

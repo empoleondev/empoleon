@@ -3,7 +3,7 @@ import { EmpoleonSize } from '../../core';
 
 interface CheckboxGroupContextValue {
   value: Accessor<string[]>;
-  onChange: (value: Event | string ) => void;
+  onChange: (value: Event | string) => void;
   size: Accessor<EmpoleonSize | (string & {}) | undefined>;
 }
 

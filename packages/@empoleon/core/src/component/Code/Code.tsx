@@ -4,10 +4,10 @@ import {
   BoxProps,
   createVarsResolver,
   ElementProps,
+  EmpoleonColor,
   factory,
   Factory,
   getThemeColor,
-  EmpoleonColor,
   StylesApiProps,
   useProps,
   useStyles,
@@ -42,7 +42,7 @@ const varsResolver = createVarsResolver<CodeFactory>((theme, props) => ({
   },
 }));
 
-export const Code = factory<CodeFactory>(_props => {
+export const Code = factory<CodeFactory>((_props) => {
   const props = useProps('Code', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -56,7 +56,7 @@ export const Code = factory<CodeFactory>(_props => {
     'variant',
     'mod',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<CodeFactory>({

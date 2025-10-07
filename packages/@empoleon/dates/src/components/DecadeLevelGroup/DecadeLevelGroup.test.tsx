@@ -74,14 +74,14 @@ describe('@empoleon/dates/DecadeLevelGroup', () => {
   });
 
   it('supports levelControlAriaLabel as function', () => {
-    render(
-      () => <DecadeLevelGroup
+    render(() => (
+      <DecadeLevelGroup
         {...defaultProps}
         levelControlAriaLabel={(date) =>
           `${new Date(date).getMonth()}/${new Date(date).getFullYear()}`
         }
       />
-    );
+    ));
     expect(screen.getByText('2020 – 2029')).toHaveAttribute('aria-label', '3/2022');
   });
 
@@ -93,9 +93,9 @@ describe('@empoleon/dates/DecadeLevelGroup', () => {
   });
 
   it('supports custom __staticSelector', () => {
-    const { container } = render(
-      () => <DecadeLevelGroup {...defaultProps} __staticSelector="Calendar" />
-    );
+    const { container } = render(() => (
+      <DecadeLevelGroup {...defaultProps} __staticSelector="Calendar" />
+    ));
     expect(container.querySelector('table button')).toHaveClass(
       'empoleon-Calendar-yearsListControl'
     );

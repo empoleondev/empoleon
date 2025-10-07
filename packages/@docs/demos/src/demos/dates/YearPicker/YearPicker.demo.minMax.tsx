@@ -1,6 +1,6 @@
+import { createSignal } from 'solid-js';
 import { YearPicker } from '@empoleon/dates';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal } from 'solid-js';
 
 const code = `
 import { useState } from 'react';
@@ -21,7 +21,9 @@ function Demo() {
 
 function Demo() {
   const [value, setValue] = createSignal<string | null>(null);
-  return <YearPicker value={value()} onChange={setValue} minDate="2021-02-01" maxDate="2028-02-01" />;
+  return (
+    <YearPicker value={value()} onChange={setValue} minDate="2021-02-01" maxDate="2028-02-01" />
+  );
 }
 
 export const minMax: EmpoleonDemo = {

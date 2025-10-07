@@ -17,7 +17,7 @@ export default {
 
 export function WithinDisabledFieldset() {
   return (
-    <fieldset disabled style={{ 'padding': '40px' }}>
+    <fieldset disabled style={{ padding: '40px' }}>
       <legend>Disabled fieldset</legend>
       <Checkbox label="Disabled checkbox within fieldset" checked />
       <Checkbox label="Disabled checkbox" checked disabled mt="md" />
@@ -27,7 +27,7 @@ export function WithinDisabledFieldset() {
 
 export function Usage() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Checkbox label="Default" value="hello" />
       <Checkbox label="Disabled" checked disabled mt="xl" />
       <Checkbox label="Indeterminate" indeterminate mt="xl" />
@@ -38,7 +38,7 @@ export function Usage() {
 export function BooleanError() {
   const [error, setError] = createSignal(false);
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Checkbox
         label="Boolean error"
         value="hello"
@@ -64,7 +64,7 @@ export function BooleanError() {
 
 export function AutoContrast() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Checkbox
         label="Auto contrast icon color"
         value="hello"
@@ -78,7 +78,7 @@ export function AutoContrast() {
 
 export function OutlineVariant() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Checkbox variant="outline" label="Default" value="hello" />
       <Checkbox variant="outline" label="Disabled" checked disabled mt="xl" />
       <Checkbox variant="outline" label="Indeterminate" indeterminate mt="xl" />
@@ -88,7 +88,7 @@ export function OutlineVariant() {
 
 export function IconColor() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Checkbox label="Default" color="lime.4" iconColor="dark.8" />
     </div>
   );
@@ -96,7 +96,7 @@ export function IconColor() {
 
 export function WithTooltip() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Tooltip label="Tooltip" refProp="rootRef" position="bottom-start">
         {(props) => <Checkbox {...props} label="With tooltip" defaultChecked />}
       </Tooltip>
@@ -106,7 +106,7 @@ export function WithTooltip() {
 
 export function CheckboxGroup() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Checkbox.Group defaultValue={['react']}>
         <Checkbox label="React" value="react" />
         <Checkbox label="Angular" value="ng" />
@@ -125,7 +125,7 @@ export function CursorPointer() {
 
 export function Asterisk() {
   return (
-    <div style={{ 'width': '300px', 'padding': '20px' }}>
+    <div style={{ width: '300px', padding: '20px' }}>
       <Checkbox.Group label="With required asterisk" withAsterisk>
         <Checkbox value="1" />
       </Checkbox.Group>
@@ -144,7 +144,7 @@ export function Asterisk() {
 
 export function labelPosition() {
   return (
-    <Stack style={{ 'width': '300px', 'padding': '20px' }}>
+    <Stack style={{ width: '300px', padding: '20px' }}>
       <Checkbox labelPosition="left" label="Hello from left" value="1" />
       <Checkbox labelPosition="right" label="Hello from right" value="1" />
     </Stack>
@@ -153,7 +153,7 @@ export function labelPosition() {
 
 export function WithDescription() {
   return (
-    <Stack style={{ 'width': '300px', 'padding': '20px' }}>
+    <Stack style={{ width: '300px', padding: '20px' }}>
       <Checkbox
         description="This is left Checkbox"
         labelPosition="left"
@@ -172,7 +172,7 @@ export function WithDescription() {
 
 export function WithError() {
   return (
-    <Stack style={{ 'width': '300px', 'padding': '20px' }}>
+    <Stack style={{ width: '300px', padding: '20px' }}>
       <Checkbox label="Invalid Checkbox without message" value="1" error />
       <Checkbox error="This is error" labelPosition="right" label="Hello from right" value="1" />
       <Checkbox error="Invalid Checkbox without label" value="1" />

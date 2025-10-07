@@ -1,7 +1,7 @@
+import { createEffect } from 'solid-js';
 import { Burger, BurgerProps } from '@empoleon/core';
 import { useDisclosure } from '@empoleon/hooks';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createEffect } from 'solid-js';
 
 const code = `
 import { useDisclosure } from '@empoleon/hooks';
@@ -16,14 +16,7 @@ function Demo() {
 function Demo(props: BurgerProps) {
   const [opened, { toggle }] = useDisclosure();
 
-  return (
-    <Burger
-      {...props}
-      opened={opened()}
-      onClick={toggle}
-      aria-label="Toggle navigation"
-    />
-  );
+  return <Burger {...props} opened={opened()} onClick={toggle} aria-label="Toggle navigation" />;
 }
 
 export const kitchenSink: EmpoleonDemo = {
@@ -36,13 +29,13 @@ export const kitchenSink: EmpoleonDemo = {
       prop: 'size',
       type: 'size',
       initialValue: 'md',
-      libraryValue: 'md'
+      libraryValue: 'md',
     },
     {
       prop: 'color',
       type: 'color',
       initialValue: 'gray',
-      libraryValue: 'gray'
+      libraryValue: 'gray',
     },
     {
       prop: 'lineSize',
@@ -51,7 +44,7 @@ export const kitchenSink: EmpoleonDemo = {
       libraryValue: undefined,
       min: 1,
       max: 10,
-      step: 0.5
+      step: 0.5,
     },
     {
       prop: 'transitionDuration',
@@ -60,7 +53,7 @@ export const kitchenSink: EmpoleonDemo = {
       libraryValue: 300,
       min: 0,
       max: 1000,
-      step: 50
+      step: 50,
     },
     {
       prop: 'transitionTimingFunction',
@@ -79,7 +72,7 @@ export const kitchenSink: EmpoleonDemo = {
       prop: 'disabled',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
-    }
+      libraryValue: false,
+    },
   ],
 };

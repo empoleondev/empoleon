@@ -20,7 +20,7 @@ function Demo() {
 function Demo() {
   return (
     <ColorInput
-      eyeDropperIcon={<IconFocus2 size={18} stroke='1.5' />}
+      eyeDropperIcon={<IconFocus2 size={18} stroke="1.5" />}
       label="With custom eye dropper icon"
       placeholder="Pick color"
     />

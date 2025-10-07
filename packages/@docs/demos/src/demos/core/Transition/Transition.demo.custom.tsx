@@ -1,7 +1,7 @@
+import { createSignal } from 'solid-js';
 import { Box, Button, Paper, Transition } from '@empoleon/core';
 import { useClickOutside } from '@empoleon/hooks';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal } from 'solid-js';
 
 const code = `
 import { createSignal } from 'solid-js';

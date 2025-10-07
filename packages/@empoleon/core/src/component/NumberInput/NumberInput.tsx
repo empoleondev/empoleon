@@ -1,6 +1,7 @@
 import cx from 'clsx';
-import { NumberFormatValues, NumericFormat, OnValueChange } from '@empoleon/solid-number-format';
+import { createEffect, createSignal, Ref, splitProps } from 'solid-js';
 import { clamp, useMergedRef, useUncontrolled } from '@empoleon/hooks';
+import { NumberFormatValues, NumericFormat, OnValueChange } from '@empoleon/solid-number-format';
 import {
   Box,
   BoxProps,
@@ -20,7 +21,6 @@ import { InputBase } from '../InputBase';
 import { UnstyledButton } from '../UnstyledButton';
 import { NumberInputChevron } from './NumberInputChevron';
 import classes from './NumberInput.module.css';
-import { createEffect, createSignal, Ref, splitProps } from 'solid-js';
 
 // Re for negative -0, -0., -0.0, -0.00, -0.000 ... strings
 // And for positive 0., 0.0, 0.00, 0.000 ... strings
@@ -208,7 +208,7 @@ function clampAndSanitizeInput(sanitizedValue: string | number, max?: number, mi
   return clamp(parsedValue, min, max);
 }
 
-export const NumberInput = factory<NumberInputFactory>(_props => {
+export const NumberInput = factory<NumberInputFactory>((_props) => {
   const props = useProps('NumberInput', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'className',
@@ -246,8 +246,8 @@ export const NumberInput = factory<NumberInputFactory>(_props => {
     'withKeyboardEvents',
     'trimLeadingZeroesOnBlur',
     'attributes',
-    'ref'
-  ])
+    'ref',
+  ]);
 
   const getStyles = useStyles<NumberInputFactory>({
     name: 'NumberInput',
@@ -274,18 +274,20 @@ export const NumberInput = factory<NumberInputFactory>(_props => {
     onChange: local.onChange,
   });
 
-  const shouldUseStepInterval = () => local.stepHoldDelay !== undefined && local.stepHoldInterval !== undefined;
+  const shouldUseStepInterval = () =>
+    local.stepHoldDelay !== undefined && local.stepHoldInterval !== undefined;
   const [inputRef, setInputRef] = createSignal<HTMLInputElement | undefined>(undefined);
   let onStepTimeoutRef: number | null = null;
   let stepCountRef = 0;
 
   const handleValueChange: OnValueChange = (payload, event) => {
     if (event.source === 'event') {
-      const newValue = isValidNumber(payload.floatValue, payload.value) &&
+      const newValue =
+        isValidNumber(payload.floatValue, payload.value) &&
         !leadingDecimalZeroPattern.test(payload.value) &&
         !(local.allowLeadingZeros ? leadingZerosPattern.test(payload.value) : false)
-        ? payload.floatValue
-        : payload.value;
+          ? payload.floatValue
+          : payload.value;
 
       setValue(newValue);
     }
@@ -318,7 +320,10 @@ export const NumberInput = factory<NumberInputFactory>(_props => {
     const factor = 10 ** maxPrecision;
     const currentValue = _value();
 
-    if (!isNumberString(currentValue) && (typeof currentValue !== 'number' || Number.isNaN(currentValue))) {
+    if (
+      !isNumberString(currentValue) &&
+      (typeof currentValue !== 'number' || Number.isNaN(currentValue))
+    ) {
       val = clamp(local.startValue!, local.min, local.max);
     } else if (local.max !== undefined) {
       const incrementedValue =
@@ -330,7 +335,8 @@ export const NumberInput = factory<NumberInputFactory>(_props => {
 
     const formattedValue = val.toFixed(maxPrecision);
     const finalValue = parseFloat(formattedValue);
-    const currentNumericValue = typeof currentValue === 'number' ? currentValue : Number(currentValue);
+    const currentNumericValue =
+      typeof currentValue === 'number' ? currentValue : Number(currentValue);
     const valueChanged = finalValue !== currentNumericValue;
 
     setValue(finalValue);
@@ -353,7 +359,8 @@ export const NumberInput = factory<NumberInputFactory>(_props => {
     }
 
     let val: number;
-    const minValue = local.min !== undefined ? local.min : !local.allowNegative ? 0 : Number.MIN_SAFE_INTEGER;
+    const minValue =
+      local.min !== undefined ? local.min : !local.allowNegative ? 0 : Number.MIN_SAFE_INTEGER;
     const currentValuePrecision = getDecimalPlaces(_value());
     const stepPrecision = getDecimalPlaces(local.step!);
     const maxPrecision = Math.max(currentValuePrecision, stepPrecision);
@@ -370,7 +377,8 @@ export const NumberInput = factory<NumberInputFactory>(_props => {
 
     const formattedValue = val.toFixed(maxPrecision);
     const finalValue = parseFloat(formattedValue);
-    const currentNumericValue = typeof currentValue === 'number' ? currentValue : Number(currentValue);
+    const currentNumericValue =
+      typeof currentValue === 'number' ? currentValue : Number(currentValue);
     const valueChanged = finalValue !== currentNumericValue;
 
     setValue(finalValue);
@@ -396,8 +404,10 @@ export const NumberInput = factory<NumberInputFactory>(_props => {
     }
   });
 
-  const handleKeyDown = (event: KeyboardEvent & { currentTarget: HTMLInputElement; target: Element; }) => {
-    typeof local.onKeyDown == "function" && local.onKeyDown?.(event);
+  const handleKeyDown = (
+    event: KeyboardEvent & { currentTarget: HTMLInputElement; target: Element }
+  ) => {
+    typeof local.onKeyDown == 'function' && local.onKeyDown?.(event);
 
     if (local.readOnly || !local.withKeyboardEvents) {
       return;
@@ -414,7 +424,9 @@ export const NumberInput = factory<NumberInputFactory>(_props => {
     }
   };
 
-  const handleBlur = (event: FocusEvent & { currentTarget: HTMLInputElement; target: HTMLInputElement; }) => {
+  const handleBlur = (
+    event: FocusEvent & { currentTarget: HTMLInputElement; target: HTMLInputElement }
+  ) => {
     let sanitizedValue = _value();
 
     if (local.clampBehavior === 'blur' && typeof sanitizedValue === 'number') {
@@ -434,7 +446,7 @@ export const NumberInput = factory<NumberInputFactory>(_props => {
       setValue(sanitizedValue);
     }
 
-    typeof local.onBlur == "function" && local.onBlur?.(event);
+    typeof local.onBlur == 'function' && local.onBlur?.(event);
   };
 
   const onStepHandleChange = (isIncrement: boolean) => {
@@ -458,10 +470,7 @@ export const NumberInput = factory<NumberInputFactory>(_props => {
     }
   };
 
-  const onStep = (
-    event: MouseEvent | KeyboardEvent,
-    isIncrement: boolean
-  ) => {
+  const onStep = (event: MouseEvent | KeyboardEvent, isIncrement: boolean) => {
     event.preventDefault();
     inputRef()?.focus();
     onStepHandleChange(isIncrement);
@@ -479,12 +488,17 @@ export const NumberInput = factory<NumberInputFactory>(_props => {
   };
 
   const controls = (
-    <Box component='div' {...getStyles('controls')}>
+    <Box component="div" {...getStyles('controls')}>
       <UnstyledButton
         {...getStyles('control')}
         tabIndex={-1}
         aria-hidden
-        disabled={local.disabled || (typeof _value() === 'number' && local.max !== undefined && (_value() as number) >= local.max)}
+        disabled={
+          local.disabled ||
+          (typeof _value() === 'number' &&
+            local.max !== undefined &&
+            (_value() as number) >= local.max)
+        }
         mod={{ direction: 'up' }}
         onMouseDown={(event) => event.preventDefault()}
         onPointerDown={(event) => {
@@ -499,7 +513,12 @@ export const NumberInput = factory<NumberInputFactory>(_props => {
         {...getStyles('control')}
         tabIndex={-1}
         aria-hidden
-        disabled={local.disabled || (typeof _value() === 'number' && local.min !== undefined && (_value() as number) <= local.min)}
+        disabled={
+          local.disabled ||
+          (typeof _value() === 'number' &&
+            local.min !== undefined &&
+            (_value() as number) <= local.min)
+        }
         mod={{ direction: 'down' }}
         onMouseDown={(event) => event.preventDefault()}
         onPointerDown={(event) => {
@@ -526,7 +545,9 @@ export const NumberInput = factory<NumberInputFactory>(_props => {
       ref={useMergedRef(local.ref, setInputRef)}
       onValueChange={handleValueChange}
       rightSection={
-        local.hideControls || local.readOnly || !canIncrement(_value()) ? local.rightSection : local.rightSection || controls
+        local.hideControls || local.readOnly || !canIncrement(_value())
+          ? local.rightSection
+          : local.rightSection || controls
       }
       classNames={resolvedClassNames}
       styles={resolvedStyles}
@@ -535,8 +556,12 @@ export const NumberInput = factory<NumberInputFactory>(_props => {
       decimalScale={local.allowDecimal ? local.decimalScale : 0}
       onKeyDown={handleKeyDown}
       // onKeyDownCapture={handleKeyDownCapture}
-      rightSectionPointerEvents={local.rightSectionPointerEvents ?? (local.disabled ? 'none' : undefined)}
-      rightSectionWidth={local.rightSectionWidth ?? `var(--ni-right-section-width-${local.size || 'sm'})`}
+      rightSectionPointerEvents={
+        local.rightSectionPointerEvents ?? (local.disabled ? 'none' : undefined)
+      }
+      rightSectionWidth={
+        local.rightSectionWidth ?? `var(--ni-right-section-width-${local.size || 'sm'})`
+      }
       allowLeadingZeros={local.allowLeadingZeros}
       onBlur={handleBlur}
       attributes={local.attributes}

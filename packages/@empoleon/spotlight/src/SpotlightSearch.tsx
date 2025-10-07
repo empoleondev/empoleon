@@ -1,3 +1,4 @@
+import { createSignal, splitProps } from 'solid-js';
 import {
   BoxProps,
   CompoundStylesApiProps,
@@ -12,7 +13,6 @@ import {
 import { useSpotlightContext } from './Spotlight.context';
 import { spotlightActions } from './spotlight.store';
 import classes from './Spotlight.module.css';
-import { createSignal, splitProps } from 'solid-js';
 
 export type SpotlightSearchStylesNames = InputStylesNames;
 
@@ -34,7 +34,7 @@ const defaultProps: Partial<SpotlightSearchProps> = {
   size: 'lg',
 };
 
-export const SpotlightSearch = factory<SpotlightSearchFactory>(_props => {
+export const SpotlightSearch = factory<SpotlightSearchFactory>((_props) => {
   const props = useProps('SpotlightSearch', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -43,14 +43,16 @@ export const SpotlightSearch = factory<SpotlightSearchFactory>(_props => {
     'onChange',
     'vars',
     'value',
-    'ref'
+    'ref',
   ]);
   const ctx = useSpotlightContext();
   const inputStyles = ctx.getStyles('search');
   const [isComposing, setIsComposing] = createSignal(false); // IME
 
-  const handleKeyDown = (event: KeyboardEvent & { currentTarget: HTMLInputElement; target: Element; }) => {
-    typeof local.onKeyDown === "function" && local.onKeyDown?.(event);
+  const handleKeyDown = (
+    event: KeyboardEvent & { currentTarget: HTMLInputElement; target: Element }
+  ) => {
+    typeof local.onKeyDown === 'function' && local.onKeyDown?.(event);
     if (isComposing()) {
       return;
     }
@@ -80,7 +82,7 @@ export const SpotlightSearch = factory<SpotlightSearchFactory>(_props => {
       value={local.value ?? ctx.query}
       onChange={(event) => {
         ctx.setQuery(event.currentTarget.value);
-        typeof local.onChange === "function" && local.onChange?.(event);
+        typeof local.onChange === 'function' && local.onChange?.(event);
       }}
       onKeyDown={handleKeyDown}
       onCompositionStart={() => setIsComposing(true)}

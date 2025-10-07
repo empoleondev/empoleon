@@ -94,5 +94,5 @@ export function useInputProps<T extends BaseProps, U extends Partial<T> | null>(
         id: local.id,
       };
     },
-  })
+  });
 }

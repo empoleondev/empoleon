@@ -1,3 +1,4 @@
+import { splitProps } from 'solid-js';
 import {
   assignRef,
   useId,
@@ -10,13 +11,13 @@ import {
   BoxProps,
   createVarsResolver,
   ElementProps,
+  EmpoleonColor,
+  EmpoleonRadius,
+  EmpoleonSize,
   factory,
   Factory,
   getFontSize,
   getRadius,
-  EmpoleonColor,
-  EmpoleonRadius,
-  EmpoleonSize,
   rem,
   StylesApiProps,
   useProps,
@@ -24,7 +25,6 @@ import {
 } from '../../core';
 import { UnstyledButton, UnstyledButtonProps } from '../UnstyledButton';
 import classes from './TableOfContents.module.css';
-import { splitProps } from 'solid-js';
 
 export type TableOfContentsStylesNames = 'root' | 'control';
 export type TableOfContentsVariant = 'filled' | 'light' | 'none';
@@ -102,28 +102,26 @@ const defaultProps = {
   }),
 } satisfies Partial<TableOfContentsProps>;
 
-const varsResolver = createVarsResolver<TableOfContentsFactory>(
-  (theme, props) => {
-    const colors = theme.variantColorResolver({
-      color: props.color || theme.primaryColor,
-      theme,
-      variant: props.variant || 'filled',
-      autoContrast: props.autoContrast,
-    });
+const varsResolver = createVarsResolver<TableOfContentsFactory>((theme, props) => {
+  const colors = theme.variantColorResolver({
+    color: props.color || theme.primaryColor,
+    theme,
+    variant: props.variant || 'filled',
+    autoContrast: props.autoContrast,
+  });
 
-    return {
-      root: {
-        '--toc-bg': props.variant !== 'none' ? colors.background : undefined,
-        '--toc-color': props.variant !== 'none' ? colors.color : undefined,
-        '--toc-size': getFontSize(props.size),
-        '--toc-depth-offset': rem(props.depthOffset),
-        '--toc-radius': getRadius(props.radius),
-      },
-    };
-  }
-);
+  return {
+    root: {
+      '--toc-bg': props.variant !== 'none' ? colors.background : undefined,
+      '--toc-color': props.variant !== 'none' ? colors.color : undefined,
+      '--toc-size': getFontSize(props.size),
+      '--toc-depth-offset': rem(props.depthOffset),
+      '--toc-radius': getRadius(props.radius),
+    },
+  };
+});
 
-export const TableOfContents = factory<TableOfContentsFactory>(_props => {
+export const TableOfContents = factory<TableOfContentsFactory>((_props) => {
   const props = useProps('TableOfContents', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -143,7 +141,7 @@ export const TableOfContents = factory<TableOfContentsFactory>(_props => {
     'radius',
     'reinitializeRef',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<TableOfContentsFactory>({

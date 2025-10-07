@@ -1,6 +1,6 @@
+import { JSX } from 'solid-js';
 import { Anchor, Avatar, Group, HoverCard, Stack, Text } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { JSX } from 'solid-js';
 
 const code = `
 import { HoverCard, Avatar, Text, Group, Anchor, Stack } from '@empoleon/core';
@@ -52,7 +52,7 @@ function Demo() {
 
 export function HoverCardHomePageDemo({ children }: { children: JSX.Element }) {
   return (
-    <HoverCard width='320px' shadow="md" withArrow openDelay={200} closeDelay={400}>
+    <HoverCard width="320px" shadow="md" withArrow openDelay={200} closeDelay={400}>
       <HoverCard.Target>{children}</HoverCard.Target>
       <HoverCard.Dropdown>
         <Group>

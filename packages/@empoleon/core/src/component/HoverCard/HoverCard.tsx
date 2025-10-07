@@ -1,11 +1,11 @@
+import { splitProps } from 'solid-js';
 import { ExtendComponent, Factory, useProps } from '../../core';
 import { Popover, PopoverProps, PopoverStylesNames } from '../Popover';
 import { PopoverCssVariables } from '../Popover/Popover';
 import { HoverCardContextProvider } from './HoverCard.context';
 import { HoverCardDropdown } from './HoverCardDropdown/HoverCardDropdown';
-import { HoverCardTarget } from './HoverCardTarget/HoverCardTarget';
-import { splitProps } from 'solid-js';
 import { HoverCardGroup } from './HoverCardGroup/HoverCardGroup';
+import { HoverCardTarget } from './HoverCardTarget/HoverCardTarget';
 import { useHoverCard } from './use-hover-card';
 
 export interface HoverCardProps extends Omit<PopoverProps, 'opened' | 'onChange'> {
@@ -47,7 +47,7 @@ export function HoverCard(_props: HoverCardProps) {
     'onClose',
     'openDelay',
     'closeDelay',
-    'initiallyOpened'
+    'initiallyOpened',
   ]);
 
   const hoverCard = useHoverCard({

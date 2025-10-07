@@ -4,10 +4,10 @@ import {
   BoxProps,
   createVarsResolver,
   ElementProps,
+  EmpoleonSpacing,
   factory,
   Factory,
   getDefaultZIndex,
-  EmpoleonSpacing,
   StylesApiProps,
   useProps,
   useStyles,
@@ -107,16 +107,14 @@ const defaultProps: Partial<AppShellProps> = {
   zIndex: getDefaultZIndex('app'),
 } satisfies Partial<AppShellProps>;
 
-const varsResolver = createVarsResolver<AppShellFactory>(
-  (_, props) => ({
-    root: {
-      '--app-shell-transition-duration': `${props.transitionDuration}ms`,
-      '--app-shell-transition-timing-function': props.transitionTimingFunction,
-    },
-  })
-);
+const varsResolver = createVarsResolver<AppShellFactory>((_, props) => ({
+  root: {
+    '--app-shell-transition-duration': `${props.transitionDuration}ms`,
+    '--app-shell-transition-timing-function': props.transitionTimingFunction,
+  },
+}));
 
-export const AppShell = factory<AppShellFactory>(_props => {
+export const AppShell = factory<AppShellFactory>((_props) => {
   const props = useProps('AppShell', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -139,7 +137,7 @@ export const AppShell = factory<AppShellFactory>(_props => {
     'offsetScrollbars',
     'mod',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const offsetScrollbars = local.layout !== 'alt';
@@ -158,10 +156,21 @@ export const AppShell = factory<AppShellFactory>(_props => {
     varsResolver,
   });
 
-  const resizing = useResizing({ disabled: local.disabled, transitionDuration: local.transitionDuration });
+  const resizing = useResizing({
+    disabled: local.disabled,
+    transitionDuration: local.transitionDuration,
+  });
 
   return (
-    <AppShellProvider value={{ getStyles, withBorder: local.withBorder, zIndex: local.zIndex, disabled: local.disabled, offsetScrollbars }}>
+    <AppShellProvider
+      value={{
+        getStyles,
+        withBorder: local.withBorder,
+        zIndex: local.zIndex,
+        disabled: local.disabled,
+        offsetScrollbars,
+      }}
+    >
       <AppShellMediaStyles
         navbar={() => local.navbar}
         header={() => local.header}

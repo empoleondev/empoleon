@@ -1,6 +1,6 @@
+import { Accessor, createSignal, onCleanup } from 'solid-js';
 import { useUncontrolled } from '@empoleon/hooks';
 import { getFirstIndex, getNextIndex, getPreviousIndex } from './get-index/get-index';
-import { Accessor, createSignal, onCleanup } from 'solid-js';
 
 export type ComboboxDropdownEventSource = 'keyboard' | 'mouse' | 'unknown';
 
@@ -133,7 +133,7 @@ export function useCombobox(props: UseComboboxOptions = {}): ComboboxStore {
       setDropdownOpened(false);
       props.onDropdownClose?.(eventSource);
     }
-  }
+  };
 
   const toggleDropdown: ComboboxStore['toggleDropdown'] = (eventSource = 'unknown') => {
     if (dropdownOpened()) {
@@ -141,7 +141,7 @@ export function useCombobox(props: UseComboboxOptions = {}): ComboboxStore {
     } else {
       openDropdown(eventSource);
     }
-  }
+  };
 
   const clearSelectedItem = () => {
     const selected = document.querySelector(`#${listId()} [data-combobox-selected]`);
@@ -169,7 +169,7 @@ export function useCombobox(props: UseComboboxOptions = {}): ComboboxStore {
     }
 
     return null;
-  }
+  };
 
   const selectActiveOption = () => {
     const activeOption = document.querySelector<HTMLDivElement>(
@@ -185,7 +185,7 @@ export function useCombobox(props: UseComboboxOptions = {}): ComboboxStore {
     }
 
     return selectOption(0);
-  }
+  };
 
   const loop = props.loop || true;
 
@@ -214,7 +214,10 @@ export function useCombobox(props: UseComboboxOptions = {}): ComboboxStore {
       )
     );
 
-  const updateSelectedOptionIndex = (target: 'active' | 'selected' = 'selected', options?: { scrollIntoView?: boolean }) => {
+  const updateSelectedOptionIndex = (
+    target: 'active' | 'selected' = 'selected',
+    options?: { scrollIntoView?: boolean }
+  ) => {
     selectedIndexUpdateTimeout = window.setTimeout(() => {
       const items = document.querySelectorAll<HTMLDivElement>(
         `#${listId()} [data-combobox-option]`
@@ -229,17 +232,15 @@ export function useCombobox(props: UseComboboxOptions = {}): ComboboxStore {
         items[index]?.scrollIntoView({ block: 'nearest', behavior: props.scrollBehavior });
       }
     }, 0);
-  }
+  };
 
   const resetSelectedOption = () => {
     selectedOptionIndex.current = -1;
     clearSelectedItem();
-  }
+  };
 
   const clickSelectedOption = () => {
-    const items = document.querySelectorAll<HTMLDivElement>(
-      `#${listId()} [data-combobox-option]`
-    );
+    const items = document.querySelectorAll<HTMLDivElement>(`#${listId()} [data-combobox-option]`);
     const item = items?.[selectedOptionIndex.current];
     item?.click();
   };

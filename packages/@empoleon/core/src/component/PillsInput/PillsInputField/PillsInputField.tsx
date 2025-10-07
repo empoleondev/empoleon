@@ -1,3 +1,4 @@
+import { splitProps } from 'solid-js';
 import { PossibleRef, useMergedRef } from '@empoleon/hooks';
 import {
   Box,
@@ -12,7 +13,6 @@ import {
 import { useInputWrapperContext } from '../../Input';
 import { usePillsInputContext } from '../PillsInput.context';
 import classes from '../PillsInput.module.css';
-import { splitProps } from 'solid-js';
 
 export type PillsInputFieldStylesNames = 'field';
 
@@ -37,7 +37,7 @@ const defaultProps = {
   type: 'visible',
 } satisfies Partial<PillsInputFieldProps>;
 
-export const PillsInputField = factory<PillsInputFieldFactory>(_props => {
+export const PillsInputField = factory<PillsInputFieldFactory>((_props) => {
   const props = useProps('PillsInputField', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -52,7 +52,7 @@ export const PillsInputField = factory<PillsInputFieldFactory>(_props => {
     'pointer',
     'mod',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const ctx = usePillsInputContext();
@@ -75,15 +75,18 @@ export const PillsInputField = factory<PillsInputFieldFactory>(_props => {
   return (
     <Box
       component="input"
-      ref={
-        useMergedRef(local.ref, ctx?.fieldRef ? (el: HTMLInputElement) => {
-          if (typeof ctx.fieldRef === 'function') {
-            ctx.fieldRef(el);
-          } else if (ctx.fieldRef && 'current' in ctx.fieldRef) {
-            ctx.fieldRef.current = el;
-          }
-        } : undefined)
-      }
+      ref={useMergedRef(
+        local.ref,
+        ctx?.fieldRef
+          ? (el: HTMLInputElement) => {
+              if (typeof ctx.fieldRef === 'function') {
+                ctx.fieldRef(el);
+              } else if (ctx.fieldRef && 'current' in ctx.fieldRef) {
+                ctx.fieldRef.current = el;
+              }
+            }
+          : undefined
+      )}
       data-type={local.type}
       disabled={_disabled}
       mod={[{ disabled: _disabled, pointer: local.pointer }, local.mod]}

@@ -1,9 +1,9 @@
+import { splitProps } from 'solid-js';
 import { ElementProps } from '../../core';
 import { Overlay, OverlayProps } from '../Overlay';
 import { Transition, TransitionOverride } from '../Transition';
 import { useModalBaseContext } from './ModalBase.context';
 import { useModalTransition } from './use-modal-transition';
-import { splitProps } from 'solid-js';
 
 export interface ModalBaseOverlayProps
   extends Omit<OverlayProps, 'styles' | 'classNames' | 'variant' | 'vars'>,
@@ -21,7 +21,7 @@ export function ModalBaseOverlay(props: ModalBaseOverlayProps) {
     'transitionProps',
     'style',
     'visible',
-    'ref'
+    'ref',
   ]);
 
   const ctx = useModalBaseContext();
@@ -41,7 +41,7 @@ export function ModalBaseOverlay(props: ModalBaseOverlayProps) {
           zIndex={ctx.zIndex}
           unstyled={ctx.unstyled}
           onClick={(event) => {
-            typeof local.onClick === "function" && local.onClick?.(event);
+            typeof local.onClick === 'function' && local.onClick?.(event);
             ctx.closeOnClickOutside() && ctx.onClose();
           }}
           {...others}

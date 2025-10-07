@@ -8,6 +8,7 @@ import {
   createHighlightJsAdapter,
 } from '@empoleon/code-highlight';
 import { EmpoleonDemo } from '@empoleonx/demo';
+
 import 'highlight.js/styles/github-dark.css';
 
 hljs.registerLanguage('typescript', tsLang);

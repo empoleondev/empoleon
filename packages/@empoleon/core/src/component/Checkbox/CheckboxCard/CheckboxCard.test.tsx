@@ -6,9 +6,7 @@ const defaultProps: CheckboxCardProps = {};
 describe('@empoleon/core/CheckboxCard', () => {
   tests.axe([
     () => <CheckboxCard>Label</CheckboxCard>,
-    () => <CheckboxCard checked>
-      Label
-    </CheckboxCard>,
+    () => <CheckboxCard checked>Label</CheckboxCard>,
   ]);
 
   tests.itSupportsSystemProps<CheckboxCardProps, CheckboxCardStylesNames>({

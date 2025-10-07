@@ -1,6 +1,6 @@
 import { JSX } from 'solid-js';
-import { TimeInput } from './TimeInput';
 import { EmpoleonProvider } from '@empoleon/core';
+import { TimeInput } from './TimeInput';
 
 export default {
   title: 'TimeInput',

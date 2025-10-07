@@ -1,14 +1,20 @@
 import { createEffect, JSX } from 'solid-js';
 import type { EmpoleonStyleProp } from '../../Box';
-import { FactoryPayload } from '../../factory';
 import {
   useEmpoleonClassNamesPrefix,
   useEmpoleonIsHeadless,
   useEmpoleonTheme,
   useEmpoleonWithStaticClasses,
 } from '../../EmpoleonProvider';
+import { FactoryPayload } from '../../factory';
 import { PartialVarsResolver, VarsResolver } from '../create-vars-resolver/create-vars-resolver';
-import { Attributes, ClassNames, ClassNamesArray, GetStylesApiOptions, Styles } from '../styles-api.types';
+import {
+  Attributes,
+  ClassNames,
+  ClassNamesArray,
+  GetStylesApiOptions,
+  Styles,
+} from '../styles-api.types';
 import { getClassName } from './get-class-name/get-class-name';
 import { getStyle } from './get-style/get-style';
 import { useStylesTransform } from './use-transformed-styles';
@@ -39,19 +45,23 @@ export type GetStylesApi<Payload extends FactoryPayload> = (
   style: (() => JSX.CSSProperties) | JSX.CSSProperties;
 };
 
-export function useStyles<Payload extends FactoryPayload>(_props: UseStylesInput<Payload>): GetStylesApi<Payload> {
+export function useStyles<Payload extends FactoryPayload>(
+  _props: UseStylesInput<Payload>
+): GetStylesApi<Payload> {
   const theme = useEmpoleonTheme();
   const classNamesPrefix = useEmpoleonClassNamesPrefix();
   const withStaticClasses = useEmpoleonWithStaticClasses();
   const headless = useEmpoleonIsHeadless();
-  const themeName = (Array.isArray(_props.name) ? _props.name : [_props.name]).filter((n) => n) as string[];
+  const themeName = (Array.isArray(_props.name) ? _props.name : [_props.name]).filter(
+    (n) => n
+  ) as string[];
   const { withStylesTransform, getTransformedStyles } = useStylesTransform({
     props: _props.props,
     stylesCtx: _props.stylesCtx,
     themeName,
   });
 
-  const rootSelector = (_props.rootSelector || ('root' as NonNullable<Payload['stylesNames']>));
+  const rootSelector = _props.rootSelector || ('root' as NonNullable<Payload['stylesNames']>);
 
   return (selector, options) => ({
     className: getClassName({
@@ -72,37 +82,39 @@ export function useStyles<Payload extends FactoryPayload>(_props: UseStylesInput
       transformedStyles: getTransformedStyles([options?.styles, _props.styles]),
     }),
 
-    style: process.env.NODE_ENV === 'test' ?
-      getStyle({
-      theme,
-      themeName,
-      selector,
-      options,
-      props: _props.props,
-      stylesCtx: _props.stylesCtx,
-      rootSelector,
-      styles: _props.styles,
-      style: _props.style,
-      vars: _props.vars,
-      varsResolver: _props.varsResolver,
-      headless,
-      withStylesTransform,
-    }) :
-    () => getStyle({
-      theme,
-      themeName,
-      selector,
-      options,
-      props: _props.props,
-      stylesCtx: _props.stylesCtx,
-      rootSelector,
-      styles: _props.styles,
-      style: _props.style,
-      vars: _props.vars,
-      varsResolver: _props.varsResolver,
-      headless,
-      withStylesTransform,
-    }),
+    style:
+      process.env.NODE_ENV === 'test'
+        ? getStyle({
+            theme,
+            themeName,
+            selector,
+            options,
+            props: _props.props,
+            stylesCtx: _props.stylesCtx,
+            rootSelector,
+            styles: _props.styles,
+            style: _props.style,
+            vars: _props.vars,
+            varsResolver: _props.varsResolver,
+            headless,
+            withStylesTransform,
+          })
+        : () =>
+            getStyle({
+              theme,
+              themeName,
+              selector,
+              options,
+              props: _props.props,
+              stylesCtx: _props.stylesCtx,
+              rootSelector,
+              styles: _props.styles,
+              style: _props.style,
+              vars: _props.vars,
+              varsResolver: _props.varsResolver,
+              headless,
+              withStylesTransform,
+            }),
 
     ..._props.attributes?.[selector],
   });

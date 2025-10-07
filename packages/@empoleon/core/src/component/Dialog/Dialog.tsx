@@ -1,12 +1,12 @@
-import { splitProps, JSX, Show, createEffect } from 'solid-js';
+import { createEffect, JSX, Show, splitProps } from 'solid-js';
 import {
   BoxProps,
   createVarsResolver,
   ElementProps,
+  EmpoleonSize,
   factory,
   Factory,
   getSize,
-  EmpoleonSize,
   StylesApiProps,
   useProps,
   useStyles,
@@ -74,7 +74,7 @@ const varsResolver = createVarsResolver<DialogFactory>((_, props) => ({
   },
 }));
 
-export const Dialog = factory<DialogFactory>(_props => {
+export const Dialog = factory<DialogFactory>((_props) => {
   const props = useProps('Dialog', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -94,7 +94,7 @@ export const Dialog = factory<DialogFactory>(_props => {
     'onClose',
     'portalProps',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<DialogFactory>({
@@ -128,7 +128,11 @@ export const Dialog = factory<DialogFactory>(_props => {
             {...others}
           >
             <Show when={local.withCloseButton}>
-              <CloseButton onClick={local.onClose} unstyled={local.unstyled} {...getStyles('closeButton')} />
+              <CloseButton
+                onClick={local.onClose}
+                unstyled={local.unstyled}
+                {...getStyles('closeButton')}
+              />
             </Show>
             {local.children}
           </Paper>

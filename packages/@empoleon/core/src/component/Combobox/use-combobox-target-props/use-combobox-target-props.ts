@@ -21,7 +21,9 @@ export function useComboboxTargetProps({
   const ctx = useComboboxContext();
   const [selectedOptionId, setSelectedOptionId] = createSignal<string | null>(null);
 
-  const handleKeyDown = (event: KeyboardEvent & { currentTarget: HTMLInputElement; target: Element }) => {
+  const handleKeyDown = (
+    event: KeyboardEvent & { currentTarget: HTMLInputElement; target: Element }
+  ) => {
     if (typeof onKeyDown === 'function') {
       onKeyDown(event);
     }

@@ -1,8 +1,8 @@
 import { createSignal, JSX } from 'solid-js';
+import { EmpoleonProvider } from '../../core';
 import { AlphaSlider } from './AlphaSlider/AlphaSlider';
 import { ColorPicker } from './ColorPicker';
 import { HueSlider } from './HueSlider/HueSlider';
-import { EmpoleonProvider } from '../../core';
 
 export default {
   title: 'ColorPicker',
@@ -39,7 +39,7 @@ export function SeparateHueSlider() {
 
 export function Usage() {
   return (
-    <div style={{ 'padding': '40px', 'max-width': '300px' }}>
+    <div style={{ padding: '40px', 'max-width': '300px' }}>
       <ColorPicker
         swatches={[
           '#25262b',
@@ -66,7 +66,7 @@ export function Usage() {
 
 export function Unstyled() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <ColorPicker
         swatches={[
           '#25262b',
@@ -94,7 +94,7 @@ export function Controlled() {
   const [value, setValue] = createSignal('#FFFFFF');
 
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <ColorPicker
         swatches={[
           '#25262b',

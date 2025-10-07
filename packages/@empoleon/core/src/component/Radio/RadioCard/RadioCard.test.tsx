@@ -4,12 +4,7 @@ import { RadioCard, RadioCardProps, RadioCardStylesNames } from './RadioCard';
 const defaultProps: RadioCardProps = {};
 
 describe('@empoleon/core/RadioCard', () => {
-  tests.axe([
-    () => <RadioCard>Label</RadioCard>,
-    () => <RadioCard checked>
-      Label
-    </RadioCard>,
-  ]);
+  tests.axe([() => <RadioCard>Label</RadioCard>, () => <RadioCard checked>Label</RadioCard>]);
 
   tests.itSupportsSystemProps<RadioCardProps, RadioCardStylesNames>({
     component: RadioCard,

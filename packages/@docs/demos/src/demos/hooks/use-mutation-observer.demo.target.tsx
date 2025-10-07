@@ -1,7 +1,7 @@
+import { createSignal } from 'solid-js';
 import { Kbd, Text } from '@empoleon/core';
 import { useMutationObserver } from '@empoleon/hooks';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal } from 'solid-js';
 
 const code = `
 import { useState } from 'react';

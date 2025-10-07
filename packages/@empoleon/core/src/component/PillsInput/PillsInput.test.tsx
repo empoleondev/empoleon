@@ -8,21 +8,29 @@ const defaultProps: PillsInputProps = {
 
 describe('@empoleon/core/PillsInput', () => {
   tests.axe([
-    () => <PillsInput label="test-label">
-      <PillsInput.Field />
-    </PillsInput>,
+    () => (
+      <PillsInput label="test-label">
+        <PillsInput.Field />
+      </PillsInput>
+    ),
 
-    () => <PillsInput label="test-label" description="test-description">
-      <PillsInput.Field />
-    </PillsInput>,
+    () => (
+      <PillsInput label="test-label" description="test-description">
+        <PillsInput.Field />
+      </PillsInput>
+    ),
 
-    () => <PillsInput label="test-label" error="test-error">
-      <PillsInput.Field />
-    </PillsInput>,
+    () => (
+      <PillsInput label="test-label" error="test-error">
+        <PillsInput.Field />
+      </PillsInput>
+    ),
 
-    () => <PillsInput>
-      <PillsInput.Field aria-label="test-label" />
-    </PillsInput>,
+    () => (
+      <PillsInput>
+        <PillsInput.Field aria-label="test-label" />
+      </PillsInput>
+    ),
   ]);
 
   tests.itSupportsSystemProps<PillsInputProps, __InputStylesNames>({

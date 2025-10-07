@@ -1,6 +1,6 @@
 import { render } from '@solidjs/testing-library';
-import { useColorScheme } from './use-color-scheme';
 import { createEffect } from 'solid-js';
+import { useColorScheme } from './use-color-scheme';
 
 describe('@empoleon/hooks/use-color-scheme', () => {
   // @ts-ignore

@@ -1,12 +1,12 @@
-import { createMemo, For, splitProps } from 'solid-js';
 import dayjs from 'dayjs';
+import { createMemo, For, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
   ElementProps,
+  EmpoleonSize,
   factory,
   Factory,
-  EmpoleonSize,
   StylesApiProps,
   useProps,
   useStyles,
@@ -67,7 +67,7 @@ const defaultProps = {
   withCellSpacing: true,
 } satisfies Partial<YearsListProps>;
 
-export const YearsList = factory<YearsListFactory>(_props => {
+export const YearsList = factory<YearsListFactory>((_props) => {
   const props = useProps('YearsList', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -92,7 +92,7 @@ export const YearsList = factory<YearsListFactory>(_props => {
     'withCellSpacing',
     'size',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<YearsListFactory>({
@@ -121,7 +121,13 @@ export const YearsList = factory<YearsListFactory>(_props => {
   });
 
   return (
-    <Box component="table" ref={local.ref} size={local.size} {...getStyles('yearsList')} {...others}>
+    <Box
+      component="table"
+      ref={local.ref}
+      size={local.size}
+      {...getStyles('yearsList')}
+      {...others}
+    >
       <tbody>
         <For each={years()}>
           {(yearsRow, rowIndex) => (
@@ -140,7 +146,11 @@ export const YearsList = factory<YearsListFactory>(_props => {
                         size={local.size}
                         unstyled={local.unstyled}
                         data-empoleon-stop-propagation={local.__stopPropagation || undefined}
-                        disabled={isYearDisabled({ year, minDate: local.minDate, maxDate: local.maxDate })}
+                        disabled={isYearDisabled({
+                          year,
+                          minDate: local.minDate,
+                          maxDate: local.maxDate,
+                        })}
                         ref={(node) => local.__getControlRef?.(rowIndex(), cellIndex(), node!)}
                         {...controlProps}
                         onKeyDown={(event) => {
@@ -148,7 +158,11 @@ export const YearsList = factory<YearsListFactory>(_props => {
                           if (props?.onKeyDown) {
                             (props.onKeyDown as any)(event);
                           }
-                          local.__onControlKeyDown?.(event, { rowIndex: rowIndex(), cellIndex: cellIndex(), date: year });
+                          local.__onControlKeyDown?.(event, {
+                            rowIndex: rowIndex(),
+                            cellIndex: cellIndex(),
+                            date: year,
+                          });
                         }}
                         onClick={(event) => {
                           const props = controlProps();
@@ -173,7 +187,9 @@ export const YearsList = factory<YearsListFactory>(_props => {
                         }}
                         tabIndex={local.__preventFocus || !isYearInTabOrder ? -1 : 0}
                       >
-                        {dayjs(year).locale(ctx.getLocale(local.locale)).format(local.yearsListFormat)}
+                        {dayjs(year)
+                          .locale(ctx.getLocale(local.locale))
+                          .format(local.yearsListFormat)}
                       </PickerControl>
                     </td>
                   );

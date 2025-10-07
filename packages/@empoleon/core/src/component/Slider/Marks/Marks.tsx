@@ -23,7 +23,7 @@ export function Marks(props: MarksProps) {
     'value',
     'offset',
     'inverted',
-   ]);
+  ]);
 
   const { getStyles } = useSliderContext();
 
@@ -34,7 +34,9 @@ export function Marks(props: MarksProps) {
           {(mark) => (
             <Box
               {...getStyles('markWrapper')}
-              __vars={{ '--mark-offset': `${getPosition({ value: mark.value, min: props.min, max: props.max })}%` }}
+              __vars={{
+                '--mark-offset': `${getPosition({ value: mark.value, min: props.min, max: props.max })}%`,
+              }}
             >
               <Box
                 {...getStyles('mark')}
@@ -43,13 +45,15 @@ export function Marks(props: MarksProps) {
                     mark,
                     value: props.value,
                     offset: props.offset,
-                    inverted: props.inverted
+                    inverted: props.inverted,
                   }),
-                  disabled: props.disabled
+                  disabled: props.disabled,
                 }}
               />
               <Show when={mark.label}>
-                <Box component='div' {...getStyles('markLabel')}>{mark.label}</Box>
+                <Box component="div" {...getStyles('markLabel')}>
+                  {mark.label}
+                </Box>
               </Show>
             </Box>
           )}

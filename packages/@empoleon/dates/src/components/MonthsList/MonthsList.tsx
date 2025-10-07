@@ -1,11 +1,12 @@
 import dayjs from 'dayjs';
+import { createMemo, For, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
   ElementProps,
+  EmpoleonSize,
   factory,
   Factory,
-  EmpoleonSize,
   StylesApiProps,
   useProps,
   useStyles,
@@ -18,7 +19,6 @@ import { getMonthInTabOrder } from './get-month-in-tab-order/get-month-in-tab-or
 import { getMonthsData } from './get-months-data/get-months-data';
 import { isMonthDisabled } from './is-month-disabled/is-month-disabled';
 import classes from './MonthsList.module.css';
-import { createMemo, For, splitProps } from 'solid-js';
 
 export type MonthsListStylesNames =
   | 'monthsList'
@@ -68,7 +68,7 @@ const defaultProps = {
   withCellSpacing: true,
 } satisfies Partial<MonthsListProps>;
 
-export const MonthsList = factory<MonthsListFactory>(_props => {
+export const MonthsList = factory<MonthsListFactory>((_props) => {
   const props = useProps('MonthsList', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -93,7 +93,7 @@ export const MonthsList = factory<MonthsListFactory>(_props => {
     'withCellSpacing',
     'size',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<MonthsListFactory>({
@@ -122,7 +122,13 @@ export const MonthsList = factory<MonthsListFactory>(_props => {
   });
 
   return (
-    <Box component="table" ref={local.ref} size={local.size} {...getStyles('monthsList')} {...others}>
+    <Box
+      component="table"
+      ref={local.ref}
+      size={local.size}
+      {...getStyles('monthsList')}
+      {...others}
+    >
       <tbody>
         <For each={months()}>
           {(monthsRow, rowIndex) => (
@@ -154,7 +160,11 @@ export const MonthsList = factory<MonthsListFactory>(_props => {
                           if (props?.onKeyDown) {
                             (props.onKeyDown as any)(event);
                           }
-                          local.__onControlKeyDown?.(event, { rowIndex: rowIndex(), cellIndex: cellIndex(), date: month });
+                          local.__onControlKeyDown?.(event, {
+                            rowIndex: rowIndex(),
+                            cellIndex: cellIndex(),
+                            date: month,
+                          });
                         }}
                         onClick={(event) => {
                           const props = controlProps();
@@ -179,7 +189,9 @@ export const MonthsList = factory<MonthsListFactory>(_props => {
                         }}
                         tabIndex={local.__preventFocus || !isMonthInTabOrder ? -1 : 0}
                       >
-                        {dayjs(month).locale(ctx.getLocale(local.locale)).format(local.monthsListFormat)}
+                        {dayjs(month)
+                          .locale(ctx.getLocale(local.locale))
+                          .format(local.monthsListFormat)}
                       </PickerControl>
                     </td>
                   );
@@ -190,7 +202,7 @@ export const MonthsList = factory<MonthsListFactory>(_props => {
         </For>
       </tbody>
     </Box>
-  )
+  );
 });
 
 MonthsList.classes = classes;

@@ -32,7 +32,7 @@ export type RichTextEditorToolbarFactory = Factory<{
   compound: true;
 }>;
 
-export const RichTextEditorToolbar = factory<RichTextEditorToolbarFactory>(_props => {
+export const RichTextEditorToolbar = factory<RichTextEditorToolbarFactory>((_props) => {
   const props = useProps('RichTextEditorToolbar', null, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -44,7 +44,7 @@ export const RichTextEditorToolbar = factory<RichTextEditorToolbarFactory>(_prop
     'stickyOffset',
     'mod',
     'variant',
-    'ref'
+    'ref',
   ]);
   const ctx = useRichTextEditorContext();
 
@@ -53,7 +53,12 @@ export const RichTextEditorToolbar = factory<RichTextEditorToolbarFactory>(_prop
       ref={local.ref}
       mod={[{ sticky: local.sticky }, local.mod]}
       variant={local.variant || ctx.variant}
-      {...ctx.getStyles('toolbar', { className: local.className, style: local.style, styles: local.styles, classNames: local.classNames })}
+      {...ctx.getStyles('toolbar', {
+        className: local.className,
+        style: local.style,
+        styles: local.styles,
+        classNames: local.classNames,
+      })}
       {...others}
       __vars={{ '--rte-sticky-offset': rem(local.stickyOffset) }}
     />

@@ -28,14 +28,12 @@ export function createEdgeComponent(edgeProps: CreateEdgeComponent) {
 
   const Component = (_props: PaginationEdgeProps) => {
     const props = useProps(edgeProps.name, defaultProps, _props);
-    const [local, others] = splitProps(props, [
-      'icon',
-      'ref'
-    ]);
+    const [local, others] = splitProps(props, ['icon', 'ref']);
     const Icon = local.icon!;
     const ctx = usePaginationContext();
-    const _disabled = () => edgeProps.type === 'next' ? ctx.active() === ctx.total() : ctx.active() === 1;
-    const disabled = () => (ctx.disabled() || _disabled());
+    const _disabled = () =>
+      edgeProps.type === 'next' ? ctx.active() === ctx.total() : ctx.active() === 1;
+    const disabled = () => ctx.disabled() || _disabled();
 
     return (
       <PaginationControl

@@ -14,13 +14,7 @@ function Demo() {
 `;
 
 function Demo(props: HighlightProps) {
-  return (
-    <Highlight
-      maw={600}
-      mx="auto"
-      {...props}
-    />
-  );
+  return <Highlight maw={600} mx="auto" {...props} />;
 }
 
 export const kitchenSink: EmpoleonDemo = {

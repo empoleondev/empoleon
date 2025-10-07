@@ -1,6 +1,6 @@
 import { JSX } from 'solid-js';
-import { PasswordInput } from './PasswordInput';
 import { EmpoleonProvider } from '../../core';
+import { PasswordInput } from './PasswordInput';
 
 export default {
   title: 'PasswordInput',
@@ -28,7 +28,7 @@ export function Usage() {
 
 export function Unstyled() {
   return (
-    <div style={{ 'padding': '40px', 'max-width': '340px' }}>
+    <div style={{ padding: '40px', 'max-width': '340px' }}>
       <PasswordInput placeholder="Your password" description="Hello" label="There" unstyled />
     </div>
   );

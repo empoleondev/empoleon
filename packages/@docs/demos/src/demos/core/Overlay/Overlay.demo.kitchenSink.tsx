@@ -1,6 +1,6 @@
+import { createEffect, createSignal } from 'solid-js';
 import { AspectRatio, Button, Overlay, OverlayProps, rgba } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal, createEffect } from 'solid-js';
 
 const code = `
 import { AspectRatio, Button, Overlay } from '@empoleon/core';
@@ -25,10 +25,12 @@ function Demo() {
 }
 `;
 
-function Demo(props: OverlayProps & {
-  gradient?: boolean;
-  color2?: string;
-}) {
+function Demo(
+  props: OverlayProps & {
+    gradient?: boolean;
+    color2?: string;
+  }
+) {
   const [visible, setVisible] = createSignal(true);
 
   createEffect(() => {
@@ -45,7 +47,7 @@ function Demo(props: OverlayProps & {
 
       return {
         ...rest,
-        gradient: `linear-gradient(145deg, ${color1WithOpacity} 0%, ${color2WithOpacity} 100%)`
+        gradient: `linear-gradient(145deg, ${color1WithOpacity} 0%, ${color2WithOpacity} 100%)`,
       };
     }
 
@@ -80,13 +82,13 @@ export const kitchenSink: EmpoleonDemo = {
       prop: 'color',
       type: 'color',
       initialValue: '#000',
-      libraryValue: '#000'
+      libraryValue: '#000',
     },
     {
       prop: 'color2',
       type: 'color',
       initialValue: '#fff',
-      libraryValue: '#fff'
+      libraryValue: '#fff',
     },
     {
       prop: 'backgroundOpacity',
@@ -95,7 +97,7 @@ export const kitchenSink: EmpoleonDemo = {
       libraryValue: 0.6,
       min: 0,
       max: 1,
-      step: 0.05
+      step: 0.05,
     },
     {
       prop: 'blur',
@@ -104,19 +106,19 @@ export const kitchenSink: EmpoleonDemo = {
       libraryValue: 0,
       min: 0,
       max: 20,
-      step: 0.5
+      step: 0.5,
     },
     {
       prop: 'radius',
       type: 'size',
       initialValue: 'md',
-      libraryValue: 'md'
+      libraryValue: 'md',
     },
     {
       prop: 'gradient',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'zIndex',
@@ -125,19 +127,19 @@ export const kitchenSink: EmpoleonDemo = {
       libraryValue: 200,
       min: 0,
       max: 9999,
-      step: 1
+      step: 1,
     },
     {
       prop: 'fixed',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'center',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
-    }
+      libraryValue: false,
+    },
   ],
 };

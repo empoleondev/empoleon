@@ -19,15 +19,14 @@ export function itSupportsBackgroundProps<Props>(
     const propsWithBgsz = { ...baseProps, bgsz: 32 } as Props & { bgsz: number };
     const { container: bgsz } = render(() => <options.component {...propsWithBgsz} />);
 
-    const propsWithBgp = { ...baseProps, bgp: "center" } as Props & { bgp: string };
+    const propsWithBgp = { ...baseProps, bgp: 'center' } as Props & { bgp: string };
     const { container: bgp } = render(() => <options.component {...propsWithBgp} />);
 
-    const propsWithBgr = { ...baseProps, bgr: "repeat" } as Props & { bgr: string };
+    const propsWithBgr = { ...baseProps, bgr: 'repeat' } as Props & { bgr: string };
     const { container: bgr } = render(() => <options.component {...propsWithBgr} />);
 
-    const propsWithBga = { ...baseProps, bga: "fixed" } as Props & { bga: string };
+    const propsWithBga = { ...baseProps, bga: 'fixed' } as Props & { bga: string };
     const { container: bga } = render(() => <options.component {...propsWithBga} />);
-
 
     expect(bgsz.querySelector(selector)).toHaveStyle({
       backgroundSize: 'calc(2rem * var(--empoleon-scale))',

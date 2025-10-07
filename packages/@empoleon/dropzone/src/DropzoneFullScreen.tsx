@@ -55,8 +55,7 @@ const defaultProps = {
   withinPortal: true,
 } satisfies Partial<DropzoneFullScreenProps>;
 
-
-export const DropzoneFullScreen = factory<DropzoneFullScreenFactory>(_props => {
+export const DropzoneFullScreen = factory<DropzoneFullScreenFactory>((_props) => {
   const props = useProps('DropzoneFullScreen', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -72,7 +71,7 @@ export const DropzoneFullScreen = factory<DropzoneFullScreenFactory>(_props => {
     'withinPortal',
     'portalProps',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<DropzoneFullScreenFactory>({
@@ -130,7 +129,11 @@ export const DropzoneFullScreen = factory<DropzoneFullScreenFactory>(_props => {
     <OptionalPortal {...local.portalProps} withinPortal={local.withinPortal}>
       <Box
         {...getStyles('fullScreen', {
-          style: { opacity: visible() ? 1 : 0, pointerEvents: visible() ? 'all' : 'none', zIndex: local.zIndex },
+          style: {
+            opacity: visible() ? 1 : 0,
+            pointerEvents: visible() ? 'all' : 'none',
+            zIndex: local.zIndex,
+          },
         })}
         ref={local.ref}
       >

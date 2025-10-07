@@ -1,4 +1,4 @@
-import { onMount, onCleanup } from 'solid-js';
+import { onCleanup, onMount } from 'solid-js';
 
 export function useWindowEvent<K extends string>(
   type: K,

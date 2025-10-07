@@ -2,9 +2,9 @@ import { JSX, splitProps } from 'solid-js';
 import {
   BoxProps,
   ElementProps,
+  EmpoleonComponentStaticProperties,
   factory,
   Factory,
-  EmpoleonComponentStaticProperties,
   StylesApiProps,
   useProps,
   useResolvedStylesApi,
@@ -50,7 +50,7 @@ type YearPickerComponent = (<Type extends DatePickerType = 'default'>(
   displayName?: string;
 } & EmpoleonComponentStaticProperties<YearPickerFactory>;
 
-export const YearPicker: YearPickerComponent = factory<YearPickerFactory>(_props => {
+export const YearPicker: YearPickerComponent = factory<YearPickerFactory>((_props) => {
   const props = useProps('YearPicker', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -67,7 +67,7 @@ export const YearPicker: YearPickerComponent = factory<YearPickerFactory>(_props
     'onMouseLeave',
     'onYearSelect',
     '__updateDateOnYearSelect',
-    'ref'
+    'ref',
   ]);
 
   const dateState = useDatesState({

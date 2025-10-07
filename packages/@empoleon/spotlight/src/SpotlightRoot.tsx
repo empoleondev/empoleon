@@ -109,7 +109,7 @@ const defaultProps = {
   maxHeight: '400px',
 } satisfies Partial<SpotlightRootProps>;
 
-export const SpotlightRoot = factory<SpotlightRootFactory>(_props => {
+export const SpotlightRoot = factory<SpotlightRootFactory>((_props) => {
   const props = useProps('SpotlightRoot', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -135,7 +135,7 @@ export const SpotlightRoot = factory<SpotlightRootFactory>(_props => {
     'maxHeight',
     'scrollable',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const theme = useEmpoleonTheme();
@@ -160,11 +160,17 @@ export const SpotlightRoot = factory<SpotlightRootFactory>(_props => {
     attributes: local.attributes,
   });
 
-  useHotkeys(getHotkeys(local.shortcut, local.store!), local.tagsToIgnore, local.triggerOnContentEditable);
+  useHotkeys(
+    getHotkeys(local.shortcut, local.store!),
+    local.tagsToIgnore,
+    local.triggerOnContentEditable
+  );
 
-  createEffect(on(opened, (isOpened) => {
-    isOpened ? local.onSpotlightOpen?.() : local.onSpotlightClose?.();
-  }));
+  createEffect(
+    on(opened, (isOpened) => {
+      isOpened ? local.onSpotlightOpen?.() : local.onSpotlightClose?.();
+    })
+  );
 
   if (local.disabled) {
     return null;
@@ -200,7 +206,10 @@ export const SpotlightRoot = factory<SpotlightRootFactory>(_props => {
           ...local.transitionProps,
           onExited: () => {
             local.clearQueryOnClose && setQuery('');
-            spotlightActions.clearSpotlightState({ clearQuery: local.clearQueryOnClose }, local.store!);
+            spotlightActions.clearSpotlightState(
+              { clearQuery: local.clearQueryOnClose },
+              local.store!
+            );
             local.transitionProps?.onExited?.();
           },
         }}

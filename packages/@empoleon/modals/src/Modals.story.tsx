@@ -1,5 +1,5 @@
 import { createSignal, JSX } from 'solid-js';
-import { Button, Group, EmpoleonProvider, Modal, Text } from '@empoleon/core';
+import { Button, EmpoleonProvider, Group, Modal, Text } from '@empoleon/core';
 import {
   closeAllModals,
   closeModal,
@@ -34,7 +34,7 @@ export default {
         </ModalsProvider>
       </EmpoleonProvider>
     ),
-  ]
+  ],
 };
 
 export function Usage() {
@@ -86,7 +86,7 @@ export function Usage() {
       confirmProps: { color: 'red' },
       closeOnConfirm: false,
       children: (
-        <div style={{ 'font-size': '14px', color: '#666', "margin-bottom": "1rem" }}>
+        <div style={{ 'font-size': '14px', color: '#666', 'margin-bottom': '1rem' }}>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione magnam modi vitae
           molestias unde tempora exercitationem fugit, ex repellat doloribus maiores facilis quo
           quis, itaque temporibus obcaecati vel iusto praesentium.

@@ -46,9 +46,9 @@ describe('@empoleon/dates/YearPicker', () => {
 
   it('can be controlled (type="default")', async () => {
     const spy = vi.fn();
-    const { container } = render(
-      () => <YearPicker date="2022-04-11" value="2023-04-11" onChange={spy} />
-    );
+    const { container } = render(() => (
+      <YearPicker date="2022-04-11" value="2023-04-11" onChange={spy} />
+    ));
 
     expect(container.querySelector('[data-selected]')!.textContent).toBe('2023');
 
@@ -57,9 +57,7 @@ describe('@empoleon/dates/YearPicker', () => {
   });
 
   it('can be uncontrolled (type="multiple")', async () => {
-    const { container } = render(
-      () => <YearPicker type="multiple" date="2022-04-11" />
-    );
+    const { container } = render(() => <YearPicker type="multiple" date="2022-04-11" />);
     expect(container.querySelectorAll('[data-selected]')).toHaveLength(0);
     await userEvent.click(container.querySelectorAll('table button')[0]);
     expect(container.querySelectorAll('[data-selected]')).toHaveLength(1);
@@ -74,14 +72,9 @@ describe('@empoleon/dates/YearPicker', () => {
 
   it('can be controlled (type="multiple")', async () => {
     const spy = vi.fn();
-    const { container } = render(
-      () => <YearPicker
-        type="multiple"
-        date="2022-04-11"
-        value={['2023-04-11']}
-        onChange={spy}
-      />
-    );
+    const { container } = render(() => (
+      <YearPicker type="multiple" date="2022-04-11" value={['2023-04-11']} onChange={spy} />
+    ));
 
     await userEvent.click(container.querySelector('table button')!);
     expect(spy).toHaveBeenCalledWith(['2023-04-11', '2020-01-01']);
@@ -104,27 +97,27 @@ describe('@empoleon/dates/YearPicker', () => {
 
   it('can be controlled (type="range")', async () => {
     const spy = vi.fn();
-    const { container } = render(
-      () => <YearPicker type="range" value={[null, null]} onChange={spy} />
-    );
+    const { container } = render(() => (
+      <YearPicker type="range" value={[null, null]} onChange={spy} />
+    ));
     await userEvent.click(container.querySelector('table button')!);
     expect(spy).toHaveBeenLastCalledWith(['2020-01-01', null]);
   });
 
   it('supports onClick handler from getYearControlProps', async () => {
     const spy = vi.fn();
-    const { container } = render(
-      () => <YearPicker getYearControlProps={() => ({ onClick: spy })} />
-    );
+    const { container } = render(() => (
+      <YearPicker getYearControlProps={() => ({ onClick: spy })} />
+    ));
     await userEvent.click(container.querySelector('table button')!);
     expect(spy).toHaveBeenCalled();
   });
 
   it('handles allowSingleDateInRange={true} correctly', async () => {
     const spy = vi.fn();
-    const { container } = render(
-      () => <YearPicker type="range" allowSingleDateInRange onChange={spy} />
-    );
+    const { container } = render(() => (
+      <YearPicker type="range" allowSingleDateInRange onChange={spy} />
+    ));
     await userEvent.click(container.querySelectorAll('table button')[2]);
     expect(spy).toHaveBeenCalledWith(['2022-01-01', null]);
     await userEvent.click(container.querySelectorAll('table button')[2]);
@@ -133,9 +126,9 @@ describe('@empoleon/dates/YearPicker', () => {
 
   it('handles allowSingleDateInRange={false} correctly', async () => {
     const spy = vi.fn();
-    const { container } = render(
-      () => <YearPicker type="range" allowSingleDateInRange={false} onChange={spy} />
-    );
+    const { container } = render(() => (
+      <YearPicker type="range" allowSingleDateInRange={false} onChange={spy} />
+    ));
     await userEvent.click(container.querySelectorAll('table button')[2]);
     expect(spy).toHaveBeenCalledWith(['2022-01-01', null]);
     await userEvent.click(container.querySelectorAll('table button')[2]);
@@ -158,15 +151,15 @@ describe('@empoleon/dates/YearPicker', () => {
   };
 
   it('only adds selected year of decade to tab order', async () => {
-    render(
-      () => <YearPicker
+    render(() => (
+      <YearPicker
         date="2010-01-01"
         getYearControlProps={(date) => ({
           selected: dayjs('2013-01-01').isSame(date, 'year'),
         })}
         ariaLabels={ariaLabels}
       />
-    );
+    ));
     await userEvent.tab();
     expect(screen.getByRole('button', { name: ariaLabels.previousDecade })).toHaveFocus();
 
@@ -181,9 +174,7 @@ describe('@empoleon/dates/YearPicker', () => {
   });
 
   it('only adds current year of decade to tab order', async () => {
-    render(
-      () => <YearPicker date={dayjs().format('YYYY-MM-DD')} ariaLabels={ariaLabels} />
-    );
+    render(() => <YearPicker date={dayjs().format('YYYY-MM-DD')} ariaLabels={ariaLabels} />);
     await userEvent.tab();
     expect(screen.getByRole('button', { name: ariaLabels.previousDecade })).toHaveFocus();
 
@@ -198,8 +189,8 @@ describe('@empoleon/dates/YearPicker', () => {
   });
 
   it('only adds first non-disabled year of decade to tab order', async () => {
-    render(
-      () => <YearPicker
+    render(() => (
+      <YearPicker
         date="2010-01-01"
         minDate="2014-01-01"
         getYearControlProps={(date) => ({
@@ -207,7 +198,7 @@ describe('@empoleon/dates/YearPicker', () => {
         })}
         ariaLabels={ariaLabels}
       />
-    );
+    ));
     await userEvent.tab();
     expect(screen.getByRole('button', { name: ariaLabels.nextDecade })).toHaveFocus();
 

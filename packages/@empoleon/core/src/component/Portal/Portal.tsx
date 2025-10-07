@@ -121,9 +121,9 @@
 
 // Portal.displayName = '@empoleon/core/Portal';
 
-import { JSX, onMount, onCleanup, splitProps, createSignal } from "solid-js";
-import { Portal as CreatePortal } from "solid-js/web";
-import { factory } from "../../core";
+import { createSignal, JSX, onCleanup, onMount, splitProps } from 'solid-js';
+import { Portal as CreatePortal } from 'solid-js/web';
+import { factory } from '../../core';
 
 function createPortalNode(props: JSX.HTMLAttributes<HTMLDivElement>) {
   const node = document.createElement('div');
@@ -195,7 +195,7 @@ const defaultProps: Partial<PortalProps> = {
   reuseTargetNode: true,
 };
 
-export const Portal = factory<PortalFactory>(props => {
+export const Portal = factory<PortalFactory>((props) => {
   const [local, others] = splitProps(props, ['children', 'target', 'reuseTargetNode', 'ref']);
 
   const [node, setNode] = createSignal<HTMLElement | null>(null);
@@ -204,7 +204,7 @@ export const Portal = factory<PortalFactory>(props => {
     const targetNode = getTargetNode({
       target: local.target,
       reuseTargetNode: local.reuseTargetNode ?? defaultProps.reuseTargetNode,
-      ...others
+      ...others,
     });
 
     setNode(targetNode);
@@ -217,19 +217,17 @@ export const Portal = factory<PortalFactory>(props => {
   onCleanup(() => {
     const currentNode = node();
     // Only remove individual nodes (not shared ones or explicit targets)
-    if (currentNode &&
-        !local.target &&
-        !(local.reuseTargetNode ?? defaultProps.reuseTargetNode) &&
-        currentNode.parentNode === document.body) {
+    if (
+      currentNode &&
+      !local.target &&
+      !(local.reuseTargetNode ?? defaultProps.reuseTargetNode) &&
+      currentNode.parentNode === document.body
+    ) {
       document.body.removeChild(currentNode);
     }
   });
 
-  return (
-    <CreatePortal mount={node() || document.body}>
-      {local.children}
-    </CreatePortal>
-  );
+  return <CreatePortal mount={node() || document.body}>{local.children}</CreatePortal>;
 });
 
 Portal.displayName = '@empoleon/core/Portal';

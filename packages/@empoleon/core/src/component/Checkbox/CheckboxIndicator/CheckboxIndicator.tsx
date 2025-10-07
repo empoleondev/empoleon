@@ -4,6 +4,9 @@ import {
   BoxProps,
   createVarsResolver,
   ElementProps,
+  EmpoleonColor,
+  EmpoleonRadius,
+  EmpoleonSize,
   factory,
   Factory,
   getAutoContrastValue,
@@ -11,9 +14,6 @@ import {
   getRadius,
   getSize,
   getThemeColor,
-  EmpoleonColor,
-  EmpoleonRadius,
-  EmpoleonSize,
   parseThemeColor,
   StylesApiProps,
   useProps,
@@ -73,30 +73,29 @@ const defaultProps: Partial<CheckboxIndicatorProps> = {
   icon: CheckboxIcon,
 };
 
-const varsResolver = createVarsResolver<CheckboxIndicatorFactory>(
-  (theme, props) => {
-    const parsedColor = parseThemeColor({ color: props.color || theme.primaryColor, theme });
-    const outlineColor =
-      parsedColor.isThemeColor && parsedColor.shade === undefined
-        ? `var(--empoleon-color-${parsedColor.color}-outline)`
-        : parsedColor.color;
+const varsResolver = createVarsResolver<CheckboxIndicatorFactory>((theme, props) => {
+  const parsedColor = parseThemeColor({ color: props.color || theme.primaryColor, theme });
+  const outlineColor =
+    parsedColor.isThemeColor && parsedColor.shade === undefined
+      ? `var(--empoleon-color-${parsedColor.color}-outline)`
+      : parsedColor.color;
 
-    return {
-      indicator: {
-        '--checkbox-size': getSize(props.size, 'checkbox-size'),
-        '--checkbox-radius': props.radius === undefined ? undefined : getRadius(props.radius),
-        '--checkbox-color': props.variant === 'outline' ? outlineColor : getThemeColor(props.color, theme),
-        '--checkbox-icon-color': props.iconColor
-          ? getThemeColor(props.iconColor, theme)
-          : getAutoContrastValue(props.autoContrast, theme)
-            ? getContrastColor({ color: props.color, theme, autoContrast: props.autoContrast })
-            : undefined,
-      },
-    };
-  }
-);
+  return {
+    indicator: {
+      '--checkbox-size': getSize(props.size, 'checkbox-size'),
+      '--checkbox-radius': props.radius === undefined ? undefined : getRadius(props.radius),
+      '--checkbox-color':
+        props.variant === 'outline' ? outlineColor : getThemeColor(props.color, theme),
+      '--checkbox-icon-color': props.iconColor
+        ? getThemeColor(props.iconColor, theme)
+        : getAutoContrastValue(props.autoContrast, theme)
+          ? getContrastColor({ color: props.color, theme, autoContrast: props.autoContrast })
+          : undefined,
+    },
+  };
+});
 
-export const CheckboxIndicator = factory<CheckboxIndicatorFactory>(_props => {
+export const CheckboxIndicator = factory<CheckboxIndicatorFactory>((_props) => {
   const props = useProps('CheckboxIndicator', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -116,7 +115,7 @@ export const CheckboxIndicator = factory<CheckboxIndicatorFactory>(_props => {
     'variant',
     'disabled',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const Icon = local.icon!;

@@ -20,9 +20,9 @@ function Demo() {
 function Demo() {
   return (
     <>
-    <Carousel withIndicators height='200px'>
-      <Slides count={5} />
-    </Carousel>
+      <Carousel withIndicators height="200px">
+        <Slides count={5} />
+      </Carousel>
     </>
   );
 }

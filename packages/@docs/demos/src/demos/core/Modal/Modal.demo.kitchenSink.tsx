@@ -1,7 +1,7 @@
+import { createEffect, createSignal } from 'solid-js';
 import { Button, Modal, ModalProps } from '@empoleon/core';
 import { useDisclosure } from '@empoleon/hooks';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createEffect, createSignal } from 'solid-js';
 import { AuthenticationForm } from '../../../shared/AuthenticationForm/AuthenticationForm';
 
 const code = `
@@ -25,10 +25,12 @@ function Demo() {
 }
 `;
 
-function Demo(props: ModalProps & {
-  contentType?: string;
-  contentLength?: string;
-}) {
+function Demo(
+  props: ModalProps & {
+    contentType?: string;
+    contentLength?: string;
+  }
+) {
   const [opened, { open, close }] = useDisclosure(false);
 
   const getContent = () => {
@@ -50,14 +52,38 @@ function Demo(props: ModalProps & {
         return (
           <div>
             <p>This is a longer text content that demonstrates scrolling behavior in the modal.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-            <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-            <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
+              incididunt ut labore et dolore magna aliqua.
+            </p>
+            <p>
+              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+              ea commodo consequat.
+            </p>
+            <p>
+              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+              nulla pariatur.
+            </p>
+            <p>
+              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+              mollit anim id est laborum.
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
+              incididunt ut labore et dolore magna aliqua.
+            </p>
+            <p>
+              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+              ea commodo consequat.
+            </p>
+            <p>
+              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+              nulla pariatur.
+            </p>
+            <p>
+              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+              mollit anim id est laborum.
+            </p>
           </div>
         );
       }
@@ -68,11 +94,7 @@ function Demo(props: ModalProps & {
 
   return (
     <>
-      <Modal
-        {...props}
-        opened={opened()}
-        onClose={close}
-      >
+      <Modal {...props} opened={opened()} onClose={close}>
         {getContent()}
       </Modal>
 

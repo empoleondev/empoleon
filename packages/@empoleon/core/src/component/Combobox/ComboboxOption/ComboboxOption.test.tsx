@@ -1,4 +1,11 @@
-import { createContextContainer, patchConsoleError, render, screen, tests, userEvent } from '@empoleon-tests/core';
+import {
+  createContextContainer,
+  patchConsoleError,
+  render,
+  screen,
+  tests,
+  userEvent,
+} from '@empoleon-tests/core';
 import { Combobox } from '../Combobox';
 import { ComboboxOption, ComboboxOptionProps, ComboboxOptionStylesNames } from './ComboboxOption';
 

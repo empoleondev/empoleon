@@ -5,9 +5,9 @@ import {
   IconAlignRight,
   IconCheck,
 } from '@tabler/icons-solidjs';
+import { JSX } from 'solid-js';
 import { Group, Select, SelectProps } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { JSX } from 'solid-js';
 
 const code = `
 import {

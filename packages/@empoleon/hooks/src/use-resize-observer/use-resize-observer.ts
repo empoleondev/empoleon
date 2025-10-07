@@ -1,16 +1,8 @@
-import {
-  createSignal,
-  createEffect,
-  onCleanup,
-  Accessor,
-} from "solid-js";
-import {
-  makeResizeObserver,
-  createElementSize,
-} from "@solid-primitives/resize-observer";
+import { createElementSize, makeResizeObserver } from '@solid-primitives/resize-observer';
+import { Accessor, createEffect, createSignal, onCleanup } from 'solid-js';
 
 // Define the shape of the observed bounding box
-export type ObserverRect = Omit<DOMRectReadOnly, "toJSON">;
+export type ObserverRect = Omit<DOMRectReadOnly, 'toJSON'>;
 const defaultRect: ObserverRect = {
   x: 0,
   y: 0,
@@ -33,18 +25,15 @@ export function useResizeObserver<T extends HTMLElement = any>(
   /** attach to your element: `<div ref={setRef}>` */
   (el: T | undefined) => void,
   /** reactive rect: `{ x, y, width, height, top, left, bottom, right }` */
-  Accessor<ObserverRect>
+  Accessor<ObserverRect>,
 ] {
   const [el, setEl] = createSignal<T>();
   const [rect, setRect] = createSignal<ObserverRect>(defaultRect);
 
-  const { observe, unobserve } = makeResizeObserver<T>(
-    (entries) => {
-      const entry = entries[0];
-      if (entry) setRect(entry.contentRect);
-    },
-    options
-  );
+  const { observe, unobserve } = makeResizeObserver<T>((entries) => {
+    const entry = entries[0];
+    if (entry) setRect(entry.contentRect);
+  }, options);
 
   createEffect(() => {
     const node = el();

@@ -28,14 +28,11 @@ export type CodeHighlightControlFactory = PolymorphicFactory<{
 
 const defaultProps: Partial<CodeHighlightControlProps> = {};
 
-export const CodeHighlightControl: ReturnType<typeof polymorphicFactory<CodeHighlightControlFactory>> = polymorphicFactory<CodeHighlightControlFactory>(_props => {
+export const CodeHighlightControl: ReturnType<
+  typeof polymorphicFactory<CodeHighlightControlFactory>
+> = polymorphicFactory<CodeHighlightControlFactory>((_props) => {
   const props = useProps('CodeHighlightControl', defaultProps, _props);
-  const [local, others] = splitProps(props, [
-    'children',
-    'vars',
-    'tooltipLabel',
-    'ref'
-  ]);
+  const [local, others] = splitProps(props, ['children', 'vars', 'tooltipLabel', 'ref']);
   const ctx = useCodeHighlightContext();
   const tooltipStyles = ctx.getStyles('controlTooltip');
 

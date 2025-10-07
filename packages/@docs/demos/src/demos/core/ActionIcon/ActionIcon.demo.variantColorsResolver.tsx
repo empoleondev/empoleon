@@ -3,8 +3,8 @@ import {
   ActionIcon,
   darken,
   defaultVariantColorsResolver,
-  Group,
   EmpoleonThemeProvider,
+  Group,
   parseThemeColor,
   rgba,
   VariantColorsResolver,
@@ -128,15 +128,15 @@ function Demo() {
     <EmpoleonThemeProvider theme={{ variantColorResolver }}>
       <Group>
         <ActionIcon color="lime.4" variant="filled" size="lg">
-          <IconPhoto size={20} stroke='1.5' />
+          <IconPhoto size={20} stroke="1.5" />
         </ActionIcon>
 
         <ActionIcon color="orange" variant="light" size="lg">
-          <IconFingerprint size={20} stroke='1.5' />
+          <IconFingerprint size={20} stroke="1.5" />
         </ActionIcon>
 
         <ActionIcon variant="danger" size="lg">
-          <IconError404 size={20} stroke='1.5' />
+          <IconError404 size={20} stroke="1.5" />
         </ActionIcon>
       </Group>
     </EmpoleonThemeProvider>

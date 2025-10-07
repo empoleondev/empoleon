@@ -1,8 +1,8 @@
+import { splitProps } from 'solid-js';
 import { BoxProps, ElementProps, NativeSelect } from '@empoleon/core';
 import { getControlLabel } from './get-control-label';
 import { SelectData, transformSelectData } from './transform-select-data';
 import { ConfiguratorControl } from './types';
-import { splitProps } from 'solid-js';
 
 export type ConfiguratorSelectControlOptions = ConfiguratorControl<
   'select',
@@ -19,12 +19,7 @@ export interface ConfiguratorSelectControlProps
 }
 
 export function ConfiguratorSelectControl(props: ConfiguratorSelectControlProps) {
-  const [local, others] = splitProps(props, [
-    'value',
-    'onChange',
-    'prop',
-    'data',
-  ]);
+  const [local, others] = splitProps(props, ['value', 'onChange', 'prop', 'data']);
 
   return (
     <NativeSelect

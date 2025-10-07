@@ -1,6 +1,6 @@
+import { createEffect } from 'solid-js';
 import { Slider } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createEffect } from 'solid-js';
 
 const code = `
 import { Slider } from '@empoleon/core';
@@ -20,11 +20,9 @@ function Demo() {
 `;
 
 function Demo() {
-  createEffect(
-    () => () => {
-      document.documentElement.style.fontSize = '100%';
-    }
-  );
+  createEffect(() => () => {
+    document.documentElement.style.fontSize = '100%';
+  });
 
   return (
     <Slider

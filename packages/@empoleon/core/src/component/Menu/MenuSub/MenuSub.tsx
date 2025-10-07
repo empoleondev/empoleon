@@ -3,11 +3,11 @@ import { useDisclosure, useId } from '@empoleon/hooks';
 import { ExtendComponent, Factory, useProps } from '../../../core';
 import { FloatingAxesOffsets, FloatingPosition, useDelayedHover } from '../../../utils/Floating';
 import { __PopoverProps, Popover } from '../../Popover';
+import { TransitionOverride } from '../../Transition';
 import { MenuSubDropdown } from '../MenuSubDropdown/MenuSubDropdown';
 import { MenuSubItem } from '../MenuSubItem/MenuSubItem';
 import { MenuSubTarget } from '../MenuSubTarget/MenuSubTarget';
 import { SubMenuProvider, useSubMenuContext } from './MenuSub.context';
-import { TransitionOverride } from '../../Transition';
 
 export type MenuSubFactory = Factory<{
   props: MenuSubProps;
@@ -37,10 +37,7 @@ const defaultProps = {
 
 export function MenuSub(_props: MenuSubProps) {
   const props = useProps('MenuSub', defaultProps, _props);
-  const [local, others] = splitProps(props, [
-    'children',
-    'closeDelay'
-  ]);
+  const [local, others] = splitProps(props, ['children', 'closeDelay']);
 
   const id = useId();
   const [opened, { open, close }] = useDisclosure(false);

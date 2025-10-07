@@ -12,12 +12,12 @@ const defaultProps: AlertProps = {
 describe('@empoleon/core/Alert', () => {
   tests.axe([
     () => <Alert>Alert message</Alert>,
-    () => <Alert title="Alert title">
-      Alert message
-    </Alert>,
-    () => <Alert withCloseButton closeButtonLabel="test-close">
-      Alert message
-    </Alert>,
+    () => <Alert title="Alert title">Alert message</Alert>,
+    () => (
+      <Alert withCloseButton closeButtonLabel="test-close">
+        Alert message
+      </Alert>
+    ),
   ]);
 
   tests.itSupportsSystemProps<AlertProps, AlertStylesNames>({

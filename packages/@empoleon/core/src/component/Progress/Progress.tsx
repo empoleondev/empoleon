@@ -1,7 +1,8 @@
+import { splitProps } from 'solid-js';
 import {
+  EmpoleonColor,
   factory,
   Factory,
-  EmpoleonColor,
   StylesApiProps,
   useProps,
   useResolvedStylesApi,
@@ -15,7 +16,6 @@ import {
 } from './ProgressRoot/ProgressRoot';
 import { ProgressSection } from './ProgressSection/ProgressSection';
 import classes from './Progress.module.css';
-import { splitProps } from 'solid-js';
 
 export type ProgressStylesNames = ProgressRootStylesNames;
 
@@ -47,7 +47,7 @@ export type ProgressFactory = Factory<{
 
 const defaultProps: Partial<ProgressProps> = {};
 
-export const Progress = factory<ProgressFactory>(_props => {
+export const Progress = factory<ProgressFactory>((_props) => {
   const props = useProps('Progress', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'value',
@@ -58,7 +58,7 @@ export const Progress = factory<ProgressFactory>(_props => {
     'striped',
     'animated',
     'aria-label',
-    'ref'
+    'ref',
   ]);
 
   const { resolvedClassNames, resolvedStyles } = useResolvedStylesApi<ProgressFactory>({

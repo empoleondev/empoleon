@@ -31,15 +31,15 @@ describe('@empoleon/dates/TimeGrid', () => {
 
   it('calls onChange with null when time is clicked and allowDeselect is true', async () => {
     const spy = vi.fn();
-    const { rerender } = render(
-      () => <TimeGrid {...defaultProps} onChange={spy} allowDeselect defaultValue="10:00" />
-    );
+    const { rerender } = render(() => (
+      <TimeGrid {...defaultProps} onChange={spy} allowDeselect defaultValue="10:00" />
+    ));
     await userEvent.click(screen.getByRole('button', { name: '10:00' }));
     expect(spy).toHaveBeenLastCalledWith(null);
 
-    rerender(
-      () => <TimeGrid {...defaultProps} onChange={spy} allowDeselect={false} defaultValue="10:00" />
-    );
+    rerender(() => (
+      <TimeGrid {...defaultProps} onChange={spy} allowDeselect={false} defaultValue="10:00" />
+    ));
     await userEvent.click(screen.getByRole('button', { name: '10:00' }));
     expect(spy).toHaveBeenCalledTimes(1);
     expect(spy).toHaveBeenLastCalledWith(null);

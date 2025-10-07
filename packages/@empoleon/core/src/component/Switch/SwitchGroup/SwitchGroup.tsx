@@ -1,8 +1,8 @@
-import { splitProps, JSX } from 'solid-js';
+import { JSX, splitProps } from 'solid-js';
 import { useUncontrolled } from '@empoleon/hooks';
-import { DataAttributes, factory, Factory, EmpoleonSize, useProps } from '../../../core';
-import { Input, InputWrapperProps, InputWrapperStylesNames } from '../../Input';
+import { DataAttributes, EmpoleonSize, factory, Factory, useProps } from '../../../core';
 import { InputsGroupFieldset } from '../../../utils/InputsGroupFieldset';
+import { Input, InputWrapperProps, InputWrapperStylesNames } from '../../Input';
 import { SwitchGroupProvider } from '../SwitchGroup.context';
 
 export type SwitchGroupStylesNames = InputWrapperStylesNames;
@@ -38,7 +38,7 @@ export type SwitchGroupFactory = Factory<{
 
 const defaultProps: Partial<SwitchGroupProps> = {};
 
-export const SwitchGroup = factory<SwitchGroupFactory>(_props => {
+export const SwitchGroup = factory<SwitchGroupFactory>((_props) => {
   const props = useProps('SwitchGroup', defaultProps, _props);
 
   const [local, others] = splitProps(props, [
@@ -49,7 +49,7 @@ export const SwitchGroup = factory<SwitchGroupFactory>(_props => {
     'wrapperProps',
     'children',
     'readOnly',
-    'ref'
+    'ref',
   ]);
 
   const [_value, setValue] = useUncontrolled({
@@ -70,7 +70,15 @@ export const SwitchGroup = factory<SwitchGroupFactory>(_props => {
   };
 
   return (
-    <SwitchGroupProvider value={{ get value() { return _value(); }, onChange: handleChange, size: local.size }}>
+    <SwitchGroupProvider
+      value={{
+        get value() {
+          return _value();
+        },
+        onChange: handleChange,
+        size: local.size,
+      }}
+    >
       <Input.Wrapper
         size={local.size}
         ref={local.ref}

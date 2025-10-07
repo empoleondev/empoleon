@@ -1,17 +1,14 @@
-import { splitProps, JSX } from 'solid-js';
+import { JSX, splitProps } from 'solid-js';
 import { Box } from '../../../core';
 
 export interface ThumbProps extends JSX.HTMLAttributes<HTMLDivElement> {
   variant?: string;
   position: { x: number; y: number };
-  ref?: HTMLDivElement
+  ref?: HTMLDivElement;
 }
 
 export const Thumb = (props: ThumbProps) => {
-  const [local, others] = splitProps(props, [
-    'position',
-    'ref'
-  ]);
+  const [local, others] = splitProps(props, ['position', 'ref']);
 
   return (
     // @ts-ignore
@@ -23,7 +20,7 @@ export const Thumb = (props: ThumbProps) => {
       }}
       {...others}
     />
-  )
+  );
 };
 
 Thumb.displayName = '@empoleon/core/ColorPickerThumb';

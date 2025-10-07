@@ -1,7 +1,8 @@
-import { createSignal, onMount, onCleanup } from 'solid-js';
+import { createSignal, onCleanup, onMount } from 'solid-js';
 
 export function useDocumentVisibility(): () => DocumentVisibilityState {
-  const [documentVisibility, setDocumentVisibility] = createSignal<DocumentVisibilityState>('visible');
+  const [documentVisibility, setDocumentVisibility] =
+    createSignal<DocumentVisibilityState>('visible');
 
   onMount(() => {
     const listener = () => setDocumentVisibility(document.visibilityState);

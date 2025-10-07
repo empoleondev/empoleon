@@ -4,6 +4,9 @@ import {
   BoxProps,
   createVarsResolver,
   ElementProps,
+  EmpoleonColor,
+  EmpoleonRadius,
+  EmpoleonSize,
   factory,
   Factory,
   getAutoContrastValue,
@@ -11,9 +14,6 @@ import {
   getRadius,
   getSize,
   getThemeColor,
-  EmpoleonColor,
-  EmpoleonRadius,
-  EmpoleonSize,
   parseThemeColor,
   StylesApiProps,
   useProps,
@@ -75,31 +75,30 @@ const defaultProps: Partial<RadioIndicatorProps> = {
   icon: RadioIcon,
 };
 
-const varsResolver = createVarsResolver<RadioIndicatorFactory>(
-  (theme, props) => {
-    const parsedColor = parseThemeColor({ color: props.color || theme.primaryColor, theme });
-    const outlineColor =
-      parsedColor.isThemeColor && parsedColor.shade === undefined
-        ? `var(--empoleon-color-${parsedColor.color}-outline)`
-        : parsedColor.color;
+const varsResolver = createVarsResolver<RadioIndicatorFactory>((theme, props) => {
+  const parsedColor = parseThemeColor({ color: props.color || theme.primaryColor, theme });
+  const outlineColor =
+    parsedColor.isThemeColor && parsedColor.shade === undefined
+      ? `var(--empoleon-color-${parsedColor.color}-outline)`
+      : parsedColor.color;
 
-    return {
-      indicator: {
-        '--radio-size': getSize(props.size, 'radio-size'),
-        '--radio-radius': props.radius === undefined ? undefined : getRadius(props.radius),
-        '--radio-color': props.variant === 'outline' ? outlineColor : getThemeColor(props.color, theme),
-        '--radio-icon-size': getSize(props.size, 'radio-icon-size'),
-        '--radio-icon-color': props.iconColor
-          ? getThemeColor(props.iconColor, theme)
-          : getAutoContrastValue(props.autoContrast, theme)
-            ? getContrastColor({ color: props.color, theme, autoContrast: props.autoContrast })
-            : undefined,
-      },
-    };
-  }
-);
+  return {
+    indicator: {
+      '--radio-size': getSize(props.size, 'radio-size'),
+      '--radio-radius': props.radius === undefined ? undefined : getRadius(props.radius),
+      '--radio-color':
+        props.variant === 'outline' ? outlineColor : getThemeColor(props.color, theme),
+      '--radio-icon-size': getSize(props.size, 'radio-icon-size'),
+      '--radio-icon-color': props.iconColor
+        ? getThemeColor(props.iconColor, theme)
+        : getAutoContrastValue(props.autoContrast, theme)
+          ? getContrastColor({ color: props.color, theme, autoContrast: props.autoContrast })
+          : undefined,
+    },
+  };
+});
 
-export const RadioIndicator = factory<RadioIndicatorFactory>(_props => {
+export const RadioIndicator = factory<RadioIndicatorFactory>((_props) => {
   const props = useProps('RadioIndicator', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -118,7 +117,7 @@ export const RadioIndicator = factory<RadioIndicatorFactory>(_props => {
     'variant',
     'disabled',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const Icon = local.icon!;
@@ -139,7 +138,8 @@ export const RadioIndicator = factory<RadioIndicatorFactory>(_props => {
   });
 
   const ctx = useRadioCardContext();
-  const _checked = () => (typeof local.checked === 'boolean' ? local.checked : ctx?.checked() || false);
+  const _checked = () =>
+    typeof local.checked === 'boolean' ? local.checked : ctx?.checked() || false;
 
   return (
     <Box
@@ -149,7 +149,7 @@ export const RadioIndicator = factory<RadioIndicatorFactory>(_props => {
       mod={[{ checked: _checked(), disabled: local.disabled }, local.mod]}
       {...others}
     >
-      <Icon {...getStyles('icon') as any} />
+      <Icon {...(getStyles('icon') as any)} />
     </Box>
   );
 });

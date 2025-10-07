@@ -36,7 +36,7 @@ describe('@empoleon/core/Box', () => {
     const { rerender } = render(() => <Box mod={{ 'data-test': 'test' }}>test</Box>);
     expect(screen.getByText('test')).toHaveAttribute('data-test', 'test');
 
-    rerender(() =>
+    rerender(() => (
       <Box
         mod={[
           'test',
@@ -46,7 +46,7 @@ describe('@empoleon/core/Box', () => {
       >
         test
       </Box>
-    );
+    ));
     expect(screen.getByText('test')).toHaveAttribute('data-test');
     expect(screen.getByText('test')).toHaveAttribute('data-test-2', 'test-2');
     expect(screen.getByText('test')).not.toHaveAttribute('data-test-3');

@@ -1,8 +1,8 @@
 import Autoplay, { AutoplayType } from 'embla-carousel-autoplay';
+import { createSignal, onCleanup, onMount } from 'solid-js';
 import { Carousel } from '@empoleon/carousel';
 import { EmpoleonDemo } from '@empoleonx/demo';
 import { Slides } from './_slides';
-import { createSignal, onMount, onCleanup } from 'solid-js';
 
 const code = `
 import { createSignal, onMount, onCleanup } from 'solid-js';
@@ -72,7 +72,7 @@ function Demo() {
   return (
     <Carousel
       withIndicators
-      height='200px'
+      height="200px"
       plugins={autoplayInstance() ? [autoplayInstance()!] : []}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}

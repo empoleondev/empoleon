@@ -1,6 +1,6 @@
+import { createEffect, createSignal } from 'solid-js';
 import { Pagination, PaginationProps } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal, createEffect } from 'solid-js';
 
 const code = `
 import { Pagination } from '@empoleon/core';
@@ -26,13 +26,7 @@ function Demo(props: PaginationProps) {
     props.onChange?.(page);
   };
 
-  return (
-    <Pagination
-      {...props}
-      value={value()}
-      onChange={handleChange}
-    />
-  );
+  return <Pagination {...props} value={value()} onChange={handleChange} />;
 }
 
 export const kitchenSink: EmpoleonDemo = {

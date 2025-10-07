@@ -1,4 +1,4 @@
-import { JSX } from "solid-js";
+import { JSX } from 'solid-js';
 
 interface FileIconProps {
   fileName: string | undefined;

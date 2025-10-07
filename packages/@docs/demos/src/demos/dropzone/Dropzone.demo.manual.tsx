@@ -1,7 +1,7 @@
+import { createSignal } from 'solid-js';
 import { Button, Group } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
 import { BaseDemo } from './_base';
-import { createSignal } from 'solid-js';
 
 const code = `
 import { useRef } from 'react';

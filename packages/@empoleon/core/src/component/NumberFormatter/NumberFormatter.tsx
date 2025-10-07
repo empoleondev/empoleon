@@ -1,6 +1,6 @@
-import { splitProps, JSX } from 'solid-js';
+import { JSX, splitProps } from 'solid-js';
 import { NumericFormat } from '@empoleon/solid-number-format';
-import { ExtendComponent, Factory, EmpoleonThemeComponent, useProps } from '../../core';
+import { EmpoleonThemeComponent, ExtendComponent, Factory, useProps } from '../../core';
 
 export interface NumberFormatterProps extends JSX.HTMLAttributes<HTMLSpanElement> {
   /** Value to format */
@@ -41,10 +41,7 @@ export type NumberFormatterFactory = Factory<{
 
 export function NumberFormatter(_props: NumberFormatterProps) {
   const props = useProps('NumberFormatter', null, _props);
-  const [local, others] = splitProps(props, [
-    'value',
-    'defaultValue',
-  ]);
+  const [local, others] = splitProps(props, ['value', 'defaultValue']);
 
   if (local.value === undefined) {
     return null;
@@ -54,7 +51,9 @@ export function NumberFormatter(_props: NumberFormatterProps) {
 }
 
 // @ts-ignore
-const extendNumberFormatter = (c: ExtendComponent<NumberFormatterFactory>): EmpoleonThemeComponent => c;
+const extendNumberFormatter = (
+  c: ExtendComponent<NumberFormatterFactory>
+): EmpoleonThemeComponent => c;
 
 NumberFormatter.extend = extendNumberFormatter;
 NumberFormatter.displayName = '@empoleon/core/NumberFormatter';

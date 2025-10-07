@@ -47,9 +47,7 @@ describe('@empoleon/dates/Day', () => {
   it('renders given date value', () => {
     render(() => <Day {...defaultProps} />);
     const button = screen.getByRole('button');
-    expect(button.textContent).toBe(
-      Number(defaultProps.date.split('-')[2]).toString()
-    );
+    expect(button.textContent).toBe(Number(defaultProps.date.split('-')[2]).toString());
   });
 
   it('adds correct disabled attributes when disabled prop is set', () => {

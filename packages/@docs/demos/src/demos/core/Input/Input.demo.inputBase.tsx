@@ -31,16 +31,12 @@ function Demo() {
 
 function Demo() {
   const MaskedInput = createMaskedInput({
-    mask: "+{7} (000) 000-00-00",
+    mask: '+{7} (000) 000-00-00',
   });
 
   return (
     <>
-      <InputBase
-        label="Your phone"
-        component={MaskedInput}
-        placeholder="Your phone"
-      />
+      <InputBase label="Your phone" component={MaskedInput} placeholder="Your phone" />
 
       <InputBase label="Custom native select" component="select" mt="md">
         <option value="react">React</option>

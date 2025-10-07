@@ -12,9 +12,9 @@ export function createContextContainer<P>(
   );
 
   (Container as any).displayName = (Component as any).displayName;
-  (Container as any).extend      = (Component as any).extend;
-  (Container as any).classes     = (Component as any).classes;
-  (Container as any).withProps   = (Component as any).withProps;
+  (Container as any).extend = (Component as any).extend;
+  (Container as any).classes = (Component as any).classes;
+  (Container as any).withProps = (Component as any).withProps;
 
   // But cast the whole thing back to the proper signature
   return Container as (props: P) => JSX.Element;

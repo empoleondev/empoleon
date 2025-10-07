@@ -59,7 +59,7 @@ function Demo() {
 
 function Demo() {
   return (
-    <Menu width='200px' position="bottom-start">
+    <Menu width="200px" position="bottom-start">
       <Menu.Target>
         <Button>Toggle Menu</Button>
       </Menu.Target>

@@ -1,6 +1,6 @@
 import { JSX } from 'solid-js';
-import { LoadingOverlay } from './LoadingOverlay';
 import { EmpoleonProvider } from '../../core';
+import { LoadingOverlay } from './LoadingOverlay';
 
 export default {
   title: 'LoadingOverlay',
@@ -15,7 +15,7 @@ export default {
 
 export function Usage() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <LoadingOverlay visible />
     </div>
   );
@@ -23,7 +23,7 @@ export function Usage() {
 
 export function CustomLoader() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <LoadingOverlay
         visible
         loaderProps={{
@@ -36,7 +36,7 @@ export function CustomLoader() {
 
 export function Unstyled() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <LoadingOverlay visible unstyled />
     </div>
   );

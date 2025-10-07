@@ -1,13 +1,13 @@
-import { defineConfig } from 'vitest/config';
-import solid from 'vite-plugin-solid';
 import path from 'path';
+import solid from 'vite-plugin-solid';
+import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
   plugins: [solid()],
   resolve: {
     alias: {
-      '@empoleon/core': path.resolve(__dirname, 'packages/@empoleon/core/src')
-    }
+      '@empoleon/core': path.resolve(__dirname, 'packages/@empoleon/core/src'),
+    },
   },
 
   test: {
@@ -18,11 +18,11 @@ export default defineConfig({
     pool: 'forks',
     isolate: true,
     // include: [
-    //   '**/Input/*.test.{ts,tsx}'
+    //   '**/ColorInput/*.test.{ts,tsx}'
     // ],
     exclude: [
       // Exclude all node_modules test files
       'node_modules/**',
-    ]
+    ],
   },
 });

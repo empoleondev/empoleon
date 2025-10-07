@@ -1,7 +1,7 @@
-import { FloatingDelayGroup } from '@empoleon/solid-floating-ui';
-import { ExtendComponent, Factory, EmpoleonThemeComponent, useProps } from '../../../core';
-import { HoverCardGroupProvider } from './HoverCardGroup.context';
 import { JSX } from 'solid-js';
+import { FloatingDelayGroup } from '@empoleon/solid-floating-ui';
+import { EmpoleonThemeComponent, ExtendComponent, Factory, useProps } from '../../../core';
+import { HoverCardGroupProvider } from './HoverCardGroup.context';
 
 export interface HoverCardGroupProps {
   /** `HoverCard` components */

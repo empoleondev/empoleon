@@ -1,16 +1,12 @@
+import { For } from 'solid-js';
 import { SimpleGrid, SimpleGridProps } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
 import { defaultItems, GridItem } from './_demo-item';
-import { For } from 'solid-js';
 
 function Demo(props: SimpleGridProps) {
   return (
     <SimpleGrid {...props} id="grid-configurator">
-      <For each={defaultItems}>
-        {(_, index) => (
-          <GridItem>{index() + 1}</GridItem>
-        )}
-      </For>
+      <For each={defaultItems}>{(_, index) => <GridItem>{index() + 1}</GridItem>}</For>
     </SimpleGrid>
   );
 }

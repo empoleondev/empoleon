@@ -1,4 +1,4 @@
-import { createSignal, createEffect, onCleanup } from 'solid-js';
+import { createEffect, createSignal, onCleanup } from 'solid-js';
 
 function getFullscreenElement(): HTMLElement | null {
   const _document = window.document as any;

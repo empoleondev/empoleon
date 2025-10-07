@@ -1,8 +1,8 @@
 import 'dayjs/locale/ru';
 
-import { WeekdaysRow, WeekdaysRowProps } from './WeekdaysRow';
 import { For, JSX } from 'solid-js';
 import { EmpoleonProvider } from '@empoleon/core';
+import { WeekdaysRow, WeekdaysRowProps } from './WeekdaysRow';
 
 export default {
   title: 'WeekdaysRow',
@@ -56,9 +56,7 @@ export function Sizes() {
 
   return (
     <div style={{ padding: '40px' }}>
-      <For each={sizeOptions}>
-        {(size) => <Wrapper size={size} />}
-      </For>
+      <For each={sizeOptions}>{(size) => <Wrapper size={size} />}</For>
     </div>
   );
 }

@@ -1,7 +1,7 @@
+import { createSignal } from 'solid-js';
 import { Button, Code, Stack, TextInput } from '@empoleon/core';
 import { createFormContext } from '@empoleon/form';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal } from 'solid-js';
 
 const code = `
 import { Button, Code, Stack, TextInput } from '@empoleon/core';
@@ -64,11 +64,7 @@ function Demo() {
   return (
     <Provider form={form}>
       <Stack>
-        <TextInput
-          label="Name"
-          placeholder="Name"
-          {...form.getInputProps('person.name')}
-        />
+        <TextInput label="Name" placeholder="Name" {...form.getInputProps('person.name')} />
         <Button onClick={() => form.setFieldValue('person', { name: 'Jane Doe' })}>
           Set 'person' object to `{'{ name: "Jane Doe" }'}`
         </Button>

@@ -75,7 +75,7 @@ const defaultProps: Partial<ModalProps> = {
   withCloseButton: true,
 };
 
-export const Modal = factory<ModalFactory>(_props => {
+export const Modal = factory<ModalFactory>((_props) => {
   const props = useProps('Modal', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'title',
@@ -88,10 +88,12 @@ export const Modal = factory<ModalFactory>(_props => {
     'opened',
     'stackId',
     'zIndex',
-    'ref'
+    'ref',
   ]);
 
-  const openedFn = createMemo(() => (typeof local.opened === 'function' ? local.opened() : local.opened));
+  const openedFn = createMemo(() =>
+    typeof local.opened === 'function' ? local.opened() : local.opened
+  );
 
   const ctx = useModalStackContext();
   const isStacked = createMemo(() => !!(ctx && local.stackId));
@@ -111,8 +113,11 @@ export const Modal = factory<ModalFactory>(_props => {
   const hasHeader = () => !!local.title || local.withCloseButton;
 
   const overlayVisible = createMemo(() =>
-    local.withOverlay === false ? false :
-    (local.stackId && ctx ? ctx.currentId === local.stackId : openedFn())
+    local.withOverlay === false
+      ? false
+      : local.stackId && ctx
+        ? ctx.currentId === local.stackId
+        : openedFn()
   );
 
   createEffect(() => {

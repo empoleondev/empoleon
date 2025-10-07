@@ -26,7 +26,7 @@ export type AppShellNavbarFactory = Factory<{
   stylesNames: AppShellNavbarStylesNames;
 }>;
 
-export const AppShellNavbar = factory<AppShellNavbarFactory>(_props => {
+export const AppShellNavbar = factory<AppShellNavbarFactory>((_props) => {
   const props = useProps('AppShellNavbar', null, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -38,7 +38,7 @@ export const AppShellNavbar = factory<AppShellNavbarFactory>(_props => {
     'withBorder',
     'zIndex',
     'mod',
-    'ref'
+    'ref',
   ]);
 
   const ctx = useAppShellContext();
@@ -53,7 +53,12 @@ export const AppShellNavbar = factory<AppShellNavbarFactory>(_props => {
       component="nav"
       ref={local.ref}
       mod={[{ 'with-border': local.withBorder ?? ctx.withBorder }, local.mod]}
-      {...ctx.getStyles('navbar', { className: local.className, classNames: local.classNames, styles: local.styles, style: local.style })}
+      {...ctx.getStyles('navbar', {
+        className: local.className,
+        classNames: local.classNames,
+        styles: local.styles,
+        style: local.style,
+      })}
       {...others}
       __vars={{
         '--app-shell-navbar-z-index': `calc(${local.zIndex ?? ctx.zIndex} + 1)`,

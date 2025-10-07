@@ -1,4 +1,4 @@
-import { createSignal, createEffect, on, Accessor } from 'solid-js';
+import { Accessor, createEffect, createSignal, on } from 'solid-js';
 
 /**
  * Tracks the previous value of a reactive accessor.
@@ -8,9 +8,11 @@ import { createSignal, createEffect, on, Accessor } from 'solid-js';
 export function usePrevious<T>(value: Accessor<T>): Accessor<T | undefined> {
   const [prev, setPrev] = createSignal<T | undefined>();
 
-  createEffect(on(value, (_, prevValue) => {
-    setPrev(() => prevValue);
-  }));
+  createEffect(
+    on(value, (_, prevValue) => {
+      setPrev(() => prevValue);
+    })
+  );
 
   return prev;
 }

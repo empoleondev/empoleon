@@ -1,4 +1,4 @@
-export {clamp, lowerFirst, randomId, range, shallowEqual, upperFirst} from './utils/index.js';
+export { clamp, lowerFirst, randomId, range, shallowEqual, upperFirst } from './utils/index.js';
 
 export { useCallbackRef } from './use-callback-ref/use-callback-ref';
 export { useDebouncedCallback } from './use-debounced-callback/use-debounced-callback';

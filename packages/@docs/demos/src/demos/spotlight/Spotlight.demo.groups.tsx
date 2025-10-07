@@ -74,7 +74,7 @@ function Demo() {
       highlightQuery
       shortcut={null}
       searchProps={{
-        leftSection: <IconSearch size={20} stroke='1.5' />,
+        leftSection: <IconSearch size={20} stroke="1.5" />,
         placeholder: 'Search...',
       }}
     />

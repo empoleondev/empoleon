@@ -1,5 +1,5 @@
-import { splitProps, JSX } from 'solid-js';
-import { Box, GetStylesApi, getThemeColor, EmpoleonColor, useEmpoleonTheme } from '../../../core';
+import { JSX, splitProps } from 'solid-js';
+import { Box, EmpoleonColor, GetStylesApi, getThemeColor, useEmpoleonTheme } from '../../../core';
 import { Tooltip } from '../../Tooltip';
 import type { RingProgressFactory } from '../RingProgress';
 import { getCurveProps } from './get-curve-props';
@@ -43,7 +43,14 @@ export function Curve(props: CurveProps) {
           __vars={{ '--curve-color': local.color ? getThemeColor(local.color, theme) : undefined }}
           fill="none"
           stroke-linecap={local.lineRoundCaps ? 'round' : 'butt'}
-          {...getCurveProps({ sum: local.sum, size: local.size, thickness: local.thickness, value: local.value, offset: local.offset, root: local.root })}
+          {...getCurveProps({
+            sum: local.sum,
+            size: local.size,
+            thickness: local.thickness,
+            value: local.value,
+            offset: local.offset,
+            root: local.root,
+          })}
         />
       )}
     </Tooltip.Floating>

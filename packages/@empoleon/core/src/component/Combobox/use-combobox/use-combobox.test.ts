@@ -58,7 +58,7 @@
 import { useCombobox } from './use-combobox';
 
 describe('@empoleon/core/Combobox/use-combobox', () => {
-   it('supports uncontrolled opened state', () => {
+  it('supports uncontrolled opened state', () => {
     const hook = useCombobox({ defaultOpened: true });
     expect(hook.dropdownOpened()).toBe(true);
 

@@ -1,8 +1,8 @@
+import path from 'path';
 import type { StorybookConfig } from '@storybook/html-vite';
+import fg from 'fast-glob';
 import solidPlugin from 'vite-plugin-solid';
 import tsconfigPaths from 'vite-tsconfig-paths';
-import path from 'path';
-import fg from 'fast-glob';
 
 const getPath = (storyPath: string) => path.resolve(process.cwd(), storyPath).replace(/\\/g, '/');
 const getGlobPaths = (paths: string[]) =>
@@ -21,7 +21,7 @@ function getStoryPaths() {
     getPath('packages/@empoleon/nprogress/src/*.story.@(ts|tsx)'),
     getPath('packages/@empoleon/spotlight/src/*.story.@(ts|tsx)'),
     getPath('packages/@empoleon/tiptap/src/*.story.@(ts|tsx)'),
-    getPath('packages/@docs/*/src/**/*.story.@(ts|tsx)')
+    getPath('packages/@docs/*/src/**/*.story.@(ts|tsx)'),
   ]);
 }
 
@@ -32,8 +32,12 @@ const storiesPath = getStoryPaths().sort((a, b) => {
   const componentA = nameA.split('.story')[0];
   const componentB = nameB.split('.story')[0];
 
-  const actualComponentA = componentA.startsWith('demo:') ? componentA.substring(5).trim() : componentA;
-  const actualComponentB = componentB.startsWith('demo:') ? componentB.substring(5).trim() : componentB;
+  const actualComponentA = componentA.startsWith('demo:')
+    ? componentA.substring(5).trim()
+    : componentA;
+  const actualComponentB = componentB.startsWith('demo:')
+    ? componentB.substring(5).trim()
+    : componentB;
 
   const componentComparison = actualComponentA.localeCompare(actualComponentB);
   if (componentComparison !== 0) {
@@ -52,18 +56,13 @@ const storiesPath = getStoryPaths().sort((a, b) => {
 
 const config: StorybookConfig = {
   stories: storiesPath,
-  addons: [
-    '@storybook/addon-links',
-  ],
+  addons: ['@storybook/addon-links'],
   framework: {
     name: '@storybook/html-vite',
     options: {},
   },
   async viteFinal(config) {
-    config.plugins?.push(
-      solidPlugin({ hot: false }),
-      tsconfigPaths()
-    );
+    config.plugins?.push(solidPlugin({ hot: false }), tsconfigPaths());
     return config;
   },
 };

@@ -1,4 +1,4 @@
-import { Button, createTheme, Group, EmpoleonThemeProvider } from '@empoleon/core';
+import { Button, createTheme, EmpoleonThemeProvider, Group } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `

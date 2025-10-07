@@ -23,7 +23,10 @@ describe('@empoleon/core/AppShell', () => {
 
   it('sets data-layout attribute based on layout prop', () => {
     const { container } = render(() => <AppShell layout="alt" />);
-    expect(container.querySelector('.empoleon-AppShell-root')).toHaveAttribute('data-layout', 'alt');
+    expect(container.querySelector('.empoleon-AppShell-root')).toHaveAttribute(
+      'data-layout',
+      'alt'
+    );
   });
 
   it('sets data-disabled attribute based on disabled prop', () => {

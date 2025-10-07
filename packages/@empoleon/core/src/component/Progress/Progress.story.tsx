@@ -1,6 +1,6 @@
 import { JSX } from 'solid-js';
-import { Progress } from './Progress';
 import { EmpoleonProvider } from '../../core';
+import { Progress } from './Progress';
 
 export default {
   title: 'Progress',
@@ -15,7 +15,7 @@ export default {
 
 export function Usage() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Progress value={56} />
     </div>
   );
@@ -23,7 +23,7 @@ export function Usage() {
 
 export function Striped() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Progress value={56} size="xl" animated />
     </div>
   );
@@ -31,7 +31,7 @@ export function Striped() {
 
 export function Unstyled() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Progress value={56} size="xl" unstyled />
     </div>
   );
@@ -39,7 +39,7 @@ export function Unstyled() {
 
 export function Compound() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Progress.Root size="xl" autoContrast>
         <Progress.Section value={56} color="lime.4">
           <Progress.Label>Documents</Progress.Label>

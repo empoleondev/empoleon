@@ -1,4 +1,5 @@
 import { createMemo, JSX, splitProps } from 'solid-js';
+import { Dynamic } from 'solid-js/web';
 import {
   Box,
   BoxProps,
@@ -10,7 +11,6 @@ import {
 } from '../../../core';
 import { useListContext } from '../List.context';
 import classes from '../List.module.css';
-import { Dynamic } from 'solid-js/web';
 
 export type ListItemStylesNames = 'item' | 'itemWrapper' | 'itemIcon' | 'itemLabel';
 
@@ -32,7 +32,7 @@ export type ListItemFactory = Factory<{
   compound: true;
 }>;
 
-export const ListItem = factory<ListItemFactory>(_props => {
+export const ListItem = factory<ListItemFactory>((_props) => {
   const props = useProps('ListItem', null, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -43,7 +43,7 @@ export const ListItem = factory<ListItemFactory>(_props => {
     'icon',
     'children',
     'mod',
-    'ref'
+    'ref',
   ]);
 
   const ctx = useListContext();
@@ -58,17 +58,25 @@ export const ListItem = factory<ListItemFactory>(_props => {
 
   return (
     <Box
-      {...ctx.getStyles('item', { ...stylesApiProps, className: local.className, style: local.style })}
+      {...ctx.getStyles('item', {
+        ...stylesApiProps,
+        className: local.className,
+        style: local.style,
+      })}
       component="li"
       mod={[{ 'with-icon': !!iconEl(), centered: ctx.center }, local.mod]}
       ref={local.ref}
       {...others}
     >
-      <Box component='div' {...ctx.getStyles('itemWrapper', stylesApiProps)}>
+      <Box component="div" {...ctx.getStyles('itemWrapper', stylesApiProps)}>
         {iconEl() && (
-          <Box component='span' {...ctx.getStyles('itemIcon', stylesApiProps)}>{iconEl()}</Box>
+          <Box component="span" {...ctx.getStyles('itemIcon', stylesApiProps)}>
+            {iconEl()}
+          </Box>
         )}
-        <Box component='span' {...ctx.getStyles('itemLabel', stylesApiProps)}>{local.children}</Box>
+        <Box component="span" {...ctx.getStyles('itemLabel', stylesApiProps)}>
+          {local.children}
+        </Box>
       </Box>
     </Box>
   );

@@ -1,7 +1,7 @@
 import { IconPhoto } from '@tabler/icons-solidjs';
+import { For, JSX } from 'solid-js';
 import { EmpoleonProvider, EmpoleonThemeProvider } from '../../core';
 import { Alert } from './Alert';
-import { For, JSX } from 'solid-js';
 
 export default {
   title: 'Alert',
@@ -16,9 +16,16 @@ export default {
 
 export function Variants() {
   return (
-    <div style={{ 'max-width': '500px', margin: 'auto', padding: '40px', background: 'rgba(0, 0, 0, 0.1)' }}>
+    <div
+      style={{
+        'max-width': '500px',
+        margin: 'auto',
+        padding: '40px',
+        background: 'rgba(0, 0, 0, 0.1)',
+      }}
+    >
       <Alert
-        icon={<IconPhoto stroke='1.5' />}
+        icon={<IconPhoto stroke="1.5" />}
         title="Bummer!"
         color="red"
         variant="light"
@@ -28,7 +35,7 @@ export function Variants() {
         lost forever!
       </Alert>
       <Alert
-        icon={<IconPhoto stroke='1.5' />}
+        icon={<IconPhoto stroke="1.5" />}
         withCloseButton
         title="Bummer!"
         color="red"
@@ -39,7 +46,7 @@ export function Variants() {
         lost forever!
       </Alert>
       <Alert
-        icon={<IconPhoto stroke='1.5' />}
+        icon={<IconPhoto stroke="1.5" />}
         withCloseButton
         title="Bummer!"
         color="red"
@@ -50,7 +57,7 @@ export function Variants() {
         lost forever!
       </Alert>
       <Alert
-        icon={<IconPhoto stroke='1.5' />}
+        icon={<IconPhoto stroke="1.5" />}
         withCloseButton
         title="Bummer!"
         color="red"
@@ -61,7 +68,7 @@ export function Variants() {
         lost forever!
       </Alert>
       <Alert
-        icon={<IconPhoto stroke='1.5' />}
+        icon={<IconPhoto stroke="1.5" />}
         withCloseButton
         title="Bummer!"
         color="red"
@@ -72,7 +79,7 @@ export function Variants() {
         lost forever!
       </Alert>
       <Alert
-        icon={<IconPhoto stroke='1.5' />}
+        icon={<IconPhoto stroke="1.5" />}
         withCloseButton
         title="Bummer!"
         color="red"
@@ -92,11 +99,11 @@ export function AutoContrast() {
   return (
     <div
       style={{
-        'display': 'flex',
+        display: 'flex',
         'flex-direction': 'column',
         'align-items': 'flex-start',
-        'gap': '10px',
-        'padding': '40px',
+        gap: '10px',
+        padding: '40px',
       }}
     >
       <For each={buttons}>
@@ -109,8 +116,8 @@ export function AutoContrast() {
             mt="xl"
             autoContrast
           >
-            Something terrible happened! You made a mistake and there is no going back, your data was
-            lost forever!
+            Something terrible happened! You made a mistake and there is no going back, your data
+            was lost forever!
           </Alert>
         )}
       </For>
@@ -120,7 +127,7 @@ export function AutoContrast() {
 
 export function Unstyled() {
   return (
-    <div style={{ 'max-width': '500px', 'margin': 'auto', 'padding': '40px' }}>
+    <div style={{ 'max-width': '500px', margin: 'auto', padding: '40px' }}>
       <Alert title="Bummer!" color="red" variant="light" withCloseButton unstyled>
         Something terrible happened! You made a mistake and there is no going back, your data was
         lost forever!
@@ -131,7 +138,7 @@ export function Unstyled() {
 
 export function WithoutDescription() {
   return (
-    <div style={{ 'max-width': '500px', 'margin': 'auto', 'padding': '40px' }}>
+    <div style={{ 'max-width': '500px', margin: 'auto', padding: '40px' }}>
       <Alert icon="$" title="Bummer!" color="red" variant="light" withCloseButton />
     </div>
   );
@@ -150,7 +157,7 @@ export function CSSVariables() {
         },
       }}
     >
-      <div style={{ 'max-width': '500px', 'margin': 'auto', 'padding': '40px' }}>
+      <div style={{ 'max-width': '500px', margin: 'auto', padding: '40px' }}>
         <Alert title="Bummer!" withCloseButton>
           Something terrible happened! You made a mistake and there is no going back, your data was
           lost forever!

@@ -51,25 +51,25 @@ export const kitchenSink: EmpoleonDemo = {
       prop: 'description',
       type: 'string',
       initialValue: 'This is anonymous',
-      libraryValue: ''
+      libraryValue: '',
     },
     {
       prop: 'error',
       type: 'string',
       initialValue: '',
-      libraryValue: ''
+      libraryValue: '',
     },
     {
       prop: 'size',
       type: 'size',
       initialValue: 'sm',
-      libraryValue: 'sm'
+      libraryValue: 'sm',
     },
     {
       prop: 'withAsterisk',
       type: 'boolean',
       initialValue: true,
-      libraryValue: false
+      libraryValue: false,
     },
   ],
 };

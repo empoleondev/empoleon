@@ -18,7 +18,7 @@ export type ComboboxDropdownFactory = Factory<{
   compound: true;
 }>;
 
-export const ComboboxDropdown = factory<ComboboxDropdownFactory>(_props => {
+export const ComboboxDropdown = factory<ComboboxDropdownFactory>((_props) => {
   const props = useProps('ComboboxDropdown', null, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -26,8 +26,8 @@ export const ComboboxDropdown = factory<ComboboxDropdownFactory>(_props => {
     'className',
     'style',
     'hidden',
-    'ref'
-  ])
+    'ref',
+  ]);
 
   const ctx = useComboboxContext();
 
@@ -37,7 +37,12 @@ export const ComboboxDropdown = factory<ComboboxDropdownFactory>(_props => {
       ref={local.ref}
       role="presentation"
       data-hidden={local.hidden || undefined}
-      {...ctx.getStyles('dropdown', { className: local.className, style: local.style, classNames: local.classNames, styles: local.styles })}
+      {...ctx.getStyles('dropdown', {
+        className: local.className,
+        style: local.style,
+        classNames: local.classNames,
+        styles: local.styles,
+      })}
     />
   );
 });

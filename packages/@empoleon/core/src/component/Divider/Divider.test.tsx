@@ -49,6 +49,8 @@ describe('@empoleon/core/Divider', () => {
     expect(container.querySelector('.empoleon-Divider-root')).toHaveAttribute('data-with-label');
 
     rerender(() => <Divider />);
-    expect(container.querySelector('.empoleon-Divider-root')).not.toHaveAttribute('data-with-label');
+    expect(container.querySelector('.empoleon-Divider-root')).not.toHaveAttribute(
+      'data-with-label'
+    );
   });
 });

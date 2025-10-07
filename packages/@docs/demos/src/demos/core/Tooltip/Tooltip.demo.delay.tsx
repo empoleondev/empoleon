@@ -22,10 +22,10 @@ export function Demo() {
   return (
     <Group justify="center">
       <Tooltip label="Opened after 500ms" openDelay={500}>
-        {(props) => <Button {...props} >Delay open - 500ms</Button>}
+        {(props) => <Button {...props}>Delay open - 500ms</Button>}
       </Tooltip>
       <Tooltip label="Closes after 500ms" closeDelay={500}>
-        {(props) => <Button {...props} >Delay close - 500ms</Button>}
+        {(props) => <Button {...props}>Delay close - 500ms</Button>}
       </Tooltip>
     </Group>
   );

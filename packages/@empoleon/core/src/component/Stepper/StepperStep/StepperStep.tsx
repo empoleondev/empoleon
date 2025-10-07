@@ -1,15 +1,24 @@
-import { createEffect, createMemo, createSignal, JSX, Match, onMount, splitProps, Switch } from 'solid-js';
 import {
+  createEffect,
+  createMemo,
+  createSignal,
+  JSX,
+  Match,
+  onMount,
+  splitProps,
+  Switch,
+} from 'solid-js';
+import {
+  Box,
   BoxProps,
   CompoundStylesApiProps,
   ElementProps,
+  EmpoleonColor,
   factory,
   Factory,
   getThemeColor,
-  EmpoleonColor,
   useEmpoleonTheme,
   useProps,
-  Box,
 } from '../../../core';
 import { CheckIcon } from '../../Checkbox';
 import { Loader } from '../../Loader';
@@ -107,7 +116,7 @@ const defaultProps = {
   iconPosition: 'left',
 } satisfies Partial<StepperStepProps>;
 
-export const StepperStep = factory<StepperStepFactory>(_props => {
+export const StepperStep = factory<StepperStepFactory>((_props) => {
   const props = useProps('StepperStep', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -131,7 +140,7 @@ export const StepperStep = factory<StepperStepFactory>(_props => {
     'iconPosition',
     'orientation',
     'mod',
-    'ref'
+    'ref',
   ]);
 
   const ctx = useStepperContext();
@@ -201,13 +210,13 @@ export const StepperStep = factory<StepperStepFactory>(_props => {
         className: local.className,
         style: local.style,
         variant: ctx.orientation,
-        ...stylesApi
+        ...stylesApi,
       })}
       mod={[
         {
           'icon-position': local.iconPosition || ctx.iconPosition,
           'allow-click': local.allowStepClick,
-          'type': 'step'
+          type: 'step',
         },
         local.mod,
       ]}
@@ -223,11 +232,16 @@ export const StepperStep = factory<StepperStepFactory>(_props => {
       tabIndex={local.allowStepClick ? 0 : -1}
     >
       {local.withIcon && (
-        <Box component='span' {...ctx.getStyles('stepWrapper', stylesApi)}>
-          <Box component='span' {...ctx.getStyles('stepIcon', stylesApi)} {...dataAttributes()}>
-            <Transition mounted={mounted() && state() === 'stepCompleted'} transition="pop" duration={200}>
+        <Box component="span" {...ctx.getStyles('stepWrapper', stylesApi)}>
+          <Box component="span" {...ctx.getStyles('stepIcon', stylesApi)} {...dataAttributes()}>
+            <Transition
+              mounted={mounted() && state() === 'stepCompleted'}
+              transition="pop"
+              duration={200}
+            >
               {(transitionStyles) => (
-                <Box component='span'
+                <Box
+                  component="span"
                   {...ctx.getStyles('stepCompletedIcon', { style: transitionStyles, ...stylesApi })}
                 >
                   {isLoading() ? (
@@ -236,12 +250,12 @@ export const StepperStep = factory<StepperStepFactory>(_props => {
                       size="calc(var(--stepper-icon-size) / 2)"
                       {...ctx.getStyles('stepLoader', stylesApi)}
                     />
+                  ) : local.completedIcon ? (
+                    getStepFragment(local.completedIcon, idx())
+                  ) : ctx.completedIcon ? (
+                    getStepFragment(ctx.completedIcon as any, idx())
                   ) : (
-                    local.completedIcon
-                      ? getStepFragment(local.completedIcon, idx())
-                      : ctx.completedIcon
-                      ? getStepFragment(ctx.completedIcon as any, idx())
-                      : <CheckIcon size="60%" />
+                    <CheckIcon size="60%" />
                   )}
                 </Box>
               )}
@@ -260,7 +274,8 @@ export const StepperStep = factory<StepperStepFactory>(_props => {
             ) : null}
           </Box>
           {ctx.orientation === 'vertical' && (
-            <Box component='span'
+            <Box
+              component="span"
               {...ctx.getStyles('verticalSeparator', stylesApi)}
               data-active={state() === 'stepCompleted' || undefined}
             />
@@ -269,16 +284,19 @@ export const StepperStep = factory<StepperStepFactory>(_props => {
       )}
 
       {(local.label || local.description) && (
-        <Box component='span'
+        <Box
+          component="span"
           {...ctx.getStyles('stepBody', stylesApi)}
           data-orientation={ctx.orientation}
           data-icon-position={local.iconPosition || ctx.iconPosition}
         >
           {local.label && (
-            <Box component='span' {...ctx.getStyles('stepLabel', stylesApi)}>{getStepFragment(local.label, idx())}</Box>
+            <Box component="span" {...ctx.getStyles('stepLabel', stylesApi)}>
+              {getStepFragment(local.label, idx())}
+            </Box>
           )}
           {local.description && (
-            <Box component='span' {...ctx.getStyles('stepDescription', stylesApi)}>
+            <Box component="span" {...ctx.getStyles('stepDescription', stylesApi)}>
               {getStepFragment(local.description, idx())}
             </Box>
           )}

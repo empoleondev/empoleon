@@ -1,14 +1,12 @@
+import { For } from 'solid-js';
 import { Table, TableProps } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
 import { elements } from './_data';
-import { For } from 'solid-js';
 
 function Wrapper(props: TableProps) {
   return (
     <Table {...props}>
-      {props.captionSide && (
-        <Table.Caption>Some elements from periodic table</Table.Caption>
-      )}
+      {props.captionSide && <Table.Caption>Some elements from periodic table</Table.Caption>}
       <Table.Thead>
         <Table.Tr>
           <Table.Th>Element position</Table.Th>
@@ -81,43 +79,43 @@ export const kitchenSink: EmpoleonDemo = {
       prop: 'striped',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'highlightOnHover',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'withTableBorder',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'withColumnBorders',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'withRowBorders',
       type: 'boolean',
       initialValue: true,
-      libraryValue: true
+      libraryValue: true,
     },
     {
       prop: 'horizontalSpacing',
       type: 'size',
       initialValue: 'xs',
-      libraryValue: 'xs'
+      libraryValue: 'xs',
     },
     {
       prop: 'verticalSpacing',
       type: 'size',
       initialValue: 'xs',
-      libraryValue: 'xs'
+      libraryValue: 'xs',
     },
     {
       prop: 'captionSide',
@@ -133,7 +131,7 @@ export const kitchenSink: EmpoleonDemo = {
       prop: 'stickyHeader',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'stickyHeaderOffset',
@@ -142,7 +140,7 @@ export const kitchenSink: EmpoleonDemo = {
       libraryValue: 0,
       min: 0,
       max: 200,
-      step: 10
+      step: 10,
     },
     {
       prop: 'layout',
@@ -168,7 +166,7 @@ export const kitchenSink: EmpoleonDemo = {
       prop: 'tabularNums',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
   ],
 };

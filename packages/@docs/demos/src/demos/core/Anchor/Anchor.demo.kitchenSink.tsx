@@ -1,6 +1,6 @@
+import { createEffect, splitProps } from 'solid-js';
 import { Anchor, AnchorProps, Box } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createEffect, splitProps } from 'solid-js';
 
 const code = `
 import { Anchor } from '@empoleon/core';
@@ -17,11 +17,7 @@ function Demo() {
 function Wrapper(props: AnchorProps & { children?: string }) {
   return (
     <Box maw={400} mx="auto">
-      <Anchor
-        href="https://mantine.dev/"
-        target="_blank"
-        {...props}
-      />
+      <Anchor href="https://mantine.dev/" target="_blank" {...props} />
     </Box>
   );
 }
@@ -54,7 +50,7 @@ export const kitchenSink: EmpoleonDemo = {
       prop: 'size',
       type: 'size',
       initialValue: 'md',
-      libraryValue: 'md'
+      libraryValue: 'md',
     },
     {
       prop: 'truncate',
@@ -80,13 +76,13 @@ export const kitchenSink: EmpoleonDemo = {
       prop: 'inline',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'inherit',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
   ],
 };

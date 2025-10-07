@@ -1,17 +1,17 @@
-import { splitProps, JSX } from 'solid-js';
+import { JSX, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
   createVarsResolver,
   ElementProps,
+  EmpoleonColor,
+  EmpoleonRadius,
   factory,
   Factory,
   getAutoContrastValue,
   getContrastColor,
   getRadius,
   getThemeColor,
-  EmpoleonColor,
-  EmpoleonRadius,
   rem,
   StylesApiProps,
   useProps,
@@ -93,22 +93,20 @@ const defaultProps = {
   offset: 0,
 } satisfies Partial<IndicatorProps>;
 
-const varsResolver = createVarsResolver<IndicatorFactory>(
-  (theme, props) => ({
-    root: {
-      '--indicator-color': props.color ? getThemeColor(props.color, theme) : undefined,
-      '--indicator-text-color': getAutoContrastValue(props.autoContrast, theme)
-        ? getContrastColor({ color: props.color, theme, autoContrast: props.autoContrast })
-        : undefined,
-      '--indicator-size': rem(props.size),
-      '--indicator-radius': props.radius === undefined ? undefined : getRadius(props.radius),
-      '--indicator-z-index': props.zIndex?.toString(),
-      ...getPositionVariables(props.position, props.offset),
-    },
-  })
-);
+const varsResolver = createVarsResolver<IndicatorFactory>((theme, props) => ({
+  root: {
+    '--indicator-color': props.color ? getThemeColor(props.color, theme) : undefined,
+    '--indicator-text-color': getAutoContrastValue(props.autoContrast, theme)
+      ? getContrastColor({ color: props.color, theme, autoContrast: props.autoContrast })
+      : undefined,
+    '--indicator-size': rem(props.size),
+    '--indicator-radius': props.radius === undefined ? undefined : getRadius(props.radius),
+    '--indicator-z-index': props.zIndex?.toString(),
+    ...getPositionVariables(props.position, props.offset),
+  },
+}));
 
-export const Indicator = factory<IndicatorFactory>(_props => {
+export const Indicator = factory<IndicatorFactory>((_props) => {
   const props = useProps('Indicator', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -131,7 +129,7 @@ export const Indicator = factory<IndicatorFactory>(_props => {
     'autoContrast',
     'attributes',
     'mod',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<IndicatorFactory>({
@@ -149,10 +147,19 @@ export const Indicator = factory<IndicatorFactory>(_props => {
   });
 
   return (
-    <Box ref={local.ref} {...getStyles('root')} mod={[{ inline: local.inline }, local.mod]} {...others}>
+    <Box
+      ref={local.ref}
+      {...getStyles('root')}
+      mod={[{ inline: local.inline }, local.mod]}
+      {...others}
+    >
       {!local.disabled && (
         <Box
-          mod={{ 'with-label': !!local.label, 'with-border': local.withBorder, processing: local.processing  }}
+          mod={{
+            'with-label': !!local.label,
+            'with-border': local.withBorder,
+            processing: local.processing,
+          }}
           {...getStyles('indicator')}
         >
           {local.label}

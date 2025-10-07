@@ -4,11 +4,11 @@ import {
   BoxProps,
   createVarsResolver,
   ElementProps,
+  EmpoleonSize,
   factory,
   Factory,
   getDefaultZIndex,
   getSpacing,
-  EmpoleonSize,
   StylesApiProps,
   useProps,
   useStyles,
@@ -71,7 +71,7 @@ const varsResolver = createVarsResolver<AffixFactory>((_, props) => ({
   },
 }));
 
-export const Affix = factory<AffixFactory>(_props => {
+export const Affix = factory<AffixFactory>((_props) => {
   const props = useProps('Affix', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -85,7 +85,7 @@ export const Affix = factory<AffixFactory>(_props => {
     'withinPortal',
     'position',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<AffixFactory>({

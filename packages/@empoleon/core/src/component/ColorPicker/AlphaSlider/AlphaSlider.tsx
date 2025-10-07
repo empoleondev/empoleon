@@ -13,13 +13,7 @@ const defaultProps: Partial<AlphaSliderProps> = {};
 export const AlphaSlider = (_props: AlphaSliderProps) => {
   const props = useProps('AlphaSlider', defaultProps, _props);
 
-  const [local, others] = splitProps(props, [
-    'value',
-    'onChange',
-    'onChangeEnd',
-    'color',
-    'ref'
-  ]);
+  const [local, others] = splitProps(props, ['value', 'onChange', 'onChangeEnd', 'color', 'ref']);
 
   return (
     <ColorSlider

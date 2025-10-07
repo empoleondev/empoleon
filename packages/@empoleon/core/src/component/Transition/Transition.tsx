@@ -1,4 +1,4 @@
-import { JSX, splitProps, Show, createEffect } from 'solid-js';
+import { createEffect, JSX, Show, splitProps } from 'solid-js';
 import { Transition as SolidTransition } from 'solid-transition-group';
 import { useEmpoleonEnv } from '../../core';
 import { getTransitionStyles } from './get-transition-styles/get-transition-styles';
@@ -62,7 +62,7 @@ export function Transition(props: TransitionProps) {
     'onEnter',
     'onEntered',
     'enterDelay',
-    'exitDelay'
+    'exitDelay',
   ]);
 
   const duration = local.duration ?? 250;
@@ -70,7 +70,12 @@ export function Transition(props: TransitionProps) {
   const timingFunction = local.timingFunction ?? 'ease';
 
   const mkStyles = (state: Parameters<typeof getTransitionStyles>[0]['state'], dur: number) =>
-    getTransitionStyles({ transition: local.transition ?? 'fade', state, duration: dur, timingFunction });
+    getTransitionStyles({
+      transition: local.transition ?? 'fade',
+      state,
+      duration: dur,
+      timingFunction,
+    });
 
   function animate(
     el: HTMLElement,
@@ -100,7 +105,9 @@ export function Transition(props: TransitionProps) {
     <SolidTransition
       appear
       mode="inout"
-      onBeforeEnter={el => el instanceof HTMLElement && Object.assign(el.style, mkStyles('pre-entering', duration))}
+      onBeforeEnter={(el) =>
+        el instanceof HTMLElement && Object.assign(el.style, mkStyles('pre-entering', duration))
+      }
       onEnter={(el, done) => {
         if (!(el instanceof HTMLElement)) return done();
         local.onEnter?.();
@@ -109,8 +116,12 @@ export function Transition(props: TransitionProps) {
           done();
         });
       }}
-      onAfterEnter={el => el instanceof HTMLElement && Object.assign(el.style, mkStyles('entered', duration))}
-      onBeforeExit={el => el instanceof HTMLElement && Object.assign(el.style, mkStyles('pre-exiting', exitDuration))}
+      onAfterEnter={(el) =>
+        el instanceof HTMLElement && Object.assign(el.style, mkStyles('entered', duration))
+      }
+      onBeforeExit={(el) =>
+        el instanceof HTMLElement && Object.assign(el.style, mkStyles('pre-exiting', exitDuration))
+      }
       onExit={(el, done) => {
         if (!(el instanceof HTMLElement)) return done();
         local.onExit?.();
@@ -119,7 +130,9 @@ export function Transition(props: TransitionProps) {
           done();
         });
       }}
-      onAfterExit={el => el instanceof HTMLElement && Object.assign(el.style, mkStyles('exited', exitDuration))}
+      onAfterExit={(el) =>
+        el instanceof HTMLElement && Object.assign(el.style, mkStyles('exited', exitDuration))
+      }
     >
       <Show when={local.mounted || local.keepMounted} fallback={null}>
         {local.children(local.mounted ? mkStyles('entered', duration) : { display: 'none' })}

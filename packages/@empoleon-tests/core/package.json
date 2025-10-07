@@ -33,6 +33,6 @@
   "devDependencies": {
     "@empoleon/core": "workspace:*",
     "@empoleon/hooks": "workspace:*",
-    "solid-js": "^1.9.7"
+    "solid-js": "1.9.7"
   }
 }

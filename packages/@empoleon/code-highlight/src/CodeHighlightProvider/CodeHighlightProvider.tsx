@@ -1,4 +1,4 @@
-import { createEffect, createMemo, createSignal, JSX, createContext, useContext } from 'solid-js';
+import { createContext, createEffect, createMemo, createSignal, JSX, useContext } from 'solid-js';
 import { plainTextAdapter } from './adapters/plain-text-adapter';
 
 // Types matching the old interface

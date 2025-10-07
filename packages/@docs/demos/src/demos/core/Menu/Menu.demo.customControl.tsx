@@ -1,8 +1,8 @@
 import { IconChevronRight } from '@tabler/icons-solidjs';
+import { JSX } from 'solid-js';
 import { Avatar, Group, Menu, Text, UnstyledButton } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
 import { DemoMenuItems } from './_menu-items';
-import { JSX } from 'solid-js';
 
 const code = `
 import { JSX } from 'solid-js';
@@ -70,11 +70,13 @@ interface UserButtonProps extends JSX.ButtonHTMLAttributes<HTMLButtonElement> {
 const UserButton = ({ image, name, email, icon, ...others }: UserButtonProps, ref: any) => (
   <UnstyledButton
     ref={ref}
-    style={{
-      padding: 'var(--empoleon-spacing-md)',
-      color: 'var(--empoleon-color-text)',
-      'border-radius': 'var(--empoleon-radius-sm)',
-    } as any}
+    style={
+      {
+        padding: 'var(--empoleon-spacing-md)',
+        color: 'var(--empoleon-color-text)',
+        'border-radius': 'var(--empoleon-radius-sm)',
+      } as any
+    }
     {...others}
   >
     <Group>

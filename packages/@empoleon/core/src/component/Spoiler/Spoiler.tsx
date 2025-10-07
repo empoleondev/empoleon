@@ -1,5 +1,5 @@
-import { splitProps, JSX, createEffect, Show } from 'solid-js';
 import { Ref } from '@solid-primitives/refs';
+import { createEffect, JSX, Show, splitProps } from 'solid-js';
 import { useElementSize, useId, useUncontrolled } from '@empoleon/hooks';
 import {
   Box,
@@ -69,7 +69,7 @@ const varsResolver = createVarsResolver<SpoilerFactory>((_, props) => ({
   },
 }));
 
-export const Spoiler = factory<SpoilerFactory>(_props => {
+export const Spoiler = factory<SpoilerFactory>((_props) => {
   const props = useProps('Spoiler', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -89,7 +89,7 @@ export const Spoiler = factory<SpoilerFactory>(_props => {
     'expanded',
     'onExpandedChange',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<SpoilerFactory>({
@@ -115,7 +115,7 @@ export const Spoiler = factory<SpoilerFactory>(_props => {
     onChange: local.onExpandedChange,
   });
   const { ref: contentRef, height } = useElementSize();
-  const spoilerMoreContent = () => show() ? local.hideLabel : local.showLabel;
+  const spoilerMoreContent = () => (show() ? local.hideLabel : local.showLabel);
   const spoiler = () => spoilerMoreContent !== null && local.maxHeight! < height();
 
   return (
@@ -132,7 +132,7 @@ export const Spoiler = factory<SpoilerFactory>(_props => {
           type="button"
           ref={local.controlRef}
           onClick={() => {
-            setShowState(!show())
+            setShowState(!show());
           }}
           aria-expanded={show()}
           aria-controls={regionId}
@@ -141,9 +141,12 @@ export const Spoiler = factory<SpoilerFactory>(_props => {
           {spoilerMoreContent()}
         </Anchor>
       </Show>
-      <Box component='div'
+      <Box
+        component="div"
         {...getStyles('content', {
-          style: { 'max-height': !show() ? rem(local.maxHeight) : height() ? rem(height()) : undefined },
+          style: {
+            'max-height': !show() ? rem(local.maxHeight) : height() ? rem(height()) : undefined,
+          },
         })}
         data-reduce-motion
         role="region"

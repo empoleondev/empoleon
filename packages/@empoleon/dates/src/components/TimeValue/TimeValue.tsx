@@ -26,14 +26,16 @@ export function TimeValue(props: TimeValueProps) {
     props
   );
 
-  return <>
-    {getFormattedTime({
-      value: merged.value,
-      format: merged.format,
-      amPmLabels: merged.amPmLabels,
-      withSeconds: merged.withSeconds
-    })}
-  </>;
+  return (
+    <>
+      {getFormattedTime({
+        value: merged.value,
+        format: merged.format,
+        amPmLabels: merged.amPmLabels,
+        withSeconds: merged.withSeconds,
+      })}
+    </>
+  );
 }
 
 TimeValue.displayName = '@empoleon/dates/TimeValue';

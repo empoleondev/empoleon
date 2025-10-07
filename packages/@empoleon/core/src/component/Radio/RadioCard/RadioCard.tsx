@@ -3,10 +3,10 @@ import {
   BoxProps,
   createVarsResolver,
   ElementProps,
+  EmpoleonRadius,
   factory,
   Factory,
   getRadius,
-  EmpoleonRadius,
   StylesApiProps,
   useDirection,
   useProps,
@@ -59,7 +59,7 @@ const varsResolver = createVarsResolver<RadioCardFactory>((_, props) => ({
   },
 }));
 
-export const RadioCard = factory<RadioCardFactory>(_props => {
+export const RadioCard = factory<RadioCardFactory>((_props) => {
   const props = useProps('RadioCard', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -76,7 +76,7 @@ export const RadioCard = factory<RadioCardFactory>(_props => {
     'name',
     'onKeyDown',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<RadioCardFactory>({
@@ -96,11 +96,14 @@ export const RadioCard = factory<RadioCardFactory>(_props => {
 
   const { dir } = useDirection();
   const ctx = useRadioGroupContext();
-  const _checked = () => typeof local.checked === 'boolean' ? local.checked : ctx?.value() === local.value || false;
+  const _checked = () =>
+    typeof local.checked === 'boolean' ? local.checked : ctx?.value() === local.value || false;
   const _name = local.name || ctx?.name;
 
-  const handleKeyDown = (event: KeyboardEvent & { currentTarget: HTMLButtonElement; target: Element }) => {
-    typeof local.onKeyDown === "function" && local.onKeyDown?.(event);
+  const handleKeyDown = (
+    event: KeyboardEvent & { currentTarget: HTMLButtonElement; target: Element }
+  ) => {
+    typeof local.onKeyDown === 'function' && local.onKeyDown?.(event);
 
     if (['ArrowDown', 'ArrowUp', 'ArrowLeft', 'ArrowRight'].includes(event.code)) {
       event.preventDefault();
@@ -148,11 +151,13 @@ export const RadioCard = factory<RadioCardFactory>(_props => {
         role="radio"
         aria-checked={_checked()}
         name={_name}
-        onClick={(event: MouseEvent & {
-          currentTarget: HTMLButtonElement;
-          target: Element;
-        }) => {
-          typeof local.onClick === "function" &&  local.onClick?.(event);
+        onClick={(
+          event: MouseEvent & {
+            currentTarget: HTMLButtonElement;
+            target: Element;
+          }
+        ) => {
+          typeof local.onClick === 'function' && local.onClick?.(event);
           ctx?.onChange(local.value || '');
         }}
         onKeyDown={handleKeyDown}

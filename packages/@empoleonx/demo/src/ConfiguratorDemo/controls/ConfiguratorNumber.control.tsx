@@ -1,7 +1,7 @@
+import { splitProps } from 'solid-js';
 import { BoxProps, ElementProps, Input, Slider } from '@empoleon/core';
 import { getControlLabel } from './get-control-label';
 import { ConfiguratorControl } from './types';
-import { splitProps } from 'solid-js';
 
 export type ConfiguratorNumberControlOptions = ConfiguratorControl<
   'number',
@@ -18,18 +18,18 @@ export interface ConfiguratorNumberControlProps extends BoxProps, ElementProps<'
 }
 
 export function ConfiguratorNumberControl(props: ConfiguratorNumberControlProps) {
-  const [local, others] = splitProps(props, [
-    'value',
-    'onChange',
-    'prop',
-    'step',
-    'min',
-    'max'
-  ]);
+  const [local, others] = splitProps(props, ['value', 'onChange', 'prop', 'step', 'min', 'max']);
 
   return (
     <Input.Wrapper labelElement="div" label={getControlLabel(local.prop)} {...others}>
-      <Slider value={local.value} onChange={local.onChange} step={local.step} min={local.min} max={local.max} thumbLabel="Size" />
+      <Slider
+        value={local.value}
+        onChange={local.onChange}
+        step={local.step}
+        min={local.min}
+        max={local.max}
+        thumbLabel="Size"
+      />
     </Input.Wrapper>
   );
 }

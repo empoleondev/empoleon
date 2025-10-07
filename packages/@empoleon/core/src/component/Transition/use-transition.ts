@@ -1,4 +1,4 @@
-import { createSignal, createEffect, onCleanup, splitProps, mergeProps } from 'solid-js';
+import { createEffect, createSignal, mergeProps, onCleanup, splitProps } from 'solid-js';
 import { useReducedMotion } from '@empoleon/hooks';
 import { useEmpoleonTheme } from '../../core';
 
@@ -34,14 +34,18 @@ export function useTransition(props: UseTransition) {
     'onEntered',
     'onExited',
     'enterDelay',
-    'exitDelay'
+    'exitDelay',
   ]);
 
   const theme = useEmpoleonTheme();
   const shouldReduceMotion = useReducedMotion();
   const reduceMotion = theme.respectReducedMotion ? shouldReduceMotion : false;
-  const [transitionDuration, setTransitionDuration] = createSignal(reduceMotion ? 0 : local.duration);
-  const [transitionStatus, setStatus] = createSignal<TransitionStatus>(local.mounted() ? 'entered' : 'exited');
+  const [transitionDuration, setTransitionDuration] = createSignal(
+    reduceMotion ? 0 : local.duration
+  );
+  const [transitionStatus, setStatus] = createSignal<TransitionStatus>(
+    local.mounted() ? 'entered' : 'exited'
+  );
   let transitionTimeoutRef = -1;
   let delayTimeoutRef = -1;
   let rafRef = -1;
@@ -52,7 +56,11 @@ export function useTransition(props: UseTransition) {
 
     window.clearTimeout(transitionTimeoutRef);
 
-    const newTransitionDuration = reduceMotion ? 0 : shouldMount ? local.duration : local.exitDuration;
+    const newTransitionDuration = reduceMotion
+      ? 0
+      : shouldMount
+        ? local.duration
+        : local.exitDuration;
     setTransitionDuration(newTransitionDuration);
 
     if (newTransitionDuration === 0) {

@@ -11,25 +11,25 @@ export function itSupportsInputAsterisk<Props>(
   name = 'supports combination of withAsterisk and required props'
 ) {
   it(name, () => {
-    const { container } = render(
-      () => <options.component {...options.props} required={false} withAsterisk={false} />
-    );
+    const { container } = render(() => (
+      <options.component {...options.props} required={false} withAsterisk={false} />
+    ));
 
     expect(container.querySelector('.empoleon-InputWrapper-required')).not.toBeInTheDocument();
 
-    const { container: container2 } = render(
-      () => <options.component {...options.props} required withAsterisk={false} />
-    );
+    const { container: container2 } = render(() => (
+      <options.component {...options.props} required withAsterisk={false} />
+    ));
     expect(container2.querySelector('.empoleon-InputWrapper-required')).not.toBeInTheDocument();
 
-    const { container: container3 } = render(
-      () => <options.component {...options.props} required={false} withAsterisk />
-    );
+    const { container: container3 } = render(() => (
+      <options.component {...options.props} required={false} withAsterisk />
+    ));
     expect(container3.querySelector('.empoleon-InputWrapper-required')).toBeInTheDocument();
 
-    const { container: container4 } = render(
-      () => <options.component {...options.props} required withAsterisk />
-    );
+    const { container: container4 } = render(() => (
+      <options.component {...options.props} required withAsterisk />
+    ));
     expect(container4.querySelector('.empoleon-InputWrapper-required')).toBeInTheDocument();
   });
 }

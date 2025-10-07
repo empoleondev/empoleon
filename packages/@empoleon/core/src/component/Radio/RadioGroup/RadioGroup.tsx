@@ -1,8 +1,8 @@
-import { splitProps, JSX } from 'solid-js';
+import { JSX, splitProps } from 'solid-js';
 import { useId, useUncontrolled } from '@empoleon/hooks';
-import { DataAttributes, factory, Factory, EmpoleonSize, useProps } from '../../../core';
-import { Input, InputWrapperProps, InputWrapperStylesNames } from '../../Input';
+import { DataAttributes, EmpoleonSize, factory, Factory, useProps } from '../../../core';
 import { InputsGroupFieldset } from '../../../utils/InputsGroupFieldset';
+import { Input, InputWrapperProps, InputWrapperStylesNames } from '../../Input';
 import { RadioGroupProvider } from '../RadioGroup.context';
 
 export type RadioGroupStylesNames = InputWrapperStylesNames;
@@ -42,7 +42,7 @@ export type RadioGroupFactory = Factory<{
 
 const defaultProps: Partial<RadioGroupProps> = {};
 
-export const RadioGroup = factory<RadioGroupFactory>(_props => {
+export const RadioGroup = factory<RadioGroupFactory>((_props) => {
   const props = useProps('RadioGroup', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'value',
@@ -66,10 +66,13 @@ export const RadioGroup = factory<RadioGroupFactory>(_props => {
   });
 
   const handleChange = (event: Event | string) =>
-    !local.readOnly && setValue(typeof event === 'string' ? event : (event.currentTarget as HTMLInputElement)?.value);
+    !local.readOnly &&
+    setValue(typeof event === 'string' ? event : (event.currentTarget as HTMLInputElement)?.value);
 
   return (
-    <RadioGroupProvider value={{ value: _value, onChange: handleChange, size: local.size, name: _name }}>
+    <RadioGroupProvider
+      value={{ value: _value, onChange: handleChange, size: local.size, name: _name }}
+    >
       <Input.Wrapper
         size={local.size}
         ref={local.ref}

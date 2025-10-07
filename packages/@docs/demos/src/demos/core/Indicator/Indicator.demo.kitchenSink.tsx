@@ -39,7 +39,7 @@ export const kitchenSink: EmpoleonDemo = {
       prop: 'color',
       type: 'color',
       initialValue: 'blue',
-      libraryValue: 'blue'
+      libraryValue: 'blue',
     },
     {
       prop: 'position',
@@ -62,7 +62,7 @@ export const kitchenSink: EmpoleonDemo = {
       prop: 'radius',
       type: 'size',
       initialValue: 'xl',
-      libraryValue: 'xl'
+      libraryValue: 'xl',
     },
     {
       prop: 'size',
@@ -71,7 +71,7 @@ export const kitchenSink: EmpoleonDemo = {
       libraryValue: 10,
       step: 1,
       min: 6,
-      max: 30
+      max: 30,
     },
     {
       prop: 'offset',
@@ -80,43 +80,43 @@ export const kitchenSink: EmpoleonDemo = {
       libraryValue: 0,
       step: 1,
       min: -20,
-      max: 20
+      max: 20,
     },
     {
       prop: 'disabled',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'withBorder',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'processing',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'inline',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'autoContrast',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'label',
       type: 'string',
       initialValue: '',
-      libraryValue: ''
+      libraryValue: '',
     },
     {
       prop: 'zIndex',
@@ -125,7 +125,7 @@ export const kitchenSink: EmpoleonDemo = {
       libraryValue: 200,
       step: 1,
       min: 0,
-      max: 9999
-    }
+      max: 9999,
+    },
   ],
 };

@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
+import { createSignal, For, JSX } from 'solid-js';
 import { Code, EmpoleonProvider, Indicator } from '@empoleon/core';
 import { Month, MonthProps } from './Month';
-import { createSignal, For, JSX } from 'solid-js';
 
 export default {
   title: 'Month',
@@ -104,11 +104,7 @@ export function Unstyled() {
 export function Sizes() {
   const sizes = ['xs', 'sm', 'md', 'lg', 'xl'] as const;
 
-  return (
-    <For each={sizes}>
-      {(size) => <Wrapper size={size} />}
-    </For>
-  );
+  return <For each={sizes}>{(size) => <Wrapper size={size} />}</For>;
 }
 
 export function withWeekNumbers() {

@@ -91,7 +91,10 @@ export function parseStyleProps(props: ParseStylePropsOptions): SortMediaQueries
         if (!hasResponsiveStyles(props.styleProps[styleProp])) {
           properties.forEach((property) => {
             // change from camelCase to kebab-case
-            (acc.inlineStyles as any)[camelToKebab(property)] = resolvers[propertyData.type](baseValue, props.theme);
+            (acc.inlineStyles as any)[camelToKebab(property)] = resolvers[propertyData.type](
+              baseValue,
+              props.theme
+            );
           });
 
           return acc;

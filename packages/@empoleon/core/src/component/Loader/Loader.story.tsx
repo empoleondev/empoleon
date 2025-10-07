@@ -1,7 +1,7 @@
+import { JSX, splitProps } from 'solid-js';
 import { createTheme, EmpoleonProvider } from '@empoleon/core';
 import { defaultLoaders, Loader } from './Loader';
 import { EmpoleonLoaderComponent } from './Loader.types';
-import { JSX, splitProps } from 'solid-js';
 
 export default {
   title: 'Loader',
@@ -16,7 +16,7 @@ export default {
 
 export function Usage() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Loader />
       <Loader type="bars" mt="xl" />
       <Loader type="dots" mt="xl" />
@@ -40,7 +40,7 @@ export function LoaderOnProvider() {
   });
   return (
     <EmpoleonProvider theme={theme}>
-      <div style={{ 'padding': '40px' }}>
+      <div style={{ padding: '40px' }}>
         <Loader />
         <Loader type="bars" mt="xl" />
         <Loader type="dots" mt="xl" />
@@ -51,7 +51,7 @@ export function LoaderOnProvider() {
 
 export function Colors() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Loader color="orange.3" />
       <Loader color="#FEFE00" mt="xl" />
     </div>
@@ -141,14 +141,14 @@ const RingLoader: EmpoleonLoaderComponent = (props: any) => {
         </circle>
       </g>
     </svg>
-  )
+  );
 };
 
 RingLoader.displayName = '@empoleon/core/RingLoader';
 
 export function CustomComponent() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Loader
         type="ring"
         loaders={{

@@ -1,5 +1,5 @@
-import { For, JSX, splitProps } from 'solid-js';
 import dayjs from 'dayjs';
+import { For, JSX, splitProps } from 'solid-js';
 import { BoxProps, ElementProps, factory, Factory, StylesApiProps, useProps } from '@empoleon/core';
 import { DateStringValue } from '../../types';
 import { handleControlKeyDown } from '../../utils';
@@ -40,7 +40,7 @@ const defaultProps = {
   numberOfColumns: 1,
 } satisfies Partial<MonthLevelGroupProps>;
 
-export const MonthLevelGroup = factory<MonthLevelGroupFactory>(_props => {
+export const MonthLevelGroup = factory<MonthLevelGroupFactory>((_props) => {
   const props = useProps('MonthLevelGroup', defaultProps, _props);
   const [local, others] = splitProps(props, [
     // Month settings
@@ -89,7 +89,7 @@ export const MonthLevelGroup = factory<MonthLevelGroupFactory>(_props => {
     'static',
     'vars',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   let daysRefs: HTMLButtonElement[][][] = [];
@@ -106,7 +106,8 @@ export const MonthLevelGroup = factory<MonthLevelGroupFactory>(_props => {
     >
       <For each={Array(local.numberOfColumns).fill(0)}>
         {(_, monthIndex) => {
-          const currentMonth = () => dayjs(local.month).add(monthIndex(), 'months').format('YYYY-MM-DD');
+          const currentMonth = () =>
+            dayjs(local.month).add(monthIndex(), 'months').format('YYYY-MM-DD');
 
           return (
             <MonthLevel

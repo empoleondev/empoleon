@@ -1,24 +1,24 @@
-import { splitProps, JSX, createSignal } from 'solid-js';
+import { createSignal, JSX, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
   createVarsResolver,
   ElementProps,
+  EmpoleonColor,
+  EmpoleonRadius,
   factory,
   Factory,
   getAutoContrastValue,
   getContrastColor,
   getRadius,
   getThemeColor,
-  EmpoleonColor,
-  EmpoleonRadius,
   rem,
   StylesApiProps,
   useProps,
   useStyles,
 } from '../../core';
-import { TimelineItem, TimelineItemStylesNames } from './TimelineItem/TimelineItem';
 import { TimelineProvider } from './Timeline.context';
+import { TimelineItem, TimelineItemStylesNames } from './TimelineItem/TimelineItem';
 import classes from './Timeline.module.css';
 
 export type TimelineStylesNames = 'root' | TimelineItemStylesNames;
@@ -73,21 +73,19 @@ const defaultProps = {
   align: 'left',
 } satisfies Partial<TimelineProps>;
 
-const varsResolver = createVarsResolver<TimelineFactory>(
-  (theme, props) => ({
-    root: {
-      '--tl-bullet-size': rem(props.bulletSize),
-      '--tl-line-width': rem(props.lineWidth),
-      '--tl-radius': props.radius === undefined ? undefined : getRadius(props.radius),
-      '--tl-color': props.color ? getThemeColor(props.color, theme) : undefined,
-      '--tl-icon-color': getAutoContrastValue(props.autoContrast, theme)
-        ? getContrastColor({ color: props.color, theme, autoContrast: props.autoContrast })
-        : undefined,
-    },
-  })
-);
+const varsResolver = createVarsResolver<TimelineFactory>((theme, props) => ({
+  root: {
+    '--tl-bullet-size': rem(props.bulletSize),
+    '--tl-line-width': rem(props.lineWidth),
+    '--tl-radius': props.radius === undefined ? undefined : getRadius(props.radius),
+    '--tl-color': props.color ? getThemeColor(props.color, theme) : undefined,
+    '--tl-icon-color': getAutoContrastValue(props.autoContrast, theme)
+      ? getContrastColor({ color: props.color, theme, autoContrast: props.autoContrast })
+      : undefined,
+  },
+}));
 
-export const Timeline = factory<TimelineFactory>(_props => {
+export const Timeline = factory<TimelineFactory>((_props) => {
   const props = useProps('Timeline', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -107,7 +105,7 @@ export const Timeline = factory<TimelineFactory>(_props => {
     'mod',
     'autoContrast',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<TimelineFactory>({
@@ -133,16 +131,23 @@ export const Timeline = factory<TimelineFactory>(_props => {
   };
 
   return (
-    <TimelineProvider value={{
-      getStyles,
-      registerItem,
-      activeIndex: () => local.active!,
-      reverseActive: () => local.reverseActive!,
-      align: () => local.align!,
-      unstyled: () => !!local.unstyled,
-      totalItems: count,
-    }}>
-      <Box {...getStyles('root')} mod={[{ align: local.align }, local.mod]} ref={local.ref} {...others}>
+    <TimelineProvider
+      value={{
+        getStyles,
+        registerItem,
+        activeIndex: () => local.active!,
+        reverseActive: () => local.reverseActive!,
+        align: () => local.align!,
+        unstyled: () => !!local.unstyled,
+        totalItems: count,
+      }}
+    >
+      <Box
+        {...getStyles('root')}
+        mod={[{ align: local.align }, local.mod]}
+        ref={local.ref}
+        {...others}
+      >
         {local.children}
       </Box>
     </TimelineProvider>

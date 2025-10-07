@@ -1,10 +1,10 @@
-import { splitProps, JSX } from 'solid-js';
+import { JSX, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
   createVarsResolver,
-  getRadius,
   EmpoleonRadius,
+  getRadius,
   polymorphicFactory,
   PolymorphicFactory,
   rem,
@@ -61,7 +61,7 @@ const varsResolver = createVarsResolver<ColorSwatchFactory>((_, props) => ({
   },
 }));
 
-export const ColorSwatch = polymorphicFactory<ColorSwatchFactory>(_props => {
+export const ColorSwatch = polymorphicFactory<ColorSwatchFactory>((_props) => {
   const props = useProps('ColorSwatch', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -77,7 +77,7 @@ export const ColorSwatch = polymorphicFactory<ColorSwatchFactory>(_props => {
     'children',
     'variant',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<ColorSwatchFactory>({
@@ -104,8 +104,13 @@ export const ColorSwatch = polymorphicFactory<ColorSwatchFactory>(_props => {
     >
       <Box component="span" {...getStyles('alphaOverlay')} />
       {local.withShadow && <Box component="span" {...getStyles('shadowOverlay')} />}
-      <Box component="span" {...getStyles('colorOverlay', { style: { 'background-color': local.color } })} />
-      <Box component="span" {...getStyles('childrenOverlay')}>{local.children}</Box>
+      <Box
+        component="span"
+        {...getStyles('colorOverlay', { style: { 'background-color': local.color } })}
+      />
+      <Box component="span" {...getStyles('childrenOverlay')}>
+        {local.children}
+      </Box>
     </Box>
   );
 });

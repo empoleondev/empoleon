@@ -1,6 +1,6 @@
+import { IconCheck, IconCircle } from '@tabler/icons-solidjs';
 import { Radio, RadioProps } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { IconCheck, IconCircle } from '@tabler/icons-solidjs';
 
 const code = `
 import { Radio } from '@empoleon/core';
@@ -17,10 +17,7 @@ function Demo() {
 function Wrapper(props: RadioProps) {
   return (
     <Radio.Group name="demo" defaultValue="react">
-      <Radio
-        value="react"
-        {...props}
-      />
+      <Radio value="react" {...props} />
     </Radio.Group>
   );
 }
@@ -98,6 +95,6 @@ export const kitchenSink: EmpoleonDemo = {
       type: 'boolean',
       initialValue: false,
       libraryValue: false,
-    }
+    },
   ],
 };

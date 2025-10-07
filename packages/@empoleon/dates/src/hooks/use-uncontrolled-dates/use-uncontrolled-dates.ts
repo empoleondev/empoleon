@@ -1,4 +1,4 @@
-import { createSignal, createMemo, mergeProps } from 'solid-js';
+import { createMemo, createSignal, mergeProps } from 'solid-js';
 import { DatePickerType, DatePickerValue, DateStringValue } from '../../types';
 import { toDateString, toDateTimeString } from '../../utils';
 
@@ -18,31 +18,41 @@ export const convertDatesValue = (value: any, withTime: boolean) => {
   return Array.isArray(value) ? value.map(converter) : converter(value);
 };
 
-export function useUncontrolledDates<Type extends DatePickerType = 'default'>(props: UseUncontrolledDates<Type>) {
-  const mergedProps = mergeProps({
-    withTime: false
-  }, props);
+export function useUncontrolledDates<Type extends DatePickerType = 'default'>(
+  props: UseUncontrolledDates<Type>
+) {
+  const mergedProps = mergeProps(
+    {
+      withTime: false,
+    },
+    props
+  );
 
   let storedType = props.type;
   const controlled = props.value !== undefined;
 
   const initialValue = convertDatesValue(
-    props.value !== undefined ? props.value :
-    props.defaultValue !== undefined ? props.defaultValue :
-    getEmptyValue(props.type),
+    props.value !== undefined
+      ? props.value
+      : props.defaultValue !== undefined
+        ? props.defaultValue
+        : getEmptyValue(props.type),
     mergedProps.withTime
   );
 
   const [_value, _setValue] = createSignal<any>(initialValue);
 
   const finalValue = createMemo(() => {
-    const currentValue = controlled ? convertDatesValue(props.value, mergedProps.withTime) : _value();
+    const currentValue = controlled
+      ? convertDatesValue(props.value, mergedProps.withTime)
+      : _value();
 
     if (storedType !== props.type) {
       storedType = props.type;
 
       if (!controlled) {
-        const newValue = props.defaultValue !== undefined ? props.defaultValue : getEmptyValue(props.type);
+        const newValue =
+          props.defaultValue !== undefined ? props.defaultValue : getEmptyValue(props.type);
         _setValue(convertDatesValue(newValue, mergedProps.withTime));
         return convertDatesValue(newValue, mergedProps.withTime);
       }

@@ -15,11 +15,7 @@ function Demo() {
 `;
 
 function Demo(props: PillProps) {
-  return (
-    <Pill {...props}>
-      React
-    </Pill>
-  );
+  return <Pill {...props}>React</Pill>;
 }
 
 export const kitchenSink: EmpoleonDemo = {
@@ -32,25 +28,25 @@ export const kitchenSink: EmpoleonDemo = {
       prop: 'size',
       type: 'size',
       initialValue: 'md',
-      libraryValue: 'md'
+      libraryValue: 'md',
     },
     {
       prop: 'withRemoveButton',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'disabled',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'radius',
       type: 'size',
       initialValue: 'sm',
-      libraryValue: 'sm'
-    }
+      libraryValue: 'sm',
+    },
   ],
 };

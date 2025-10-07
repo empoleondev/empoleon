@@ -1,6 +1,6 @@
+import { createSignal, Show } from 'solid-js';
 import { Button, FileButton, Group, Text } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal, Show } from 'solid-js';
 
 const code = `
 import { createSignal, Show } from 'solid-js';

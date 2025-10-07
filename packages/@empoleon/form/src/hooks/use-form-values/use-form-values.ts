@@ -44,7 +44,9 @@ interface UseFormValuesInput<Values extends Record<PropertyKey, any>> {
   onValuesChange?: ((values: Values, previousValues: Values) => void) | undefined;
 }
 
-export function useFormValues<Values extends Record<PropertyKey, any>>(props: UseFormValuesInput<Values>): $FormValues<Values> {
+export function useFormValues<Values extends Record<PropertyKey, any>>(
+  props: UseFormValuesInput<Values>
+): $FormValues<Values> {
   const [initialized, setInitialized] = createSignal(false);
   const [stateValues, setStateValues] = createSignal<Values>(props.initialValues || ({} as Values));
 
@@ -54,18 +56,23 @@ export function useFormValues<Values extends Record<PropertyKey, any>>(props: Us
   const [refValuesSignal, setRefValuesSignal] = createSignal(refValuesData);
 
   const refValues = {
-    get current() { return refValuesData; },
+    get current() {
+      return refValuesData;
+    },
     set current(value: Values) {
       refValuesData = value;
       setRefValuesSignal(() => value);
       setStateValues(() => value);
-    }
+    },
   };
 
-
   const valuesSnapshot = {
-    get current() { return valuesSnapshotData; },
-    set current(value: Values) { valuesSnapshotData = value; }
+    get current() {
+      return valuesSnapshotData;
+    },
+    set current(value: Values) {
+      valuesSnapshotData = value;
+    },
   };
 
   const setValues = ({

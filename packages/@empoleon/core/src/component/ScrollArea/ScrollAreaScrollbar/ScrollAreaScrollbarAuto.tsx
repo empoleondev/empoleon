@@ -1,8 +1,4 @@
-import {
-  createSignal,
-  splitProps,
-  Show,
-} from 'solid-js';
+import { createSignal, Show, splitProps } from 'solid-js';
 import { useDebouncedCallback } from '@empoleon/hooks';
 import { useScrollAreaContext } from '../ScrollArea.context';
 import { useResizeObserver } from '../use-resize-observer';
@@ -11,16 +7,12 @@ import {
   ScrollAreaScrollbarVisibleProps,
 } from './ScrollAreaScrollbarVisible';
 
-export interface ScrollAreaScrollbarAutoProps
-  extends ScrollAreaScrollbarVisibleProps {
+export interface ScrollAreaScrollbarAutoProps extends ScrollAreaScrollbarVisibleProps {
   forceMount?: true;
 }
 
 export function ScrollAreaScrollbarAuto(props: ScrollAreaScrollbarAutoProps) {
-  const [local, others] = splitProps(props, [
-    'forceMount',
-    'ref',
-  ]);
+  const [local, others] = splitProps(props, ['forceMount', 'ref']);
   const ctx = useScrollAreaContext();
   const [visible, setVisible] = createSignal(false);
   const isHorizontal = () => props.orientation === 'horizontal';

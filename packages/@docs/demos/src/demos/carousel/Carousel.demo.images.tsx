@@ -1,8 +1,8 @@
+import { For } from 'solid-js';
 import { Carousel } from '@empoleon/carousel';
 import { Image } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
 import { images as _images } from './_images';
-import { For } from 'solid-js';
 
 const code = `
 import { Carousel } from '@empoleon/carousel';
@@ -33,7 +33,7 @@ function Demo() {
 
 function Demo() {
   return (
-    <Carousel withIndicators height='200px'>
+    <Carousel withIndicators height="200px">
       <For each={_images}>
         {(url) => (
           <Carousel.Slide>

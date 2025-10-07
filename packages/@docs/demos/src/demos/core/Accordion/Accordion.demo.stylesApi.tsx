@@ -1,8 +1,8 @@
+import { For } from 'solid-js';
 import { Accordion, AccordionProps } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
 import { AccordionStylesApi } from '@docs/styles-api';
 import { data } from './_base';
-import { For } from 'solid-js';
 
 const code = `
 import { Accordion } from '@empoleon/core';

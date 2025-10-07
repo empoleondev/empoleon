@@ -1,6 +1,6 @@
 import { For, JSX } from 'solid-js';
-import { PickerControl } from './PickerControl';
 import { EmpoleonProvider } from '@empoleon/core';
+import { PickerControl } from './PickerControl';
 
 export default {
   title: 'PickerControl',
@@ -47,17 +47,17 @@ export function Range() {
 }
 
 export function Sizes() {
- const sizes = ['xs', 'sm', 'md', 'lg', 'xl'] as const;
+  const sizes = ['xs', 'sm', 'md', 'lg', 'xl'] as const;
 
- return (
-   <div style={{ padding: '40px' }}>
-     <For each={sizes}>
-       {(size) => (
-         <PickerControl selected size={size} mt="md">
-           {size}
-         </PickerControl>
-       )}
-     </For>
-   </div>
- );
+  return (
+    <div style={{ padding: '40px' }}>
+      <For each={sizes}>
+        {(size) => (
+          <PickerControl selected size={size} mt="md">
+            {size}
+          </PickerControl>
+        )}
+      </For>
+    </div>
+  );
 }

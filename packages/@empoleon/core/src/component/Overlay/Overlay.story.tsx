@@ -1,6 +1,6 @@
 import { For, JSX } from 'solid-js';
-import { Overlay } from './Overlay';
 import { EmpoleonProvider } from '../../core';
+import { Overlay } from './Overlay';
 
 export default {
   title: 'Overlay',
@@ -13,10 +13,9 @@ export default {
   ],
 };
 
-const lorem = 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ducimus ratione expedita voluptatibus aperiam cum, consectetur, tenetur consequuntur error qui eum eligendi, ea illum! Sit, sint totam dicta rem deleniti perspiciatis!';
-const content = <For each={Array(20).fill(0)}>
-  {() => <p>{lorem}</p>}
-</For>
+const lorem =
+  'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ducimus ratione expedita voluptatibus aperiam cum, consectetur, tenetur consequuntur error qui eum eligendi, ea illum! Sit, sint totam dicta rem deleniti perspiciatis!';
+const content = <For each={Array(20).fill(0)}>{() => <p>{lorem}</p>}</For>;
 
 export function Usage() {
   return (

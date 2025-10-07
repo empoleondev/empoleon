@@ -1,4 +1,4 @@
-import { createSignal, createMemo, JSX, splitProps } from 'solid-js';
+import { createMemo, createSignal, JSX, splitProps } from 'solid-js';
 import { getDefaultZIndex, Modal } from '@empoleon/core';
 import { randomId } from '@empoleon/hooks';
 import { ConfirmModal } from './ConfirmModal';
@@ -74,43 +74,49 @@ export function ModalsProvider(props: ModalsProviderProps) {
   };
 
   const openModal = ({ modalId, ...props }: ModalSettings) => {
-  const id = modalId || randomId();
+    const id = modalId || randomId();
 
-    setState(modalsReducer(state(), {
-      type: 'OPEN',
-      modal: {
-        id,
-        type: 'content',
-        props,
-      },
-    }));
+    setState(
+      modalsReducer(state(), {
+        type: 'OPEN',
+        modal: {
+          id,
+          type: 'content',
+          props,
+        },
+      })
+    );
     return id;
   };
 
   const openConfirmModal = ({ modalId, ...props }: OpenConfirmModal) => {
     const id = modalId || randomId();
-    setState(modalsReducer(state(), {
-      type: 'OPEN',
-      modal: {
-        id,
-        type: 'confirm',
-        props,
-      },
-    }));
+    setState(
+      modalsReducer(state(), {
+        type: 'OPEN',
+        modal: {
+          id,
+          type: 'confirm',
+          props,
+        },
+      })
+    );
     return id;
   };
 
   const openContextModal = (modal: string, { modalId, ...props }: OpenContextModal) => {
     const id = modalId || randomId();
-    setState(modalsReducer(state(), {
-      type: 'OPEN',
-      modal: {
-        id,
-        type: 'context',
-        props,
-        ctx: modal,
-      },
-    }));
+    setState(
+      modalsReducer(state(), {
+        type: 'OPEN',
+        modal: {
+          id,
+          type: 'context',
+          props,
+          ctx: modal,
+        },
+      })
+    );
     return id;
   };
 
@@ -119,14 +125,19 @@ export function ModalsProvider(props: ModalsProviderProps) {
   };
 
   const updateModal = ({ modalId, ...newProps }: Partial<ModalSettings> & { modalId: string }) => {
-    setState(modalsReducer(state(), {
-      type: 'UPDATE',
-      modalId,
-      newProps,
-    }));
+    setState(
+      modalsReducer(state(), {
+        type: 'UPDATE',
+        modalId,
+        newProps,
+      })
+    );
   };
 
-  const updateContextModal = ({ modalId, ...newProps }: { modalId: string } & Partial<OpenContextModal<any>>) => {
+  const updateContextModal = ({
+    modalId,
+    ...newProps
+  }: { modalId: string } & Partial<OpenContextModal<any>>) => {
     setState(modalsReducer(state(), { type: 'UPDATE', modalId, newProps }));
   };
 
@@ -169,7 +180,9 @@ export function ModalsProvider(props: ModalsProviderProps) {
         const ContextModal = props.modals![currentModal.ctx];
         return {
           modalProps: rest,
-          content: <ContextModal innerProps={local.innerProps} context={ctx} id={currentModal.id} />,
+          content: (
+            <ContextModal innerProps={local.innerProps} context={ctx} id={currentModal.id} />
+          ),
         };
       }
       case 'confirm': {

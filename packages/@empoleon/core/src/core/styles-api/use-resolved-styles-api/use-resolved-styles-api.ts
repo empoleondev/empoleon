@@ -1,5 +1,5 @@
-import { FactoryPayload } from '../../factory';
 import { useEmpoleonTheme } from '../../EmpoleonProvider';
+import { FactoryPayload } from '../../factory';
 import { ClassNames, Styles } from '../styles-api.types';
 import { resolveClassNames } from '../use-styles/get-class-name/resolve-class-names/resolve-class-names';
 import { resolveStyles } from '../use-styles/get-style/resolve-styles/resolve-styles';
@@ -11,7 +11,9 @@ export interface UseResolvedStylesApiInput<Payload extends FactoryPayload> {
   stylesCtx?: Record<string, any>;
 }
 
-export function useResolvedStylesApi<Payload extends FactoryPayload>(_props: UseResolvedStylesApiInput<Payload>) {
+export function useResolvedStylesApi<Payload extends FactoryPayload>(
+  _props: UseResolvedStylesApiInput<Payload>
+) {
   const theme = useEmpoleonTheme();
 
   return {

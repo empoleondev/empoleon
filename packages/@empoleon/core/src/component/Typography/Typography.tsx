@@ -24,7 +24,7 @@ export type TypographyFactory = Factory<{
   stylesNames: TypographyStylesNames;
 }>;
 
-export const Typography = factory<TypographyFactory>(_props => {
+export const Typography = factory<TypographyFactory>((_props) => {
   const props = useProps('Typography', null, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -33,7 +33,7 @@ export const Typography = factory<TypographyFactory>(_props => {
     'styles',
     'unstyled',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<TypographyFactory>({

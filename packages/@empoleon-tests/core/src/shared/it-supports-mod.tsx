@@ -67,14 +67,14 @@ import { getPropsValue } from './get-props-value';
 
 interface Options<Props = any> {
   component: (props: Props) => JSX.Element;
-  props: Props | (() => Props)
+  props: Props | (() => Props);
   selector?: string;
 }
 
 export function itSupportsMod<Props>(options: Options<Props>, name = 'supports mod') {
   it(`${name}: string`, () => {
     const baseProps = getPropsValue(options.props);
-    const propsWithMod = { ...baseProps, mod: "test" } as Props & { mod: string };
+    const propsWithMod = { ...baseProps, mod: 'test' } as Props & { mod: string };
     const { container } = render(() => <options.component {...propsWithMod} mod="test" />);
 
     expect(container.querySelector(options.selector || '*:not(style)')!).toHaveAttribute(
@@ -84,10 +84,12 @@ export function itSupportsMod<Props>(options: Options<Props>, name = 'supports m
 
   it(`${name}: object`, () => {
     const baseProps = getPropsValue(options.props);
-    const propsWithMod = { ...baseProps, mod: { test: true, test2: false } } as Props & { mod: any };
-    const { container } = render(
-      () => <options.component {...propsWithMod} mod={{ test: true, test2: false }} />
-    );
+    const propsWithMod = { ...baseProps, mod: { test: true, test2: false } } as Props & {
+      mod: any;
+    };
+    const { container } = render(() => (
+      <options.component {...propsWithMod} mod={{ test: true, test2: false }} />
+    ));
 
     expect(container.querySelector(options.selector || '*:not(style)')!).toHaveAttribute(
       'data-test'
@@ -101,7 +103,9 @@ export function itSupportsMod<Props>(options: Options<Props>, name = 'supports m
   it(`${name}: array`, () => {
     const baseProps = getPropsValue(options.props);
     const propsWithMod = { ...baseProps, mod: ['test', 'test2'] } as Props & { mod: any };
-    const { container } = render(() => <options.component {...propsWithMod} mod={['test', 'test2']} />);
+    const { container } = render(() => (
+      <options.component {...propsWithMod} mod={['test', 'test2']} />
+    ));
 
     expect(container.querySelector(options.selector || '*:not(style)')!).toHaveAttribute(
       'data-test'
@@ -115,9 +119,9 @@ export function itSupportsMod<Props>(options: Options<Props>, name = 'supports m
   it(`${name}: array with object`, () => {
     const baseProps = getPropsValue(options.props);
     const propsWithMod = { ...baseProps, mod: ['test', { test2: true }] } as Props & { mod: any };
-    const { container } = render(
-      () => <options.component {...propsWithMod} mod={['test', { test2: true }]} />
-    );
+    const { container } = render(() => (
+      <options.component {...propsWithMod} mod={['test', { test2: true }]} />
+    ));
 
     expect(container.querySelector(options.selector || '*:not(style)')!).toHaveAttribute(
       'data-test'

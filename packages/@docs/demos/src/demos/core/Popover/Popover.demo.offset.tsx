@@ -27,7 +27,7 @@ function Demo() {
 
 function Wrapper(props: any) {
   return (
-    <Popover width='200px' opened {...props}>
+    <Popover width="200px" opened {...props}>
       <Popover.Target>
         <Button>Popover target</Button>
       </Popover.Target>

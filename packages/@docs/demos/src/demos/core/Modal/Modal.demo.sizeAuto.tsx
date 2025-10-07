@@ -1,7 +1,7 @@
+import { For } from 'solid-js';
 import { Badge, Button, Group, Modal, Text } from '@empoleon/core';
 import { useCounter, useDisclosure } from '@empoleon/hooks';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { For } from 'solid-js';
 
 const code = `
 import { For } from 'solid-js';
@@ -47,9 +47,7 @@ function Demo() {
         <Text>Modal with size auto will fits its content</Text>
 
         <Group wrap="nowrap" mt="md">
-          <For each={Array(count()).fill(0)}>
-            {(_, index) => <Badge>Badge {index()}</Badge>}
-          </For>
+          <For each={Array(count()).fill(0)}>{(_, index) => <Badge>Badge {index()}</Badge>}</For>
         </Group>
 
         <Group mt="xl">

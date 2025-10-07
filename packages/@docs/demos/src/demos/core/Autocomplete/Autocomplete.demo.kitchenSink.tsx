@@ -1,7 +1,7 @@
+import { IconMail, IconSearch, IconStar, IconUser } from '@tabler/icons-solidjs';
+import { createEffect, createSignal } from 'solid-js';
 import { Autocomplete, AutocompleteProps } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { IconSearch, IconStar, IconUser, IconMail } from '@tabler/icons-solidjs';
-import { createSignal, createEffect } from 'solid-js';
 
 const code = `
 import { Autocomplete } from '@empoleon/core';
@@ -63,7 +63,7 @@ function Demo(props: DemoProps) {
   const getIcon = () => {
     const iconProps = {
       style: { width: '70%', height: '70%' },
-      stroke: '1.5'
+      stroke: '1.5',
     };
 
     switch (props.iconType) {
@@ -107,37 +107,37 @@ export const kitchenSink: EmpoleonDemo = {
       prop: 'label',
       type: 'string',
       initialValue: 'Your favorite library',
-      libraryValue: undefined
+      libraryValue: undefined,
     },
     {
       prop: 'description',
       type: 'string',
       initialValue: '',
-      libraryValue: undefined
+      libraryValue: undefined,
     },
     {
       prop: 'error',
       type: 'string',
       initialValue: '',
-      libraryValue: undefined
+      libraryValue: undefined,
     },
     {
       prop: 'placeholder',
       type: 'string',
       initialValue: 'Pick value or enter anything',
-      libraryValue: undefined
+      libraryValue: undefined,
     },
     {
       prop: 'size',
       type: 'size',
       initialValue: 'sm',
-      libraryValue: 'sm'
+      libraryValue: 'sm',
     },
     {
       prop: 'radius',
       type: 'size',
       initialValue: 'sm',
-      libraryValue: 'sm'
+      libraryValue: 'sm',
     },
     {
       prop: 'variant',
@@ -154,49 +154,49 @@ export const kitchenSink: EmpoleonDemo = {
       prop: 'disabled',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'readOnly',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'required',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'clearable',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'withAsterisk',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'selectFirstOptionOnChange',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'autoSelectOnBlur',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'withScrollArea',
       type: 'boolean',
       initialValue: true,
-      libraryValue: true
+      libraryValue: true,
     },
     {
       prop: 'limit',
@@ -205,7 +205,7 @@ export const kitchenSink: EmpoleonDemo = {
       libraryValue: Infinity,
       min: 1,
       max: 20,
-      step: 1
+      step: 1,
     },
     {
       prop: 'maxDropdownHeight',
@@ -214,25 +214,25 @@ export const kitchenSink: EmpoleonDemo = {
       libraryValue: 220,
       min: 100,
       max: 500,
-      step: 20
+      step: 20,
     },
     {
       prop: 'dropdownOpened',
       type: 'boolean',
       initialValue: undefined,
-      libraryValue: undefined
+      libraryValue: undefined,
     },
     {
       prop: 'withLeftSection',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'withRightSection',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'iconType',

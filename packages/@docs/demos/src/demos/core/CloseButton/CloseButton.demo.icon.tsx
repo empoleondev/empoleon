@@ -12,7 +12,7 @@ function Demo() {
 `;
 
 function Demo() {
-  return <CloseButton icon={<IconXboxX size={18} stroke='1.5' />} />;
+  return <CloseButton icon={<IconXboxX size={18} stroke="1.5" />} />;
 }
 
 export const icon: EmpoleonDemo = {

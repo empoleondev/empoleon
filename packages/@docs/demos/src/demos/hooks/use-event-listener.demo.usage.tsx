@@ -1,7 +1,7 @@
+import { createSignal } from 'solid-js';
 import { Button } from '@empoleon/core';
 import { useEventListener } from '@empoleon/hooks';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal } from 'solid-js';
 
 const code = `
 import { useState, useCallback } from 'react';

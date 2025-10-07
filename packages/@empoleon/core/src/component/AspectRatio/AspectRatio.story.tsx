@@ -1,6 +1,6 @@
 import { JSX } from 'solid-js';
-import { AspectRatio } from './AspectRatio';
 import { EmpoleonProvider } from '../../core';
+import { AspectRatio } from './AspectRatio';
 
 export default {
   title: 'AspectRatio',
@@ -17,7 +17,7 @@ const WithProps = AspectRatio.withProps({ ratio: 112 / 9 });
 
 export function Usage() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <WithProps>
         <img
           src="https://raw.githubusercontent.com/empoleondev/empoleon/master/.demo/images/bg-8.png"
@@ -30,7 +30,7 @@ export function Usage() {
 
 export function Unstyled() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <AspectRatio ratio={1} unstyled>
         <img
           src="https://raw.githubusercontent.com/empoleondev/empoleon/master/.demo/images/bg-8.png"
@@ -43,7 +43,7 @@ export function Unstyled() {
 
 export function WithinFlexContainer() {
   return (
-    <div style={{ 'padding': '40px', display: 'flex', 'gap': '20px' }}>
+    <div style={{ padding: '40px', display: 'flex', gap: '20px' }}>
       <AspectRatio ratio={16 / 9} style={{ flex: 1 }}>
         <img
           src="https://raw.githubusercontent.com/empoleondev/empoleon/master/.demo/images/bg-8.png"

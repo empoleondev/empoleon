@@ -1,7 +1,7 @@
+import { createMemo } from 'solid-js';
 import { Box, Text, TextInput } from '@empoleon/core';
 import { useValidatedState } from '@empoleon/hooks';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createMemo } from 'solid-js';
 
 const code = `
 import { TextInput, Text, Box } from '@empoleon/core';

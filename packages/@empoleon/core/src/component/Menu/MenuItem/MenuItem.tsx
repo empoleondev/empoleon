@@ -53,7 +53,7 @@ export type MenuItemFactory = PolymorphicFactory<{
 
 const defaultProps: Partial<MenuItemProps> = {};
 
-export const MenuItem = polymorphicFactory<MenuItemFactory>(_props => {
+export const MenuItem = polymorphicFactory<MenuItemFactory>((_props) => {
   const props = useProps('MenuItem', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -89,7 +89,9 @@ export const MenuItem = polymorphicFactory<MenuItemFactory>(_props => {
     }
   });
 
-  const colors = local.color ? theme.variantColorResolver({ color: local.color, theme, variant: 'light' }) : undefined;
+  const colors = local.color
+    ? theme.variantColorResolver({ color: local.color, theme, variant: 'light' })
+    : undefined;
   const parsedThemeColor = local.color ? parseThemeColor({ color: local.color, theme }) : null;
 
   const handleKeydown = createEventHandler<any>(_others.onKeyDown, (event: any) => {
@@ -105,7 +107,12 @@ export const MenuItem = polymorphicFactory<MenuItemFactory>(_props => {
       {...others}
       unstyled={ctx.unstyled}
       tabIndex={ctx.menuItemTabIndex}
-      {...ctx.getStyles('item', { className: local.className, style: local.style, styles: local.styles, classNames: local.classNames })}
+      {...ctx.getStyles('item', {
+        className: local.className,
+        style: local.style,
+        styles: local.styles,
+        classNames: local.classNames,
+      })}
       ref={useMergedRef(itemRef, local.ref)}
       role="menuitem"
       disabled={local.disabled}
@@ -131,13 +138,28 @@ export const MenuItem = polymorphicFactory<MenuItemFactory>(_props => {
       }}
     >
       {local.leftSection && (
-        <Box component='div' {...ctx.getStyles('itemSection', { styles: local.styles, classNames: local.classNames })} data-position="left">
+        <Box
+          component="div"
+          {...ctx.getStyles('itemSection', { styles: local.styles, classNames: local.classNames })}
+          data-position="left"
+        >
           {local.leftSection}
         </Box>
       )}
-      {local.children && <Box component='div' {...ctx.getStyles('itemLabel', { styles: local.styles, classNames: local.classNames })}>{local.children}</Box>}
+      {local.children && (
+        <Box
+          component="div"
+          {...ctx.getStyles('itemLabel', { styles: local.styles, classNames: local.classNames })}
+        >
+          {local.children}
+        </Box>
+      )}
       {local.rightSection && (
-        <Box component='div' {...ctx.getStyles('itemSection', { styles: local.styles, classNames: local.classNames })} data-position="right">
+        <Box
+          component="div"
+          {...ctx.getStyles('itemSection', { styles: local.styles, classNames: local.classNames })}
+          data-position="right"
+        >
           {local.rightSection}
         </Box>
       )}

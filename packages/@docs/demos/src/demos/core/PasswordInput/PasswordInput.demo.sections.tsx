@@ -24,7 +24,7 @@ function Demo() {
 `;
 
 function Demo() {
-  const icon = <IconLock size={18} stroke='1.5' />;
+  const icon = <IconLock size={18} stroke="1.5" />;
 
   return (
     <>

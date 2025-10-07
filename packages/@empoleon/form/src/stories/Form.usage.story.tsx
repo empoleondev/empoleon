@@ -1,17 +1,26 @@
-import { Button, Checkbox, Group, EmpoleonProvider, NativeSelect, Select, Textarea, TextInput } from '@empoleon/core';
+import { createSignal, JSX } from 'solid-js';
+import {
+  Button,
+  Checkbox,
+  EmpoleonProvider,
+  Group,
+  NativeSelect,
+  Select,
+  Textarea,
+  TextInput,
+} from '@empoleon/core';
 import { formRootRule, useForm } from '../index';
 import { FormBase } from './_base';
-import { createSignal, JSX } from 'solid-js';
 
 export default {
-   title: 'Form',
-   decorators: [
+  title: 'Form',
+  decorators: [
     (Story: () => JSX.Element) => (
       <EmpoleonProvider>
         <Story />
       </EmpoleonProvider>
     ),
-  ]
+  ],
 };
 
 export function Usage() {
@@ -53,7 +62,7 @@ export function Usage() {
       <NativeSelect
         label="native select"
         data={['React', 'Angular']}
-        {...form.getInputProps('select', { type: "select" })}
+        {...form.getInputProps('select', { type: 'select' })}
       />
 
       <Button onClick={() => form.setValues({ name: 'test' })}>Set values</Button>
@@ -112,7 +121,7 @@ export function Initialize() {
       <NativeSelect
         label="native select"
         data={['React', 'Angular']}
-        {...form.getInputProps('select', { type: "select" })}
+        {...form.getInputProps('select', { type: 'select' })}
       />
 
       <Button
@@ -148,7 +157,7 @@ export function ControlMode() {
         label="select"
         defaultDropdownOpened
         data={['React', 'Angular']}
-        {...form.getInputProps('select', { type: "select" })}
+        {...form.getInputProps('select', { type: 'select' })}
       />
 
       <TextInput label="Name" {...form.getInputProps('name')} />
@@ -220,7 +229,7 @@ export function FocusOnError() {
       <NativeSelect
         label="native select"
         data={['React', 'Angular']}
-        {...form.getInputProps('select', { type: "select" })}
+        {...form.getInputProps('select', { type: 'select' })}
       />
 
       <Button onClick={() => form.setValues({ name: 'test' })}>Set values</Button>

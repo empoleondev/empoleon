@@ -45,7 +45,7 @@ export type ComboboxEventsTargetFactory = Factory<{
   compound: true;
 }>;
 
-export const ComboboxEventsTarget = factory<ComboboxEventsTargetFactory>(_props => {
+export const ComboboxEventsTarget = factory<ComboboxEventsTargetFactory>((_props) => {
   const props = useProps('ComboboxEventsTarget', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'children',
@@ -56,7 +56,7 @@ export const ComboboxEventsTarget = factory<ComboboxEventsTargetFactory>(_props 
     'targetType',
     'autoComplete',
     'ref',
-  ])
+  ]);
 
   if (!isElement(local.children)) {
     throw new Error(
@@ -70,28 +70,25 @@ export const ComboboxEventsTarget = factory<ComboboxEventsTargetFactory>(_props 
     withAriaAttributes: local.withAriaAttributes,
     withKeyboardNavigation: local.withAriaAttributes,
     withExpandedAttribute: local.withExpandedAttribute,
-    onKeyDown: typeof local.children === 'object' && local.children && 'props' in local.children
-    ? (local.children.props as any).onKeyDown
-    : undefined,
+    onKeyDown:
+      typeof local.children === 'object' && local.children && 'props' in local.children
+        ? (local.children.props as any).onKeyDown
+        : undefined,
     autoComplete: local.autoComplete,
   });
 
-  const childProps = typeof local.children === 'object' && local.children && 'props' in local.children
-    ? local.children.props as any
-    : {};
+  const childProps =
+    typeof local.children === 'object' && local.children && 'props' in local.children
+      ? (local.children.props as any)
+      : {};
 
-  const mergedProps = mergeProps(
-    childProps,
-    targetProps,
-    others,
-    {
-      [local.refProp!]: useMergedRef(local.ref, ctx.store.targetRef, getRefProp(local.children))
-    }
-  );
+  const mergedProps = mergeProps(childProps, targetProps, others, {
+    [local.refProp!]: useMergedRef(local.ref, ctx.store.targetRef, getRefProp(local.children)),
+  });
 
   return typeof local.children === 'object' && local.children && 'type' in local.children
     ? { ...local.children, props: mergedProps }
     : local.children;
-  });
+});
 
 ComboboxEventsTarget.displayName = '@empoleon/core/ComboboxEventsTarget';

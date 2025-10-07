@@ -1,6 +1,6 @@
 import { IconBold, IconItalic } from '@tabler/icons-solidjs';
-import { useEditor } from '@empoleon/solid-tiptap';
 import StarterKit from '@tiptap/starter-kit';
+import { useEditor } from '@empoleon/solid-tiptap';
 import { RichTextEditor } from '@empoleon/tiptap';
 import { EmpoleonDemo } from '@empoleonx/demo';
 
@@ -34,8 +34,8 @@ function Demo() {
 }
 `;
 
-const BoldIcon = () => <IconBold size={16} stroke='3.5' />;
-const ItalicIcon = () => <IconItalic size={16} stroke='3.5' />;
+const BoldIcon = () => <IconBold size={16} stroke="3.5" />;
+const ItalicIcon = () => <IconItalic size={16} stroke="3.5" />;
 
 function Demo() {
   const editor = useEditor({

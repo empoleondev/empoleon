@@ -1,5 +1,22 @@
 import { JSX, splitProps } from 'solid-js';
 import {
+  Box,
+  BoxProps,
+  createVarsResolver,
+  ElementProps,
+  EmpoleonColor,
+  EmpoleonRadius,
+  factory,
+  Factory,
+  getRadius,
+  LoaderProps,
+  LoadingOverlay,
+  StylesApiProps,
+  useProps,
+  useStyles,
+} from '@empoleon/core';
+import { assignRef } from '@empoleon/hooks';
+import {
   Accept,
   DropEvent,
   FileError,
@@ -7,23 +24,6 @@ import {
   FileWithPath,
   useDropzone,
 } from '@empoleon/solid-dropzone';
-import {
-  Box,
-  BoxProps,
-  createVarsResolver,
-  ElementProps,
-  factory,
-  Factory,
-  getRadius,
-  LoaderProps,
-  LoadingOverlay,
-  EmpoleonColor,
-  EmpoleonRadius,
-  StylesApiProps,
-  useProps,
-  useStyles,
-} from '@empoleon/core';
-import { assignRef } from '@empoleon/hooks';
 import { DropzoneProvider } from './Dropzone.context';
 import type { DropzoneFullScreenType } from './DropzoneFullScreen';
 import { DropzoneAccept, DropzoneIdle, DropzoneReject } from './DropzoneStatus';
@@ -163,33 +163,31 @@ const defaultProps = {
   rejectColor: 'red',
 } satisfies Partial<DropzoneProps>;
 
-const varsResolver = createVarsResolver<DropzoneFactory>(
-  (theme, props) => {
-    const acceptColors = theme.variantColorResolver({
-      color: props.acceptColor || theme.primaryColor,
-      theme,
-      variant: props.variant!,
-    });
+const varsResolver = createVarsResolver<DropzoneFactory>((theme, props) => {
+  const acceptColors = theme.variantColorResolver({
+    color: props.acceptColor || theme.primaryColor,
+    theme,
+    variant: props.variant!,
+  });
 
-    const rejectColors = theme.variantColorResolver({
-      color: props.rejectColor || 'red',
-      theme,
-      variant: props.variant!,
-    });
+  const rejectColors = theme.variantColorResolver({
+    color: props.rejectColor || 'red',
+    theme,
+    variant: props.variant!,
+  });
 
-    return {
-      root: {
-        '--dropzone-radius': getRadius(props.radius),
-        '--dropzone-accept-color': acceptColors.color,
-        '--dropzone-accept-bg': acceptColors.background,
-        '--dropzone-reject-color': rejectColors.color,
-        '--dropzone-reject-bg': rejectColors.background,
-      },
-    };
-  }
-);
+  return {
+    root: {
+      '--dropzone-radius': getRadius(props.radius),
+      '--dropzone-accept-color': acceptColors.color,
+      '--dropzone-accept-bg': acceptColors.background,
+      '--dropzone-reject-color': rejectColors.color,
+      '--dropzone-reject-bg': rejectColors.background,
+    },
+  };
+});
 
-export const Dropzone = factory<DropzoneFactory>(_props => {
+export const Dropzone = factory<DropzoneFactory>((_props) => {
   const props = useProps('Dropzone', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -232,7 +230,7 @@ export const Dropzone = factory<DropzoneFactory>(_props => {
     'inputProps',
     'mod',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<DropzoneFactory>({
@@ -254,7 +252,9 @@ export const Dropzone = factory<DropzoneFactory>(_props => {
     onDropAccepted: local.onDrop,
     onDropRejected: local.onReject,
     disabled: local.disabled || local.loading,
-    accept: Array.isArray(local.accept) ? local.accept.reduce((r, key) => ({ ...r, [key]: [] }), {}) : local.accept,
+    accept: Array.isArray(local.accept)
+      ? local.accept.reduce((r, key) => ({ ...r, [key]: [] }), {})
+      : local.accept,
     multiple: local.multiple,
     maxSize: local.maxSize,
     maxFiles: local.maxFiles,
@@ -279,7 +279,9 @@ export const Dropzone = factory<DropzoneFactory>(_props => {
   const isIdle = !dropzone.isDragAccept() && !dropzone.isDragReject();
 
   return (
-    <DropzoneProvider value={{ accept: dropzone.isDragAccept(), reject: dropzone.isDragReject(), idle: isIdle }}>
+    <DropzoneProvider
+      value={{ accept: dropzone.isDragAccept(), reject: dropzone.isDragReject(), idle: isIdle }}
+    >
       <Box
         {...dropzone.getRootProps()}
         {...getStyles('root', { focusable: true })}

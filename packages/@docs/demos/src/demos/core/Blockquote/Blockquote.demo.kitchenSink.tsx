@@ -1,4 +1,10 @@
-import { IconInfoCircle, IconHeart, IconFlame, IconStar, IconAlertCircle } from '@tabler/icons-solidjs';
+import {
+  IconAlertCircle,
+  IconFlame,
+  IconHeart,
+  IconInfoCircle,
+  IconStar,
+} from '@tabler/icons-solidjs';
 import { Blockquote } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
 
@@ -41,7 +47,7 @@ function Demo() {
 function Demo(props: any) {
   const getIcon = () => {
     const iconProps = {
-      style: { width: '100%', height: '100%' }
+      style: { width: '100%', height: '100%' },
     };
 
     switch (props.icon) {
@@ -129,6 +135,6 @@ export const kitchenSink: EmpoleonDemo = {
       prop: 'children',
       initialValue: 'Life is like an npm install – you never know what you are going to get.',
       libraryValue: null,
-    }
+    },
   ],
 };

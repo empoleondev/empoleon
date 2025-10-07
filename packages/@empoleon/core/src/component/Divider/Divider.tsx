@@ -1,15 +1,15 @@
-import { splitProps, JSX } from 'solid-js';
+import { JSX, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
   createVarsResolver,
   ElementProps,
+  EmpoleonColor,
+  EmpoleonSize,
   factory,
   Factory,
   getSize,
   getThemeColor,
-  EmpoleonColor,
-  EmpoleonSize,
   StylesApiProps,
   useProps,
   useStyles,
@@ -62,7 +62,7 @@ const varsResolver = createVarsResolver<DividerFactory>((theme, props) => ({
   },
 }));
 
-export const Divider = factory<DividerFactory>(_props => {
+export const Divider = factory<DividerFactory>((_props) => {
   const props = useProps('Divider', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -77,7 +77,7 @@ export const Divider = factory<DividerFactory>(_props => {
     'labelPosition',
     'mod',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<DividerFactory>({

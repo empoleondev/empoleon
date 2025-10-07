@@ -1,7 +1,7 @@
+import { IconSearch } from '@tabler/icons-solidjs';
+import { createEffect, createSignal } from 'solid-js';
 import { TagsInput, TagsInputProps } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { IconSearch } from '@tabler/icons-solidjs';
-import { createSignal, createEffect } from 'solid-js';
 
 const code = `
 import { TagsInput } from '@empoleon/core';
@@ -17,13 +17,15 @@ function Demo() {
 }
 `;
 
-function Demo(props: TagsInputProps & {
-  showLabel?: boolean;
-  showDescription?: boolean;
-  showError?: boolean;
-  showLeftSection?: boolean;
-  showRightSection?: boolean;
-}) {
+function Demo(
+  props: TagsInputProps & {
+    showLabel?: boolean;
+    showDescription?: boolean;
+    showError?: boolean;
+    showLeftSection?: boolean;
+    showRightSection?: boolean;
+  }
+) {
   const [value, setValue] = createSignal<string[]>(props.value || ['React', 'Vue']);
   const [searchValue, setSearchValue] = createSignal('');
 
@@ -44,7 +46,9 @@ function Demo(props: TagsInputProps & {
     <TagsInput
       {...props}
       label={props.showLabel ? 'Enter your favorite frameworks' : undefined}
-      description={props.showDescription ? 'Pick from suggestions or enter custom values' : undefined}
+      description={
+        props.showDescription ? 'Pick from suggestions or enter custom values' : undefined
+      }
       error={props.showError ? 'Please enter at least one tag' : undefined}
       placeholder="Enter tags"
       value={value()}

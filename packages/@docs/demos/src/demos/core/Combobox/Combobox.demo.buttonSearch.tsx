@@ -1,6 +1,6 @@
+import { createMemo, createSignal, For, Show } from 'solid-js';
 import { Box, Button, Combobox, Text, useCombobox } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createMemo, createSignal, For, Show } from 'solid-js';
 
 const code = `
 import { useState } from 'react';
@@ -102,9 +102,7 @@ function Demo() {
   });
 
   const filteredGroceries = createMemo(() =>
-    groceries.filter((item) =>
-      item.toLowerCase().includes(search().toLowerCase().trim())
-    )
+    groceries.filter((item) => item.toLowerCase().includes(search().toLowerCase().trim()))
   );
 
   return (
@@ -121,7 +119,7 @@ function Demo() {
 
       <Combobox
         store={combobox}
-        width='250px'
+        width="250px"
         position="bottom-start"
         withArrow
         onOptionSubmit={(val) => {
@@ -131,7 +129,9 @@ function Demo() {
       >
         <Combobox.Target withAriaAttributes={false}>
           {(props) => (
-            <Button {...props} onClick={() => combobox.toggleDropdown()}>Pick item</Button>
+            <Button {...props} onClick={() => combobox.toggleDropdown()}>
+              Pick item
+            </Button>
           )}
         </Combobox.Target>
 
@@ -147,11 +147,7 @@ function Demo() {
               fallback={<Combobox.Empty>Nothing found</Combobox.Empty>}
             >
               <For each={filteredGroceries()}>
-                {(item) => (
-                  <Combobox.Option value={item}>
-                    {item}
-                  </Combobox.Option>
-                )}
+                {(item) => <Combobox.Option value={item}>{item}</Combobox.Option>}
               </For>
             </Show>
           </Combobox.Options>

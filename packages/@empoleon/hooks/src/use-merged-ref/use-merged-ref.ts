@@ -1,5 +1,5 @@
 // use-merged-ref.ts
-import { mergeRefs as solidMergeRefs, type Ref } from "@solid-primitives/refs";
+import { mergeRefs as solidMergeRefs, type Ref } from '@solid-primitives/refs';
 
 /** A ref callback or signal-style ref used by Solid primitives */
 export type PossibleRef<T> = Ref<T> | undefined;
@@ -8,13 +8,10 @@ export type PossibleRef<T> = Ref<T> | undefined;
  * Assigns a value to a ref that can be either a function ref or an object ref
  * This utility handles both React-style object refs and Solid-style function refs
  */
-export function assignRef<T>(
-  ref: ((el: T) => void) | { current?: T } | undefined,
-  value: T
-) {
-  if (typeof ref === "function") {
+export function assignRef<T>(ref: ((el: T) => void) | { current?: T } | undefined, value: T) {
+  if (typeof ref === 'function') {
     ref(value);
-  } else if (ref && typeof ref === "object") {
+  } else if (ref && typeof ref === 'object') {
     (ref as any).current = value;
   }
 }

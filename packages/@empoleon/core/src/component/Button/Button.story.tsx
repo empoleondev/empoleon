@@ -1,7 +1,7 @@
 import { IconChevronDown, IconChevronUp } from '@tabler/icons-solidjs';
+import { createSignal, For, JSX } from 'solid-js';
 import { DEFAULT_THEME, EmpoleonProvider, rem } from '../../core';
 import { Button, ButtonProps } from './Button';
-import { createSignal, For, JSX } from 'solid-js';
 
 export default {
   title: 'Button',
@@ -24,14 +24,14 @@ export function AutoContrast() {
   return (
     <div
       style={{
-        'display': 'flex',
+        display: 'flex',
         'flex-direction': 'column',
         'align-items': 'flex-start',
-        'gap': '10px',
-        'padding': '40px',
+        gap: '10px',
+        padding: '40px',
       }}
     >
-       <For each={buttons}>
+      <For each={buttons}>
         {(color) => (
           <Button color={color} autoContrast>
             Button
@@ -44,7 +44,7 @@ export function AutoContrast() {
 
 export function PolymorphicAlignment() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Button>Button</Button>
       <Button component="div">Div</Button>
       <Button component="a">Link</Button>
@@ -54,7 +54,7 @@ export function PolymorphicAlignment() {
 
 export function SingleButton() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <div>
         <Button variant="outline" size="xl">
           Button
@@ -71,7 +71,7 @@ export function SingleButton() {
 
 export function WithinDisabledFieldset() {
   return (
-    <fieldset disabled style={{ 'padding': '40px' }}>
+    <fieldset disabled style={{ padding: '40px' }}>
       <legend>Disabled fieldset</legend>
       <Button size="lg">Disabled button</Button>
     </fieldset>
@@ -81,24 +81,21 @@ export function WithinDisabledFieldset() {
 function Colors({ index, ...others }: ButtonProps & { index?: number }) {
   const colors = Object.keys(DEFAULT_THEME.colors);
 
-  return <div style={{ display: 'flex', 'gap': '20px', 'padding': '40px' }}>
-    <For each={colors}>
-      {(color) => (
-        <Button
-          color={`${color}${typeof index === 'number' ? `.${index}` : ''}`}
-          {...others}
-        >
-          Button
-        </Button>
-      )}
-    </For>
-  </div>;
+  return (
+    <div style={{ display: 'flex', gap: '20px', padding: '40px' }}>
+      <For each={colors}>
+        {(color) => (
+          <Button color={`${color}${typeof index === 'number' ? `.${index}` : ''}`} {...others}>
+            Button
+          </Button>
+        )}
+      </For>
+    </div>
+  );
 }
 
 export function Single() {
-  return (
-    <Button darkHidden>hello</Button>
-  );
+  return <Button darkHidden>hello</Button>;
 }
 
 export function Usage() {
@@ -138,7 +135,7 @@ export function Usage() {
 
 export function FullWidth() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Button fullWidth leftSection="L" rightSection="R" justify="space-between">
         Button
       </Button>
@@ -149,7 +146,7 @@ export function FullWidth() {
 export function Sizes() {
   return (
     <>
-      <div style={{ 'padding': '40px' }}>
+      <div style={{ padding: '40px' }}>
         <Button size="xs">Button xs</Button>
         <Button size="sm">Button sm</Button>
         <Button size="md">Button md</Button>
@@ -157,7 +154,7 @@ export function Sizes() {
         <Button size="xl">Button xl</Button>
       </div>
 
-      <div style={{ 'padding': '40px' }}>
+      <div style={{ padding: '40px' }}>
         <Button size="compact-xs">Button compact xs</Button>
         <Button size="compact-sm">Button compact sm</Button>
         <Button size="compact-md">Button compact md</Button>
@@ -170,7 +167,7 @@ export function Sizes() {
 
 export function CssColor() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       Filled variant
       <div>
         <Button size="xl" radius="xl" color="#ff00ff">
@@ -213,7 +210,7 @@ export function CssColor() {
 
 export function GradientVariant() {
   return (
-    <div style={{ 'padding': '40px', display: 'flex', 'gap': '40px' }}>
+    <div style={{ padding: '40px', display: 'flex', gap: '40px' }}>
       <Button size="lg" variant="gradient">
         $$
       </Button>
@@ -229,7 +226,7 @@ export function GradientVariant() {
 
 export function AsLink() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Button
         size="xl"
         component="a"
@@ -247,7 +244,7 @@ export function AsLink() {
 
 export function Variables() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Button
         size="xl"
         __vars={{ '--aasdsad': 'asdasd' }}
@@ -270,7 +267,7 @@ export function Variables() {
 
 export function Loading() {
   return (
-    <div style={{ 'padding': '40px', display: 'flex', 'gap': '20px' }}>
+    <div style={{ padding: '40px', display: 'flex', gap: '20px' }}>
       <Button loading size="xs">
         Button xs
       </Button>
@@ -293,7 +290,7 @@ export function Loading() {
 export function ToggleLoading() {
   const [loading, setLoading] = createSignal(false);
   return (
-    <div style={{ 'padding': '40px', display: 'flex', 'gap': '20px' }}>
+    <div style={{ padding: '40px', display: 'flex', gap: '20px' }}>
       <Button loading={loading()} size="lg">
         Save to database
       </Button>
@@ -307,7 +304,7 @@ export function ToggleLoading() {
 
 export function Disabled() {
   return (
-    <div style={{ 'padding': '40px', display: 'flex', 'gap': '20px' }}>
+    <div style={{ padding: '40px', display: 'flex', gap: '20px' }}>
       <Button disabled size="lg">
         $$
       </Button>
@@ -317,7 +314,7 @@ export function Disabled() {
 
 export function Sections() {
   return (
-    <div style={{ 'padding': '40px', display: 'flex', 'gap': '20px' }}>
+    <div style={{ padding: '40px', display: 'flex', gap: '20px' }}>
       <Button leftSection="L">With Left</Button>
       <Button rightSection="R">With Right</Button>
       <Button leftSection="L" rightSection="R">
@@ -329,7 +326,7 @@ export function Sections() {
 
 export function ButtonGroup() {
   return (
-    <div style={{ 'padding': '40px', 'display': 'flex', 'gap': '20px' }}>
+    <div style={{ padding: '40px', display: 'flex', gap: '20px' }}>
       <Button size="lg" variant="default">
         S
       </Button>
@@ -375,7 +372,7 @@ export function ButtonGroup() {
 
 export function Unstyled() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Button unstyled loading>
         Unstyled
       </Button>

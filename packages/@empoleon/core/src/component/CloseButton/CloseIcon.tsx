@@ -1,4 +1,4 @@
-import { splitProps, mergeProps, JSX } from 'solid-js';
+import { JSX, mergeProps, splitProps } from 'solid-js';
 
 export interface CloseIconProps extends JSX.SvgSVGAttributes<SVGSVGElement> {
   /** Icon width and height, `var(--icon-size)` by default */
@@ -6,10 +6,11 @@ export interface CloseIconProps extends JSX.SvgSVGAttributes<SVGSVGElement> {
 }
 
 export function CloseIcon(props: CloseIconProps) {
-  const [local, others] = splitProps(
-    mergeProps({ size: 'var(--cb-icon-size, 70%)' }, props),
-    ['size', 'style', 'ref']
-  );
+  const [local, others] = splitProps(mergeProps({ size: 'var(--cb-icon-size, 70%)' }, props), [
+    'size',
+    'style',
+    'ref',
+  ]);
 
   return (
     <svg
@@ -27,7 +28,7 @@ export function CloseIcon(props: CloseIconProps) {
         clip-rule="evenodd"
       />
     </svg>
-  )
-};
+  );
+}
 
 CloseIcon.displayName = '@empoleon/core/CloseIcon';

@@ -44,7 +44,7 @@ const defaultProps = {
   animateOpacity: true,
 } satisfies Partial<CollapseProps>;
 
-export const Collapse = factory<CollapseFactory>(_props => {
+export const Collapse = factory<CollapseFactory>((_props) => {
   const props = useProps('Collapse', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'children',
@@ -62,7 +62,7 @@ export const Collapse = factory<CollapseFactory>(_props => {
   const theme = useEmpoleonTheme();
   const shouldReduceMotion = useReducedMotion();
   const reduceMotion = theme.respectReducedMotion ? shouldReduceMotion : false;
-  const duration = () => reduceMotion ? 0 : local.transitionDuration;
+  const duration = () => (reduceMotion ? 0 : local.transitionDuration);
 
   const getCollapseProps = useCollapse({
     opened,
@@ -75,12 +75,19 @@ export const Collapse = factory<CollapseFactory>(_props => {
   // If animations are disabled, render directly
   if (duration() === 0) {
     return (
-      <Show when={opened()} fallback={local.keepMounted ?
-        <Box {...others} style={{ display: 'none', ...getStyleObject(local.style, theme) }}>
+      <Show
+        when={opened()}
+        fallback={
+          local.keepMounted ? (
+            <Box {...others} style={{ display: 'none', ...getStyleObject(local.style, theme) }}>
+              <div data-collapse-content>{local.children}</div>
+            </Box>
+          ) : null
+        }
+      >
+        <Box {...others}>
           <div data-collapse-content>{local.children}</div>
-        </Box> : null
-      }>
-        <Box {...others}><div data-collapse-content>{local.children}</div></Box>
+        </Box>
       </Show>
     );
   }

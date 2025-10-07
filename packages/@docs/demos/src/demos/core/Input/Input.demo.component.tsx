@@ -36,7 +36,7 @@ function Demo() {
 
       <Input
         component="select"
-        rightSection={<IconChevronDown size={14} stroke='1.5' />}
+        rightSection={<IconChevronDown size={14} stroke="1.5" />}
         pointer
         mt="md"
       >

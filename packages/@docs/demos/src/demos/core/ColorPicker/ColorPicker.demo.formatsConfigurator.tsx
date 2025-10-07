@@ -1,6 +1,6 @@
+import { createSignal } from 'solid-js';
 import { ColorPicker, ColorPickerProps, Stack, Text } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal } from 'solid-js';
 
 function Wrapper(props: ColorPickerProps) {
   const [value, onChange] = createSignal('#C5D899');

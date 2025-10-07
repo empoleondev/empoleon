@@ -90,23 +90,23 @@ function Demo() {
   });
 
   // const fields = form.getValues().employees.map((item, index) => (
-    // <Draggable index={index} draggableId={item.key}>
-    //   {(provided) => (
-        // <Group ref={provided.innerRef} mt="xs" {...provided.draggableProps}>
-        //   <Center {...provided.dragHandleProps}>
-        //     <IconGripVertical size={18} />
-        //   </Center>
-        //   <TextInput
-        //     placeholder="John Doe"
-        //     {...form.getInputProps(`employees.${index}.name`)}
-        //   />
-        //   <TextInput
-        //     placeholder="example@mail.com"
-        //     {...form.getInputProps(`employees.${index}.email`)}
-        //   />
-        // </Group>
-    //   )}
-    // </Draggable>
+  // <Draggable index={index} draggableId={item.key}>
+  //   {(provided) => (
+  // <Group ref={provided.innerRef} mt="xs" {...provided.draggableProps}>
+  //   <Center {...provided.dragHandleProps}>
+  //     <IconGripVertical size={18} />
+  //   </Center>
+  //   <TextInput
+  //     placeholder="John Doe"
+  //     {...form.getInputProps(`employees.${index}.name`)}
+  //   />
+  //   <TextInput
+  //     placeholder="example@mail.com"
+  //     {...form.getInputProps(`employees.${index}.email`)}
+  //   />
+  // </Group>
+  //   )}
+  // </Draggable>
   // ));
 
   return (

@@ -27,7 +27,7 @@ export const SpinInput = (props: SpinInputProps) => {
     'onNextInput',
     'onPreviousInput',
     'onFocus',
-    'ref'
+    'ref',
   ]);
 
   const maxDigit = getMaxDigit(local.max);
@@ -95,13 +95,15 @@ export const SpinInput = (props: SpinInputProps) => {
 
     if (event.key === 'ArrowUp') {
       event.preventDefault();
-      const newValue = local.value === null ? local.min : clamp(local.value + local.step, local.min, local.max);
+      const newValue =
+        local.value === null ? local.min : clamp(local.value + local.step, local.min, local.max);
       local.onChange(newValue);
     }
 
     if (event.key === 'ArrowDown') {
       event.preventDefault();
-      const newValue = local.value === null ? local.max : clamp(local.value - local.step, local.min, local.max);
+      const newValue =
+        local.value === null ? local.max : clamp(local.value - local.step, local.min, local.max);
       local.onChange(newValue);
     }
   };
@@ -123,7 +125,7 @@ export const SpinInput = (props: SpinInputProps) => {
       onKeyDown={handleKeyDown}
       onFocus={(event) => {
         event.currentTarget.select();
-        typeof local.onFocus === "function" && local.onFocus?.(event);
+        typeof local.onFocus === 'function' && local.onFocus?.(event);
       }}
       onClick={(event) => {
         event.stopPropagation();
@@ -133,6 +135,6 @@ export const SpinInput = (props: SpinInputProps) => {
       {...others}
     />
   );
-}
+};
 
 SpinInput.displayName = '@empoleon/dates/SpinInput';

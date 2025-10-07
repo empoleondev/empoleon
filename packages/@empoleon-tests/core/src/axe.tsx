@@ -1,5 +1,5 @@
-import { JSX } from 'solid-js';
 import { render } from '@solidjs/testing-library';
+import { JSX } from 'solid-js';
 import { EmpoleonProvider } from '@empoleon/core';
 
 // Custom accessibility checks
@@ -14,7 +14,9 @@ function checkAccessibility(element: Element): string[] {
     const hasLabelledBy = button.getAttribute('aria-labelledby');
 
     if (!hasText && !hasLabel && !hasLabelledBy) {
-      violations.push(`Button ${index + 1} is missing accessible name (aria-label, aria-labelledby, or text content)`);
+      violations.push(
+        `Button ${index + 1} is missing accessible name (aria-label, aria-labelledby, or text content)`
+      );
     }
   });
 
@@ -36,7 +38,9 @@ function checkAccessibility(element: Element): string[] {
       if (index === 0 && level !== 1) {
         // First heading should be h1, but this might be too strict for components
       } else if (level > prevLevel + 1) {
-        violations.push(`Heading hierarchy skip detected: ${heading.tagName} follows h${prevLevel}`);
+        violations.push(
+          `Heading hierarchy skip detected: ${heading.tagName} follows h${prevLevel}`
+        );
       }
       prevLevel = level;
     });
@@ -51,7 +55,9 @@ function checkAccessibility(element: Element): string[] {
     const associatedLabel = id ? element.querySelector(`label[for="${id}"]`) : null;
 
     if (!hasLabel && !hasLabelledBy && !associatedLabel) {
-      violations.push(`Form input ${index + 1} (${input.tagName.toLowerCase()}) is missing accessible name`);
+      violations.push(
+        `Form input ${index + 1} (${input.tagName.toLowerCase()}) is missing accessible name`
+      );
     }
   });
 
@@ -69,11 +75,15 @@ function checkAccessibility(element: Element): string[] {
   });
 
   // Check for keyboard accessibility indicators
-  const focusableElements = element.querySelectorAll('button, a, input, textarea, select, [tabindex]');
+  const focusableElements = element.querySelectorAll(
+    'button, a, input, textarea, select, [tabindex]'
+  );
   focusableElements.forEach((el, index) => {
     const tabIndex = el.getAttribute('tabindex');
     if (tabIndex && parseInt(tabIndex) > 0) {
-      violations.push(`Element ${index + 1} has positive tabindex (${tabIndex}), which can disrupt tab order`);
+      violations.push(
+        `Element ${index + 1} has positive tabindex (${tabIndex}), which can disrupt tab order`
+      );
     }
   });
 
@@ -91,7 +101,7 @@ export function axe(elementFactories: (() => JSX.Element)[]): void {
       ));
 
       // Wait for rendering to complete
-      await new Promise(resolve => setTimeout(resolve, 10));
+      await new Promise((resolve) => setTimeout(resolve, 10));
 
       try {
         // Get the rendered element

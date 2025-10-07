@@ -1,10 +1,11 @@
+import { splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
   ElementProps,
+  EmpoleonSpacing,
   Factory,
   factory,
-  EmpoleonSpacing,
   StyleProp,
   StylesApiProps,
   useProps,
@@ -13,7 +14,6 @@ import {
 } from '../../core';
 import { SimpleGridContainerVariables, SimpleGridMediaVariables } from './SimpleGridVariables';
 import classes from './SimpleGrid.module.css';
-import { splitProps } from 'solid-js';
 
 export type SimpleGridStylesNames = 'root' | 'container';
 
@@ -46,7 +46,7 @@ const defaultProps = {
   type: 'media',
 } satisfies Partial<SimpleGridProps>;
 
-export const SimpleGrid = factory<SimpleGridFactory>(_props => {
+export const SimpleGrid = factory<SimpleGridFactory>((_props) => {
   const props = useProps('SimpleGrid', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -60,7 +60,7 @@ export const SimpleGrid = factory<SimpleGridFactory>(_props => {
     'spacing',
     'type',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<SimpleGridFactory>({
@@ -82,8 +82,12 @@ export const SimpleGrid = factory<SimpleGridFactory>(_props => {
     return (
       <>
         <SimpleGridContainerVariables {...props} selector={`.${responsiveClassName}`} />
-        <Box component='div' {...getStyles('container')}>
-          <Box ref={local.ref} {...getStyles('root', { className: responsiveClassName })} {...others} />
+        <Box component="div" {...getStyles('container')}>
+          <Box
+            ref={local.ref}
+            {...getStyles('root', { className: responsiveClassName })}
+            {...others}
+          />
         </Box>
       </>
     );

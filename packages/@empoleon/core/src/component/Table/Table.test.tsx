@@ -1,3 +1,4 @@
+import { JSX } from 'solid-js';
 import { render, screen, tests } from '@empoleon-tests/core';
 import { Table, TableProps, TableStylesNames } from './Table';
 import {
@@ -9,36 +10,37 @@ import {
   TableThead,
   TableTr,
 } from './Table.components';
-import { JSX } from 'solid-js';
 
 describe('@empoleon/core/Table', () => {
   tests.itSupportsSystemProps<TableProps, TableStylesNames>({
     component: Table,
     props: () => ({
-      children: (() => <>
-        <Table.Thead>
-          <Table.Tr>
-            <Table.Th>test-th-1</Table.Th>
-            <Table.Th>test-th-2</Table.Th>
-          </Table.Tr>
-        </Table.Thead>
+      children: (() => (
+        <>
+          <Table.Thead>
+            <Table.Tr>
+              <Table.Th>test-th-1</Table.Th>
+              <Table.Th>test-th-2</Table.Th>
+            </Table.Tr>
+          </Table.Thead>
 
-        <Table.Tbody>
-          <Table.Tr>
-            <Table.Td>test-td-1</Table.Td>
-            <Table.Td>test-td-2</Table.Td>
-          </Table.Tr>
-        </Table.Tbody>
+          <Table.Tbody>
+            <Table.Tr>
+              <Table.Td>test-td-1</Table.Td>
+              <Table.Td>test-td-2</Table.Td>
+            </Table.Tr>
+          </Table.Tbody>
 
-        <Table.Tfoot>
-          <Table.Tr>
-            <Table.Td>test-td-1</Table.Td>
-            <Table.Td>test-td-2</Table.Td>
-          </Table.Tr>
-        </Table.Tfoot>
+          <Table.Tfoot>
+            <Table.Tr>
+              <Table.Td>test-td-1</Table.Td>
+              <Table.Td>test-td-2</Table.Td>
+            </Table.Tr>
+          </Table.Tfoot>
 
-        <Table.Caption>test-caption</Table.Caption>
-      </>) as unknown as JSX.Element,
+          <Table.Caption>test-caption</Table.Caption>
+        </>
+      )) as unknown as JSX.Element,
     }),
     mod: true,
     styleProps: true,
@@ -53,16 +55,16 @@ describe('@empoleon/core/Table', () => {
   });
 
   it('renders children', () => {
-    render(() =>
+    render(() => (
       <Table>
         <tbody data-test="tbody" />
       </Table>
-    );
+    ));
     expect(document.querySelector('[data-test="tbody"]')).toBeInTheDocument();
   });
 
   it('renders table rows based on data prop', () => {
-    const { container } = render(() =>
+    const { container } = render(() => (
       <Table
         data={{
           head: ['test-thead'],
@@ -71,7 +73,7 @@ describe('@empoleon/core/Table', () => {
           caption: 'test-caption',
         }}
       />
-    );
+    ));
 
     expect(container.querySelectorAll('tr')).toHaveLength(3);
     expect(container.querySelector('td')?.textContent).toBe('test-td');

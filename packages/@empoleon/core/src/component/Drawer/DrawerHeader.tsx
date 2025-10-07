@@ -19,7 +19,7 @@ export type DrawerHeaderFactory = Factory<{
 
 const defaultProps: Partial<DrawerHeaderProps> = {};
 
-export const DrawerHeader = factory<DrawerHeaderFactory>(_props => {
+export const DrawerHeader = factory<DrawerHeaderFactory>((_props) => {
   const props = useProps('DrawerHeader', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -27,7 +27,7 @@ export const DrawerHeader = factory<DrawerHeaderFactory>(_props => {
     'style',
     'styles',
     'vars',
-    'ref'
+    'ref',
   ]);
 
   const ctx = useDrawerContext();
@@ -35,7 +35,12 @@ export const DrawerHeader = factory<DrawerHeaderFactory>(_props => {
   return (
     <ModalBaseHeader
       ref={local.ref}
-      {...ctx.getStyles('header', { classNames: local.classNames, style: local.style, styles: local.styles, className: local.className })}
+      {...ctx.getStyles('header', {
+        classNames: local.classNames,
+        style: local.style,
+        styles: local.styles,
+        className: local.className,
+      })}
       {...others}
     />
   );

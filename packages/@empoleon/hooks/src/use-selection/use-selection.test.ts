@@ -1,7 +1,7 @@
 import { renderHook } from '@solidjs/testing-library';
-import { useSelection } from './use-selection';
-import { vi, describe, it, expect } from 'vitest';
 import { createSignal } from 'solid-js';
+import { describe, expect, it, vi } from 'vitest';
+import { useSelection } from './use-selection';
 
 describe('@empoleon/hooks/use-selection', () => {
   it('correctly returns initial state for an empty data array', () => {
@@ -140,7 +140,9 @@ describe('@empoleon/hooks/use-selection', () => {
 
   it('does not reset selection when data changes and resetSelectionOnDataChange is false', () => {
     const [data, setData] = createSignal([1, 2, 3]);
-    const { result } = renderHook(() => useSelection({ data: data(), resetSelectionOnDataChange: false }));
+    const { result } = renderHook(() =>
+      useSelection({ data: data(), resetSelectionOnDataChange: false })
+    );
 
     result[1].select(1);
     result[1].select(2);
@@ -157,10 +159,14 @@ describe('@empoleon/hooks/use-selection', () => {
   it('resets selection when data changes and resetSelectionOnDataChange is true', () => {
     const [data, setData] = createSignal([1, 2, 3]);
 
-    const { result } = renderHook(() => useSelection({
-        get data() { return data(); },
-        resetSelectionOnDataChange: true
-    }));
+    const { result } = renderHook(() =>
+      useSelection({
+        get data() {
+          return data();
+        },
+        resetSelectionOnDataChange: true,
+      })
+    );
 
     result[1].select(1);
     result[1].select(2);
@@ -174,11 +180,15 @@ describe('@empoleon/hooks/use-selection', () => {
 
   it('resets to empty selection when data changes and resetSelectionOnDataChange is true', () => {
     const [data, setData] = createSignal([1, 2, 3]);
-    const { result } = renderHook(() => useSelection({
-        get data() { return data(); },
+    const { result } = renderHook(() =>
+      useSelection({
+        get data() {
+          return data();
+        },
         defaultSelection: [1],
-        resetSelectionOnDataChange: true
-    }));
+        resetSelectionOnDataChange: true,
+      })
+    );
 
     expect(result[0]()).toStrictEqual([1]);
     setData([1, 2, 3, 4]);

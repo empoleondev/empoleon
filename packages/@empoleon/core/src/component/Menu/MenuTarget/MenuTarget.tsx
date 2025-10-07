@@ -1,8 +1,8 @@
-import { splitProps, children as resolveChildren, JSX } from 'solid-js';
+import { JSX, children as resolveChildren, splitProps } from 'solid-js';
+import { Dynamic } from 'solid-js/web';
 import { createEventHandler, isElement, useProps } from '../../../core';
 import { Popover } from '../../Popover';
 import { useMenuContext } from '../Menu.context';
-import { Dynamic } from 'solid-js/web';
 
 export interface MenuTargetProps {
   /** Target element */
@@ -21,11 +21,7 @@ const defaultProps: Partial<MenuTargetProps> = {
 
 export function MenuTarget(_props: MenuTargetProps) {
   const props = useProps('MenuTarget', defaultProps, _props);
-  const [local, others] = splitProps(props, [
-    'children',
-    'refProp',
-    'ref'
-  ])
+  const [local, others] = splitProps(props, ['children', 'refProp', 'ref']);
 
   if (!isElement(local.children)) {
     throw new Error(
@@ -97,6 +93,6 @@ export function MenuTarget(_props: MenuTargetProps) {
       }}
     </Popover.Target>
   );
-};
+}
 
 MenuTarget.displayName = '@empoleon/core/MenuTarget';

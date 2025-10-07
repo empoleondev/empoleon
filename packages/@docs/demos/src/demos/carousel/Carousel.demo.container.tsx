@@ -51,7 +51,7 @@ function Demo() {
     >
       <Carousel
         withIndicators
-        height='200px'
+        height="200px"
         type="container"
         slideSize={{ base: '100%', '300px': '50%', '500px': '33.333333%' }}
         slideGap={{ base: 0, '300px': 'md', '500px': 'lg' }}

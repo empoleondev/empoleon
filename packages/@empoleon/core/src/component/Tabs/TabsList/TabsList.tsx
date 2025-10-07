@@ -34,7 +34,7 @@ export type TabsListFactory = Factory<{
   compound: true;
 }>;
 
-export const TabsList = factory<TabsListFactory>(_props => {
+export const TabsList = factory<TabsListFactory>((_props) => {
   const props = useProps('TabsList', null, _props);
   const [local, others] = splitProps(props, [
     'children',
@@ -45,7 +45,7 @@ export const TabsList = factory<TabsListFactory>(_props => {
     'styles',
     'style',
     'mod',
-    'ref'
+    'ref',
   ]);
 
   const ctx = useTabsContext();

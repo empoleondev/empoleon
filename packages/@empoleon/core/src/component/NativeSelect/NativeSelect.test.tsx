@@ -48,9 +48,9 @@ describe('@empoleon/core/NativeSelect', () => {
     const { container, rerender } = render(() => <NativeSelect data={['test-1', 'test-2']} />);
     expect(container.querySelectorAll('option')).toHaveLength(2);
 
-    rerender(
-      () => <NativeSelect data={['test-1', { group: 'test-group', items: ['test-2', 'test-3'] }]} />
-    );
+    rerender(() => (
+      <NativeSelect data={['test-1', { group: 'test-group', items: ['test-2', 'test-3'] }]} />
+    ));
 
     expect(container.querySelectorAll('option')).toHaveLength(3);
     expect(container.querySelectorAll('optgroup')).toHaveLength(1);
@@ -64,13 +64,13 @@ describe('@empoleon/core/NativeSelect', () => {
 
   it('supports controlled state', async () => {
     const onChange = vi.fn();
-    const { container } = render(
-      () => <NativeSelect
+    const { container } = render(() => (
+      <NativeSelect
         data={['test-1', 'test-2']}
         value="test-1"
         onChange={(event) => onChange(event.currentTarget.value)}
       />
-    );
+    ));
 
     await userEvent.selectOptions(container.querySelector('select')!, 'test-2');
     expect(onChange).toHaveBeenCalledWith('test-2');

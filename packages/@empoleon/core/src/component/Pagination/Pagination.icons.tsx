@@ -1,4 +1,4 @@
-import { Component, JSX } from "solid-js";
+import { Component, JSX } from 'solid-js';
 
 interface _PaginationIconProps extends JSX.SvgSVGAttributes<SVGSVGElement> {
   path: string;

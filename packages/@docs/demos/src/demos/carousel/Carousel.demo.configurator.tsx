@@ -4,7 +4,7 @@ import { Slides } from './_slides';
 
 function Wrapper(props: CarouselProps) {
   return (
-    <Carousel height='200px' slideSize="70%" {...props}>
+    <Carousel height="200px" slideSize="70%" {...props}>
       <Slides count={5} />
     </Carousel>
   );

@@ -16,7 +16,11 @@ function Demo() {
 function Demo() {
   return (
     <Tooltip label="Chip tooltip" refProp="rootRef">
-      {(props) => <Chip {...props} defaultChecked>Chip with tooltip</Chip>}
+      {(props) => (
+        <Chip {...props} defaultChecked>
+          Chip with tooltip
+        </Chip>
+      )}
     </Tooltip>
   );
 }

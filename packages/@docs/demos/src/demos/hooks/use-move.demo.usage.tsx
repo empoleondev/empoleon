@@ -1,7 +1,7 @@
+import { createSignal } from 'solid-js';
 import { Code, Group, Text } from '@empoleon/core';
 import { useMove } from '@empoleon/hooks';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal } from 'solid-js';
 
 const code = `
 import { useState } from 'react';
@@ -74,7 +74,8 @@ function Demo() {
         </div>
       </Group>
       <Text ta="center" mt="sm">
-        Values <Code>{`{ x: ${Math.round(value().x * 100)}, y: ${Math.round(value().y * 100)} }`}</Code>
+        Values{' '}
+        <Code>{`{ x: ${Math.round(value().x * 100)}, y: ${Math.round(value().y * 100)} }`}</Code>
       </Text>
     </>
   );

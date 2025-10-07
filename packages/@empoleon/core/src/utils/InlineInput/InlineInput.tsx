@@ -1,16 +1,16 @@
-import { splitProps, JSX } from 'solid-js';
+import { JSX, splitProps } from 'solid-js';
+import { Input } from '../../component/Input';
 import {
   Box,
   BoxProps,
   ElementProps,
+  EmpoleonSize,
   Factory,
   getFontSize,
   getSize,
-  EmpoleonSize,
   StylesApiProps,
   useStyles,
 } from '../../core';
-import { Input } from '../../component/Input';
 import classes from './InlineInput.module.css';
 
 export const InlineInputClasses = classes;
@@ -68,7 +68,7 @@ export function InlineInput(props: InlineInputProps) {
     'style',
     'vars',
     'mod',
-    'ref'
+    'ref',
   ]);
 
   const labelPosition = local.labelPosition || 'left';
@@ -106,7 +106,11 @@ export function InlineInput(props: InlineInputProps) {
       >
         {local.children}
 
-        <Box component='div' {...getStyles('labelWrapper')} data-disabled={local.disabled || undefined}>
+        <Box
+          component="div"
+          {...getStyles('labelWrapper')}
+          data-disabled={local.disabled || undefined}
+        >
           {local.label && (
             <Box
               component={labelElement}
@@ -119,7 +123,11 @@ export function InlineInput(props: InlineInputProps) {
           )}
 
           {local.description && (
-            <Input.Description size={local.size} __inheritStyles={false} {...getStyles('description')}>
+            <Input.Description
+              size={local.size}
+              __inheritStyles={false}
+              {...getStyles('description')}
+            >
               {local.description}
             </Input.Description>
           )}

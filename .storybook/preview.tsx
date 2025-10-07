@@ -13,8 +13,8 @@
 //   }
 // };
 
-import { render } from 'solid-js/web';
 import type { Preview } from '@storybook/html-vite';
+import { render } from 'solid-js/web';
 
 export const globalTypes = {
   theme: {
@@ -36,9 +36,7 @@ export const decorators = [
   (Story: any, context: any) => {
     const container = document.createElement('div');
 
-    render(() => (
-      <Story {...context.args} />
-    ), container);
+    render(() => <Story {...context.args} />, container);
 
     return container;
   },

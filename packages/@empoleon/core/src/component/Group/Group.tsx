@@ -1,13 +1,13 @@
-import { splitProps, JSX } from 'solid-js';
+import { JSX, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
   createVarsResolver,
   ElementProps,
+  EmpoleonSpacing,
   factory,
   Factory,
   getSpacing,
-  EmpoleonSpacing,
   StylesApiProps,
   useProps,
   useStyles,
@@ -67,19 +67,17 @@ const defaultProps: Partial<GroupProps> = {
   wrap: 'wrap',
 };
 
-const varsResolver = createVarsResolver<GroupFactory>(
-  (_, props, props2) => ({
-    root: {
-      '--group-child-width': props.grow && props.preventGrowOverflow ? props2.childWidth : undefined,
-      '--group-gap': getSpacing(props.gap),
-      '--group-align': props.align,
-      '--group-justify': props.justify,
-      '--group-wrap': props.wrap,
-    },
-  })
-);
+const varsResolver = createVarsResolver<GroupFactory>((_, props, props2) => ({
+  root: {
+    '--group-child-width': props.grow && props.preventGrowOverflow ? props2.childWidth : undefined,
+    '--group-gap': getSpacing(props.gap),
+    '--group-align': props.align,
+    '--group-justify': props.justify,
+    '--group-wrap': props.wrap,
+  },
+}));
 
-export const Group = factory<GroupFactory>(_props => {
+export const Group = factory<GroupFactory>((_props) => {
   const props = useProps('Group', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -105,11 +103,10 @@ export const Group = factory<GroupFactory>(_props => {
   const filteredChildren = () => filterFalsyChildren(local.children);
   const childrenCount = () => filteredChildren().length;
   const resolvedGap = () => getSpacing(local.gap ?? 'md');
-  const childWidth = () => `calc(${
-    100 / childrenCount()
-  }% - (${resolvedGap()} - ${resolvedGap()} / ${childrenCount()}))`;
+  const childWidth = () =>
+    `calc(${100 / childrenCount()}% - (${resolvedGap()} - ${resolvedGap()} / ${childrenCount()}))`;
 
-  const stylesCtx: GroupStylesCtx =  { childWidth: childWidth() };
+  const stylesCtx: GroupStylesCtx = { childWidth: childWidth() };
 
   const getStyles = useStyles<GroupFactory>({
     name: 'Group',

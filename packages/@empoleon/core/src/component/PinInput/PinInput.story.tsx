@@ -17,7 +17,7 @@ export default {
 export function Usage() {
   const [value, setValue] = createSignal('');
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <PinInput id="test-id" value={value()} onChange={setValue} />
       <Button onClick={() => setValue('')}>Reset</Button>
     </div>
@@ -78,7 +78,7 @@ export function InputRef() {
   let inputRef: HTMLInputElement | undefined;
 
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <PinInput ref={inputRef!} />
       <Button onClick={() => inputRef?.focus()}>Focus first input</Button>
     </div>
@@ -87,7 +87,7 @@ export function InputRef() {
 
 export function Unstyled() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <PinInput unstyled />
     </div>
   );
@@ -96,7 +96,7 @@ export function Unstyled() {
 export function OnComplete() {
   const [value, setValue] = createSignal('');
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <PinInput length={5} onComplete={setValue} />
       Pin: {value()}
     </div>
@@ -107,7 +107,7 @@ export function ResetControlled() {
   const [value, setValue] = createSignal('1234');
 
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <PinInput value={value()} onChange={setValue} />
       <Button onClick={() => setValue('')}>Reset</Button>
     </div>
@@ -116,7 +116,7 @@ export function ResetControlled() {
 
 export function ReadOnly() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <PinInput readOnly />
     </div>
   );
@@ -124,7 +124,7 @@ export function ReadOnly() {
 
 export function Autofocus() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <PinInput autoFocus />
     </div>
   );
@@ -133,7 +133,7 @@ export function Autofocus() {
 export function Controlled() {
   const [value, setValue] = createSignal('');
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <PinInput value={value()} onChange={setValue} />
       Value: {value()}
     </div>
@@ -143,7 +143,7 @@ export function Controlled() {
 export function Mask() {
   const [value, setValue] = createSignal('');
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <PinInput value={value()} onChange={setValue} mask />
       Value: {value()}
     </div>
@@ -152,18 +152,16 @@ export function Mask() {
 
 export function Sizes() {
   const sizes = Object.keys(DEFAULT_THEME.fontSizes);
-  return <div style={{ 'padding': '40px' }}>
-    <For each={sizes}>
-      {(size) => (
-        <PinInput size={size as EmpoleonSize} mt="md" />
-      )}
-    </For>
-  </div>;
+  return (
+    <div style={{ padding: '40px' }}>
+      <For each={sizes}>{(size) => <PinInput size={size as EmpoleonSize} mt="md" />}</For>
+    </div>
+  );
 }
 
 export function Number() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <PinInput type="number" />
     </div>
   );
@@ -171,7 +169,7 @@ export function Number() {
 
 export function Tab() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <PinInput />
       <PinInput mt="md" />
     </div>

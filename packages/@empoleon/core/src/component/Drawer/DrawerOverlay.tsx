@@ -20,7 +20,7 @@ export type DrawerOverlayFactory = Factory<{
 
 const defaultProps: Partial<DrawerOverlayProps> = {};
 
-export const DrawerOverlay = factory<DrawerOverlayFactory>(_props => {
+export const DrawerOverlay = factory<DrawerOverlayFactory>((_props) => {
   const props = useProps('DrawerOverlay', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -28,7 +28,7 @@ export const DrawerOverlay = factory<DrawerOverlayFactory>(_props => {
     'style',
     'styles',
     'vars',
-    'ref'
+    'ref',
   ]);
 
   const ctx = useDrawerContext();
@@ -36,7 +36,12 @@ export const DrawerOverlay = factory<DrawerOverlayFactory>(_props => {
   return (
     <ModalBaseOverlay
       ref={local.ref}
-      {...ctx.getStyles('overlay', { classNames: local.classNames, style: local.style, styles: local.styles, className: local.className })}
+      {...ctx.getStyles('overlay', {
+        classNames: local.classNames,
+        style: local.style,
+        styles: local.styles,
+        className: local.className,
+      })}
       {...others}
     />
   );

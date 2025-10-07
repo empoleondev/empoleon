@@ -1,10 +1,10 @@
 import { createSignal, JSX } from 'solid-js';
+import { EmpoleonProvider } from '../../core';
 // import { useForm } from '@empoleon/form';
 import { Button } from '../Button';
 import { Group } from '../Group';
 import { TextInput } from '../TextInput';
 import { NumberInput, NumberInputHandlers } from './NumberInput';
-import { EmpoleonProvider } from '../../core';
 
 export default {
   title: 'NumberInput',
@@ -20,7 +20,7 @@ export default {
 export function Usage() {
   const [value, setValue] = createSignal<number | string>('133');
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <NumberInput
         value={value()}
         label="Number input"
@@ -28,7 +28,9 @@ export function Usage() {
         onChange={setValue}
         onValueChange={console.log}
       />
-      {typeof value === 'number' ? `${value} number` : `${value() === '' ? 'empty' : value()} string`}
+      {typeof value === 'number'
+        ? `${value} number`
+        : `${value() === '' ? 'empty' : value()} string`}
       <Button onClick={() => setValue(245.32)}>Set value to float</Button>
     </div>
   );
@@ -57,7 +59,7 @@ export function LargeDecimalPoints() {
 export function AllowLeadingZeros() {
   const [value, setValue] = createSignal<number | string>('');
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <NumberInput
         value={value()}
         label="Number input"
@@ -65,7 +67,9 @@ export function AllowLeadingZeros() {
         onChange={setValue}
         allowLeadingZeros
       />
-      {typeof value() === 'number' ? `${value()} number` : `${value() === '' ? 'empty' : value()} string`}
+      {typeof value() === 'number'
+        ? `${value()} number`
+        : `${value() === '' ? 'empty' : value()} string`}
       <Button onClick={() => setValue(245.32)}>Set value to float</Button>
     </div>
   );
@@ -73,7 +77,7 @@ export function AllowLeadingZeros() {
 
 export function MinWithStartValue() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <NumberInput label="with min" min={-1000} startValue={20} />
     </div>
   );
@@ -82,7 +86,7 @@ export function MinWithStartValue() {
 export function OnChangeValue() {
   const [value, setValue] = createSignal<number | string>(345);
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <NumberInput
         value={value()}
         label="Number input"
@@ -92,7 +96,9 @@ export function OnChangeValue() {
         thousandSeparator
         onChange={setValue}
       />
-      {typeof value() === 'number' ? `${value()} number` : `${value() === '' ? 'empty' : value()} string`}
+      {typeof value() === 'number'
+        ? `${value()} number`
+        : `${value() === '' ? 'empty' : value()} string`}
       <Button onClick={() => setValue(245.32)}>Set value to float</Button>
     </div>
   );
@@ -103,11 +109,11 @@ export function RightSectionSizes() {
     <div
       style={{
         'max-width': '340px',
-        'margin': 'auto',
-        'padding': '40px',
-        'display': 'flex',
+        margin: 'auto',
+        padding: '40px',
+        display: 'flex',
         'flex-direction': 'column',
-        'gap': '20px',
+        gap: '20px',
       }}
     >
       <NumberInput placeholder="xs" size="xs" styles={{ section: { background: 'transparent' } }} />
@@ -122,7 +128,7 @@ export function RightSectionSizes() {
 export function Unstyled() {
   const [value, setValue] = createSignal<number | string>(345);
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <NumberInput
         value={value()}
         label="Number input"
@@ -130,7 +136,9 @@ export function Unstyled() {
         onChange={setValue}
         unstyled
       />
-      {typeof value() === 'number' ? `${value()} number` : `${value() === '' ? 'empty' : value()} string`}
+      {typeof value() === 'number'
+        ? `${value()} number`
+        : `${value() === '' ? 'empty' : value()} string`}
       <Button onClick={() => setValue(245.32)}>Set value to float</Button>
     </div>
   );
@@ -139,7 +147,7 @@ export function Unstyled() {
 export function ReadOnly() {
   const [value, setValue] = createSignal<number | string>(345);
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <NumberInput
         value={value()}
         label="Number input"
@@ -154,7 +162,7 @@ export function ReadOnly() {
 export function MinMax() {
   const [value, setValue] = createSignal<number | string>(15);
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <NumberInput
         value={value()}
         label="Number input"
@@ -165,7 +173,9 @@ export function MinMax() {
         min={0}
         max={100}
       />
-      {typeof value() === 'number' ? `${value()} number` : `${value() === '' ? 'empty' : value()} string`}
+      {typeof value() === 'number'
+        ? `${value()} number`
+        : `${value() === '' ? 'empty' : value()} string`}
       <Button onClick={() => setValue(245.32)}>Set value to float</Button>
     </div>
   );
@@ -174,7 +184,7 @@ export function MinMax() {
 export function NegativeMin() {
   const [value, setValue] = createSignal<number | string>(0);
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <NumberInput
         value={value()}
         label="Number input"
@@ -183,7 +193,9 @@ export function NegativeMin() {
         min={-10}
         max={-5}
       />
-      {typeof value() === 'number' ? `${value()} number` : `${value() === '' ? 'empty' : value()} string`}
+      {typeof value() === 'number'
+        ? `${value()} number`
+        : `${value() === '' ? 'empty' : value()} string`}
       <Button onClick={() => setValue(245.32)}>Set value to float</Button>
     </div>
   );
@@ -192,7 +204,7 @@ export function NegativeMin() {
 export function NoDecimals() {
   const [value, setValue] = createSignal<number | string>(15);
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <NumberInput
         value={value()}
         label="Number input"
@@ -200,7 +212,9 @@ export function NoDecimals() {
         onChange={setValue}
         allowDecimal={false}
       />
-      {typeof value() === 'number' ? `${value()} number` : `${value() === '' ? 'empty' : value()} string`}
+      {typeof value() === 'number'
+        ? `${value()} number`
+        : `${value() === '' ? 'empty' : value()} string`}
       <Button onClick={() => setValue(245.32)}>Set value to float</Button>
     </div>
   );
@@ -208,10 +222,10 @@ export function NoDecimals() {
 
 export function Handlers() {
   const [value, setValue] = createSignal<number | string>(15);
-  const [handlersRef, setHandlersRef] = createSignal<NumberInputHandlers|null>(null);
+  const [handlersRef, setHandlersRef] = createSignal<NumberInputHandlers | null>(null);
 
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <NumberInput
         value={value()}
         label="Number input"
@@ -222,7 +236,9 @@ export function Handlers() {
         min={10}
         max={20}
       />
-      {typeof value() === 'number' ? `${value()} number` : `${value() === '' ? 'empty' : value()} string`}
+      {typeof value() === 'number'
+        ? `${value()} number`
+        : `${value() === '' ? 'empty' : value()} string`}
       <Button onClick={() => handlersRef()?.increment()}>Increment</Button>
       <Button onClick={() => handlersRef()?.decrement()}>Decrement</Button>
     </div>
@@ -231,7 +247,7 @@ export function Handlers() {
 
 export function Disabled() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <NumberInput disabled value={4000} label="Disabled with value" rightSection="$$" />
       <NumberInput disabled placeholder="Test value" label="Disabled with placeholder" />
     </div>

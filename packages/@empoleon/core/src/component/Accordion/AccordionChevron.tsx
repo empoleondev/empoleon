@@ -1,4 +1,4 @@
-import { JSX, mergeProps } from "solid-js";
+import { JSX, mergeProps } from 'solid-js';
 import { rem } from '../../core';
 
 export interface AccordionChevronProps extends JSX.SvgSVGAttributes<SVGSVGElement> {
@@ -18,7 +18,7 @@ export function AccordionChevron(props: AccordionChevronProps) {
         width: rem(merged.size),
         height: rem(merged.size),
         display: 'block',
-        ...merged.style as Record<string, any>
+        ...(merged.style as Record<string, any>),
       }}
       {...(() => {
         const { style, size, ...others } = merged;

@@ -1,16 +1,16 @@
+import { JSX } from 'solid-js';
 import { EmpoleonProvider, TextInput } from '@empoleon/core';
 import { createFormContext } from '../index';
-import { JSX } from 'solid-js';
 
 export default {
-   title: 'Form',
-   decorators: [
+  title: 'Form',
+  decorators: [
     (Story: () => JSX.Element) => (
       <EmpoleonProvider>
         <Story />
       </EmpoleonProvider>
     ),
-  ]
+  ],
 };
 
 interface FormValues {

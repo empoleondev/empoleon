@@ -15,7 +15,8 @@ export function getYearInTabOrder(props: GetYearInTabOrderInput) {
     .flat()
     .filter(
       (year) =>
-        !isYearDisabled({ year, minDate: props.minDate, maxDate: props.maxDate }) && !props.getYearControlProps?.(year)?.disabled
+        !isYearDisabled({ year, minDate: props.minDate, maxDate: props.maxDate }) &&
+        !props.getYearControlProps?.(year)?.disabled
     );
 
   const selectedYear = enabledYears.find((year) => props.getYearControlProps?.(year)?.selected);

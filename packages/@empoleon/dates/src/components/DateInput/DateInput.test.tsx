@@ -106,7 +106,7 @@ describe('@empoleon/dates/DateInput', () => {
     input?.dispatchEvent(new Event('focus', { bubbles: true }));
     input?.dispatchEvent(new Event('click', { bubbles: true }));
 
-    await new Promise(resolve => setTimeout(resolve, 50));
+    await new Promise((resolve) => setTimeout(resolve, 50));
 
     // Remove focus assertion, just check dropdown opened
     expect(container.querySelector('[data-dates-dropdown]')).toBeInTheDocument();
@@ -114,7 +114,7 @@ describe('@empoleon/dates/DateInput', () => {
     // Manual blur to close dropdown
     input?.dispatchEvent(new Event('blur', { bubbles: true }));
 
-    await new Promise(resolve => setTimeout(resolve, 50));
+    await new Promise((resolve) => setTimeout(resolve, 50));
 
     // Remove focus assertion, just check dropdown closed
     expect(container.querySelector('[data-dates-dropdown]')).not.toBeInTheDocument();
@@ -143,7 +143,7 @@ describe('@empoleon/dates/DateInput', () => {
     input?.dispatchEvent(new Event('focus', { bubbles: true }));
     input?.dispatchEvent(new Event('click', { bubbles: true }));
 
-    await new Promise(resolve => setTimeout(resolve, 50));
+    await new Promise((resolve) => setTimeout(resolve, 50));
 
     // Check if dropdown is visible
     const dropdown = container.querySelector('[data-dates-dropdown]');
@@ -159,7 +159,7 @@ describe('@empoleon/dates/DateInput', () => {
     input?.dispatchEvent(new Event('focus', { bubbles: true }));
     input?.dispatchEvent(new Event('click', { bubbles: true }));
 
-    await new Promise(resolve => setTimeout(resolve, 50));
+    await new Promise((resolve) => setTimeout(resolve, 50));
 
     await userEvent.click(screen.getByLabelText('level-control'));
     await userEvent.click(screen.getByLabelText('level-control'));
@@ -176,7 +176,7 @@ describe('@empoleon/dates/DateInput', () => {
       if ((input as any).$$input) {
         const mockEvent = {
           currentTarget: { value: 'January 5, 2020' },
-          target: { value: 'January 5, 2020' }
+          target: { value: 'January 5, 2020' },
         };
         (input as any).$$input(mockEvent);
       }
@@ -193,7 +193,7 @@ describe('@empoleon/dates/DateInput', () => {
     input?.dispatchEvent(new Event('focus', { bubbles: true }));
     input?.dispatchEvent(new Event('click', { bubbles: true }));
 
-    await new Promise(resolve => setTimeout(resolve, 50));
+    await new Promise((resolve) => setTimeout(resolve, 50));
 
     await clickControl(container, 4);
 
@@ -203,9 +203,9 @@ describe('@empoleon/dates/DateInput', () => {
 
   it('supports controlled state (dropdown click)', async () => {
     const spy = vi.fn();
-    const { container } = render(
-      () => <DateInput {...defaultProps} date="2022-04-11" value="2022-04-11" onChange={spy} />
-    );
+    const { container } = render(() => (
+      <DateInput {...defaultProps} date="2022-04-11" value="2022-04-11" onChange={spy} />
+    ));
 
     const input = container.querySelector('input[data-dates-input]');
 
@@ -213,7 +213,7 @@ describe('@empoleon/dates/DateInput', () => {
     input?.dispatchEvent(new Event('focus', { bubbles: true }));
     input?.dispatchEvent(new Event('click', { bubbles: true }));
 
-    await new Promise(resolve => setTimeout(resolve, 50));
+    await new Promise((resolve) => setTimeout(resolve, 50));
 
     await clickControl(container, 4);
 
@@ -231,7 +231,7 @@ describe('@empoleon/dates/DateInput', () => {
     if ((input as any).$$input) {
       const mockEvent = {
         currentTarget: { value: 'April 1, 2022' },
-        target: { value: 'April 1, 2022' }
+        target: { value: 'April 1, 2022' },
       };
       (input as any).$$input(mockEvent);
     }
@@ -244,7 +244,9 @@ describe('@empoleon/dates/DateInput', () => {
 
   it('supports controlled state (free input)', async () => {
     const spy = vi.fn();
-    const { container } = render(() => <DateInput {...defaultProps} value="2022-04-11" onChange={spy} />);
+    const { container } = render(() => (
+      <DateInput {...defaultProps} value="2022-04-11" onChange={spy} />
+    ));
 
     const input = container.querySelector('input[data-dates-input]') as HTMLInputElement;
 
@@ -252,7 +254,7 @@ describe('@empoleon/dates/DateInput', () => {
     if ((input as any).$$input) {
       const mockEvent = {
         currentTarget: { value: 'April 1, 2022' },
-        target: { value: 'April 1, 2022' }
+        target: { value: 'April 1, 2022' },
       };
       (input as any).$$input(mockEvent);
     }
@@ -265,14 +267,14 @@ describe('@empoleon/dates/DateInput', () => {
   });
 
   it('clears input when clear button is clicked (uncontrolled)', async () => {
-    const { container } = render(
-      () => <DateInput
+    const { container } = render(() => (
+      <DateInput
         {...defaultProps}
         clearable
         defaultValue="2022-04-11"
         clearButtonProps={{ 'aria-label': 'clear-button' }}
       />
-    );
+    ));
 
     const input = container.querySelector('input[data-dates-input]');
 
@@ -287,15 +289,15 @@ describe('@empoleon/dates/DateInput', () => {
 
   it('clears input when clear button is clicked (controlled)', async () => {
     const spy = vi.fn();
-    const { container } = render(
-      () => <DateInput
+    const { container } = render(() => (
+      <DateInput
         {...defaultProps}
         clearable
         value="2022-04-11"
         onChange={spy}
         clearButtonProps={{ 'aria-label': 'clear-button' }}
       />
-    );
+    ));
 
     const input = container.querySelector('input[data-dates-input]');
 
@@ -310,9 +312,9 @@ describe('@empoleon/dates/DateInput', () => {
   });
 
   it('allows to clear input value when clearable is set (uncontrolled)', async () => {
-    const { container } = render(
-      () => <DateInput {...defaultProps} clearable defaultValue="2022-04-11" />
-    );
+    const { container } = render(() => (
+      <DateInput {...defaultProps} clearable defaultValue="2022-04-11" />
+    ));
 
     const input = container.querySelector('input[data-dates-input]');
 
@@ -329,9 +331,9 @@ describe('@empoleon/dates/DateInput', () => {
 
   it('allows to clear input value when clearable is set (controlled)', async () => {
     const spy = vi.fn();
-    const { container } = render(
-      () => <DateInput {...defaultProps} clearable value="2022-04-11" onChange={spy} />
-    );
+    const { container } = render(() => (
+      <DateInput {...defaultProps} clearable value="2022-04-11" onChange={spy} />
+    ));
 
     const input = container.querySelector('input[data-dates-input]');
 
@@ -349,9 +351,9 @@ describe('@empoleon/dates/DateInput', () => {
   });
 
   it('does not allow to clear input value when clearable is not set (uncontrolled)', async () => {
-    const { container } = render(
-      () => <DateInput {...defaultProps} clearable={false} defaultValue="2022-04-11" />
-    );
+    const { container } = render(() => (
+      <DateInput {...defaultProps} clearable={false} defaultValue="2022-04-11" />
+    ));
 
     const input = container.querySelector('input[data-dates-input]');
 
@@ -369,9 +371,9 @@ describe('@empoleon/dates/DateInput', () => {
 
   it('does not allow to clear input value when clearable is not set (controlled)', async () => {
     const spy = vi.fn();
-    const { container } = render(
-      () => <DateInput {...defaultProps} clearable={false} value="2022-04-11" onChange={spy} />
-    );
+    const { container } = render(() => (
+      <DateInput {...defaultProps} clearable={false} value="2022-04-11" onChange={spy} />
+    ));
 
     const input = container.querySelector('input[data-dates-input]');
 
@@ -389,9 +391,9 @@ describe('@empoleon/dates/DateInput', () => {
   });
 
   it('allows to clear input value by clicking the selected date when clearable and allowDeselect are set (uncontrolled)', async () => {
-    const { container } = render(
-      () => <DateInput {...defaultProps} clearable allowDeselect defaultValue="2022-04-01" />
-    );
+    const { container } = render(() => (
+      <DateInput {...defaultProps} clearable allowDeselect defaultValue="2022-04-01" />
+    ));
 
     const input = container.querySelector('input[data-dates-input]');
 
@@ -402,7 +404,7 @@ describe('@empoleon/dates/DateInput', () => {
     input?.dispatchEvent(new Event('focus', { bubbles: true }));
     input?.dispatchEvent(new Event('click', { bubbles: true }));
 
-    await new Promise(resolve => setTimeout(resolve, 50));
+    await new Promise((resolve) => setTimeout(resolve, 50));
 
     await clickControl(container, 4);
 
@@ -412,9 +414,9 @@ describe('@empoleon/dates/DateInput', () => {
 
   it('allows to clear input value by clicking the selected date when clearable and allowDeselect are set (controlled)', async () => {
     const spy = vi.fn();
-    const { container } = render(
-      () => <DateInput {...defaultProps} clearable allowDeselect value="2022-04-01" onChange={spy} />
-    );
+    const { container } = render(() => (
+      <DateInput {...defaultProps} clearable allowDeselect value="2022-04-01" onChange={spy} />
+    ));
 
     const input = container.querySelector('input[data-dates-input]');
 
@@ -425,7 +427,7 @@ describe('@empoleon/dates/DateInput', () => {
     input?.dispatchEvent(new Event('focus', { bubbles: true }));
     input?.dispatchEvent(new Event('click', { bubbles: true }));
 
-    await new Promise(resolve => setTimeout(resolve, 50));
+    await new Promise((resolve) => setTimeout(resolve, 50));
 
     await clickControl(container, 4);
 
@@ -435,9 +437,9 @@ describe('@empoleon/dates/DateInput', () => {
   });
 
   it('does not allow to clear input value by clicking the selected date when allowDeselect is not set (uncontrolled)', async () => {
-    const { container } = render(
-      () => <DateInput {...defaultProps} clearable allowDeselect={false} defaultValue="2022-04-01" />
-    );
+    const { container } = render(() => (
+      <DateInput {...defaultProps} clearable allowDeselect={false} defaultValue="2022-04-01" />
+    ));
 
     const input = container.querySelector('input[data-dates-input]');
 
@@ -448,7 +450,7 @@ describe('@empoleon/dates/DateInput', () => {
     input?.dispatchEvent(new Event('focus', { bubbles: true }));
     input?.dispatchEvent(new Event('click', { bubbles: true }));
 
-    await new Promise(resolve => setTimeout(resolve, 50));
+    await new Promise((resolve) => setTimeout(resolve, 50));
 
     await clickControl(container, 4);
 
@@ -458,15 +460,15 @@ describe('@empoleon/dates/DateInput', () => {
 
   it('does not allow to clear input value by clicking the selected date when allowDeselect is not set (controlled)', async () => {
     const spy = vi.fn();
-    const { container } = render(
-      () => <DateInput
+    const { container } = render(() => (
+      <DateInput
         {...defaultProps}
         clearable
         allowDeselect={false}
         value="2022-04-01"
         onChange={spy}
       />
-    );
+    ));
 
     const input = container.querySelector('input[data-dates-input]');
 
@@ -477,7 +479,7 @@ describe('@empoleon/dates/DateInput', () => {
     input?.dispatchEvent(new Event('focus', { bubbles: true }));
     input?.dispatchEvent(new Event('click', { bubbles: true }));
 
-    await new Promise(resolve => setTimeout(resolve, 50));
+    await new Promise((resolve) => setTimeout(resolve, 50));
 
     await clickControl(container, 4);
 
@@ -494,9 +496,9 @@ describe('@empoleon/dates/DateInput', () => {
   });
 
   it('render hidden input with given value', () => {
-    const { container } = render(
-      () => <DateInput {...defaultProps} value="2022-04-11" name="hidden-name" form="hidden-form" />
-    );
+    const { container } = render(() => (
+      <DateInput {...defaultProps} value="2022-04-11" name="hidden-name" form="hidden-form" />
+    ));
     const input = container.querySelector('input[type="hidden"]');
     expect(input).toHaveValue('2022-04-11');
     expect(input).toHaveAttribute('name', 'hidden-name');
@@ -504,9 +506,9 @@ describe('@empoleon/dates/DateInput', () => {
   });
 
   it('supports custom value format', () => {
-    const { container } = render(
-      () => <DateInput {...defaultProps} defaultValue="2022-04-11" valueFormat="DD/MM/YYYY" />
-    );
+    const { container } = render(() => (
+      <DateInput {...defaultProps} defaultValue="2022-04-11" valueFormat="DD/MM/YYYY" />
+    ));
 
     const input = container.querySelector('input[data-dates-input]');
 
@@ -515,9 +517,9 @@ describe('@empoleon/dates/DateInput', () => {
   });
 
   it('does not update value on blur if fixOnBlur={false}', async () => {
-    const { container } = render(
-      () => <DateInput {...defaultProps} fixOnBlur={false} defaultValue="2022-04-11" />
-    );
+    const { container } = render(() => (
+      <DateInput {...defaultProps} fixOnBlur={false} defaultValue="2022-04-11" />
+    ));
 
     const input = container.querySelector('input[data-dates-input]') as HTMLInputElement;
 
@@ -526,14 +528,16 @@ describe('@empoleon/dates/DateInput', () => {
     // Simulate the handleInputChange function directly
     const event = {
       currentTarget: { value: 'invalid value' },
-      target: { value: 'invalid value' }
+      target: { value: 'invalid value' },
     };
 
     // Trigger the input handler by dispatching a custom event
-    input?.dispatchEvent(new CustomEvent('input', {
-      detail: event,
-      bubbles: true
-    }));
+    input?.dispatchEvent(
+      new CustomEvent('input', {
+        detail: event,
+        bubbles: true,
+      })
+    );
 
     // If that doesn't work, just skip the interaction and test the final state
     if (input.value === 'April 11, 2022') {
@@ -548,9 +552,9 @@ describe('@empoleon/dates/DateInput', () => {
   });
 
   it('updates value on blur if fixOnBlur={true}', async () => {
-    const { container } = render(
-      () => <DateInput {...defaultProps} fixOnBlur defaultValue="2022-04-11" />
-    );
+    const { container } = render(() => (
+      <DateInput {...defaultProps} fixOnBlur defaultValue="2022-04-11" />
+    ));
 
     const input = container.querySelector('input[data-dates-input]');
 
@@ -568,12 +572,12 @@ describe('@empoleon/dates/DateInput', () => {
   });
 
   it('supports custom date parser', async () => {
-    const { container } = render(
-      () => <DateInput
+    const { container } = render(() => (
+      <DateInput
         {...defaultProps}
         dateParser={(input) => (input === 'secret-date' ? '2022-04-11' : null)}
       />
-    );
+    ));
 
     const input = container.querySelector('input[data-dates-input]') as HTMLInputElement;
 
@@ -581,7 +585,7 @@ describe('@empoleon/dates/DateInput', () => {
     if ((input as any).$$input) {
       const mockEvent = {
         currentTarget: { value: 'secret-date' },
-        target: { value: 'secret-date' }
+        target: { value: 'secret-date' },
       };
       (input as any).$$input(mockEvent);
     }
@@ -592,12 +596,12 @@ describe('@empoleon/dates/DateInput', () => {
   });
 
   it('has correct default __staticSelector', () => {
-    const { container } = render(
-      () => <DateInput
+    const { container } = render(() => (
+      <DateInput
         {...defaultProps}
         popoverProps={{ opened: true, withinPortal: false, transitionProps: { duration: 0 } }}
       />
-    );
+    ));
     expect(container.querySelector('[data-dates-input]')).toHaveClass('empoleon-DateInput-input');
 
     expect(container.querySelector('table button')!).toHaveClass('empoleon-DateInput-day');

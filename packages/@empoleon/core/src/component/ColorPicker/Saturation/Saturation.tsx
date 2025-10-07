@@ -37,7 +37,10 @@ export function Saturation(props: SaturationProps) {
 
   const { getStyles } = useColorPickerContext()!;
 
-  const [position, setPosition] = createSignal({ x: local.value.s / 100, y: 1 - local.value.v / 100 });
+  const [position, setPosition] = createSignal({
+    x: local.value.s / 100,
+    y: 1 - local.value.v / 100,
+  });
   let positionRef: { x: number; y: number } = position();
 
   const { ref } = useMove(
@@ -103,27 +106,30 @@ export function Saturation(props: SaturationProps) {
       onKeyDown={handleKeyDown}
     >
       <Box
-        component='div'
+        component="div"
         {...getStyles('saturationOverlay', {
           style: { 'background-color': `hsl(${local.value.h}, 100%, 50%)` },
         })}
       />
 
       <Box
-        component='div'
+        component="div"
         {...getStyles('saturationOverlay', {
           style: { 'background-image': 'linear-gradient(90deg, #fff, transparent)' },
         })}
       />
 
       <Box
-        component='div'
+        component="div"
         {...getStyles('saturationOverlay', {
           style: { 'background-image': 'linear-gradient(0deg, #000, transparent)' },
         })}
       />
 
-      <Thumb position={position()} {...getStyles('thumb', { style: { backgroundColor: local.color } }) as any} />
+      <Thumb
+        position={position()}
+        {...(getStyles('thumb', { style: { backgroundColor: local.color } }) as any)}
+      />
     </Box>
   );
 }

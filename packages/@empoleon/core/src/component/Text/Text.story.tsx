@@ -1,6 +1,6 @@
 import { JSX } from 'solid-js';
-import { Text } from './Text';
 import { EmpoleonProvider } from '../../core';
+import { Text } from './Text';
 
 export default {
   title: 'Text',
@@ -15,7 +15,7 @@ export default {
 
 export function Usage() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Text>Just text</Text>
     </div>
   );
@@ -26,7 +26,7 @@ const lorem =
 
 export function Sizes() {
   return (
-    <div style={{ 'padding': '40px', 'max-width': '500px' }}>
+    <div style={{ padding: '40px', 'max-width': '500px' }}>
       <Text size="xs">{lorem}</Text>
       <Text size="sm" mt="xl">
         {lorem}
@@ -46,7 +46,7 @@ export function Sizes() {
 
 export function Truncate() {
   return (
-    <div style={{ 'padding': '40px', 'max-width': '300px' }}>
+    <div style={{ padding: '40px', 'max-width': '300px' }}>
       <Text truncate>Please truncate this text from the end</Text>
       <Text truncate="start">Please truncate this text from the start</Text>
       <Text truncate="end">Please truncate this text from the end</Text>
@@ -56,7 +56,7 @@ export function Truncate() {
 
 export function Gradient() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Text variant="gradient" fz={50} fw="bold" gradient={{ from: 'red', to: 'cyan', deg: 180 }}>
         This is gradient text
       </Text>
@@ -70,7 +70,7 @@ export function Gradient() {
 
 export function StyleProps() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Text tt="uppercase">Text transform</Text>
       <Text td="underline">Underline</Text>
       <Text td="line-through">Strike</Text>
@@ -84,7 +84,7 @@ export function StyleProps() {
 
 export function LineClamp() {
   return (
-    <div style={{ 'padding': '40px', 'max-width': '600px' }}>
+    <div style={{ padding: '40px', 'max-width': '600px' }}>
       <Text lineClamp={3} inherit>
         From Bulbapedia: Bulbasaur is a small, quadrupedal Pokémon that has blue-green skin with
         darker patches. It has red eyes with white pupils, pointed, ear-like structures on top of

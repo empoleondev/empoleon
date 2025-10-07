@@ -1,6 +1,6 @@
-import { Button, Group, EmpoleonProvider, useEmpoleonColorScheme } from '@empoleon/core';
-import { EmpoleonDemo } from '@empoleonx/demo';
 import { createEffect, createSignal } from 'solid-js';
+import { Button, EmpoleonProvider, Group, useEmpoleonColorScheme } from '@empoleon/core';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = (props: any) => `
 import { EmpoleonProvider, Button, Group } from '@empoleon/core';

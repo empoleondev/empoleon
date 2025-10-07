@@ -19,7 +19,7 @@ export type DrawerCloseButtonFactory = Factory<{
 
 const defaultProps: Partial<DrawerCloseButtonProps> = {};
 
-export const DrawerCloseButton = factory<DrawerCloseButtonFactory>(_props => {
+export const DrawerCloseButton = factory<DrawerCloseButtonFactory>((_props) => {
   const props = useProps('DrawerCloseButton', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -27,7 +27,7 @@ export const DrawerCloseButton = factory<DrawerCloseButtonFactory>(_props => {
     'style',
     'styles',
     'vars',
-    'ref'
+    'ref',
   ]);
 
   const ctx = useDrawerContext();
@@ -35,7 +35,12 @@ export const DrawerCloseButton = factory<DrawerCloseButtonFactory>(_props => {
   return (
     <ModalBaseCloseButton
       ref={local.ref}
-      {...ctx.getStyles('close', { classNames: local.classNames, style: local.style, styles: local.styles, className: local.className })}
+      {...ctx.getStyles('close', {
+        classNames: local.classNames,
+        style: local.style,
+        styles: local.styles,
+        className: local.className,
+      })}
       {...others}
     />
   );

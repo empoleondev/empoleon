@@ -2,9 +2,9 @@ import 'dayjs/locale/ru';
 
 import dayjs from 'dayjs';
 import { screen } from '@solidjs/testing-library';
+import { JSX } from 'solid-js';
 import { DatesProvider, useDatesContext } from '@empoleon/dates';
 import { render } from '@empoleon-tests/core';
-import { JSX } from 'solid-js';
 
 export function expectWeekdaysNames(names: string[]) {
   expect(screen.getAllByRole('columnheader').map((th) => th.textContent)).toStrictEqual(names);
@@ -56,17 +56,19 @@ export function itSupportsWeekdaysProps(options: Options, name = 'supports weekd
     });
 
     it('supports changing weekday format function', () => {
-      render(
-        () => <options.component
+      render(() => (
+        <options.component
           {...options.props}
           weekdayFormat={(date: Date) => dayjs(date).format('dd')[0]}
         />
-      );
+      ));
       expectWeekdaysNames(['M', 'T', 'W', 'T', 'F', 'S', 'S']);
     });
 
     it('changes weekdays order based on firstDayOfWeek prop', () => {
-      const { rerender } = render(() => <options.component {...options.props} firstDayOfWeek={0} />);
+      const { rerender } = render(() => (
+        <options.component {...options.props} firstDayOfWeek={0} />
+      ));
       expectWeekdaysNames(['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']);
 
       rerender(() => <options.component {...options.props} firstDayOfWeek={6} />);

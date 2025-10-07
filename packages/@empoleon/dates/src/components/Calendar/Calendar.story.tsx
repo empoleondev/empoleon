@@ -1,7 +1,7 @@
 import { For, JSX } from 'solid-js';
+import { EmpoleonProvider } from '@empoleon/core';
 import { DatesProvider } from '../DatesProvider';
 import { Calendar } from './Calendar';
-import { EmpoleonProvider } from '@empoleon/core';
 
 export default {
   title: 'Calendar',
@@ -92,9 +92,7 @@ export function Sizes() {
 
   return (
     <div style={{ padding: '40px' }}>
-      <For each={sizes}>
-        {(size) => <Calendar size={size} mt="xl" />}
-      </For>
+      <For each={sizes}>{(size) => <Calendar size={size} mt="xl" />}</For>
     </div>
   );
 }

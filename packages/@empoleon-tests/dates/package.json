@@ -36,6 +36,6 @@
     "@empoleon/dates": "workspace:*",
     "@empoleon/hooks": "workspace:*",
     "dayjs": "^1.11.13",
-    "solid-js": "^1.9.7"
+    "solid-js": "1.9.7"
   }
 }

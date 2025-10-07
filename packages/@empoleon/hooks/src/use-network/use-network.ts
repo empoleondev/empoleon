@@ -41,7 +41,7 @@ export function useNetwork() {
   });
 
   function handleConnectionChange() {
-    setStatus(current => ({ ...current, ...getConnection() }));
+    setStatus((current) => ({ ...current, ...getConnection() }));
   }
 
   // (Replaced useWindowEvent with this)
@@ -69,7 +69,7 @@ export function useNetwork() {
 
     if (typeof _navigator.onLine === 'boolean') {
       // Required for Firefox and other browsers that don't support navigator.connection
-      setStatus(current => ({ ...current, online: _navigator.onLine }));
+      setStatus((current) => ({ ...current, online: _navigator.onLine }));
     }
   });
 

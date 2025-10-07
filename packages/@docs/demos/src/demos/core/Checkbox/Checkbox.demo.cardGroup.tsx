@@ -1,7 +1,7 @@
+import { createSignal, For } from 'solid-js';
 import { Checkbox, Group, Stack, Text } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
 import classes from './Checkbox.demo.card.module.css';
-import { createSignal, For } from 'solid-js';
 
 const cssCode = `.root {
   position: relative;

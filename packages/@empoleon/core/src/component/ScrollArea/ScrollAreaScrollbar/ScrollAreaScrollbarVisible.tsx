@@ -1,8 +1,4 @@
-import {
-  createSignal,
-  splitProps,
-  Show,
-} from 'solid-js';
+import { createSignal, Show, splitProps } from 'solid-js';
 import { useDirection } from '../../../core';
 import { useScrollAreaContext } from '../ScrollArea.context';
 import {
@@ -10,17 +6,9 @@ import {
   ScrollAreaScrollbarAxisProps,
   Sizes,
 } from '../ScrollArea.types';
-import {
-  ScrollAreaScrollbarX,
-} from './ScrollbarX';
-import {
-  ScrollAreaScrollbarY,
-} from './ScrollbarY';
-import {
-  getScrollPositionFromPointer,
-  getThumbOffsetFromScroll,
-  getThumbRatio,
-} from '../utils';
+import { getScrollPositionFromPointer, getThumbOffsetFromScroll, getThumbRatio } from '../utils';
+import { ScrollAreaScrollbarX } from './ScrollbarX';
+import { ScrollAreaScrollbarY } from './ScrollbarY';
 
 export interface ScrollAreaScrollbarVisibleProps
   extends Omit<ScrollAreaScrollbarAxisProps, keyof ScrollAreaScrollbarAxisPrivateProps> {
@@ -88,8 +76,7 @@ export function ScrollAreaScrollbarVisible(props: ScrollAreaScrollbarVisibleProp
             if (ctx.viewport) ctx.viewport.scrollLeft = scrollPos;
           }}
           onDragScroll={(pointerPos) => {
-            if (ctx.viewport)
-              ctx.viewport.scrollLeft = getScrollPosition(pointerPos, dir);
+            if (ctx.viewport) ctx.viewport.scrollLeft = getScrollPosition(pointerPos, dir);
           }}
         >
           {local.children}
@@ -117,8 +104,7 @@ export function ScrollAreaScrollbarVisible(props: ScrollAreaScrollbarVisibleProp
             if (ctx.viewport) ctx.viewport.scrollTop = scrollPos;
           }}
           onDragScroll={(pointerPos) => {
-            if (ctx.viewport)
-              ctx.viewport.scrollTop = getScrollPosition(pointerPos);
+            if (ctx.viewport) ctx.viewport.scrollTop = getScrollPosition(pointerPos);
           }}
         >
           {local.children}

@@ -1,3 +1,4 @@
+import { createEffect, createMemo, createSignal, JSX } from 'solid-js';
 import { useDisclosure } from '@empoleon/hooks';
 import { EmpoleonProvider, EmpoleonThemeProvider } from '../../core';
 import { Button } from '../Button';
@@ -5,8 +6,6 @@ import { Group } from '../Group';
 import { Modal } from '../Modal';
 import { TextInput } from '../TextInput';
 import { SegmentedControl } from './SegmentedControl';
-import { createEffect, createMemo, JSX } from 'solid-js';
-import { createSignal } from 'solid-js';
 
 export default {
   title: 'SegmentedControl',
@@ -115,7 +114,7 @@ export function Disabled() {
 
 export function FocusRingAlways() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <EmpoleonThemeProvider theme={{ focusRing: 'always' }} inherit>
         <SegmentedControl data={['React', 'Angular', 'Svelte', 'Vue']} />
       </EmpoleonThemeProvider>
@@ -131,13 +130,13 @@ export function SelectedItemRemoved() {
     breakingThings() ? ['1', '2', '3'].filter((elem) => elem !== '3') : ['1', '2', '3']
   );
 
-   createEffect(() => {
+  createEffect(() => {
     const data = dataList();
     if (value() && !data.includes(value())) setValue(data[0] ?? '');
   });
 
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <SegmentedControl value={value()} onChange={setValue} data={dataList()} />
 
       <button type="button" onClick={() => setBreakingThings(!breakingThings())}>
@@ -153,7 +152,7 @@ export function Unselect() {
   const dataList = ['1', '2', '3'];
 
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <SegmentedControl value={value()} onChange={setValue} data={dataList} mr={10} />
 
       <button type="button" onClick={() => setValue('')}>
@@ -172,6 +171,8 @@ export function NextToInput() {
   ));
 
   return (
-    <div style={{ 'padding': '40px', display: 'flex', 'flex-direction': 'column', gap: '40px' }}>{sizes}</div>
+    <div style={{ padding: '40px', display: 'flex', 'flex-direction': 'column', gap: '40px' }}>
+      {sizes}
+    </div>
   );
 }

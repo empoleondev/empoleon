@@ -1,6 +1,6 @@
+import { createMemo, createSignal, For } from 'solid-js';
 import { Combobox, TextInput, useCombobox } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createMemo, createSignal, For } from 'solid-js';
 
 const code = `
 import { createMemo, createSignal, For } from 'solid-js';
@@ -67,9 +67,7 @@ const groceries = ['🍎 Apples', '🍌 Bananas', '🥦 Broccoli', '🥕 Carrots
 function Demo() {
   const combobox = useCombobox();
   const [value, setValue] = createSignal('');
-  const shouldFilterOptions = createMemo(() =>
-    !groceries.some((item) => item === value())
-  );
+  const shouldFilterOptions = createMemo(() => !groceries.some((item) => item === value()));
   const filteredOptions = createMemo(() =>
     shouldFilterOptions()
       ? groceries.filter((item) => item.toLowerCase().includes(value().toLowerCase().trim()))
@@ -105,11 +103,7 @@ function Demo() {
       <Combobox.Dropdown hidden={filteredOptions().length === 0}>
         <Combobox.Options>
           <For each={filteredOptions()}>
-            {(item) => (
-              <Combobox.Option value={item}>
-                {item}
-              </Combobox.Option>
-            )}
+            {(item) => <Combobox.Option value={item}>{item}</Combobox.Option>}
           </For>
         </Combobox.Options>
       </Combobox.Dropdown>

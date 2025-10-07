@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@solidjs/testing-library';
+import { afterAll, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { useLongPress, UseLongPressOptions } from './use-long-press';
-import { vi, describe, it, expect, beforeEach, beforeAll, afterAll } from 'vitest';
 
 // Test component that uses the hook
 interface TestComponentProps {
@@ -61,7 +61,9 @@ describe('useLongPress', () => {
     const onLongPress = vi.fn();
     const customThreshold = 1000;
 
-    render(() => <TestComponent onLongPress={onLongPress} options={{ threshold: customThreshold }} />);
+    render(() => (
+      <TestComponent onLongPress={onLongPress} options={{ threshold: customThreshold }} />
+    ));
 
     const element = screen.getByTestId('test-element');
     fireEvent.mouseDown(element);

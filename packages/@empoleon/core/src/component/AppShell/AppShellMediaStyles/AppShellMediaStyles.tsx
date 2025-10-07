@@ -21,9 +21,15 @@ export function AppShellMediaStyles(props: AppShellMediaStylesProps) {
       footer: props.footer(),
       aside: props.aside(),
       padding: props.padding(),
-      theme
+      theme,
     })
   );
 
-  return <InlineStyles media={variables().media} styles={variables().baseStyles} selector={ctx.cssVariablesSelector} />;
+  return (
+    <InlineStyles
+      media={variables().media}
+      styles={variables().baseStyles}
+      selector={ctx.cssVariablesSelector}
+    />
+  );
 }

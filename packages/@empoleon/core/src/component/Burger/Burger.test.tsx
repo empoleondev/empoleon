@@ -7,9 +7,11 @@ const defaultProps: BurgerProps = {};
 describe('@empoleon/core/Burger', () => {
   tests.axe([
     () => <Burger aria-label="test" />,
-    () => <Burger>
-      <VisuallyHidden>test</VisuallyHidden>
-    </Burger>,
+    () => (
+      <Burger>
+        <VisuallyHidden>test</VisuallyHidden>
+      </Burger>
+    ),
   ]);
 
   tests.itSupportsSystemProps<BurgerProps, BurgerStylesNames>({

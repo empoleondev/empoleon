@@ -45,7 +45,7 @@ function Demo() {
     <Accordion variant="filled" radius="md" defaultValue="photos" mih={200}>
       <Accordion.Item value="photos">
         <Accordion.Control
-          icon={<IconPhoto size={22} stroke='1.5' color="var(--empoleon-color-dimmed)" />}
+          icon={<IconPhoto size={22} stroke="1.5" color="var(--empoleon-color-dimmed)" />}
         >
           Recent photos
         </Accordion.Control>
@@ -54,7 +54,7 @@ function Demo() {
 
       <Accordion.Item value="print">
         <Accordion.Control
-          icon={<IconPrinter size={22} stroke='1.5' color="var(--empoleon-color-dimmed)" />}
+          icon={<IconPrinter size={22} stroke="1.5" color="var(--empoleon-color-dimmed)" />}
         >
           Print photos
         </Accordion.Control>
@@ -63,7 +63,7 @@ function Demo() {
 
       <Accordion.Item value="camera">
         <Accordion.Control
-          icon={<IconCameraSelfie size={22} stroke='1.5' color="var(--empoleon-color-dimmed)" />}
+          icon={<IconCameraSelfie size={22} stroke="1.5" color="var(--empoleon-color-dimmed)" />}
         >
           Camera settings
         </Accordion.Control>

@@ -1,16 +1,16 @@
-import { createEffect, createMemo, createSignal, JSX, splitProps } from 'solid-js';
 import cx from 'clsx';
+import { createEffect, createMemo, createSignal, JSX, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
   createVarsResolver,
   ElementProps,
+  EmpoleonColor,
+  EmpoleonRadius,
   factory,
   Factory,
   getRadius,
   getThemeColor,
-  EmpoleonColor,
-  EmpoleonRadius,
   rem,
   ScrollArea,
   StylesApiProps,
@@ -121,17 +121,15 @@ const defaultProps = {
   expandCodeLabel: 'Expand code',
 } satisfies Partial<CodeHighlightProps>;
 
-const varsResolver = createVarsResolver<CodeHighlightFactory>(
-  (theme, props) => ({
-    codeHighlight: {
-      '--ch-max-height': rem(props.maxCollapsedHeight),
-      '--ch-background': props.background ? getThemeColor(props.background, theme) : undefined,
-      '--ch-radius': typeof props.radius !== 'undefined' ? getRadius(props.radius) : undefined,
-    },
-  })
-);
+const varsResolver = createVarsResolver<CodeHighlightFactory>((theme, props) => ({
+  codeHighlight: {
+    '--ch-max-height': rem(props.maxCollapsedHeight),
+    '--ch-background': props.background ? getThemeColor(props.background, theme) : undefined,
+    '--ch-radius': typeof props.radius !== 'undefined' ? getRadius(props.radius) : undefined,
+  },
+}));
 
-export const CodeHighlight = factory<CodeHighlightFactory>(_props => {
+export const CodeHighlight = factory<CodeHighlightFactory>((_props) => {
   const props = useProps('CodeHighlight', defaultProps, _props);
 
   const [local, others] = splitProps(props, [
@@ -162,7 +160,7 @@ export const CodeHighlight = factory<CodeHighlightFactory>(_props => {
     '__inline',
     '__staticSelector',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<CodeHighlightFactory>({
@@ -200,7 +198,7 @@ export const CodeHighlight = factory<CodeHighlightFactory>(_props => {
   }>({
     highlightedCode: '',
     isHighlighted: false,
-    codeElementProps: {}
+    codeElementProps: {},
   });
 
   createEffect(() => {
@@ -212,16 +210,18 @@ export const CodeHighlight = factory<CodeHighlightFactory>(_props => {
     highlight({
       code,
       language,
-      colorScheme: scheme
-    }).then((result) => {
-      setHighlightedResult(result);
-    }).catch((error) => {
-      setHighlightedResult({
-        highlightedCode: code,
-        isHighlighted: false,
-        codeElementProps: {}
+      colorScheme: scheme,
+    })
+      .then((result) => {
+        setHighlightedResult(result);
+      })
+      .catch((error) => {
+        setHighlightedResult({
+          highlightedCode: code,
+          isHighlighted: false,
+          codeElementProps: {},
+        });
       });
-    });
   });
 
   const codeContent = createMemo(() => {
@@ -232,9 +232,7 @@ export const CodeHighlight = factory<CodeHighlightFactory>(_props => {
   });
 
   const safeOthers = Object.fromEntries(
-    Object.entries(others).filter(([key]) =>
-      !key.startsWith('on') || key === 'onClick'
-    )
+    Object.entries(others).filter(([key]) => !key.startsWith('on') || key === 'onClick')
   );
 
   if (local.__inline) {
@@ -279,7 +277,11 @@ export const CodeHighlight = factory<CodeHighlightFactory>(_props => {
               />
             )}
             {local.withCopyButton && (
-              <CopyCodeButton code={typeof local.code === 'function' ? local.code() : (local.code || '')} copiedLabel={local.copiedLabel} copyLabel={local.copyLabel} />
+              <CopyCodeButton
+                code={typeof local.code === 'function' ? local.code() : local.code || ''}
+                copiedLabel={local.copiedLabel}
+                copyLabel={local.copyLabel}
+              />
             )}
           </div>
         )}

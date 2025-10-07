@@ -1,14 +1,14 @@
-import { createEffect, createSignal, splitProps, JSX } from 'solid-js';
+import { createEffect, createSignal, JSX, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
   createVarsResolver,
-  getRadius,
-  getSize,
   EmpoleonColor,
   EmpoleonGradient,
   EmpoleonRadius,
   EmpoleonSize,
+  getRadius,
+  getSize,
   polymorphicFactory,
   PolymorphicFactory,
   StylesApiProps,
@@ -83,34 +83,32 @@ export type AvatarFactory = PolymorphicFactory<{
   };
 }>;
 
-const varsResolver = createVarsResolver<AvatarFactory>(
-  (theme, props) => {
-    const _color =
-      props.color === 'initials' && typeof props.name === 'string'
-        ? getInitialsColor(props.name, props.allowedInitialsColors)
-        : props.color;
+const varsResolver = createVarsResolver<AvatarFactory>((theme, props) => {
+  const _color =
+    props.color === 'initials' && typeof props.name === 'string'
+      ? getInitialsColor(props.name, props.allowedInitialsColors)
+      : props.color;
 
-    const colors = theme.variantColorResolver({
-      color: _color || 'gray',
-      theme,
-      gradient: props.gradient,
-      variant: props.variant || 'light',
-      autoContrast: props.autoContrast,
-    });
+  const colors = theme.variantColorResolver({
+    color: _color || 'gray',
+    theme,
+    gradient: props.gradient,
+    variant: props.variant || 'light',
+    autoContrast: props.autoContrast,
+  });
 
-    return {
-      root: {
-        '--avatar-size': getSize(props.size, 'avatar-size'),
-        '--avatar-radius': props.radius === undefined ? undefined : getRadius(props.radius),
-        '--avatar-bg': _color || props.variant ? colors.background : undefined,
-        '--avatar-color': _color || props.variant ? colors.color : undefined,
-        '--avatar-bd': _color || props.variant ? colors.border : undefined,
-      },
-    };
-  }
-);
+  return {
+    root: {
+      '--avatar-size': getSize(props.size, 'avatar-size'),
+      '--avatar-radius': props.radius === undefined ? undefined : getRadius(props.radius),
+      '--avatar-bg': _color || props.variant ? colors.background : undefined,
+      '--avatar-color': _color || props.variant ? colors.color : undefined,
+      '--avatar-bd': _color || props.variant ? colors.border : undefined,
+    },
+  };
+});
 
-export const Avatar = polymorphicFactory<AvatarFactory>(_props => {
+export const Avatar = polymorphicFactory<AvatarFactory>((_props) => {
   const props = useProps('Avatar', null, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -131,7 +129,7 @@ export const Avatar = polymorphicFactory<AvatarFactory>(_props => {
     'name',
     'allowedInitialsColors',
     'attributes',
-    'ref'
+    'ref',
   ]);
   const ctx = useAvatarGroupContext();
   const [error, setError] = createSignal(!local.src);
@@ -160,11 +158,14 @@ export const Avatar = polymorphicFactory<AvatarFactory>(_props => {
       {...others}
     >
       {error() ? (
-        <Box component='span' {...getStyles('placeholder')} title={local.alt}>
-          {local.children || (typeof local.name === 'string' && getInitials(local.name)) || <AvatarPlaceholderIcon />}
+        <Box component="span" {...getStyles('placeholder')} title={local.alt}>
+          {local.children || (typeof local.name === 'string' && getInitials(local.name)) || (
+            <AvatarPlaceholderIcon />
+          )}
         </Box>
       ) : (
-        <Box component='img'
+        <Box
+          component="img"
           {...local.imageProps}
           {...getStyles('image')}
           src={local.src!}

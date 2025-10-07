@@ -18,17 +18,12 @@ describe('@empoleon/core/MultiSelect', () => {
     () => <MultiSelect aria-label="test-label" data={['test-1', 'test-2']} />,
     () => <MultiSelect label="test-label" data={['test-1', 'test-2']} />,
     () => <MultiSelect label="test-label" error data={['test-1', 'test-2']} />,
-    () => <MultiSelect
-      label="test-label"
-      error="test-error"
-      id="test"
-      data={['test-1', 'test-2']}
-    />,
-    () => <MultiSelect
-      label="test-label"
-      description="test-description"
-      data={['test-1', 'test-2']}
-    />,
+    () => (
+      <MultiSelect label="test-label" error="test-error" id="test" data={['test-1', 'test-2']} />
+    ),
+    () => (
+      <MultiSelect label="test-label" description="test-description" data={['test-1', 'test-2']} />
+    ),
     () => <MultiSelect label="test-label" data={['test-1', 'test-2']} dropdownOpened />,
   ]);
 
@@ -67,9 +62,9 @@ describe('@empoleon/core/MultiSelect', () => {
 
   it('supports controlled state', async () => {
     const spy = vi.fn();
-    render(
-      () => <MultiSelect {...defaultProps} value={['test-1']} onChange={spy} name="test-multi-select" />
-    );
+    render(() => (
+      <MultiSelect {...defaultProps} value={['test-1']} onChange={spy} name="test-multi-select" />
+    ));
     await userEvent.click(screen.getByRole('textbox'));
     await userEvent.click(screen.getByRole('option', { name: 'test-2' }));
     expect(document.querySelector('input[name="test-multi-select"]')).toHaveValue('test-1');
@@ -77,7 +72,9 @@ describe('@empoleon/core/MultiSelect', () => {
   });
 
   it('supports defaultValue', () => {
-    render(() => <MultiSelect {...defaultProps} defaultValue={['test-1']} name="test-multi-select" />);
+    render(() => (
+      <MultiSelect {...defaultProps} defaultValue={['test-1']} name="test-multi-select" />
+    ));
     expect(document.querySelector('input[name="test-multi-select"]')).toHaveValue('test-1');
   });
 

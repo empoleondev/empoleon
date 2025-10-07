@@ -1,13 +1,10 @@
-import { JSX, createSignal, createEffect, onCleanup, splitProps } from 'solid-js';
-import { useScrollAreaContext } from '../ScrollArea.context';
-import {
-  ScrollbarContextValue,
-  ScrollbarProvider,
-} from './Scrollbar.context';
-import { Sizes } from '../ScrollArea.types';
+import { createEffect, createSignal, JSX, onCleanup, splitProps } from 'solid-js';
 import { useDebouncedCallback, useMergedRef } from '@empoleon/hooks';
-import { composeEventHandlers } from '../utils';
+import { useScrollAreaContext } from '../ScrollArea.context';
+import { Sizes } from '../ScrollArea.types';
 import { useResizeObserver } from '../use-resize-observer';
+import { composeEventHandlers } from '../utils';
+import { ScrollbarContextValue, ScrollbarProvider } from './Scrollbar.context';
 
 export interface ScrollbarPrivateProps {
   sizes: Sizes;
@@ -37,7 +34,7 @@ export function Scrollbar(props: ScrollbarPrivateProps & JSX.HTMLAttributes<HTML
   ]);
 
   const context = useScrollAreaContext();
-  const [scrollbar, setScrollbar] = createSignal<HTMLDivElement |  null>(null);
+  const [scrollbar, setScrollbar] = createSignal<HTMLDivElement | null>(null);
   const composeRefs = useMergedRef(local.ref, (node: HTMLDivElement) => setScrollbar(node));
   const [rectRef, setRect] = createSignal<DOMRect | null>(null);
   const [prevWebkitUserSelectRef, setPrevWebkitUserSelectRef] = createSignal('');
@@ -48,7 +45,7 @@ export function Scrollbar(props: ScrollbarPrivateProps & JSX.HTMLAttributes<HTML
 
   const handleDragScroll = (e: PointerEvent) => {
     const rect = rectRef();
-    if (rect !== null){
+    if (rect !== null) {
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
       local.onDragScroll({ x, y });
@@ -67,7 +64,9 @@ export function Scrollbar(props: ScrollbarPrivateProps & JSX.HTMLAttributes<HTML
     document.addEventListener('wheel', handleWheel, { passive: false } as AddEventListenerOptions);
 
     onCleanup(() => {
-      document.removeEventListener('wheel', handleWheel, { passive: false } as AddEventListenerOptions);
+      document.removeEventListener('wheel', handleWheel, {
+        passive: false,
+      } as AddEventListenerOptions);
     });
   });
 
@@ -79,21 +78,27 @@ export function Scrollbar(props: ScrollbarPrivateProps & JSX.HTMLAttributes<HTML
   useResizeObserver(() => context.content, handleResize);
 
   return (
-    <ScrollbarProvider value={{
-      scrollbar: scrollbar(),
-      get hasThumb() { return local.hasThumb },
-      onThumbChange: local.onThumbChange,
-      onThumbPointerUp: local.onThumbPointerUp,
-      onThumbPositionChange: local.onThumbPositionChange,
-      onThumbPointerDown: local.onThumbPointerDown,
-    }}>
+    <ScrollbarProvider
+      value={{
+        scrollbar: scrollbar(),
+        get hasThumb() {
+          return local.hasThumb;
+        },
+        onThumbChange: local.onThumbChange,
+        onThumbPointerUp: local.onThumbPointerUp,
+        onThumbPositionChange: local.onThumbPositionChange,
+        onThumbPointerDown: local.onThumbPointerDown,
+      }}
+    >
       <div
         {...scrollbarProps}
         ref={composeRefs}
         data-empoleon-scrollbar
         style={{
           position: 'absolute',
-          ...(typeof scrollbarProps.style === 'object' && scrollbarProps.style !== null ? scrollbarProps.style : {})
+          ...(typeof scrollbarProps.style === 'object' && scrollbarProps.style !== null
+            ? scrollbarProps.style
+            : {}),
         }}
         onPointerDown={composeEventHandlers(
           (e: PointerEvent) => {

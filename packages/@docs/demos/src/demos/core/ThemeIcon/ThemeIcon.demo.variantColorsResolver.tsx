@@ -2,8 +2,8 @@ import { IconError404, IconFingerprint, IconPhoto } from '@tabler/icons-solidjs'
 import {
   darken,
   defaultVariantColorsResolver,
-  Group,
   EmpoleonThemeProvider,
+  Group,
   parseThemeColor,
   rgba,
   ThemeIcon,
@@ -128,15 +128,15 @@ function Demo() {
     <EmpoleonThemeProvider theme={{ variantColorResolver }}>
       <Group>
         <ThemeIcon color="lime.4" variant="filled" size="lg">
-          <IconPhoto size={20} stroke='1.5' />
+          <IconPhoto size={20} stroke="1.5" />
         </ThemeIcon>
 
         <ThemeIcon color="orange" variant="light" size="lg">
-          <IconFingerprint size={20} stroke='1.5' />
+          <IconFingerprint size={20} stroke="1.5" />
         </ThemeIcon>
 
         <ThemeIcon variant="danger" size="lg">
-          <IconError404 size={20} stroke='1.5' />
+          <IconError404 size={20} stroke="1.5" />
         </ThemeIcon>
       </Group>
     </EmpoleonThemeProvider>

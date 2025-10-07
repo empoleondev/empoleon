@@ -1,8 +1,8 @@
 import cx from 'clsx';
+import { splitProps } from 'solid-js';
 import { polymorphicFactory, PolymorphicFactory, useProps } from '../../core';
 import { Text, TextCssVariables, TextProps, TextStylesNames, TextVariant } from '../Text';
 import classes from './Anchor.module.css';
-import { splitProps } from 'solid-js';
 
 export type AnchorStylesNames = TextStylesNames;
 export type AnchorVariant = TextVariant;
@@ -24,17 +24,11 @@ export type AnchorFactory = PolymorphicFactory<{
 
 const defaultProps: Partial<AnchorProps> = {
   underline: 'hover',
-} satisfies Partial<AnchorProps>;;
+} satisfies Partial<AnchorProps>;
 
-export const Anchor = polymorphicFactory<AnchorFactory>(_props => {
+export const Anchor = polymorphicFactory<AnchorFactory>((_props) => {
   const props = useProps('Anchor', defaultProps, _props);
-  const [local, others] = splitProps(props, [
-    'underline',
-    'className',
-    'unstyled',
-    'mod',
-    'ref'
-  ]);
+  const [local, others] = splitProps(props, ['underline', 'className', 'unstyled', 'mod', 'ref']);
 
   return (
     <Text

@@ -30,9 +30,9 @@ describe('@empoleon/core/Notification', () => {
   });
 
   it('renders close button based on withCloseButton prop', () => {
-    const { container, rerender } = render(
-      () => <Notification {...defaultProps} withCloseButton={false} />
-    );
+    const { container, rerender } = render(() => (
+      <Notification {...defaultProps} withCloseButton={false} />
+    ));
     expect(container.querySelector('.empoleon-Notification-closeButton')).not.toBeInTheDocument();
 
     rerender(() => <Notification {...defaultProps} withCloseButton />);
@@ -40,7 +40,9 @@ describe('@empoleon/core/Notification', () => {
   });
 
   it('renders given icon', () => {
-    const { container, rerender } = render(() => <Notification {...defaultProps} icon="test-icon" />);
+    const { container, rerender } = render(() => (
+      <Notification {...defaultProps} icon="test-icon" />
+    ));
     const iconElement = container.querySelector('.empoleon-Notification-icon');
     expect(iconElement?.textContent).toBe('test-icon');
 

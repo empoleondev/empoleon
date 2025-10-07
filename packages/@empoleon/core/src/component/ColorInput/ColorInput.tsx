@@ -1,4 +1,4 @@
-import { createEffect, createMemo, createSignal, JSX, splitProps } from 'solid-js';
+import { createEffect, createSignal, JSX, splitProps } from 'solid-js';
 import { useEyeDropper, useUncontrolled } from '@empoleon/hooks';
 import {
   BoxProps,
@@ -100,7 +100,7 @@ const varsResolver = createVarsResolver<ColorInputFactory>((_, props) => ({
   },
 }));
 
-export const ColorInput = factory<ColorInputFactory>(__props => {
+export const ColorInput = factory<ColorInputFactory>((__props) => {
   const _props = useProps('ColorInput', defaultProps, __props);
   const props = useInputProps('ColorInput', defaultProps, _props);
 
@@ -133,7 +133,7 @@ export const ColorInput = factory<ColorInputFactory>(__props => {
     'leftSection',
     'rightSection',
     'swatchesPerRow',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<ColorInputFactory>({
@@ -156,6 +156,7 @@ export const ColorInput = factory<ColorInputFactory>(__props => {
 
   const [dropdownOpened, setDropdownOpened] = createSignal(false);
   const [lastValidValue, setLastValidValue] = createSignal('');
+  const [isInitialMount, setIsInitialMount] = createSignal(true);
   const [_value, setValue] = useUncontrolled({
     value: () => local.value,
     defaultValue: local.defaultValue,
@@ -177,7 +178,8 @@ export const ColorInput = factory<ColorInputFactory>(__props => {
       size={local.inputProps.size}
       unstyled={local.unstyled}
       onClick={() =>
-        eyeDropperFuncs.open()
+        eyeDropperFuncs
+          .open()
           .then((payload: any) => {
             if (payload?.sRGBHex) {
               const color = convertHsvaTo(local.format!, parseColor(payload.sRGBHex));
@@ -188,7 +190,7 @@ export const ColorInput = factory<ColorInputFactory>(__props => {
           .catch(() => {})
       }
     >
-      {local.eyeDropperIcon || <EyeDropperIcon {...getStyles('eyeDropperIcon') as any} />}
+      {local.eyeDropperIcon || <EyeDropperIcon {...(getStyles('eyeDropperIcon') as any)} />}
     </ActionIcon>
   );
 
@@ -200,7 +202,6 @@ export const ColorInput = factory<ColorInputFactory>(__props => {
   const handleInputBlur = (event: FocusEvent) => {
     local.fixOnBlur && setValue(lastValidValue());
     local.onBlur?.(event);
-    setDropdownOpened(false);
   };
 
   const handleInputClick = (event: MouseEvent) => {
@@ -209,14 +210,27 @@ export const ColorInput = factory<ColorInputFactory>(__props => {
   };
 
   createEffect(() => {
-    if (isColorValid(_value()) || _value().trim() === '') {
-      setLastValidValue(_value());
+    if (dropdownOpened()) {
+      setTimeout(() => setIsInitialMount(false), 0);
+    } else {
+      setIsInitialMount(true);
     }
   });
 
   createEffect(() => {
-    if (isColorValid(_value())) {
-      setValue(convertHsvaTo(local.format!, parseColor(_value())));
+    const value = _value();
+    if (isColorValid(value) || value.trim() === '') {
+      setLastValidValue(value);
+    }
+  });
+
+  createEffect(() => {
+    const value = _value();
+    if (value.trim() !== '' && isColorValid(value)) {
+      const currentFormat = convertHsvaTo(local.format!, parseColor(value));
+      if (currentFormat !== value) {
+        setValue(currentFormat);
+      }
     }
   });
 
@@ -232,13 +246,17 @@ export const ColorInput = factory<ColorInputFactory>(__props => {
         position="bottom-start"
         offset={5}
         opened={dropdownOpened()}
+        onChange={setDropdownOpened}
         {...local.popoverProps}
+        trapFocus={false}
         classNames={resolvedClassNames}
         styles={resolvedStyles}
         unstyled={local.unstyled}
         withRoles={false}
         disabled={
-          local.readOnly || (local.withPicker === false && (!Array.isArray(local.swatches) || local.swatches.length === 0))
+          local.readOnly ||
+          (local.withPicker === false &&
+            (!Array.isArray(local.swatches) || local.swatches.length === 0))
         }
       >
         <Popover.Target>
@@ -280,20 +298,27 @@ export const ColorInput = factory<ColorInputFactory>(__props => {
                 unstyled={local.unstyled}
                 rightSection={
                   local.rightSection ||
-                  (local.withEyeDropper && !local.disabled && !local.readOnly && eyeDropperFuncs.supported() ? eyeDropper : null)
+                  (local.withEyeDropper &&
+                  !local.disabled &&
+                  !local.readOnly &&
+                  eyeDropperFuncs.supported()
+                    ? eyeDropper
+                    : null)
                 }
               />
             </div>
           )}
         </Popover.Target>
-        <Popover.Dropdown
-          onMouseDown={(event) => event.preventDefault()}
-          className={classes.dropdown}
-        >
+        <Popover.Dropdown className={classes.dropdown}>
           <ColorPicker
+            auto-complete="none"
             __staticSelector="ColorInput"
-            value={_value()}
-            onChange={setValue}
+            value={_value().trim() === '' ? undefined : _value()}
+            onChange={(color) => {
+              if (!isInitialMount()) {
+                setValue(color);
+              }
+            }}
             onChangeEnd={local.onChangeEnd}
             format={local.format}
             swatches={local.swatches}

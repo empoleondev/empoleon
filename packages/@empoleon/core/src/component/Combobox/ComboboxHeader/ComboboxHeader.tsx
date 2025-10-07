@@ -27,23 +27,28 @@ export type ComboboxHeaderFactory = Factory<{
 
 const defaultProps: Partial<ComboboxHeaderProps> = {};
 
-export const ComboboxHeader = factory<ComboboxHeaderFactory>(_props => {
+export const ComboboxHeader = factory<ComboboxHeaderFactory>((_props) => {
   const props = useProps('ComboboxHeader', defaultProps, _props);
   const [local, others] = splitProps(props, [
-      'classNames',
-      'className',
-      'style',
-      'styles',
-      'vars',
-      'ref'
-    ]);
+    'classNames',
+    'className',
+    'style',
+    'styles',
+    'vars',
+    'ref',
+  ]);
 
   const ctx = useComboboxContext();
 
   return (
     <Box
       ref={local.ref}
-      {...ctx.getStyles('header', { className: local.className, classNames: local.classNames, style: local.style, styles: local.styles })}
+      {...ctx.getStyles('header', {
+        className: local.className,
+        classNames: local.classNames,
+        style: local.style,
+        styles: local.styles,
+      })}
       {...others}
       onMouseDown={(event) => {
         event.preventDefault();

@@ -1,3 +1,4 @@
+import { For } from 'solid-js';
 import { ScrollArea, SimpleGrid } from '@empoleon/core';
 import { useTimePickerContext } from '../TimePicker.context';
 import {
@@ -9,7 +10,6 @@ import {
 import { isSameTime } from '../utils/is-same-time/is-same-time';
 import { TimePresetControl } from './TimePresetControl';
 import { TimePresetGroup } from './TimePresetGroup';
-import { For } from 'solid-js';
 
 interface TimePresetsProps {
   presets: TimePickerPresets;
@@ -38,17 +38,21 @@ export function TimePresets(props: TimePresetsProps) {
         <div {...ctx.getStyles('presetsRoot')}>
           <SimpleGrid cols={props.withSeconds ? 2 : 3} spacing={4}>
             <For each={props.presets as string[]}>
-              {item => (
+              {(item) => (
                 <TimePresetControl
                   value={item}
                   format={props.format}
                   amPmLabels={props.amPmLabels}
                   withSeconds={props.withSeconds}
-                  active={isSameTime({ time: item, compare: props.value, withSeconds: props.withSeconds })}
+                  active={isSameTime({
+                    time: item,
+                    compare: props.value,
+                    withSeconds: props.withSeconds,
+                  })}
                   onChange={props.onChange}
                 />
               )}
-              </For>
+            </For>
           </SimpleGrid>
         </div>
       </ScrollArea.Autosize>
@@ -64,7 +68,7 @@ export function TimePresets(props: TimePresetsProps) {
     >
       <div {...ctx.getStyles('presetsRoot')}>
         <For each={props.presets as TimePickerPresetGroup[]}>
-          {group => (
+          {(group) => (
             <TimePresetGroup
               data={group}
               value={props.value}

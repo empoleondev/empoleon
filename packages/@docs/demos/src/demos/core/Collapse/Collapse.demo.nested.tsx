@@ -1,6 +1,6 @@
+import { createSignal } from 'solid-js';
 import { Box, Button, Collapse, CollapseProps, Text } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal } from 'solid-js';
 
 export function CollapsedDemo({
   children,

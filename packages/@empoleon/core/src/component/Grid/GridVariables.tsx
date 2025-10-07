@@ -19,12 +19,14 @@ export function GridVariables(props: GridVariablesProps) {
   const theme = useEmpoleonTheme();
   const _breakpoints = props.breakpoints || theme.breakpoints;
 
-  const baseStyles: Accessor<Record<string, string | undefined>> = createMemo(() => filterProps({
-    '--grid-gutter': getSpacing(getBaseValue(props.gutter)),
-  }));
+  const baseStyles: Accessor<Record<string, string | undefined>> = createMemo(() =>
+    filterProps({
+      '--grid-gutter': getSpacing(getBaseValue(props.gutter)),
+    })
+  );
 
-  const queries = () => keys(_breakpoints).reduce<Record<string, Record<string, any>>>(
-    (acc, breakpoint) => {
+  const queries = () =>
+    keys(_breakpoints).reduce<Record<string, Record<string, any>>>((acc, breakpoint) => {
       if (!acc[breakpoint]) {
         acc[breakpoint] = {};
       }
@@ -34,9 +36,7 @@ export function GridVariables(props: GridVariablesProps) {
       }
 
       return acc;
-    },
-    {}
-  );
+    }, {});
 
   const sortedBreakpoints = getSortedBreakpoints(keys(queries), _breakpoints).filter(
     (breakpoint) => keys(queries()[breakpoint.value]).length > 0

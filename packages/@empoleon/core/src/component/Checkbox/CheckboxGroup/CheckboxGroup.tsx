@@ -1,9 +1,9 @@
-import { splitProps, JSX, createEffect } from 'solid-js';
-import { DataAttributes, factory, Factory, EmpoleonSize, useProps } from '../../../core';
-import { Input, InputWrapperProps, InputWrapperStylesNames } from '../../Input';
-import { InputsGroupFieldset } from '../../../utils/InputsGroupFieldset';
-import { CheckboxGroupProvider } from '../CheckboxGroup.context';
+import { createEffect, JSX, splitProps } from 'solid-js';
 import { useUncontrolled } from '@empoleon/hooks';
+import { DataAttributes, EmpoleonSize, factory, Factory, useProps } from '../../../core';
+import { InputsGroupFieldset } from '../../../utils/InputsGroupFieldset';
+import { Input, InputWrapperProps, InputWrapperStylesNames } from '../../Input';
+import { CheckboxGroupProvider } from '../CheckboxGroup.context';
 
 export type CheckboxGroupStylesNames = InputWrapperStylesNames;
 
@@ -36,7 +36,7 @@ export type CheckboxGroupFactory = Factory<{
   stylesNames: CheckboxGroupStylesNames;
 }>;
 
-export const CheckboxGroup = factory<CheckboxGroupFactory>(_props => {
+export const CheckboxGroup = factory<CheckboxGroupFactory>((_props) => {
   const props = useProps('CheckboxGroup', null, _props);
   const [local, others] = splitProps(props, [
     'value',
@@ -46,7 +46,7 @@ export const CheckboxGroup = factory<CheckboxGroupFactory>(_props => {
     'wrapperProps',
     'children',
     'readOnly',
-    'ref'
+    'ref',
   ]);
 
   const [_value, setValue] = useUncontrolled({
@@ -57,9 +57,8 @@ export const CheckboxGroup = factory<CheckboxGroupFactory>(_props => {
   });
 
   const handleChange = (event: Event | string) => {
-    const itemValue = typeof event === 'string'
-      ? event
-      : (event.currentTarget as HTMLInputElement).value;
+    const itemValue =
+      typeof event === 'string' ? event : (event.currentTarget as HTMLInputElement).value;
 
     if (!local.readOnly) {
       setValue(
@@ -71,11 +70,13 @@ export const CheckboxGroup = factory<CheckboxGroupFactory>(_props => {
   };
 
   return (
-    <CheckboxGroupProvider value={{
-      value: _value,
-      onChange: handleChange,
-      size: () => local.size
-    }}>
+    <CheckboxGroupProvider
+      value={{
+        value: _value,
+        onChange: handleChange,
+        size: () => local.size,
+      }}
+    >
       {/* @ts-ignore */}
       <Input.Wrapper
         size={local.size}

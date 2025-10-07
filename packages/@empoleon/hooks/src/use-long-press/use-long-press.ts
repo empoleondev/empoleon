@@ -88,9 +88,7 @@ export function useLongPress(
 }
 
 function isTouchEvent(event: MouseEvent | TouchEvent): event is TouchEvent {
-  return window.TouchEvent
-    ? event instanceof TouchEvent
-    : 'touches' in event;
+  return window.TouchEvent ? event instanceof TouchEvent : 'touches' in event;
 }
 
 function isMouseEvent(event: MouseEvent | TouchEvent): event is MouseEvent {

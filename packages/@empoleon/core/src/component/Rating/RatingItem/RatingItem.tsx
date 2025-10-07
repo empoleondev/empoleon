@@ -35,14 +35,17 @@ export function RatingItem(props: RatingItemProps) {
   ]);
 
   const ctx = useRatingContext();
-  const _fullIcon = typeof local.fullIcon === 'function' ? local.fullIcon(local.value) : local.fullIcon;
-  const _emptyIcon = typeof local.emptyIcon === 'function' ? local.emptyIcon(local.value) : local.emptyIcon;
+  const _fullIcon =
+    typeof local.fullIcon === 'function' ? local.fullIcon(local.value) : local.fullIcon;
+  const _emptyIcon =
+    typeof local.emptyIcon === 'function' ? local.emptyIcon(local.value) : local.emptyIcon;
   const { dir } = useDirection();
 
   return (
     <>
       {!local.readOnly && (
-        <Box component='input'
+        <Box
+          component="input"
           {...ctx.getStyles('input')}
           onKeyDown={(event) => event.key === ' ' && local.onChange(local.value)}
           id={local.id}
@@ -63,14 +66,19 @@ export function RatingItem(props: RatingItemProps) {
         html-for={local.id}
         onClick={() => local.onChange(local.value)}
         __vars={{
-          '--rating-item-z-index': (local.fractionValue === 1 ? undefined : local.active ? 2 : 0)?.toString(),
+          '--rating-item-z-index': (local.fractionValue === 1
+            ? undefined
+            : local.active
+              ? 2
+              : 0
+          )?.toString(),
         }}
       >
         <Box
           {...ctx.getStyles('symbolBody')}
           __vars={{
             '--rating-symbol-clip-path':
-            local.fractionValue === 1
+              local.fractionValue === 1
                 ? undefined
                 : dir === 'ltr'
                   ? `inset(0 ${local.active ? 100 - local.fractionValue * 100 : 100}% 0 0)`

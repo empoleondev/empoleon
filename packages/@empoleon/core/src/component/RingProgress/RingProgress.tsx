@@ -1,12 +1,12 @@
-import { splitProps, JSX, For } from 'solid-js';
+import { For, JSX, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
   createVarsResolver,
   ElementProps,
+  EmpoleonColor,
   factory,
   Factory,
-  EmpoleonColor,
   rem,
   StylesApiProps,
   useProps,
@@ -69,17 +69,17 @@ const defaultProps = {
   thickness: 12,
 } satisfies Partial<RingProgressProps>;
 
-const varsResolver = createVarsResolver<RingProgressFactory>(
-  (_, props) => ({
-    root: {
-      '--rp-size': rem(props.size),
-      '--rp-label-offset': rem(props.thickness! * 2),
-      '--rp-transition-duration': props.transitionDuration ? `${props.transitionDuration}ms` : undefined,
-    },
-  })
-);
+const varsResolver = createVarsResolver<RingProgressFactory>((_, props) => ({
+  root: {
+    '--rp-size': rem(props.size),
+    '--rp-label-offset': rem(props.thickness! * 2),
+    '--rp-transition-duration': props.transitionDuration
+      ? `${props.transitionDuration}ms`
+      : undefined,
+  },
+}));
 
-export const RingProgress = factory<RingProgressFactory>(_props => {
+export const RingProgress = factory<RingProgressFactory>((_props) => {
   const props = useProps('RingProgress', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -96,7 +96,7 @@ export const RingProgress = factory<RingProgressFactory>(_props => {
     'rootColor',
     'transitionDuration',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<RingProgressFactory>({
@@ -115,17 +115,18 @@ export const RingProgress = factory<RingProgressFactory>(_props => {
 
   const clampedThickness = () => getClampedThickness(local.thickness!, local.size!);
 
-  const curvesData = () => getCurves({
-    size: local.size!,
-    thickness: clampedThickness(),
-    sections: local.sections,
-    renderRoundedLineCaps: local.roundCaps,
-    rootColor: local.rootColor,
-  });
+  const curvesData = () =>
+    getCurves({
+      size: local.size!,
+      thickness: clampedThickness(),
+      sections: local.sections,
+      renderRoundedLineCaps: local.roundCaps,
+      rootColor: local.rootColor,
+    });
 
   return (
     <Box {...getStyles('root')} size={local.size} ref={local.ref} {...others}>
-      <Box component='svg' {...getStyles('svg')}>
+      <Box component="svg" {...getStyles('svg')}>
         <For each={curvesData()}>
           {(item) => (
             <Curve
@@ -142,7 +143,11 @@ export const RingProgress = factory<RingProgressFactory>(_props => {
           )}
         </For>
       </Box>
-      {local.label && <Box component='div' {...getStyles('label')}>{local.label}</Box>}
+      {local.label && (
+        <Box component="div" {...getStyles('label')}>
+          {local.label}
+        </Box>
+      )}
     </Box>
   );
 });

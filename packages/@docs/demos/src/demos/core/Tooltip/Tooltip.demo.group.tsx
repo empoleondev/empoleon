@@ -27,15 +27,9 @@ function Demo() {
   return (
     <Tooltip.Group openDelay={500} closeDelay={100}>
       <Group justify="center">
-        <Tooltip label="Tooltip 1">
-          {(props) => <Button {...props}>Button 1</Button>}
-        </Tooltip>
-        <Tooltip label="Tooltip 2">
-          {(props) => <Button {...props}>Button 2</Button>}
-        </Tooltip>
-        <Tooltip label="Tooltip 3">
-          {(props) => <Button {...props}>Button 3</Button>}
-        </Tooltip>
+        <Tooltip label="Tooltip 1">{(props) => <Button {...props}>Button 1</Button>}</Tooltip>
+        <Tooltip label="Tooltip 2">{(props) => <Button {...props}>Button 2</Button>}</Tooltip>
+        <Tooltip label="Tooltip 3">{(props) => <Button {...props}>Button 3</Button>}</Tooltip>
       </Group>
     </Tooltip.Group>
   );

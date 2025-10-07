@@ -1,6 +1,6 @@
+import { For } from 'solid-js';
 import { Accordion, AccordionProps, Avatar, Group, Text } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { For } from 'solid-js';
 
 const charactersList = [
   {

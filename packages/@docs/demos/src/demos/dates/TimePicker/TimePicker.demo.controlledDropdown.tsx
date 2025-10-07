@@ -1,8 +1,8 @@
 import { IconClock } from '@tabler/icons-solidjs';
+import { createSignal } from 'solid-js';
 import { ActionIcon } from '@empoleon/core';
 import { TimePicker } from '@empoleon/dates';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal } from 'solid-js';
 
 const code = `
 import { useState } from 'react';
@@ -45,7 +45,7 @@ function Demo() {
     <TimePicker
       rightSection={
         <ActionIcon onClick={() => setDropdownOpened(true)} variant="default">
-          <IconClock size={18} stroke='1.5' />
+          <IconClock size={18} stroke="1.5" />
         </ActionIcon>
       }
       value={value()}

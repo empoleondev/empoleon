@@ -1,5 +1,5 @@
-import { createEffect, createMemo, createSignal, JSX } from 'solid-js';
 import dayjs from 'dayjs';
+import { createEffect, createMemo, createSignal, JSX } from 'solid-js';
 import { DatePickerType, DateStringValue, PickerBaseProps } from '../../types';
 import { useUncontrolledDates } from '../use-uncontrolled-dates/use-uncontrolled-dates';
 import { isInRange } from './is-in-range/is-in-range';
@@ -11,7 +11,9 @@ interface UseDatesRangeInput<Type extends DatePickerType = 'default'>
   onMouseLeave?: JSX.EventHandlerUnion<HTMLDivElement, MouseEvent>;
 }
 
-export function useDatesState<Type extends DatePickerType = 'default'>(props: UseDatesRangeInput<Type>) {
+export function useDatesState<Type extends DatePickerType = 'default'>(
+  props: UseDatesRangeInput<Type>
+) {
   const [_value, setValue] = useUncontrolledDates({
     type: props.type,
     value: props.value,
@@ -118,7 +120,9 @@ export function useDatesState<Type extends DatePickerType = 'default'>(props: Us
       return false;
     }
 
-    return dayjs(hoveredDate()).isBefore(_value()[0]) && dayjs(date).isSame(_value()[0], props.level);
+    return (
+      dayjs(hoveredDate()).isBefore(_value()[0]) && dayjs(date).isSame(_value()[0], props.level)
+    );
   };
 
   const getControlProps = (date: DateStringValue) => {
@@ -130,7 +134,8 @@ export function useDatesState<Type extends DatePickerType = 'default'>(props: Us
         inRange: isDateInRange(date),
         firstInRange: isFirstInRange(date),
         lastInRange: isLastInRange(date),
-        'data-autofocus': (!!_value()[0] && dayjs(_value()[0]).isSame(date, props.level)) || undefined,
+        'data-autofocus':
+          (!!_value()[0] && dayjs(_value()[0]).isSame(date, props.level)) || undefined,
       };
     }
 
@@ -139,7 +144,8 @@ export function useDatesState<Type extends DatePickerType = 'default'>(props: Us
         selected: _value().some(
           (selection: DateStringValue) => selection && dayjs(selection).isSame(date, props.level)
         ),
-        'data-autofocus': (!!_value()[0] && dayjs(_value()[0]).isSame(date, props.level)) || undefined,
+        'data-autofocus':
+          (!!_value()[0] && dayjs(_value()[0]).isSame(date, props.level)) || undefined,
       };
     }
 

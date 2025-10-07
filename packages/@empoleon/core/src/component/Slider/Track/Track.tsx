@@ -40,7 +40,11 @@ export function Track(props: TrackProps) {
   const { getStyles } = useSliderContext();
 
   return (
-    <Box {...getStyles('trackContainer')} mod={{ disabled: local.disabled }} {...local.containerProps}>
+    <Box
+      {...getStyles('trackContainer')}
+      mod={{ disabled: local.disabled }}
+      {...local.containerProps}
+    >
       <Box {...getStyles('track')} mod={{ inverted: local.inverted, disabled: local.disabled }}>
         <Box
           mod={{ inverted: local.inverted, disabled: local.disabled }}
@@ -53,7 +57,12 @@ export function Track(props: TrackProps) {
 
         {local.children}
 
-        <Marks {...others} offset={local.marksOffset} disabled={local.disabled} inverted={local.inverted} />
+        <Marks
+          {...others}
+          offset={local.marksOffset}
+          disabled={local.disabled}
+          inverted={local.inverted}
+        />
       </Box>
     </Box>
   );

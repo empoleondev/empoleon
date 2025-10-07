@@ -36,13 +36,13 @@ function Demo() {
     <>
       <Group>
         <ActionIcon loading={loading()}>
-          <IconHeart size={18} stroke='1.5' />
+          <IconHeart size={18} stroke="1.5" />
         </ActionIcon>
         <ActionIcon variant="light" loading={loading()}>
-          <IconHeart size={18} stroke='1.5' />
+          <IconHeart size={18} stroke="1.5" />
         </ActionIcon>
         <ActionIcon variant="outline" loading={loading()}>
-          <IconHeart size={18} stroke='1.5' />
+          <IconHeart size={18} stroke="1.5" />
         </ActionIcon>
       </Group>
 

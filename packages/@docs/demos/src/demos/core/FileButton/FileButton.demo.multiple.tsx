@@ -1,6 +1,6 @@
+import { createSignal, For, Show } from 'solid-js';
 import { Button, FileButton, Group, Text } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal, For, Show } from 'solid-js';
 
 const code = `
 import { createSignal, For, Show } from 'solid-js';
@@ -49,9 +49,7 @@ function Demo() {
       </Show>
 
       <ul>
-        <For each={files()}>
-          {(file) => <li>{file.name}</li>}
-        </For>
+        <For each={files()}>{(file) => <li>{file.name}</li>}</For>
       </ul>
     </>
   );

@@ -1,7 +1,7 @@
+import { IconLock } from '@tabler/icons-solidjs';
+import { createEffect, createSignal } from 'solid-js';
 import { PasswordInput, PasswordInputProps } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { IconLock } from '@tabler/icons-solidjs';
-import { createSignal, createEffect } from 'solid-js';
 
 const code = `
 import { PasswordInput } from '@empoleon/core';
@@ -16,13 +16,15 @@ function Demo() {
 }
 `;
 
-function Demo(props: PasswordInputProps & {
-  showLabel?: boolean;
-  showDescription?: boolean;
-  showError?: boolean;
-  showLeftSection?: boolean;
-  showAsterisk?: boolean;
-}) {
+function Demo(
+  props: PasswordInputProps & {
+    showLabel?: boolean;
+    showDescription?: boolean;
+    showError?: boolean;
+    showLeftSection?: boolean;
+    showAsterisk?: boolean;
+  }
+) {
   const [visible, setVisible] = createSignal(props.visible || false);
 
   createEffect(() => {
@@ -74,67 +76,67 @@ export const kitchenSink: EmpoleonDemo = {
       prop: 'size',
       type: 'size',
       initialValue: 'sm',
-      libraryValue: 'sm'
+      libraryValue: 'sm',
     },
     {
       prop: 'radius',
       type: 'size',
       initialValue: 'sm',
-      libraryValue: 'sm'
+      libraryValue: 'sm',
     },
     {
       prop: 'showLabel',
       type: 'boolean',
       initialValue: true,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'showDescription',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'description',
       type: 'string',
       initialValue: 'Password must include at least one letter, number and special character',
-      libraryValue: ''
+      libraryValue: '',
     },
     {
       prop: 'showError',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'showAsterisk',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'disabled',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'visible',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'showLeftSection',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'withErrorStyles',
       type: 'boolean',
       initialValue: true,
-      libraryValue: true
+      libraryValue: true,
     },
     {
       prop: 'leftSectionWidth',
@@ -143,7 +145,7 @@ export const kitchenSink: EmpoleonDemo = {
       libraryValue: 36,
       min: 20,
       max: 80,
-      step: 4
+      step: 4,
     },
     {
       prop: 'rightSectionWidth',
@@ -152,7 +154,7 @@ export const kitchenSink: EmpoleonDemo = {
       libraryValue: 36,
       min: 20,
       max: 80,
-      step: 4
+      step: 4,
     },
   ],
 };

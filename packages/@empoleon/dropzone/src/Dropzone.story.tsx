@@ -1,5 +1,5 @@
 import { For, JSX } from 'solid-js';
-import { Button, Group, EmpoleonProvider } from '@empoleon/core';
+import { Button, EmpoleonProvider, Group } from '@empoleon/core';
 import { Dropzone } from './index';
 
 export default {
@@ -10,7 +10,7 @@ export default {
         <Story />
       </EmpoleonProvider>
     ),
-  ]
+  ],
 };
 
 export function Usage() {
@@ -56,13 +56,7 @@ export function FullScreen() {
   return (
     <div style={{ height: '100vh', display: 'flex', 'flex-direction': 'column' }}>
       <div style={{ flex: 1, overflow: 'auto' }}>
-        <For each={Array(10).fill(0)}>
-          {_ => (
-            <div style={{ padding: '20px' }}>
-              {lorem}
-            </div>
-          )}
-        </For>
+        <For each={Array(10).fill(0)}>{(_) => <div style={{ padding: '20px' }}>{lorem}</div>}</For>
       </div>
       <Dropzone full-screen onDrop={(files) => console.log('accepted files', files)}>
         <Group justify="center" gap="xl" mih={220} style={{ pointerEvents: 'none' }}>

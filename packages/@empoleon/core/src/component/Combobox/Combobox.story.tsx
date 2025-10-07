@@ -1,4 +1,5 @@
 import { createSignal, For, JSX } from 'solid-js';
+import { EmpoleonProvider } from '../../core';
 import { Anchor } from '../Anchor';
 import { Button } from '../Button';
 import { Popover } from '../Popover';
@@ -7,7 +8,6 @@ import { Text } from '../Text';
 import { TextInput } from '../TextInput';
 import { Combobox } from './Combobox';
 import { useCombobox } from './use-combobox/use-combobox';
-import { EmpoleonProvider } from '../../core';
 
 export default {
   title: 'Combobox',
@@ -26,11 +26,7 @@ sodales, leo sapien faucibus eros, eu tincidunt nisl quam eget mauris. Nulla fac
 facilisi. Nulla facilisi. Nulla facilisi. Nulla facilisi. Nulla facilisi. Nulla facilisi. Nulla
 `;
 
-const scrollableContent = (
-  <For each={Array(20).fill(0)}>
-    {() => <p>{lorem}</p>}
-  </For>
-);
+const scrollableContent = <For each={Array(20).fill(0)}>{() => <p>{lorem}</p>}</For>;
 
 export function Usage() {
   const [opened, setOpened] = createSignal(true);
@@ -100,20 +96,20 @@ export function DisabledFirstItem() {
         }}
       >
         <Combobox.Target>
-           {(props) => (
-              <TextInput
-                {...props}
-                placeholder="Pick a value"
-                onFocus={() => store.openDropdown()}
-                onBlur={() => store.closeDropdown()}
-                value={value()}
-                onChange={(event) => {
-                  setValue(event.currentTarget.value);
-                  store.openDropdown();
-                }}
-                onClick={() => store.openDropdown()}
-              />
-            )}
+          {(props) => (
+            <TextInput
+              {...props}
+              placeholder="Pick a value"
+              onFocus={() => store.openDropdown()}
+              onBlur={() => store.closeDropdown()}
+              value={value()}
+              onChange={(event) => {
+                setValue(event.currentTarget.value);
+                store.openDropdown();
+              }}
+              onClick={() => store.openDropdown()}
+            />
+          )}
         </Combobox.Target>
         <Combobox.Dropdown>
           <Combobox.Header>Header</Combobox.Header>
@@ -151,7 +147,7 @@ export function AllItemsDisabled() {
         }}
       >
         <Combobox.Target>
-           {(props) =>
+          {(props) => (
             <TextInput
               {...props}
               placeholder="Pick a value"
@@ -164,7 +160,7 @@ export function AllItemsDisabled() {
               }}
               onClick={() => store.openDropdown()}
             />
-          }
+          )}
         </Combobox.Target>
         <Combobox.Dropdown>
           <Combobox.Header>Header</Combobox.Header>
@@ -220,13 +216,17 @@ export function WithButtonTarget() {
           console.log(value);
           store.closeDropdown();
         }}
-        width='400px'
+        width="400px"
         position="bottom-start"
         offset={10}
         withArrow
       >
         <Combobox.Target targetType="button">
-           {(props) => <Button onClick={() => store.toggleDropdown()} {...props}>Toggle Popover</Button>}
+          {(props) => (
+            <Button onClick={() => store.toggleDropdown()} {...props}>
+              Toggle Popover
+            </Button>
+          )}
         </Combobox.Target>
         <Combobox.Dropdown>
           <Combobox.Search
@@ -242,9 +242,7 @@ export function WithButtonTarget() {
               {filteredData().length > 0 ? (
                 <For each={filteredData()}>
                   {(option) => (
-                    <Combobox.Option value={option.value}>
-                      {option.label}
-                    </Combobox.Option>
+                    <Combobox.Option value={option.value}>{option.label}</Combobox.Option>
                   )}
                 </For>
               ) : (
@@ -267,7 +265,7 @@ export function WithScrollArea() {
       {scrollableContent}
       <Combobox store={store} withinPortal={false} onOptionSubmit={setValue}>
         <Combobox.Target>
-          {(props) =>
+          {(props) => (
             <TextInput
               {...props}
               placeholder="Pick a value"
@@ -276,16 +274,14 @@ export function WithScrollArea() {
               value={value()}
               onChange={(event) => setValue(event.currentTarget.value)}
             />
-          }
+          )}
         </Combobox.Target>
         <Combobox.Dropdown>
           <Combobox.Options>
             <ScrollArea.Autosize mah={200} type="scroll">
-               <For each={Array(100).fill(0)}>
+              <For each={Array(100).fill(0)}>
                 {(_, index) => (
-                  <Combobox.Option value={`option-${index()}`}>
-                    Option {index()}
-                  </Combobox.Option>
+                  <Combobox.Option value={`option-${index()}`}>Option {index()}</Combobox.Option>
                 )}
               </For>
             </ScrollArea.Autosize>
@@ -322,7 +318,7 @@ export function WithActive() {
         }}
       >
         <Combobox.Target>
-           {(props) =>
+          {(props) => (
             <TextInput
               {...props}
               placeholder="Pick a value"
@@ -333,7 +329,7 @@ export function WithActive() {
                 setValue(event.currentTarget.value);
               }}
             />
-          }
+          )}
         </Combobox.Target>
         <Combobox.Dropdown>
           <Combobox.Options>
@@ -369,9 +365,7 @@ export function DifferentTargets() {
           />
         </Combobox.EventsTarget>
 
-        <Combobox.Target>
-           {(props) => <Button {...props}>Dropdown target</Button>}
-        </Combobox.Target>
+        <Combobox.Target>{(props) => <Button {...props}>Dropdown target</Button>}</Combobox.Target>
 
         <Combobox.Dropdown>
           <Combobox.Options>
@@ -424,7 +418,7 @@ export function WithGroups() {
         }}
       >
         <Combobox.Target>
-           {(props) =>
+          {(props) => (
             <TextInput
               {...props}
               placeholder="Pick a value"
@@ -437,7 +431,7 @@ export function WithGroups() {
               }}
               onClick={() => store.openDropdown()}
             />
-          }
+          )}
         </Combobox.Target>
         <Combobox.Dropdown>
           <Combobox.Header>Header</Combobox.Header>
@@ -481,7 +475,7 @@ export function InteractiveHeaderAndFooter() {
         }}
       >
         <Combobox.Target>
-          {(props) =>
+          {(props) => (
             <TextInput
               {...props}
               placeholder="Pick a value"
@@ -492,11 +486,11 @@ export function InteractiveHeaderAndFooter() {
                 setValue(event.currentTarget.value);
               }}
             />
-          }
+          )}
         </Combobox.Target>
         <Combobox.Dropdown>
           <Combobox.Header>
-            <Popover width='200px' position="right" withArrow shadow="md">
+            <Popover width="200px" position="right" withArrow shadow="md">
               <Popover.Target>
                 <Button size="compact-xs">Toggle popover</Button>
               </Popover.Target>
@@ -583,9 +577,11 @@ export function SearchWithScrollArea() {
       withinPortal={false}
     >
       <Combobox.Target>
-        {(props) =>
-          <Button onClick={() => combobox.openDropdown()} {...props}>{value() || 'Select an item'}</Button>
-        }
+        {(props) => (
+          <Button onClick={() => combobox.openDropdown()} {...props}>
+            {value() || 'Select an item'}
+          </Button>
+        )}
       </Combobox.Target>
 
       <Combobox.Dropdown>
@@ -596,11 +592,7 @@ export function SearchWithScrollArea() {
               <Combobox.Empty>Nothing found</Combobox.Empty>
             ) : (
               <For each={filteredOptions()}>
-                {(item) => (
-                  <Combobox.Option value={item}>
-                    {item}
-                  </Combobox.Option>
-                )}
+                {(item) => <Combobox.Option value={item}>{item}</Combobox.Option>}
               </For>
             )}
           </ScrollArea.Autosize>

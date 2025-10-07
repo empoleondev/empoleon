@@ -1,6 +1,6 @@
 import { screen } from '@solidjs/testing-library';
-import { render } from '../render';
 import { JSX } from 'solid-js';
+import { render } from '../render';
 
 interface Options<Props = any> {
   component: (props: Props) => JSX.Element;
@@ -23,24 +23,24 @@ export function itSupportsInputSections<Props>(
     });
 
     it('supports rightSectionProps', () => {
-      render(
-        () => <options.component
+      render(() => (
+        <options.component
           {...options.props}
           rightSection="test-right-section"
           rightSectionProps={{ 'data-test': 'test' }}
         />
-      );
+      ));
       expect(screen.getByText('test-right-section')).toHaveAttribute('data-test', 'test');
     });
 
     it('supports leftSectionProps', () => {
-      render(
-        () => <options.component
+      render(() => (
+        <options.component
           {...options.props}
           leftSection="test-left-section"
           leftSectionProps={{ 'data-test': 'test' }}
         />
-      );
+      ));
       expect(screen.getByText('test-left-section')).toHaveAttribute('data-test', 'test');
     });
   });

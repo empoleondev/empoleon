@@ -5,12 +5,12 @@ import {
   BoxProps,
   createVarsResolver,
   ElementProps,
+  EmpoleonColor,
+  EmpoleonSize,
   factory,
   Factory,
   getSize,
   getThemeColor,
-  EmpoleonColor,
-  EmpoleonSize,
   StylesApiProps,
   useDirection,
   useProps,
@@ -107,7 +107,7 @@ const varsResolver = createVarsResolver<RatingFactory>((theme, props) => ({
   },
 }));
 
-export const Rating = factory<RatingFactory>(_props => {
+export const Rating = factory<RatingFactory>((_props) => {
   const props = useProps('Rating', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -138,7 +138,7 @@ export const Rating = factory<RatingFactory>(_props => {
     'fullSymbol',
     'highlightSelectedOnly',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<RatingFactory>({
@@ -174,12 +174,8 @@ export const Rating = factory<RatingFactory>(_props => {
   const _count = () => Math.floor(local.count!);
 
   const decimalUnit = 1 / _fractions;
-  const stableValueRounded = createMemo(() =>
-    roundValueTo(_value(), decimalUnit)
-  );
-  const finalValue = createMemo(() =>
-    hovered() !== -1 ? hovered() : stableValueRounded()
-  );
+  const stableValueRounded = createMemo(() => roundValueTo(_value(), decimalUnit));
+  const finalValue = createMemo(() => (hovered() !== -1 ? hovered() : stableValueRounded()));
 
   const getRatingFromCoordinates = (x: number) => {
     const { left, right, width } = rootRef()!.getBoundingClientRect();
@@ -192,13 +188,17 @@ export const Rating = factory<RatingFactory>(_props => {
     return clamp(roundValueTo(hoverValue + decimalUnit / 2, decimalUnit), decimalUnit, _count());
   };
 
-  const handleMouseEnter = (event: MouseEvent & { currentTarget: HTMLDivElement; target: Element }) => {
-    typeof local.onMouseEnter === "function" && local.onMouseEnter?.(event);
+  const handleMouseEnter = (
+    event: MouseEvent & { currentTarget: HTMLDivElement; target: Element }
+  ) => {
+    typeof local.onMouseEnter === 'function' && local.onMouseEnter?.(event);
     !local.readOnly && setOutside(false);
   };
 
-  const handleMouseMove = (event: MouseEvent & { currentTarget: HTMLDivElement; target: Element }) => {
-    typeof local.onMouseMove === "function" && local.onMouseMove?.(event);
+  const handleMouseMove = (
+    event: MouseEvent & { currentTarget: HTMLDivElement; target: Element }
+  ) => {
+    typeof local.onMouseMove === 'function' && local.onMouseMove?.(event);
 
     if (local.readOnly) {
       return;
@@ -210,8 +210,10 @@ export const Rating = factory<RatingFactory>(_props => {
     rounded !== hovered() && local.onHover?.(rounded);
   };
 
-  const handleMouseLeave = (event: MouseEvent & { currentTarget: HTMLDivElement; target: Element }) => {
-    typeof local.onMouseLeave === "function" && local.onMouseLeave?.(event);
+  const handleMouseLeave = (
+    event: MouseEvent & { currentTarget: HTMLDivElement; target: Element }
+  ) => {
+    typeof local.onMouseLeave === 'function' && local.onMouseLeave?.(event);
 
     if (local.readOnly) {
       return;
@@ -222,7 +224,9 @@ export const Rating = factory<RatingFactory>(_props => {
     hovered() !== -1 && local.onHover?.(-1);
   };
 
-  const handleTouchStart = (event: TouchEvent & { currentTarget: HTMLDivElement; target: Element }) => {
+  const handleTouchStart = (
+    event: TouchEvent & { currentTarget: HTMLDivElement; target: Element }
+  ) => {
     const { touches } = event;
     if (touches.length !== 1) {
       return;
@@ -233,13 +237,15 @@ export const Rating = factory<RatingFactory>(_props => {
       setValue(getRatingFromCoordinates(touch.clientX));
     }
 
-    typeof local.onTouchStart === "function" && local.onTouchStart?.(event);
+    typeof local.onTouchStart === 'function' && local.onTouchStart?.(event);
   };
 
-  const handleTouchEnd = (event: TouchEvent & { currentTarget: HTMLDivElement; target: Element }) => {
+  const handleTouchEnd = (
+    event: TouchEvent & { currentTarget: HTMLDivElement; target: Element }
+  ) => {
     event.preventDefault();
 
-    typeof local.onTouchEnd === "function" && local.onTouchEnd?.(event);
+    typeof local.onTouchEnd === 'function' && local.onTouchEnd?.(event);
   };
 
   const handleItemBlur = () => isOutside() && setHovered(-1);
@@ -283,17 +289,24 @@ export const Rating = factory<RatingFactory>(_props => {
           {(_, index) => {
             const integerValue = index + 1;
             const fractionItems = Array.from(new Array(index === 0 ? _fractions + 1 : _fractions));
-            const isGroupActive = createMemo(() => !local.readOnly && Math.ceil(hovered()) === integerValue);
+            const isGroupActive = createMemo(
+              () => !local.readOnly && Math.ceil(hovered()) === integerValue
+            );
 
             return (
-              <Box component='div'
+              <Box
+                component="div"
                 data-active={isGroupActive() ? true : undefined}
                 {...getStyles('symbolGroup')}
               >
                 <Index each={fractionItems}>
                   {(_, fractionIndex) => {
-                    const fractionValue = createMemo(() => decimalUnit * (index === 0 ? fractionIndex : fractionIndex + 1));
-                    const symbolValue = createMemo(() => roundValueTo(integerValue - 1 + fractionValue(), decimalUnit));
+                    const fractionValue = createMemo(
+                      () => decimalUnit * (index === 0 ? fractionIndex : fractionIndex + 1)
+                    );
+                    const symbolValue = createMemo(() =>
+                      roundValueTo(integerValue - 1 + fractionValue(), decimalUnit)
+                    );
 
                     return (
                       <RatingItem
@@ -301,7 +314,9 @@ export const Rating = factory<RatingFactory>(_props => {
                         emptyIcon={local.emptySymbol}
                         fullIcon={local.fullSymbol}
                         full={
-                          local.highlightSelectedOnly ? symbolValue() === finalValue() : symbolValue() <= finalValue()
+                          local.highlightSelectedOnly
+                            ? symbolValue() === finalValue()
+                            : symbolValue() <= finalValue()
                         }
                         active={symbolValue() === finalValue()}
                         checked={symbolValue() === stableValueRounded()}
@@ -314,11 +329,11 @@ export const Rating = factory<RatingFactory>(_props => {
                         onInputChange={handleInputChange}
                         id={`${_id}-${index}-${fractionIndex}`}
                       />
-                    )
+                    );
                   }}
                 </Index>
               </Box>
-            )
+            );
           }}
         </Index>
       </Box>

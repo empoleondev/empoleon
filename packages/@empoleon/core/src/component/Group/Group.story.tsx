@@ -1,6 +1,6 @@
 import { JSX } from 'solid-js';
-import { Group } from './Group';
 import { EmpoleonProvider } from '../../core';
+import { Group } from './Group';
 
 export default {
   title: 'Group',
@@ -15,7 +15,7 @@ export default {
 
 export function Usage() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Group component="nav">
         <button type="button">First</button>
         <button type="button">Second</button>
@@ -27,7 +27,7 @@ export function Usage() {
 
 export function Grow() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Group grow>
         <button type="button">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas ducimus necessitatibus

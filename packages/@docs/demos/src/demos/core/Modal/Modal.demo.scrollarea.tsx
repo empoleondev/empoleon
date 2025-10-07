@@ -1,7 +1,7 @@
+import { For } from 'solid-js';
 import { Button, Modal, ScrollArea } from '@empoleon/core';
 import { useDisclosure } from '@empoleon/hooks';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { For } from 'solid-js';
 
 const code = `
 import { useDisclosure } from '@empoleon/hooks';
@@ -42,9 +42,7 @@ function Demo() {
         title="Header is sticky"
         scrollAreaComponent={ScrollArea.Autosize}
       >
-        <For each={Array(100).fill(0)}>
-          {() => <p>Modal with scroll</p>}
-        </For>
+        <For each={Array(100).fill(0)}>{() => <p>Modal with scroll</p>}</For>
       </Modal>
 
       <Button variant="default" onClick={open}>

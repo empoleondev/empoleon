@@ -4,12 +4,12 @@ import {
   BoxProps,
   createVarsResolver,
   ElementProps,
+  EmpoleonRadius,
+  EmpoleonSize,
   factory,
   Factory,
   getRadius,
   getSize,
-  EmpoleonRadius,
-  EmpoleonSize,
   StylesApiProps,
   useProps,
   useStyles,
@@ -49,18 +49,16 @@ export type ProgressRootFactory = Factory<{
 
 const defaultProps: Partial<ProgressRootProps> = {};
 
-const varsResolver = createVarsResolver<ProgressRootFactory>(
-  (_, props) => ({
-    root: {
-      '--progress-size': getSize(props.size, 'progress-size'),
-      '--progress-radius': props.radius === undefined ? undefined : getRadius(props.radius),
-      '--progress-transition-duration':
-        typeof props.transitionDuration === 'number' ? `${props.transitionDuration}ms` : undefined,
-    },
-  })
-);
+const varsResolver = createVarsResolver<ProgressRootFactory>((_, props) => ({
+  root: {
+    '--progress-size': getSize(props.size, 'progress-size'),
+    '--progress-radius': props.radius === undefined ? undefined : getRadius(props.radius),
+    '--progress-transition-duration':
+      typeof props.transitionDuration === 'number' ? `${props.transitionDuration}ms` : undefined,
+  },
+}));
 
-export const ProgressRoot = factory<ProgressRootFactory>(_props => {
+export const ProgressRoot = factory<ProgressRootFactory>((_props) => {
   const props = useProps('ProgressRoot', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -72,7 +70,7 @@ export const ProgressRoot = factory<ProgressRootFactory>(_props => {
     'autoContrast',
     'transitionDuration',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<ProgressRootFactory>({

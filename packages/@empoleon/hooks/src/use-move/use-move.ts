@@ -21,7 +21,7 @@ interface useMoveHandlers {
 export function useMove<T extends HTMLElement = HTMLDivElement>(
   onChange: (value: UseMovePosition) => void,
   handlers?: useMoveHandlers,
-  dir: 'ltr' | 'rtl' = 'ltr',
+  dir: 'ltr' | 'rtl' = 'ltr'
 ) {
   const [ref, setRef] = createSignal<T>();
   let mounted = false;

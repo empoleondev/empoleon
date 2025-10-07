@@ -1,4 +1,5 @@
 import { Component, createEffect, JSX, splitProps } from 'solid-js';
+import { Dynamic } from 'solid-js/web';
 import {
   Box,
   BoxProps,
@@ -13,7 +14,6 @@ import { UnstyledButton } from '../../UnstyledButton';
 import { useAccordionContext } from '../Accordion.context';
 import { useAccordionItemContext } from '../AccordionItem.context';
 import classes from '../Accordion.module.css';
-import { Dynamic } from 'solid-js/web';
 
 export type AccordionControlStylesNames = 'control' | 'chevron' | 'label' | 'itemTitle' | 'icon';
 
@@ -25,7 +25,7 @@ export interface AccordionControlProps
   disabled?: boolean;
 
   /** Custom chevron icon */
-  chevron: () => (() => JSX.Element | Component | null);
+  chevron: () => () => JSX.Element | Component | null;
 
   /** Control label */
   children?: JSX.Element;
@@ -43,7 +43,7 @@ export type AccordionControlFactory = Factory<{
 
 const defaultProps: Partial<AccordionControlProps> = {};
 
-export const AccordionControl = factory<AccordionControlFactory>(_props => {
+export const AccordionControl = factory<AccordionControlFactory>((_props) => {
   const props = useProps('AccordionControl', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -58,7 +58,7 @@ export const AccordionControl = factory<AccordionControlFactory>(_props => {
     'children',
     'disabled',
     'mod',
-    'ref'
+    'ref',
   ]);
 
   const { value } = useAccordionItemContext();
@@ -70,7 +70,13 @@ export const AccordionControl = factory<AccordionControlFactory>(_props => {
   const content = (
     <UnstyledButton<'button'>
       {...others}
-      {...ctx.getStyles('control', { className: local.className, classNames: local.classNames, style: local.style, styles: local.styles, variant: ctx.variant() })}
+      {...ctx.getStyles('control', {
+        className: local.className,
+        classNames: local.classNames,
+        style: local.style,
+        styles: local.styles,
+        variant: ctx.variant(),
+      })}
       unstyled={ctx.unstyled}
       mod={[
         'accordion-control',
@@ -78,11 +84,13 @@ export const AccordionControl = factory<AccordionControlFactory>(_props => {
         local.mod,
       ]}
       ref={local.ref}
-      onClick={(event: MouseEvent & {
-        currentTarget: HTMLButtonElement;
-        target: Element;
-      }) => {
-        typeof local.onClick === "function" && local.onClick?.(event);
+      onClick={(
+        event: MouseEvent & {
+          currentTarget: HTMLButtonElement;
+          target: Element;
+        }
+      ) => {
+        typeof local.onClick === 'function' && local.onClick?.(event);
         ctx.onChange(value);
       }}
       type="button"
@@ -97,25 +105,38 @@ export const AccordionControl = factory<AccordionControlFactory>(_props => {
         loop: ctx.loop(),
         orientation: 'vertical',
         onKeyDown: (event) => {
-          typeof local.onKeyDown === "function" && local.onKeyDown(event as KeyboardEvent & { currentTarget: HTMLButtonElement; target: Element });
+          typeof local.onKeyDown === 'function' &&
+            local.onKeyDown(
+              event as KeyboardEvent & { currentTarget: HTMLButtonElement; target: Element }
+            );
         },
       })}
     >
       <Box
         component="span"
-        mod={{ rotate: !ctx.disableChevronRotation() && isActive(), position: ctx.chevronPosition() }}
-        {...ctx.getStyles('chevron', { classNames: local.classNames, styles: local.styles  })}
+        mod={{
+          rotate: !ctx.disableChevronRotation() && isActive(),
+          position: ctx.chevronPosition(),
+        }}
+        {...ctx.getStyles('chevron', { classNames: local.classNames, styles: local.styles })}
       >
-        {(() => {
-          const chevronFn = local.chevron || ctx.chevron();
-          if (chevronFn === null) return null;
-          if (typeof chevronFn === 'function') {
-            return chevronFn();
-          }
-          return chevronFn;
-        })() as any}
+        {
+          (() => {
+            const chevronFn = local.chevron || ctx.chevron();
+            if (chevronFn === null) return null;
+            if (typeof chevronFn === 'function') {
+              return chevronFn();
+            }
+            return chevronFn;
+          })() as any
+        }
       </Box>
-      <Box component='div' {...ctx.getStyles('label', { classNames: local.classNames, styles: local.styles })}>{local.children}</Box>
+      <Box
+        component="div"
+        {...ctx.getStyles('label', { classNames: local.classNames, styles: local.styles })}
+      >
+        {local.children}
+      </Box>
       {local.icon && (
         <Box
           component="span"
@@ -130,7 +151,12 @@ export const AccordionControl = factory<AccordionControlFactory>(_props => {
 
   return shouldWrapWithHeading ? (
     // @ts-ignore
-    <Dynamic component={headingTag()} {...ctx.getStyles('itemTitle', { classNames: local.classNames, styles: local.styles })}>{content}</Dynamic>
+    <Dynamic
+      component={headingTag()}
+      {...ctx.getStyles('itemTitle', { classNames: local.classNames, styles: local.styles })}
+    >
+      {content}
+    </Dynamic>
   ) : (
     content
   );

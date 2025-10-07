@@ -4,12 +4,12 @@ import {
   BoxProps,
   CompoundStylesApiProps,
   ElementProps,
+  EmpoleonColor,
   factory,
   Factory,
   getAutoContrastValue,
   getContrastColor,
   getThemeColor,
-  EmpoleonColor,
   useEmpoleonTheme,
   useProps,
 } from '../../../core';
@@ -49,7 +49,7 @@ const defaultProps: Partial<ProgressSectionProps> = {
   withAria: true,
 };
 
-export const ProgressSection = factory<ProgressSectionFactory>(_props => {
+export const ProgressSection = factory<ProgressSectionFactory>((_props) => {
   const props = useProps('ProgressSection', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -63,7 +63,7 @@ export const ProgressSection = factory<ProgressSectionFactory>(_props => {
     'striped',
     'animated',
     'mod',
-    'ref'
+    'ref',
   ]);
 
   const ctx = useProgressContext();
@@ -82,7 +82,12 @@ export const ProgressSection = factory<ProgressSectionFactory>(_props => {
   return (
     <Box
       ref={local.ref}
-      {...ctx.getStyles('section', { className: local.className, classNames: local.classNames, styles: local.styles, style: local.style })}
+      {...ctx.getStyles('section', {
+        className: local.className,
+        classNames: local.classNames,
+        styles: local.styles,
+        style: local.style,
+      })}
       {...others}
       {...ariaAttributes}
       mod={[{ striped: local.striped || local.animated, animated: local.animated }, local.mod]}

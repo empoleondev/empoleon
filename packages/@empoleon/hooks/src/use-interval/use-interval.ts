@@ -1,4 +1,4 @@
-import { createSignal, createEffect, onCleanup } from 'solid-js';
+import { createEffect, createSignal, onCleanup } from 'solid-js';
 
 interface UseIntervalOptions {
   /** If set, the interval will start automatically when the component is mounted, `false` by default */

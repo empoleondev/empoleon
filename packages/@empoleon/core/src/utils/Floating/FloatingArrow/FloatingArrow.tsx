@@ -26,7 +26,7 @@ export function FloatingArrow(props: FloatingArrowProps) {
     'arrowX',
     'arrowY',
     'style',
-    'ref'
+    'ref',
   ]);
 
   const { dir } = useDirection();
@@ -53,9 +53,9 @@ export function FloatingArrow(props: FloatingArrowProps) {
     <div
       {...others}
       ref={local.ref}
-      style={finalStyles()}  // Use the variable instead
+      style={finalStyles()} // Use the variable instead
     />
   );
-};
+}
 
 FloatingArrow.displayName = '@empoleon/core/FloatingArrow';

@@ -55,7 +55,7 @@ const varsResolver = createVarsResolver<TooltipFloatingFactory>((theme, props) =
   },
 }));
 
-export const TooltipFloating = factory<TooltipFloatingFactory>(_props => {
+export const TooltipFloating = factory<TooltipFloatingFactory>((_props) => {
   const props = useProps('TooltipFloating', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'children',
@@ -79,7 +79,7 @@ export const TooltipFloating = factory<TooltipFloatingFactory>(_props => {
     'vars',
     'portalProps',
     'ref',
-  ])
+  ]);
 
   const theme = useEmpoleonTheme();
   const getStyles = useStyles<TooltipFloatingFactory>({
@@ -110,12 +110,7 @@ export const TooltipFloating = factory<TooltipFloatingFactory>(_props => {
 
   const [wrapperElement, setWrapperElement] = createSignal<HTMLElement | null>(null);
   const childRef = typeof local.children === 'function' ? undefined : getRefProp(local.children);
-  const targetRef = useMergedRef(
-    setWrapperElement,
-    floating.boundaryRef,
-    childRef,
-    local.ref
-  );
+  const targetRef = useMergedRef(setWrapperElement, floating.boundaryRef, childRef, local.ref);
 
   const componentType = createMemo(() => {
     const parent = wrapperElement()?.parentElement;
@@ -146,7 +141,7 @@ export const TooltipFloating = factory<TooltipFloatingFactory>(_props => {
               ...getStyleObject(local.style, theme),
               zIndex: local.zIndex as JSX.CSSProperties['z-index'],
               display: !local.disabled && floating.opened() ? 'block' : 'none',
-              ...coords()
+              ...coords(),
             },
           })}
           variant={local.variant}
@@ -157,23 +152,22 @@ export const TooltipFloating = factory<TooltipFloatingFactory>(_props => {
         </Box>
       </OptionalPortal>
 
-      {typeof local.children === 'function'
-        ? local.children({
-            [local.refProp!]: targetRef,
-            onMouseEnter: onMouseEnter,
-            onMouseLeave: onMouseLeave
-          })
-        : (
-          <Dynamic
-            component={componentType()}
-            ref={targetRef!}
-            onMouseEnter={onMouseEnter}
-            onMouseLeave={onMouseLeave}
-          >
-            {local.children}
-          </Dynamic>
-        )
-      }
+      {typeof local.children === 'function' ? (
+        local.children({
+          [local.refProp!]: targetRef,
+          onMouseEnter: onMouseEnter,
+          onMouseLeave: onMouseLeave,
+        })
+      ) : (
+        <Dynamic
+          component={componentType()}
+          ref={targetRef!}
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
+        >
+          {local.children}
+        </Dynamic>
+      )}
     </>
   );
 });

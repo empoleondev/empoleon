@@ -1,17 +1,17 @@
-import { splitProps, JSX } from 'solid-js';
+import { JSX, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
   createVarsResolver,
   ElementProps,
-  factory,
-  Factory,
-  getRadius,
-  getSize,
   EmpoleonColor,
   EmpoleonGradient,
   EmpoleonRadius,
   EmpoleonSize,
+  factory,
+  Factory,
+  getRadius,
+  getSize,
   StylesApiProps,
   useProps,
   useStyles,
@@ -63,29 +63,27 @@ export type ThemeIconFactory = Factory<{
   variant: ThemeIconVariant;
 }>;
 
-const varsResolver = createVarsResolver<ThemeIconFactory>(
-  (theme, props) => {
-    const colors = theme.variantColorResolver({
-      color: props.color || theme.primaryColor,
-      theme,
-      gradient: props.gradient,
-      variant: props.variant || 'filled',
-      autoContrast: props.autoContrast,
-    });
+const varsResolver = createVarsResolver<ThemeIconFactory>((theme, props) => {
+  const colors = theme.variantColorResolver({
+    color: props.color || theme.primaryColor,
+    theme,
+    gradient: props.gradient,
+    variant: props.variant || 'filled',
+    autoContrast: props.autoContrast,
+  });
 
-    return {
-      root: {
-        '--ti-size': getSize(props.size, 'ti-size'),
-        '--ti-radius': props.radius === undefined ? undefined : getRadius(props.radius),
-        '--ti-bg': props.color || props.variant ? colors.background : undefined,
-        '--ti-color': props.color || props.variant ? colors.color : undefined,
-        '--ti-bd': props.color || props.variant ? colors.border : undefined,
-      },
-    };
-  }
-);
+  return {
+    root: {
+      '--ti-size': getSize(props.size, 'ti-size'),
+      '--ti-radius': props.radius === undefined ? undefined : getRadius(props.radius),
+      '--ti-bg': props.color || props.variant ? colors.background : undefined,
+      '--ti-color': props.color || props.variant ? colors.color : undefined,
+      '--ti-bd': props.color || props.variant ? colors.border : undefined,
+    },
+  };
+});
 
-export const ThemeIcon = factory<ThemeIconFactory>(_props => {
+export const ThemeIcon = factory<ThemeIconFactory>((_props) => {
   const props = useProps('ThemeIcon', null, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -96,7 +94,7 @@ export const ThemeIcon = factory<ThemeIconFactory>(_props => {
     'vars',
     'autoContrast',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<ThemeIconFactory>({

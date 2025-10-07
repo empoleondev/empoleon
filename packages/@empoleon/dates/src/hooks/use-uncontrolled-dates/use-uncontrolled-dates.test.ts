@@ -25,10 +25,12 @@ const multipleTypeValue = [
 
 const setupHook = (config: Pick<HookConfig, 'type'> & Partial<HookConfig>) =>
   renderHook((innerConfig: HookConfig) => useUncontrolledDates(innerConfig), {
-    initialProps: [{
-      ...hookDefaults,
-      ...config,
-    }],
+    initialProps: [
+      {
+        ...hookDefaults,
+        ...config,
+      },
+    ],
   });
 
 describe('use-uncontrolled-dates', () => {

@@ -1,7 +1,7 @@
+import { createEffect, createSignal } from 'solid-js';
 import { Box, Paper, Text } from '@empoleon/core';
 import { useIntersection } from '@empoleon/hooks';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createEffect, createSignal } from 'solid-js';
 
 const code = `
 import { useRef } from 'react';
@@ -39,7 +39,7 @@ function Demo() {
 `;
 
 function Demo() {
-  const [containerRef, setContainerRef] = createSignal<HTMLDivElement|null>(null);
+  const [containerRef, setContainerRef] = createSignal<HTMLDivElement | null>(null);
 
   const { ref, entry } = useIntersection({
     root: containerRef(),

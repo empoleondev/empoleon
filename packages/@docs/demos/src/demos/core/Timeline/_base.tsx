@@ -4,11 +4,11 @@ import {
   IconGitPullRequest,
   IconMessageDots,
 } from '@tabler/icons-solidjs';
-import { Text, Timeline, TimelineProps } from '@empoleon/core';
 import { splitProps } from 'solid-js';
+import { Text, Timeline, TimelineProps } from '@empoleon/core';
 
 export function TimelineBase(props: Partial<TimelineProps> & { noIcon?: boolean }) {
-  const [local, others] = splitProps(props, ['noIcon'])
+  const [local, others] = splitProps(props, ['noIcon']);
 
   const displayIcon = !local.noIcon;
   return (

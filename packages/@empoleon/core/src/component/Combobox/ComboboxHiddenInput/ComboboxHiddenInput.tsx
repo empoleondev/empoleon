@@ -1,7 +1,6 @@
-import { ComponentProps, JSX, splitProps } from "solid-js";
+import { ComponentProps, JSX, splitProps } from 'solid-js';
 
-export interface ComboboxHiddenInputProps
-  extends Omit<ComponentProps<'input'>, 'value'> {
+export interface ComboboxHiddenInputProps extends Omit<ComponentProps<'input'>, 'value'> {
   /** Input value */
   value: string | string[] | null;
 
@@ -12,7 +11,8 @@ export interface ComboboxHiddenInputProps
 export function ComboboxHiddenInput(props: ComboboxHiddenInputProps) {
   const [local, others] = splitProps(props, ['value', 'valuesDivider']);
   const valuesDivider = local.valuesDivider || ',';
-  const computedValue = () => Array.isArray(local.value) ? local.value.join(valuesDivider) : local.value || '';
+  const computedValue = () =>
+    Array.isArray(local.value) ? local.value.join(valuesDivider) : local.value || '';
 
   return (
     <input

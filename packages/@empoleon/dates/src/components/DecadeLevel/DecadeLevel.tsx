@@ -1,4 +1,5 @@
 import dayjs from 'dayjs';
+import { createMemo, JSX, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
@@ -17,7 +18,6 @@ import {
 import { useDatesContext } from '../DatesProvider';
 import { YearsList, YearsListSettings, YearsListStylesNames } from '../YearsList';
 import { getDecadeRange } from './get-decade-range/get-decade-range';
-import { createMemo, JSX, splitProps } from 'solid-js';
 
 export type DecadeLevelStylesNames = YearsListStylesNames | CalendarHeaderStylesNames;
 
@@ -58,7 +58,7 @@ const defaultProps = {
   decadeLabelFormat: 'YYYY',
 } satisfies Partial<DecadeLevelProps>;
 
-export const DecadeLevel = factory<DecadeLevelFactory>(_props => {
+export const DecadeLevel = factory<DecadeLevelFactory>((_props) => {
   const props = useProps('DecadeLevel', defaultProps, _props);
   const [local, others] = splitProps(props, [
     // YearsList settings
@@ -97,7 +97,7 @@ export const DecadeLevel = factory<DecadeLevelFactory>(_props => {
     '__stopPropagation',
     'size',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const ctx = useDatesContext();

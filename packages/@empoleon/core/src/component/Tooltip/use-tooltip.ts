@@ -1,6 +1,8 @@
-import { createEffect, createSignal, createMemo, Accessor } from 'solid-js';
+import { Accessor, createEffect, createMemo, createSignal } from 'solid-js';
+import { useId } from '@empoleon/hooks';
 import {
   arrow,
+  autoUpdate,
   flip,
   inline,
   offset,
@@ -13,9 +15,7 @@ import {
   useInteractions,
   useRole,
   type Middleware,
-  autoUpdate,
 } from '@empoleon/solid-floating-ui';
-import { useId } from '@empoleon/hooks';
 import {
   FloatingAxesOffsets,
   FloatingPosition,
@@ -101,7 +101,9 @@ export function useTooltip(settings: UseTooltip) {
   const withinGroup = useTooltipGroupContext();
   const uid = useId();
 
-  const opened = createMemo<boolean>(() => settings.opened ? settings.opened() : uncontrolledOpened() || false);
+  const opened = createMemo<boolean>(() =>
+    settings.opened ? settings.opened() : uncontrolledOpened() || false
+  );
 
   const onChange = (_opened: boolean) => {
     if (!controlled) {
@@ -132,19 +134,24 @@ export function useTooltip(settings: UseTooltip) {
   const delayGroup = useDelayGroup(() => floating.context, { id: uid });
 
   const interactions = useInteractions([
-    useHover(() => floating.context, () => {
-      const hoverOptions = {
-        enabled: settings.events?.hover,
-        delay: withinGroup ? delayGroup.delay : { open: settings.openDelay, close: settings.closeDelay },
-        mouseOnly: !settings.events?.touch,
-      };
+    useHover(
+      () => floating.context,
+      () => {
+        const hoverOptions = {
+          enabled: settings.events?.hover,
+          delay: withinGroup
+            ? delayGroup.delay
+            : { open: settings.openDelay, close: settings.closeDelay },
+          mouseOnly: !settings.events?.touch,
+        };
 
-      return hoverOptions;
-    })(),
+        return hoverOptions;
+      }
+    )(),
 
     useFocus(floating.context, {
       enabled: settings.events?.focus,
-      visibleOnly: true
+      visibleOnly: true,
     })(),
 
     useRole(floating.context, { role: 'tooltip' })(),
@@ -174,16 +181,26 @@ export function useTooltip(settings: UseTooltip) {
   const isGroupPhase = opened() && delayGroup.currentId && delayGroup.currentId !== uid;
 
   return {
-    get x() { return floating.x; },
-    get y() { return floating.y; },
-    get arrowX() { return floating.middlewareData.arrow?.x ?? null; },
-    get arrowY() { return floating.middlewareData.arrow?.y ?? null; },
+    get x() {
+      return floating.x;
+    },
+    get y() {
+      return floating.y;
+    },
+    get arrowX() {
+      return floating.middlewareData.arrow?.x ?? null;
+    },
+    get arrowY() {
+      return floating.middlewareData.arrow?.y ?? null;
+    },
     reference: setReferenceElement,
     floating: setFloatingElement,
     getFloatingProps: interactions.getFloatingProps,
     getReferenceProps: interactions.getReferenceProps,
     isGroupPhase,
     opened,
-    get placement() { return floating.placement; },
+    get placement() {
+      return floating.placement;
+    },
   };
 }

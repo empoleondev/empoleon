@@ -1,8 +1,8 @@
 import { IconStarFilled } from '@tabler/icons-solidjs';
-import { Group } from '../Group';
-import { Badge } from './Badge';
 import { createEffect, For, JSX } from 'solid-js';
 import { EmpoleonProvider, useEmpoleonColorScheme } from '../../core';
+import { Group } from '../Group';
+import { Badge } from './Badge';
 
 export default {
   title: 'Badge',
@@ -33,10 +33,10 @@ export function Usage() {
   return (
     <div
       style={{
-        'padding': '40px',
-        'display': 'flex',
-        'gap': '1rem',
-        'background': 'rgba(0, 0, 0, 0.05)',
+        padding: '40px',
+        display: 'flex',
+        gap: '1rem',
+        background: 'rgba(0, 0, 0, 0.05)',
         'flex-wrap': 'wrap',
       }}
     >
@@ -60,7 +60,7 @@ export function Usage() {
 
 export function WithFixedWidth() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Badge w={200} rightSection="R" leftSection="L">
         Badge
       </Badge>
@@ -90,7 +90,7 @@ export function WithIconInSection() {
 
 export function Round() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Badge circle size="md">
         12
       </Badge>
@@ -104,11 +104,11 @@ export function AutoContrast() {
   return (
     <div
       style={{
-        'display': 'flex',
+        display: 'flex',
         'flex-direction': 'column',
         'align-items': 'flex-start',
-        'gap': '10px',
-        'padding': '40px',
+        gap: '10px',
+        padding: '40px',
       }}
     >
       <For each={buttons}>
@@ -144,7 +144,7 @@ export function Variants() {
 
 export function WithinGroup() {
   return (
-    <div style={{ 'display': 'flex', 'flex-direction': 'column' }}>
+    <div style={{ display: 'flex', 'flex-direction': 'column' }}>
       <Badge>Single badge within group</Badge>
     </div>
   );
@@ -152,7 +152,7 @@ export function WithinGroup() {
 
 export function Unstyled() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Badge unstyled leftSection="$$">
         Unstyled badge
       </Badge>
@@ -162,7 +162,7 @@ export function Unstyled() {
 
 export function CustomComponent() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Badge component="a" href="https://empoleon.dev/">
         Anchor
       </Badge>
@@ -176,7 +176,7 @@ export function CustomComponent() {
 
 export function ColorsIndex() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Badge color="violet.2" variant="dot">
         Anchor
       </Badge>
@@ -187,15 +187,11 @@ export function ColorsIndex() {
 export function Sizes() {
   const sizes = ['xs', 'sm', 'md', 'lg', 'xl'];
 
-  return <div style={{ 'padding': '40px', display: 'flex', 'gap': '40px' }}>
-    <For each={sizes}>
-      {(size) => (
-        <Badge size={size}>
-          Badge {size}
-        </Badge>
-      )}
-    </For>
-  </div>;
+  return (
+    <div style={{ padding: '40px', display: 'flex', gap: '40px' }}>
+      <For each={sizes}>{(size) => <Badge size={size}>Badge {size}</Badge>}</For>
+    </div>
+  );
 }
 
 export function DotWithRightSection() {

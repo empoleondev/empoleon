@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
+import { Component, createSignal } from 'solid-js';
 import { DateFormatter } from '@empoleon/dates';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { Component, createSignal } from 'solid-js';
 
 const getCode = (name: string) => `
 import dayjs from 'dayjs';

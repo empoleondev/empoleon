@@ -1,4 +1,5 @@
 import dayjs from 'dayjs';
+import { createEffect, createSignal, JSX, splitProps } from 'solid-js';
 import {
   ActionIcon,
   ActionIconProps,
@@ -23,6 +24,7 @@ import {
   pickCalendarProps,
 } from '../Calendar';
 import { DatePicker } from '../DatePicker';
+import { DatePickerPreset } from '../DatePicker/DatePicker';
 import { useDatesContext } from '../DatesProvider';
 import {
   DateInputSharedProps,
@@ -32,9 +34,6 @@ import {
 import { TimePicker, TimePickerProps } from '../TimePicker/TimePicker';
 import { getMaxTime, getMinTime } from './get-min-max-time/get-min-max-time';
 import classes from './DateTimePicker.module.css';
-import { JSX } from 'solid-js';
-import { createEffect, createSignal, splitProps } from 'solid-js';
-import { DatePickerPreset } from '../DatePicker/DatePicker';
 
 export type DateTimePickerStylesNames =
   | 'timeWrapper'
@@ -94,7 +93,7 @@ const defaultProps = {
   dropdownType: 'popover',
 } satisfies Partial<DateTimePickerProps>;
 
-export const DateTimePicker = factory<DateTimePickerFactory>(_props => {
+export const DateTimePicker = factory<DateTimePickerFactory>((_props) => {
   const props = useProps('DateTimePicker', defaultProps, _props);
   const [local, rest] = splitProps(props, [
     'value',
@@ -120,7 +119,7 @@ export const DateTimePicker = factory<DateTimePickerFactory>(_props => {
     'defaultTimeValue',
     'presets',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<DateTimePickerFactory>({
@@ -139,7 +138,8 @@ export const DateTimePicker = factory<DateTimePickerFactory>(_props => {
     props,
   });
 
-  const _valueFormat = local.valueFormat || (local.withSeconds ? 'DD/MM/YYYY HH:mm:ss' : 'DD/MM/YYYY HH:mm');
+  const _valueFormat =
+    local.valueFormat || (local.withSeconds ? 'DD/MM/YYYY HH:mm:ss' : 'DD/MM/YYYY HH:mm');
 
   const [timePickerRef, setTimePickerRef] = createSignal<HTMLInputElement | null>(null);
   const timePickerRefMerged = useMergedRef(setTimePickerRef, local.timePickerProps?.hoursRef);
@@ -162,7 +162,9 @@ export const DateTimePicker = factory<DateTimePickerFactory>(_props => {
     dateValue ? dayjs(dateValue).format(local.withSeconds ? 'HH:mm:ss' : 'HH:mm') : '';
 
   const [timeValue, setTimeValue] = createSignal(formatTime(_value()!));
-  const [currentLevel, setCurrentLevel] = createSignal(local.level || local.defaultLevel || 'month');
+  const [currentLevel, setCurrentLevel] = createSignal(
+    local.level || local.defaultLevel || 'month'
+  );
 
   const [dropdownOpened, dropdownHandlers] = useDisclosure(false);
   const formattedValue = _value()

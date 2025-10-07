@@ -60,7 +60,9 @@ export function Demo() {
     <>
       <Checkbox
         checked={values().every((value) => value.checked)}
-        indeterminate={values().some((value) => value.checked) && !values().every((value) => value.checked)}
+        indeterminate={
+          values().some((value) => value.checked) && !values().every((value) => value.checked)
+        }
         label="Receive all notifications"
         onChange={() => {
           const allChecked = values().every((value) => value.checked);
@@ -76,7 +78,9 @@ export function Demo() {
             ml={33}
             label={value.label}
             checked={value.checked}
-            onChange={(event) => handlers.setItemProp(index(), 'checked', event.currentTarget.checked)}
+            onChange={(event) =>
+              handlers.setItemProp(index(), 'checked', event.currentTarget.checked)
+            }
           />
         )}
       </For>

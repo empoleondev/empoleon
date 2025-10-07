@@ -26,7 +26,7 @@ function Demo() {
 function Demo() {
   return (
     <Carousel
-      height='180px'
+      height="180px"
       nextControlIcon={<IconArrowRight size={16} />}
       previousControlIcon={<IconArrowLeft size={16} />}
     >

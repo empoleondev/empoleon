@@ -1,3 +1,4 @@
+import { JSX, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
@@ -7,7 +8,6 @@ import {
   EmpoleonSize,
 } from '../../../core';
 import { useSliderContext } from '../Slider.context';
-import { JSX, splitProps } from 'solid-js';
 
 export interface SliderRootProps extends BoxProps, ElementProps<'div'> {
   size: EmpoleonSize | (string & {}) | number;
@@ -29,7 +29,7 @@ export function SliderRoot(props: SliderRootProps) {
     'variant',
     'thumbSize',
     'radius',
-    'ref'
+    'ref',
   ]);
 
   const { getStyles } = useSliderContext();

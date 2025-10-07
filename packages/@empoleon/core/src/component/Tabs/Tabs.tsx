@@ -1,9 +1,12 @@
+import { JSX, splitProps } from 'solid-js';
 import { useId, useUncontrolled } from '@empoleon/hooks';
 import {
   Box,
   BoxProps,
   createVarsResolver,
   ElementProps,
+  EmpoleonColor,
+  EmpoleonRadius,
   factory,
   Factory,
   getAutoContrastValue,
@@ -11,8 +14,6 @@ import {
   getRadius,
   getSafeId,
   getThemeColor,
-  EmpoleonColor,
-  EmpoleonRadius,
   StylesApiProps,
   useProps,
   useStyles,
@@ -22,7 +23,6 @@ import { TabsList, TabsListStylesNames } from './TabsList/TabsList';
 import { TabsPanel, TabsPanelStylesNames } from './TabsPanel/TabsPanel';
 import { TabsTab, TabsTabStylesNames } from './TabsTab/TabsTab';
 import classes from './Tabs.module.css';
-import { JSX, splitProps } from 'solid-js';
 
 export type TabsStylesNames =
   | 'root'
@@ -123,7 +123,7 @@ const varsResolver = createVarsResolver<TabsFactory>((theme, props) => ({
   },
 }));
 
-export const Tabs = factory<TabsFactory>(_props => {
+export const Tabs = factory<TabsFactory>((_props) => {
   const props = useProps('Tabs', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'defaultValue',
@@ -150,7 +150,7 @@ export const Tabs = factory<TabsFactory>(_props => {
     'autoContrast',
     'mod',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const uid = useId(local.id);

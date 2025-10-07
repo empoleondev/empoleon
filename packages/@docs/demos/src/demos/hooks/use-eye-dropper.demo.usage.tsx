@@ -1,8 +1,8 @@
 import { IconViewfinder } from '@tabler/icons-solidjs';
+import { createSignal } from 'solid-js';
 import { ActionIcon, ColorSwatch, Group, Text } from '@empoleon/core';
 import { useEyeDropper } from '@empoleon/hooks';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal } from 'solid-js';
 
 const code = `
 import { useState } from 'react';
@@ -68,7 +68,7 @@ function Demo() {
   return (
     <Group>
       <ActionIcon variant="default" onClick={pickColor} size="xl" radius="md">
-        <IconViewfinder size={28} stroke='1.5' />
+        <IconViewfinder size={28} stroke="1.5" />
       </ActionIcon>
       {color ? (
         <Group gap="xs">

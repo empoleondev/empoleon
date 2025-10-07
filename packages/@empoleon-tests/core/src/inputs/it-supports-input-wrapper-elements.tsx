@@ -12,17 +12,19 @@ export function itSupportsInputWrapperElements<Props>(
   name = 'supports InputWrapper elements'
 ) {
   it(`${name}: label`, () => {
-    const { container } = render(
-      () => <options.component {...options.props} label="test-label" withAsterisk={false} />
-    );
+    const { container } = render(() => (
+      <options.component {...options.props} label="test-label" withAsterisk={false} />
+    ));
     expect(inputWrapperQueries.getLabel(container as HTMLElement).textContent).toBe('test-label');
   });
 
   it(`${name}: description`, () => {
-    const { container } = render(
-      () => <options.component {...options.props} description="test-description" />
+    const { container } = render(() => (
+      <options.component {...options.props} description="test-description" />
+    ));
+    expect(inputWrapperQueries.getDescription(container as HTMLElement).textContent).toBe(
+      'test-description'
     );
-    expect(inputWrapperQueries.getDescription(container as HTMLElement).textContent).toBe('test-description');
   });
 
   it(`${name}: error`, () => {
@@ -31,23 +33,29 @@ export function itSupportsInputWrapperElements<Props>(
   });
 
   it(`${name}: labelProps`, () => {
-    const { container } = render(
-      () => <options.component {...options.props} labelProps={{ 'data-test-label': true }} />
+    const { container } = render(() => (
+      <options.component {...options.props} labelProps={{ 'data-test-label': true }} />
+    ));
+    expect(inputWrapperQueries.getLabel(container as HTMLElement)).toHaveAttribute(
+      'data-test-label'
     );
-    expect(inputWrapperQueries.getLabel(container as HTMLElement)).toHaveAttribute('data-test-label');
   });
 
   it(`${name}: descriptionProps`, () => {
-    const { container } = render(
-      () => <options.component {...options.props} descriptionProps={{ 'data-test-description': true }} />
+    const { container } = render(() => (
+      <options.component {...options.props} descriptionProps={{ 'data-test-description': true }} />
+    ));
+    expect(inputWrapperQueries.getDescription(container as HTMLElement)).toHaveAttribute(
+      'data-test-description'
     );
-    expect(inputWrapperQueries.getDescription(container as HTMLElement)).toHaveAttribute('data-test-description');
   });
 
   it(`${name}: errorProps`, () => {
-    const { container } = render(
-      () => <options.component {...options.props} errorProps={{ 'data-test-error': true }} />
+    const { container } = render(() => (
+      <options.component {...options.props} errorProps={{ 'data-test-error': true }} />
+    ));
+    expect(inputWrapperQueries.getError(container as HTMLElement)).toHaveAttribute(
+      'data-test-error'
     );
-    expect(inputWrapperQueries.getError(container as HTMLElement)).toHaveAttribute('data-test-error');
   });
 }

@@ -1,12 +1,13 @@
 import { splitProps } from 'solid-js';
+import { useUncontrolled } from '@empoleon/hooks';
 import {
   BoxProps,
   createVarsResolver,
   ElementProps,
+  EmpoleonRadius,
   factory,
   Factory,
   getRadius,
-  EmpoleonRadius,
   StylesApiProps,
   useProps,
   useStyles,
@@ -15,7 +16,6 @@ import { UnstyledButton } from '../../UnstyledButton';
 import { useCheckboxGroupContext } from '../CheckboxGroup.context';
 import { CheckboxCardProvider } from './CheckboxCard.context';
 import classes from './CheckboxCard.module.css';
-import { useUncontrolled } from '@empoleon/hooks';
 
 export type CheckboxCardStylesNames = 'card';
 export type CheckboxCardCssVariables = {
@@ -62,7 +62,7 @@ const varsResolver = createVarsResolver<CheckboxCardFactory>((_, props) => ({
   },
 }));
 
-export const CheckboxCard = factory<CheckboxCardFactory>(_props => {
+export const CheckboxCard = factory<CheckboxCardFactory>((_props) => {
   const props = useProps('CheckboxCard', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -79,7 +79,7 @@ export const CheckboxCard = factory<CheckboxCardFactory>(_props => {
     'defaultChecked',
     'onChange',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<CheckboxCardFactory>({
@@ -99,8 +99,8 @@ export const CheckboxCard = factory<CheckboxCardFactory>(_props => {
 
   const ctx = useCheckboxGroupContext();
   const checked = () => local.checked;
-  const groupStoreValue = () => ctx ? ctx.value().includes(local.value || '') : undefined;
-  const _checked = () => typeof local.checked === 'boolean'? checked() : groupStoreValue();
+  const groupStoreValue = () => (ctx ? ctx.value().includes(local.value || '') : undefined);
+  const _checked = () => (typeof local.checked === 'boolean' ? checked() : groupStoreValue());
 
   const defaultChecked = () => local.defaultChecked;
 
@@ -122,8 +122,8 @@ export const CheckboxCard = factory<CheckboxCardFactory>(_props => {
         role="checkbox"
         aria-checked={_value()}
         onClick={(event) => {
-          typeof local.onClick === "function" && local.onClick?.(event);
-          typeof local.onClick !== "function" && ctx && ctx.onChange(local.value || '');
+          typeof local.onClick === 'function' && local.onClick?.(event);
+          typeof local.onClick !== 'function' && ctx && ctx.onChange(local.value || '');
           setValue(!_value());
         }}
       />

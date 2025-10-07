@@ -1,15 +1,22 @@
-import { createEffect, createMemo, createSignal, For, Index, JSX, Show, splitProps } from 'solid-js';
 import {
-  useId,
-  useMergedRef,
-  useMounted,
-  useUncontrolled,
-} from '@empoleon/hooks';
+  createEffect,
+  createMemo,
+  createSignal,
+  For,
+  Index,
+  JSX,
+  Show,
+  splitProps,
+} from 'solid-js';
+import { useId, useMergedRef, useMounted, useUncontrolled } from '@empoleon/hooks';
 import {
   Box,
   BoxProps,
   createVarsResolver,
   ElementProps,
+  EmpoleonColor,
+  EmpoleonRadius,
+  EmpoleonSize,
   Factory,
   factory,
   getContrastColor,
@@ -17,9 +24,6 @@ import {
   getRadius,
   getSize,
   getThemeColor,
-  EmpoleonColor,
-  EmpoleonRadius,
-  EmpoleonSize,
   StylesApiProps,
   useEmpoleonTheme,
   useProps,
@@ -116,22 +120,20 @@ const defaultProps = {
   withItemsBorders: true,
 } satisfies Partial<SegmentedControlProps>;
 
-const varsResolver = createVarsResolver<SegmentedControlFactory>(
-  (theme, props) => ({
-    root: {
-      '--sc-radius': props.radius === undefined ? undefined : getRadius(props.radius),
-      '--sc-color': props.color ? getThemeColor(props.color, theme) : undefined,
-      '--sc-shadow': props.color ? undefined : 'var(--empoleon-shadow-xs)',
-      '--sc-transition-duration':
-        props.transitionDuration === undefined ? undefined : `${props.transitionDuration}ms`,
-      '--sc-transition-timing-function': props.transitionTimingFunction,
-      '--sc-padding': getSize(props.size, 'sc-padding'),
-      '--sc-font-size': getFontSize(props.size),
-    },
-  })
-);
+const varsResolver = createVarsResolver<SegmentedControlFactory>((theme, props) => ({
+  root: {
+    '--sc-radius': props.radius === undefined ? undefined : getRadius(props.radius),
+    '--sc-color': props.color ? getThemeColor(props.color, theme) : undefined,
+    '--sc-shadow': props.color ? undefined : 'var(--empoleon-shadow-xs)',
+    '--sc-transition-duration':
+      props.transitionDuration === undefined ? undefined : `${props.transitionDuration}ms`,
+    '--sc-transition-timing-function': props.transitionTimingFunction,
+    '--sc-padding': getSize(props.size, 'sc-padding'),
+    '--sc-font-size': getFontSize(props.size),
+  },
+}));
 
-export const SegmentedControl = factory<SegmentedControlFactory>(_props => {
+export const SegmentedControl = factory<SegmentedControlFactory>((_props) => {
   const props = useProps('SegmentedControl', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -159,7 +161,7 @@ export const SegmentedControl = factory<SegmentedControlFactory>(_props => {
     'withItemsBorders',
     'mod',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<SegmentedControlFactory>({
@@ -188,7 +190,7 @@ export const SegmentedControl = factory<SegmentedControlFactory>(_props => {
   const [parent, setParent] = createSignal<HTMLElement | null>(null);
   const [refs, setRefs] = createSignal<Record<string, HTMLElement | null>>({});
   const setElementRef = (element: HTMLElement | null, val: string) => {
-    setRefs(prev => ({ ...prev, [val]: element }));
+    setRefs((prev) => ({ ...prev, [val]: element }));
   };
 
   const [_value, handleValueChange] = useUncontrolled({
@@ -245,7 +247,8 @@ export const SegmentedControl = factory<SegmentedControlFactory>(_props => {
             {...getStyles('control')}
             mod={{ active: _value() === item.value, orientation: local.orientation }}
           >
-            <Box component='input'
+            <Box
+              component="input"
               {...getStyles('input')}
               disabled={local.disabled || item.disabled}
               type="radio"
@@ -269,11 +272,17 @@ export const SegmentedControl = factory<SegmentedControlFactory>(_props => {
               __vars={{
                 '--sc-label-color':
                   local.color !== undefined
-                    ? getContrastColor({ color: local.color, theme, autoContrast: local.autoContrast })
+                    ? getContrastColor({
+                        color: local.color,
+                        theme,
+                        autoContrast: local.autoContrast,
+                      })
                     : undefined,
               }}
             >
-              <Box component='span' {...getStyles('innerLabel')}>{item.label}</Box>
+              <Box component="span" {...getStyles('innerLabel')}>
+                {item.label}
+              </Box>
             </Box>
           </Box>
         )}

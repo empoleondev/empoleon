@@ -18,7 +18,7 @@ function Demo() {
 
 function Demo(props: any) {
   return (
-    <Carousel withIndicators height='200px' {...props}>
+    <Carousel withIndicators height="200px" {...props}>
       <Slides count={2} />
     </Carousel>
   );

@@ -1,7 +1,7 @@
+import { JSX } from 'solid-js';
 import { SimpleGrid, Text } from '@empoleon/core';
 import { DemoArea, DemoAreaProps } from '../DemoArea';
 import classes from './DemoColumns.module.css';
-import { JSX } from 'solid-js';
 
 export interface DemoColumnsProps extends DemoAreaProps {
   title?: JSX.Element;

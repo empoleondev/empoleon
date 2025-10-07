@@ -1,15 +1,15 @@
-import { JSX, splitProps } from 'solid-js';
 import cx from 'clsx';
+import { JSX, splitProps } from 'solid-js';
 import {
   __BaseInputProps,
   __InputStylesNames,
   BoxProps,
   ElementProps,
+  EmpoleonSize,
   factory,
   Factory,
   Input,
   InputVariant,
-  EmpoleonSize,
   Modal,
   ModalProps,
   Popover,
@@ -91,7 +91,7 @@ export type PickerInputBaseFactory = Factory<{
   variant: InputVariant;
 }>;
 
-export const PickerInputBase = factory<PickerInputBaseFactory>(_props => {
+export const PickerInputBase = factory<PickerInputBaseFactory>((_props) => {
   const props = useInputProps('PickerInputBase', null, _props);
   const [local, others] = splitProps(props, [
     'inputProps',
@@ -121,15 +121,20 @@ export const PickerInputBase = factory<PickerInputBaseFactory>(_props => {
     'type',
     'onDropdownClose',
     'withTime',
-    'ref'
+    'ref',
   ]);
 
   const clearButton = (
-    <Input.ClearButton onClick={local.onClear} unstyled={local.unstyled} {...local.clearButtonProps} />
+    <Input.ClearButton
+      onClick={local.onClear}
+      unstyled={local.unstyled}
+      {...local.clearButtonProps}
+    />
   );
 
   const handleClose = () => {
-    const isInvalidRangeValue = local.type === 'range' && Array.isArray(local.value) && local.value[0] && !local.value[1];
+    const isInvalidRangeValue =
+      local.type === 'range' && Array.isArray(local.value) && local.value[0] && !local.value[1];
     if (isInvalidRangeValue) {
       local.onClear();
     }
@@ -162,7 +167,9 @@ export const PickerInputBase = factory<PickerInputBaseFactory>(_props => {
           returnFocus={false}
           unstyled={local.unstyled}
           {...local.popoverProps}
-          disabled={local.popoverProps?.disabled || local.dropdownType === 'modal' || local.readOnly}
+          disabled={
+            local.popoverProps?.disabled || local.dropdownType === 'modal' || local.readOnly
+          }
           onChange={(_opened) => {
             if (!_opened) {
               local.popoverProps?.onClose?.();
@@ -181,15 +188,20 @@ export const PickerInputBase = factory<PickerInputBaseFactory>(_props => {
                   type="button"
                   multiline
                   onClick={(event) => {
-                    typeof local.onClick === "function" && local.onClick?.(event);
+                    typeof local.onClick === 'function' && local.onClick?.(event);
                     local.dropdownHandlers.toggle();
                   }}
                   __clearSection={clearButton}
-                  __clearable={local.clearable && local.shouldClear && !local.readOnly && !local.disabled}
+                  __clearable={
+                    local.clearable && local.shouldClear && !local.readOnly && !local.disabled
+                  }
                   rightSection={local.rightSection}
                   {...local.inputProps}
                   ref={local.ref}
-                  classNames={{ ...local.classNames, input: cx(classes.input, (local.classNames as any)?.input) }}
+                  classNames={{
+                    ...local.classNames,
+                    input: cx(classes.input, (local.classNames as any)?.input),
+                  }}
                   value={local.value}
                   {...others}
                 >
@@ -204,14 +216,20 @@ export const PickerInputBase = factory<PickerInputBaseFactory>(_props => {
                     </Input.Placeholder>
                   )}
                 </Input>
-            </div>
+              </div>
             )}
           </Popover.Target>
 
           <Popover.Dropdown data-dates-dropdown>{local.children}</Popover.Dropdown>
         </Popover>
       </Input.Wrapper>
-      <HiddenDatesInput value={local.value} name={local.name} form={local.form} type={local.type} withTime={local.withTime} />
+      <HiddenDatesInput
+        value={local.value}
+        name={local.name}
+        form={local.form}
+        type={local.type}
+        withTime={local.withTime}
+      />
     </>
   );
 });

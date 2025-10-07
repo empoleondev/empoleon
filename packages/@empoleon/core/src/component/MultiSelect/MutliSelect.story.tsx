@@ -1,9 +1,9 @@
+import { createSignal, For, JSX } from 'solid-js';
+import { EmpoleonProvider } from '../../core';
 import { Button } from '../Button';
 import { Group } from '../Group';
 import { TextInput } from '../TextInput';
 import { MultiSelect } from './MultiSelect';
-import { createSignal, For, JSX } from 'solid-js';
-import { EmpoleonProvider } from '../../core';
 
 export default {
   title: 'MultiSelect',

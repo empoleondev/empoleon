@@ -1,7 +1,7 @@
+import { IconArrowRight, IconDownload, IconPhoto } from '@tabler/icons-solidjs';
+import { createEffect, createSignal, Show } from 'solid-js';
 import { Button, ButtonProps } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { IconPhoto, IconDownload, IconArrowRight } from '@tabler/icons-solidjs';
-import { createSignal, createEffect, Show } from 'solid-js';
 
 const code = `
 import { Button } from '@empoleon/core';
@@ -16,11 +16,13 @@ function Demo() {
 }
 `;
 
-function Demo(props: ButtonProps & {
-  leftSectionEnabled?: boolean;
-  rightSectionEnabled?: boolean;
-  iconSize?: number;
-}) {
+function Demo(
+  props: ButtonProps & {
+    leftSectionEnabled?: boolean;
+    rightSectionEnabled?: boolean;
+    iconSize?: number;
+  }
+) {
   const [loading, setLoading] = createSignal(props.loading || false);
 
   createEffect(() => {
@@ -71,7 +73,7 @@ export const kitchenSink: EmpoleonDemo = {
       prop: 'color',
       type: 'color',
       initialValue: 'blue',
-      libraryValue: 'blue'
+      libraryValue: 'blue',
     },
     {
       prop: 'size',
@@ -95,43 +97,43 @@ export const kitchenSink: EmpoleonDemo = {
       prop: 'radius',
       type: 'size',
       initialValue: 'sm',
-      libraryValue: 'sm'
+      libraryValue: 'sm',
     },
     {
       prop: 'disabled',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'loading',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'fullWidth',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'autoContrast',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'leftSectionEnabled',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'rightSectionEnabled',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'justify',

@@ -122,7 +122,7 @@ export function tableElement<Factory extends FactoryPayload>(
   options?: TableElementOptions
 ) {
   const name = `Table${element.charAt(0).toUpperCase()}${element.slice(1)}`;
-  const Component = factory<Factory>(_props => {
+  const Component = factory<Factory>((_props) => {
     const props = useProps(name, {}, _props);
 
     // Split props to separate known props from others (same pattern as Affix and other components)
@@ -134,7 +134,7 @@ export function tableElement<Factory extends FactoryPayload>(
       'children',
       'ref',
       'unstyled',
-      'vars'
+      'vars',
     ]);
 
     const ctx = useTableContext();
@@ -149,7 +149,7 @@ export function tableElement<Factory extends FactoryPayload>(
           classNames: props.classNames,
           style: props.style,
           styles: props.styles,
-          props
+          props,
         })}
         {...others}
       >

@@ -1,6 +1,6 @@
+import { createEffect, createSignal } from 'solid-js';
 import { Slider } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal, createEffect } from 'solid-js';
 
 const code = `
 import { Slider } from '@empoleon/core';
@@ -158,6 +158,6 @@ export const kitchenSink: EmpoleonDemo = {
       type: 'boolean',
       initialValue: false,
       libraryValue: false,
-    }
+    },
   ],
 };

@@ -21,30 +21,32 @@ export const Swatches = (props: SwatchesProps) => {
     'focusable',
     'data',
     'swatchesPerRow',
-    'ref'
+    'ref',
   ]);
 
   const ctx = useColorPickerContext()!;
 
-  const colors = <For each={local.data}>
-    {(color) => (
-      <ColorSwatch
-        {...ctx.getStyles('swatch')}
-        unstyled={ctx.unstyled}
-        component="button"
-        type="button"
-        color={color}
-        radius="sm"
-        onClick={() => {
-          local.setValue(color);
-          local.onChangeEnd?.(color);
-        }}
-        aria-label={color}
-        tabIndex={local.focusable ? 0 : -1}
-        data-swatch
-      />
-    )}
-  </For>
+  const colors = (
+    <For each={local.data}>
+      {(color) => (
+        <ColorSwatch
+          {...ctx.getStyles('swatch')}
+          unstyled={ctx.unstyled}
+          component="button"
+          type="button"
+          color={color}
+          radius="sm"
+          onClick={() => {
+            local.setValue(color);
+            local.onChangeEnd?.(color);
+          }}
+          aria-label={color}
+          tabIndex={local.focusable ? 0 : -1}
+          data-swatch
+        />
+      )}
+    </For>
+  );
 
   return (
     <Box {...ctx.getStyles('swatches')} ref={local.ref} {...others}>

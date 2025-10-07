@@ -119,26 +119,24 @@ const defaultProps: Partial<TooltipProps> = {
   middlewares: { flip: true, shift: true, inline: false },
 };
 
-const varsResolver = createVarsResolver<TooltipFactory>(
-  (theme, props) => {
-    const colors = theme.variantColorResolver({
-      theme,
-      color: props.color || theme.primaryColor,
-      autoContrast: props.autoContrast,
-      variant: props.variant || 'filled',
-    });
+const varsResolver = createVarsResolver<TooltipFactory>((theme, props) => {
+  const colors = theme.variantColorResolver({
+    theme,
+    color: props.color || theme.primaryColor,
+    autoContrast: props.autoContrast,
+    variant: props.variant || 'filled',
+  });
 
-    return {
-      tooltip: {
-        '--tooltip-radius': props.radius === undefined ? undefined : getRadius(props.radius),
-        '--tooltip-bg': props.color ? colors.background : undefined,
-        '--tooltip-color': props.color ? colors.color : undefined,
-      },
-    };
-  }
-);
+  return {
+    tooltip: {
+      '--tooltip-radius': props.radius === undefined ? undefined : getRadius(props.radius),
+      '--tooltip-bg': props.color ? colors.background : undefined,
+      '--tooltip-color': props.color ? colors.color : undefined,
+    },
+  };
+});
 
-export const Tooltip = factory<TooltipFactory>(_props => {
+export const Tooltip = factory<TooltipFactory>((_props) => {
   const props = useProps('Tooltip', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'position',
@@ -186,7 +184,7 @@ export const Tooltip = factory<TooltipFactory>(_props => {
     'onMouseMove',
     'onPointerDown',
     'onPointerEnter',
-    'ref'
+    'ref',
   ]);
 
   const { dir } = useDirection();
@@ -202,7 +200,10 @@ export const Tooltip = factory<TooltipFactory>(_props => {
     events: local.events,
     arrowRef: () => arrowRef(),
     arrowOffset: local.arrowOffset,
-    offset: () => typeof local.offset === 'number' ? local.offset! + (local.withArrow ? local.arrowSize! / 2 : 0) : local.offset!,
+    offset: () =>
+      typeof local.offset === 'number'
+        ? local.offset! + (local.withArrow ? local.arrowSize! / 2 : 0)
+        : local.offset!,
     positionDependencies: [...local.positionDependencies!, props.children],
     inline: local.inline,
     strategy: local.floatingStrategy,
@@ -228,7 +229,10 @@ export const Tooltip = factory<TooltipFactory>(_props => {
   }
 
   const targetRef = useMergedRef(tooltip.reference, getRefProp(props.children), local.ref);
-  const transition = getTransitionProps(local.transitionProps, { duration: 100, transition: 'fade' });
+  const transition = getTransitionProps(local.transitionProps, {
+    duration: 100,
+    transition: 'fade',
+  });
 
   const coords = createMemo(() => ({
     top: `${tooltip.y ?? 0}px`,
@@ -259,8 +263,8 @@ export const Tooltip = factory<TooltipFactory>(_props => {
                 ref: tooltip.floating,
                 style: {
                   ...(process.env.NODE_ENV === 'test'
-                  ? (getStyles('tooltip') as any).style
-                  : (getStyles('tooltip') as any).style()),
+                    ? (getStyles('tooltip') as any).style
+                    : (getStyles('tooltip') as any).style()),
                   ...transitionStyles,
                   ['z-index']: local.zIndex as JSX.CSSProperties['z-index'],
                   ...coords(),
@@ -279,31 +283,42 @@ export const Tooltip = factory<TooltipFactory>(_props => {
                 arrowOffset={() => local.arrowOffset!}
                 arrowRadius={() => local.arrowRadius!}
                 arrowPosition={() => local.arrowPosition!}
-                {...getStyles('arrow') as any}
+                {...(getStyles('arrow') as any)}
               />
             </Box>
           )}
         </Transition>
       </OptionalPortal>
 
-      {typeof props.children === 'function' ? (() => {
-        const refProps = tooltip.getReferenceProps();
+      {typeof props.children === 'function'
+        ? (() => {
+            const refProps = tooltip.getReferenceProps();
 
-        // Merge event handlers from parent tooltips with current tooltip's handlers
-        ['onmouseenter', 'onmouseleave', 'onmousemove', 'onpointerdown', 'onpointerenter'].forEach(handler => {
-          const parent = (others as any)[handler];
-          const current = refProps[handler];
-          if (parent && current && typeof current === 'function') {
-            refProps[handler] = (e: any) => { current(e); parent(e); };
-          }
-        });
+            // Merge event handlers from parent tooltips with current tooltip's handlers
+            [
+              'onmouseenter',
+              'onmouseleave',
+              'onmousemove',
+              'onpointerdown',
+              'onpointerenter',
+            ].forEach((handler) => {
+              const parent = (others as any)[handler];
+              const current = refProps[handler];
+              if (parent && current && typeof current === 'function') {
+                refProps[handler] = (e: any) => {
+                  current(e);
+                  parent(e);
+                };
+              }
+            });
 
-        return props.children({
-          [local.refProp!]: targetRef,
-          class: local.className,
-          ...refProps,
-        });
-      })() : props.children}
+            return props.children({
+              [local.refProp!]: targetRef,
+              class: local.className,
+              ...refProps,
+            });
+          })()
+        : props.children}
     </>
   );
 });

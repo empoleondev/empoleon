@@ -1,9 +1,9 @@
 import { For, JSX } from 'solid-js';
+import { EmpoleonProvider } from '../../core';
 import { Stack } from '../Stack';
 import { Text } from '../Text';
 import { Title } from '../Title';
 import { Table } from './Table';
-import { EmpoleonProvider } from '../../core';
 
 export default {
   title: 'Table',
@@ -39,9 +39,7 @@ const TableRows = () => (
 // Base component for all stories, providing padding and the Empoleon theme.
 const StoryWrapper = (props: { children: JSX.Element }) => (
   <EmpoleonProvider>
-    <div style={{ padding: '40px' }}>
-      {props.children}
-    </div>
+    <div style={{ padding: '40px' }}>{props.children}</div>
   </EmpoleonProvider>
 );
 
@@ -57,7 +55,9 @@ export function Usage() {
             <Table.Th>Atomic mass</Table.Th>
           </Table.Tr>
         </Table.Thead>
-        <Table.Tbody><TableRows /></Table.Tbody>
+        <Table.Tbody>
+          <TableRows />
+        </Table.Tbody>
         <Table.Caption>Test caption</Table.Caption>
       </Table>
     </StoryWrapper>
@@ -99,7 +99,9 @@ export function Unstyled() {
             <Table.Th>Atomic mass</Table.Th>
           </Table.Tr>
         </Table.Thead>
-        <Table.Tbody><TableRows /></Table.Tbody>
+        <Table.Tbody>
+          <TableRows />
+        </Table.Tbody>
         <Table.Caption>Test caption</Table.Caption>
       </Table>
     </StoryWrapper>
@@ -119,7 +121,9 @@ export function WithScrollContainer() {
               <Table.Th>Atomic mass</Table.Th>
             </Table.Tr>
           </Table.Thead>
-          <Table.Tbody><TableRows /></Table.Tbody>
+          <Table.Tbody>
+            <TableRows />
+          </Table.Tbody>
           <Table.Caption>Test caption</Table.Caption>
         </Table>
       </Table.ScrollContainer>
@@ -139,7 +143,9 @@ export function FixedLayout() {
             <Table.Th w={200}>Atomic mass</Table.Th>
           </Table.Tr>
         </Table.Thead>
-        <Table.Tbody><TableRows /></Table.Tbody>
+        <Table.Tbody>
+          <TableRows />
+        </Table.Tbody>
       </Table>
     </StoryWrapper>
   );
@@ -157,7 +163,9 @@ export function Striped() {
             <Table.Th>Atomic mass</Table.Th>
           </Table.Tr>
         </Table.Thead>
-        <Table.Tbody><TableRows /></Table.Tbody>
+        <Table.Tbody>
+          <TableRows />
+        </Table.Tbody>
       </Table>
     </StoryWrapper>
   );
@@ -175,7 +183,9 @@ export function HighlightOnHover() {
             <Table.Th>Atomic mass</Table.Th>
           </Table.Tr>
         </Table.Thead>
-        <Table.Tbody><TableRows /></Table.Tbody>
+        <Table.Tbody>
+          <TableRows />
+        </Table.Tbody>
       </Table>
     </StoryWrapper>
   );

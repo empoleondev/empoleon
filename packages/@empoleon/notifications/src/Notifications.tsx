@@ -1,5 +1,5 @@
-import { createEffect, createSignal, For, splitProps, createMemo } from 'solid-js';
 import { createListTransition } from '@solid-primitives/transition-group';
+import { createEffect, createMemo, createSignal, For, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
@@ -123,7 +123,7 @@ function PositionTransitions(props: {
   const trackElement = (el: HTMLElement, id: string) => {
     props.refs[id] = el as HTMLDivElement;
 
-    setNotificationRefs(prev => {
+    setNotificationRefs((prev) => {
       const newRefs = [...prev];
       if (!newRefs.includes(el)) {
         newRefs.push(el);
@@ -135,7 +135,7 @@ function PositionTransitions(props: {
   // Update refs when notifications change
   createEffect(() => {
     const currentRefs: HTMLElement[] = [];
-    props.notifications.forEach(notification => {
+    props.notifications.forEach((notification) => {
       const existingRef = props.refs[notification.id];
       if (existingRef) {
         currentRefs.push(existingRef);
@@ -220,7 +220,6 @@ function PositionTransitions(props: {
 
                   el.style.transform = overshootTransform;
 
-
                   // Phase 3: Bounce back to final position
                   const onOvershootEnd = () => {
                     el.removeEventListener('transitionend', onOvershootEnd);
@@ -249,8 +248,6 @@ function PositionTransitions(props: {
           });
         });
       }
-
-
 
       if (removed.length > 0) {
         removed.forEach((el, i) => {
@@ -303,7 +300,7 @@ function PositionTransitions(props: {
   );
 }
 
-export const Notifications = factory<NotificationsFactory>(_props => {
+export const Notifications = factory<NotificationsFactory>((_props) => {
   const props = useProps('Notifications', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -322,7 +319,7 @@ export const Notifications = factory<NotificationsFactory>(_props => {
     'store',
     'portalProps',
     'withinPortal',
-    'ref'
+    'ref',
   ]);
 
   const theme = useEmpoleonTheme();
@@ -361,12 +358,7 @@ export const Notifications = factory<NotificationsFactory>(_props => {
 
   return (
     <OptionalPortal withinPortal={local.withinPortal} {...local.portalProps}>
-      <Box
-        {...getStyles('root')}
-        data-position="top-center"
-        ref={local.ref}
-        {...others}
-      >
+      <Box {...getStyles('root')} data-position="top-center" ref={local.ref} {...others}>
         <PositionTransitions
           notifications={grouped()['top-center']}
           position="top-center"
@@ -379,11 +371,7 @@ export const Notifications = factory<NotificationsFactory>(_props => {
         />
       </Box>
 
-      <Box
-        {...getStyles('root')}
-        data-position="top-left"
-        {...others}
-      >
+      <Box {...getStyles('root')} data-position="top-left" {...others}>
         <PositionTransitions
           notifications={grouped()['top-left']}
           position="top-left"
@@ -396,11 +384,7 @@ export const Notifications = factory<NotificationsFactory>(_props => {
         />
       </Box>
 
-      <Box
-        {...getStyles('root')}
-        data-position="top-right"
-        {...others}
-      >
+      <Box {...getStyles('root')} data-position="top-right" {...others}>
         <PositionTransitions
           notifications={grouped()['top-right']}
           position="top-right"
@@ -413,11 +397,7 @@ export const Notifications = factory<NotificationsFactory>(_props => {
         />
       </Box>
 
-      <Box
-        {...getStyles('root')}
-        data-position="bottom-right"
-        {...others}
-      >
+      <Box {...getStyles('root')} data-position="bottom-right" {...others}>
         <PositionTransitions
           notifications={grouped()['bottom-right']}
           position="bottom-right"
@@ -430,11 +410,7 @@ export const Notifications = factory<NotificationsFactory>(_props => {
         />
       </Box>
 
-      <Box
-        {...getStyles('root')}
-        data-position="bottom-left"
-        {...others}
-      >
+      <Box {...getStyles('root')} data-position="bottom-left" {...others}>
         <PositionTransitions
           notifications={grouped()['bottom-left']}
           position="bottom-left"
@@ -447,11 +423,7 @@ export const Notifications = factory<NotificationsFactory>(_props => {
         />
       </Box>
 
-      <Box
-        {...getStyles('root')}
-        data-position="bottom-center"
-        {...others}
-      >
+      <Box {...getStyles('root')} data-position="bottom-center" {...others}>
         <PositionTransitions
           notifications={grouped()['bottom-center']}
           position="bottom-center"

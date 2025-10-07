@@ -84,18 +84,18 @@ function Demo() {
       <NavLink
         href="#required-for-focus"
         label="With icon"
-        leftSection={<IconHome2 size={16} stroke='1.5' />}
+        leftSection={<IconHome2 size={16} stroke="1.5" />}
       />
       <NavLink
         href="#required-for-focus"
         label="With right section"
-        leftSection={<IconGauge size={16} stroke='1.5' />}
-        rightSection={<IconChevronRight size={12} stroke='1.5' class="emploeon-rotate-rtl" />}
+        leftSection={<IconGauge size={16} stroke="1.5" />}
+        rightSection={<IconChevronRight size={12} stroke="1.5" class="emploeon-rotate-rtl" />}
       />
       <NavLink
         href="#required-for-focus"
         label="Disabled"
-        leftSection={<IconCircleOff size={16} stroke='1.5' />}
+        leftSection={<IconCircleOff size={16} stroke="1.5" />}
         disabled
       />
       <NavLink
@@ -111,23 +111,23 @@ function Demo() {
       <NavLink
         href="#required-for-focus"
         label="Active subtle"
-        leftSection={<IconActivity size={16} stroke='1.5' />}
-        rightSection={<IconChevronRight size={12} stroke='1.5' class="empoleon-rotate-rtl" />}
+        leftSection={<IconActivity size={16} stroke="1.5" />}
+        rightSection={<IconChevronRight size={12} stroke="1.5" class="empoleon-rotate-rtl" />}
         variant="subtle"
         active
       />
       <NavLink
         href="#required-for-focus"
         label="Active light"
-        leftSection={<IconActivity size={16} stroke='1.5' />}
-        rightSection={<IconChevronRight size={12} stroke='1.5' class="empoleon-rotate-rtl" />}
+        leftSection={<IconActivity size={16} stroke="1.5" />}
+        rightSection={<IconChevronRight size={12} stroke="1.5" class="empoleon-rotate-rtl" />}
         active
       />
       <NavLink
         href="#required-for-focus"
         label="Active filled"
-        leftSection={<IconActivity size={16} stroke='1.5' />}
-        rightSection={<IconChevronRight size={12} stroke='1.5' class="empoleon-rotate-rtl" />}
+        leftSection={<IconActivity size={16} stroke="1.5" />}
+        rightSection={<IconChevronRight size={12} stroke="1.5" class="empoleon-rotate-rtl" />}
         variant="filled"
         active
       />

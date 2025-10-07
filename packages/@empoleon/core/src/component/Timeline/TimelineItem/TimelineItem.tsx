@@ -1,15 +1,15 @@
-import { splitProps, JSX, onMount, createSignal, useContext, createEffect } from 'solid-js';
+import { createEffect, createSignal, JSX, onMount, splitProps, useContext } from 'solid-js';
 import {
   Box,
   BoxProps,
   CompoundStylesApiProps,
   ElementProps,
+  EmpoleonColor,
+  EmpoleonRadius,
   factory,
   Factory,
   getRadius,
   getThemeColor,
-  EmpoleonColor,
-  EmpoleonRadius,
   useEmpoleonTheme,
   useProps,
 } from '../../../core';
@@ -62,7 +62,7 @@ export type TimelineItemFactory = Factory<{
   compound: true;
 }>;
 
-export const TimelineItem = factory<TimelineItemFactory>(_props => {
+export const TimelineItem = factory<TimelineItemFactory>((_props) => {
   const props = useProps('TimelineItem', null, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -81,7 +81,7 @@ export const TimelineItem = factory<TimelineItemFactory>(_props => {
     'children',
     'title',
     'mod',
-    'ref'
+    'ref',
   ]);
 
   const ctx = useTimelineContext();
@@ -96,9 +96,7 @@ export const TimelineItem = factory<TimelineItemFactory>(_props => {
 
   const isActive = () => {
     const activeIdx = () => ctx.activeIndex();
-    return ctx.reverseActive()
-      ? activeIdx() >= ctx.totalItems() - idx() - 1
-      : activeIdx() >= idx();
+    return ctx.reverseActive() ? activeIdx() >= ctx.totalItems() - idx() - 1 : activeIdx() >= idx();
   };
 
   const isLineActive = () => {
@@ -110,8 +108,12 @@ export const TimelineItem = factory<TimelineItemFactory>(_props => {
 
   return (
     <Box
-      {...ctx.getStyles('item', { ...stylesApiProps, className: local.className, style: local.style })}
-      mod={[{ "line-active": isLineActive(), active: isActive() }, local.mod]}
+      {...ctx.getStyles('item', {
+        ...stylesApiProps,
+        className: local.className,
+        style: local.style,
+      })}
+      mod={[{ 'line-active': isLineActive(), active: isActive() }, local.mod]}
       ref={local.ref}
       __vars={{
         '--tli-radius': local.radius ? getRadius(local.radius) : undefined,
@@ -122,14 +124,20 @@ export const TimelineItem = factory<TimelineItemFactory>(_props => {
     >
       <Box
         {...ctx.getStyles('itemBullet', stylesApiProps)}
-        mod={{ 'with-child': !!local.bullet, 'align': ctx.align(), 'active': isActive() }}
+        mod={{ 'with-child': !!local.bullet, align: ctx.align(), active: isActive() }}
       >
         {local.bullet}
       </Box>
 
-      <Box component='div' {...ctx.getStyles('itemBody', stylesApiProps)}>
-        {local.title && <Box component='div' {...ctx.getStyles('itemTitle', stylesApiProps)}>{local.title}</Box>}
-        <Box component='div' {...ctx.getStyles('itemContent', stylesApiProps)}>{local.children}</Box>
+      <Box component="div" {...ctx.getStyles('itemBody', stylesApiProps)}>
+        {local.title && (
+          <Box component="div" {...ctx.getStyles('itemTitle', stylesApiProps)}>
+            {local.title}
+          </Box>
+        )}
+        <Box component="div" {...ctx.getStyles('itemContent', stylesApiProps)}>
+          {local.children}
+        </Box>
       </Box>
     </Box>
   );

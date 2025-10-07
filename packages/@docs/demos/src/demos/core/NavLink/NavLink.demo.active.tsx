@@ -1,7 +1,7 @@
 import { IconActivity, IconChevronRight, IconFingerprint, IconGauge } from '@tabler/icons-solidjs';
+import { createSignal, For } from 'solid-js';
 import { Box, Group, NavLink } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal, For } from 'solid-js';
 
 const code = `
 import { createSignal, For } from 'solid-js';
@@ -49,7 +49,7 @@ const data = [
   {
     icon: IconFingerprint,
     label: 'Security',
-    rightSection: <IconChevronRight size={16} stroke='1.5' class="mantine-rotate-rtl" />,
+    rightSection: <IconChevronRight size={16} stroke="1.5" class="mantine-rotate-rtl" />,
   },
   { icon: IconActivity, label: 'Activity' },
 ];
@@ -60,12 +60,11 @@ function Demo(props: any) {
   const items = data.map((item, index) => (
     <NavLink
       href="#required-for-focus"
-
       active={index === active()}
       label={item.label}
       description={item.description}
       rightSection={item.rightSection}
-      leftSection={<item.icon size={16} stroke='1.5' />}
+      leftSection={<item.icon size={16} stroke="1.5" />}
       onClick={() => setActive(index)}
       {...props}
     />
@@ -82,13 +81,14 @@ function Demo(props: any) {
               label={item.label}
               description={item.description}
               rightSection={item.rightSection}
-              leftSection={<item.icon size={16} stroke='1.5' />}
+              leftSection={<item.icon size={16} stroke="1.5" />}
               onClick={() => setActive(index())}
               {...props}
             />
           )}
         </For>
-      </Box>;
+      </Box>
+      ;
     </Group>
   );
 }

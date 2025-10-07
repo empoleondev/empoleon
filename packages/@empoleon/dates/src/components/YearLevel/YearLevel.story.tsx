@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
-import { YearLevel } from './YearLevel';
 import { createSignal, For, JSX } from 'solid-js';
 import { EmpoleonProvider } from '@empoleon/core';
+import { YearLevel } from './YearLevel';
 
 export default {
   title: 'YearLevel',

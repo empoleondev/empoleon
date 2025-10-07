@@ -1,6 +1,6 @@
 import { JSX } from 'solid-js';
-import { AngleSlider } from './AngleSlider';
 import { EmpoleonProvider } from '../../core';
+import { AngleSlider } from './AngleSlider';
 
 export default {
   title: 'AngleSlider',
@@ -15,7 +15,7 @@ export default {
 
 export function Usage() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <AngleSlider size={100} formatLabel={(value) => `${value}°`} />
     </div>
   );
@@ -23,7 +23,7 @@ export function Usage() {
 
 export function WithMarks() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <AngleSlider
         size={100}
         formatLabel={(value) => `${value}°`}
@@ -44,7 +44,7 @@ export function WithMarks() {
 
 export function RestrictToMarks() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <AngleSlider
         size={100}
         formatLabel={(value) => `${value}°`}

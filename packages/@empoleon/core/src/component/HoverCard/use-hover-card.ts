@@ -1,14 +1,14 @@
-import { createSignal, createMemo, onCleanup, Accessor } from 'solid-js';
+import { Accessor, createMemo, createSignal, onCleanup } from 'solid-js';
+import { useId } from '@empoleon/hooks';
 import {
+  autoUpdate,
   useDelayGroup,
   useDismiss,
   useFloating,
   useHover,
   useInteractions,
   useRole,
-  autoUpdate,
 } from '@empoleon/solid-floating-ui';
-import { useId } from '@empoleon/hooks';
 import { useHoverCardGroupContext } from './HoverCardGroup/HoverCardGroup.context';
 
 interface UseHoverCard {
@@ -67,10 +67,15 @@ export function useHoverCard(settings: UseHoverCard) {
   const delayGroup = useDelayGroup(() => floating.context, { id: uid });
 
   const interactions = useInteractions([
-    useHover(() => floating.context, () => ({
-      enabled: true,
-      delay: withinGroup ? delayGroup.delay : { open: settings.openDelay, close: settings.closeDelay },
-    }))(),
+    useHover(
+      () => floating.context,
+      () => ({
+        enabled: true,
+        delay: withinGroup
+          ? delayGroup.delay
+          : { open: settings.openDelay, close: settings.closeDelay },
+      })
+    )(),
 
     useRole(floating.context, { role: 'dialog' })(),
 

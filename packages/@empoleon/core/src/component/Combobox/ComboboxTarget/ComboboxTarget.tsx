@@ -1,14 +1,16 @@
 import { JSX, mergeProps, splitProps } from 'solid-js';
+import { Dynamic } from 'solid-js/web';
 import { useMergedRef } from '@empoleon/hooks';
 import { factory, Factory, isElement, useProps } from '../../../core';
 import { Popover } from '../../Popover';
 import { useComboboxContext } from '../Combobox.context';
 import { useComboboxTargetProps } from '../use-combobox-target-props/use-combobox-target-props';
-import { Dynamic } from 'solid-js/web';
 
 export interface ComboboxTargetProps {
   /** Target element */
-  children: JSX.Element | ((props: { ref: (element: HTMLElement) => void; [key: string]: any }) => JSX.Element);
+  children:
+    | JSX.Element
+    | ((props: { ref: (element: HTMLElement) => void; [key: string]: any }) => JSX.Element);
 
   /** Key of the prop that should be used to access element ref */
   refProp?: string;
@@ -47,7 +49,7 @@ export type ComboboxTargetFactory = Factory<{
   compound: true;
 }>;
 
-export const ComboboxTarget = factory<ComboboxTargetFactory>(_props => {
+export const ComboboxTarget = factory<ComboboxTargetFactory>((_props) => {
   const props = useProps('ComboboxTarget', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'children',
@@ -57,7 +59,7 @@ export const ComboboxTarget = factory<ComboboxTargetFactory>(_props => {
     'withExpandedAttribute',
     'targetType',
     'autoComplete',
-    'ref'
+    'ref',
   ]);
 
   if (!isElement(local.children)) {
@@ -73,9 +75,10 @@ export const ComboboxTarget = factory<ComboboxTargetFactory>(_props => {
     withAriaAttributes: local.withAriaAttributes,
     withKeyboardNavigation: local.withKeyboardNavigation,
     withExpandedAttribute: local.withExpandedAttribute,
-    onKeyDown: typeof local.children === 'object' && local.children && 'props' in local.children
-    ? (local.children.props as any).onKeyDown
-    : undefined,
+    onKeyDown:
+      typeof local.children === 'object' && local.children && 'props' in local.children
+        ? (local.children.props as any).onKeyDown
+        : undefined,
     autoComplete: local.autoComplete,
   });
 

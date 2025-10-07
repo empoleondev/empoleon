@@ -68,9 +68,14 @@ export function itSupportsSystemProps<
     itSupportsLightDarkHidden({ ...options, props: options.props });
     itSupportsStyle({ ...options, props: options.props });
     itSupportsOthers({ ...options, props: options.props });
-    options.refType && itSupportsRef({ ...options, props: options.props, refType: options.refType });
+    options.refType &&
+      itSupportsRef({ ...options, props: options.props, refType: options.refType });
     options.polymorphic &&
-      itIsPolymorphic({ ...options, props: options.props, selector: options.polymorphicSelector || options.selector });
+      itIsPolymorphic({
+        ...options,
+        props: options.props,
+        selector: options.polymorphicSelector || options.selector,
+      });
     options.children && itRendersChildren({ ...options, props: options.props });
     typeof providerName === 'string' &&
       options.providerName !== null &&
@@ -87,15 +92,27 @@ export function itSupportsSystemProps<
     }
 
     if (options.variant) {
-      itSupportsVariant({ ...options, props: options.props, selector: options.variantSelector || options.selector });
+      itSupportsVariant({
+        ...options,
+        props: options.props,
+        selector: options.variantSelector || options.selector,
+      });
     }
 
     if (options.size) {
-      itSupportsSize({ ...options, props: options.props, selector: options.sizeSelector || options.selector });
+      itSupportsSize({
+        ...options,
+        props: options.props,
+        selector: options.sizeSelector || options.selector,
+      });
     }
 
     if (options.mod) {
-      itSupportsMod({ ...options, props: options.props, selector: options.sizeSelector || options.selector });
+      itSupportsMod({
+        ...options,
+        props: options.props,
+        selector: options.sizeSelector || options.selector,
+      });
     }
 
     if (Array.isArray(options.stylesApiSelectors) && stylesApiName) {

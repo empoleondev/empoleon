@@ -1,4 +1,4 @@
-import { JSX, Component, splitProps } from 'solid-js';
+import { Component, JSX, splitProps } from 'solid-js';
 import { Dynamic } from 'solid-js/web';
 import { useProps } from '@empoleon/core'; // Assuming these exist for SolidJS
 import { upperFirst } from '@empoleon/hooks';
@@ -19,12 +19,7 @@ function createDropzoneStatus(status: keyof DropzoneContextValue) {
 
     if (ctx[status]) {
       if (typeof local.children === 'function') {
-        return (
-          <Dynamic
-            component={local.children as Component}
-            {...others}
-          />
-        );
+        return <Dynamic component={local.children as Component} {...others} />;
       } else {
         return <span {...others}>{local.children}</span>;
       }

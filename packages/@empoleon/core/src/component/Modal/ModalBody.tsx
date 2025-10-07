@@ -19,7 +19,7 @@ export type ModalBodyFactory = Factory<{
 
 const defaultProps: Partial<ModalBodyProps> = {};
 
-export const ModalBody = factory<ModalBodyFactory>(_props => {
+export const ModalBody = factory<ModalBodyFactory>((_props) => {
   const props = useProps('ModalBody', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -27,7 +27,7 @@ export const ModalBody = factory<ModalBodyFactory>(_props => {
     'style',
     'styles',
     'vars',
-    'ref'
+    'ref',
   ]);
 
   const ctx = useModalContext();
@@ -35,7 +35,12 @@ export const ModalBody = factory<ModalBodyFactory>(_props => {
   return (
     <ModalBaseBody
       ref={local.ref}
-      {...ctx.getStyles('body', { classNames: local.classNames, style: local.style, styles: local.styles, className: local.className })}
+      {...ctx.getStyles('body', {
+        classNames: local.classNames,
+        style: local.style,
+        styles: local.styles,
+        className: local.className,
+      })}
       {...others}
     />
   );

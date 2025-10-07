@@ -1,4 +1,4 @@
-import { createEffect, onCleanup, onMount, mergeProps, splitProps } from 'solid-js';
+import { createEffect, mergeProps, onCleanup, onMount, splitProps } from 'solid-js';
 import { Notification, NotificationProps } from '@empoleon/core';
 import { getAutoClose } from './get-auto-close/get-auto-close';
 import { NotificationData } from './notifications.store';
@@ -10,16 +10,9 @@ interface NotificationContainerProps extends NotificationProps {
 }
 
 export function NotificationContainer(props: NotificationContainerProps) {
-  const [local, others] = splitProps(props, [
-    'data',
-    'onHide',
-    'autoClose',
-    'ref'
-  ]);
+  const [local, others] = splitProps(props, ['data', 'onHide', 'autoClose', 'ref']);
 
-  const [dataProps, notificationProps] = splitProps(local.data, [
-    'message',
-  ]);
+  const [dataProps, notificationProps] = splitProps(local.data, ['message']);
 
   const autoCloseDuration = getAutoClose(local.autoClose, local.autoClose);
 

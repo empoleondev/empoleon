@@ -1,3 +1,4 @@
+import { splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
@@ -9,7 +10,6 @@ import {
 } from '@empoleon/core';
 import { useSpotlightContext } from './Spotlight.context';
 import classes from './Spotlight.module.css';
-import { splitProps } from 'solid-js';
 
 export type SpotlightFooterStylesNames = 'footer';
 
@@ -25,21 +25,20 @@ export type SpotlightFooterFactory = Factory<{
   compound: true;
 }>;
 
-export const SpotlightFooter = factory<SpotlightFooterFactory>(_props => {
+export const SpotlightFooter = factory<SpotlightFooterFactory>((_props) => {
   const props = useProps('SpotlightFooter', null, _props);
-  const [local, others] = splitProps(props, [
-    'className',
-    'style',
-    'classNames',
-    'styles',
-    'ref'
-  ]);
+  const [local, others] = splitProps(props, ['className', 'style', 'classNames', 'styles', 'ref']);
 
   const ctx = useSpotlightContext();
   return (
     <Box
       ref={local.ref}
-      {...ctx.getStyles('footer', { className: local.className, classNames: local.classNames, style: local.style, styles: local.styles })}
+      {...ctx.getStyles('footer', {
+        className: local.className,
+        classNames: local.classNames,
+        style: local.style,
+        styles: local.styles,
+      })}
       {...others}
     />
   );

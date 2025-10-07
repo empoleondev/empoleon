@@ -1,7 +1,7 @@
 import { JSX } from 'solid-js';
+import { EmpoleonProvider } from '../../core';
 import { Input } from '../Input';
 import { Pill } from './Pill';
-import { EmpoleonProvider } from '../../core';
 
 export default {
   title: 'Pill',
@@ -16,7 +16,7 @@ export default {
 
 export function SinglePill() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Pill.Group size="xl">
         <Pill withRemoveButton>Pill</Pill>
         <Pill withRemoveButton>Pill 2</Pill>
@@ -28,7 +28,7 @@ export function SinglePill() {
 export function Usage() {
   return (
     <>
-      <div style={{ 'padding': '40px', 'display': 'flex', 'gap': '20px' }}>
+      <div style={{ padding: '40px', display: 'flex', gap: '20px' }}>
         <Pill withRemoveButton size="xs">
           XS pill
         </Pill>
@@ -46,7 +46,12 @@ export function Usage() {
         </Pill>
       </div>
       <div
-        style={{ 'padding': '40px', 'display': 'flex', 'gap': '20px', background: 'var(--empoleon-color-gray-0)' }}
+        style={{
+          padding: '40px',
+          display: 'flex',
+          gap: '20px',
+          background: 'var(--empoleon-color-gray-0)',
+        }}
       >
         <Pill withRemoveButton variant="contrast" size="xs">
           XS pill
@@ -70,7 +75,7 @@ export function Usage() {
 
 export function WithinInput() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Input size="xs" component="div" multiline>
         <Pill.Group size="xs">
           <Pill withRemoveButton size="xs">
@@ -146,7 +151,7 @@ export function WithinInput() {
 
 export function InputWithOverflow() {
   return (
-    <div style={{ 'padding': '40px', 'max-width': '400px' }}>
+    <div style={{ padding: '40px', 'max-width': '400px' }}>
       <Input size="sm" component="div" multiline>
         <Pill.Group size="sm">
           <Pill withRemoveButton size="sm" radius="xl">
@@ -181,7 +186,7 @@ export function InputWithOverflow() {
 
 export function WithoutRemove() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Input size="xs" component="div" multiline>
         <Pill.Group size="xs">
           <Pill size="xs">First</Pill>
@@ -227,7 +232,7 @@ export function WithoutRemove() {
 
 export function Overflow() {
   return (
-    <div style={{ 'padding': '40px', 'width': '200px', background: 'pink' }}>
+    <div style={{ padding: '40px', width: '200px', background: 'pink' }}>
       <Pill>Test pill with container overflow</Pill>
       <Pill withRemoveButton>Test pill with container overflow</Pill>
       <Pill withRemoveButton>Test</Pill>
@@ -244,7 +249,7 @@ export function Overflow() {
 
 export function WithinDisabledFieldset() {
   return (
-    <fieldset disabled style={{ 'padding': '40px' }}>
+    <fieldset disabled style={{ padding: '40px' }}>
       <Pill>Disabled without remove</Pill>
       <Pill withRemoveButton>Disabled with remove</Pill>
     </fieldset>

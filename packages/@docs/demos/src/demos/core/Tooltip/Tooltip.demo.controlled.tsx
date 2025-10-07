@@ -1,6 +1,6 @@
+import { createSignal } from 'solid-js';
 import { Button, Tooltip } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal } from 'solid-js';
 
 const code = `
 import { createSignal } from 'solid-js';
@@ -23,7 +23,11 @@ export function Demo() {
 
   return (
     <Tooltip label="Ctrl + J" opened={opened()}>
-      {(props) => <Button {...props} onClick={() => setOpened((o) => !o)}>Toggle color scheme</Button>}
+      {(props) => (
+        <Button {...props} onClick={() => setOpened((o) => !o)}>
+          Toggle color scheme
+        </Button>
+      )}
     </Tooltip>
   );
 }

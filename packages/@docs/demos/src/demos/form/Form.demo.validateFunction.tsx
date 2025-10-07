@@ -67,17 +67,8 @@ function Demo() {
   return (
     <Box maw={340} mx="auto">
       <form onSubmit={form.onSubmit((values) => console.log(values))}>
-        <TextInput
-          label="Name"
-          placeholder="Name"
-          {...form.getInputProps('name')}
-        />
-        <NumberInput
-          mt="sm"
-          label="Age"
-          placeholder="You age"
-          {...form.getInputProps('age')}
-        />
+        <TextInput label="Name" placeholder="Name" {...form.getInputProps('name')} />
+        <NumberInput mt="sm" label="Age" placeholder="You age" {...form.getInputProps('age')} />
 
         <Group justify="flex-end" mt="md">
           <Button type="submit">Submit</Button>

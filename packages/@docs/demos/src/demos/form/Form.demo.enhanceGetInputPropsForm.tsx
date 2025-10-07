@@ -67,17 +67,8 @@ function Demo() {
 
   return (
     <>
-      <TextInput
-        {...form.getInputProps('name')}
-        label="Your name"
-        placeholder="Your name"
-      />
-      <NumberInput
-        {...form.getInputProps('age')}
-        label="Age"
-        placeholder="Age"
-        mt="md"
-      />
+      <TextInput {...form.getInputProps('name')} label="Your name" placeholder="Your name" />
+      <NumberInput {...form.getInputProps('age')} label="Age" placeholder="Age" mt="md" />
       <Button onClick={() => form.initialize({ name: 'John', age: 20 })} mt="md">
         Initialize form
       </Button>

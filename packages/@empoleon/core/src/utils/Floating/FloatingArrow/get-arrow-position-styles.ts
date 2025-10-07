@@ -70,14 +70,18 @@ export function getArrowPositionStyles(props: {
   arrowY: number | undefined;
   dir: 'rtl' | 'ltr';
 }) {
-  const [side, placement = 'center'] = props.position.split('-') as [FloatingSide, FloatingPlacement];
+  const [side, placement = 'center'] = props.position.split('-') as [
+    FloatingSide,
+    FloatingPlacement,
+  ];
 
   const baseStyles = {
     width: `${props.arrowSize}px`,
     height: `${props.arrowSize}px`,
     transform: 'rotate(45deg)',
     position: 'absolute',
-    [radiusByFloatingSide[side]]: props.arrowRadius !== undefined ? `${props.arrowRadius}px` : undefined,
+    [radiusByFloatingSide[side]]:
+      props.arrowRadius !== undefined ? `${props.arrowRadius}px` : undefined,
   };
 
   const arrowPlacement = -props.arrowSize / 2;

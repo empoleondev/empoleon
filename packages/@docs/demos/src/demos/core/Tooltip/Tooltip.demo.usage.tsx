@@ -15,9 +15,7 @@ function Demo() {
 
 function Demo() {
   return (
-    <Tooltip label="Tooltip">
-      {(props) => <Button {...props} >Button with tooltip</Button>}
-    </Tooltip>
+    <Tooltip label="Tooltip">{(props) => <Button {...props}>Button with tooltip</Button>}</Tooltip>
   );
 }
 

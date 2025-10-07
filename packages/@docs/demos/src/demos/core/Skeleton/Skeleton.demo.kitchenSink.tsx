@@ -17,10 +17,10 @@ function Demo() {
     <>
       <Skeleton
         height={${props.circle ? props.height : 50}}${props.circle ? '\n        circle' : ''}${
-  !props.animate ? '\n        animate={false}' : ''
-}${props.visible !== undefined && !props.visible ? '\n        visible={false}' : ''}${
-  props.width && props.width !== '100%' ? `\n        width="${props.width}"` : ''
-}${props.radius && props.radius !== 'sm' ? `\n        radius="${props.radius}"` : ''}
+          !props.animate ? '\n        animate={false}' : ''
+        }${props.visible !== undefined && !props.visible ? '\n        visible={false}' : ''}${
+          props.width && props.width !== '100%' ? `\n        width="${props.width}"` : ''
+        }${props.radius && props.radius !== 'sm' ? `\n        radius="${props.radius}"` : ''}
         mb="xl"
       />
     </>

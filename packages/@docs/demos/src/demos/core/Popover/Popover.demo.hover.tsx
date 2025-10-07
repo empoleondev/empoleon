@@ -26,7 +26,7 @@ function Demo() {
 function Demo() {
   const [opened, { close, open }] = useDisclosure(false);
   return (
-    <Popover width='200px' position="bottom" withArrow shadow="md" opened={opened()}>
+    <Popover width="200px" position="bottom" withArrow shadow="md" opened={opened()}>
       <Popover.Target>
         <Button onMouseEnter={open} onMouseLeave={close}>
           Hover to see popover

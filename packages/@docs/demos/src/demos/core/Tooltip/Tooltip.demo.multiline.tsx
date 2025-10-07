@@ -28,7 +28,7 @@ export function Demo() {
       transitionProps={{ duration: 200 }}
       label="Use this button to save this information in your profile, after that you will be able to access it any time and share it via email."
     >
-      {(props) => <Button {...props} >Multiline tooltip</Button>}
+      {(props) => <Button {...props}>Multiline tooltip</Button>}
     </Tooltip>
   );
 }

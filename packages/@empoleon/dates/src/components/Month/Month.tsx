@@ -1,14 +1,15 @@
 import dayjs from 'dayjs';
+import { For, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
   createVarsResolver,
   ElementProps,
+  EmpoleonSize,
   factory,
   Factory,
   getFontSize,
   getSize,
-  EmpoleonSize,
   StylesApiProps,
   useProps,
   useResolvedStylesApi,
@@ -26,7 +27,6 @@ import { isAfterMinDate } from './is-after-min-date/is-after-min-date';
 import { isBeforeMaxDate } from './is-before-max-date/is-before-max-date';
 import { isSameMonth } from './is-same-month/is-same-month';
 import classes from './Month.module.css';
-import { For, splitProps } from 'solid-js';
 
 export type MonthStylesNames =
   | 'month'
@@ -54,10 +54,7 @@ export interface MonthSettings {
   __onDayMouseEnter?: (event: MouseEvent, date: DateStringValue) => void;
 
   /** Called when any keydown event is registered on day, used for arrows navigation */
-  __onDayKeyDown?: (
-    event: KeyboardEvent,
-    payload: ControlKeydownPayload
-  ) => void;
+  __onDayKeyDown?: (event: KeyboardEvent, payload: ControlKeydownPayload) => void;
 
   /** Assigns ref of every day based on its position in the table, used for arrows navigation */
   __getDayRef?: (rowIndex: number, cellIndex: number, node: HTMLButtonElement) => void;
@@ -144,7 +141,7 @@ const varsResolver = createVarsResolver<MonthFactory>((_, props) => ({
   },
 }));
 
-export const Month = factory<MonthFactory>(_props => {
+export const Month = factory<MonthFactory>((_props) => {
   const props = useProps('Month', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -179,7 +176,7 @@ export const Month = factory<MonthFactory>(_props => {
     'highlightToday',
     'withWeekNumbers',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<MonthFactory>({
@@ -198,11 +195,12 @@ export const Month = factory<MonthFactory>(_props => {
   });
 
   const ctx = useDatesContext();
-  const dates = () => getMonthDays({
-    month: local.month,
-    firstDayOfWeek: ctx.getFirstDayOfWeek(local.firstDayOfWeek),
-    consistentWeeks: ctx.consistentWeeks,
-  });
+  const dates = () =>
+    getMonthDays({
+      month: local.month,
+      firstDayOfWeek: ctx.getFirstDayOfWeek(local.firstDayOfWeek),
+      consistentWeeks: ctx.consistentWeeks,
+    });
 
   const dateInTabOrder = getDateInTabOrder({
     dates: dates(),
@@ -241,9 +239,7 @@ export const Month = factory<MonthFactory>(_props => {
         <For each={dates()}>
           {(row, rowIndex) => (
             <tr {...getStyles('monthRow')}>
-              {local.withWeekNumbers && (
-                <td {...getStyles('weekNumber')}>{getWeekNumber(row)}</td>
-              )}
+              {local.withWeekNumbers && <td {...getStyles('weekNumber')}>{getWeekNumber(row)}</td>}
               <For each={row}>
                 {(date, cellIndex) => {
                   const outside = !isSameMonth(date, local.month);
@@ -270,7 +266,9 @@ export const Month = factory<MonthFactory>(_props => {
                         renderDay={local.renderDay}
                         date={date}
                         size={local.size}
-                        weekend={ctx.getWeekendDays(local.weekendDays).includes(dayjs(date).get('day') as DayOfWeek)}
+                        weekend={ctx
+                          .getWeekendDays(local.weekendDays)
+                          .includes(dayjs(date).get('day') as DayOfWeek)}
                         outside={outside}
                         hidden={local.hideOutsideDates ? outside : false}
                         aria-label={ariaLabel}
@@ -287,7 +285,11 @@ export const Month = factory<MonthFactory>(_props => {
                           if (props?.onKeyDown) {
                             (props.onKeyDown as any)(event);
                           }
-                          local.__onDayKeyDown?.(event, { rowIndex: rowIndex(), cellIndex: cellIndex(), date });
+                          local.__onDayKeyDown?.(event, {
+                            rowIndex: rowIndex(),
+                            cellIndex: cellIndex(),
+                            date,
+                          });
                         }}
                         onMouseEnter={(event) => {
                           const props = dayProps();

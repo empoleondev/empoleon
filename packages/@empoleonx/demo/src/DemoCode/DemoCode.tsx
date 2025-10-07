@@ -12,8 +12,8 @@ export interface DemoCodeProps {
 export function DemoCode(props: DemoCodeProps) {
   const mergedProps = mergeProps({
     ...props,
-    defaultExpanded: true
-  })
+    defaultExpanded: true,
+  });
 
   const _code = createMemo(() => {
     const codeValue = typeof props.code === 'function' ? props.code() : props.code;

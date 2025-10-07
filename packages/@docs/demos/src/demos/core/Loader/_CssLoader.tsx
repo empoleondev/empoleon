@@ -1,10 +1,10 @@
 import cx from 'clsx';
+import { JSX } from 'solid-js';
 import { Box, EmpoleonLoaderComponent } from '@empoleon/core';
 import classes from './CssLoader.module.css';
-import { JSX } from 'solid-js';
 
 export const CssLoader: EmpoleonLoaderComponent = ({ class: className, ...others }, ref?: any) => (
-    <Box component="span" className={cx(classes.loader, className)} {...(others as any)} ref={ref} />
+  <Box component="span" className={cx(classes.loader, className)} {...(others as any)} ref={ref} />
 );
 
 export const cssLoaderTsxCode = `

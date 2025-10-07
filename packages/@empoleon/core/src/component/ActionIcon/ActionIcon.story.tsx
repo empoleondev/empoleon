@@ -1,5 +1,5 @@
-import { For, JSX } from 'solid-js';
 import { IconChevronDown, IconChevronUp } from '@tabler/icons-solidjs';
+import { For, JSX } from 'solid-js';
 import { DEFAULT_THEME, EmpoleonProvider, EmpoleonThemeProvider, rem } from '../../core';
 import { ActionIcon, ActionIconProps } from './ActionIcon';
 
@@ -11,25 +11,27 @@ export default {
         <Story />
       </EmpoleonProvider>
     ),
-  ]
+  ],
 };
 
 function Colors({ index, ...others }: ActionIconProps & { index?: number }) {
   const colors = Object.keys(DEFAULT_THEME.colors);
 
-  return <div style={{ display: 'flex', 'gap': '20px', 'padding': '40px' }}>
-    <For each={colors}>
-      {(color) => (
-        <ActionIcon
-          color={`${color}${typeof index === 'number' ? `.${index}` : ''}`}
-          {...others}
-          size="lg"
-        >
-          $$
-        </ActionIcon>
-      )}
+  return (
+    <div style={{ display: 'flex', gap: '20px', padding: '40px' }}>
+      <For each={colors}>
+        {(color) => (
+          <ActionIcon
+            color={`${color}${typeof index === 'number' ? `.${index}` : ''}`}
+            {...others}
+            size="lg"
+          >
+            $$
+          </ActionIcon>
+        )}
       </For>
-  </div>;
+    </div>
+  );
 }
 
 export function AutoContrast() {
@@ -41,8 +43,8 @@ export function AutoContrast() {
         display: 'flex',
         'flex-direction': 'column',
         'align-items': 'flex-start',
-        'gap': '10px',
-        'padding': '40px',
+        gap: '10px',
+        padding: '40px',
       }}
     >
       <For each={buttons}>
@@ -58,7 +60,7 @@ export function AutoContrast() {
 
 export function SingleButton() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <EmpoleonThemeProvider
         theme={{
           components: {
@@ -78,7 +80,7 @@ export function SingleButton() {
 
 export function WithinDisabledFieldset() {
   return (
-    <fieldset disabled style={{ 'padding': '40px' }}>
+    <fieldset disabled style={{ padding: '40px' }}>
       <legend>Disabled fieldset</legend>
       <ActionIcon size="lg" p={45}>
         $$
@@ -124,7 +126,7 @@ export function Usage() {
 
 export function CssColor() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       Filled variant
       <div>
         <ActionIcon size="xl" radius="xl" color="#ff00ff">
@@ -167,7 +169,7 @@ export function CssColor() {
 
 export function GradientVariant() {
   return (
-    <div style={{ 'padding': '40px', 'display': 'flex', 'gap': '40px' }}>
+    <div style={{ padding: '40px', display: 'flex', gap: '40px' }}>
       <ActionIcon size="lg" variant="gradient">
         $$
       </ActionIcon>
@@ -183,7 +185,7 @@ export function GradientVariant() {
 
 export function AsLink() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <ActionIcon size="xl" component="a" href="https://empoleon.dev">
         $$
       </ActionIcon>
@@ -193,7 +195,7 @@ export function AsLink() {
 
 export function Variables() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <ActionIcon
         size="xl"
         __vars={{ '--aasdsad': 'asdasd' }}
@@ -216,7 +218,7 @@ export function Variables() {
 
 export function Loading() {
   return (
-    <div style={{ 'padding': '40px', display: 'flex', 'gap': '20px' }}>
+    <div style={{ padding: '40px', display: 'flex', gap: '20px' }}>
       <ActionIcon loading size="lg">
         $$
       </ActionIcon>
@@ -232,7 +234,7 @@ export function Loading() {
 
 export function Disabled() {
   return (
-    <div style={{ 'padding': '40px', display: 'flex', 'gap': '20px' }}>
+    <div style={{ padding: '40px', display: 'flex', gap: '20px' }}>
       <ActionIcon disabled size="lg">
         $$
       </ActionIcon>
@@ -242,7 +244,7 @@ export function Disabled() {
 
 export function ActionIconGroup() {
   return (
-    <div style={{ 'padding': '40px', display: 'flex', 'gap': '20px' }}>
+    <div style={{ padding: '40px', display: 'flex', gap: '20px' }}>
       <ActionIcon size="lg" variant="default">
         S
       </ActionIcon>
@@ -287,7 +289,7 @@ export function ActionIconGroup() {
 
 export function Unstyled() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <ActionIcon.Group unstyled>
         <ActionIcon unstyled size="lg" variant="default">
           $$

@@ -1,4 +1,6 @@
 import { IconCalendar, IconPhone } from '@tabler/icons-solidjs';
+import { JSX } from 'solid-js';
+import { EmpoleonProvider } from '../../core';
 import { Checkbox } from '../Checkbox';
 import { ColorInput } from '../ColorInput';
 import { Group } from '../Group';
@@ -11,8 +13,6 @@ import { RangeSlider } from '../Slider';
 import { Stack } from '../Stack';
 import { Switch } from '../Switch';
 import { TextInput } from './TextInput';
-import { JSX } from 'solid-js';
-import { EmpoleonProvider } from '../../core';
 
 export default {
   title: 'TextInput',
@@ -27,7 +27,7 @@ export default {
 
 export function Usage() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <TextInput
         label="Text input"
         placeholder="This is text input"
@@ -44,10 +44,10 @@ export function Usage() {
 
 export function OnBlur() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <TextInput
         onBlur={() => {
-          console.log("I'm blurring")
+          console.log("I'm blurring");
         }}
       />
     </div>
@@ -56,10 +56,10 @@ export function OnBlur() {
 
 export function OnKeyDown() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <TextInput
         onkeydown={(event) => {
-          console.log(event.target.value)
+          console.log(event.target.value);
         }}
       />
     </div>
@@ -77,7 +77,7 @@ export function InputWrapperOrder() {
   };
 
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <TextInput {...props} inputWrapperOrder={['label', 'description', 'input', 'error']} />
       <TextInput {...props} inputWrapperOrder={['description', 'label', 'error', 'input']} />
       <TextInput {...props} inputWrapperOrder={['label', 'description', 'error', 'input']} />
@@ -88,7 +88,7 @@ export function InputWrapperOrder() {
 
 export function ErrorWithIcon() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <TextInput
         label="Text input"
         leftSection={<IconPhone />}
@@ -104,7 +104,7 @@ export function ErrorWithIcon() {
 
 export function DisabledWithRightSection() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <TextInput
         label="Text input"
         placeholder="This is text input"
@@ -118,7 +118,7 @@ export function DisabledWithRightSection() {
 
 export function Unstyled() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <TextInput
         label="Text input"
         placeholder="This is text input"
@@ -132,7 +132,7 @@ export function Unstyled() {
 
 export function WithoutErrorStyles() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <TextInput
         label="Text input without error styles"
         description="Description"
@@ -145,7 +145,7 @@ export function WithoutErrorStyles() {
 
 export function Breakpoints() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <TextInput label="Text input without error styles" bg="red" hiddenFrom="sm" />
       <TextInput label="Text input without error styles" bg="blue" visibleFrom="md" />
     </div>
@@ -160,9 +160,9 @@ export function HomepageCollage() {
           label="Appointment date"
           value="September 30, 2021"
           withAsterisk
-          leftSection={<IconCalendar size={24} stroke='1.5' color="var(--empoleon-color-gray-5)" />}
+          leftSection={<IconCalendar size={24} stroke="1.5" color="var(--empoleon-color-gray-5)" />}
           rightSection={<Input.ClearButton />}
-          leftSectionWidth='36px'
+          leftSectionWidth="36px"
           styles={{ input: { paddingLeft: 39.5 } }}
           radius="md"
           size="md"

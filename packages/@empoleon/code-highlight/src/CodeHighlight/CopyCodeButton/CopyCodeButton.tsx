@@ -1,7 +1,7 @@
+import { mergeProps } from 'solid-js';
 import { useClipboard } from '@empoleon/hooks';
 import { CodeHighlightControl } from '../CodeHighlightControl/CodeHighlightControl';
 import { CopyIcon } from './CopyIcon';
-import { mergeProps } from 'solid-js';
 
 interface CopyCodeButtonProps {
   code: string;
@@ -14,7 +14,7 @@ export function CopyCodeButton(props: CopyCodeButtonProps) {
     ...props,
     copyLabel: 'Copy',
     copiedLabel: 'Copied',
-  })
+  });
 
   const clipboard = useClipboard();
 

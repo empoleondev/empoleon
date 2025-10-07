@@ -1,22 +1,22 @@
-import { splitProps, JSX, createSignal, onMount, onCleanup, createEffect } from 'solid-js';
+import { createEffect, createSignal, JSX, onCleanup, onMount, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
+  CompoundStylesApiProps,
   createVarsResolver,
-  getSpacing,
   EmpoleonRadius,
   EmpoleonShadow,
   EmpoleonSpacing,
+  getSpacing,
   polymorphicFactory,
   PolymorphicFactory,
   StylesApiProps,
   useProps,
   useStyles,
-  CompoundStylesApiProps,
 } from '../../core';
 import { Paper } from '../Paper';
-import classes from './Card.module.css';
 import { CardProvider, useCardContext } from './Card.context';
+import classes from './Card.module.css';
 
 export type CardStylesNames = 'root' | 'section';
 export type CardSectionStylesNames = 'section';
@@ -66,7 +66,7 @@ const varsResolver = createVarsResolver<CardFactory>((_, props) => ({
 }));
 
 // CardSection component
-export const CardSection = polymorphicFactory<CardSectionFactory>(_props => {
+export const CardSection = polymorphicFactory<CardSectionFactory>((_props) => {
   const props = useProps('CardSection', defaultSectionProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -77,7 +77,7 @@ export const CardSection = polymorphicFactory<CardSectionFactory>(_props => {
     'withBorder',
     'inheritPadding',
     'mod',
-    'ref'
+    'ref',
   ]);
 
   const ctx = useCardContext();
@@ -106,18 +106,21 @@ export const CardSection = polymorphicFactory<CardSectionFactory>(_props => {
     className: local.className,
     style: local.style,
     styles: local.styles,
-    classNames: local.classNames
+    classNames: local.classNames,
   });
 
   return (
     <Box
       ref={local.ref}
-      mod={[{
-        'with-border': local.withBorder,
-        'inherit-padding': local.inheritPadding,
-        'first-section': isFirst(),
-        'last-section': isLast()
-      }, local.mod]}
+      mod={[
+        {
+          'with-border': local.withBorder,
+          'inherit-padding': local.inheritPadding,
+          'first-section': isFirst(),
+          'last-section': isLast(),
+        },
+        local.mod,
+      ]}
       {...sectionStyles}
       data-first-section={isFirst() ? true : undefined}
       data-last-section={isLast() ? true : undefined}
@@ -127,7 +130,7 @@ export const CardSection = polymorphicFactory<CardSectionFactory>(_props => {
 });
 
 // Card component
-export const Card = polymorphicFactory<CardFactory>(_props => {
+export const Card = polymorphicFactory<CardFactory>((_props) => {
   const props = useProps('Card', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -138,7 +141,7 @@ export const Card = polymorphicFactory<CardFactory>(_props => {
     'vars',
     'children',
     'padding',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<CardFactory>({
@@ -158,7 +161,7 @@ export const Card = polymorphicFactory<CardFactory>(_props => {
 
   const registerSection = () => {
     const index = sectionCount();
-    setSectionCount(c => c + 1);
+    setSectionCount((c) => c + 1);
     return index;
   };
 
@@ -170,12 +173,14 @@ export const Card = polymorphicFactory<CardFactory>(_props => {
   };
 
   return (
-    <CardProvider value={{
-      getStyles,
-      registerSection,
-      getTotalSections,
-      onSectionsChange
-    }}>
+    <CardProvider
+      value={{
+        getStyles,
+        registerSection,
+        getTotalSections,
+        onSectionsChange,
+      }}
+    >
       <Paper ref={local.ref} unstyled={local.unstyled} {...getStyles('root')} {...others}>
         {local.children as JSX.Element}
       </Paper>

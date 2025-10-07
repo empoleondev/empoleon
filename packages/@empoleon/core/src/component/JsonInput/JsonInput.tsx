@@ -1,10 +1,10 @@
-import { createSignal, splitProps, JSX } from 'solid-js';
+import { createSignal, JSX, splitProps } from 'solid-js';
+import { useUncontrolled } from '@empoleon/hooks';
 import { factory, Factory, useProps } from '../../core';
 import { __InputStylesNames } from '../Input';
 import { InputBase } from '../InputBase';
 import { Textarea, TextareaProps } from '../Textarea';
 import { validateJson } from './validate-json/validate-json';
-import { useUncontrolled } from '@empoleon/hooks';
 
 export interface JsonInputProps extends Omit<TextareaProps, 'onChange'> {
   /** Value for controlled component */
@@ -40,7 +40,7 @@ const defaultProps: Partial<JsonInputProps> = {
   deserialize: JSON.parse,
 };
 
-export const JsonInput = factory<JsonInputFactory>(_props => {
+export const JsonInput = factory<JsonInputFactory>((_props) => {
   const props = useProps('JsonInput', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'value',
@@ -54,7 +54,7 @@ export const JsonInput = factory<JsonInputFactory>(_props => {
     'onBlur',
     'readOnly',
     'error',
-    'ref'
+    'ref',
   ]);
 
   const [_value, setValue] = useUncontrolled({
@@ -67,27 +67,16 @@ export const JsonInput = factory<JsonInputFactory>(_props => {
   const [valid, setValid] = createSignal(validateJson(_value(), local.deserialize!));
 
   const handleFocus: JSX.FocusEventHandler<HTMLTextAreaElement, FocusEvent> = (e) => {
-    typeof local.onFocus === "function" && local.onFocus(e);
+    typeof local.onFocus === 'function' && local.onFocus(e);
     setValid(true);
   };
 
   const handleBlur: JSX.FocusEventHandler<HTMLTextAreaElement, FocusEvent> = (e) => {
-    typeof local.onBlur === "function" && local.onBlur(e);
+    typeof local.onBlur === 'function' && local.onBlur(e);
     const isValid = validateJson(e.currentTarget.value, local.deserialize!);
 
-    if (
-      local.formatOnBlur &&
-      !local.readOnly &&
-      isValid &&
-      e.currentTarget.value.trim() !== ""
-    ) {
-      setValue(
-        local.serialize!(
-          local.deserialize!(e.currentTarget.value),
-          null,
-          2
-        )
-      );
+    if (local.formatOnBlur && !local.readOnly && isValid && e.currentTarget.value.trim() !== '') {
+      setValue(local.serialize!(local.deserialize!(e.currentTarget.value), null, 2));
     }
     setValid(isValid);
   };
@@ -95,7 +84,7 @@ export const JsonInput = factory<JsonInputFactory>(_props => {
   return (
     <Textarea
       value={_value()}
-      onChange={event => setValue(event.currentTarget.value)}
+      onChange={(event) => setValue(event.currentTarget.value)}
       onFocus={handleFocus}
       onBlur={handleBlur}
       ref={local.ref}

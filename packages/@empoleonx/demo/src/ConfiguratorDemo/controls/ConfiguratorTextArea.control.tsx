@@ -1,7 +1,7 @@
+import { splitProps } from 'solid-js';
 import { BoxProps, ElementProps, Textarea } from '@empoleon/core';
 import { getControlLabel } from './get-control-label';
 import { ConfiguratorControl } from './types';
-import { splitProps } from 'solid-js';
 
 export type ConfiguratorTextareaControlOptions = ConfiguratorControl<
   'textarea',
@@ -17,11 +17,7 @@ export interface ConfiguratorTextareaControlProps
 }
 
 export function ConfiguratorTextareaControl(props: ConfiguratorTextareaControlProps) {
-  const [local, others] = splitProps(props, [
-    'value',
-    'onChange',
-    'prop',
-  ]);
+  const [local, others] = splitProps(props, ['value', 'onChange', 'prop']);
 
   return (
     <Textarea

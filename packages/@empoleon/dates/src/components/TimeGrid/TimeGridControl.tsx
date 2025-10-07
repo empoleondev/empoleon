@@ -1,5 +1,5 @@
-import { JSX, splitProps } from 'solid-js';
 import cx from 'clsx';
+import { JSX, splitProps } from 'solid-js';
 import { UnstyledButton, useEmpoleonTheme } from '@empoleon/core';
 import type { TimePickerAmPmLabels, TimePickerFormat } from '../TimePicker';
 import { TimeValue } from '../TimeValue';
@@ -23,7 +23,7 @@ export function TimeGridControl(props: TimeGridControlProps) {
     'amPmLabels',
     'format',
     'withSeconds',
-    'style'
+    'style',
   ]);
 
   return (
@@ -32,7 +32,12 @@ export function TimeGridControl(props: TimeGridControlProps) {
       {...ctx.getStyles('control', { className: cx(theme.activeClassName, local.class) })}
       {...others}
     >
-      <TimeValue value={local.time} format={local.format} amPmLabels={local.amPmLabels} withSeconds={local.withSeconds} />
+      <TimeValue
+        value={local.time}
+        format={local.format}
+        amPmLabels={local.amPmLabels}
+        withSeconds={local.withSeconds}
+      />
     </UnstyledButton>
   );
 }

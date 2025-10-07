@@ -83,11 +83,7 @@ function Demo() {
         }
       )}
     >
-      <TextInput
-        withAsterisk
-        label="Your name"
-        placeholder="Your name"
-      />
+      <TextInput withAsterisk label="Your name" placeholder="Your name" />
 
       <TextInput
         withAsterisk

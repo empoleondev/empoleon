@@ -61,7 +61,7 @@ const varsResolver = createVarsResolver<LoadingOverlayFactory>((_, props) => ({
   },
 }));
 
-export const LoadingOverlay = factory<LoadingOverlayFactory>(_props => {
+export const LoadingOverlay = factory<LoadingOverlayFactory>((_props) => {
   const props = useProps('LoadingOverlay', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -76,7 +76,7 @@ export const LoadingOverlay = factory<LoadingOverlayFactory>(_props => {
     'visible',
     'zIndex',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const theme = useEmpoleonTheme();

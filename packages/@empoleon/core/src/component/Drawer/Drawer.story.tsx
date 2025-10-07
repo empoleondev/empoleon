@@ -1,11 +1,11 @@
+import { JSX } from 'solid-js';
 import { useDisclosure } from '@empoleon/hooks';
+import { EmpoleonProvider } from '../../core';
 import { Button } from '../Button';
 import { useModalsStack } from '../Modal';
 import { ScrollArea } from '../ScrollArea';
 import { Tabs } from '../Tabs';
 import { Drawer } from './Drawer';
-import { JSX } from 'solid-js';
-import { EmpoleonProvider } from '../../core';
 
 export default {
   title: 'Drawer',
@@ -22,16 +22,12 @@ const lorem =
   'Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum tenetur, atque animi ducimus tempora iste distinctio harum nostrum eos tempore voluptatem, voluptas dolorem eveniet fugiat pariatur! Repellendus minus nulla non?';
 const content = Array(20)
   .fill(0)
-  .map(_ => (
-    <p style={{ margin: 0 }}>
-      {lorem}
-    </p>
-  ));
+  .map((_) => <p style={{ margin: 0 }}>{lorem}</p>);
 
 export function Usage() {
   const [opened, { open, close }] = useDisclosure(true);
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Button onClick={open}>Open modal</Button>
       {content}
       <Button onClick={open}>Open modal</Button>
@@ -45,7 +41,7 @@ export function Usage() {
 export function ScrollbarWithOffset() {
   const [opened, { open, close }] = useDisclosure(true);
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Button onClick={open}>Open modal</Button>
       <Button onClick={open}>Open modal</Button>
       <Drawer
@@ -66,7 +62,7 @@ export function ScrollbarWithOffset() {
 export function FloatingVariant() {
   const [opened, { open, close }] = useDisclosure(true);
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Button onClick={open}>Open modal</Button>
       {content}
       <Button onClick={open}>Open modal</Button>
@@ -89,7 +85,7 @@ export function FloatingVariant() {
 export function WithTabs() {
   const [opened, { open, close }] = useDisclosure(true);
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Button onClick={open}>Open drawer</Button>
       <Drawer opened={opened} onClose={close} title="Just a Drawer" zIndex={73812}>
         <Tabs defaultValue="comment">
@@ -114,7 +110,7 @@ export function WithTabs() {
 export function Unstyled() {
   const [opened, { open, close }] = useDisclosure(true);
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Button onClick={open}>Open modal</Button>
       {content}
       <Button onClick={open}>Open modal</Button>
@@ -135,7 +131,7 @@ export function Unstyled() {
 export function CustomTransition() {
   const [opened, { open, close }] = useDisclosure(false);
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Button onClick={open}>Open modal</Button>
       {content}
       <Button onClick={open}>Open modal</Button>
@@ -155,7 +151,7 @@ export function CustomTransition() {
 
 export function WithScroll() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Drawer opened onClose={() => {}} title="Just a Drawer" size="md">
         {content}
       </Drawer>
@@ -165,7 +161,7 @@ export function WithScroll() {
 
 export function AutosizeScrollarea() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Drawer
         opened
         onClose={() => {}}
@@ -183,7 +179,7 @@ export function Stack() {
   const stack = useModalsStack(['first', 'second', 'third']);
 
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Button onClick={() => stack.open('first')}>Open modal</Button>
       <Drawer.Stack>
         <Drawer {...stack.register('first')} title="First modal" overlayProps={{ blur: 3 }}>

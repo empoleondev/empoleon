@@ -1,23 +1,35 @@
-import { createSignal, For, JSX, Show, splitProps } from 'solid-js';
 import dayjs from 'dayjs';
+import { createSignal, For, JSX, Show, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
   createVarsResolver,
   ElementProps,
+  EmpoleonComponentStaticProperties,
   factory,
   Factory,
   getFontSize,
-  EmpoleonComponentStaticProperties,
   StylesApiProps,
+  UnstyledButton,
   useProps,
   useResolvedStylesApi,
   useStyles,
-  UnstyledButton,
 } from '@empoleon/core';
 import { useDatesState } from '../../hooks';
-import { CalendarLevel, DatePickerType, DateStringValue, DateValue, PickerBaseProps } from '../../types';
-import { Calendar, CalendarBaseProps, CalendarSettings, CalendarStylesNames, pickCalendarProps, } from '../Calendar';
+import {
+  CalendarLevel,
+  DatePickerType,
+  DateStringValue,
+  DateValue,
+  PickerBaseProps,
+} from '../../types';
+import {
+  Calendar,
+  CalendarBaseProps,
+  CalendarSettings,
+  CalendarStylesNames,
+  pickCalendarProps,
+} from '../Calendar';
 import { DecadeLevelBaseSettings } from '../DecadeLevel';
 import { isSameMonth } from '../Month';
 import { MonthLevelBaseSettings } from '../MonthLevel';
@@ -101,7 +113,7 @@ type DatePickerComponent = (<Type extends DatePickerType = 'default'>(
   displayName?: string;
 } & EmpoleonComponentStaticProperties<DatePickerFactory>;
 
-export const DatePicker: DatePickerComponent = factory<DatePickerFactory>(_props => {
+export const DatePicker: DatePickerComponent = factory<DatePickerFactory>((_props) => {
   const props = useProps('DatePicker', defaultProps, _props);
   const [local, rest] = splitProps(props, [
     'allowDeselect',
@@ -124,7 +136,7 @@ export const DatePicker: DatePickerComponent = factory<DatePickerFactory>(_props
     'size',
     'vars',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const { calendarProps, others } = pickCalendarProps(rest);
@@ -190,16 +202,21 @@ export const DatePicker: DatePickerComponent = factory<DatePickerFactory>(_props
         ...calendarProps.getDayProps?.(date),
       })}
       getMonthControlProps={(date) => ({
-        selected: typeof datesState._value() === 'string' ? isSameMonth(date, datesState._value()) : false,
+        selected:
+          typeof datesState._value() === 'string' ? isSameMonth(date, datesState._value()) : false,
         ...calendarProps.getMonthControlProps?.(date),
       })}
       getYearControlProps={(date) => ({
-        selected: typeof datesState._value() === 'string' ? dayjs(date).isSame(datesState._value(), 'year') : false,
+        selected:
+          typeof datesState._value() === 'string'
+            ? dayjs(date).isSame(datesState._value(), 'year')
+            : false,
         ...calendarProps.getYearControlProps?.(date),
       })}
       hideOutsideDates={calendarProps.hideOutsideDates ?? calendarProps.numberOfColumns !== 1}
-      {...(!local.presets ? { className: local.className, style: local.style, attributes: local.attributes } : {})}
-
+      {...(!local.presets
+        ? { className: local.className, style: local.style, attributes: local.attributes }
+        : {})}
     />
   );
 
@@ -216,14 +233,11 @@ export const DatePicker: DatePickerComponent = factory<DatePickerFactory>(_props
   };
 
   return (
-    <Show
-      when={local.presets}
-      fallback={calendar}
-    >
+    <Show when={local.presets} fallback={calendar}>
       <Box {...getStyles('datePickerRoot')} size={local.size} {...others}>
-        <Box component='div' {...getStyles('presetsList')}>
+        <Box component="div" {...getStyles('presetsList')}>
           <For each={local.presets}>
-            {preset => (
+            {(preset) => (
               <button
                 onClick={() => handlePresetSelect(preset.value)}
                 onMouseDown={(event) => event.preventDefault()}

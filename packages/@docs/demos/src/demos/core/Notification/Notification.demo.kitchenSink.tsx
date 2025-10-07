@@ -1,7 +1,7 @@
+import { IconAlertTriangle, IconCheck, IconInfoCircle, IconX } from '@tabler/icons-solidjs';
+import { createEffect, createSignal } from 'solid-js';
 import { Box, Notification, NotificationProps } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { IconCheck, IconX, IconInfoCircle, IconAlertTriangle } from '@tabler/icons-solidjs';
-import { createSignal, createEffect } from 'solid-js';
 
 const code = `
 import { Notification } from '@empoleon/core';
@@ -16,9 +16,11 @@ function Demo() {
 }
 `;
 
-function Demo(props: NotificationProps & {
-  iconType?: string;
-}) {
+function Demo(
+  props: NotificationProps & {
+    iconType?: string;
+  }
+) {
   const [loading, setLoading] = createSignal(props.loading || false);
 
   createEffect(() => {
@@ -42,12 +44,7 @@ function Demo(props: NotificationProps & {
 
   return (
     <Box maw={400} mx="auto">
-      <Notification
-        {...props}
-        loading={loading()}
-        icon={getIcon()}
-        onClose={() => {}}
-      />
+      <Notification {...props} loading={loading()} icon={getIcon()} onClose={() => {}} />
     </Box>
   );
 }

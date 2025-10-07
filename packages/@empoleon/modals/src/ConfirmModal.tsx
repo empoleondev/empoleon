@@ -26,16 +26,20 @@ export function ConfirmModal(props: ConfirmModalProps) {
   const { cancel: cancelLabel, confirm: confirmLabel } = labels;
   const ctx = useModals();
 
-  const handleCancel = (event: MouseEvent & { currentTarget: HTMLButtonElement; target: Element }) => {
+  const handleCancel = (
+    event: MouseEvent & { currentTarget: HTMLButtonElement; target: Element }
+  ) => {
     typeof props.cancelProps?.onClick === 'function' && props.cancelProps?.onClick(event);
     typeof props.onCancel === 'function' && props.onCancel();
-    (props.closeOnCancel !== false) && ctx.closeModal(props.id!);
+    props.closeOnCancel !== false && ctx.closeModal(props.id!);
   };
 
-  const handleConfirm = (event: MouseEvent & { currentTarget: HTMLButtonElement; target: Element }) => {
+  const handleConfirm = (
+    event: MouseEvent & { currentTarget: HTMLButtonElement; target: Element }
+  ) => {
     typeof props.confirmProps?.onClick === 'function' && props.confirmProps?.onClick(event);
     typeof props.onConfirm === 'function' && props.onConfirm();
-    (props.closeOnConfirm !== false) && ctx.closeModal(props.id!);
+    props.closeOnConfirm !== false && ctx.closeModal(props.id!);
   };
 
   // No styling with children otherwise on transition will hide the content

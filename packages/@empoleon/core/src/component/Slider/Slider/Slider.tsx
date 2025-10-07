@@ -4,15 +4,15 @@ import {
   BoxProps,
   createVarsResolver,
   ElementProps,
+  EmpoleonColor,
+  EmpoleonRadius,
+  EmpoleonSize,
   factory,
   Factory,
   findClosestNumber,
   getRadius,
   getSize,
   getThemeColor,
-  EmpoleonColor,
-  EmpoleonRadius,
-  EmpoleonSize,
   rem,
   StylesApiProps,
   useDirection,
@@ -140,19 +140,17 @@ const defaultProps = {
   size: 'md',
 } satisfies Partial<SliderProps>;
 
-const varsResolver = createVarsResolver<SliderFactory>(
-  (theme, props) => ({
-    root: {
-      '--slider-size': getSize(props.size, 'slider-size'),
-      '--slider-color': props.color ? getThemeColor(props.color, theme) : undefined,
-      '--slider-radius': props.radius === undefined ? undefined : getRadius(props.radius),
-      '--slider-thumb-size':
-        props.thumbSize !== undefined ? rem(props.thumbSize) : 'calc(var(--slider-size) * 2)',
-    },
-  })
-);
+const varsResolver = createVarsResolver<SliderFactory>((theme, props) => ({
+  root: {
+    '--slider-size': getSize(props.size, 'slider-size'),
+    '--slider-color': props.color ? getThemeColor(props.color, theme) : undefined,
+    '--slider-radius': props.radius === undefined ? undefined : getRadius(props.radius),
+    '--slider-thumb-size':
+      props.thumbSize !== undefined ? rem(props.thumbSize) : 'calc(var(--slider-size) * 2)',
+  },
+}));
 
-export const Slider = factory<SliderFactory>(_props => {
+export const Slider = factory<SliderFactory>((_props) => {
   const props = useProps('Slider', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -185,10 +183,10 @@ export const Slider = factory<SliderFactory>(_props => {
     'restrictToMarks',
     'thumbProps',
     'attributes',
-    'ref'
-   ]);
+    'ref',
+  ]);
 
-   const { style: thumbStyle, ...restThumbProps } = local.thumbProps || {};
+  const { style: thumbStyle, ...restThumbProps } = local.thumbProps || {};
 
   const getStyles = useStyles<SliderFactory>({
     name: 'Slider',
@@ -206,8 +204,12 @@ export const Slider = factory<SliderFactory>(_props => {
   const { dir } = useDirection();
   const [hovered, setHovered] = createSignal(false);
   const [_value, setValue] = useUncontrolled({
-    value: () => typeof local.value === 'number' ? clamp(local.value, local.min!, local.max!) : local.value,
-    defaultValue: typeof local.defaultValue === 'number' ? clamp(local.defaultValue, local.min!, local.max!) : local.defaultValue!,
+    value: () =>
+      typeof local.value === 'number' ? clamp(local.value, local.min!, local.max!) : local.value,
+    defaultValue:
+      typeof local.defaultValue === 'number'
+        ? clamp(local.defaultValue, local.min!, local.max!)
+        : local.defaultValue!,
     finalValue: clamp(0, local.min!, local.max!),
     onChange: local.onChange,
   });
@@ -225,7 +227,9 @@ export const Slider = factory<SliderFactory>(_props => {
     return pos;
   });
   const scaledValue = createMemo(() => local.scale!(_value()));
-  const _label = createMemo(() => typeof local.label === 'function' ? local.label(scaledValue()) : local.label);
+  const _label = createMemo(() =>
+    typeof local.label === 'function' ? local.label(scaledValue()) : local.label
+  );
   const precision = local.precision ?? getPrecision(local.step!);
 
   const handleChange = ({ x }: { x: number }) => {
@@ -237,12 +241,13 @@ export const Slider = factory<SliderFactory>(_props => {
         step: local.step!,
         precision,
       });
-      const finalValue = local.restrictToMarks && local.marks?.length
-      ? findClosestNumber(
-          nextValue,
-          local.marks.map((mark: any) => mark.value)
-        )
-      : nextValue;
+      const finalValue =
+        local.restrictToMarks && local.marks?.length
+          ? findClosestNumber(
+              nextValue,
+              local.marks.map((mark: any) => mark.value)
+            )
+          : nextValue;
       setValue(finalValue);
       valueRef = nextValue;
 
@@ -300,14 +305,19 @@ export const Slider = factory<SliderFactory>(_props => {
 
           if (local.restrictToMarks && local.marks) {
             const nextValue =
-              dir === 'rtl' ? getPreviousMarkValue(_value(), local.marks) : getNextMarkValue(_value(), local.marks);
+              dir === 'rtl'
+                ? getPreviousMarkValue(_value(), local.marks)
+                : getNextMarkValue(_value(), local.marks);
             setValue(nextValue);
             callOnChangeEnd(nextValue);
             break;
           }
 
           const nextValue = getFloatingValue(
-            Math.min(Math.max(dir === 'rtl' ? _value() - local.step! : _value() + local.step!, local.min!), local.max!),
+            Math.min(
+              Math.max(dir === 'rtl' ? _value() - local.step! : _value() + local.step!, local.min!),
+              local.max!
+            ),
             precision
           );
 
@@ -342,14 +352,19 @@ export const Slider = factory<SliderFactory>(_props => {
 
           if (local.restrictToMarks && local.marks) {
             const nextValue =
-              dir === 'rtl' ? getNextMarkValue(_value(), local.marks) : getPreviousMarkValue(_value(), local.marks);
+              dir === 'rtl'
+                ? getNextMarkValue(_value(), local.marks)
+                : getPreviousMarkValue(_value(), local.marks);
             setValue(nextValue);
             callOnChangeEnd(nextValue);
             break;
           }
 
           const nextValue = getFloatingValue(
-            Math.min(Math.max(dir === 'rtl' ? _value() + local.step! : _value() - local.step!, local.min!), local.max!),
+            Math.min(
+              Math.max(dir === 'rtl' ? _value() + local.step! : _value() - local.step!, local.min!),
+              local.max!
+            ),
             precision
           );
           setValue(nextValue);

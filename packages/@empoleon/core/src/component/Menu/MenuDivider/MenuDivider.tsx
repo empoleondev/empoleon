@@ -25,26 +25,27 @@ export type MenuDividerFactory = Factory<{
   compound: true;
 }>;
 
-export const MenuDivider = factory<MenuDividerFactory>(_props => {
-  const props = useProps(
-    'MenuDivider',
-    null,
-    _props
-  );
+export const MenuDivider = factory<MenuDividerFactory>((_props) => {
+  const props = useProps('MenuDivider', null, _props);
   const [local, others] = splitProps(props, [
     'classNames',
     'className',
     'style',
     'styles',
     'vars',
-    'ref'
-  ])
+    'ref',
+  ]);
   const ctx = useMenuContext();
 
   return (
     <Box
       ref={local.ref}
-      {...ctx.getStyles('divider', { className: local.className, style: local.style, styles: local.styles, classNames: local.classNames })}
+      {...ctx.getStyles('divider', {
+        className: local.className,
+        style: local.style,
+        styles: local.styles,
+        classNames: local.classNames,
+      })}
       {...others}
     />
   );

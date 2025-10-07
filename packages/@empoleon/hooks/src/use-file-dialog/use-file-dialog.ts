@@ -1,4 +1,4 @@
-import { createSignal, createEffect, onCleanup } from 'solid-js';
+import { createEffect, createSignal, onCleanup } from 'solid-js';
 
 export interface UseFileDialogOptions {
   /** Determines whether multiple files are allowed, `true` by default */
@@ -78,7 +78,9 @@ function createInput(options: UseFileDialogOptions) {
 
 export function useFileDialog(input: UseFileDialogOptions = {}) {
   const options: UseFileDialogOptions = { ...defaultOptions, ...input };
-  const [files, setFiles] = createSignal<FileList | null>(getInitialFilesList(options.initialFiles));
+  const [files, setFiles] = createSignal<FileList | null>(
+    getInitialFilesList(options.initialFiles)
+  );
   let inputRef: HTMLInputElement | null = null;
 
   const handleChange = (event: Event) => {

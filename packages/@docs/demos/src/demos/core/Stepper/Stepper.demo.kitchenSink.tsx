@@ -1,6 +1,6 @@
-import { Stepper, StepperProps, Button, Group } from '@empoleon/core';
+import { createEffect, createSignal } from 'solid-js';
+import { Button, Group, Stepper, StepperProps } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal, createEffect } from 'solid-js';
 import { Content } from './_content';
 
 function Demo(props: Partial<StepperProps>) {
@@ -16,28 +16,15 @@ function Demo(props: Partial<StepperProps>) {
   const prevStep = () => setActive((current) => (current > 0 ? current - 1 : current));
 
   return (
-    <div style={{ width: "800px", margin: "10px" }}>
-      <Stepper
-        {...props}
-        active={active()}
-        onStepClick={setActive}
-      >
-        <Stepper.Step
-          label="First step"
-          description="Create an account"
-        >
+    <div style={{ width: '800px', margin: '10px' }}>
+      <Stepper {...props} active={active()} onStepClick={setActive}>
+        <Stepper.Step label="First step" description="Create an account">
           <Content>Step 1 content: Create an account</Content>
         </Stepper.Step>
-        <Stepper.Step
-          label="Second step"
-          description="Verify email"
-        >
+        <Stepper.Step label="Second step" description="Verify email">
           <Content>Step 2 content: Verify email</Content>
         </Stepper.Step>
-        <Stepper.Step
-          label="Final step"
-          description="Get full access"
-        >
+        <Stepper.Step label="Final step" description="Get full access">
           <Content>Step 3 content: Get full access</Content>
         </Stepper.Step>
 
@@ -171,6 +158,6 @@ export const kitchenSink: EmpoleonDemo = {
       type: 'boolean',
       initialValue: false,
       libraryValue: false,
-    }
+    },
   ],
 };

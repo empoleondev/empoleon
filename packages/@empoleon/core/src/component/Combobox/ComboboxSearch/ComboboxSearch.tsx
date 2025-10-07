@@ -28,7 +28,7 @@ const defaultProps: Partial<ComboboxSearchProps> = {
   withKeyboardNavigation: true,
 };
 
-export const ComboboxSearch = factory<ComboboxSearchFactory>(_props => {
+export const ComboboxSearch = factory<ComboboxSearchFactory>((_props) => {
   const props = useProps('ComboboxSearch', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -39,7 +39,7 @@ export const ComboboxSearch = factory<ComboboxSearchFactory>(_props => {
     'onKeyDown',
     'withKeyboardNavigation',
     'size',
-    'ref'
+    'ref',
   ]);
 
   const ctx = useComboboxContext();

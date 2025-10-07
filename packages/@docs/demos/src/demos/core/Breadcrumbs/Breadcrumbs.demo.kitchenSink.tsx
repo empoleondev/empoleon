@@ -1,6 +1,6 @@
+import { For } from 'solid-js';
 import { Anchor, Breadcrumbs, BreadcrumbsProps } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { For } from 'solid-js';
 
 const code = `
 import { Breadcrumbs, Anchor } from '@empoleon/core';
@@ -49,9 +49,11 @@ const items = [
   { title: 'Category', href: '#' },
 ];
 
-function Demo(props: BreadcrumbsProps & {
-  separatorType?: string;
-}) {
+function Demo(
+  props: BreadcrumbsProps & {
+    separatorType?: string;
+  }
+) {
   const getSeparator = () => {
     switch (props.separatorType) {
       case 'slash':
@@ -70,17 +72,8 @@ function Demo(props: BreadcrumbsProps & {
   };
 
   return (
-    <Breadcrumbs
-      {...props}
-      separator={getSeparator()}
-    >
-      <For each={items}>
-        {(item) => (
-          <Anchor href={item.href}>
-            {item.title}
-          </Anchor>
-        )}
-      </For>
+    <Breadcrumbs {...props} separator={getSeparator()}>
+      <For each={items}>{(item) => <Anchor href={item.href}>{item.title}</Anchor>}</For>
     </Breadcrumbs>
   );
 }
@@ -108,7 +101,7 @@ export const kitchenSink: EmpoleonDemo = {
       prop: 'separatorMargin',
       type: 'size',
       initialValue: 'xs',
-      libraryValue: 'xs'
+      libraryValue: 'xs',
     },
   ],
 };

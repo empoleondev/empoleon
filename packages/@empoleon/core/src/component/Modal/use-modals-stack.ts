@@ -1,4 +1,4 @@
-import { createMemo, createSignal } from "solid-js";
+import { createMemo, createSignal } from 'solid-js';
 
 interface ModalStackReturnType<T extends string> {
   state: () => Record<T, boolean>;
@@ -17,10 +17,13 @@ export function useModalsStack<const T extends string>(modals: T[]): ModalStackR
 
   const [state, setState] = createSignal(initialState);
 
-  const openedMemos = modals.reduce((acc, modal) => {
-    acc[modal] = createMemo(() => state()[modal]);
-    return acc;
-  }, {} as Record<T, () => boolean>);
+  const openedMemos = modals.reduce(
+    (acc, modal) => {
+      acc[modal] = createMemo(() => state()[modal]);
+      return acc;
+    },
+    {} as Record<T, () => boolean>
+  );
 
   const open = (modal: T) => {
     setState((current) => ({ ...current, [modal]: true }));

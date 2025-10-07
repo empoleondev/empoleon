@@ -1,8 +1,8 @@
 import { IconArrowUp } from '@tabler/icons-solidjs';
+import { createEffect, createSignal } from 'solid-js';
 import { Affix, Button, Text, Transition } from '@empoleon/core';
 import { useWindowScroll } from '@empoleon/hooks';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal, createEffect } from 'solid-js';
 
 const code = `
 import { IconArrowUp } from '@tabler/icons-solidjs';
@@ -49,25 +49,37 @@ function Demo(props: any) {
   const [scroll, scrollTo] = useWindowScroll();
 
   const [position, setPosition] = createSignal({
-    ...(props.bottom !== undefined ? { bottom: props.bottom } : props.top !== undefined ? { top: props.top } : {}),
-    ...(props.right !== undefined ? { right: props.right } : props.left !== undefined ? { left: props.left } : {}),
+    ...(props.bottom !== undefined
+      ? { bottom: props.bottom }
+      : props.top !== undefined
+        ? { top: props.top }
+        : {}),
+    ...(props.right !== undefined
+      ? { right: props.right }
+      : props.left !== undefined
+        ? { left: props.left }
+        : {}),
   });
 
   createEffect(() => {
     setPosition({
-      ...(props.bottom !== undefined ? { bottom: props.bottom } : props.top !== undefined ? { top: props.top } : {}),
-      ...(props.right !== undefined ? { right: props.right } : props.left !== undefined ? { left: props.left } : {}),
+      ...(props.bottom !== undefined
+        ? { bottom: props.bottom }
+        : props.top !== undefined
+          ? { top: props.top }
+          : {}),
+      ...(props.right !== undefined
+        ? { right: props.right }
+        : props.left !== undefined
+          ? { left: props.left }
+          : {}),
     });
   });
 
   return (
     <>
       <Text ta="center">Affix is located at the configured position, scroll to see it</Text>
-      <Affix
-        position={position()}
-        zIndex={props.zIndex}
-        withinPortal={props.withinPortal}
-      >
+      <Affix position={position()} zIndex={props.zIndex} withinPortal={props.withinPortal}>
         <Transition transition="slide-up" mounted={scroll().y > 0}>
           {(transitionStyles) => (
             <Button

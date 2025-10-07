@@ -1,7 +1,7 @@
+import { createSignal, For } from 'solid-js';
 import { Button, Group, Modal } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
 import { AuthenticationForm } from '../../../shared/AuthenticationForm/AuthenticationForm';
-import { createSignal, For } from 'solid-js';
 
 const SIZES = ['xs', 'sm', 'md', 'lg', 'xl', '55rem', '70%', '100%'];
 

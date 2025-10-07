@@ -99,7 +99,7 @@ export function modalsReducer(
               ...modal.props,
               ...newProps,
             },
-          } as ModalState;;
+          } as ModalState;
         }
 
         if (modal.type === 'context') {
@@ -113,15 +113,17 @@ export function modalsReducer(
                 ...(newProps as Partial<OpenContextModal<any>>).innerProps,
               },
             },
-          } as ModalState;;
+          } as ModalState;
         }
 
         return modal;
       });
 
-      const currentModal = state.current?.id === modalId
-        ? (updatedModals.find((modal) => modal.id === modalId) || state.current) as ModalState | null
-        : state.current;
+      const currentModal =
+        state.current?.id === modalId
+          ? ((updatedModals.find((modal) => modal.id === modalId) ||
+              state.current) as ModalState | null)
+          : state.current;
 
       return {
         ...state,

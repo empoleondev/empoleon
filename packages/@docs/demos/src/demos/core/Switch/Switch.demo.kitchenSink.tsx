@@ -1,7 +1,7 @@
+import { IconCheck, IconX } from '@tabler/icons-solidjs';
+import { createEffect, createSignal } from 'solid-js';
 import { Switch, SwitchProps } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { IconCheck, IconX } from '@tabler/icons-solidjs';
-import { createSignal, createEffect } from 'solid-js';
 
 const code = `
 import { Switch } from '@empoleon/core';
@@ -17,12 +17,14 @@ function Demo() {
 }
 `;
 
-function Demo(props: SwitchProps & {
-  withThumbIndicator?: boolean;
-  showIconLabels?: boolean;
-  onLabel?: string;
-  offLabel?: string;
-}) {
+function Demo(
+  props: SwitchProps & {
+    withThumbIndicator?: boolean;
+    showIconLabels?: boolean;
+    onLabel?: string;
+    offLabel?: string;
+  }
+) {
   const [checked, setChecked] = createSignal(props.defaultChecked || false);
 
   createEffect(() => {
@@ -33,7 +35,11 @@ function Demo(props: SwitchProps & {
 
   const getThumbIcon = () => {
     if (!props.withThumbIndicator) return undefined;
-    return checked() ? <IconCheck size={12} color="var(--empoleon-color-teal-6)" stroke='3' /> : <IconX size={12} color="var(--empoleon-color-red-6)" stroke='3' />;
+    return checked() ? (
+      <IconCheck size={12} color="var(--empoleon-color-teal-6)" stroke="3" />
+    ) : (
+      <IconX size={12} color="var(--empoleon-color-red-6)" stroke="3" />
+    );
   };
 
   const getOnLabel = () => {
@@ -72,37 +78,37 @@ export const kitchenSink: EmpoleonDemo = {
       prop: 'color',
       type: 'color',
       initialValue: 'blue',
-      libraryValue: 'blue'
+      libraryValue: 'blue',
     },
     {
       prop: 'size',
       type: 'size',
       initialValue: 'md',
-      libraryValue: 'md'
+      libraryValue: 'md',
     },
     {
       prop: 'radius',
       type: 'size',
       initialValue: 'xl',
-      libraryValue: 'xl'
+      libraryValue: 'xl',
     },
     {
       prop: 'label',
       type: 'string',
       initialValue: 'I agree to sell my privacy',
-      libraryValue: ''
+      libraryValue: '',
     },
     {
       prop: 'description',
       type: 'string',
       initialValue: '',
-      libraryValue: ''
+      libraryValue: '',
     },
     {
       prop: 'error',
       type: 'string',
       initialValue: '',
-      libraryValue: ''
+      libraryValue: '',
     },
     {
       prop: 'labelPosition',
@@ -118,37 +124,37 @@ export const kitchenSink: EmpoleonDemo = {
       prop: 'withThumbIndicator',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'onLabel',
       type: 'string',
       initialValue: '',
-      libraryValue: ''
+      libraryValue: '',
     },
     {
       prop: 'offLabel',
       type: 'string',
       initialValue: '',
-      libraryValue: ''
+      libraryValue: '',
     },
     {
       prop: 'showIconLabels',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'disabled',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'autoContrast',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
   ],
 };

@@ -1,8 +1,7 @@
+import { createSignal, JSX } from 'solid-js';
+import { EmpoleonProvider } from '../../core';
 import { RangeSlider } from './RangeSlider/RangeSlider';
 import { Slider } from './Slider/Slider';
-import { JSX } from 'solid-js';
-import { EmpoleonProvider } from '../../core';
-import { createSignal } from 'solid-js';
 
 export default {
   title: 'Slider',
@@ -31,7 +30,7 @@ const sizeMarks = [
 
 export function WithinDisabledFieldset() {
   return (
-    <fieldset disabled style={{ 'padding': '40px' }}>
+    <fieldset disabled style={{ padding: '40px' }}>
       <legend>Disabled fieldset</legend>
       <Slider defaultValue={45} />
       <Slider defaultValue={45} inverted />
@@ -43,7 +42,7 @@ export function WithinDisabledFieldset() {
 
 export function Usage() {
   return (
-    <div style={{ 'padding': '40px', 'max-width': '400px' }}>
+    <div style={{ padding: '40px', 'max-width': '400px' }}>
       <Slider defaultValue={45} marks={marks} size="md" onChangeEnd={console.log} restrictToMarks />
       <Slider defaultValue={45} disabled mt={60} />
       <Slider defaultValue={45} inverted mt="xl" />
@@ -55,7 +54,7 @@ export function Usage() {
 
 export function Unstyled() {
   return (
-    <div style={{ 'padding': '40px', 'max-width': '400px' }}>
+    <div style={{ padding: '40px', 'max-width': '400px' }}>
       <Slider defaultValue={45} marks={marks} unstyled />
       <RangeSlider defaultValue={[45, 55]} marks={marks} unstyled />
     </div>
@@ -64,7 +63,7 @@ export function Unstyled() {
 
 export function SizeSlider() {
   return (
-    <div style={{ 'padding': '40px', 'max-width': '300px' }}>
+    <div style={{ padding: '40px', 'max-width': '300px' }}>
       <div style={{ background: 'pink' }}>
         <Slider step={25} defaultValue={50} marks={sizeMarks} size="md" />
       </div>
@@ -74,7 +73,7 @@ export function SizeSlider() {
 
 export function Range() {
   return (
-    <div style={{ 'padding': '40px', 'max-width': '400px' }}>
+    <div style={{ padding: '40px', 'max-width': '400px' }}>
       <RangeSlider
         defaultValue={[25, 65]}
         restrictToMarks
@@ -104,7 +103,7 @@ export function Range() {
 export function DynamicDisabled() {
   const [disabled, setDisabled] = createSignal(false);
   return (
-    <div style={{ 'padding': '40px', 'max-width': '400px' }}>
+    <div style={{ padding: '40px', 'max-width': '400px' }}>
       <button type="button" onClick={() => setDisabled((d) => !d)}>
         Toggle disabled
       </button>
@@ -120,7 +119,7 @@ export function DynamicDisabled() {
 
 export function RangeRestrictToMarks() {
   return (
-    <div style={{ 'padding': '40px', 'max-width': '1000' }}>
+    <div style={{ padding: '40px', 'max-width': '1000' }}>
       <RangeSlider
         defaultValue={[10, 25]}
         restrictToMarks
@@ -146,7 +145,7 @@ export function RangeRestrictToMarks() {
 
 export function Sizes() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Slider defaultValue={45} mt="xl" marks={marks} size="xs" />
       <Slider defaultValue={45} mt="xl" marks={marks} size="sm" />
       <Slider defaultValue={45} mt="xl" marks={marks} size="md" />
@@ -161,7 +160,7 @@ export function Sizes() {
 
 export function WithDecimalValue() {
   return (
-    <div style={{ 'padding': '40px', 'max-width': '400px' }}>
+    <div style={{ padding: '40px', 'max-width': '400px' }}>
       <RangeSlider
         minRange={0.1}
         step={0.1}

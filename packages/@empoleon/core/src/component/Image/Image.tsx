@@ -1,11 +1,10 @@
-import { JSX } from 'solid-js';
-import { createEffect, createSignal, splitProps } from 'solid-js';
+import { createEffect, createSignal, JSX, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
   createVarsResolver,
-  getRadius,
   EmpoleonRadius,
+  getRadius,
   polymorphicFactory,
   PolymorphicFactory,
   StylesApiProps,
@@ -13,7 +12,6 @@ import {
   useStyles,
 } from '../../core';
 import classes from './Image.module.css';
-
 
 export type ImageStylesNames = 'root';
 export type ImageCssVariables = {
@@ -54,7 +52,7 @@ const varsResolver = createVarsResolver<ImageFactory>((_, props) => ({
   },
 }));
 
-export const Image = polymorphicFactory<ImageFactory>(_props => {
+export const Image = polymorphicFactory<ImageFactory>((_props) => {
   const props = useProps('Image', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -70,7 +68,7 @@ export const Image = polymorphicFactory<ImageFactory>(_props => {
     'fallbackSrc',
     'mod',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const [error, setError] = createSignal(!local.src);

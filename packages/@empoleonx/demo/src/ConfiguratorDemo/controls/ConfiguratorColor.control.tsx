@@ -1,3 +1,4 @@
+import { createSignal, splitProps } from 'solid-js';
 import {
   BoxProps,
   CheckIcon,
@@ -15,7 +16,6 @@ import { ColorWheelIcon } from './ColorWheelIcon';
 import { getControlLabel } from './get-control-label';
 import { ConfiguratorControl } from './types';
 import classes from './ConfiguratorColor.control.module.css';
-import { createSignal, splitProps } from 'solid-js';
 
 export type ConfiguratorColorControlOptions = ConfiguratorControl<
   'color',
@@ -31,11 +31,7 @@ export interface ConfiguratorColorControlProps
 }
 
 export function ConfiguratorColorControl(props: ConfiguratorColorControlProps) {
-  const [local, others] = splitProps(props, [
-    'value',
-    'onChange',
-    'prop'
-  ]);
+  const [local, others] = splitProps(props, ['value', 'onChange', 'prop']);
 
   const [colorPickerColor, setColorPickerColor] = createSignal('#fff');
 

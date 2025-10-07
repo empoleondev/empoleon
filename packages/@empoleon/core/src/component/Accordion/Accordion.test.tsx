@@ -1,53 +1,58 @@
+import { JSX } from 'solid-js';
 import { render, screen, tests, userEvent } from '@empoleon-tests/core';
 import { Accordion, AccordionProps, AccordionStylesNames } from './Accordion';
 import { AccordionChevron } from './AccordionChevron';
 import { AccordionControl } from './AccordionControl/AccordionControl';
 import { AccordionItem } from './AccordionItem/AccordionItem';
 import { AccordionPanel } from './AccordionPanel/AccordionPanel';
-import { JSX } from 'solid-js';
 
 describe('@empoleon/core/Accordion', () => {
   tests.axe([
-    () => <Accordion
-      transitionDuration={0}
-      defaultValue='item-1'
-      children={
-        <>
-          <Accordion.Item value="item-1">
-            <Accordion.Control icon="$$">Label 1</Accordion.Control>
-            <Accordion.Panel>test-item-1</Accordion.Panel>
-          </Accordion.Item>
-          <Accordion.Item value="item-2">
-            <Accordion.Control>Label 2</Accordion.Control>
-            <Accordion.Panel>test-item-2</Accordion.Panel>
-          </Accordion.Item>
-          <Accordion.Item value="item-3">
-            <Accordion.Control>Label 3</Accordion.Control>
-            <Accordion.Panel>test-item-3</Accordion.Panel>
-          </Accordion.Item>
-        </>
-      }
-    />,
-    () => <Accordion transitionDuration={0}
-      defaultValue='item-1'
-      order={2}
-      children={
-        <>
-          <Accordion.Item value="item-1">
-            <Accordion.Control icon="$$">Label 1</Accordion.Control>
-            <Accordion.Panel>test-item-1</Accordion.Panel>
-          </Accordion.Item>
-          <Accordion.Item value="item-2">
-            <Accordion.Control>Label 2</Accordion.Control>
-            <Accordion.Panel>test-item-2</Accordion.Panel>
-          </Accordion.Item>
-          <Accordion.Item value="item-3">
-            <Accordion.Control>Label 3</Accordion.Control>
-            <Accordion.Panel>test-item-3</Accordion.Panel>
-          </Accordion.Item>
-        </>
-      }
+    () => (
+      <Accordion
+        transitionDuration={0}
+        defaultValue="item-1"
+        children={
+          <>
+            <Accordion.Item value="item-1">
+              <Accordion.Control icon="$$">Label 1</Accordion.Control>
+              <Accordion.Panel>test-item-1</Accordion.Panel>
+            </Accordion.Item>
+            <Accordion.Item value="item-2">
+              <Accordion.Control>Label 2</Accordion.Control>
+              <Accordion.Panel>test-item-2</Accordion.Panel>
+            </Accordion.Item>
+            <Accordion.Item value="item-3">
+              <Accordion.Control>Label 3</Accordion.Control>
+              <Accordion.Panel>test-item-3</Accordion.Panel>
+            </Accordion.Item>
+          </>
+        }
       />
+    ),
+    () => (
+      <Accordion
+        transitionDuration={0}
+        defaultValue="item-1"
+        order={2}
+        children={
+          <>
+            <Accordion.Item value="item-1">
+              <Accordion.Control icon="$$">Label 1</Accordion.Control>
+              <Accordion.Panel>test-item-1</Accordion.Panel>
+            </Accordion.Item>
+            <Accordion.Item value="item-2">
+              <Accordion.Control>Label 2</Accordion.Control>
+              <Accordion.Panel>test-item-2</Accordion.Panel>
+            </Accordion.Item>
+            <Accordion.Item value="item-3">
+              <Accordion.Control>Label 3</Accordion.Control>
+              <Accordion.Panel>test-item-3</Accordion.Panel>
+            </Accordion.Item>
+          </>
+        }
+      />
+    ),
   ]);
 
   tests.itSupportsSystemProps<AccordionProps, AccordionStylesNames>({
@@ -70,7 +75,7 @@ describe('@empoleon/core/Accordion', () => {
             <Accordion.Panel>test-item-3</Accordion.Panel>
           </Accordion.Item>
         </>
-      )) as unknown as JSX.Element
+      )) as unknown as JSX.Element,
     }),
     mod: true,
     styleProps: true,
@@ -85,50 +90,54 @@ describe('@empoleon/core/Accordion', () => {
   });
 
   it('renders correct amount of items', () => {
-    const { container } = render(() => <Accordion
-      transitionDuration={0}
-      defaultValue='item-1'
-      children={
-        <>
-          <Accordion.Item value="item-1">
-            <Accordion.Control icon="$$">Label 1</Accordion.Control>
-            <Accordion.Panel>test-item-1</Accordion.Panel>
-          </Accordion.Item>
-          <Accordion.Item value="item-2">
-            <Accordion.Control>Label 2</Accordion.Control>
-            <Accordion.Panel>test-item-2</Accordion.Panel>
-          </Accordion.Item>
-          <Accordion.Item value="item-3">
-            <Accordion.Control>Label 3</Accordion.Control>
-            <Accordion.Panel>test-item-3</Accordion.Panel>
-          </Accordion.Item>
-        </>
-      } />
-    );
+    const { container } = render(() => (
+      <Accordion
+        transitionDuration={0}
+        defaultValue="item-1"
+        children={
+          <>
+            <Accordion.Item value="item-1">
+              <Accordion.Control icon="$$">Label 1</Accordion.Control>
+              <Accordion.Panel>test-item-1</Accordion.Panel>
+            </Accordion.Item>
+            <Accordion.Item value="item-2">
+              <Accordion.Control>Label 2</Accordion.Control>
+              <Accordion.Panel>test-item-2</Accordion.Panel>
+            </Accordion.Item>
+            <Accordion.Item value="item-3">
+              <Accordion.Control>Label 3</Accordion.Control>
+              <Accordion.Panel>test-item-3</Accordion.Panel>
+            </Accordion.Item>
+          </>
+        }
+      />
+    ));
     expect(container.querySelectorAll('.empoleon-Accordion-item')).toHaveLength(3);
   });
 
   it('support uncontrolled state (multiple: false, default)', async () => {
-    render(() => <Accordion
-      transitionDuration={0}
-      defaultValue='item-2'
-      children={
-        <>
-          <Accordion.Item value="item-1">
-            <Accordion.Control icon="$$">Label 1</Accordion.Control>
-            <Accordion.Panel>test-item-1</Accordion.Panel>
-          </Accordion.Item>
-          <Accordion.Item value="item-2">
-            <Accordion.Control>Label 2</Accordion.Control>
-            <Accordion.Panel>test-item-2</Accordion.Panel>
-          </Accordion.Item>
-          <Accordion.Item value="item-3">
-            <Accordion.Control>Label 3</Accordion.Control>
-            <Accordion.Panel>test-item-3</Accordion.Panel>
-          </Accordion.Item>
-        </>
-      }
-    />);
+    render(() => (
+      <Accordion
+        transitionDuration={0}
+        defaultValue="item-2"
+        children={
+          <>
+            <Accordion.Item value="item-1">
+              <Accordion.Control icon="$$">Label 1</Accordion.Control>
+              <Accordion.Panel>test-item-1</Accordion.Panel>
+            </Accordion.Item>
+            <Accordion.Item value="item-2">
+              <Accordion.Control>Label 2</Accordion.Control>
+              <Accordion.Panel>test-item-2</Accordion.Panel>
+            </Accordion.Item>
+            <Accordion.Item value="item-3">
+              <Accordion.Control>Label 3</Accordion.Control>
+              <Accordion.Panel>test-item-3</Accordion.Panel>
+            </Accordion.Item>
+          </>
+        }
+      />
+    ));
     expect(screen.getByText('test-item-2')).toBeInTheDocument();
     expect(screen.queryAllByText('test-item-1')).toHaveLength(0);
 
@@ -138,23 +147,29 @@ describe('@empoleon/core/Accordion', () => {
   });
 
   it('support uncontrolled state (multiple: true)', async () => {
-    render(() => <Accordion transitionDuration={0}
-      children={
-        <>
-          <Accordion.Item value="item-1">
-            <Accordion.Control icon="$$">Label 1</Accordion.Control>
-            <Accordion.Panel>test-item-1</Accordion.Panel>
-          </Accordion.Item>
-          <Accordion.Item value="item-2">
-            <Accordion.Control>Label 2</Accordion.Control>
-            <Accordion.Panel>test-item-2</Accordion.Panel>
-          </Accordion.Item>
-          <Accordion.Item value="item-3">
-            <Accordion.Control>Label 3</Accordion.Control>
-            <Accordion.Panel>test-item-3</Accordion.Panel>
-          </Accordion.Item>
-        </>
-      } multiple defaultValue={['item-2']} />);
+    render(() => (
+      <Accordion
+        transitionDuration={0}
+        children={
+          <>
+            <Accordion.Item value="item-1">
+              <Accordion.Control icon="$$">Label 1</Accordion.Control>
+              <Accordion.Panel>test-item-1</Accordion.Panel>
+            </Accordion.Item>
+            <Accordion.Item value="item-2">
+              <Accordion.Control>Label 2</Accordion.Control>
+              <Accordion.Panel>test-item-2</Accordion.Panel>
+            </Accordion.Item>
+            <Accordion.Item value="item-3">
+              <Accordion.Control>Label 3</Accordion.Control>
+              <Accordion.Panel>test-item-3</Accordion.Panel>
+            </Accordion.Item>
+          </>
+        }
+        multiple
+        defaultValue={['item-2']}
+      />
+    ));
     expect(screen.queryAllByText('test-item-1').length).toBe(0);
     expect(screen.getByText('test-item-2')).toBeInTheDocument();
 
@@ -164,24 +179,28 @@ describe('@empoleon/core/Accordion', () => {
   });
 
   it('supports navigating between items with up and down arrows (loop: true, default)', async () => {
-    render(() => <Accordion transitionDuration={0}
-      defaultValue='item-1'
-      children={
-        <>
-          <Accordion.Item value="item-1">
-            <Accordion.Control icon="$$">Label 1</Accordion.Control>
-            <Accordion.Panel>test-item-1</Accordion.Panel>
-          </Accordion.Item>
-          <Accordion.Item value="item-2">
-            <Accordion.Control>Label 2</Accordion.Control>
-            <Accordion.Panel>test-item-2</Accordion.Panel>
-          </Accordion.Item>
-          <Accordion.Item value="item-3">
-            <Accordion.Control>Label 3</Accordion.Control>
-            <Accordion.Panel>test-item-3</Accordion.Panel>
-          </Accordion.Item>
-        </>
-      } />);
+    render(() => (
+      <Accordion
+        transitionDuration={0}
+        defaultValue="item-1"
+        children={
+          <>
+            <Accordion.Item value="item-1">
+              <Accordion.Control icon="$$">Label 1</Accordion.Control>
+              <Accordion.Panel>test-item-1</Accordion.Panel>
+            </Accordion.Item>
+            <Accordion.Item value="item-2">
+              <Accordion.Control>Label 2</Accordion.Control>
+              <Accordion.Panel>test-item-2</Accordion.Panel>
+            </Accordion.Item>
+            <Accordion.Item value="item-3">
+              <Accordion.Control>Label 3</Accordion.Control>
+              <Accordion.Panel>test-item-3</Accordion.Panel>
+            </Accordion.Item>
+          </>
+        }
+      />
+    ));
 
     await userEvent.type(screen.getAllByRole('button')[0], '{arrowdown}');
     expect(screen.getAllByRole('button')[1]).toHaveFocus();
@@ -197,24 +216,29 @@ describe('@empoleon/core/Accordion', () => {
   });
 
   it('supports navigating between items with up and down arrows (loop: false)', async () => {
-    render(() => <Accordion transitionDuration={0}
-      defaultValue='item-1'
-      children={
-        <>
-          <Accordion.Item value="item-1">
-            <Accordion.Control icon="$$">Label 1</Accordion.Control>
-            <Accordion.Panel>test-item-1</Accordion.Panel>
-          </Accordion.Item>
-          <Accordion.Item value="item-2">
-            <Accordion.Control>Label 2</Accordion.Control>
-            <Accordion.Panel>test-item-2</Accordion.Panel>
-          </Accordion.Item>
-          <Accordion.Item value="item-3">
-            <Accordion.Control>Label 3</Accordion.Control>
-            <Accordion.Panel>test-item-3</Accordion.Panel>
-          </Accordion.Item>
-        </>
-      } loop={false} />);
+    render(() => (
+      <Accordion
+        transitionDuration={0}
+        defaultValue="item-1"
+        children={
+          <>
+            <Accordion.Item value="item-1">
+              <Accordion.Control icon="$$">Label 1</Accordion.Control>
+              <Accordion.Panel>test-item-1</Accordion.Panel>
+            </Accordion.Item>
+            <Accordion.Item value="item-2">
+              <Accordion.Control>Label 2</Accordion.Control>
+              <Accordion.Panel>test-item-2</Accordion.Panel>
+            </Accordion.Item>
+            <Accordion.Item value="item-3">
+              <Accordion.Control>Label 3</Accordion.Control>
+              <Accordion.Panel>test-item-3</Accordion.Panel>
+            </Accordion.Item>
+          </>
+        }
+        loop={false}
+      />
+    ));
 
     await userEvent.type(screen.getAllByRole('button')[0], '{arrowdown}');
     expect(screen.getAllByRole('button')[1]).toHaveFocus();
@@ -231,28 +255,30 @@ describe('@empoleon/core/Accordion', () => {
 
   it('supports controlled state (multiple: false, default)', async () => {
     const spy = vi.fn();
-    render(() => <Accordion
-      transitionDuration={0}
-      defaultValue='item-1'
-      children={
-        <>
-          <Accordion.Item value="item-1">
-            <Accordion.Control icon="$$">Label 1</Accordion.Control>
-            <Accordion.Panel>test-item-1</Accordion.Panel>
-          </Accordion.Item>
-          <Accordion.Item value="item-2">
-            <Accordion.Control>Label 2</Accordion.Control>
-            <Accordion.Panel>test-item-2</Accordion.Panel>
-          </Accordion.Item>
-          <Accordion.Item value="item-3">
-            <Accordion.Control>Label 3</Accordion.Control>
-            <Accordion.Panel>test-item-3</Accordion.Panel>
-          </Accordion.Item>
-        </>
-      }
-      value="item-2"
-      onChange={spy}
-    />);
+    render(() => (
+      <Accordion
+        transitionDuration={0}
+        defaultValue="item-1"
+        children={
+          <>
+            <Accordion.Item value="item-1">
+              <Accordion.Control icon="$$">Label 1</Accordion.Control>
+              <Accordion.Panel>test-item-1</Accordion.Panel>
+            </Accordion.Item>
+            <Accordion.Item value="item-2">
+              <Accordion.Control>Label 2</Accordion.Control>
+              <Accordion.Panel>test-item-2</Accordion.Panel>
+            </Accordion.Item>
+            <Accordion.Item value="item-3">
+              <Accordion.Control>Label 3</Accordion.Control>
+              <Accordion.Panel>test-item-3</Accordion.Panel>
+            </Accordion.Item>
+          </>
+        }
+        value="item-2"
+        onChange={spy}
+      />
+    ));
 
     expect(screen.getByText('test-item-2')).toBeInTheDocument();
     expect(screen.queryAllByText('test-item-1')).toHaveLength(0);
@@ -265,71 +291,85 @@ describe('@empoleon/core/Accordion', () => {
   });
 
   it('opens items initially based on defaultValue prop (multiple: false, default)', () => {
-    render(() => <Accordion transitionDuration={0}
-      defaultValue='item-3'
-      children={
-        <>
-          <Accordion.Item value="item-1">
-            <Accordion.Control icon="$$">Label 1</Accordion.Control>
-            <Accordion.Panel>test-item-1</Accordion.Panel>
-          </Accordion.Item>
-          <Accordion.Item value="item-2">
-            <Accordion.Control>Label 2</Accordion.Control>
-            <Accordion.Panel>test-item-2</Accordion.Panel>
-          </Accordion.Item>
-          <Accordion.Item value="item-3">
-            <Accordion.Control>Label 3</Accordion.Control>
-            <Accordion.Panel>test-item-3</Accordion.Panel>
-          </Accordion.Item>
-        </>
-      } />);
+    render(() => (
+      <Accordion
+        transitionDuration={0}
+        defaultValue="item-3"
+        children={
+          <>
+            <Accordion.Item value="item-1">
+              <Accordion.Control icon="$$">Label 1</Accordion.Control>
+              <Accordion.Panel>test-item-1</Accordion.Panel>
+            </Accordion.Item>
+            <Accordion.Item value="item-2">
+              <Accordion.Control>Label 2</Accordion.Control>
+              <Accordion.Panel>test-item-2</Accordion.Panel>
+            </Accordion.Item>
+            <Accordion.Item value="item-3">
+              <Accordion.Control>Label 3</Accordion.Control>
+              <Accordion.Panel>test-item-3</Accordion.Panel>
+            </Accordion.Item>
+          </>
+        }
+      />
+    ));
     expect(screen.getByText('test-item-3')).toBeInTheDocument();
     expect(screen.queryAllByText('test-item-2')).toHaveLength(0);
     expect(screen.queryAllByText('test-item-1')).toHaveLength(0);
   });
 
   it('opens items initially based on defaultValue prop (multiple: true)', () => {
-    render(() => <Accordion transitionDuration={0}
-      children={
-        <>
-          <Accordion.Item value="item-1">
-            <Accordion.Control icon="$$">Label 1</Accordion.Control>
-            <Accordion.Panel>test-item-1</Accordion.Panel>
-          </Accordion.Item>
-          <Accordion.Item value="item-2">
-            <Accordion.Control>Label 2</Accordion.Control>
-            <Accordion.Panel>test-item-2</Accordion.Panel>
-          </Accordion.Item>
-          <Accordion.Item value="item-3">
-            <Accordion.Control>Label 3</Accordion.Control>
-            <Accordion.Panel>test-item-3</Accordion.Panel>
-          </Accordion.Item>
-        </>
-      } multiple defaultValue={['item-3', 'item-1']} />);
+    render(() => (
+      <Accordion
+        transitionDuration={0}
+        children={
+          <>
+            <Accordion.Item value="item-1">
+              <Accordion.Control icon="$$">Label 1</Accordion.Control>
+              <Accordion.Panel>test-item-1</Accordion.Panel>
+            </Accordion.Item>
+            <Accordion.Item value="item-2">
+              <Accordion.Control>Label 2</Accordion.Control>
+              <Accordion.Panel>test-item-2</Accordion.Panel>
+            </Accordion.Item>
+            <Accordion.Item value="item-3">
+              <Accordion.Control>Label 3</Accordion.Control>
+              <Accordion.Panel>test-item-3</Accordion.Panel>
+            </Accordion.Item>
+          </>
+        }
+        multiple
+        defaultValue={['item-3', 'item-1']}
+      />
+    ));
     expect(screen.getByText('test-item-3')).toBeInTheDocument();
     expect(screen.getByText('test-item-1')).toBeInTheDocument();
     expect(screen.queryAllByText('test-item-2')).toHaveLength(0);
   });
 
   it('handles tab key correctly', async () => {
-    render(() => <Accordion transitionDuration={0}
-      defaultValue='item-1'
-      children={
-        <>
-          <Accordion.Item value="item-1">
-            <Accordion.Control icon="$$">Label 1</Accordion.Control>
-            <Accordion.Panel>test-item-1</Accordion.Panel>
-          </Accordion.Item>
-          <Accordion.Item value="item-2">
-            <Accordion.Control>Label 2</Accordion.Control>
-            <Accordion.Panel>test-item-2</Accordion.Panel>
-          </Accordion.Item>
-          <Accordion.Item value="item-3">
-            <Accordion.Control>Label 3</Accordion.Control>
-            <Accordion.Panel>test-item-3</Accordion.Panel>
-          </Accordion.Item>
-        </>
-      } />);
+    render(() => (
+      <Accordion
+        transitionDuration={0}
+        defaultValue="item-1"
+        children={
+          <>
+            <Accordion.Item value="item-1">
+              <Accordion.Control icon="$$">Label 1</Accordion.Control>
+              <Accordion.Panel>test-item-1</Accordion.Panel>
+            </Accordion.Item>
+            <Accordion.Item value="item-2">
+              <Accordion.Control>Label 2</Accordion.Control>
+              <Accordion.Panel>test-item-2</Accordion.Panel>
+            </Accordion.Item>
+            <Accordion.Item value="item-3">
+              <Accordion.Control>Label 3</Accordion.Control>
+              <Accordion.Panel>test-item-3</Accordion.Panel>
+            </Accordion.Item>
+          </>
+        }
+      />
+    ));
     expect(document.body).toHaveFocus();
 
     await userEvent.tab();

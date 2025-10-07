@@ -4,12 +4,12 @@ import {
   BoxProps,
   createVarsResolver,
   ElementProps,
+  EmpoleonColor,
+  EmpoleonSize,
   factory,
   Factory,
   getSize,
   getThemeColor,
-  EmpoleonColor,
-  EmpoleonSize,
   rem,
   StylesApiProps,
   useProps,
@@ -60,20 +60,18 @@ export type BurgerFactory = Factory<{
 
 const defaultProps: Partial<BurgerProps> = {};
 
-const varsResolver = createVarsResolver<BurgerFactory>(
-  (theme, props) => ({
-    root: {
-      '--burger-color': props.color ? getThemeColor(props.color, theme) : undefined,
-      '--burger-size': getSize(props.size, 'burger-size'),
-      '--burger-line-size': props.lineSize ? rem(props.lineSize) : undefined,
-      '--burger-transition-duration':
-        props.transitionDuration === undefined ? undefined : `${props.transitionDuration}ms`,
-      '--burger-transition-timing-function': props.transitionTimingFunction,
-    },
-  })
-);
+const varsResolver = createVarsResolver<BurgerFactory>((theme, props) => ({
+  root: {
+    '--burger-color': props.color ? getThemeColor(props.color, theme) : undefined,
+    '--burger-size': getSize(props.size, 'burger-size'),
+    '--burger-line-size': props.lineSize ? rem(props.lineSize) : undefined,
+    '--burger-transition-duration':
+      props.transitionDuration === undefined ? undefined : `${props.transitionDuration}ms`,
+    '--burger-transition-timing-function': props.transitionTimingFunction,
+  },
+}));
 
-export const Burger = factory<BurgerFactory>(_props => {
+export const Burger = factory<BurgerFactory>((_props) => {
   const props = useProps('Burger', null, _props);
 
   const [local, others] = splitProps(props, [
@@ -89,7 +87,7 @@ export const Burger = factory<BurgerFactory>(_props => {
     'transitionTimingFunction',
     'lineSize',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<BurgerFactory>({

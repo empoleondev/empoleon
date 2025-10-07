@@ -1,17 +1,17 @@
+import { mergeRefs, Ref } from '@solid-primitives/refs';
 import cx from 'clsx';
-import { createMemo, Show, splitProps, JSX, createEffect } from 'solid-js';
-import { mergeRefs, Ref } from "@solid-primitives/refs";
+import { createEffect, createMemo, JSX, Show, splitProps } from 'solid-js';
 import { Dynamic } from 'solid-js/web';
+import { EmpoleonBreakpoint, useEmpoleonSxTransform, useEmpoleonTheme } from '../EmpoleonProvider';
 import { createPolymorphicComponent } from '../factory';
 import { InlineStyles } from '../InlineStyles';
-import { EmpoleonBreakpoint, useEmpoleonSxTransform, useEmpoleonTheme } from '../EmpoleonProvider';
 import { isNumberLike } from '../utils';
 import type { CssVarsProp, EmpoleonStyleProp } from './Box.types';
 import { getBoxMod } from './get-box-mod/get-box-mod';
 import { getBoxStyle } from './get-box-style/get-box-style';
 import {
-  extractStyleProps,
   EmpoleonStyleProps,
+  extractStyleProps,
   parseStyleProps,
   STYlE_PROPS_DATA,
 } from './style-props';
@@ -86,7 +86,7 @@ const _Box = <T extends HTMLElement = HTMLDivElement>(
     'renderRoot',
     '__size',
     'ref',
-    'children'
+    'children',
   ]);
 
   const theme = useEmpoleonTheme();
@@ -94,7 +94,7 @@ const _Box = <T extends HTMLElement = HTMLDivElement>(
   // const [_, rest] = splitProps(extractStyleProps(others), ['styleProps']);
   // const extracted = () => extractStyleProps(others);
   // const styleProps = () => extracted().styleProps;
-    const [{ rest }, _] = splitProps(extractStyleProps(others), ['rest']);
+  const [{ rest }, _] = splitProps(extractStyleProps(others), ['rest']);
   const extracted = () => extractStyleProps(others);
   const styleProps = () => extracted().styleProps;
 

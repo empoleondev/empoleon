@@ -20,7 +20,7 @@ export type ModalOverlayFactory = Factory<{
 
 const defaultProps: Partial<ModalOverlayProps> = {};
 
-export const ModalOverlay = factory<ModalOverlayFactory>(_props => {
+export const ModalOverlay = factory<ModalOverlayFactory>((_props) => {
   const props = useProps('ModalOverlay', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -28,7 +28,7 @@ export const ModalOverlay = factory<ModalOverlayFactory>(_props => {
     'style',
     'styles',
     'vars',
-    'ref'
+    'ref',
   ]);
 
   const ctx = useModalContext();
@@ -36,7 +36,12 @@ export const ModalOverlay = factory<ModalOverlayFactory>(_props => {
   return (
     <ModalBaseOverlay
       ref={local.ref}
-      {...ctx.getStyles('overlay', { classNames: local.classNames, style: local.style, styles: local.styles, className: local.className })}
+      {...ctx.getStyles('overlay', {
+        classNames: local.classNames,
+        style: local.style,
+        styles: local.styles,
+        className: local.className,
+      })}
       {...others}
     />
   );

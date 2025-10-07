@@ -46,7 +46,10 @@ export function getCurves(props: GetCurves) {
   curvesInOrder.push({ ...curves[curves.length - 1], lineRoundCaps: false });
   if (curves.length > 2) {
     curvesInOrder.push({ ...curves[0], lineRoundCaps: props.renderRoundedLineCaps });
-    curvesInOrder.push({ ...curves[curves.length - 2], lineRoundCaps: props.renderRoundedLineCaps });
+    curvesInOrder.push({
+      ...curves[curves.length - 2],
+      lineRoundCaps: props.renderRoundedLineCaps,
+    });
     for (let i = 1; i <= curves.length - 3; i += 1) {
       curvesInOrder.push({ ...curves[i], lineRoundCaps: false });
     }

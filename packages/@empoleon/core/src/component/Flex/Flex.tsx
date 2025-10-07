@@ -1,11 +1,11 @@
-import { splitProps, JSX } from 'solid-js';
+import { JSX, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
   ElementProps,
+  EmpoleonSpacing,
   filterProps,
   InlineStyles,
-  EmpoleonSpacing,
   parseStyleProps,
   polymorphicFactory,
   PolymorphicFactory,
@@ -53,7 +53,7 @@ export type FlexFactory = PolymorphicFactory<{
 
 const defaultProps: Partial<FlexProps> = {};
 
-export const Flex = polymorphicFactory<FlexFactory>(_props => {
+export const Flex = polymorphicFactory<FlexFactory>((_props) => {
   const props = useProps('Flex', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -70,7 +70,7 @@ export const Flex = polymorphicFactory<FlexFactory>(_props => {
     'wrap',
     'direction',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<FlexFactory>({
@@ -88,19 +88,20 @@ export const Flex = polymorphicFactory<FlexFactory>(_props => {
 
   const theme = useEmpoleonTheme();
   const responsiveClassName = useRandomClassName();
-  const parsedStyleProps = () => parseStyleProps({
-    styleProps: {
-      gap: local.gap,
-      rowGap: local.rowGap,
-      columnGap: local.columnGap,
-      align: local.align,
-      justify: local.justify,
-      wrap: local.wrap,
-      direction: local.direction
-    },
-    theme,
-    data: FLEX_STYLE_PROPS_DATA,
-  });
+  const parsedStyleProps = () =>
+    parseStyleProps({
+      styleProps: {
+        gap: local.gap,
+        rowGap: local.rowGap,
+        columnGap: local.columnGap,
+        align: local.align,
+        justify: local.justify,
+        wrap: local.wrap,
+        direction: local.direction,
+      },
+      theme,
+      data: FLEX_STYLE_PROPS_DATA,
+    });
 
   return (
     <>

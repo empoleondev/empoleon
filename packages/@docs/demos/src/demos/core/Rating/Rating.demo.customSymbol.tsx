@@ -66,8 +66,8 @@ function Demo() {
 `;
 
 const getIconStyle = (color?: string) => ({
-  width: 24,
-  height: 24,
+  width: '24px',
+  height: '24px',
   color: color ? `var(--empoleon-color-${color}-7)` : undefined,
 });
 
@@ -76,19 +76,14 @@ const getEmptyIcon = (value: number) => {
 
   switch (value) {
     case 1:
-      // @ts-ignore
       return <IconMoodCry style={iconStyle} />;
     case 2:
-      // @ts-ignore
       return <IconMoodSad style={iconStyle} />;
     case 3:
-      // @ts-ignore
       return <IconMoodSmile style={iconStyle} />;
     case 4:
-      // @ts-ignore
       return <IconMoodHappy style={iconStyle} />;
     case 5:
-      // @ts-ignore
       return <IconMoodCrazyHappy style={iconStyle} />;
     default:
       return null;
@@ -98,19 +93,14 @@ const getEmptyIcon = (value: number) => {
 const getFullIcon = (value: number) => {
   switch (value) {
     case 1:
-      // @ts-ignore
       return <IconMoodCry style={getIconStyle('red')} />;
     case 2:
-      // @ts-ignore
       return <IconMoodSad style={getIconStyle('orange')} />;
     case 3:
-      // @ts-ignore
       return <IconMoodSmile style={getIconStyle('yellow')} />;
     case 4:
-      // @ts-ignore
       return <IconMoodHappy style={getIconStyle('lime')} />;
     case 5:
-      // @ts-ignore
       return <IconMoodCrazyHappy style={getIconStyle('green')} />;
     default:
       return null;

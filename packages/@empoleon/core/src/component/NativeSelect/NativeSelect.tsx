@@ -24,7 +24,7 @@ const defaultProps = {
   rightSectionPointerEvents: 'none',
 } satisfies Partial<NativeSelectProps>;
 
-export const NativeSelect = factory<NativeSelectFactory>(_props => {
+export const NativeSelect = factory<NativeSelectFactory>((_props) => {
   const props = useProps('NativeSelect', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'data',
@@ -33,7 +33,7 @@ export const NativeSelect = factory<NativeSelectFactory>(_props => {
     'error',
     'rightSection',
     'unstyled',
-    'ref'
+    'ref',
   ]);
 
   return (
@@ -47,12 +47,16 @@ export const NativeSelect = factory<NativeSelectFactory>(_props => {
       error={local.error}
       unstyled={local.unstyled}
       rightSection={
-        local.rightSection || <ComboboxChevron size={local.size} error={local.error} unstyled={local.unstyled} />
+        local.rightSection || (
+          <ComboboxChevron size={local.size} error={local.error} unstyled={local.unstyled} />
+        )
       }
     >
-      {local.children || <For each={getParsedComboboxData(local.data)}>
-        {item => <NativeSelectOption data={item} />}
-      </For>}
+      {local.children || (
+        <For each={getParsedComboboxData(local.data)}>
+          {(item) => <NativeSelectOption data={item} />}
+        </For>
+      )}
     </InputBase>
   );
 });

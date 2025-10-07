@@ -1,6 +1,6 @@
+import { createSignal, For } from 'solid-js';
 import { Box, Button, Combobox, Text, useCombobox } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal, For } from 'solid-js';
 
 const code = `
 import { useState } from 'react';
@@ -81,7 +81,7 @@ function Demo() {
 
       <Combobox
         store={combobox}
-        width='250px'
+        width="250px"
         position="bottom-start"
         withArrow
         onOptionSubmit={(val) => {
@@ -91,18 +91,16 @@ function Demo() {
       >
         <Combobox.Target>
           {(props) => (
-            <Button {...props} onClick={() => combobox.toggleDropdown()}>Pick item</Button>
+            <Button {...props} onClick={() => combobox.toggleDropdown()}>
+              Pick item
+            </Button>
           )}
         </Combobox.Target>
 
         <Combobox.Dropdown>
           <Combobox.Options>
             <For each={groceries}>
-              {(item) => (
-                <Combobox.Option value={item}>
-                  {item}
-                </Combobox.Option>
-              )}
+              {(item) => <Combobox.Option value={item}>{item}</Combobox.Option>}
             </For>
           </Combobox.Options>
         </Combobox.Dropdown>

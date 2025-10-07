@@ -1,6 +1,6 @@
 import { For, JSX } from 'solid-js';
-import { MonthLevelGroup } from './MonthLevelGroup';
 import { EmpoleonProvider } from '@empoleon/core';
+import { MonthLevelGroup } from './MonthLevelGroup';
 
 export default {
   title: 'MonthLevelGroup',
@@ -34,9 +34,7 @@ export function Sizes() {
   return (
     <div style={{ padding: '40px' }}>
       <For each={sizes}>
-        {(size) => (
-          <MonthLevelGroup numberOfColumns={3} size={size} mt="xl" month="2022-04-11" />
-        )}
+        {(size) => <MonthLevelGroup numberOfColumns={3} size={size} mt="xl" month="2022-04-11" />}
       </For>
     </div>
   );

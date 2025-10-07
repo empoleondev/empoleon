@@ -1,4 +1,5 @@
 import cx from 'clsx';
+import { splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
@@ -13,7 +14,6 @@ import {
 import { useGridContext } from '../Grid.context';
 import { GridColVariables } from './GridColVariables';
 import classes from '../Grid.module.css';
-import { splitProps } from 'solid-js';
 
 export type GridColStylesNames = 'col';
 export type ColSpan = number | 'auto' | 'content';
@@ -43,7 +43,7 @@ const defaultProps: Partial<GridColProps> = {
   span: 12,
 };
 
-export const GridCol = factory<GridColFactory>(_props => {
+export const GridCol = factory<GridColFactory>((_props) => {
   const props = useProps('GridCol', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -54,8 +54,8 @@ export const GridCol = factory<GridColFactory>(_props => {
     'span',
     'order',
     'offset',
-    'ref'
-  ])
+    'ref',
+  ]);
 
   const ctx = useGridContext();
   const responsiveClassName = useRandomClassName();

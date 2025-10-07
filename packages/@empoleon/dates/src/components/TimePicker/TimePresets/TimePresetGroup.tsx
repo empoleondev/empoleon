@@ -1,9 +1,9 @@
+import { For } from 'solid-js';
 import { SimpleGrid } from '@empoleon/core';
 import { useTimePickerContext } from '../TimePicker.context';
 import { TimePickerAmPmLabels, TimePickerFormat, TimePickerPresetGroup } from '../TimePicker.types';
 import { isSameTime } from '../utils/is-same-time/is-same-time';
 import { TimePresetControl } from './TimePresetControl';
-import { For } from 'solid-js';
 
 interface TimePresetGroupProps {
   value: string;
@@ -28,7 +28,11 @@ export function TimePresetGroup(props: TimePresetGroupProps) {
               format={props.format}
               amPmLabels={props.amPmLabels}
               withSeconds={props.withSeconds}
-              active={isSameTime({ time: item, compare: props.value, withSeconds: props.withSeconds })}
+              active={isSameTime({
+                time: item,
+                compare: props.value,
+                withSeconds: props.withSeconds,
+              })}
               onChange={props.onChange}
             />
           )}

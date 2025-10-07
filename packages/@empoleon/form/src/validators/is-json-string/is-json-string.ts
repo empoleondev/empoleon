@@ -1,4 +1,4 @@
-import { JSX } from "solid-js";
+import { JSX } from 'solid-js';
 
 export function isJSONString(error?: JSX.Element) {
   const _error = error || true;

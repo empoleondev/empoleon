@@ -1,8 +1,8 @@
 import { screen } from '@solidjs/testing-library';
 import userEvent from '@testing-library/user-event';
-import { render } from '../render';
 import { JSX } from 'solid-js';
 import { vi } from 'vitest';
+import { render } from '../render';
 
 interface Options<Props = any> {
   component: (props: Props) => JSX.Element;

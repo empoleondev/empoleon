@@ -103,9 +103,9 @@ describe('@empoleon/dates/Calendar', () => {
       previousDecade: 'test-previous-decade',
     };
 
-    const { rerender } = render(
-      () => <Calendar {...defaultProps} ariaLabels={testLabels} level="month" />
-    );
+    const { rerender } = render(() => (
+      <Calendar {...defaultProps} ariaLabels={testLabels} level="month" />
+    ));
 
     expect(screen.getByLabelText('test-month-level')).toBeInTheDocument();
     expect(screen.getByLabelText('test-next-month')).toBeInTheDocument();
@@ -122,7 +122,9 @@ describe('@empoleon/dates/Calendar', () => {
   });
 
   it('supports numberOfColumns', () => {
-    const { rerender } = render(() => <Calendar {...defaultProps} numberOfColumns={1} level="month" />);
+    const { rerender } = render(() => (
+      <Calendar {...defaultProps} numberOfColumns={1} level="month" />
+    ));
     expectLevelsCount([1, 0]);
 
     rerender(() => <Calendar {...defaultProps} numberOfColumns={2} level="month" />);
@@ -200,106 +202,126 @@ describe('@empoleon/dates/Calendar', () => {
   it('changes displayed date when next/previous controls are clicked with defaultDate prop (uncontrolled)', async () => {
     let currentDate = defaultProps.defaultDate;
 
-    const { rerender } = render(() =>
+    const { rerender } = render(() => (
       <Calendar
         {...defaultProps}
         level="month"
         date={currentDate}
-        onDateChange={(newDate) => { currentDate = newDate; }}
+        onDateChange={(newDate) => {
+          currentDate = newDate;
+        }}
       />
-    );
+    ));
 
     expectHeaderLevel('month', 'April 2022');
 
     await clickNext('month');
-    rerender(() =>
+    rerender(() => (
       <Calendar
         {...defaultProps}
         level="month"
         date={currentDate}
-        onDateChange={(newDate) => { currentDate = newDate; }}
+        onDateChange={(newDate) => {
+          currentDate = newDate;
+        }}
       />
-    );
+    ));
     expectHeaderLevel('month', 'May 2022');
 
     await clickPrevious('month');
-    rerender(() =>
+    rerender(() => (
       <Calendar
         {...defaultProps}
         level="month"
         date={currentDate}
-        onDateChange={(newDate) => { currentDate = newDate; }}
+        onDateChange={(newDate) => {
+          currentDate = newDate;
+        }}
       />
-    );
+    ));
     expectHeaderLevel('month', 'April 2022');
 
-    rerender(() =>
+    rerender(() => (
       <Calendar
         {...defaultProps}
         level="year"
         date={currentDate}
-        onDateChange={(newDate) => { currentDate = newDate; }}
+        onDateChange={(newDate) => {
+          currentDate = newDate;
+        }}
       />
-    );
+    ));
     expectHeaderLevel('year', '2022');
 
     await clickNext('year');
-    rerender(() =>
+    rerender(() => (
       <Calendar
         {...defaultProps}
         level="year"
         date={currentDate}
-        onDateChange={(newDate) => { currentDate = newDate; }}
+        onDateChange={(newDate) => {
+          currentDate = newDate;
+        }}
       />
-    );
+    ));
     expectHeaderLevel('year', '2023');
 
     await clickPrevious('year');
-    rerender(() =>
+    rerender(() => (
       <Calendar
         {...defaultProps}
         level="year"
         date={currentDate}
-        onDateChange={(newDate) => { currentDate = newDate; }}
+        onDateChange={(newDate) => {
+          currentDate = newDate;
+        }}
       />
-    );
+    ));
     expectHeaderLevel('year', '2022');
 
-    rerender(() =>
+    rerender(() => (
       <Calendar
         {...defaultProps}
         level="decade"
         date={currentDate}
-        onDateChange={(newDate) => { currentDate = newDate; }}
+        onDateChange={(newDate) => {
+          currentDate = newDate;
+        }}
       />
-    );
+    ));
     expect(screen.getByText('2020 – 2029')).toBeInTheDocument();
 
     await clickNext('decade');
-    rerender(() =>
+    rerender(() => (
       <Calendar
         {...defaultProps}
         level="decade"
         date={currentDate}
-        onDateChange={(newDate) => { currentDate = newDate; }}
+        onDateChange={(newDate) => {
+          currentDate = newDate;
+        }}
       />
-    );
+    ));
     expect(screen.getByText('2030 – 2039')).toBeInTheDocument();
 
     await clickPrevious('decade');
-    rerender(() =>
+    rerender(() => (
       <Calendar
         {...defaultProps}
         level="decade"
         date={currentDate}
-        onDateChange={(newDate) => { currentDate = newDate; }}
+        onDateChange={(newDate) => {
+          currentDate = newDate;
+        }}
       />
-    );
+    ));
     expect(screen.getByText('2020 – 2029')).toBeInTheDocument();
   });
 
   it('does not change date when next/previous controls are clicked with date prop (controlled)', async () => {
-    const { rerender } = render(() => <Calendar {...defaultProps} date="2022-04-11" level="month" />);
+    const { rerender } = render(() => (
+      <Calendar {...defaultProps} date="2022-04-11" level="month" />
+    ));
     expectHeaderLevel('month', 'April 2022');
     await clickNext('month');
     expectHeaderLevel('month', 'April 2022');
@@ -317,9 +339,9 @@ describe('@empoleon/dates/Calendar', () => {
 
   it('calls onDateChange when date changes', async () => {
     const spy = vi.fn();
-    const { rerender } = render(
-      () => <Calendar {...defaultProps} level="month" date="2022-04-11" onDateChange={spy} />
-    );
+    const { rerender } = render(() => (
+      <Calendar {...defaultProps} level="month" date="2022-04-11" onDateChange={spy} />
+    ));
 
     await clickNext('month');
     expect(spy).toHaveBeenLastCalledWith('2022-05-11');
@@ -327,7 +349,9 @@ describe('@empoleon/dates/Calendar', () => {
     await clickPrevious('month');
     expect(spy).toHaveBeenLastCalledWith('2022-03-11');
 
-    rerender(() => <Calendar {...defaultProps} level="year" date="2022-04-11" onDateChange={spy} />);
+    rerender(() => (
+      <Calendar {...defaultProps} level="year" date="2022-04-11" onDateChange={spy} />
+    ));
 
     await clickNext('year');
     expect(spy).toHaveBeenLastCalledWith('2023-04-11');
@@ -335,7 +359,9 @@ describe('@empoleon/dates/Calendar', () => {
     await clickPrevious('year');
     expect(spy).toHaveBeenLastCalledWith('2021-04-11');
 
-    rerender(() => <Calendar {...defaultProps} level="decade" date="2022-04-11" onDateChange={spy} />);
+    rerender(() => (
+      <Calendar {...defaultProps} level="decade" date="2022-04-11" onDateChange={spy} />
+    ));
 
     await clickNext('decade');
     expect(spy).toHaveBeenLastCalledWith('2032-04-11');
@@ -354,9 +380,9 @@ describe('@empoleon/dates/Calendar', () => {
   });
 
   it('supports minLevel', async () => {
-    const { container } = render(
-      () => <Calendar {...defaultProps} defaultLevel="decade" minLevel="year" />
-    );
+    const { container } = render(() => (
+      <Calendar {...defaultProps} defaultLevel="decade" minLevel="year" />
+    ));
     expectLevelsCount([0, 0]);
 
     await userEvent.click(container.querySelector('table button')!);
@@ -368,14 +394,18 @@ describe('@empoleon/dates/Calendar', () => {
 
   it('calls onYearSelect when year control is clicked', async () => {
     const spy = vi.fn();
-    const { container } = render(() => <Calendar {...defaultProps} level="decade" onYearSelect={spy} />);
+    const { container } = render(() => (
+      <Calendar {...defaultProps} level="decade" onYearSelect={spy} />
+    ));
     await userEvent.click(container.querySelector('table button')!);
     expect(spy).toHaveBeenCalledWith('2020-01-01');
   });
 
   it('calls onMonthSelect when month control is clicked', async () => {
     const spy = vi.fn();
-    const { container } = render(() => <Calendar {...defaultProps} level="year" onMonthSelect={spy} />);
+    const { container } = render(() => (
+      <Calendar {...defaultProps} level="year" onMonthSelect={spy} />
+    ));
     await userEvent.click(container.querySelector('table button')!);
     expect(spy).toHaveBeenCalledWith('2022-01-01');
   });
@@ -386,12 +416,12 @@ describe('@empoleon/dates/Calendar', () => {
   });
 
   it('supports changing month label with callback', () => {
-    render(
-      () => <Calendar
+    render(() => (
+      <Calendar
         {...defaultProps}
         monthLabelFormat={(date) => `${dayjs(date).month()}/${dayjs(date).year()}`}
       />
-    );
+    ));
 
     expectHeaderLevel('month', '3/2022');
   });
@@ -402,13 +432,13 @@ describe('@empoleon/dates/Calendar', () => {
   });
 
   it('supports changing year label with callback', () => {
-    render(
-      () => <Calendar
+    render(() => (
+      <Calendar
         {...defaultProps}
         level="year"
         yearLabelFormat={(date) => `${dayjs(date).month()}/${dayjs(date).year()}`}
       />
-    );
+    ));
 
     expectHeaderLevel('year', '3/2022');
   });
@@ -419,28 +449,28 @@ describe('@empoleon/dates/Calendar', () => {
   });
 
   it('supports changing decade label with callback', () => {
-    render(
-      () => <Calendar
+    render(() => (
+      <Calendar
         {...defaultProps}
         level="decade"
         decadeLabelFormat={(startOfDecade, endOfDecade) =>
           `${dayjs(startOfDecade).month()}/${dayjs(startOfDecade).year()} – ${dayjs(endOfDecade).month()}/${dayjs(endOfDecade).year()}`
         }
       />
-    );
+    ));
 
     expect(screen.getByText('0/2020 – 0/2029')).toBeInTheDocument();
   });
 
   it('only adds selected date in month to tab order', async () => {
-    render(
-      () => <Calendar
+    render(() => (
+      <Calendar
         {...defaultProps}
         getDayProps={(date) => ({
           selected: dayjs(date).isSame(defaultProps.defaultDate!, 'date'),
         })}
       />
-    );
+    ));
 
     await userEvent.tab();
     expect(
@@ -465,7 +495,9 @@ describe('@empoleon/dates/Calendar', () => {
   });
 
   it('only adds current date in month to tab order', async () => {
-    render(() => <Calendar {...defaultProps} defaultDate={dayjs(new Date()).format('YYYY-MM-DD')} />);
+    render(() => (
+      <Calendar {...defaultProps} defaultDate={dayjs(new Date()).format('YYYY-MM-DD')} />
+    ));
 
     await userEvent.tab();
     expect(
@@ -488,13 +520,13 @@ describe('@empoleon/dates/Calendar', () => {
   });
 
   it('only adds first non-disabled date in month to tab order', async () => {
-    render(
-      () => <Calendar
+    render(() => (
+      <Calendar
         {...defaultProps}
         minDate="2022-04-15"
         getDayProps={(date) => ({ disabled: dayjs(new Date(2022, 3, 15)).isSame(date, 'date') })}
       />
-    );
+    ));
 
     await userEvent.tab();
     expect(

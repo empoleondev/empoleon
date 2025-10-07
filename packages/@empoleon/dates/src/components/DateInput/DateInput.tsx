@@ -1,16 +1,16 @@
 import dayjs from 'dayjs';
-import { createSignal, createEffect, splitProps, JSX, Show } from 'solid-js';
+import { createEffect, createSignal, JSX, Show, splitProps } from 'solid-js';
 import {
   __BaseInputProps,
   __InputStylesNames,
   BoxProps,
   CloseButton,
   ElementProps,
+  EmpoleonSize,
   factory,
   Factory,
   Input,
   InputVariant,
-  EmpoleonSize,
   Popover,
   PopoverProps,
   StylesApiProps,
@@ -95,7 +95,7 @@ const defaultProps: Partial<DateInputProps> = {
   fixOnBlur: true,
 };
 
-export const DateInput = factory<DateInputFactory>(_props => {
+export const DateInput = factory<DateInputFactory>((_props) => {
   const props = useInputProps('DateInput', defaultProps, _props);
   const [local, rest] = splitProps(props, [
     'inputProps',
@@ -129,8 +129,8 @@ export const DateInput = factory<DateInputFactory>(_props => {
     'onDateChange',
     'getMonthControlProps',
     'getYearControlProps',
-    'ref'
-  ])
+    'ref',
+  ]);
 
   let _wrapperRef: HTMLDivElement | undefined;
   let _dropdownRef: HTMLDivElement | undefined;
@@ -176,7 +176,9 @@ export const DateInput = factory<DateInputFactory>(_props => {
     setInputValue(formatValue(_value()!));
   });
 
-  const handleInputChange = (event: Event & { currentTarget: HTMLInputElement; target: HTMLInputElement }) => {
+  const handleInputChange = (
+    event: Event & { currentTarget: HTMLInputElement; target: HTMLInputElement }
+  ) => {
     const val = event.currentTarget?.value;
     setInputValue(val);
     setDropdownOpened(true);
@@ -215,7 +217,11 @@ export const DateInput = factory<DateInputFactory>(_props => {
       local.getDayProps?.(day).onClick?.(event);
 
       const val =
-        local.clearable && _allowDeselect ? (dayjs(_value()!).isSame(day, 'day') ? null : day) : day;
+        local.clearable && _allowDeselect
+          ? dayjs(_value()!).isSame(day, 'day')
+            ? null
+            : day
+          : day;
       setValue(val);
       !controlled && setInputValue(formatValue(val!));
       setDropdownOpened(false);
@@ -226,10 +232,7 @@ export const DateInput = factory<DateInputFactory>(_props => {
     _value() !== undefined && !dropdownOpened() && setInputValue(formatValue(_value()!));
   });
 
-  useClickOutside(() => setDropdownOpened(false), undefined, [
-    _wrapperRef!,
-    _dropdownRef!,
-  ]);
+  useClickOutside(() => setDropdownOpened(false), undefined, [_wrapperRef!, _dropdownRef!]);
 
   return (
     <>
@@ -257,23 +260,25 @@ export const DateInput = factory<DateInputFactory>(_props => {
                   onFocus={handleInputFocus}
                   onClick={handleInputClick}
                   readOnly={local.readOnly}
-                  rightSection={local.rightSection || (
-                    <Show when={local.clearable && _value() && !local.readOnly} fallback={null}>
-                      <CloseButton
-                        variant="transparent"
-                        onMouseDown={(event) => event.preventDefault()}
-                        tabIndex={-1}
-                        onClick={() => {
-                          setValue(null);
-                          !controlled && setInputValue('');
-                          setDropdownOpened(false);
-                        }}
-                        unstyled={local.unstyled}
-                        size={local.inputProps.size || 'sm'}
-                        {...local.clearButtonProps}
-                      />
-                    </Show>
-                  )}
+                  rightSection={
+                    local.rightSection || (
+                      <Show when={local.clearable && _value() && !local.readOnly} fallback={null}>
+                        <CloseButton
+                          variant="transparent"
+                          onMouseDown={(event) => event.preventDefault()}
+                          tabIndex={-1}
+                          onClick={() => {
+                            setValue(null);
+                            !controlled && setInputValue('');
+                            setDropdownOpened(false);
+                          }}
+                          unstyled={local.unstyled}
+                          size={local.inputProps.size || 'sm'}
+                          {...local.clearButtonProps}
+                        />
+                      </Show>
+                    )
+                  }
                   {...local.inputProps}
                   {...others}
                   __staticSelector="DateInput"
@@ -305,7 +310,8 @@ export const DateInput = factory<DateInputFactory>(_props => {
                 ...local.getMonthControlProps?.(date),
               })}
               getYearControlProps={(date) => ({
-                selected: typeof _value() === 'string' ? dayjs(date).isSame(_value(), 'year') : false,
+                selected:
+                  typeof _value() === 'string' ? dayjs(date).isSame(_value(), 'year') : false,
                 ...local.getYearControlProps?.(date),
               })}
               attributes={local.wrapperProps.attributes}

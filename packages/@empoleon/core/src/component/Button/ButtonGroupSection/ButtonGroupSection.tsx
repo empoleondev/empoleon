@@ -4,14 +4,14 @@ import {
   BoxProps,
   createVarsResolver,
   ElementProps,
+  EmpoleonGradient,
+  EmpoleonRadius,
+  EmpoleonSize,
   factory,
   Factory,
   getFontSize,
   getRadius,
   getSize,
-  EmpoleonGradient,
-  EmpoleonRadius,
-  EmpoleonSize,
   StylesApiProps,
   useProps,
   useStyles,
@@ -58,33 +58,31 @@ export type ButtonGroupSectionFactory = Factory<{
 
 const defaultProps: Partial<ButtonGroupSectionProps> = {};
 
-const varsResolver = createVarsResolver<ButtonGroupSectionFactory>(
-  (theme, props) => {
-    const colors = theme.variantColorResolver({
-      color: props.color || theme.primaryColor,
-      theme,
-      gradient: props.gradient,
-      variant: props.variant || 'filled',
-      autoContrast: props.autoContrast,
-    });
+const varsResolver = createVarsResolver<ButtonGroupSectionFactory>((theme, props) => {
+  const colors = theme.variantColorResolver({
+    color: props.color || theme.primaryColor,
+    theme,
+    gradient: props.gradient,
+    variant: props.variant || 'filled',
+    autoContrast: props.autoContrast,
+  });
 
-    return {
-      groupSection: {
-        '--section-height': getSize(props.size, 'section-height'),
-        '--section-padding-x': getSize(props.size, 'section-padding-x'),
-        '--section-fz': props.size?.includes('compact')
-          ? getFontSize(props.size.replace('compact-', ''))
-          : getFontSize(props.size),
-        '--section-radius': props.radius === undefined ? undefined : getRadius(props.radius),
-        '--section-bg': props.color || props.variant ? colors.background : undefined,
-        '--section-color': colors.color,
-        '--section-bd': props.color || props.variant ? colors.border : undefined,
-      },
-    };
-  }
-);
+  return {
+    groupSection: {
+      '--section-height': getSize(props.size, 'section-height'),
+      '--section-padding-x': getSize(props.size, 'section-padding-x'),
+      '--section-fz': props.size?.includes('compact')
+        ? getFontSize(props.size.replace('compact-', ''))
+        : getFontSize(props.size),
+      '--section-radius': props.radius === undefined ? undefined : getRadius(props.radius),
+      '--section-bg': props.color || props.variant ? colors.background : undefined,
+      '--section-color': colors.color,
+      '--section-bd': props.color || props.variant ? colors.border : undefined,
+    },
+  };
+});
 
-export const ButtonGroupSection = factory<ButtonGroupSectionFactory>(_props => {
+export const ButtonGroupSection = factory<ButtonGroupSectionFactory>((_props) => {
   const props = useProps('ButtonGroupSection', defaultProps, _props);
 
   const [local, others] = splitProps(props, [
@@ -99,7 +97,7 @@ export const ButtonGroupSection = factory<ButtonGroupSectionFactory>(_props => {
     'radius',
     'autoContrast',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<ButtonGroupSectionFactory>({

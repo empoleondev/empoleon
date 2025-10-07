@@ -1,7 +1,7 @@
 import { JSX } from 'solid-js';
+import { EmpoleonProvider } from '../../core';
 import { ActionIcon } from '../ActionIcon';
 import { VisuallyHidden } from './VisuallyHidden';
-import { EmpoleonProvider } from '../../core';
 
 export default {
   title: 'VisuallyHidden',
@@ -16,7 +16,7 @@ export default {
 
 export function Usage() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <ActionIcon>
         <VisuallyHidden>Pronounce this</VisuallyHidden>
         $$

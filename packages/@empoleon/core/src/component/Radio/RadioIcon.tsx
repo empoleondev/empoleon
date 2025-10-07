@@ -11,7 +11,11 @@ export function RadioIcon({ size, style, ...others }: RadioIconProps) {
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 5 5"
-      style={{ width: rem(size), height: rem(size), ...(typeof style === 'object' && style !== null ? style : {}) }}
+      style={{
+        width: rem(size),
+        height: rem(size),
+        ...(typeof style === 'object' && style !== null ? style : {}),
+      }}
       aria-hidden
       {...others}
     >

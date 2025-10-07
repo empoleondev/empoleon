@@ -1,10 +1,10 @@
 import dayjs from 'dayjs';
+import { Component } from 'solid-js';
 import { DatesProvider, useDatesContext } from '@empoleon/dates';
 import { render } from '@empoleon-tests/core';
-import { Component } from 'solid-js';
 
 interface Options {
-  component: Component<any>
+  component: Component<any>;
   props: Record<string, any>;
 }
 
@@ -77,26 +77,26 @@ export function itSupportsMonthsListProps(options: Options, name = 'supports mon
         return <options.component {...options.props} locale={ctx.locale} />;
       };
 
-      const { container } = render(
-        () => <DatesProvider settings={{ locale: 'ru' }}>
+      const { container } = render(() => (
+        <DatesProvider settings={{ locale: 'ru' }}>
           <TestConsumer />
         </DatesProvider>
-      );
+      ));
 
       expectMonthNames(container as any, ruMonthsNames);
     });
 
     it('supports custom monthsListFormat format', () => {
-      const { container } = render(
-        () => <options.component {...options.props} monthsListFormat="MMM YY" />
-      );
+      const { container } = render(() => (
+        <options.component {...options.props} monthsListFormat="MMM YY" />
+      ));
       expectMonthNames(container as any, customFormatMonthsNames);
     });
 
     it('disables months if they are before minDate', () => {
-      const { container } = render(
-        () => <options.component {...options.props} year="2022-04-11" minDate="2022-05-11" />
-      );
+      const { container } = render(() => (
+        <options.component {...options.props} year="2022-04-11" minDate="2022-05-11" />
+      ));
       const months = container.querySelectorAll('table button');
       expect(months[0]).toBeDisabled();
       expect(months[1]).toBeDisabled();
@@ -106,9 +106,9 @@ export function itSupportsMonthsListProps(options: Options, name = 'supports mon
     });
 
     it('disables months if they are after minDate', () => {
-      const { container } = render(
-        () => <options.component {...options.props} year="2022-04-11" maxDate="2022-05-11" />
-      );
+      const { container } = render(() => (
+        <options.component {...options.props} year="2022-04-11" maxDate="2022-05-11" />
+      ));
       const months = container.querySelectorAll('table button');
       expect(months[0]).not.toBeDisabled();
       expect(months[4]).not.toBeDisabled();
@@ -117,14 +117,14 @@ export function itSupportsMonthsListProps(options: Options, name = 'supports mon
     });
 
     it('supports getMonthControlProps', () => {
-      const { container } = render(
-        () => <options.component
+      const { container } = render(() => (
+        <options.component
           {...options.props}
           getMonthControlProps={(date: string) => ({
             selected: dayjs(date).isSame('2022-04-11', 'month'),
           })}
         />
-      );
+      ));
 
       const months = container.querySelectorAll('table button');
       expect(months[2]).not.toHaveAttribute('data-selected');

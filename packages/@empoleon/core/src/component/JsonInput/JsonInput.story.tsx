@@ -1,6 +1,6 @@
 import { createSignal, JSX } from 'solid-js';
-import { JsonInput } from './JsonInput';
 import { EmpoleonProvider } from '../../core';
+import { JsonInput } from './JsonInput';
 
 export default {
   title: 'JsonInput',

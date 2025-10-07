@@ -57,7 +57,7 @@ function Demo(props: DialogProps) {
     }
 
     return position;
-  }
+  };
 
   return (
     <>
@@ -88,37 +88,37 @@ export const kitchenSink: EmpoleonDemo = {
       prop: 'withCloseButton',
       type: 'boolean',
       initialValue: true,
-      libraryValue: true
+      libraryValue: true,
     },
     {
       prop: 'keepMounted',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'size',
       type: 'size',
       initialValue: 'lg',
-      libraryValue: 'lg'
+      libraryValue: 'lg',
     },
     {
       prop: 'radius',
       type: 'size',
       initialValue: 'md',
-      libraryValue: 'md'
+      libraryValue: 'md',
     },
     {
       prop: 'shadow',
       type: 'size',
       initialValue: 'md',
-      libraryValue: 'md'
+      libraryValue: 'md',
     },
     {
       prop: 'withBorder',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'position',
@@ -130,13 +130,13 @@ export const kitchenSink: EmpoleonDemo = {
         { label: 'Top Left', value: 'top-left' },
       ],
       initialValue: 'bottom-right',
-      libraryValue: 'bottom-right'
+      libraryValue: 'bottom-right',
     },
     {
       prop: 'withinPortal',
       type: 'boolean',
       initialValue: true,
-      libraryValue: true
+      libraryValue: true,
     },
     {
       prop: 'zIndex',
@@ -145,7 +145,7 @@ export const kitchenSink: EmpoleonDemo = {
       libraryValue: 200,
       min: 0,
       max: 9999,
-      step: 100
+      step: 100,
     },
   ],
 };

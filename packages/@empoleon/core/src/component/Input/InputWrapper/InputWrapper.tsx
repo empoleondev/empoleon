@@ -1,14 +1,24 @@
-import { splitProps, JSX, Show, For, Switch, Match, children as resolveChildren, createMemo, untrack } from 'solid-js';
+import {
+  createMemo,
+  For,
+  JSX,
+  Match,
+  children as resolveChildren,
+  Show,
+  splitProps,
+  Switch,
+  untrack,
+} from 'solid-js';
 import { useId } from '@empoleon/hooks';
 import {
   Box,
   BoxProps,
   createVarsResolver,
   ElementProps,
+  EmpoleonFontSize,
   factory,
   Factory,
   getFontSize,
-  EmpoleonFontSize,
   rem,
   StylesApiProps,
   useProps,
@@ -114,7 +124,8 @@ const varsResolver = createVarsResolver<InputWrapperFactory>((_, props) => ({
     '--input-asterisk-color': undefined,
   },
   error: {
-    '--input-error-size': props.size === undefined ? undefined : `calc(${getFontSize(props.size)} - ${rem(2)})`,
+    '--input-error-size':
+      props.size === undefined ? undefined : `calc(${getFontSize(props.size)} - ${rem(2)})`,
   },
   description: {
     '--input-description-size':
@@ -122,7 +133,7 @@ const varsResolver = createVarsResolver<InputWrapperFactory>((_, props) => ({
   },
 }));
 
-export const InputWrapper = factory<InputWrapperFactory>(_props => {
+export const InputWrapper = factory<InputWrapperFactory>((_props) => {
   const props = useProps('InputWrapper', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -150,7 +161,7 @@ export const InputWrapper = factory<InputWrapperFactory>(_props => {
     '__stylesApiProps',
     'mod',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<InputWrapperFactory>({
@@ -174,7 +185,8 @@ export const InputWrapper = factory<InputWrapperFactory>(_props => {
   };
 
   const idBase = useId(local.id);
-  const isRequired = () => (typeof local.withAsterisk === 'boolean' ? local.withAsterisk : local.required);
+  const isRequired = () =>
+    typeof local.withAsterisk === 'boolean' ? local.withAsterisk : local.required;
   const errorId = local.errorProps?.id || `${idBase}-error`;
   const descriptionId = local.descriptionProps?.id || `${idBase}-description`;
   const inputId = idBase;
@@ -191,22 +203,33 @@ export const InputWrapper = factory<InputWrapperFactory>(_props => {
         describedBy,
         inputId,
         labelId,
-        ...getInputOffsets(local.inputWrapperOrder!, { hasDescription: hasDescription(), hasError: hasError() }),
+        ...getInputOffsets(local.inputWrapperOrder!, {
+          hasDescription: hasDescription(),
+          hasError: hasError(),
+        }),
       }}
     >
       <Box
         ref={local.ref}
         variant={local.variant}
         size={local.size}
-        mod={[{ error: !!(local.error && (typeof (local.error as any) === 'function' ? (local.error as any)() : local.error)) }, local.mod]}
+        mod={[
+          {
+            error: !!(
+              local.error &&
+              (typeof (local.error as any) === 'function' ? (local.error as any)() : local.error)
+            ),
+          },
+          local.mod,
+        ]}
         {...getStyles('root')}
         {...others}
       >
         <For each={local.inputWrapperOrder}>
           {(part) => (
             <Switch>
-              <Match when={part === 'label'}>{
-                local.label && (
+              <Match when={part === 'label'}>
+                {local.label && (
                   <InputLabel
                     labelElement={local.labelElement}
                     id={labelId}
@@ -217,13 +240,13 @@ export const InputWrapper = factory<InputWrapperFactory>(_props => {
                   >
                     {local.label}
                   </InputLabel>
-                )
-              }</Match>
+                )}
+              </Match>
               <Match when={part === 'input'}>
                 {untrack(() => local.inputContainer!(local.children))}
               </Match>
-              <Match when={part === 'description'}>{
-                hasDescription() && (
+              <Match when={part === 'description'}>
+                {hasDescription() && (
                   <InputDescription
                     {...local.descriptionProps}
                     {...sharedProps}
@@ -232,8 +255,7 @@ export const InputWrapper = factory<InputWrapperFactory>(_props => {
                   >
                     {local.description}
                   </InputDescription>
-                )
-              }
+                )}
               </Match>
               <Match when={part === 'error'}>
                 <Show when={!!(local.error && typeof local.error !== 'boolean')}>

@@ -1,7 +1,6 @@
-import { FileInput } from './FileInput';
-import { JSX } from 'solid-js';
+import { createSignal, JSX } from 'solid-js';
 import { EmpoleonProvider } from '../../core';
-import { createSignal } from 'solid-js';
+import { FileInput } from './FileInput';
 
 export default {
   title: 'FileInput',
@@ -17,7 +16,7 @@ export default {
 export function Usage() {
   const [value, setValue] = createSignal<File | null>(null);
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <FileInput placeholder="Pick file" value={value()} onChange={setValue} />
     </div>
   );
@@ -26,7 +25,7 @@ export function Usage() {
 export function Unstyled() {
   const [value, setValue] = createSignal<File | null>(null);
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <FileInput placeholder="Pick file" value={value()} onChange={setValue} unstyled />
     </div>
   );
@@ -35,7 +34,7 @@ export function Unstyled() {
 export function Multiple() {
   const [value, setValue] = createSignal<File[]>([]);
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <FileInput placeholder="Multiple" multiple value={value()} onChange={setValue} clearable />
     </div>
   );

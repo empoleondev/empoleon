@@ -1,7 +1,7 @@
-import { onMount, onCleanup, createSignal, createEffect } from 'solid-js';
+import { createEffect, createSignal, onCleanup, onMount } from 'solid-js';
+import { useTimeout } from '@empoleon/hooks';
 import { getEnv } from '../../core';
 import { toInt } from '../ScrollArea/utils';
-import { useTimeout } from '@empoleon/hooks';
 
 function isParent(
   parentElement: HTMLElement | EventTarget | null,
@@ -24,15 +24,20 @@ interface UseFloatingIndicatorInput {
   displayAfterTransitionEnd?: boolean;
 }
 
-export function useFloatingIndicator({ target, parent, ref, displayAfterTransitionEnd }: UseFloatingIndicatorInput) {
+export function useFloatingIndicator({
+  target,
+  parent,
+  ref,
+  displayAfterTransitionEnd,
+}: UseFloatingIndicatorInput) {
   let transitionTimeout: number;
   const [initialized, setInitialized] = createSignal(false);
   const [hidden, setHidden] = createSignal(
     typeof displayAfterTransitionEnd === 'boolean' ? displayAfterTransitionEnd : false
   );
 
-  const getTarget = () => typeof target === 'function' ? target() : target;
-  const getParent = () => typeof parent === 'function' ? parent() : parent;
+  const getTarget = () => (typeof target === 'function' ? target() : target);
+  const getParent = () => (typeof parent === 'function' ? parent() : parent);
 
   const updatePosition = () => {
     const currentTarget = getTarget();
@@ -108,7 +113,10 @@ export function useFloatingIndicator({ target, parent, ref, displayAfterTransiti
         }
       }
     });
-    mutationObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['dir'] });
+    mutationObserver.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['dir'],
+    });
     onCleanup(() => mutationObserver.disconnect());
   });
 
@@ -118,9 +126,13 @@ export function useFloatingIndicator({ target, parent, ref, displayAfterTransiti
     }
   });
 
-  const { start } = useTimeout(() => {
-    if (getEnv() !== 'test') setInitialized(true);
-  }, 20, { autoInvoke: true });
+  const { start } = useTimeout(
+    () => {
+      if (getEnv() !== 'test') setInitialized(true);
+    },
+    20,
+    { autoInvoke: true }
+  );
 
   return { initialized: () => initialized(), hidden: () => hidden() };
 }

@@ -27,7 +27,7 @@ export type ComboboxFooterFactory = Factory<{
 
 const defaultProps: Partial<ComboboxFooterProps> = {};
 
-export const ComboboxFooter = factory<ComboboxFooterFactory>(_props => {
+export const ComboboxFooter = factory<ComboboxFooterFactory>((_props) => {
   const props = useProps('ComboboxFooter', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -35,15 +35,20 @@ export const ComboboxFooter = factory<ComboboxFooterFactory>(_props => {
     'style',
     'styles',
     'vars',
-    'ref'
-  ])
+    'ref',
+  ]);
 
   const ctx = useComboboxContext();
 
   return (
     <Box
       ref={local.ref}
-      {...ctx.getStyles('footer', { className: local.className, classNames: local.classNames, style: local.style, styles: local.styles })}
+      {...ctx.getStyles('footer', {
+        className: local.className,
+        classNames: local.classNames,
+        style: local.style,
+        styles: local.styles,
+      })}
       {...others}
       onMouseDown={(event) => {
         event.preventDefault();

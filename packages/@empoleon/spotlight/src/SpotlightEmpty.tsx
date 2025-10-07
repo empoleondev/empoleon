@@ -1,3 +1,4 @@
+import { splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
@@ -9,7 +10,6 @@ import {
 } from '@empoleon/core';
 import { useSpotlightContext } from './Spotlight.context';
 import classes from './Spotlight.module.css';
-import { splitProps } from 'solid-js';
 
 export type SpotlightEmptyStylesNames = 'empty';
 
@@ -27,22 +27,21 @@ export type SpotlightEmptyFactory = Factory<{
 
 const defaultProps: Partial<SpotlightEmptyProps> = {};
 
-export const SpotlightEmpty = factory<SpotlightEmptyFactory>(_props => {
+export const SpotlightEmpty = factory<SpotlightEmptyFactory>((_props) => {
   const props = useProps('SpotlightEmpty', defaultProps, _props);
-  const [local, others] = splitProps(props, [
-    'className',
-    'style',
-    'classNames',
-    'styles',
-    'ref'
-  ]);
+  const [local, others] = splitProps(props, ['className', 'style', 'classNames', 'styles', 'ref']);
 
   const ctx = useSpotlightContext();
 
   return (
     <Box
       ref={local.ref}
-      {...ctx.getStyles('empty', { classNames: local.classNames, styles: local.styles, className: local.className, style: local.style })}
+      {...ctx.getStyles('empty', {
+        classNames: local.classNames,
+        styles: local.styles,
+        className: local.className,
+        style: local.style,
+      })}
       {...others}
     />
   );

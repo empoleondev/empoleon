@@ -1,7 +1,6 @@
-import { clamp } from '../utils';
-
 // ./use-counter.ts
 import { createSignal } from 'solid-js';
+import { clamp } from '../utils';
 
 const DEFAULT_OPTIONS = {
   min: -Infinity,
@@ -13,12 +12,12 @@ const DEFAULT_OPTIONS = {
  */
 export function useCounter(
   initialValue = 0,
-  options: Partial<{ min: number; max: number }> = DEFAULT_OPTIONS,
+  options: Partial<{ min: number; max: number }> = DEFAULT_OPTIONS
 ) {
   const [count, setCount] = createSignal<number>(clamp(initialValue, options?.min, options?.max));
 
-  const increment = () => setCount(current => clamp(current + 1, options?.min, options?.max));
-  const decrement = () => setCount(current => clamp(current - 1, options?.min, options?.max));
+  const increment = () => setCount((current) => clamp(current + 1, options?.min, options?.max));
+  const decrement = () => setCount((current) => clamp(current - 1, options?.min, options?.max));
   const set = (value: number) => setCount(clamp(value, options?.min, options?.max));
   const reset = () => setCount(clamp(initialValue, options?.min, options?.max));
 

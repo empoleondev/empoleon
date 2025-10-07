@@ -1,10 +1,10 @@
 import dayjs from 'dayjs';
+import { createMemo } from 'solid-js';
 import { useDisclosure } from '@empoleon/hooks';
 import { useDatesContext } from '../../components/DatesProvider';
 import { DatePickerType, DatePickerValue } from '../../types';
 import { DateFormatter, getFormattedDate } from '../../utils';
 import { useUncontrolledDates } from '../use-uncontrolled-dates/use-uncontrolled-dates';
-import { createMemo } from 'solid-js';
 
 interface UseDatesInput<Type extends DatePickerType = 'default'> {
   type: Type;
@@ -31,14 +31,16 @@ export function useDatesInput<Type extends DatePickerType = 'default'>(props: Us
     onChange: props.onChange,
   });
 
-  const formattedValue = createMemo(() => getFormattedDate({
-    type: props.type,
-    date: _value(),
-    locale: ctx.getLocale(props.locale),
-    format: props.format!,
-    labelSeparator: ctx.getLabelSeparator(props.labelSeparator),
-    formatter: props.valueFormatter,
-  }));
+  const formattedValue = createMemo(() =>
+    getFormattedDate({
+      type: props.type,
+      date: _value(),
+      locale: ctx.getLocale(props.locale),
+      format: props.format!,
+      labelSeparator: ctx.getLabelSeparator(props.labelSeparator),
+      formatter: props.valueFormatter,
+    })
+  );
 
   const setValue = (val: any) => {
     if (props.closeOnChange) {
@@ -58,9 +60,14 @@ export function useDatesInput<Type extends DatePickerType = 'default'>(props: Us
     }
   };
 
-  const onClear = () => setValue(props.type === 'range' ? [null, null] : props.type === 'multiple' ? [] : null);
+  const onClear = () =>
+    setValue(props.type === 'range' ? [null, null] : props.type === 'multiple' ? [] : null);
   const shouldClear =
-    props.type === 'range' ? !!_value()[0] : props.type === 'multiple' ? _value().length > 0 : _value() !== null;
+    props.type === 'range'
+      ? !!_value()[0]
+      : props.type === 'multiple'
+        ? _value().length > 0
+        : _value() !== null;
 
   return {
     _value,

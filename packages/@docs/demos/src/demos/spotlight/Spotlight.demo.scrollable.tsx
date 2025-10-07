@@ -51,10 +51,10 @@ function Demo() {
       nothingFound="Nothing found..."
       highlightQuery
       scrollable
-      maxHeight='350'
+      maxHeight="350"
       shortcut={null}
       searchProps={{
-        leftSection: <IconSearch size={20} stroke='1.5' />,
+        leftSection: <IconSearch size={20} stroke="1.5" />,
         placeholder: 'Search...',
       }}
     />

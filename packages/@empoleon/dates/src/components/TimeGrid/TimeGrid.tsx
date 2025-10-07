@@ -5,12 +5,12 @@ import {
   createVarsResolver,
   DataAttributes,
   ElementProps,
+  EmpoleonRadius,
+  EmpoleonSize,
   factory,
   Factory,
   getFontSize,
   getRadius,
-  EmpoleonRadius,
-  EmpoleonSize,
   SimpleGrid,
   SimpleGridProps,
   StylesApiProps,
@@ -103,7 +103,7 @@ const varsResolver = createVarsResolver<TimeGridFactory>((_theme, props) => ({
   },
 }));
 
-export const TimeGrid = factory<TimeGridFactory>(_props => {
+export const TimeGrid = factory<TimeGridFactory>((_props) => {
   const props = useProps('TimeGrid', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -127,7 +127,7 @@ export const TimeGrid = factory<TimeGridFactory>(_props => {
     'disableTime',
     'disabled',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const withSeconds = () => local.withSeconds || false;
@@ -164,13 +164,15 @@ export const TimeGrid = factory<TimeGridFactory>(_props => {
           })}
         >
           <For each={local.data}>
-            {time => {
+            {(time) => {
               const isDisabled =
                 local.disabled ||
                 (!!local.minTime && isTimeBefore(time, local.minTime)) ||
                 (!!local.maxTime && isTimeAfter(time, local.maxTime)) ||
                 (Array.isArray(local.disableTime)
-                  ? !!local.disableTime.find((t) => isSameTime({ time, compare: t, withSeconds: withSeconds() }))
+                  ? !!local.disableTime.find((t) =>
+                      isSameTime({ time, compare: t, withSeconds: withSeconds() })
+                    )
                   : !!local.disableTime?.(time));
 
               return (
@@ -180,7 +182,9 @@ export const TimeGrid = factory<TimeGridFactory>(_props => {
                   onClick={() => {
                     const nextValue =
                       local.allowDeselect &&
-                      (_value() === null ? time === _value() : isSameTime({ time, compare: _value()!, withSeconds: withSeconds() }))
+                      (_value() === null
+                        ? time === _value()
+                        : isSameTime({ time, compare: _value()!, withSeconds: withSeconds() }))
                         ? null
                         : time;
                     nextValue !== _value() && setValue(nextValue);

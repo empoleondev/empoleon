@@ -1,7 +1,7 @@
 import Highlight from '@tiptap/extension-highlight';
 import Underline from '@tiptap/extension-underline';
-import { useEditor } from '@empoleon/solid-tiptap';
 import StarterKit from '@tiptap/starter-kit';
+import { useEditor } from '@empoleon/solid-tiptap';
 import { RichTextEditor } from '@empoleon/tiptap';
 import { EmpoleonDemo } from '@empoleonx/demo';
 

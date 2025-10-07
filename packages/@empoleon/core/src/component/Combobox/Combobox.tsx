@@ -1,12 +1,12 @@
 import { createEffect, JSX, splitProps } from 'solid-js';
 import {
   createVarsResolver,
+  EmpoleonSize,
+  EmpoleonThemeComponent,
   ExtendComponent,
   Factory,
   getFontSize,
   getSize,
-  EmpoleonSize,
-  EmpoleonThemeComponent,
   rem,
   StylesApiProps,
   useProps,
@@ -111,7 +111,8 @@ const varsResolver = createVarsResolver<ComboboxFactory>((_, props) => ({
   },
 
   dropdown: {
-    '--combobox-padding': props.dropdownPadding === undefined ? undefined : rem(props.dropdownPadding),
+    '--combobox-padding':
+      props.dropdownPadding === undefined ? undefined : rem(props.dropdownPadding),
     '--combobox-option-fz': getFontSize(props.size),
     '--combobox-option-padding': getSize(props.size, 'combobox-option-padding'),
   },

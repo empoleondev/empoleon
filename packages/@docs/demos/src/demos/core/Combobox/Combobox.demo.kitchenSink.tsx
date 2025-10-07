@@ -1,6 +1,6 @@
-import { Combobox, ComboboxProps, useCombobox, TextInput } from '@empoleon/core';
+import { createEffect, createSignal, For } from 'solid-js';
+import { Combobox, ComboboxProps, TextInput, useCombobox } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal, createEffect, For } from 'solid-js';
 
 const code = `
 import { Combobox, useCombobox, TextInput } from '@empoleon/core';
@@ -62,13 +62,26 @@ function Demo() {
 }
 `;
 
-const groceries = ['🍎 Apples', '🍌 Bananas', '🥦 Broccoli', '🥕 Carrots', '🍫 Chocolate', '🍇 Grapes', '🥝 Kiwi', '🍋 Lemon', '🥭 Mango', '🍊 Orange'];
+const groceries = [
+  '🍎 Apples',
+  '🍌 Bananas',
+  '🥦 Broccoli',
+  '🥕 Carrots',
+  '🍫 Chocolate',
+  '🍇 Grapes',
+  '🥝 Kiwi',
+  '🍋 Lemon',
+  '🥭 Mango',
+  '🍊 Orange',
+];
 
-function Demo(props: Partial<ComboboxProps> & {
-  defaultOpened?: boolean;
-  selectFirstOnChange?: boolean;
-  loop?: boolean;
-}) {
+function Demo(
+  props: Partial<ComboboxProps> & {
+    defaultOpened?: boolean;
+    selectFirstOnChange?: boolean;
+    loop?: boolean;
+  }
+) {
   const comboboxOptions: any = {
     defaultOpened: props.defaultOpened,
     loop: props.loop,
@@ -89,9 +102,7 @@ function Demo(props: Partial<ComboboxProps> & {
   });
 
   const filteredOptions = () =>
-    groceries.filter((item) =>
-      item.toLowerCase().includes(search().toLowerCase())
-    );
+    groceries.filter((item) => item.toLowerCase().includes(search().toLowerCase()));
 
   return (
     <Combobox
@@ -135,15 +146,9 @@ function Demo(props: Partial<ComboboxProps> & {
       <Combobox.Dropdown>
         <Combobox.Options>
           <For each={filteredOptions()}>
-            {(item) => (
-              <Combobox.Option value={item}>
-                {item}
-              </Combobox.Option>
-            )}
+            {(item) => <Combobox.Option value={item}>{item}</Combobox.Option>}
           </For>
-          {filteredOptions().length === 0 && (
-            <Combobox.Empty>Nothing found</Combobox.Empty>
-          )}
+          {filteredOptions().length === 0 && <Combobox.Empty>Nothing found</Combobox.Empty>}
         </Combobox.Options>
       </Combobox.Dropdown>
     </Combobox>

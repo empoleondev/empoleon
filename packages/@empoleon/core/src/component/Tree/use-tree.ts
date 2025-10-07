@@ -109,7 +109,9 @@ export interface UseTreeReturnType {
   collapseAllNodes: () => void;
 
   /** Sets expanded state */
-  setExpandedState: (state: TreeExpandedState | ((prev: TreeExpandedState) => TreeExpandedState)) => void;
+  setExpandedState: (
+    state: TreeExpandedState | ((prev: TreeExpandedState) => TreeExpandedState)
+  ) => void;
 
   /** Toggles selected state of the node with provided value */
   toggleSelected: (value: string) => void;
@@ -232,7 +234,7 @@ export function useTree({
 
       return next;
     });
-  }
+  };
 
   const toggleSelected = (value: string) => {
     setSelectedState((current) => {
@@ -255,14 +257,14 @@ export function useTree({
 
       return [...current, value];
     });
-  }
+  };
 
   const select = (value: string) => {
     setAnchorNode(value);
     setSelectedState((current) =>
       multiple ? (current.includes(value) ? current : [...current, value]) : [value]
     );
-  }
+  };
 
   const deselect = (value: string) => {
     anchorNode() === value && setAnchorNode(null);
@@ -275,14 +277,14 @@ export function useTree({
   };
 
   const checkNode = (value: string) => {
-      const checkedNodes = getChildrenNodesValues(value, data());
-      setCheckedState((current) => Array.from(new Set([...current, ...checkedNodes])));
-    };
+    const checkedNodes = getChildrenNodesValues(value, data());
+    setCheckedState((current) => Array.from(new Set([...current, ...checkedNodes])));
+  };
 
   const uncheckNode = (value: string) => {
-      const checkedNodes = getChildrenNodesValues(value, data());
-      setCheckedState((current) => current.filter((item) => !checkedNodes.includes(item)));
-    };
+    const checkedNodes = getChildrenNodesValues(value, data());
+    setCheckedState((current) => current.filter((item) => !checkedNodes.includes(item)));
+  };
 
   const checkAllNodes = () => {
     setCheckedState(() => getAllChildrenNodes(data()));

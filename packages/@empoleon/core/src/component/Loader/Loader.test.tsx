@@ -26,7 +26,7 @@ describe('@empoleon/core/Loader', () => {
   });
 
   it('supports custom loaders', () => {
-    const { container } = render(() =>
+    const { container } = render(() => (
       <Loader
         type="custom"
         loaders={{
@@ -34,7 +34,7 @@ describe('@empoleon/core/Loader', () => {
           custom: customLoader,
         }}
       />
-    );
+    ));
     expect(container.querySelector('[data-custom-loader]')).toBeInTheDocument();
   });
 

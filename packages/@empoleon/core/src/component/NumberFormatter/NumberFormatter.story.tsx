@@ -1,6 +1,6 @@
 import { JSX } from 'solid-js';
-import { NumberFormatter } from './NumberFormatter';
 import { EmpoleonProvider } from '../../core';
+import { NumberFormatter } from './NumberFormatter';
 
 export default {
   title: 'NumberFormatter',
@@ -15,7 +15,7 @@ export default {
 
 export function Usage() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <NumberFormatter
         value={-1022233.34}
         decimalScale={3}

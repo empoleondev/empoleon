@@ -8,41 +8,62 @@ const clickChip = (index: number, type: 'radio' | 'checkbox') =>
   userEvent.click(getChip(index, type));
 
 describe('@empoleon/core/ChipGroup', () => {
-  tests.axe([() => <ChipGroup children={
-    <>
-      <Chip value="test-1">test-1</Chip>
-      <Chip value="test-2">test-2</Chip>
-      <Chip value="test-3">test-3</Chip>
-    </>
-  } />]);
+  tests.axe([
+    () => (
+      <ChipGroup
+        children={
+          <>
+            <Chip value="test-1">test-1</Chip>
+            <Chip value="test-2">test-2</Chip>
+            <Chip value="test-3">test-3</Chip>
+          </>
+        }
+      />
+    ),
+  ]);
 
   it('sets chip type based on multiple prop', () => {
-    const { container: multiple } = render(() => <ChipGroup multiple children={
-    <>
-      <Chip value="test-1">test-1</Chip>
-      <Chip value="test-2">test-2</Chip>
-      <Chip value="test-3">test-3</Chip>
-    </>
-  } value={['1']} />);
-    const { container: single } = render(() => <ChipGroup multiple={false} children={
-    <>
-      <Chip value="test-1">test-1</Chip>
-      <Chip value="test-2">test-2</Chip>
-      <Chip value="test-3">test-3</Chip>
-    </>
-  } />);
+    const { container: multiple } = render(() => (
+      <ChipGroup
+        multiple
+        children={
+          <>
+            <Chip value="test-1">test-1</Chip>
+            <Chip value="test-2">test-2</Chip>
+            <Chip value="test-3">test-3</Chip>
+          </>
+        }
+        value={['1']}
+      />
+    ));
+    const { container: single } = render(() => (
+      <ChipGroup
+        multiple={false}
+        children={
+          <>
+            <Chip value="test-1">test-1</Chip>
+            <Chip value="test-2">test-2</Chip>
+            <Chip value="test-3">test-3</Chip>
+          </>
+        }
+      />
+    ));
     expect(multiple.querySelector('input')).toHaveAttribute('type', 'checkbox');
     expect(single.querySelector('input')).toHaveAttribute('type', 'radio');
   });
 
   it('supports uncontrolled state when multiple prop is false', async () => {
-    render(() => <ChipGroup children={
-    <>
-      <Chip value="test-1">test-1</Chip>
-      <Chip value="test-2">test-2</Chip>
-      <Chip value="test-3">test-3</Chip>
-    </>
-  } />);
+    render(() => (
+      <ChipGroup
+        children={
+          <>
+            <Chip value="test-1">test-1</Chip>
+            <Chip value="test-2">test-2</Chip>
+            <Chip value="test-3">test-3</Chip>
+          </>
+        }
+      />
+    ));
     expect(
       screen.getAllByRole('radio').every((chip) => chip.getAttribute('checked') === null)
     ).toBe(true);
@@ -56,13 +77,18 @@ describe('@empoleon/core/ChipGroup', () => {
   });
 
   it('supports uncontrolled state when multiple prop is true', async () => {
-    render(() => <ChipGroup children={
-    <>
-      <Chip value="test-1">test-1</Chip>
-      <Chip value="test-2">test-2</Chip>
-      <Chip value="test-3">test-3</Chip>
-    </>
-  } multiple />);
+    render(() => (
+      <ChipGroup
+        children={
+          <>
+            <Chip value="test-1">test-1</Chip>
+            <Chip value="test-2">test-2</Chip>
+            <Chip value="test-3">test-3</Chip>
+          </>
+        }
+        multiple
+      />
+    ));
     expect(
       screen.getAllByRole('checkbox').every((chip) => chip.getAttribute('checked') === null)
     ).toBe(true);
@@ -81,13 +107,19 @@ describe('@empoleon/core/ChipGroup', () => {
 
   it('supports controlled state when multiple prop is false', async () => {
     const spy = vi.fn();
-    render(() => <ChipGroup children={
-    <>
-      <Chip value="test-1">test-1</Chip>
-      <Chip value="test-2">test-2</Chip>
-      <Chip value="test-3">test-3</Chip>
-    </>
-  } value="test-1" onChange={spy} />);
+    render(() => (
+      <ChipGroup
+        children={
+          <>
+            <Chip value="test-1">test-1</Chip>
+            <Chip value="test-2">test-2</Chip>
+            <Chip value="test-3">test-3</Chip>
+          </>
+        }
+        value="test-1"
+        onChange={spy}
+      />
+    ));
     await clickChip(1, 'radio');
     expect(spy).toHaveBeenLastCalledWith('test-2');
     await clickChip(2, 'radio');
@@ -96,13 +128,20 @@ describe('@empoleon/core/ChipGroup', () => {
 
   it('supports controlled state when multiple prop is true', async () => {
     const spy = vi.fn();
-    render(() => <ChipGroup children={
-    <>
-      <Chip value="test-1">test-1</Chip>
-      <Chip value="test-2">test-2</Chip>
-      <Chip value="test-3">test-3</Chip>
-    </>
-  } multiple onChange={spy} value={['test-2']} />);
+    render(() => (
+      <ChipGroup
+        children={
+          <>
+            <Chip value="test-1">test-1</Chip>
+            <Chip value="test-2">test-2</Chip>
+            <Chip value="test-3">test-3</Chip>
+          </>
+        }
+        multiple
+        onChange={spy}
+        value={['test-2']}
+      />
+    ));
     userEvent.click(screen.getAllByRole('checkbox')[1]);
     await clickChip(1, 'checkbox');
     expect(spy).toHaveBeenLastCalledWith([]);

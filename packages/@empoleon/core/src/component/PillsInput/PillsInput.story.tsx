@@ -1,9 +1,9 @@
 import { Index, JSX } from 'solid-js';
+import { EmpoleonProvider } from '../../core';
 import { Group } from '../Group';
 import { Pill } from '../Pill';
 import { TextInput } from '../TextInput';
 import { PillsInput } from './PillsInput';
-import { EmpoleonProvider } from '../../core';
 
 export default {
   title: 'PillsInput',
@@ -47,7 +47,7 @@ const getPills = (props: any) => (
 
 export function Usage() {
   return (
-    <div style={{ 'padding': '40px', 'max-width': '400px' }}>
+    <div style={{ padding: '40px', 'max-width': '400px' }}>
       <PillsInput>
         <Pill.Group>
           {getPills({})}
@@ -60,7 +60,7 @@ export function Usage() {
 
 export function Unstyled() {
   return (
-    <div style={{ 'padding': '40px', 'max-width': '400px' }}>
+    <div style={{ padding: '40px', 'max-width': '400px' }}>
       <PillsInput unstyled>
         <Pill.Group unstyled>
           {getPills({ unstyled: true })}
@@ -72,23 +72,25 @@ export function Unstyled() {
 }
 
 export function Sizes() {
-  const items = <Index each={['xs', 'sm', 'md', 'lg', 'xl']}>
-    {(size) => (
-      <PillsInput size={size()} mt="xl">
-      <Pill.Group size={size()}>
-        {getPills({})}
-        <PillsInput.Field placeholder="Pills input" />
-      </Pill.Group>
-    </PillsInput>
-  )}
-  </Index>
+  const items = (
+    <Index each={['xs', 'sm', 'md', 'lg', 'xl']}>
+      {(size) => (
+        <PillsInput size={size()} mt="xl">
+          <Pill.Group size={size()}>
+            {getPills({})}
+            <PillsInput.Field placeholder="Pills input" />
+          </Pill.Group>
+        </PillsInput>
+      )}
+    </Index>
+  );
 
-  return <div style={{ 'padding': '40px', 'max-width': '600px' }}>{items}</div>;
+  return <div style={{ padding: '40px', 'max-width': '600px' }}>{items}</div>;
 }
 
 export function AutoType() {
   return (
-    <div style={{ 'padding': '40px', 'max-width': '600px' }}>
+    <div style={{ padding: '40px', 'max-width': '600px' }}>
       <PillsInput>
         <Pill.Group>
           {getPills({})}
@@ -101,7 +103,7 @@ export function AutoType() {
 
 export function Disabled() {
   return (
-    <div style={{ 'padding': '40px', 'max-width': '460px' }}>
+    <div style={{ padding: '40px', 'max-width': '460px' }}>
       <PillsInput disabled>
         <Pill.Group disabled>
           {getPills({})}
@@ -114,7 +116,7 @@ export function Disabled() {
 
 export function WithinDisabledFieldset() {
   return (
-    <div style={{ 'padding': '40px', 'max-width': '600px' }}>
+    <div style={{ padding: '40px', 'max-width': '600px' }}>
       <fieldset disabled>
         <PillsInput>
           <Pill.Group>
@@ -129,7 +131,7 @@ export function WithinDisabledFieldset() {
 
 export function WithLabel() {
   return (
-    <div style={{ 'padding': '40px', 'max-width': '600px' }}>
+    <div style={{ padding: '40px', 'max-width': '600px' }}>
       <PillsInput label="Pills input label" description="Pills input description">
         <Pill.Group>
           {getPills({})}
@@ -142,7 +144,7 @@ export function WithLabel() {
 
 export function WithError() {
   return (
-    <div style={{ 'padding': '40px', 'max-width': '600px' }}>
+    <div style={{ padding: '40px', 'max-width': '600px' }}>
       <PillsInput label="Pills input label" error="test-error">
         <Pill.Group>
           {getPills({})}
@@ -154,26 +156,28 @@ export function WithError() {
 }
 
 export function Alignment() {
-  const sizes = <Index each={['left','center','right']}>
-    {(size) => (
-      <Group align="flex-start" mt="xl">
-      <PillsInput size={size()}>
-        <Pill.Group size={size()}>
-          <Pill withRemoveButton>First</Pill>
-          <PillsInput.Field placeholder="Pills input" />
-        </Pill.Group>
-      </PillsInput>
+  const sizes = (
+    <Index each={['left', 'center', 'right']}>
+      {(size) => (
+        <Group align="flex-start" mt="xl">
+          <PillsInput size={size()}>
+            <Pill.Group size={size()}>
+              <Pill withRemoveButton>First</Pill>
+              <PillsInput.Field placeholder="Pills input" />
+            </Pill.Group>
+          </PillsInput>
 
-      <PillsInput size={size()}>
-        <Pill.Group>
-          <PillsInput.Field placeholder="Pills input" />
-        </Pill.Group>
-      </PillsInput>
+          <PillsInput size={size()}>
+            <Pill.Group>
+              <PillsInput.Field placeholder="Pills input" />
+            </Pill.Group>
+          </PillsInput>
 
-      <TextInput size={size()} placeholder="Regular input" />
-    </Group>
-    )}
-  </Index>
+          <TextInput size={size()} placeholder="Regular input" />
+        </Group>
+      )}
+    </Index>
+  );
 
-  return <div style={{ 'padding': '40px' }}>{sizes}</div>;
+  return <div style={{ padding: '40px' }}>{sizes}</div>;
 }

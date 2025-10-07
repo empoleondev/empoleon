@@ -64,14 +64,15 @@ export function GridColVariables(props: GridColVariablesProps) {
   const baseValue = getBaseValue(props.span);
   const baseSpan = baseValue === undefined ? 12 : getBaseValue(props.span);
 
-  const baseStyles: Accessor<Record<string, string | undefined>> = () => filterProps({
-    '--col-order': getBaseValue(props.order)?.toString(),
-    '--col-flex-grow': getColumnFlexGrow(baseSpan, ctx.grow),
-    '--col-flex-basis': getColumnFlexBasis(baseSpan, ctx.columns),
-    '--col-width': baseSpan === 'content' ? 'auto' : undefined,
-    '--col-max-width': getColumnMaxWidth(baseSpan, ctx.columns, ctx.grow),
-    '--col-offset': getColumnOffset(getBaseValue(props.offset), ctx.columns),
-  });
+  const baseStyles: Accessor<Record<string, string | undefined>> = () =>
+    filterProps({
+      '--col-order': getBaseValue(props.order)?.toString(),
+      '--col-flex-grow': getColumnFlexGrow(baseSpan, ctx.grow),
+      '--col-flex-basis': getColumnFlexBasis(baseSpan, ctx.columns),
+      '--col-width': baseSpan === 'content' ? 'auto' : undefined,
+      '--col-max-width': getColumnMaxWidth(baseSpan, ctx.columns, ctx.grow),
+      '--col-offset': getColumnOffset(getBaseValue(props.offset), ctx.columns),
+    });
 
   const queries = keys(_breakpoints).reduce<Record<string, Record<string, any>>>(
     (acc, breakpoint) => {
@@ -85,7 +86,10 @@ export function GridColVariables(props: GridColVariablesProps) {
 
       if (typeof props.span === 'object' && props.span[breakpoint] !== undefined) {
         acc[breakpoint]['--col-flex-grow'] = getColumnFlexGrow(props.span[breakpoint], ctx.grow);
-        acc[breakpoint]['--col-flex-basis'] = getColumnFlexBasis(props.span[breakpoint], ctx.columns);
+        acc[breakpoint]['--col-flex-basis'] = getColumnFlexBasis(
+          props.span[breakpoint],
+          ctx.columns
+        );
         acc[breakpoint]['--col-width'] = props.span[breakpoint] === 'content' ? 'auto' : undefined;
         acc[breakpoint]['--col-max-width'] = getColumnMaxWidth(
           props.span[breakpoint],

@@ -1,7 +1,7 @@
 import { createEffect, createSignal, Index, JSX } from 'solid-js';
+import { EmpoleonProvider } from '../../core';
 import { Accordion } from '../Accordion/Accordion';
 import { Spoiler } from './Spoiler';
-import { EmpoleonProvider } from '../../core';
 
 export default {
   title: 'Spoiler',
@@ -21,20 +21,20 @@ export function ContentChanges() {
 
   createEffect(() => {
     setContent(Array(count()).fill(0));
-  })
+  });
 
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <button type="button" onClick={randomCount}>
         Random count
       </button>
       <Spoiler maxHeight={120} showLabel="Show more" hideLabel="Hide">
         <Index each={content()}>
-          {_ => (
+          {(_) => (
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem officiis, incidunt libero,
-              itaque, quaerat labore quis odio culpa tempore quisquam porro unde omnis tempora nostrum
-              nihil eligendi distinctio. Animi, consectetur!
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem officiis, incidunt
+              libero, itaque, quaerat labore quis odio culpa tempore quisquam porro unde omnis
+              tempora nostrum nihil eligendi distinctio. Animi, consectetur!
             </p>
           )}
         </Index>
@@ -45,7 +45,7 @@ export function ContentChanges() {
 
 export function InsideAccordion() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Accordion>
         <Accordion.Item value="first">
           <Accordion.Control>Expand me</Accordion.Control>
@@ -68,7 +68,7 @@ export function InsideAccordion() {
 
 export function Usage() {
   return (
-    <div style={{ 'padding': '40px', 'max-width': '500px' }}>
+    <div style={{ padding: '40px', 'max-width': '500px' }}>
       <Spoiler showLabel="Show more" hideLabel="Hide details" maxHeight={50}>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ut quam vitae lorem
         viverra ultricies. Integer hendrerit, quam mollis tempus iaculis, tellus est pellentesque
@@ -87,7 +87,7 @@ export function Usage() {
 export function Controlled() {
   const [expanded, setExpanded] = createSignal(false);
   return (
-    <div style={{ 'padding': '40px', 'max-width': '500px' }}>
+    <div style={{ padding: '40px', 'max-width': '500px' }}>
       <Spoiler
         showLabel="Show more"
         hideLabel="Hide details"

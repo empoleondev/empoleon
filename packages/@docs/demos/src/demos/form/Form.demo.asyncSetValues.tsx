@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
+import { createEffect } from 'solid-js';
 import { Checkbox, TextInput } from '@empoleon/core';
 import { useForm } from '@empoleon/form';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createEffect } from 'solid-js';
 
 const code = `
 import { useEffect } from 'react';
@@ -76,11 +76,7 @@ function Demo() {
 
   return (
     <form onSubmit={form.onSubmit(console.log)}>
-      <TextInput
-        label="Email"
-        placeholder="Email"
-        {...form.getInputProps('email')}
-      />
+      <TextInput label="Email" placeholder="Email" {...form.getInputProps('email')} />
       <Checkbox
         mt="sm"
         label="I accept terms and conditions"

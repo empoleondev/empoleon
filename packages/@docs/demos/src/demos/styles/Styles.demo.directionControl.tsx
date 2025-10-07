@@ -1,7 +1,7 @@
 import { IconTextDirectionLtr, IconTextDirectionRtl } from '@tabler/icons-solidjs';
+import { createEffect } from 'solid-js';
 import { ActionIcon, useDirection } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createEffect } from 'solid-js';
 
 const code = `
 import { ActionIcon, useDirection } from '@empoleon/core';
@@ -28,9 +28,9 @@ function Demo() {
   return (
     <ActionIcon onClick={() => toggleDirection()} variant="default" radius="md" size="lg">
       {dir === 'rtl' ? (
-        <IconTextDirectionLtr stroke='1.5' />
+        <IconTextDirectionLtr stroke="1.5" />
       ) : (
-        <IconTextDirectionRtl stroke='1.5' />
+        <IconTextDirectionRtl stroke="1.5" />
       )}
     </ActionIcon>
   );

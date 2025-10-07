@@ -1,6 +1,6 @@
 import { render, renderHook } from '@solidjs/testing-library';
-import { createOptionalContext } from './create-optional-context';
 import { JSX } from 'solid-js';
+import { createOptionalContext } from './create-optional-context';
 
 interface ContextType {
   value: number;

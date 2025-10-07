@@ -11,21 +11,21 @@ const actions: SpotlightActionData[] = [
     label: 'Home',
     description: 'Get to home page',
     onClick: () => console.log('Home'),
-    leftSection: <IconHome size={24} stroke='1.5' />,
+    leftSection: <IconHome size={24} stroke="1.5" />,
   },
   {
     id: 'dashboard',
     label: 'Dashboard',
     description: 'Get full information about current system status',
     onClick: () => console.log('Dashboard'),
-    leftSection: <IconDashboard size={24} stroke='1.5' />,
+    leftSection: <IconDashboard size={24} stroke="1.5" />,
   },
   {
     id: 'documentation',
     label: 'Documentation',
     description: 'Visit documentation to lean more about all features',
     onClick: () => console.log('Documentation'),
-    leftSection: <IconFileText size={24} stroke='1.5' />,
+    leftSection: <IconFileText size={24} stroke="1.5" />,
   },
 ];
 
@@ -84,7 +84,7 @@ function Demo() {
       highlightQuery
       shortcut={null}
       searchProps={{
-        leftSection: <IconSearch size={20} stroke='1.5' />,
+        leftSection: <IconSearch size={20} stroke="1.5" />,
         placeholder: 'Search...',
       }}
     />

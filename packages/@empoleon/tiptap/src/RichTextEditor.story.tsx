@@ -1,4 +1,3 @@
-import { For, JSX } from 'solid-js';
 // import { IconColorPicker } from '@tabler/icons-solidjs';
 import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight';
 import { Color } from '@tiptap/extension-color';
@@ -11,14 +10,15 @@ import TipTapTaskList from '@tiptap/extension-task-list';
 import TextAlign from '@tiptap/extension-text-align';
 import TextStyle from '@tiptap/extension-text-style';
 import Underline from '@tiptap/extension-underline';
-import { BubbleMenu, FloatingMenu, useEditor } from '@empoleon/solid-tiptap';
 import StarterKit from '@tiptap/starter-kit';
 import css from 'highlight.js/lib/languages/css';
 import js from 'highlight.js/lib/languages/javascript';
 import ts from 'highlight.js/lib/languages/typescript';
 import html from 'highlight.js/lib/languages/xml';
 import { createLowlight } from 'lowlight';
+import { For, JSX } from 'solid-js';
 import { AppShell, EmpoleonProvider } from '@empoleon/core';
+import { BubbleMenu, FloatingMenu, useEditor } from '@empoleon/solid-tiptap';
 import { Link } from './extensions/Link';
 import { getTaskListExtension } from './extensions/TaskList';
 import { RichTextEditor, RichTextEditorProps } from './RichTextEditor';
@@ -39,7 +39,7 @@ export default {
         <Story />
       </EmpoleonProvider>
     ),
-  ]
+  ],
 };
 
 const lorem =
@@ -253,22 +253,12 @@ export function StickyToolbar() {
   return (
     <AppShell header={{ height: 60 }}>
       <AppShell.Header>Header</AppShell.Header>
-      <For each={scrollItems}>
-        {() => <p>{lorem}</p>}
-      </For>
-      <For each={largeContentItems}>
-        {() => <p>{lorem}</p>}
-      </For>
+      <For each={scrollItems}>{() => <p>{lorem}</p>}</For>
+      <For each={largeContentItems}>{() => <p>{lorem}</p>}</For>
       <BasicEditor toolbarProps={{ sticky: true, stickyOffset: '60' }} />
-      <For each={scrollItems}>
-        {() => <p>{lorem}</p>}
-      </For>
-      <For each={scrollItems}>
-        {() => <p>{lorem}</p>}
-      </For>
-      <For each={scrollItems}>
-        {() => <p>{lorem}</p>}
-      </For>
+      <For each={scrollItems}>{() => <p>{lorem}</p>}</For>
+      <For each={scrollItems}>{() => <p>{lorem}</p>}</For>
+      <For each={scrollItems}>{() => <p>{lorem}</p>}</For>
     </AppShell>
   );
 }

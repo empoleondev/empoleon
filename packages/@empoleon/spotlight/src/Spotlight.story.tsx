@@ -1,9 +1,8 @@
-import { JSX } from 'solid-js';
 import { IconSearch } from '@tabler/icons-solidjs';
+import { createMemo, createSignal, For, JSX } from 'solid-js';
 import { Button, EmpoleonProvider } from '@empoleon/core';
 import { Spotlight, SpotlightActionData } from './Spotlight';
 import { createSpotlight } from './spotlight.store';
-import { createMemo, createSignal, For } from 'solid-js';
 
 const [store, actions] = createSpotlight();
 
@@ -15,7 +14,7 @@ export default {
         <Story />
       </EmpoleonProvider>
     ),
-  ]
+  ],
 };
 
 const actionsData: SpotlightActionData[] = Array(100)
@@ -48,7 +47,7 @@ export function Compound() {
       >
         <Spotlight.Search
           placeholder="Search something..."
-          leftSection={<IconSearch stroke='1.5' size={20} />}
+          leftSection={<IconSearch stroke="1.5" size={20} />}
         />
 
         <Spotlight.ActionsList>
@@ -95,7 +94,7 @@ export function Default() {
         limit={20}
         searchProps={{
           placeholder: 'Search actions',
-          leftSection: <IconSearch stroke='1.5' size={20} />,
+          leftSection: <IconSearch stroke="1.5" size={20} />,
         }}
       />
       <Button onClick={actions.open}>Open spotlight</Button>
@@ -120,7 +119,7 @@ export function NotScrollable() {
         limit={20}
         searchProps={{
           placeholder: 'Search actions',
-          leftSection: <IconSearch stroke='1.5' size={20} />,
+          leftSection: <IconSearch stroke="1.5" size={20} />,
         }}
       />
       <Button onClick={actions.open}>Open spotlight</Button>

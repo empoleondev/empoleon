@@ -1,4 +1,6 @@
 import { screen } from '@solidjs/testing-library';
+import { JSX } from 'solid-js';
+import { vi } from 'vitest';
 import { render } from '@empoleon-tests/core';
 import {
   clickControl,
@@ -10,8 +12,6 @@ import {
   expectValue,
   getInputValue,
 } from './date-input-test-helpers';
-import { JSX } from 'solid-js';
-import { vi } from 'vitest';
 
 interface Options {
   component: (props: any) => JSX.Element;
@@ -21,9 +21,9 @@ interface Options {
 export function itSupportsDateInputProps(options: Options, name = 'supports date input props') {
   describe(name, () => {
     it('supports uncontrolled state (type="default")', async () => {
-      const { container } = render(
-        () => <options.component {...options.props} placeholder="test-placeholder" />
-      );
+      const { container } = render(() => (
+        <options.component {...options.props} placeholder="test-placeholder" />
+      ));
       expectValue(container as any, 'test-placeholder');
 
       await clickInput(container as any);
@@ -38,9 +38,9 @@ export function itSupportsDateInputProps(options: Options, name = 'supports date
     });
 
     it('supports uncontrolled state (type="range")', async () => {
-      const { container } = render(
-        () => <options.component {...options.props} type="range" placeholder="test-placeholder" />
-      );
+      const { container } = render(() => (
+        <options.component {...options.props} type="range" placeholder="test-placeholder" />
+      ));
       expectValue(container as any, 'test-placeholder');
 
       await clickInput(container as any);
@@ -54,9 +54,9 @@ export function itSupportsDateInputProps(options: Options, name = 'supports date
     });
 
     it('supports uncontrolled state (type="multiple")', async () => {
-      const { container } = render(
-        () => <options.component {...options.props} type="multiple" placeholder="test-placeholder" />
-      );
+      const { container } = render(() => (
+        <options.component {...options.props} type="multiple" placeholder="test-placeholder" />
+      ));
       expectValue(container as any, 'test-placeholder');
 
       await clickInput(container as any);
@@ -81,7 +81,9 @@ export function itSupportsDateInputProps(options: Options, name = 'supports date
     });
 
     it('toggles modal when input is clicked (dropdownType="modal")', async () => {
-      const { container } = render(() => <options.component {...options.props} dropdownType="modal" />);
+      const { container } = render(() => (
+        <options.component {...options.props} dropdownType="modal" />
+      ));
 
       await clickInput(container as any);
       expectOpenedModal(container as any);
@@ -131,9 +133,9 @@ export function itSupportsDateInputProps(options: Options, name = 'supports date
     });
 
     it('does not close dropdown when date is selected if closeOnChange is set to false (type="default")', async () => {
-      const { container } = render(
-        () => <options.component {...options.props} type="default" closeOnChange={false} />
-      );
+      const { container } = render(() => (
+        <options.component {...options.props} type="default" closeOnChange={false} />
+      ));
       expectNoPopover(container as any);
 
       await clickInput(container as any);
@@ -147,9 +149,9 @@ export function itSupportsDateInputProps(options: Options, name = 'supports date
     });
 
     it('does not close dropdown when dates range is selected if closeOnChange is set to false (type="range")', async () => {
-      const { container } = render(
-        () => <options.component {...options.props} type="range" closeOnChange={false} />
-      );
+      const { container } = render(() => (
+        <options.component {...options.props} type="range" closeOnChange={false} />
+      ));
       expectNoPopover(container as any);
 
       await clickInput(container as any);
@@ -164,9 +166,9 @@ export function itSupportsDateInputProps(options: Options, name = 'supports date
 
     it('supports controlled state (type="default")', async () => {
       const spy = vi.fn();
-      const { container } = render(
-        () => <options.component {...options.props} type="default" value="2022-04-11" onChange={spy} />
-      );
+      const { container } = render(() => (
+        <options.component {...options.props} type="default" value="2022-04-11" onChange={spy} />
+      ));
 
       const initialValue = getInputValue(container as any);
       expect(initialValue).not.toBe('');
@@ -179,14 +181,14 @@ export function itSupportsDateInputProps(options: Options, name = 'supports date
 
     it('supports controlled state (type="range")', async () => {
       const spy = vi.fn();
-      const { container } = render(
-        () => <options.component
+      const { container } = render(() => (
+        <options.component
           {...options.props}
           type="range"
           value={['2022-04-11', null]}
           onChange={spy}
         />
-      );
+      ));
 
       const initialValue = getInputValue(container as any);
       expect(initialValue).not.toBe('');
@@ -200,14 +202,14 @@ export function itSupportsDateInputProps(options: Options, name = 'supports date
 
     it('supports controlled state (type="multiple")', async () => {
       const spy = vi.fn();
-      const { container } = render(
-        () => <options.component
+      const { container } = render(() => (
+        <options.component
           {...options.props}
           type="multiple"
           value={['2022-04-11']}
           onChange={spy}
         />
-      );
+      ));
 
       const initialValue = getInputValue(container as any);
       expect(initialValue).not.toBe('');
@@ -220,14 +222,14 @@ export function itSupportsDateInputProps(options: Options, name = 'supports date
     });
 
     it('supports deselecting values when allowDeselect prop is set (type="default")', async () => {
-      const { container } = render(
-        () => <options.component
+      const { container } = render(() => (
+        <options.component
           {...options.props}
           type="default"
           placeholder="test-placeholder"
           allowDeselect
         />
-      );
+      ));
 
       expectValue(container as any, 'test-placeholder');
       await clickInput(container as any);
@@ -240,9 +242,9 @@ export function itSupportsDateInputProps(options: Options, name = 'supports date
     });
 
     it('does not allow to deselect value if allowDeselect is not set (type="default")', async () => {
-      const { container } = render(
-        () => <options.component {...options.props} type="default" placeholder="test-placeholder" />
-      );
+      const { container } = render(() => (
+        <options.component {...options.props} type="default" placeholder="test-placeholder" />
+      ));
 
       expectValue(container as any, 'test-placeholder');
       await clickInput(container as any);
@@ -255,14 +257,14 @@ export function itSupportsDateInputProps(options: Options, name = 'supports date
     });
 
     it('allows to pick single date as range if allowSingleDateInRange prop is set (type="range")', async () => {
-      const { container } = render(
-        () => <options.component
+      const { container } = render(() => (
+        <options.component
           {...options.props}
           type="range"
           placeholder="test-placeholder"
           allowSingleDateInRange
         />
-      );
+      ));
 
       expectValue(container as any, 'test-placeholder');
       await clickInput(container as any);
@@ -274,9 +276,9 @@ export function itSupportsDateInputProps(options: Options, name = 'supports date
     });
 
     it('does not allow to pick single date as range if allowSingleDateInRange prop is not set (type="range")', async () => {
-      const { container } = render(
-        () => <options.component {...options.props} type="range" placeholder="test-placeholder" />
-      );
+      const { container } = render(() => (
+        <options.component {...options.props} type="range" placeholder="test-placeholder" />
+      ));
 
       expectValue(container as any, 'test-placeholder');
       await clickInput(container as any);
@@ -298,9 +300,9 @@ export function itSupportsDateInputProps(options: Options, name = 'supports date
     });
 
     it('does not open modal if readOnly prop is set', async () => {
-      const { container } = render(
-        () => <options.component {...options.props} readOnly dropdownType="modal" />
-      );
+      const { container } = render(() => (
+        <options.component {...options.props} readOnly dropdownType="modal" />
+      ));
       expectNoPopover(container as any);
       expectNoModal(container as any);
 
@@ -310,40 +312,40 @@ export function itSupportsDateInputProps(options: Options, name = 'supports date
     });
 
     it('does not render clear button if readOnly is set', async () => {
-      const { rerender } = render(
-        () => <options.component
+      const { rerender } = render(() => (
+        <options.component
           {...options.props}
           value="2022-04-11"
           clearable
           readOnly
           clearButtonProps={{ 'aria-label': 'clear-button' }}
         />
-      );
+      ));
 
       expect(screen.queryAllByLabelText('clear-button')).toHaveLength(0);
 
-      rerender(
-        () => <options.component
+      rerender(() => (
+        <options.component
           {...options.props}
           value="2022-04-11"
           clearable
           readOnly={false}
           clearButtonProps={{ 'aria-label': 'clear-button' }}
         />
-      );
+      ));
 
       expect(screen.getByLabelText('clear-button')).toBeInTheDocument();
     });
 
     it('renders hidden input with given name, form and value attributes', () => {
-      const { container } = render(
-        () => <options.component
+      const { container } = render(() => (
+        <options.component
           {...options.props}
           name="name-hidden"
           form="form-hidden"
           value="2022-04-11"
         />
-      );
+      ));
 
       const input = container.querySelector('input[type="hidden"]');
       expect(input).toHaveAttribute('name', 'name-hidden');

@@ -1,5 +1,5 @@
 import { JSX } from 'solid-js';
-import { Button, Group, EmpoleonProvider } from '@empoleon/core';
+import { Button, EmpoleonProvider, Group } from '@empoleon/core';
 import { NavigationProgress } from './NavigationProgress';
 import { nprogress } from './nprogress.store';
 
@@ -11,7 +11,7 @@ export default {
         <Story />
       </EmpoleonProvider>
     ),
-  ]
+  ],
 };
 
 export function Usage() {

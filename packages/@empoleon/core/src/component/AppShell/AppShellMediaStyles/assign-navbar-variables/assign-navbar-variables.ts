@@ -1,4 +1,4 @@
-import { getBreakpointValue, keys, EmpoleonTheme, rem } from '../../../../core';
+import { EmpoleonTheme, getBreakpointValue, keys, rem } from '../../../../core';
 import type { AppShellProps } from '../../AppShell';
 import { getBaseSize } from '../get-base-size/get-base-size';
 import type { CSSVariables, MediaQueryVariables } from '../get-variables/get-variables';
@@ -19,7 +19,8 @@ export function assignNavbarVariables(props: AssignNavbarVariablesInput) {
   const collapsedNavbarTransformRtl = 'translateX(var(--app-shell-navbar-width))';
 
   if (props.navbar?.breakpoint && !props.navbar?.collapsed?.mobile) {
-    props.maxMediaStyles[props.navbar?.breakpoint] = props.maxMediaStyles[props.navbar?.breakpoint] || {};
+    props.maxMediaStyles[props.navbar?.breakpoint] =
+      props.maxMediaStyles[props.navbar?.breakpoint] || {};
     props.maxMediaStyles[props.navbar?.breakpoint]['--app-shell-navbar-width'] = '100%';
     props.maxMediaStyles[props.navbar?.breakpoint]['--app-shell-navbar-offset'] = '0px';
   }
@@ -48,18 +49,21 @@ export function assignNavbarVariables(props: AssignNavbarVariablesInput) {
   if (props.navbar?.collapsed?.desktop) {
     const breakpointValue = props.navbar!.breakpoint;
     props.minMediaStyles[breakpointValue] = props.minMediaStyles[breakpointValue] || {};
-    props.minMediaStyles[breakpointValue]['--app-shell-navbar-transform'] = collapsedNavbarTransform;
+    props.minMediaStyles[breakpointValue]['--app-shell-navbar-transform'] =
+      collapsedNavbarTransform;
     props.minMediaStyles[breakpointValue]['--app-shell-navbar-transform-rtl'] =
       collapsedNavbarTransformRtl;
     props.minMediaStyles[breakpointValue]['--app-shell-navbar-offset'] = '0px !important';
   }
 
   if (props.navbar?.collapsed?.mobile) {
-    const breakpointValue = getBreakpointValue(props.navbar!.breakpoint, props.theme.breakpoints) - 0.1;
+    const breakpointValue =
+      getBreakpointValue(props.navbar!.breakpoint, props.theme.breakpoints) - 0.1;
     props.maxMediaStyles[breakpointValue] = props.maxMediaStyles[breakpointValue] || {};
     props.maxMediaStyles[breakpointValue]['--app-shell-navbar-width'] = '100%';
     props.maxMediaStyles[breakpointValue]['--app-shell-navbar-offset'] = '0px';
-    props.maxMediaStyles[breakpointValue]['--app-shell-navbar-transform'] = collapsedNavbarTransform;
+    props.maxMediaStyles[breakpointValue]['--app-shell-navbar-transform'] =
+      collapsedNavbarTransform;
     props.maxMediaStyles[breakpointValue]['--app-shell-navbar-transform-rtl'] =
       collapsedNavbarTransformRtl;
   }

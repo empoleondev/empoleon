@@ -1,7 +1,7 @@
 import { JSX } from 'solid-js';
+import { EmpoleonProvider } from '../../core';
 import { Group } from '../Group';
 import { Image } from './Image';
-import { EmpoleonProvider } from '../../core';
 
 export default {
   title: 'Image',
@@ -19,7 +19,7 @@ const url =
 
 export function Usage() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Image src={url} h={600} />
     </div>
   );
@@ -27,7 +27,7 @@ export function Usage() {
 
 export function WithinGroup() {
   return (
-    <Group style={{ 'padding': '40px' }}>
+    <Group style={{ padding: '40px' }}>
       <Image src={url} h={200} radius="md" />
     </Group>
   );
@@ -35,7 +35,7 @@ export function WithinGroup() {
 
 export function Unstyled() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Image src={url} h={600} radius="md" unstyled />
     </div>
   );
@@ -43,7 +43,7 @@ export function Unstyled() {
 
 export function Fallback() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Image src={url} h={600} radius="md" fallbackSrc="https://placehold.co/600x400" />
     </div>
   );

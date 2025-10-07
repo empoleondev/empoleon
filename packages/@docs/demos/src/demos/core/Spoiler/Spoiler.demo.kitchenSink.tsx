@@ -60,6 +60,6 @@ export const kitchenSink: EmpoleonDemo = {
       type: 'boolean',
       initialValue: false,
       libraryValue: false,
-    }
+    },
   ],
 };

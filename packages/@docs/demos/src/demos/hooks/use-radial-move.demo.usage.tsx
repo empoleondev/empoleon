@@ -1,8 +1,8 @@
+import { createSignal } from 'solid-js';
 import { Box } from '@empoleon/core';
 import { useRadialMove } from '@empoleon/hooks';
 import { EmpoleonDemo } from '@empoleonx/demo';
 import classes from './use-radial-move.demo.usage.module.css';
-import { createSignal } from 'solid-js';
 
 const code = `
 import { useState } from 'react';

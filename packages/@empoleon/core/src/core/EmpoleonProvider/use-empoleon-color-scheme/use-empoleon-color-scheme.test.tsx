@@ -1,7 +1,7 @@
 import { renderHook } from '@solidjs/testing-library';
+import { JSX } from 'solid-js';
 import { EmpoleonProvider } from '../EmpoleonProvider';
 import { useEmpoleonColorScheme } from './use-empoleon-color-scheme';
-import { JSX } from 'solid-js';
 
 function Wrapper(props: { children: JSX.Element }) {
   return <EmpoleonProvider defaultColorScheme="dark">{props.children}</EmpoleonProvider>;

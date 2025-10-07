@@ -1,7 +1,7 @@
+import { createEffect } from 'solid-js';
 import { Text } from '@empoleon/core';
 import { useDocumentTitle, useDocumentVisibility } from '@empoleon/hooks';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createEffect } from 'solid-js';
 
 const code = `
 import { Text } from '@empoleon/core';

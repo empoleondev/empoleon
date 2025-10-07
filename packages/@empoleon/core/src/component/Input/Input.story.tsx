@@ -1,6 +1,6 @@
 import { JSX } from 'solid-js';
-import { Input } from './Input';
 import { EmpoleonProvider } from '../../core';
+import { Input } from './Input';
 
 export default {
   title: 'Input',
@@ -15,7 +15,7 @@ export default {
 
 export function WithinDisabledFieldset() {
   return (
-    <fieldset disabled style={{ 'padding': '40px' }}>
+    <fieldset disabled style={{ padding: '40px' }}>
       <legend>Disabled fieldset</legend>
       <Input size="lg" placeholder="Disabled input within fieldset" />
       <Input size="lg" placeholder="Disabled input" disabled mt="md" />
@@ -25,7 +25,7 @@ export function WithinDisabledFieldset() {
 
 export function Error() {
   return (
-    <div style={{ 'padding': '40px', 'max-width': '400px' }}>
+    <div style={{ padding: '40px', 'max-width': '400px' }}>
       <Input placeholder="With error" error inputSize="5" />
     </div>
   );
@@ -33,7 +33,7 @@ export function Error() {
 
 export function Variants() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Input placeholder="default" />
       <Input placeholder="cursor pointer" pointer mt="md" />
       <Input placeholder="input with error" mt="md" error leftSection="##" />
@@ -60,12 +60,12 @@ export function Sizes() {
     />
   ));
 
-  return <div style={{ 'padding': '40px' }}>{sizes}</div>;
+  return <div style={{ padding: '40px' }}>{sizes}</div>;
 }
 
 export function WithSections() {
   return (
-    <div style={{ 'padding': '40px', 'max-width': '300px' }}>
+    <div style={{ padding: '40px', 'max-width': '300px' }}>
       <Input
         placeholder="Input with right section"
         rightSection="$"
@@ -103,7 +103,7 @@ export function WithSections() {
 
 export function Multiline() {
   const sizes = (['xs', 'sm', 'md', 'lg', 'xl'] as const).map((size) => (
-    <div style={{ 'padding': '40px', 'display': 'flex' }}>
+    <div style={{ padding: '40px', display: 'flex' }}>
       <Input defaultValue="default input" size={size} />
       <Input
         size={size}
@@ -121,7 +121,7 @@ export function Multiline() {
 
 export function CompoundComponents() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Input.Label required>Input label</Input.Label>
       <Input.Error>Input error</Input.Error>
       <Input.Description>Input description</Input.Description>
@@ -154,7 +154,7 @@ export function CompoundComponents() {
 
 export function UnstyledInput() {
   return (
-    <div style={{ 'padding': '40px', 'max-width': '300px', 'background': 'pink' }}>
+    <div style={{ padding: '40px', 'max-width': '300px', background: 'pink' }}>
       <Input variant="unstyled" placeholder="Unstyled input" />
       <Input variant="unstyled" placeholder="With right section" rightSection="$$" />
       <Input variant="unstyled" placeholder="With left section" leftSection="$$" />

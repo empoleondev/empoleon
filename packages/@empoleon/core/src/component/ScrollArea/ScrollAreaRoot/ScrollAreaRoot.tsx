@@ -42,7 +42,11 @@ const defaultProps = {
 export function ScrollAreaRoot(_props: ScrollAreaRootProps) {
   const props = useProps('ScrollAreaRoot', defaultProps, _props);
   const [local, others] = splitProps(props, [
-    "type", "scrollHideDelay", "scrollbars", "getStyles", "ref",
+    'type',
+    'scrollHideDelay',
+    'scrollbars',
+    'getStyles',
+    'ref',
   ]);
 
   const [scrollArea, setScrollArea] = createSignal<HTMLDivElement | null>(null);
@@ -57,24 +61,42 @@ export function ScrollAreaRoot(_props: ScrollAreaRootProps) {
   const rootRef = useMergedRef(local.ref, (node: HTMLDivElement) => setScrollArea(node));
 
   const contextValue = createMemo(() => ({
-    get type() { return local.type!; },
-    get scrollHideDelay() { return local.scrollHideDelay; },
-    get scrollArea() { return scrollArea(); },
-    get viewport() { return viewport(); },
+    get type() {
+      return local.type!;
+    },
+    get scrollHideDelay() {
+      return local.scrollHideDelay;
+    },
+    get scrollArea() {
+      return scrollArea();
+    },
+    get viewport() {
+      return viewport();
+    },
     onViewportChange: (element: HTMLDivElement | null) => {
       setViewport(element);
     },
-    get content() { return content(); },
+    get content() {
+      return content();
+    },
     onContentChange: (element: HTMLDivElement | null) => {
       setContent(element);
     },
-    get scrollbarX() { return scrollbarX(); },
+    get scrollbarX() {
+      return scrollbarX();
+    },
     onScrollbarXChange: setScrollbarX,
-    get scrollbarXEnabled() { return scrollbarXEnabled(); },
+    get scrollbarXEnabled() {
+      return scrollbarXEnabled();
+    },
     onScrollbarXEnabledChange: setScrollbarXEnabled,
-    get scrollbarY() { return scrollbarY(); },
+    get scrollbarY() {
+      return scrollbarY();
+    },
     onScrollbarYChange: setScrollbarY,
-    get scrollbarYEnabled() { return scrollbarYEnabled(); },
+    get scrollbarYEnabled() {
+      return scrollbarYEnabled();
+    },
     onScrollbarYEnabledChange: setScrollbarYEnabled,
     onCornerWidthChange: setCornerWidth,
     onCornerHeightChange: setCornerHeight,
@@ -93,6 +115,6 @@ export function ScrollAreaRoot(_props: ScrollAreaRootProps) {
       />
     </ScrollAreaProvider>
   );
-};
+}
 
 ScrollAreaRoot.displayName = '@empoleon/core/ScrollAreaRoot';

@@ -4,10 +4,10 @@ import {
   BoxProps,
   createVarsResolver,
   ElementProps,
+  EmpoleonSize,
   factory,
   Factory,
   getSize,
-  EmpoleonSize,
   StylesApiProps,
   useProps,
   useStyles,
@@ -37,7 +37,7 @@ const varsResolver = createVarsResolver<KbdFactory>((_, props) => ({
   root: { '--kbd-fz': getSize(props.size, 'kbd-fz') },
 }));
 
-export const Kbd = factory<KbdFactory>(_props => {
+export const Kbd = factory<KbdFactory>((_props) => {
   const props = useProps('Kbd', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -47,7 +47,7 @@ export const Kbd = factory<KbdFactory>(_props => {
     'unstyled',
     'vars',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<KbdFactory>({

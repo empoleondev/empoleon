@@ -1,7 +1,7 @@
+import { createSignal } from 'solid-js';
 import { useFocusReturn, useId, useWindowEvent } from '@empoleon/hooks';
 import { TransitionOverride } from '../Transition';
 import { useLockScroll } from './use-lock-scroll';
-import { createSignal } from 'solid-js';
 
 interface UseModalInput {
   opened: () => boolean;
@@ -35,7 +35,10 @@ export function useModal(props: UseModalInput) {
     { capture: true }
   );
 
-  useFocusReturn({ opened: () => props.opened(), shouldReturnFocus: () => !!(props.trapFocus() && props.returnFocus()) });
+  useFocusReturn({
+    opened: () => props.opened(),
+    shouldReturnFocus: () => !!(props.trapFocus() && props.returnFocus()),
+  });
 
   return {
     _id,

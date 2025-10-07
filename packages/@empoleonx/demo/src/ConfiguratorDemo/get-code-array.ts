@@ -33,7 +33,11 @@ export function getCodeArray(props: GetCodeArrayInput) {
       {
         fileName: 'Demo.tsx',
         language: 'tsx' as const,
-        code: transformCodePayload({ code: props.code, controls: props.controls, state: props.state }),
+        code: transformCodePayload({
+          code: props.code,
+          controls: props.controls,
+          state: props.state,
+        }),
       },
     ];
   }

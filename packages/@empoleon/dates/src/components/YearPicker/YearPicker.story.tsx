@@ -1,7 +1,7 @@
 import { createSignal, For, JSX } from 'solid-js';
+import { EmpoleonProvider } from '@empoleon/core';
 import { DatesRangeValue, DateStringValue } from '../../types';
 import { YearPicker } from './YearPicker';
-import { EmpoleonProvider } from '@empoleon/core';
 
 export default {
   title: 'YearPicker',
@@ -67,14 +67,14 @@ export function ControlledRange() {
         numberOfColumns={3}
         columnsToScroll={1}
       />
-        <For each={value()}>
-          {(date, index) => (
-            <>
-              {date || 'ns'}
-              {index() < value().length - 1 && ' – '}
-            </>
-          )}
-        </For>
+      <For each={value()}>
+        {(date, index) => (
+          <>
+            {date || 'ns'}
+            {index() < value().length - 1 && ' – '}
+          </>
+        )}
+      </For>
     </div>
   );
 }
@@ -90,28 +90,24 @@ export function ControlledMultiple() {
         numberOfColumns={3}
         columnsToScroll={1}
       />
-        <For each={value()}>
-          {(date, index) => (
-            <>
-              {date || 'ns'}
-              {index() < value().length - 1 && ', '}
-            </>
-          )}
-        </For>
+      <For each={value()}>
+        {(date, index) => (
+          <>
+            {date || 'ns'}
+            {index() < value().length - 1 && ', '}
+          </>
+        )}
+      </For>
     </div>
   );
 }
 
 export function Sizes() {
- const sizes = ['xs', 'sm', 'md', 'lg', 'xl'] as const;
+  const sizes = ['xs', 'sm', 'md', 'lg', 'xl'] as const;
 
- return (
-   <div style={{ padding: '40px' }}>
-     <For each={sizes}>
-       {(size) => (
-         <YearPicker size={size} />
-       )}
-     </For>
-   </div>
- );
+  return (
+    <div style={{ padding: '40px' }}>
+      <For each={sizes}>{(size) => <YearPicker size={size} />}</For>
+    </div>
+  );
 }

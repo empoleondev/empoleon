@@ -1,16 +1,16 @@
 import { JSX, splitProps } from 'solid-js';
 import {
+  Box,
   CompoundStylesApiProps,
   createScopedKeydownHandler,
   ElementProps,
+  EmpoleonColor,
   factory,
   Factory,
   getThemeColor,
-  EmpoleonColor,
   useDirection,
   useEmpoleonTheme,
   useProps,
-  Box,
 } from '../../../core';
 import { UnstyledButton, UnstyledButtonProps } from '../../UnstyledButton';
 import { useTabsContext } from '../Tabs.context';
@@ -46,7 +46,7 @@ export type TabsTabFactory = Factory<{
   compound: true;
 }>;
 
-export const TabsTab = factory<TabsTabFactory>(_props => {
+export const TabsTab = factory<TabsTabFactory>((_props) => {
   const props = useProps('TabsTab', null, _props);
   const [local, others] = splitProps(props, [
     'className',
@@ -64,16 +64,20 @@ export const TabsTab = factory<TabsTabFactory>(_props => {
     'vars',
     'mod',
     'tabIndex',
-    'ref'
+    'ref',
   ]);
 
   const theme = useEmpoleonTheme();
   const { dir } = useDirection();
   const ctx = useTabsContext();
   const active = () => local.value === ctx.value();
-  const activateTab = (event: MouseEvent & { currentTarget: HTMLButtonElement; target: Element }) => {
-    ctx.onChange(ctx.allowTabDeactivation ? (local.value === ctx.value() ? null : local.value) : local.value);
-    typeof local.onClick === "function" && local.onClick?.(event);
+  const activateTab = (
+    event: MouseEvent & { currentTarget: HTMLButtonElement; target: Element }
+  ) => {
+    ctx.onChange(
+      ctx.allowTabDeactivation ? (local.value === ctx.value() ? null : local.value) : local.value
+    );
+    typeof local.onClick === 'function' && local.onClick?.(event);
   };
 
   const stylesApiProps = { classNames: local.classNames, styles: local.styles, props };
@@ -81,7 +85,12 @@ export const TabsTab = factory<TabsTabFactory>(_props => {
   return (
     <UnstyledButton
       {...others}
-      {...ctx.getStyles('tab', { className: local.className, style: local.style, variant: ctx.variant(), ...stylesApiProps })}
+      {...ctx.getStyles('tab', {
+        className: local.className,
+        style: local.style,
+        variant: ctx.variant(),
+        ...stylesApiProps,
+      })}
       disabled={local.disabled}
       unstyled={ctx.unstyled}
       variant={ctx.variant()}
@@ -99,7 +108,9 @@ export const TabsTab = factory<TabsTabFactory>(_props => {
       role="tab"
       id={ctx.getTabId(local.value)}
       aria-selected={active()}
-      tabIndex={local.tabIndex !== undefined ? local.tabIndex : active() || ctx.value() === null ? 0 : -1}
+      tabIndex={
+        local.tabIndex !== undefined ? local.tabIndex : active() || ctx.value() === null ? 0 : -1
+      }
       aria-controls={ctx.getPanelId(local.value)}
       onClick={activateTab}
       __vars={{ '--tabs-color': local.color ? getThemeColor(local.color, theme) : undefined }}
@@ -114,13 +125,21 @@ export const TabsTab = factory<TabsTabFactory>(_props => {
       })}
     >
       {local.leftSection && (
-        <Box component='span' {...ctx.getStyles('tabSection', stylesApiProps)} data-position="left">
+        <Box component="span" {...ctx.getStyles('tabSection', stylesApiProps)} data-position="left">
           {local.leftSection}
         </Box>
       )}
-      {local.children && <Box component='span' {...ctx.getStyles('tabLabel', stylesApiProps)}>{local.children}</Box>}
+      {local.children && (
+        <Box component="span" {...ctx.getStyles('tabLabel', stylesApiProps)}>
+          {local.children}
+        </Box>
+      )}
       {local.rightSection && (
-        <Box component='span' {...ctx.getStyles('tabSection', stylesApiProps)} data-position="right">
+        <Box
+          component="span"
+          {...ctx.getStyles('tabSection', stylesApiProps)}
+          data-position="right"
+        >
           {local.rightSection}
         </Box>
       )}

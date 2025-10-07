@@ -1,4 +1,4 @@
-import { JSX } from "solid-js";
+import { JSX } from 'solid-js';
 
 export function isElement(value: any): value is JSX.Element {
   if (value == null) return false;
@@ -13,7 +13,7 @@ export function isElement(value: any): value is JSX.Element {
     // Accept arrays that contain at least some valid elements
     // This handles cases like [text, function] or [function, function]
     if (value.length > 0) {
-      const hasFunctions = value.some(item => typeof item === 'function');
+      const hasFunctions = value.some((item) => typeof item === 'function');
       // Arrays with functions are valid (even mixed with text/other content)
       if (hasFunctions) {
         return true;
@@ -25,7 +25,7 @@ export function isElement(value: any): value is JSX.Element {
   }
 
   // SolidJS reactive functions (components) are valid elements
-  if (typeof value === "function") {
+  if (typeof value === 'function') {
     return true;
   }
 
@@ -37,9 +37,12 @@ export function isElement(value: any): value is JSX.Element {
   // Check for SolidJS JSX objects (before they're resolved)
   if (typeof value === 'object') {
     // Check for valid SolidJS elements
-    if (value.t !== undefined ||
-        (typeof value.type === 'string' || typeof value.type === 'function') ||
-        value.$$typeof !== undefined) {
+    if (
+      value.t !== undefined ||
+      typeof value.type === 'string' ||
+      typeof value.type === 'function' ||
+      value.$$typeof !== undefined
+    ) {
       return true;
     }
   }

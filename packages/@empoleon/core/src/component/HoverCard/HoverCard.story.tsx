@@ -1,9 +1,9 @@
 import { JSX } from 'solid-js';
+import { EmpoleonProvider } from '../../core';
 import { Button } from '../Button';
 import { Switch } from '../Switch';
 import { Tooltip } from '../Tooltip';
 import { HoverCard } from './HoverCard';
-import { EmpoleonProvider } from '../../core';
 
 export default {
   title: 'HoverCard',
@@ -18,7 +18,7 @@ export default {
 
 export function Usage() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <HoverCard>
         <HoverCard.Target>
           <Button>Hover to reveal</Button>
@@ -32,7 +32,7 @@ export function Usage() {
 
 export function Unstyled() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <HoverCard unstyled>
         <HoverCard.Target>
           <Button>Hover to reveal</Button>
@@ -46,7 +46,7 @@ export function Unstyled() {
 
 export function TargetWithTooltip() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <HoverCard>
         <Tooltip label="Tooltip first">
           {(props) => (
@@ -62,7 +62,11 @@ export function TargetWithTooltip() {
       <HoverCard>
         <HoverCard.Target>
           <Tooltip label="Tooltip last">
-            {(props) => <Button ml="xl" {...props}>Tooltip last</Button>}
+            {(props) => (
+              <Button ml="xl" {...props}>
+                Tooltip last
+              </Button>
+            )}
           </Tooltip>
         </HoverCard.Target>
 
@@ -74,8 +78,8 @@ export function TargetWithTooltip() {
 
 export function WithSwitch() {
   return (
-    <div style={{ 'padding': '40px' }}>
-      <HoverCard width='280px' shadow="md">
+    <div style={{ padding: '40px' }}>
+      <HoverCard width="280px" shadow="md">
         <HoverCard.Target refProp="rootRef" eventPropsWrapperName="wrapperProps">
           <Switch label="Switch label" />
         </HoverCard.Target>

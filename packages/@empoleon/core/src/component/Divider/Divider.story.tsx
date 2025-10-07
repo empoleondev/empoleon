@@ -1,6 +1,6 @@
 import { JSX } from 'solid-js';
-import { Divider } from './Divider';
 import { EmpoleonProvider } from '../../core';
+import { Divider } from './Divider';
 
 export default {
   title: 'Divider',
@@ -15,7 +15,7 @@ export default {
 
 export function Usage() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <div>First</div>
       <Divider label="Divider label" labelPosition="right" />
       <div>Second</div>

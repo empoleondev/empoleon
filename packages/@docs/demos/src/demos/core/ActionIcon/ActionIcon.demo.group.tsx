@@ -29,15 +29,15 @@ function Wrapper(props: any) {
   return (
     <ActionIcon.Group {...props}>
       <ActionIcon variant="default" size="lg" aria-label="Gallery">
-        <IconPhoto size={20} stroke='1.5' />
+        <IconPhoto size={20} stroke="1.5" />
       </ActionIcon>
 
       <ActionIcon variant="default" size="lg" aria-label="Settings">
-        <IconSettings size={20} stroke='1.5' />
+        <IconSettings size={20} stroke="1.5" />
       </ActionIcon>
 
       <ActionIcon variant="default" size="lg" aria-label="Likes">
-        <IconHeart size={20} stroke='1.5' />
+        <IconHeart size={20} stroke="1.5" />
       </ActionIcon>
     </ActionIcon.Group>
   );

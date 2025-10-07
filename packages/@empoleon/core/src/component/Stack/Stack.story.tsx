@@ -1,6 +1,6 @@
 import { JSX } from 'solid-js';
-import { Stack } from './Stack';
 import { EmpoleonProvider } from '../../core';
+import { Stack } from './Stack';
 
 export default {
   title: 'Stack',
@@ -15,7 +15,7 @@ export default {
 
 export function Usage() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Stack>
         <button type="button">First</button>
         <button type="button">Second</button>

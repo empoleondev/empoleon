@@ -1,6 +1,6 @@
 import { JSX } from 'solid-js';
-import { BackgroundImage } from './BackgroundImage';
 import { EmpoleonProvider } from '../../core';
+import { BackgroundImage } from './BackgroundImage';
 
 export default {
   title: 'BackgroundImage',
@@ -15,7 +15,7 @@ export default {
 
 export function Usage() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <BackgroundImage
         w={400}
         h={200}
@@ -29,7 +29,7 @@ export function Usage() {
 
 export function Unstyled() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <BackgroundImage
         w={400}
         h={200}

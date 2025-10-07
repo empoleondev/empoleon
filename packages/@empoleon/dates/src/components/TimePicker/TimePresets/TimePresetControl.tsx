@@ -21,7 +21,12 @@ export function TimePresetControl(props: TimePresetControlProps) {
       onClick={() => props.onChange(props.value)}
       {...ctx.getStyles('presetControl')}
     >
-      <TimeValue withSeconds={props.withSeconds} value={props.value} format={props.format} amPmLabels={props.amPmLabels} />
+      <TimeValue
+        withSeconds={props.withSeconds}
+        value={props.value}
+        format={props.format}
+        amPmLabels={props.amPmLabels}
+      />
     </UnstyledButton>
   );
 }

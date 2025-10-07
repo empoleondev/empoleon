@@ -1,7 +1,7 @@
+import { createSignal } from 'solid-js';
 import { Button, Group, Stepper } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
 import { Content } from './_content';
-import { createSignal } from 'solid-js';
 
 const code = `
 import { createSignal } from 'solid-js';

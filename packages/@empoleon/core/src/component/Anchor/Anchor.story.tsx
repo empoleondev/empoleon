@@ -1,6 +1,6 @@
 import { JSX } from 'solid-js';
-import { Anchor } from './Anchor';
 import { EmpoleonProvider } from '../../core';
+import { Anchor } from './Anchor';
 
 export default {
   title: 'Anchor',
@@ -15,7 +15,7 @@ export default {
 
 export function Usage() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Anchor href="https://empoleon.dev" target="blank" underline="never">
         Empoleon website link: never
       </Anchor>

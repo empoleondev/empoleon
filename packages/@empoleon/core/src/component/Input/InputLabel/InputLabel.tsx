@@ -1,19 +1,19 @@
+import { splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
   createVarsResolver,
   ElementProps,
+  EmpoleonFontSize,
   factory,
   Factory,
   getFontSize,
-  EmpoleonFontSize,
   StylesApiProps,
   useProps,
   useStyles,
 } from '../../../core';
 import { useInputWrapperContext } from '../InputWrapper.context';
 import classes from '../Input.module.css';
-import { splitProps } from 'solid-js';
 
 export type InputLabelStylesNames = 'label' | 'required';
 export type InputLabelCssVariables = {
@@ -54,7 +54,7 @@ const varsResolver = createVarsResolver<InputLabelFactory>((_, props) => ({
   },
 }));
 
-export const InputLabel = factory<InputLabelFactory>(_props => {
+export const InputLabel = factory<InputLabelFactory>((_props) => {
   const props = useProps('InputLabel', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -73,7 +73,7 @@ export const InputLabel = factory<InputLabelFactory>(_props => {
     'variant',
     'mod',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const _getStyles = useStyles<InputLabelFactory>({
@@ -96,7 +96,10 @@ export const InputLabel = factory<InputLabelFactory>(_props => {
 
   return (
     <Box
-      {...getStyles('label', ctx?.getStyles ? { className: local.className, style: local.style } : undefined)}
+      {...getStyles(
+        'label',
+        ctx?.getStyles ? { className: local.className, style: local.style } : undefined
+      )}
       component={local.labelElement as 'label'}
       variant={local.variant}
       size={local.size}
@@ -115,7 +118,7 @@ export const InputLabel = factory<InputLabelFactory>(_props => {
     >
       {local.children}
       {local.required && (
-        <Box component='span' {...getStyles('required')} aria-hidden>
+        <Box component="span" {...getStyles('required')} aria-hidden>
           {' *'}
         </Box>
       )}

@@ -6,7 +6,9 @@ export interface ColorSchemeScriptProps {
   localStorageKey?: string;
 }
 
-const getScript = (props: Pick<ColorSchemeScriptProps, 'defaultColorScheme' | 'localStorageKey' | 'forceColorScheme'>) =>
+const getScript = (
+  props: Pick<ColorSchemeScriptProps, 'defaultColorScheme' | 'localStorageKey' | 'forceColorScheme'>
+) =>
   props.forceColorScheme
     ? `document.documentElement.setAttribute("data-empoleon-color-scheme", '${props.forceColorScheme}');`
     : `try {

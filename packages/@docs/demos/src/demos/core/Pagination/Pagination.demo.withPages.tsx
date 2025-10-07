@@ -1,6 +1,6 @@
+import { createSignal } from 'solid-js';
 import { Group, Pagination, Text } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal } from 'solid-js';
 
 const code = `
 import { useState } from 'react';
@@ -29,7 +29,8 @@ const totalPages = Math.ceil(total / limit);
 
 function Demo() {
   const [page, setPage] = createSignal(1);
-  const message = () => `Showing ${limit * (page() - 1) + 1} – ${Math.min(total, limit * page())} of ${total}`;
+  const message = () =>
+    `Showing ${limit * (page() - 1) + 1} – ${Math.min(total, limit * page())} of ${total}`;
 
   return (
     <Group justify="flex-end">

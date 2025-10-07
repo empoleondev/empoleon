@@ -45,8 +45,8 @@ export function Thumb(props: ThumbProps) {
     'isHovered',
     'children',
     'disabled',
-    'ref'
-   ]);
+    'ref',
+  ]);
 
   const { getStyles } = useSliderContext();
 
@@ -54,8 +54,9 @@ export function Thumb(props: ThumbProps) {
 
   const labelAlwaysOn = () => local.labelAlwaysOn;
 
-  const isVisible = createMemo(() =>
-    labelAlwaysOn() || local.dragging || focused() || (local.showLabelOnHover && local.isHovered)
+  const isVisible = createMemo(
+    () =>
+      labelAlwaysOn() || local.dragging || focused() || (local.showLabelOnHover && local.isHovered)
   );
 
   return (
@@ -91,7 +92,9 @@ export function Thumb(props: ThumbProps) {
         {...local.labelTransitionProps}
       >
         {(transitionStyles) => (
-          <Box component='div' {...getStyles('label', { style: transitionStyles })}>{local.label}</Box>
+          <Box component="div" {...getStyles('label', { style: transitionStyles })}>
+            {local.label}
+          </Box>
         )}
       </Transition>
     </Box>

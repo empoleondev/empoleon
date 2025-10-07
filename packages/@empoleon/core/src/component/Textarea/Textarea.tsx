@@ -1,4 +1,4 @@
-import { splitProps, JSX } from 'solid-js';
+import { JSX, splitProps } from 'solid-js';
 // @ts-ignore
 import TextareaAutosize from 'solid-textarea-autosize';
 import {
@@ -39,7 +39,7 @@ export type TextareaFactory = Factory<{
   stylesNames: __InputStylesNames;
 }>;
 
-export const Textarea = factory<TextareaFactory>(_props => {
+export const Textarea = factory<TextareaFactory>((_props) => {
   const props = useProps('Textarea', null, _props);
   const [local, others] = splitProps(props, [
     'autosize',
@@ -47,7 +47,7 @@ export const Textarea = factory<TextareaFactory>(_props => {
     'minRows',
     '__staticSelector',
     'resize',
-    'ref'
+    'ref',
   ]);
 
   const shouldAutosize = () => local.autosize && getEnv() !== 'test';

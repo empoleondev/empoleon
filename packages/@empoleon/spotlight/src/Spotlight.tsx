@@ -85,7 +85,7 @@ const defaultProps = {
   shortcut: 'mod + K',
 } satisfies Partial<SpotlightProps>;
 
-export const Spotlight = factory<SpotlightFactory>(_props => {
+export const Spotlight = factory<SpotlightFactory>((_props) => {
   const props = useProps('Spotlight', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'searchProps',
@@ -96,7 +96,7 @@ export const Spotlight = factory<SpotlightFactory>(_props => {
     'nothingFound',
     'highlightQuery',
     'limit',
-    'ref'
+    'ref',
   ]);
 
   const [_query, setQuery] = useUncontrolled({

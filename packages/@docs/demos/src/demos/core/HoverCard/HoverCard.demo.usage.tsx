@@ -27,7 +27,7 @@ function Demo() {
 function Demo() {
   return (
     <Group justify="center">
-      <HoverCard width='280px' shadow="md">
+      <HoverCard width="280px" shadow="md">
         <HoverCard.Target>
           <Button>Hover to reveal the card</Button>
         </HoverCard.Target>

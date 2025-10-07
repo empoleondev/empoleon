@@ -33,7 +33,7 @@ export type PopoverDropdownFactory = Factory<{
 
 const defaultProps: Partial<PopoverDropdownProps> = {};
 
-export const PopoverDropdown = factory<PopoverDropdownFactory>(_props => {
+export const PopoverDropdown = factory<PopoverDropdownFactory>((_props) => {
   const props = useProps('PopoverDropdown', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'className',
@@ -44,7 +44,7 @@ export const PopoverDropdown = factory<PopoverDropdownFactory>(_props => {
     'variant',
     'classNames',
     'styles',
-    'ref'
+    'ref',
   ]);
 
   const ctx = usePopoverContext();
@@ -90,7 +90,7 @@ export const PopoverDropdown = factory<PopoverDropdownFactory>(_props => {
         }
       >
         {(transitionStyles) => (
-          <FocusTrap active={isOpened()} innerRef={mergedRef}>
+          <FocusTrap active={isOpened() && ctx.trapFocus} innerRef={mergedRef}>
             {(focusTrapProps) => (
               <Box
                 {...focusTrapProps}
@@ -152,7 +152,7 @@ export const PopoverDropdown = factory<PopoverDropdownFactory>(_props => {
               </Box>
             )}
           </FocusTrap>
-         )}
+        )}
       </Transition>
     </OptionalPortal>
   );

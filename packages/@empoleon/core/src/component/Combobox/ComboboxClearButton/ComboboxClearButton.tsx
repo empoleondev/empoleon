@@ -8,13 +8,7 @@ export interface ComboboxClearButtonProps extends InputClearButtonProps, Element
 }
 
 export function ComboboxClearButton(props: ComboboxClearButtonProps) {
-  const [local, others] = splitProps(props, [
-    'size',
-    'onMouseDown',
-    'onClick',
-    'onClear',
-    'ref'
-  ])
+  const [local, others] = splitProps(props, ['size', 'onMouseDown', 'onClick', 'onClear', 'ref']);
 
   return (
     <Input.ClearButton
@@ -24,14 +18,14 @@ export function ComboboxClearButton(props: ComboboxClearButtonProps) {
       {...others}
       onMouseDown={(event) => {
         event.preventDefault();
-        typeof local.onMouseDown === "function" && local.onMouseDown?.(event);
+        typeof local.onMouseDown === 'function' && local.onMouseDown?.(event);
       }}
       onClick={(event) => {
         local.onClear();
-        typeof local.onClick === "function" && local.onClick?.(event);
+        typeof local.onClick === 'function' && local.onClick?.(event);
       }}
     />
-  )
+  );
 }
 
 ComboboxClearButton.displayName = '@empoleon/core/ComboboxClearButton';

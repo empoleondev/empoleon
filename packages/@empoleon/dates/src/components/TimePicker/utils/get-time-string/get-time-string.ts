@@ -52,6 +52,13 @@ export function getTimeString(props: GetTimeStringInput) {
 
   return {
     valid: true,
-    value: convertTo24HourFormat({ hours: props.hours, minutes: props.minutes, seconds: props.seconds, amPm: props.amPm, amPmLabels: props.amPmLabels, withSeconds: props.withSeconds }),
+    value: convertTo24HourFormat({
+      hours: props.hours,
+      minutes: props.minutes,
+      seconds: props.seconds,
+      amPm: props.amPm,
+      amPmLabels: props.amPmLabels,
+      withSeconds: props.withSeconds,
+    }),
   };
 }

@@ -2,9 +2,9 @@ import { Accessor } from 'solid-js';
 import {
   ClassNames,
   createSafeContext,
-  GetStylesApi,
   EmpoleonRadius,
   EmpoleonShadow,
+  GetStylesApi,
   Styles,
 } from '../../core';
 import { ArrowPosition, FloatingPosition, FloatingStrategy } from '../../utils/Floating';

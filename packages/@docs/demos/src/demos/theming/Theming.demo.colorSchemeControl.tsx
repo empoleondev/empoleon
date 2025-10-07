@@ -66,8 +66,8 @@ function Demo() {
       size="xl"
       aria-label="Toggle color scheme"
     >
-      <IconSun class={cx(classes.icon, classes.light)} stroke='1.5' />
-      <IconMoon class={cx(classes.icon, classes.dark)} stroke='1.5' />
+      <IconSun class={cx(classes.icon, classes.light)} stroke="1.5" />
+      <IconMoon class={cx(classes.icon, classes.dark)} stroke="1.5" />
     </ActionIcon>
   );
 }

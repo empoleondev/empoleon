@@ -1,4 +1,4 @@
-import { createSignal, createMemo, Accessor } from 'solid-js';
+import { Accessor, createMemo, createSignal } from 'solid-js';
 
 export interface StateHistory<T> {
   history: T[];

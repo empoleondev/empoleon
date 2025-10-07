@@ -1,3 +1,4 @@
+import { createSignal, JSX, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
@@ -15,7 +16,6 @@ import {
   useStyles,
 } from '@empoleon/core';
 import classes from './DateInputMask.module.css';
-import { createSignal, JSX, splitProps } from 'solid-js';
 
 export type DateInputMaskStylesNames = 'fieldsRoot';
 export type DateInputMaskVariant = string;
@@ -109,7 +109,7 @@ export type DateInputMaskFactory = Factory<{
 
 const defaultProps: Partial<DateInputMaskProps> = {};
 
-export const DateInputMask = factory<DateInputMaskFactory>(_props => {
+export const DateInputMask = factory<DateInputMaskFactory>((_props) => {
   const props = useProps('DateInputMask', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -144,7 +144,7 @@ export const DateInputMask = factory<DateInputMaskFactory>(_props => {
     'onMouseDown',
     'onFocusCapture',
     'onBlurCapture',
-    'ref'
+    'ref',
   ]);
 
   const { resolvedClassNames, resolvedStyles } = useResolvedStylesApi<DateInputMaskFactory>({
@@ -204,18 +204,18 @@ export const DateInputMask = factory<DateInputMaskFactory>(_props => {
             styles={resolvedStyles}
             onMouseDown={(event) => {
               event.preventDefault();
-              typeof local.onMouseDown === "function" && local.onMouseDown?.(event);
+              typeof local.onMouseDown === 'function' && local.onMouseDown?.(event);
             }}
             onFocusCapture={(event) => {
               setDropdownOpened(true);
-              typeof local.onFocusCapture === "function" && local.onFocusCapture?.(event);
+              typeof local.onFocusCapture === 'function' && local.onFocusCapture?.(event);
             }}
             onBlurCapture={(event) => {
               setDropdownOpened(false);
-              typeof local.onBlurCapture === "function" && local.onBlurCapture?.(event);
+              typeof local.onBlurCapture === 'function' && local.onBlurCapture?.(event);
             }}
           >
-            <Box component='div' {...getStyles('fieldsRoot')} />
+            <Box component="div" {...getStyles('fieldsRoot')} />
           </InputBase>
         )}
       </Popover.Target>

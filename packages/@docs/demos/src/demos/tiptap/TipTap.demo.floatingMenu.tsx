@@ -1,5 +1,5 @@
-import { FloatingMenu, useEditor } from '@empoleon/solid-tiptap';
 import StarterKit from '@tiptap/starter-kit';
+import { FloatingMenu, useEditor } from '@empoleon/solid-tiptap';
 import { Link, RichTextEditor } from '@empoleon/tiptap';
 import { EmpoleonDemo } from '@empoleonx/demo';
 

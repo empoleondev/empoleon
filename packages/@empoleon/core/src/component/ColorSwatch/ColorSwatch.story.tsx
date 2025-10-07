@@ -1,6 +1,6 @@
 import { JSX } from 'solid-js';
-import { ColorSwatch } from './ColorSwatch';
 import { EmpoleonProvider } from '../../core';
+import { ColorSwatch } from './ColorSwatch';
 
 export default {
   title: 'ColorSwatch',
@@ -15,7 +15,7 @@ export default {
 
 export function Usage() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <ColorSwatch color="#ff00ff" />
       <ColorSwatch color="#ff00ff" unstyled />
       <ColorSwatch color="rgba(0, 56, 13, 0.2)" />

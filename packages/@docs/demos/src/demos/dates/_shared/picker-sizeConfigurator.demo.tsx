@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
-import { EmpoleonDemo } from '@empoleonx/demo';
 import { Component } from 'solid-js';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const getCodeTemplate = (component: string) =>
   `import dayjs from 'dayjs';

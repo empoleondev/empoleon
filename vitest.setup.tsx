@@ -1,7 +1,8 @@
 /* eslint-disable no-console */
 import '@testing-library/jest-dom';
-import { vi, expect } from 'vitest';
+
 import type { AxeResults } from 'axe-core';
+import { expect, vi } from 'vitest';
 
 // Your existing setup code...
 const { getComputedStyle } = window;
@@ -66,17 +67,22 @@ Object.defineProperty(window, 'Node', {
     }
   },
   writable: true,
-  configurable: true
+  configurable: true,
 });
 
 // Add isConnected to Node prototype if it doesn't exist
 if (!('isConnected' in window.Node.prototype)) {
   Object.defineProperty(window.Node.prototype, 'isConnected', {
-    get: function(): boolean {
+    get: function (): boolean {
       const element = this as any;
-      return !!(element.ownerDocument && element.ownerDocument.defaultView && element.ownerDocument.body && element.ownerDocument.body.contains(element));
+      return !!(
+        element.ownerDocument &&
+        element.ownerDocument.defaultView &&
+        element.ownerDocument.body &&
+        element.ownerDocument.body.contains(element)
+      );
     },
-    configurable: true
+    configurable: true,
   });
 }
 
@@ -86,7 +92,7 @@ if (typeof global !== 'undefined') {
     Object.defineProperty(global, 'Node', {
       value: window.Node,
       writable: true,
-      configurable: true
+      configurable: true,
     });
   } catch (error) {
     // If Node already exists and is not configurable, try to work around it
@@ -99,10 +105,15 @@ if (typeof global !== 'undefined') {
 // Additional axe-core fixes for jsdom
 if (!('isConnected' in window.Element.prototype)) {
   Object.defineProperty(window.Element.prototype, 'isConnected', {
-    get: function(): boolean {
-      return !!(this.ownerDocument && this.ownerDocument.defaultView && this.ownerDocument.body && this.ownerDocument.body.contains(this));
+    get: function (): boolean {
+      return !!(
+        this.ownerDocument &&
+        this.ownerDocument.defaultView &&
+        this.ownerDocument.body &&
+        this.ownerDocument.body.contains(this)
+      );
     },
-    configurable: true
+    configurable: true,
   });
 }
 
@@ -123,9 +134,12 @@ expect.extend({
       };
     }
 
-    const violationMessages = violations.map(violation =>
-      `${violation.id}: ${violation.description} (${violation.nodes.length} node(s))`
-    ).join('\n');
+    const violationMessages = violations
+      .map(
+        (violation) =>
+          `${violation.id}: ${violation.description} (${violation.nodes.length} node(s))`
+      )
+      .join('\n');
 
     return {
       pass: false,

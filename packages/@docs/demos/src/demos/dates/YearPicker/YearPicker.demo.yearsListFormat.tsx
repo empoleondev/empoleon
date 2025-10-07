@@ -1,6 +1,6 @@
+import { createSignal } from 'solid-js';
 import { YearPicker } from '@empoleon/dates';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal } from 'solid-js';
 
 const code = `
 import { useState } from 'react';

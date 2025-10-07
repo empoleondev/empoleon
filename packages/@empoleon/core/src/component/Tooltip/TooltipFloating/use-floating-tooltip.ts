@@ -1,4 +1,4 @@
-import { createSignal, createEffect, onCleanup, createMemo } from 'solid-js';
+import { createEffect, createMemo, createSignal, onCleanup } from 'solid-js';
 import { getOverflowAncestors, shift, useFloating } from '@empoleon/solid-floating-ui';
 import { FloatingPosition } from '../../../utils/Floating';
 
@@ -37,11 +37,19 @@ export function useFloatingTooltip<T extends HTMLElement = any>({
   });
 
   const horizontalOffset = createMemo(() =>
-    floatingHook.placement.includes('right') ? offset : floatingHook.placement.includes('left') ? offset * -1 : 0
+    floatingHook.placement.includes('right')
+      ? offset
+      : floatingHook.placement.includes('left')
+        ? offset * -1
+        : 0
   );
 
   const verticalOffset = createMemo(() =>
-    floatingHook.placement.includes('bottom') ? offset : floatingHook.placement.includes('top') ? offset * -1 : 0
+    floatingHook.placement.includes('bottom')
+      ? offset
+      : floatingHook.placement.includes('top')
+        ? offset * -1
+        : 0
   );
 
   const handleMouseMove = ({ clientX, clientY }: MouseEvent) => {
@@ -97,8 +105,12 @@ export function useFloatingTooltip<T extends HTMLElement = any>({
   });
 
   return {
-    get x() { return floatingHook.x; },
-    get y() { return floatingHook.y; },
+    get x() {
+      return floatingHook.x;
+    },
+    get y() {
+      return floatingHook.y;
+    },
     opened,
     setOpened,
     boundaryRef: setBoundaryRef,

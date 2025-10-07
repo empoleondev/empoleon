@@ -1,6 +1,6 @@
+import { createMemo, createSignal, For, Show } from 'solid-js';
 import { CheckIcon, Combobox, Group, Pill, PillsInput, useCombobox } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createMemo, createSignal, For, Show } from 'solid-js';
 
 const code = `
 import { createMemo, createSignal, For, Show } from 'solid-js';
@@ -110,9 +110,7 @@ function Demo() {
     setValue((current) => current.filter((v) => v !== val));
 
   const filteredOptions = createMemo(() =>
-    groceries.filter((item) =>
-      item.toLowerCase().includes(search().trim().toLowerCase())
-    )
+    groceries.filter((item) => item.toLowerCase().includes(search().trim().toLowerCase()))
   );
 
   return (

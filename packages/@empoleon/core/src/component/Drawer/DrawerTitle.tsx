@@ -19,7 +19,7 @@ export type DrawerTitleFactory = Factory<{
 
 const defaultProps: Partial<DrawerTitleProps> = {};
 
-export const DrawerTitle = factory<DrawerTitleFactory>(_props => {
+export const DrawerTitle = factory<DrawerTitleFactory>((_props) => {
   const props = useProps('DrawerTitle', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -27,7 +27,7 @@ export const DrawerTitle = factory<DrawerTitleFactory>(_props => {
     'style',
     'styles',
     'vars',
-    'ref'
+    'ref',
   ]);
 
   const ctx = useDrawerContext();
@@ -35,7 +35,12 @@ export const DrawerTitle = factory<DrawerTitleFactory>(_props => {
   return (
     <ModalBaseTitle
       ref={local.ref}
-      {...ctx.getStyles('title', { classNames: local.classNames, style: local.style, styles: local.styles, className: local.className })}
+      {...ctx.getStyles('title', {
+        classNames: local.classNames,
+        style: local.style,
+        styles: local.styles,
+        className: local.className,
+      })}
       {...others}
     />
   );

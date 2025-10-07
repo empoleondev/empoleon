@@ -1,4 +1,4 @@
-import { splitProps, JSX } from 'solid-js';
+import { JSX, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
@@ -43,7 +43,7 @@ const varsResolver = createVarsResolver<ButtonGroupFactory>((_, props) => ({
   group: { '--button-border-width': rem(props.borderWidth) },
 }));
 
-export const ButtonGroup = factory<ButtonGroupFactory>(_props => {
+export const ButtonGroup = factory<ButtonGroupFactory>((_props) => {
   const props = useProps('ButtonGroup', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'className',
@@ -57,7 +57,7 @@ export const ButtonGroup = factory<ButtonGroupFactory>(_props => {
     'variant',
     'mod',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<ButtonGroupFactory>({

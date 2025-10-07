@@ -105,7 +105,7 @@ function tests(mode: FormMode) {
       useForm({ mode, initialValues: { nested: { fruit: true, vegetable: 'potato' } } })
     );
 
-    hook.result.getInputProps('nested.fruit', { type: 'checkbox' }).onChange(false)
+    hook.result.getInputProps('nested.fruit', { type: 'checkbox' }).onChange(false);
     expect(hook.result.getValues()).toStrictEqual({
       nested: { fruit: false, vegetable: 'potato' },
     });
@@ -129,7 +129,7 @@ function tests(mode: FormMode) {
       })
     );
 
-    hook.result.getInputProps('nested.1.fruit', { type: 'checkbox' }).onChange(false)
+    hook.result.getInputProps('nested.1.fruit', { type: 'checkbox' }).onChange(false);
     expect(hook.result.getValues()).toStrictEqual({
       nested: [
         { fruit: true, vegetable: 'potato' },
@@ -149,9 +149,7 @@ function tests(mode: FormMode) {
   it('returns onFocus if withFocus is true', () => {
     const hook = renderHook(() => useForm({ mode, initialValues: { a: 1 } }));
     expect(typeof hook.result.getInputProps('a').onFocus).toBe('function');
-    expect(typeof hook.result.getInputProps('a', { withFocus: false }).onFocus).toBe(
-      'undefined'
-    );
+    expect(typeof hook.result.getInputProps('a', { withFocus: false }).onFocus).toBe('undefined');
   });
 }
 

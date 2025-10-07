@@ -12,7 +12,11 @@ describe('@empoleon/core/Tooltip', () => {
       opened: true,
       transitionProps: { duration: 0 },
       label: 'test-tooltip',
-      children: (props) => <button {...props} type="button">test-target</button>,
+      children: (props) => (
+        <button {...props} type="button">
+          test-target
+        </button>
+      ),
     }),
     mod: true,
     styleProps: true,
@@ -29,11 +33,15 @@ describe('@empoleon/core/Tooltip', () => {
   });
 
   it('shows tooltip when target element is hovered', async () => {
-    render(() =>
+    render(() => (
       <Tooltip label="test-tooltip" transitionProps={{ duration: 0 }}>
-        {(props) => <button type="button" {...props}>target</button>}
+        {(props) => (
+          <button type="button" {...props}>
+            target
+          </button>
+        )}
       </Tooltip>
-    );
+    ));
 
     await userEvent.hover(screen.getByRole('button'));
     expect(screen.getByText('test-tooltip')).toBeInTheDocument();
@@ -48,11 +56,15 @@ describe('@empoleon/core/Tooltip', () => {
   });
 
   it('shows tooltip by default', () => {
-    render(() =>
+    render(() => (
       <Tooltip label="test-tooltip" defaultOpened transitionProps={{ duration: 0 }}>
-        {(props) => <button type="button" {...props}>target</button>}
+        {(props) => (
+          <button type="button" {...props}>
+            target
+          </button>
+        )}
       </Tooltip>
-    );
+    ));
 
     expect(screen.getByText('test-tooltip')).toBeInTheDocument();
   });

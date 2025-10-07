@@ -1,7 +1,7 @@
+import { For } from 'solid-js';
 import { Button, Modal } from '@empoleon/core';
 import { useDisclosure } from '@empoleon/hooks';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { For } from 'solid-js';
 
 const code = `
 import { For } from 'solid-js';
@@ -33,9 +33,7 @@ function Demo() {
   return (
     <>
       <Modal opened={opened()} onClose={close} title="Header is sticky">
-        <For each={Array(100).fill(0)}>
-          {() => <p>Modal with scroll</p>}
-        </For>
+        <For each={Array(100).fill(0)}>{() => <p>Modal with scroll</p>}</For>
       </Modal>
 
       <Button variant="default" onClick={open}>

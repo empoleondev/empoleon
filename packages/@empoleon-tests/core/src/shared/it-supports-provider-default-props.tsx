@@ -4,7 +4,7 @@ import { getPropsValue } from './get-props-value';
 
 interface Options<Props = any> {
   component: (props: Props) => JSX.Element;
-  props: Props | (() => Props)
+  props: Props | (() => Props);
   providerName: string;
 }
 

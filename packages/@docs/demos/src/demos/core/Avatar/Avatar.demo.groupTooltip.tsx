@@ -57,7 +57,11 @@ function Demo() {
             </>
           }
         >
-          {(props) => <Avatar {...props} radius="xl">+2</Avatar>}
+          {(props) => (
+            <Avatar {...props} radius="xl">
+              +2
+            </Avatar>
+          )}
         </Tooltip>
       </Avatar.Group>
     </Tooltip.Group>

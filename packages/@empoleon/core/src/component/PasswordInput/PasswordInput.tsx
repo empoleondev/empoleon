@@ -1,4 +1,5 @@
 import cx from 'clsx';
+import { Component, splitProps } from 'solid-js';
 import { useId, useUncontrolled } from '@empoleon/hooks';
 import {
   Box,
@@ -19,7 +20,6 @@ import { __BaseInputProps, __InputStylesNames, Input, InputVariant } from '../In
 import { InputBase } from '../InputBase';
 import { PasswordToggleIcon } from './PasswordToggleIcon';
 import classes from './PasswordInput.module.css';
-import { Component, splitProps } from 'solid-js';
 
 export type PasswordInputStylesNames =
   | 'root'
@@ -70,7 +70,7 @@ const varsResolver = createVarsResolver<PasswordInputFactory>((_, props) => ({
   },
 }));
 
-export const PasswordInput = factory<PasswordInputFactory>(_props => {
+export const PasswordInput = factory<PasswordInputFactory>((_props) => {
   const props = useProps('PasswordInput', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -111,7 +111,7 @@ export const PasswordInput = factory<PasswordInputFactory>(_props => {
     'withErrorStyles',
     'mod',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const uuid = useId(local.id);
@@ -210,7 +210,7 @@ export const PasswordInput = factory<PasswordInputFactory>(_props => {
       attributes={local.attributes}
       {...getStyles('root')}
       {...styleProps}
-      {...local.wrapperProps as any}
+      {...(local.wrapperProps as any)}
     >
       <Input<'div'>
         component="div"
@@ -235,7 +235,8 @@ export const PasswordInput = factory<PasswordInputFactory>(_props => {
         withErrorStyles={local.withErrorStyles}
         attributes={local.attributes}
       >
-        <Box component='input'
+        <Box
+          component="input"
           required={local.required}
           data-invalid={!!local.error || undefined}
           data-with-left-section={!!local.leftSection || undefined}

@@ -1,10 +1,10 @@
 import { createSignal, JSX } from 'solid-js';
 
 export function getInputOnChange<T>(
-  setValue: (value: null | undefined | T | ((current: T) => T)) => void,
+  setValue: (value: null | undefined | T | ((current: T) => T)) => void
 ) {
   return (
-    val: null | undefined | T | Parameters<JSX.EventHandler<any, Event>>[0] | ((current: T) => T),
+    val: null | undefined | T | Parameters<JSX.EventHandler<any, Event>>[0] | ((current: T) => T)
   ) => {
     if (!val) {
       setValue(val as T);

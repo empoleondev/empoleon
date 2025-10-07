@@ -1,8 +1,8 @@
+import { createMemo, mergeProps, splitProps } from 'solid-js';
 import { BoxProps, ElementProps, Input, SegmentedControl } from '@empoleon/core';
 import { getControlLabel } from './get-control-label';
 import { SelectData, transformSelectData } from './transform-select-data';
 import { ConfiguratorControl } from './types';
-import { createMemo, mergeProps, splitProps } from 'solid-js';
 
 export type ConfiguratorSegmentedControlOptions = ConfiguratorControl<
   'segmented',
@@ -20,16 +20,13 @@ export interface ConfiguratorSegmentedControlProps
 }
 
 export function ConfiguratorSegmentedControl(props: ConfiguratorSegmentedControlProps) {
-  const [local, others] = splitProps(mergeProps({
-    ...props,
-    transformLabel: true,
-  }), [
-    'data',
-    'value',
-    'onChange',
-    'prop',
-    'transformLabel'
-  ]);
+  const [local, others] = splitProps(
+    mergeProps({
+      ...props,
+      transformLabel: true,
+    }),
+    ['data', 'value', 'onChange', 'prop', 'transformLabel']
+  );
 
   const reactiveValue = createMemo(() => props.value);
 

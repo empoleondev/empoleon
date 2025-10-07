@@ -1,4 +1,4 @@
-import { createSignal, createEffect, createMemo } from 'solid-js';
+import { createEffect, createMemo, createSignal } from 'solid-js';
 import type {
   TimePickerAmPmLabels,
   TimePickerFormat,
@@ -40,12 +40,13 @@ export function useTimePicker(props: UseTimePickerInput) {
   const [amPm, setAmPm] = createSignal<string | null>(parsedTime.amPm);
 
   const isClearable = createMemo(() => {
-    const hasValue = hours() !== null || minutes() !== null || (withSeconds && seconds() !== null) || (props.format === '12h' && amPm() !== null);
+    const hasValue =
+      hours() !== null ||
+      minutes() !== null ||
+      (withSeconds && seconds() !== null) ||
+      (props.format === '12h' && amPm() !== null);
 
-    return props.clearable &&
-      !props.readOnly &&
-      !props.disabled &&
-      hasValue;
+    return props.clearable && !props.readOnly && !props.disabled && hasValue;
   });
 
   const [hoursRef, setHoursRef] = createSignal<HTMLInputElement | undefined>();
@@ -72,9 +73,20 @@ export function useTimePicker(props: UseTimePickerInput) {
   };
 
   const handleTimeChange = (field: 'hours' | 'minutes' | 'seconds' | 'amPm', val: any) => {
-    const computedValue = { hours: hours(), minutes: minutes(), seconds: seconds(), amPm: amPm(), [field]: val };
+    const computedValue = {
+      hours: hours(),
+      minutes: minutes(),
+      seconds: seconds(),
+      amPm: amPm(),
+      [field]: val,
+    };
 
-    const timeString = getTimeString({ ...computedValue, format: props.format, withSeconds, amPmLabels: props.amPmLabels });
+    const timeString = getTimeString({
+      ...computedValue,
+      format: props.format,
+      withSeconds,
+      amPmLabels: props.amPmLabels,
+    });
 
     if (timeString.valid) {
       acceptChange = false;
@@ -105,7 +117,11 @@ export function useTimePicker(props: UseTimePickerInput) {
   const setTimeString = (timeString: string) => {
     acceptChange = false;
 
-    const parsedTime = getParsedTime({ time: timeString, amPmLabels: props.amPmLabels, format: props.format });
+    const parsedTime = getParsedTime({
+      time: timeString,
+      amPmLabels: props.amPmLabels,
+      format: props.format,
+    });
     setHours(parsedTime.hours);
     setMinutes(parsedTime.minutes);
     setSeconds(parsedTime.seconds);
@@ -152,8 +168,17 @@ export function useTimePicker(props: UseTimePickerInput) {
     event.preventDefault();
     const pastedValue = event.clipboardData?.getData('text');
     if (!pastedValue) return;
-    const parsedTime = (props.pasteSplit || getParsedTime)({ time: pastedValue, format: props.format, amPmLabels: props.amPmLabels });
-    const timeString = getTimeString({ ...parsedTime, format: props.format, withSeconds, amPmLabels: props.amPmLabels });
+    const parsedTime = (props.pasteSplit || getParsedTime)({
+      time: pastedValue,
+      format: props.format,
+      amPmLabels: props.amPmLabels,
+    });
+    const timeString = getTimeString({
+      ...parsedTime,
+      format: props.format,
+      withSeconds,
+      amPmLabels: props.amPmLabels,
+    });
     if (timeString.valid) {
       acceptChange = false;
       const clamped = clampTime(timeString.value, props.min || '00:00:00', props.max || '23:59:59');
@@ -187,7 +212,11 @@ export function useTimePicker(props: UseTimePickerInput) {
     }
 
     if (acceptChange && typeof props.value === 'string') {
-      const parsedTime = getParsedTime({ time: props.value || '', amPmLabels: props.amPmLabels, format: props.format });
+      const parsedTime = getParsedTime({
+        time: props.value || '',
+        amPmLabels: props.amPmLabels,
+        format: props.format,
+      });
 
       setHours(parsedTime.hours);
       setMinutes(parsedTime.minutes);

@@ -1,7 +1,7 @@
+import { For } from 'solid-js';
 import { Table } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
 import { elementsLong } from './_data';
-import { For } from 'solid-js';
 
 const code = `
 import { For } from 'solid-js';
@@ -39,7 +39,7 @@ function Demo() {
 
 function Demo() {
   return (
-    <Table.ScrollContainer minWidth='500px' maxHeight='300px'>
+    <Table.ScrollContainer minWidth="500px" maxHeight="300px">
       <Table>
         <Table.Thead>
           <Table.Tr>

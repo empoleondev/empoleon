@@ -1,5 +1,4 @@
 import { createMemo, JSX, splitProps } from 'solid-js';
-import { Editor } from '@empoleon/solid-tiptap';
 import {
   Box,
   BoxProps,
@@ -10,6 +9,7 @@ import {
   useProps,
   useStyles,
 } from '@empoleon/core';
+import { Editor } from '@empoleon/solid-tiptap';
 import { DEFAULT_LABELS, RichTextEditorLabels } from './labels';
 import { RichTextEditorProvider } from './RichTextEditor.context';
 import { RichTextEditorContent } from './RichTextEditorContent/RichTextEditorContent';
@@ -113,7 +113,7 @@ const defaultProps = {
   variant: 'default',
 } satisfies Partial<RichTextEditorProps>;
 
-export const RichTextEditor = factory<RichTextEditorFactory>(_props => {
+export const RichTextEditor = factory<RichTextEditorFactory>((_props) => {
   const props = useProps('RichTextEditor', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -130,7 +130,7 @@ export const RichTextEditor = factory<RichTextEditorFactory>(_props => {
     'children',
     'variant',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<RichTextEditorFactory>({

@@ -1,3 +1,4 @@
+import { splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
@@ -9,7 +10,6 @@ import {
 } from '@empoleon/core';
 import { useRichTextEditorContext } from '../RichTextEditor.context';
 import classes from '../RichTextEditor.module.css';
-import { splitProps } from 'solid-js';
 
 export type RichTextEditorControlsGroupStylesNames = 'controlsGroup';
 export interface RichTextEditorControlsGroupProps
@@ -24,7 +24,7 @@ export type RichTextEditorControlsGroupFactory = Factory<{
   compound: true;
 }>;
 
-export const RichTextEditorControlsGroup = factory<RichTextEditorControlsGroupFactory>(_props => {
+export const RichTextEditorControlsGroup = factory<RichTextEditorControlsGroupFactory>((_props) => {
   const props = useProps('RichTextEditorControlsGroup', null, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -33,14 +33,19 @@ export const RichTextEditorControlsGroup = factory<RichTextEditorControlsGroupFa
     'styles',
     'vars',
     'variant',
-    'ref'
+    'ref',
   ]);
   const ctx = useRichTextEditorContext();
   return (
     <Box
       ref={local.ref}
       variant={local.variant || ctx.variant}
-      {...ctx.getStyles('controlsGroup', { className: local.className, style: local.style, styles: local.styles, classNames: local.classNames })}
+      {...ctx.getStyles('controlsGroup', {
+        className: local.className,
+        style: local.style,
+        styles: local.styles,
+        classNames: local.classNames,
+      })}
       {...others}
     />
   );

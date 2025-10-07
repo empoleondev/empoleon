@@ -1,3 +1,4 @@
+import { splitProps } from 'solid-js';
 import { useMergedRef } from '@empoleon/hooks';
 import {
   BoxProps,
@@ -12,7 +13,6 @@ import { Popover } from '../../Popover';
 import { useMenuContext } from '../Menu.context';
 import { useSubMenuContext } from '../MenuSub/MenuSub.context';
 import classes from '../Menu.module.css';
-import { splitProps } from 'solid-js';
 
 export type MenuSubDropdownStylesNames = 'dropdown';
 
@@ -28,7 +28,7 @@ export type MenuSubDropdownFactory = Factory<{
   compound: true;
 }>;
 
-export const MenuSubDropdown = factory<MenuSubDropdownFactory>(_props => {
+export const MenuSubDropdown = factory<MenuSubDropdownFactory>((_props) => {
   const props = useProps('MenuSubDropdown', null, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -40,8 +40,8 @@ export const MenuSubDropdown = factory<MenuSubDropdownFactory>(_props => {
     'onMouseLeave',
     'onKeyDown',
     'children',
-    'ref'
-  ])
+    'ref',
+  ]);
 
   const wrapperRef: HTMLDivElement | null = null;
   const ctx = useMenuContext();

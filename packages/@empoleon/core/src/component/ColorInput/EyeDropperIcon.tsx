@@ -1,4 +1,4 @@
-import { JSX, splitProps } from "solid-js";
+import { JSX, splitProps } from 'solid-js';
 
 export function EyeDropperIcon(props: JSX.SvgSVGAttributes<SVGSVGElement>) {
   const [local, others] = splitProps(props, ['style']);

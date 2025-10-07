@@ -1,9 +1,9 @@
 import { IconCheck } from '@tabler/icons-solidjs';
-import { Tooltip } from '../Tooltip';
-import { Chip } from './Chip';
 import { For, JSX } from 'solid-js';
 import { EmpoleonProvider } from '../../core';
 import { Group } from '../Group';
+import { Tooltip } from '../Tooltip';
+import { Chip } from './Chip';
 
 export default {
   title: 'Chip',
@@ -18,7 +18,7 @@ export default {
 
 export function WithTooltip() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Tooltip label="Tooltip" refProp="rootRef" position="bottom-start">
         {(props) => (
           <Chip defaultChecked color="red" {...props}>
@@ -36,11 +36,11 @@ export function AutoContrast() {
   return (
     <div
       style={{
-        'display': 'flex',
+        display: 'flex',
         'flex-direction': 'column',
         'align-items': 'flex-start',
-        'gap': '10px',
-        'padding': '40px',
+        gap: '10px',
+        padding: '40px',
       }}
     >
       <For each={buttons}>
@@ -56,7 +56,7 @@ export function AutoContrast() {
 
 export function Usage() {
   return (
-    <div style={{ 'padding': '40px', 'display': 'flex', 'gap': '40px' }}>
+    <div style={{ padding: '40px', display: 'flex', gap: '40px' }}>
       <Chip type="checkbox" variant="light" defaultChecked>
         Light
       </Chip>
@@ -72,7 +72,7 @@ export function Usage() {
 
 export function Sizes() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Chip type="checkbox" size="xs">
         XS chip
       </Chip>
@@ -94,7 +94,7 @@ export function Sizes() {
 
 export function CustomIcon() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Chip type="checkbox" size="xs" icon={<IconCheck size={14} />}>
         XS chip
       </Chip>
@@ -138,7 +138,7 @@ export function ChipGroup() {
 
 export function Unstyled() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Chip type="checkbox" variant="light" unstyled>
         unstyled
       </Chip>

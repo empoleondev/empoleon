@@ -23,7 +23,7 @@ describe('@empoleon/dates/TimePicker', () => {
     refType: HTMLDivElement,
     displayName: '@empoleon/dates/TimePicker',
     stylesApiSelectors: ['root'],
-    selector: '.empoleon-TimePicker-root'
+    selector: '.empoleon-TimePicker-root',
   });
 
   it('manages focus properly (24h format)', async () => {
@@ -116,8 +116,8 @@ describe('@empoleon/dates/TimePicker', () => {
   });
 
   it('increments and decrements values with up/down arrow keys based on given step props (24h format)', async () => {
-    render(
-      () => <TimePicker
+    render(() => (
+      <TimePicker
         {...defaultProps}
         withSeconds
         format="24h"
@@ -125,7 +125,7 @@ describe('@empoleon/dates/TimePicker', () => {
         minutesStep={5}
         secondsStep={10}
       />
-    );
+    ));
 
     await userEvent.click(screen.getByLabelText('test-hours'));
     expect(screen.getByLabelText('test-hours')).toHaveFocus();
@@ -165,8 +165,8 @@ describe('@empoleon/dates/TimePicker', () => {
   });
 
   it('increments and decrements values with up/down arrow keys based on given step props (12h format)', async () => {
-    render(
-      () => <TimePicker
+    render(() => (
+      <TimePicker
         {...defaultProps}
         withSeconds
         format="12h"
@@ -174,7 +174,7 @@ describe('@empoleon/dates/TimePicker', () => {
         minutesStep={5}
         secondsStep={10}
       />
-    );
+    ));
 
     await userEvent.click(screen.getByLabelText('test-hours'));
     expect(screen.getByLabelText('test-hours')).toHaveFocus();
@@ -282,8 +282,8 @@ describe('@empoleon/dates/TimePicker', () => {
 
   it('clamps time based on the given min and max props (24h format)', async () => {
     const spy = vi.fn();
-    render(
-      () => <TimePicker
+    render(() => (
+      <TimePicker
         {...defaultProps}
         withSeconds
         format="24h"
@@ -291,7 +291,7 @@ describe('@empoleon/dates/TimePicker', () => {
         max="18:30"
         onChange={spy}
       />
-    );
+    ));
 
     await userEvent.type(screen.getByLabelText('test-hours'), '7');
     await userEvent.type(screen.getByLabelText('test-minutes'), '30');
@@ -311,8 +311,8 @@ describe('@empoleon/dates/TimePicker', () => {
 
   it('clamps time based on the given min and max props (12h format)', async () => {
     const spy = vi.fn();
-    render(
-      () => <TimePicker
+    render(() => (
+      <TimePicker
         {...defaultProps}
         withSeconds
         format="12h"
@@ -320,7 +320,7 @@ describe('@empoleon/dates/TimePicker', () => {
         max="18:30"
         onChange={spy}
       />
-    );
+    ));
 
     await userEvent.type(screen.getByLabelText('test-hours'), '7');
     await userEvent.type(screen.getByLabelText('test-minutes'), '30');
@@ -370,9 +370,9 @@ describe('@empoleon/dates/TimePicker', () => {
 
   it('clear input when the clear button is clicked', async () => {
     const spy = vi.fn();
-    render(
-      () => <TimePicker {...defaultProps} clearable withSeconds defaultValue="12:34:55" onChange={spy} />
-    );
+    render(() => (
+      <TimePicker {...defaultProps} clearable withSeconds defaultValue="12:34:55" onChange={spy} />
+    ));
     expect(screen.getByLabelText('test-hours')).toHaveValue('12');
     expect(screen.getByLabelText('test-minutes')).toHaveValue('34');
     expect(screen.getByLabelText('test-seconds')).toHaveValue('55');
@@ -386,9 +386,9 @@ describe('@empoleon/dates/TimePicker', () => {
 
   it('clears partial input value when the clear button is clicked', async () => {
     const spy = vi.fn();
-    render(
-      () => <TimePicker {...defaultProps} clearable withSeconds defaultValue="12:34" onChange={spy} />
-    );
+    render(() => (
+      <TimePicker {...defaultProps} clearable withSeconds defaultValue="12:34" onChange={spy} />
+    ));
     expect(screen.getByLabelText('test-hours')).toHaveValue('12');
     expect(screen.getByLabelText('test-minutes')).toHaveValue('34');
     expect(screen.getByLabelText('test-seconds')).toHaveValue('');
@@ -441,7 +441,9 @@ describe('@empoleon/dates/TimePicker', () => {
   });
 
   it('correctly handles disabled prop', async () => {
-    const { rerender } = render(() => <TimePicker {...defaultProps} withSeconds disabled format="24h" />);
+    const { rerender } = render(() => (
+      <TimePicker {...defaultProps} withSeconds disabled format="24h" />
+    ));
 
     expect(screen.getByLabelText('test-hours')).toBeDisabled();
     expect(screen.getByLabelText('test-minutes')).toBeDisabled();
@@ -455,15 +457,15 @@ describe('@empoleon/dates/TimePicker', () => {
   });
 
   it('sets value, name and form on the hidden input correctly', () => {
-    render(
-      () => <TimePicker
+    render(() => (
+      <TimePicker
         {...defaultProps}
         withSeconds
         value="12:34:45"
         name="test-name"
         form="test-form"
       />
-    );
+    ));
     const hiddenInput = document.querySelector('input[type="hidden"]');
     expect(hiddenInput).toHaveAttribute('value', '12:34:45');
     expect(hiddenInput).toHaveAttribute('name', 'test-name');
@@ -471,33 +473,33 @@ describe('@empoleon/dates/TimePicker', () => {
   });
 
   it('allows passing props down to hidden input with hiddenInputProps prop', () => {
-    render(
-      () => <TimePicker
+    render(() => (
+      <TimePicker
         {...defaultProps}
         withSeconds
         value="12:34:45"
         hiddenInputProps={{ 'data-test': 'test' }}
       />
-    );
+    ));
     expect(document.querySelector('input[type="hidden"]')).toHaveAttribute('data-test', 'test');
   });
 
   it('allows passing props down to clear button with clearButtonProps prop', () => {
-    render(
-      () => <TimePicker
+    render(() => (
+      <TimePicker
         {...defaultProps}
         withSeconds
         clearable
         defaultValue="12:34:45"
         clearButtonProps={{ 'data-test': 'test', 'aria-label': 'test-clear' }}
       />
-    );
+    ));
     expect(screen.getByLabelText('test-clear')).toHaveAttribute('data-test', 'test');
   });
 
   it('allows passing props down to hours/minutes/seconds/am-pm inputs with props', () => {
-    render(
-      () => <TimePicker
+    render(() => (
+      <TimePicker
         {...defaultProps}
         withSeconds
         defaultValue="20:34:45"
@@ -507,7 +509,7 @@ describe('@empoleon/dates/TimePicker', () => {
         secondsInputProps={{ 'data-test': 'seconds' }}
         amPmSelectProps={{ 'data-test': 'am-pm' }}
       />
-    );
+    ));
 
     expect(screen.getByLabelText('test-hours')).toHaveAttribute('data-test', 'hours');
     expect(screen.getByLabelText('test-minutes')).toHaveAttribute('data-test', 'minutes');
@@ -518,15 +520,15 @@ describe('@empoleon/dates/TimePicker', () => {
   it('allows customizing paste split behavior with pasteSplit prop', async () => {
     const spy = vi.fn();
     const customSplit = () => ({ hours: 1, minutes: 34, seconds: 53, amPm: null });
-    render(
-      () => <TimePicker
+    render(() => (
+      <TimePicker
         {...defaultProps}
         withSeconds
         format="24h"
         pasteSplit={customSplit}
         onChange={spy}
       />
-    );
+    ));
 
     await userEvent.click(screen.getByLabelText('test-hours'));
     await userEvent.paste('123456');
@@ -570,17 +572,25 @@ describe('@empoleon/dates/TimePicker', () => {
     let secondsRef: HTMLInputElement | undefined;
     let amPmRef: HTMLInputElement | HTMLSelectElement | undefined;
 
-    render(
-      () => <TimePicker
+    render(() => (
+      <TimePicker
         {...defaultProps}
         format="12h"
         withSeconds
-        hoursRef={(el) => { hoursRef = el; }}
-        minutesRef={(el) => { minutesRef = el; }}
-        secondsRef={(el) => { secondsRef = el; }}
-        amPmRef={(el) => { amPmRef = el; }}
+        hoursRef={(el) => {
+          hoursRef = el;
+        }}
+        minutesRef={(el) => {
+          minutesRef = el;
+        }}
+        secondsRef={(el) => {
+          secondsRef = el;
+        }}
+        amPmRef={(el) => {
+          amPmRef = el;
+        }}
       />
-    );
+    ));
 
     expect(hoursRef).toBe(screen.getByLabelText('test-hours'));
     expect(minutesRef).toBe(screen.getByLabelText('test-minutes'));

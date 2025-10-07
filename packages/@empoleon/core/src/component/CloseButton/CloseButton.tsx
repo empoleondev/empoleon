@@ -1,11 +1,11 @@
-import { splitProps, JSX } from 'solid-js';
+import { JSX, splitProps } from 'solid-js';
 import {
   BoxProps,
   createVarsResolver,
-  getRadius,
-  getSize,
   EmpoleonRadius,
   EmpoleonSize,
+  getRadius,
+  getSize,
   polymorphicFactory,
   PolymorphicFactory,
   rem,
@@ -73,7 +73,7 @@ const varsResolver = createVarsResolver<CloseButtonFactory>((_, props) => ({
   },
 }));
 
-export const CloseButton = polymorphicFactory<CloseButtonFactory>(_props => {
+export const CloseButton = polymorphicFactory<CloseButtonFactory>((_props) => {
   const props = useProps('CloseButton', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'iconSize',
@@ -92,7 +92,7 @@ export const CloseButton = polymorphicFactory<CloseButtonFactory>(_props => {
     'mod',
     'attributes',
     '__staticSelector',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<CloseButtonFactory>({
@@ -116,8 +116,11 @@ export const CloseButton = polymorphicFactory<CloseButtonFactory>(_props => {
       unstyled={local.unstyled}
       variant={local.variant}
       disabled={local.disabled}
-      mod={[{ disabled: local.disabled || local["data-disabled"] }, local.mod]}
-      {...getStyles('root', { variant: local.variant, active: !local.disabled && !local["data-disabled"] })}
+      mod={[{ disabled: local.disabled || local['data-disabled'] }, local.mod]}
+      {...getStyles('root', {
+        variant: local.variant,
+        active: !local.disabled && !local['data-disabled'],
+      })}
       tabIndex={-1}
     >
       {local.icon || <CloseIcon />}

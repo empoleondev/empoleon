@@ -17,9 +17,10 @@ export function useFavicon(url: Accessor<string> | string): void {
       return;
     }
 
-    const targetDocument = window.parent && window.parent !== window && window.parent.document
-      ? window.parent.document
-      : document;
+    const targetDocument =
+      window.parent && window.parent !== window && window.parent.document
+        ? window.parent.document
+        : document;
 
     const existingElements = targetDocument.querySelectorAll<HTMLLinkElement>('link[rel*="icon"]');
 

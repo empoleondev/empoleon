@@ -1,7 +1,7 @@
 import { fireEvent } from '@solidjs/testing-library';
-import { render } from '../render';
 import { JSX } from 'solid-js';
 import { vi } from 'vitest';
+import { render } from '../render';
 
 interface Options<Props = any> {
   component: (props: Props) => JSX.Element;
@@ -17,9 +17,9 @@ export function itSupportsFocusEvents<Props>(
     const onFocus = vi.fn();
     const onBlur = vi.fn();
 
-    const { container } = render(
-      () => <options.component {...options.props} onFocus={onFocus} onBlur={onBlur} />
-    );
+    const { container } = render(() => (
+      <options.component {...options.props} onFocus={onFocus} onBlur={onBlur} />
+    ));
 
     fireEvent.focus(container.querySelector(options.selector || '*:not(style)')!);
     expect(onFocus).toHaveBeenCalled();

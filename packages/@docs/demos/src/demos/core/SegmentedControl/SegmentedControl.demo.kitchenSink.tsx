@@ -10,9 +10,11 @@ function Demo() {
 `;
 
 function Wrapper(props: any) {
-  return <Box w={500} style={{ "text-align": "center" }}>
-    <SegmentedControl data={['React', 'Angular', 'Vue', 'Svelte']} {...props} />
-  </Box>;
+  return (
+    <Box w={500} style={{ 'text-align': 'center' }}>
+      <SegmentedControl data={['React', 'Angular', 'Vue', 'Svelte']} {...props} />
+    </Box>
+  );
 }
 
 export const kitchenSink: EmpoleonDemo = {
@@ -25,43 +27,43 @@ export const kitchenSink: EmpoleonDemo = {
       prop: 'color',
       type: 'color',
       initialValue: 'blue',
-      libraryValue: null
+      libraryValue: null,
     },
     {
       prop: 'size',
       type: 'size',
       initialValue: 'md',
-      libraryValue: 'md'
+      libraryValue: 'md',
     },
     {
       prop: 'radius',
       type: 'size',
       initialValue: 'sm',
-      libraryValue: 'sm'
+      libraryValue: 'sm',
     },
     {
       prop: 'fullWidth',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'disabled',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'readOnly',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'withItemsBorders',
       type: 'boolean',
       initialValue: true,
-      libraryValue: true
+      libraryValue: true,
     },
     {
       prop: 'orientation',
@@ -80,7 +82,7 @@ export const kitchenSink: EmpoleonDemo = {
       libraryValue: 200,
       min: 0,
       max: 1000,
-      step: 50
+      step: 50,
     },
     {
       prop: 'transitionTimingFunction',
@@ -99,7 +101,7 @@ export const kitchenSink: EmpoleonDemo = {
       prop: 'autoContrast',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
   ],
 };

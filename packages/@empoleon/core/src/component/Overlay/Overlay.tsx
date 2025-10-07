@@ -1,19 +1,11 @@
-const originalWarn = console.warn;
-  console.warn = (message, ...args) => {
-    if (typeof message === 'string' && message.includes('computations created outside a `createRoot` or `render` will never be disposed')) {
-      return;
-    }
-    originalWarn(message, ...args);
-  };
-
-import { splitProps, JSX } from 'solid-js';
+import { JSX, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
   createVarsResolver,
+  EmpoleonRadius,
   getDefaultZIndex,
   getRadius,
-  EmpoleonRadius,
   polymorphicFactory,
   PolymorphicFactory,
   rem,
@@ -23,6 +15,19 @@ import {
   useStyles,
 } from '../../core';
 import classes from './Overlay.module.css';
+
+const originalWarn = console.warn;
+console.warn = (message, ...args) => {
+  if (
+    typeof message === 'string' &&
+    message.includes(
+      'computations created outside a `createRoot` or `render` will never be disposed'
+    )
+  ) {
+    return;
+  }
+  originalWarn(message, ...args);
+};
 
 export type OverlayStylesNames = 'root';
 export type OverlayCssVariables = {
@@ -70,22 +75,20 @@ const defaultProps: Partial<OverlayProps> = {
   zIndex: getDefaultZIndex('modal'),
 };
 
-const varsResolver = createVarsResolver<OverlayFactory>(
-  (_, props) => ({
-    root: {
-      '--overlay-bg':
-        props.gradient ||
-        ((props.color !== undefined || props.backgroundOpacity !== undefined) &&
-          rgba(props.color || '#000', props.backgroundOpacity ?? 0.6)) ||
-        undefined,
-      '--overlay-filter': props.blur ? `blur(${rem(props.blur)})` : undefined,
-      '--overlay-radius': props.radius === undefined ? undefined : getRadius(props.radius),
-      '--overlay-z-index': props.zIndex?.toString(),
-    },
-  })
-);
+const varsResolver = createVarsResolver<OverlayFactory>((_, props) => ({
+  root: {
+    '--overlay-bg':
+      props.gradient ||
+      ((props.color !== undefined || props.backgroundOpacity !== undefined) &&
+        rgba(props.color || '#000', props.backgroundOpacity ?? 0.6)) ||
+      undefined,
+    '--overlay-filter': props.blur ? `blur(${rem(props.blur)})` : undefined,
+    '--overlay-radius': props.radius === undefined ? undefined : getRadius(props.radius),
+    '--overlay-z-index': props.zIndex?.toString(),
+  },
+}));
 
-export const Overlay = polymorphicFactory<OverlayFactory>(_props => {
+export const Overlay = polymorphicFactory<OverlayFactory>((_props) => {
   const props = useProps('Overlay', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -105,7 +108,7 @@ export const Overlay = polymorphicFactory<OverlayFactory>(_props => {
     'backgroundOpacity',
     'mod',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<OverlayFactory>({
@@ -123,7 +126,12 @@ export const Overlay = polymorphicFactory<OverlayFactory>(_props => {
   });
 
   return (
-    <Box ref={local.ref} {...getStyles('root')} mod={[{ center: local.center, fixed: local.fixed }, local.mod]} {...others}>
+    <Box
+      ref={local.ref}
+      {...getStyles('root')}
+      mod={[{ center: local.center, fixed: local.fixed }, local.mod]}
+      {...others}
+    >
       {local.children}
     </Box>
   );

@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { createSignal, createEffect, createMemo } from 'solid-js';
+import { createEffect, createMemo, createSignal } from 'solid-js';
 import { useWindowEvent } from '../use-window-event/use-window-event';
 
 export type StorageType = 'localStorage' | 'sessionStorage';
@@ -161,11 +161,11 @@ export function createStorage<T>(type: StorageType, hookName: string) {
       val !== undefined && setStorageValue()(val);
     });
 
-    return [() => value() === undefined ? defaultValue : value(), setStorageValue(), removeStorageValue()] as [
-      () => T,
-      (val: T | ((prevState: T) => T)) => void,
-      () => void,
-    ];
+    return [
+      () => (value() === undefined ? defaultValue : value()),
+      setStorageValue(),
+      removeStorageValue(),
+    ] as [() => T, (val: T | ((prevState: T) => T)) => void, () => void];
   };
 }
 

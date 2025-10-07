@@ -1,5 +1,10 @@
 import { createSignal, For, JSX, Show, splitProps } from 'solid-js';
-import { normalizeRadialValue, useMergedRef, useRadialMove, useUncontrolled } from '@empoleon/hooks';
+import {
+  normalizeRadialValue,
+  useMergedRef,
+  useRadialMove,
+  useUncontrolled,
+} from '@empoleon/hooks';
 import {
   Box,
   BoxProps,
@@ -92,7 +97,7 @@ const varsResolver = createVarsResolver<AngleSliderFactory>((_, props) => ({
   },
 }));
 
-export const AngleSlider = factory<AngleSliderFactory>(_props => {
+export const AngleSlider = factory<AngleSliderFactory>((_props) => {
   const props = useProps('AngleSlider', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -122,7 +127,7 @@ export const AngleSlider = factory<AngleSliderFactory>(_props => {
     'onScrubEnd',
     'mod',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const [rootRef, setRootRef] = createSignal<HTMLDivElement | null>(null);
@@ -223,23 +228,26 @@ export const AngleSlider = factory<AngleSliderFactory>(_props => {
       {...others}
     >
       <Show when={local.marks && local.marks.length > 0}>
-        <Box component='div' {...getStyles('marks')}>
-          <For each={local.marks}>{(mark) => (
-            <Box component='div'
-              {...getStyles('mark', { style: { '--angle': `${mark.value}deg` } })}
-              data-label={mark.label || undefined}
-            />
-          )}
+        <Box component="div" {...getStyles('marks')}>
+          <For each={local.marks}>
+            {(mark) => (
+              <Box
+                component="div"
+                {...getStyles('mark', { style: { '--angle': `${mark.value}deg` } })}
+                data-label={mark.label || undefined}
+              />
+            )}
           </For>
         </Box>
       </Show>
 
       <Show when={local.withLabel}>
-        <Box component='div' {...getStyles('label')}>
+        <Box component="div" {...getStyles('label')}>
           {typeof local.formatLabel === 'function' ? local.formatLabel(_value()) : _value()}
         </Box>
       </Show>
-      <Box component='div'
+      <Box
+        component="div"
         tabIndex={local.tabIndex ?? (local.disabled ? -1 : 0)}
         role="slider"
         aria-valuemax={360}

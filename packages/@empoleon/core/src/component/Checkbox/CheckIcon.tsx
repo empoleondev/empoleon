@@ -12,9 +12,14 @@ export interface CheckIconProps extends JSX.SvgSVGAttributes<SVGSVGElement> {
 
 export function CheckIcon(props: CheckIconProps) {
   const [local, others] = splitProps(props, ['size', 'style']);
-  const style = () => local.size !== undefined
-    ? { width: rem(local.size), height: rem(local.size), ...(typeof local.style === 'object' && local.style !== null ? local.style : {}) }
-    : local.style;
+  const style = () =>
+    local.size !== undefined
+      ? {
+          width: rem(local.size),
+          height: rem(local.size),
+          ...(typeof local.style === 'object' && local.style !== null ? local.style : {}),
+        }
+      : local.style;
 
   return (
     <svg
@@ -39,10 +44,7 @@ export function CheckboxIcon(props: CheckboxIconProps) {
   const [local, others] = splitProps(props, ['indeterminate']);
 
   return (
-    <Show
-      when={local.indeterminate}
-      fallback={<CheckIcon {...others} />}
-    >
+    <Show when={local.indeterminate} fallback={<CheckIcon {...others} />}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"

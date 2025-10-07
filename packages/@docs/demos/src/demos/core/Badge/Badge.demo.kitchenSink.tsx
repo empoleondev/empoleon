@@ -1,7 +1,7 @@
+import { IconAt, IconX } from '@tabler/icons-solidjs';
+import { createEffect, createSignal, Show } from 'solid-js';
 import { Badge, BadgeProps, Box } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { IconAt, IconX } from '@tabler/icons-solidjs';
-import { createSignal, createEffect, Show } from 'solid-js';
 
 const code = `
 import { createSignal, createEffect, Show } from 'solid-js';
@@ -27,11 +27,13 @@ function Demo() {
 }
 `;
 
-function Demo(props: BadgeProps & {
-  showLeftSection?: boolean;
-  showRightSection?: boolean;
-  badgeText?: string;
-}) {
+function Demo(
+  props: BadgeProps & {
+    showLeftSection?: boolean;
+    showRightSection?: boolean;
+    badgeText?: string;
+  }
+) {
   const [showLeft, setShowLeft] = createSignal(props.showLeftSection || false);
   const [showRight, setShowRight] = createSignal(props.showRightSection || false);
 
@@ -40,16 +42,14 @@ function Demo(props: BadgeProps & {
     setShowRight(props.showRightSection || false);
   });
 
-  const leftSection = () => showLeft() ? <IconAt style={{ width: '12px', height: '12px' }} /> : undefined;
-  const rightSection = () => showRight() ? <IconX style={{ width: '10px', height: '10px' }} /> : undefined;
+  const leftSection = () =>
+    showLeft() ? <IconAt style={{ width: '12px', height: '12px' }} /> : undefined;
+  const rightSection = () =>
+    showRight() ? <IconX style={{ width: '10px', height: '10px' }} /> : undefined;
 
   return (
     <div style={{ width: '400px', margin: '0 auto', display: 'flex', 'justify-content': 'center' }}>
-      <Badge
-        {...props}
-        leftSection={leftSection()}
-        rightSection={rightSection()}
-      >
+      <Badge {...props} leftSection={leftSection()} rightSection={rightSection()}>
         {props.badgeText || 'Badge Text'}
       </Badge>
     </div>
@@ -82,55 +82,55 @@ export const kitchenSink: EmpoleonDemo = {
       prop: 'color',
       type: 'color',
       initialValue: 'blue',
-      libraryValue: 'blue'
+      libraryValue: 'blue',
     },
     {
       prop: 'size',
       type: 'size',
       initialValue: 'md',
-      libraryValue: 'md'
+      libraryValue: 'md',
     },
     {
       prop: 'radius',
       type: 'size',
       initialValue: 'xl',
-      libraryValue: 'xl'
+      libraryValue: 'xl',
     },
     {
       prop: 'circle',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'fullWidth',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'autoContrast',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'showLeftSection',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'showRightSection',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'badgeText',
       type: 'string',
       initialValue: 'Badge Text',
-      libraryValue: 'Badge Text'
+      libraryValue: 'Badge Text',
     },
   ],
 };

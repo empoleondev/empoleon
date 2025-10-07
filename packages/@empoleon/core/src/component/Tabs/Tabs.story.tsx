@@ -1,8 +1,7 @@
 import { IconPackage } from '@tabler/icons-solidjs';
-import { Tabs, TabsProps } from './Tabs';
-import { JSX } from 'solid-js';
+import { createSignal, Index, JSX } from 'solid-js';
 import { EmpoleonProvider } from '../../core';
-import { createSignal, Index } from 'solid-js';
+import { Tabs, TabsProps } from './Tabs';
 
 export default {
   title: 'Tabs',
@@ -19,7 +18,7 @@ const Wrapper = (props: TabsProps) => <Tabs maw={500} mx="auto" mt={40} {...prop
 
 export function Horizontal() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Tabs defaultValue="react" orientation="horizontal">
         <>
           <Tabs.List>
@@ -55,34 +54,36 @@ export function Horizontal() {
 export function DefaultVariant() {
   return (
     <div>
-      <Wrapper defaultValue="react">{
-        <>
-          <Tabs.List>
-            <Tabs.Tab
-              value="react"
-              leftSection={<IconPackage size={16} />}
-              rightSection={<IconPackage size={16} />}
-            >
-              React
-            </Tabs.Tab>
-            <Tabs.Tab value="sv">Svelte</Tabs.Tab>
-            <Tabs.Tab value="ng">Wrapped tab</Tabs.Tab>
-            <Tabs.Tab value="ds" disabled>
-              Disabled
-            </Tabs.Tab>
-          </Tabs.List>
+      <Wrapper defaultValue="react">
+        {
+          <>
+            <Tabs.List>
+              <Tabs.Tab
+                value="react"
+                leftSection={<IconPackage size={16} />}
+                rightSection={<IconPackage size={16} />}
+              >
+                React
+              </Tabs.Tab>
+              <Tabs.Tab value="sv">Svelte</Tabs.Tab>
+              <Tabs.Tab value="ng">Wrapped tab</Tabs.Tab>
+              <Tabs.Tab value="ds" disabled>
+                Disabled
+              </Tabs.Tab>
+            </Tabs.List>
 
-          <Tabs.Panel value="react" pr="sm">
-            React Panel
-          </Tabs.Panel>
-          <Tabs.Panel value="sv" pr="sm">
-            Svelte Panel
-          </Tabs.Panel>
-          <Tabs.Panel value="ng" pr="sm">
-            Angular Panel
-          </Tabs.Panel>
-        </>
-      }</Wrapper>
+            <Tabs.Panel value="react" pr="sm">
+              React Panel
+            </Tabs.Panel>
+            <Tabs.Panel value="sv" pr="sm">
+              Svelte Panel
+            </Tabs.Panel>
+            <Tabs.Panel value="ng" pr="sm">
+              Angular Panel
+            </Tabs.Panel>
+          </>
+        }
+      </Wrapper>
 
       <Wrapper defaultValue="react" inverted>
         <>
@@ -393,7 +394,7 @@ export function PillsVariant() {
         orientation="vertical"
         placement="right"
       >
-       <>
+        <>
           <Tabs.List>
             <Tabs.Tab
               value="react"
@@ -486,38 +487,40 @@ export const NoKeyboardActivation = () => (
   </Wrapper>
 );
 
-export const NoDefaultValue = () => <Wrapper defaultValue={null}>
-  <>
-    <Tabs.List>
-      <Tabs.Tab
-        value="react"
-        leftSection={<IconPackage size={16} />}
-        rightSection={<IconPackage size={16} />}
-      >
-        React
-      </Tabs.Tab>
-      <Tabs.Tab value="sv">Svelte</Tabs.Tab>
-      <Tabs.Tab value="ng">Wrapped tab</Tabs.Tab>
-      <Tabs.Tab value="ds" disabled>
-        Disabled
-      </Tabs.Tab>
-    </Tabs.List>
+export const NoDefaultValue = () => (
+  <Wrapper defaultValue={null}>
+    <>
+      <Tabs.List>
+        <Tabs.Tab
+          value="react"
+          leftSection={<IconPackage size={16} />}
+          rightSection={<IconPackage size={16} />}
+        >
+          React
+        </Tabs.Tab>
+        <Tabs.Tab value="sv">Svelte</Tabs.Tab>
+        <Tabs.Tab value="ng">Wrapped tab</Tabs.Tab>
+        <Tabs.Tab value="ds" disabled>
+          Disabled
+        </Tabs.Tab>
+      </Tabs.List>
 
-    <Tabs.Panel value="react" pr="sm">
-      React Panel
-    </Tabs.Panel>
-    <Tabs.Panel value="sv" pr="sm">
-      Svelte Panel
-    </Tabs.Panel>
-    <Tabs.Panel value="ng" pr="sm">
-      Angular Panel
-    </Tabs.Panel>
-  </>
-</Wrapper>;
+      <Tabs.Panel value="react" pr="sm">
+        React Panel
+      </Tabs.Panel>
+      <Tabs.Panel value="sv" pr="sm">
+        Svelte Panel
+      </Tabs.Panel>
+      <Tabs.Panel value="ng" pr="sm">
+        Angular Panel
+      </Tabs.Panel>
+    </>
+  </Wrapper>
+);
 
 export const AllowDeactivation = () => (
   <Wrapper defaultValue="react" allowTabDeactivation>
-   <>
+    <>
       <Tabs.List>
         <Tabs.Tab
           value="react"
@@ -600,7 +603,7 @@ export const Grow = () => (
 );
 
 export const Variants = () => (
-  <div style={{ 'max-width': '500px', 'padding': '40px' }}>
+  <div style={{ 'max-width': '500px', padding: '40px' }}>
     <Wrapper defaultValue="react" variant="default" mt={10} mb={50} radius="md">
       <>
         <Tabs.List>
@@ -691,7 +694,7 @@ export const Variants = () => (
 );
 
 export const VerticalVariants = () => (
-  <div style={{ 'max-width': '600px', 'padding': '40px' }}>
+  <div style={{ 'max-width': '600px', padding: '40px' }}>
     <Wrapper
       defaultValue="react"
       orientation="vertical"
@@ -778,7 +781,7 @@ export const VerticalVariants = () => (
 );
 
 export const VerticalPlacement = () => (
-  <div style={{ 'max-width': '500px', 'padding': '40px' }}>
+  <div style={{ 'max-width': '500px', padding: '40px' }}>
     <Wrapper
       defaultValue="react"
       orientation="vertical"
@@ -931,27 +934,20 @@ export const Unstyled = () => (
 
 export const DynamicTabs = () => {
   const [count, setCount] = createSignal(1);
-  const list = () => Array(count())
-    .fill(0)
-    .map((_, index) => index);
+  const list = () =>
+    Array(count())
+      .fill(0)
+      .map((_, index) => index);
 
   return (
     <Tabs>
       <Tabs.List>
         <Index each={list()}>
-          {(item) => (
-            <Tabs.Tab value={item().toString()}>
-              Tab {item()}
-            </Tabs.Tab>
-          )}
+          {(item) => <Tabs.Tab value={item().toString()}>Tab {item()}</Tabs.Tab>}
         </Index>
       </Tabs.List>
       <Index each={list()}>
-        {(item) => (
-          <Tabs.Panel value={item().toString()}>
-            Panel {item()}
-          </Tabs.Panel>
-        )}
+        {(item) => <Tabs.Panel value={item().toString()}>Panel {item()}</Tabs.Panel>}
       </Index>
       <button type="button" onClick={() => setCount(count() + 1)}>
         Add

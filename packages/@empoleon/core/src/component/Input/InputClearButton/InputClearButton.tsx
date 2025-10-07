@@ -2,9 +2,9 @@ import { splitProps } from 'solid-js';
 import {
   BoxProps,
   ElementProps,
+  EmpoleonSize,
   factory,
   Factory,
-  EmpoleonSize,
   StylesApiProps,
   useProps,
   useResolvedStylesApi,
@@ -26,7 +26,7 @@ export type InputClearButtonFactory = Factory<{
   stylesNames: CloseButtonStylesNames;
 }>;
 
-export const InputClearButton = factory<InputClearButtonFactory>(_props => {
+export const InputClearButton = factory<InputClearButtonFactory>((_props) => {
   const props = useProps('InputClearButton', null, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -34,7 +34,7 @@ export const InputClearButton = factory<InputClearButtonFactory>(_props => {
     'variant',
     'vars',
     'size',
-    'ref'
+    'ref',
   ]);
 
   const ctx = useInputContext();

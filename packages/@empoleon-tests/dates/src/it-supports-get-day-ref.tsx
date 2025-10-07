@@ -1,5 +1,5 @@
-import { render } from '@empoleon-tests/core';
 import { Component } from 'solid-js';
+import { render } from '@empoleon-tests/core';
 
 interface Options {
   component: Component<any>;
@@ -9,14 +9,14 @@ interface Options {
 export function itSupportsGetDayRef(options: Options, name = 'supports __getDayRef') {
   it(name, () => {
     const daysRefs: Record<string, HTMLButtonElement> = {};
-    render(
-      () => <options.component
+    render(() => (
+      <options.component
         {...options.props}
         __getDayRef={(rowIndex: number, cellIndex: number, node: HTMLButtonElement) => {
           daysRefs[`${rowIndex}.${cellIndex}`] = node;
         }}
       />
-    );
+    ));
 
     expect(Object.keys(daysRefs)).toHaveLength(35);
     expect(daysRefs['0.0']).toBeInstanceOf(HTMLButtonElement);

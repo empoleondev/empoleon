@@ -22,7 +22,11 @@ export function useStylesTransform(_props: UseTransformedStylesInput) {
     return [
       ...transformedStyles,
       ..._props.themeName.map((n) =>
-        stylesTransform(theme.components[n]?.styles, { props: _props.props, theme, ctx: _props.stylesCtx })
+        stylesTransform(theme.components[n]?.styles, {
+          props: _props.props,
+          theme,
+          ctx: _props.stylesCtx,
+        })
       ),
     ].filter(Boolean) as Record<string, string>[];
   };

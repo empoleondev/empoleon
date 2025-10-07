@@ -16,9 +16,14 @@ export function RichTextEditorSourceCodeControl(_props: RichTextEditorSourceCode
 
   const handleStateChange = () => {
     if (isSourceCodeModeActive()) {
-      richTextEditorContext.editor?.commands.setContent(richTextEditorContext.editor.getText(), true);
+      richTextEditorContext.editor?.commands.setContent(
+        richTextEditorContext.editor.getText(),
+        true
+      );
     } else {
-      richTextEditorContext.editor?.commands.setContent(`<textarea>${richTextEditorContext.editor.getHTML()}</textarea>`);
+      richTextEditorContext.editor?.commands.setContent(
+        `<textarea>${richTextEditorContext.editor.getHTML()}</textarea>`
+      );
     }
 
     const isSourceCodeModeActiveNew = !isSourceCodeModeActive();
@@ -40,6 +45,6 @@ export function RichTextEditorSourceCodeControl(_props: RichTextEditorSourceCode
       <IconBraces style={{ width: rem(16), height: rem(16) }} />
     </RichTextEditorControl>
   );
-};
+}
 
 RichTextEditorSourceCodeControl.displayName = '@mantine/tiptap/RichTextEditorSourceCodeControl';

@@ -1,4 +1,4 @@
-import { createSignal, createEffect, onCleanup, createMemo } from 'solid-js';
+import { createEffect, createMemo, createSignal, onCleanup } from 'solid-js';
 
 export interface UseFetchOptions extends RequestInit {
   autoInvoke?: boolean;
@@ -64,6 +64,6 @@ export function useFetch<T>(url: string, { autoInvoke = true, ...options }: UseF
     loading,
     error,
     refetch,
-    abort
+    abort,
   };
 }

@@ -1,6 +1,6 @@
 import { For, JSX } from 'solid-js';
-import { CalendarHeader } from './CalendarHeader';
 import { EmpoleonProvider } from '@empoleon/core';
+import { CalendarHeader } from './CalendarHeader';
 
 export default {
   title: 'CalendarHeader',
@@ -66,11 +66,7 @@ export function Sizes() {
 
   return (
     <div style={{ padding: '40px' }}>
-      <For each={sizes}>
-        {(size) => (
-          <CalendarHeader label="January" size={size} mt="xl" />
-        )}
-      </For>
+      <For each={sizes}>{(size) => <CalendarHeader label="January" size={size} mt="xl" />}</For>
     </div>
   );
 }

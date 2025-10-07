@@ -42,7 +42,7 @@ describe('@empoleon/core/Radio', () => {
 
   it('supports rootRef', () => {
     let ref;
-    render(() => <Radio {...defaultProps} rootRef={(el) => ref = el} />);
+    render(() => <Radio {...defaultProps} rootRef={(el) => (ref = el)} />);
     expect(ref).toBeInstanceOf(HTMLDivElement);
   });
 });

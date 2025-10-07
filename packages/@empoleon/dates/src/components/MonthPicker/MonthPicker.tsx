@@ -1,9 +1,10 @@
+import { JSX, splitProps } from 'solid-js';
 import {
   BoxProps,
   ElementProps,
+  EmpoleonComponentStaticProperties,
   factory,
   Factory,
-  EmpoleonComponentStaticProperties,
   StylesApiProps,
   useProps,
   useResolvedStylesApi,
@@ -15,7 +16,6 @@ import { DecadeLevelBaseSettings } from '../DecadeLevel';
 import { DecadeLevelGroupStylesNames } from '../DecadeLevelGroup';
 import { YearLevelBaseSettings } from '../YearLevel';
 import { YearLevelGroupStylesNames } from '../YearLevelGroup';
-import { JSX, splitProps } from 'solid-js';
 
 export type MonthPickerStylesNames = DecadeLevelGroupStylesNames | YearLevelGroupStylesNames;
 
@@ -64,7 +64,7 @@ type MonthPickerComponent = (<Type extends DatePickerType = 'default'>(
   displayName?: string;
 } & EmpoleonComponentStaticProperties<MonthPickerFactory>;
 
-export const MonthPicker: MonthPickerComponent = factory<MonthPickerFactory>(_props => {
+export const MonthPicker: MonthPickerComponent = factory<MonthPickerFactory>((_props) => {
   const props = useProps('MonthPicker', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -82,7 +82,7 @@ export const MonthPicker: MonthPickerComponent = factory<MonthPickerFactory>(_pr
     'onMonthSelect',
     '__updateDateOnMonthSelect',
     'onLevelChange',
-    'ref'
+    'ref',
   ]);
 
   const dateState = useDatesState({

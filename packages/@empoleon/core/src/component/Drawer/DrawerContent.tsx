@@ -21,7 +21,7 @@ export type DrawerContentFactory = Factory<{
 
 const defaultProps: Partial<DrawerContentProps> = {};
 
-export const DrawerContent = factory<DrawerContentFactory>(_props => {
+export const DrawerContent = factory<DrawerContentFactory>((_props) => {
   const props = useProps('DrawerContent', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -32,7 +32,7 @@ export const DrawerContent = factory<DrawerContentFactory>(_props => {
     'children',
     'radius',
     '__hidden',
-    'ref'
+    'ref',
   ]);
 
   const ctx = useDrawerContext();
@@ -40,17 +40,29 @@ export const DrawerContent = factory<DrawerContentFactory>(_props => {
 
   return (
     <ModalBaseContent
-      {...ctx.getStyles('content', { className: local.className, style: local.style, styles: local.styles, classNames: local.classNames })}
+      {...ctx.getStyles('content', {
+        className: local.className,
+        style: local.style,
+        styles: local.styles,
+        classNames: local.classNames,
+      })}
       // @ts-ignore
-      innerProps={ctx.getStyles('inner', { className: local.className, style: local.style, styles: local.styles, classNames: local.classNames })}
+      innerProps={ctx.getStyles('inner', {
+        className: local.className,
+        style: local.style,
+        styles: local.styles,
+        classNames: local.classNames,
+      })}
       ref={local.ref}
       {...others}
       radius={local.radius || ctx.radius || 0}
       data-hidden={local.__hidden || undefined}
     >
-      <Scroll style={{
-        height: 'calc(100vh - var(--drawer-offset, 0rem) * 2)'
-      }}>
+      <Scroll
+        style={{
+          height: 'calc(100vh - var(--drawer-offset, 0rem) * 2)',
+        }}
+      >
         {local.children}
       </Scroll>
     </ModalBaseContent>

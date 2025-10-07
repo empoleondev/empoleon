@@ -1,7 +1,7 @@
+import { createSignal } from 'solid-js';
 import { Button, Text, TextInput } from '@empoleon/core';
 import { useField } from '@empoleon/form';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal } from 'solid-js';
 
 const code = `
 import { Button, TextInput } from '@empoleon/core';

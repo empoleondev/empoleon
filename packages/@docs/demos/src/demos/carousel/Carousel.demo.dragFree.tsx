@@ -26,7 +26,7 @@ function Demo() {
   return (
     <Carousel
       withIndicators
-      height='200px'
+      height="200px"
       slideGap="md"
       emblaOptions={{ dragFree: true, align: 'start' }}
     >

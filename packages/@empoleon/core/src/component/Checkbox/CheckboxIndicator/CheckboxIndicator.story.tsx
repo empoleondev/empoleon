@@ -1,7 +1,7 @@
 import { createSignal, JSX } from 'solid-js';
+import { EmpoleonProvider } from '../../../core';
 import { Checkbox } from '../Checkbox';
 import { CheckboxIndicator } from './CheckboxIndicator';
-import { EmpoleonProvider } from '../../../core';
 
 export default {
   title: 'CheckboxIndicator',
@@ -17,7 +17,7 @@ export default {
 export function Usage() {
   const [checked, setChecked] = createSignal(false);
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <CheckboxIndicator checked={checked()} onClick={() => setChecked((c) => !c)} />
       <CheckboxIndicator
         checked={checked()}
@@ -39,11 +39,7 @@ export function Sizes() {
   const [checked, setChecked] = createSignal(false);
   const sizes = ['xs', 'sm', 'md', 'lg', 'xl'];
   const indicators = sizes.map((size) => (
-    <CheckboxIndicator
-      size={size}
-      checked={checked()}
-      onClick={() => setChecked((c) => !c)}
-    />
+    <CheckboxIndicator size={size} checked={checked()} onClick={() => setChecked((c) => !c)} />
   ));
 
   const checkboxes = sizes.map((size) => (
@@ -51,7 +47,7 @@ export function Sizes() {
   ));
 
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <div style={{ display: 'flex' }}>{indicators}</div>
       <div style={{ display: 'flex' }}>{checkboxes}</div>
     </div>

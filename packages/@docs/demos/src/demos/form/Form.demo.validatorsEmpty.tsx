@@ -98,12 +98,7 @@ function Demo() {
 
   return (
     <form onSubmit={form.onSubmit(() => {})}>
-      <TextInput
-        label="Name"
-        placeholder="Name"
-        withAsterisk
-        {...form.getInputProps('name')}
-      />
+      <TextInput label="Name" placeholder="Name" withAsterisk {...form.getInputProps('name')} />
       <TextInput
         label="Your job"
         placeholder="Your job"

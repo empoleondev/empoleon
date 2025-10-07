@@ -1,7 +1,7 @@
+import { createSignal } from 'solid-js';
 import { Pagination, Text } from '@empoleon/core';
 import { randomId } from '@empoleon/hooks';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal } from 'solid-js';
 
 const code = `
 import { useState } from 'react';
@@ -60,7 +60,7 @@ const data = chunk(
 function Demo() {
   const [activePage, setPage] = createSignal(1);
   const items = data[activePage() - 1].map((item) => (
-    <Text >
+    <Text>
       id: {item.id}, name: {item.name}
     </Text>
   ));

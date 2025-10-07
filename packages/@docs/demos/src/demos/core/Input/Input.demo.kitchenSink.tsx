@@ -1,7 +1,7 @@
+import { IconAt, IconCurrencyDollar, IconLock, IconSearch } from '@tabler/icons-solidjs';
+import { createEffect, createSignal, Show } from 'solid-js';
 import { Input, InputProps } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { IconSearch, IconAt, IconLock, IconCurrencyDollar } from '@tabler/icons-solidjs';
-import { createSignal, createEffect, Show } from 'solid-js';
 
 const code = `
 import { Input } from '@empoleon/core';
@@ -17,32 +17,30 @@ function Demo() {
 }
 `;
 
-function Demo(props: InputProps & {
-  leftIconType?: string;
-  rightIconType?: string;
-  iconSize?: number;
-  hasLeftSection?: boolean;
-  hasRightSection?: boolean;
-  multiline?: boolean;
-}) {
+function Demo(
+  props: InputProps & {
+    leftIconType?: string;
+    rightIconType?: string;
+    iconSize?: number;
+    hasLeftSection?: boolean;
+    hasRightSection?: boolean;
+    multiline?: boolean;
+  }
+) {
   const [value, setValue] = createSignal(
-    props.multiline
-      ? "asdasdnjknwebdkjwbjrbfkjberfhjbrefhberjfbjherbfjherbfjhb"
-      : "default input"
+    props.multiline ? 'asdasdnjknwebdkjwbjrbfkjberfhjbrefhberjfbjherbfjherbfjhb' : 'default input'
   );
 
   createEffect(() => {
     setValue(
-      props.multiline
-        ? "asdasdnjknwebdkjwbjrbfkjberfhjbrefhberjfbjherbfjherbfjhb"
-        : "default input"
+      props.multiline ? 'asdasdnjknwebdkjwbjrbfkjberfhjbrefhberjfbjherbfjherbfjhb' : 'default input'
     );
   });
 
   const getLeftIcon = () => {
     const iconProps = {
       style: { width: `${props.iconSize || 70}%`, height: `${props.iconSize || 70}%` },
-      stroke: '1.5'
+      stroke: '1.5',
     };
 
     switch (props.leftIconType) {
@@ -61,7 +59,7 @@ function Demo(props: InputProps & {
   const getRightIcon = () => {
     const iconProps = {
       style: { width: `${props.iconSize || 70}%`, height: `${props.iconSize || 70}%` },
-      stroke: '1.5'
+      stroke: '1.5',
     };
 
     switch (props.rightIconType) {
@@ -80,12 +78,12 @@ function Demo(props: InputProps & {
   return (
     <Input
       {...props}
-      component={props.multiline ? "textarea" : undefined}
+      component={props.multiline ? 'textarea' : undefined}
       value={value()}
       onChange={(e) => setValue(e.currentTarget.value)}
       leftSection={props.hasLeftSection ? getLeftIcon()() : undefined}
       rightSection={props.hasRightSection ? getRightIcon()() : undefined}
-      placeholder={props.multiline ? "Multiline input" : "Input component"}
+      placeholder={props.multiline ? 'Multiline input' : 'Input component'}
       rows={props.multiline ? 3 : undefined}
     />
   );

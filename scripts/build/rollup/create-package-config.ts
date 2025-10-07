@@ -22,12 +22,12 @@ export function createPackageConfig(packagePath: string): RollupOptions {
   const plugins = [
     nodeResolve({
       extensions: ['.ts', '.tsx', '.js', '.jsx'],
-      resolveOnly: [/^\.{0,2}\//]
+      resolveOnly: [/^\.{0,2}\//],
     }),
     esbuild({
       tsconfig: getPath('tsconfig.json'),
-      "jsx": "preserve",
-      "jsxImportSource": "solid-js",
+      jsx: 'preserve',
+      jsxImportSource: 'solid-js',
     }),
     babel({
       babelHelpers: 'bundled',

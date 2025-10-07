@@ -28,7 +28,7 @@ function Demo(props: any) {
     <TagsInput
       {...props}
       dropdownOpened
-      leftSection={<IconAt size={18} stroke='1.5' />}
+      leftSection={<IconAt size={18} stroke="1.5" />}
       withAsterisk
       label="TagsInput"
       description="Description"

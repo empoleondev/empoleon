@@ -16,7 +16,7 @@ export default {
 
 export function Usage() {
   return (
-    <div style={{ 'padding': '0px' }}>
+    <div style={{ padding: '0px' }}>
       <Grid bg="pink.3">
         <Grid.Col span={{ sm: 6, md: 3 }}>
           <Button fullWidth>First</Button>
@@ -37,7 +37,7 @@ export function Usage() {
 
 export function ContainerBreakpoints() {
   return (
-    <div style={{ 'padding': '40px', 'resize': 'horizontal', 'overflow': 'hidden' }}>
+    <div style={{ padding: '40px', resize: 'horizontal', overflow: 'hidden' }}>
       <Grid
         type="container"
         gutter={{ base: 10, xs: 30, lg: 50 }}
@@ -103,7 +103,7 @@ export function NestedAutoGrids() {
 
 export function Offset() {
   return (
-    <div style={{ 'padding': '0px' }}>
+    <div style={{ padding: '0px' }}>
       <Grid columns={12} bg="pink.3">
         <Grid.Col span={4}>
           <Button fullWidth>First</Button>
@@ -118,7 +118,7 @@ export function Offset() {
 
 export function Order() {
   return (
-    <div style={{ 'padding': '0px' }}>
+    <div style={{ padding: '0px' }}>
       <Grid columns={12} bg="pink.3">
         <Grid.Col span={4} order={{ base: 2, sm: 1 }}>
           <Button fullWidth>First</Button>

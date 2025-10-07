@@ -47,9 +47,7 @@ interface Item {
 }
 
 function Demo() {
-  const fetch = useFetch<Item[]>(
-    'https://jsonplaceholder.typicode.com/todos/'
-  );
+  const fetch = useFetch<Item[]>('https://jsonplaceholder.typicode.com/todos/');
 
   return (
     <div>
@@ -66,7 +64,9 @@ function Demo() {
       </Group>
       <Box pos="relative" mt="md">
         {/* @ts-ignore */}
-        <Code block>{fetch.data() ? JSON.stringify(fetch.data().slice(0, 3), null, 2) : 'Fetching'}</Code>
+        <Code block>
+          {fetch.data() ? JSON.stringify(fetch.data().slice(0, 3), null, 2) : 'Fetching'}
+        </Code>
         {/* @ts-ignore */}
         <LoadingOverlay visible={fetch.loading()} />
       </Box>

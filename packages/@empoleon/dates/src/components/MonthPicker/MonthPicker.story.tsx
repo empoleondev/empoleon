@@ -1,7 +1,7 @@
 import { createSignal, For, JSX } from 'solid-js';
+import { EmpoleonProvider } from '@empoleon/core';
 import { DatesRangeValue, DateStringValue } from '../../types';
 import { MonthPicker } from './MonthPicker';
-import { EmpoleonProvider } from '@empoleon/core';
 
 export default {
   title: 'MonthPicker',
@@ -103,15 +103,11 @@ export function ControlledMultiple() {
 }
 
 export function Sizes() {
- const sizes = ['xs', 'sm', 'md', 'lg', 'xl'] as const;
+  const sizes = ['xs', 'sm', 'md', 'lg', 'xl'] as const;
 
- return (
-   <div style={{ padding: '40px' }}>
-     <For each={sizes}>
-       {(size) => (
-         <MonthPicker size={size} />
-       )}
-     </For>
-   </div>
- );
+  return (
+    <div style={{ padding: '40px' }}>
+      <For each={sizes}>{(size) => <MonthPicker size={size} />}</For>
+    </div>
+  );
 }

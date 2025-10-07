@@ -1,6 +1,6 @@
 import { JSX } from 'solid-js';
-import { SemiCircleProgress } from './SemiCircleProgress';
 import { EmpoleonProvider } from '../../core';
+import { SemiCircleProgress } from './SemiCircleProgress';
 
 export default {
   title: 'SemiCircleProgress',
@@ -15,7 +15,7 @@ export default {
 
 export function Usage() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <SemiCircleProgress value={40} label="40%" labelPosition="bottom" />
     </div>
   );

@@ -4,10 +4,10 @@ import {
   IconGitPullRequest,
   IconMessageDots,
 } from '@tabler/icons-solidjs';
-import { Text } from '../Text';
-import { Timeline } from './Timeline';
 import { JSX } from 'solid-js';
 import { EmpoleonProvider } from '../../core';
+import { Text } from '../Text';
+import { Timeline } from './Timeline';
 
 export default {
   title: 'Timeline',
@@ -22,7 +22,7 @@ export default {
 
 export function Usage() {
   return (
-    <div style={{ 'margin': '40px' }}>
+    <div style={{ margin: '40px' }}>
       <Timeline active={1}>
         <Timeline.Item bullet={<IconGitBranch size={12} />} title="New branch">
           <Text c="dimmed" size="sm">
@@ -83,7 +83,7 @@ export function Usage() {
 
 export function AutoContrast() {
   return (
-    <div style={{ 'margin': '40px' }}>
+    <div style={{ margin: '40px' }}>
       <Timeline active={1} autoContrast color="lime.3">
         <Timeline.Item bullet={<IconGitBranch size={12} />} title="New branch">
           <Text c="dimmed" size="sm">
@@ -144,7 +144,7 @@ export function AutoContrast() {
 
 export function Unstyled() {
   return (
-    <div style={{ 'margin': '40px' }}>
+    <div style={{ margin: '40px' }}>
       <Timeline active={1} bulletSize={24} lineWidth={2} unstyled>
         <Timeline.Item bullet={<IconGitBranch size={12} />} title="New branch">
           <Text c="dimmed" size="sm">
@@ -205,7 +205,7 @@ export function Unstyled() {
 
 export function WithoutIcons() {
   return (
-    <div style={{ 'margin': '40px' }}>
+    <div style={{ margin: '40px' }}>
       <Timeline active={1} bulletSize={24}>
         <Timeline.Item title="New branch">
           <Text c="dimmed" size="sm">
@@ -262,7 +262,7 @@ export function WithoutIcons() {
 
 export function AlignRight() {
   return (
-    <div style={{ 'margin': '40px' }}>
+    <div style={{ margin: '40px' }}>
       <Timeline active={1} bulletSize={24} align="right">
         <Timeline.Item title="New branch">
           <Text c="dimmed" size="sm">

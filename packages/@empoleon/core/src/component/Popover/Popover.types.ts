@@ -1,5 +1,10 @@
 import { JSX } from 'solid-js';
-import type { FlipOptions, InlineOptions, ShiftOptions, SizeOptions } from '@empoleon/solid-floating-ui';
+import type {
+  FlipOptions,
+  InlineOptions,
+  ShiftOptions,
+  SizeOptions,
+} from '@empoleon/solid-floating-ui';
 
 export type PopoverWidth = 'target' | JSX.CSSProperties['width'] | null;
 

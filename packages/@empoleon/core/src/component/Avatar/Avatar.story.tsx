@@ -20,7 +20,7 @@ export default {
 
 export function Usage() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Avatar>AN</Avatar>
       <Avatar src="https://raw.githubusercontent.com/empoleondev/empoleon/master/.demo/avatars/avatar-7.png">
         AN
@@ -40,13 +40,11 @@ export function InitialsColor() {
     'Tom Smith',
   ];
 
-  return <div style={{ 'padding': '40px', display: 'flex', 'gap': '10px' }}>
-    <For each={names}>
-      {(name) => (
-        <Avatar name={name} color="initials" />
-      )}
-    </For>
-  </div>;
+  return (
+    <div style={{ padding: '40px', display: 'flex', gap: '10px' }}>
+      <For each={names}>{(name) => <Avatar name={name} color="initials" />}</For>
+    </div>
+  );
 }
 
 export function AutoContrast() {
@@ -55,11 +53,11 @@ export function AutoContrast() {
   return (
     <div
       style={{
-        'display': 'flex',
+        display: 'flex',
         'flex-direction': 'column',
         'align-items': 'flex-start',
-        'gap': '10px',
-        'padding': '40px',
+        gap: '10px',
+        padding: '40px',
       }}
     >
       <For each={buttons}>
@@ -75,7 +73,7 @@ export function AutoContrast() {
 
 export function CustomComponent() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Avatar component="a" href="https://empoleon.dev">
         AN
       </Avatar>
@@ -88,7 +86,7 @@ export function CustomComponent() {
 
 export function AvatarGroup() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Avatar.Group>
         <Tooltip label="Hello">
           <Avatar radius="xl" color="blue">
@@ -107,17 +105,10 @@ export function AvatarGroup() {
 }
 
 export function Variants() {
-  const variants = [
-    'filled',
-    'light',
-    'white',
-    'default',
-    'gradient',
-    'outline',
-  ];
+  const variants = ['filled', 'light', 'white', 'default', 'gradient', 'outline'];
 
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Stack>
         <Group>
           <For each={variants}>
@@ -131,9 +122,7 @@ export function Variants() {
 
         <Group>
           <For each={variants}>
-            {(variant) => (
-              <Avatar variant={variant} color="blue" radius="xl" />
-            )}
+            {(variant) => <Avatar variant={variant} color="blue" radius="xl" />}
           </For>
         </Group>
 
@@ -156,7 +145,7 @@ export function Variants() {
 
 export function Gradient() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Group>
         <Box>
           <Text>Default</Text>
@@ -182,7 +171,7 @@ export function Gradient() {
 
 export function Unstyled() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Group>
         <Avatar
           unstyled

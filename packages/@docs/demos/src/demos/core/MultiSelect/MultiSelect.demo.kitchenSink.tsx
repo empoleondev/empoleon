@@ -1,8 +1,8 @@
+import { IconSearch } from '@tabler/icons-solidjs';
+import { createEffect, createSignal } from 'solid-js';
 import { MultiSelect, MultiSelectProps } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
 import { inputControls } from '../../../shared';
-import { createSignal, createEffect } from 'solid-js';
-import { IconSearch } from '@tabler/icons-solidjs';
 
 const code = `
 import { MultiSelect } from '@empoleon/core';
@@ -18,12 +18,14 @@ function Demo() {
 }
 `;
 
-function Demo(props: MultiSelectProps & {
-  dataFormat?: string;
-  withGroups?: boolean;
-  hasLeftSection?: boolean;
-  hasRightSection?: boolean;
-}) {
+function Demo(
+  props: MultiSelectProps & {
+    dataFormat?: string;
+    withGroups?: boolean;
+    hasLeftSection?: boolean;
+    hasRightSection?: boolean;
+  }
+) {
   const [searchValue, setSearchValue] = createSignal('');
 
   const getLeftSection = () => {
@@ -71,16 +73,28 @@ function Demo(props: MultiSelectProps & {
           },
           {
             group: 'Full-Stack',
-            items: [
-              { value: 'meteor', label: 'Meteor' },
-            ],
+            items: [{ value: 'meteor', label: 'Meteor' }],
           },
         ];
       }
       return [
         {
           group: 'Frontend Frameworks',
-          items: ['React', 'Angular', 'Vue', 'Svelte', 'Ember', 'Backbone', 'Preact', 'Solid', 'Qwik', 'Alpine.js', 'Lit', 'Aurelia', 'Mithril'],
+          items: [
+            'React',
+            'Angular',
+            'Vue',
+            'Svelte',
+            'Ember',
+            'Backbone',
+            'Preact',
+            'Solid',
+            'Qwik',
+            'Alpine.js',
+            'Lit',
+            'Aurelia',
+            'Mithril',
+          ],
         },
         {
           group: 'Meta-Frameworks',
@@ -118,7 +132,28 @@ function Demo(props: MultiSelectProps & {
       ];
     }
 
-    return ['React', 'Angular', 'Vue', 'Svelte', 'Next.js', 'Nuxt', 'Ember', 'Backbone', 'Preact', 'Solid', 'Qwik', 'Alpine.js', 'Lit', 'Astro', 'Remix', 'SvelteKit', 'Gatsby', 'Meteor', 'Aurelia', 'Mithril'];
+    return [
+      'React',
+      'Angular',
+      'Vue',
+      'Svelte',
+      'Next.js',
+      'Nuxt',
+      'Ember',
+      'Backbone',
+      'Preact',
+      'Solid',
+      'Qwik',
+      'Alpine.js',
+      'Lit',
+      'Astro',
+      'Remix',
+      'SvelteKit',
+      'Gatsby',
+      'Meteor',
+      'Aurelia',
+      'Mithril',
+    ];
   };
 
   return (

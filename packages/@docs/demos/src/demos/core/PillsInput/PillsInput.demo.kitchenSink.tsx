@@ -1,6 +1,6 @@
+import { createEffect, createSignal } from 'solid-js';
 import { Pill, PillsInput } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal, createEffect } from 'solid-js';
 
 const code = `
 import { PillsInput, Pill } from '@empoleon/core';
@@ -29,11 +29,7 @@ function Demo(props: any) {
   });
 
   return (
-    <PillsInput
-      {...props}
-      disabled={disabled()}
-      error={error()}
-    >
+    <PillsInput {...props} disabled={disabled()} error={error()}>
       <Pill.Group>
         <Pill>React</Pill>
         <Pill>Vue</Pill>
@@ -55,37 +51,37 @@ export const kitchenSink: EmpoleonDemo = {
       prop: 'label',
       type: 'string',
       initialValue: 'PillsInput label',
-      libraryValue: ''
+      libraryValue: '',
     },
     {
       prop: 'description',
       type: 'string',
       initialValue: '',
-      libraryValue: ''
+      libraryValue: '',
     },
     {
       prop: 'error',
       type: 'string',
       initialValue: '',
-      libraryValue: ''
+      libraryValue: '',
     },
     {
       prop: 'placeholder',
       type: 'string',
       initialValue: 'Enter tags',
-      libraryValue: ''
+      libraryValue: '',
     },
     {
       prop: 'size',
       type: 'size',
       initialValue: 'sm',
-      libraryValue: 'sm'
+      libraryValue: 'sm',
     },
     {
       prop: 'radius',
       type: 'size',
       initialValue: 'sm',
-      libraryValue: 'sm'
+      libraryValue: 'sm',
     },
     {
       prop: 'variant',
@@ -102,31 +98,31 @@ export const kitchenSink: EmpoleonDemo = {
       prop: 'disabled',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'required',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'withAsterisk',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'withErrorStyles',
       type: 'boolean',
       initialValue: true,
-      libraryValue: true
+      libraryValue: true,
     },
     {
       prop: 'pointer',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
-    }
+      libraryValue: false,
+    },
   ],
 };

@@ -1,10 +1,10 @@
 import { IconChevronDown } from '@tabler/icons-solidjs';
+import { JSX } from 'solid-js';
+import { EmpoleonProvider } from '../../core';
 import { Button } from '../Button';
 import { Group } from '../Group';
 import { Tree, TreeNodeData } from './Tree';
 import { useTree } from './use-tree';
-import { JSX } from 'solid-js';
-import { EmpoleonProvider } from '../../core';
 
 export default {
   title: 'Tree',
@@ -62,7 +62,7 @@ const data: TreeNodeData[] = [
 export function Usage() {
   const tree = useTree();
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Tree data={data} tree={tree} />
     </div>
   );
@@ -74,7 +74,7 @@ export function Controller() {
     onNodeExpand: (value) => console.log('Node expanded:', value),
   });
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Tree data={data} tree={tree} />
       <Button onClick={() => tree.expandAllNodes()}>Expand all</Button>
       <Button onClick={() => tree.collapseAllNodes()}>Collapse all</Button>
@@ -85,7 +85,7 @@ export function Controller() {
 export function RenderNode() {
   const tree = useTree();
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Tree
         tree={tree}
         data={data}
@@ -109,7 +109,7 @@ export function ExpandOnDoubleClick() {
   const tree = useTree();
 
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Tree
         tree={tree}
         data={data}
@@ -135,7 +135,7 @@ export function SelectOnClick() {
   const tree = useTree();
 
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Tree
         tree={tree}
         data={data}

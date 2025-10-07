@@ -1,4 +1,4 @@
-import { splitProps, JSX } from 'solid-js';
+import { JSX, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
@@ -27,7 +27,7 @@ export type CenterFactory = PolymorphicFactory<{
   stylesNames: CenterStylesNames;
 }>;
 
-export const Center = polymorphicFactory<CenterFactory>(_props => {
+export const Center = polymorphicFactory<CenterFactory>((_props) => {
   const props = useProps('Center', null, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -39,7 +39,7 @@ export const Center = polymorphicFactory<CenterFactory>(_props => {
     'inline',
     'mod',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<CenterFactory>({
@@ -55,7 +55,14 @@ export const Center = polymorphicFactory<CenterFactory>(_props => {
     vars: local.vars,
   });
 
-  return <Box ref={local.ref} mod={[{ inline: local.inline }, local.mod]} {...getStyles('root')} {...others} />;
+  return (
+    <Box
+      ref={local.ref}
+      mod={[{ inline: local.inline }, local.mod]}
+      {...getStyles('root')}
+      {...others}
+    />
+  );
 });
 
 Center.classes = classes;

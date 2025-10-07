@@ -1,4 +1,4 @@
-import { splitProps, JSX } from 'solid-js';
+import { JSX, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
@@ -43,7 +43,7 @@ const varsResolver = createVarsResolver<ActionIconGroupFactory>((_, props) => ({
   group: { '--ai-border-width': rem(props.borderWidth) },
 }));
 
-export const ActionIconGroup = factory<ActionIconGroupFactory>(_props => {
+export const ActionIconGroup = factory<ActionIconGroupFactory>((_props) => {
   const props = useProps('ActionIconGroup', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'className',
@@ -57,7 +57,7 @@ export const ActionIconGroup = factory<ActionIconGroupFactory>(_props => {
     'variant',
     'mod',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<ActionIconGroupFactory>({

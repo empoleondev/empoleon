@@ -11,10 +11,12 @@ const defaultProps: ButtonProps = {
 describe('@empoleon/core/Button', () => {
   tests.axe([
     () => <Button aria-label="test" />,
-    () => <Button.Group aria-label="test">
-      <Button aria-label="test-1" />
-      <Button aria-label="test-2" />
-    </Button.Group>,
+    () => (
+      <Button.Group aria-label="test">
+        <Button aria-label="test-1" />
+        <Button aria-label="test-2" />
+      </Button.Group>
+    ),
   ]);
 
   tests.itSupportsFocusEvents<ButtonProps>({

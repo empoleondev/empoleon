@@ -1,7 +1,7 @@
+import { For } from 'solid-js';
 import { Table, TableProps } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
 import { elements } from './_data';
-import { For } from 'solid-js';
 
 function Wrapper(props: TableProps) {
   return (

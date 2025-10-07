@@ -1,6 +1,6 @@
 import { JSX } from 'solid-js';
-import { Mark } from './Mark';
 import { EmpoleonProvider } from '../../core';
+import { Mark } from './Mark';
 
 export default {
   title: 'Mark',
@@ -15,7 +15,7 @@ export default {
 
 export function Usage() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <div>
         <Mark>Default mark</Mark>
       </div>

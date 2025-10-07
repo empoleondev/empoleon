@@ -29,7 +29,7 @@ function Demo() {
 function Wrapper(props: any) {
   return (
     <Popover
-      width='200px'
+      width="200px"
       position={props.position}
       opened
       offset={{ mainAxis: props.mainAxis, crossAxis: props.crossAxis }}

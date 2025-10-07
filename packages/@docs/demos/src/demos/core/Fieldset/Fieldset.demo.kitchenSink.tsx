@@ -1,4 +1,4 @@
-import { Fieldset, TextInput, Button, Group } from '@empoleon/core';
+import { Button, Fieldset, Group, TextInput } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `

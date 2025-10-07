@@ -1,7 +1,7 @@
+import { createSignal } from 'solid-js';
 import { Button, Code, Group, PasswordInput, Stepper, TextInput } from '@empoleon/core';
 import { useForm } from '@empoleon/form';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal } from 'solid-js';
 
 const code = `
 import { useState } from 'react';
@@ -177,11 +177,7 @@ function Demo() {
     <>
       <Stepper active={active()}>
         <Stepper.Step label="First step" description="Profile settings">
-          <TextInput
-            label="Username"
-            placeholder="Username"
-            {...form.getInputProps('username')}
-          />
+          <TextInput label="Username" placeholder="Username" {...form.getInputProps('username')} />
           <PasswordInput
             mt="md"
             label="Password"
@@ -191,25 +187,12 @@ function Demo() {
         </Stepper.Step>
 
         <Stepper.Step label="Second step" description="Personal information">
-          <TextInput
-            label="Name"
-            placeholder="Name"
-            {...form.getInputProps('name')}
-          />
-          <TextInput
-            mt="md"
-            label="Email"
-            placeholder="Email"
-            {...form.getInputProps('email')}
-          />
+          <TextInput label="Name" placeholder="Name" {...form.getInputProps('name')} />
+          <TextInput mt="md" label="Email" placeholder="Email" {...form.getInputProps('email')} />
         </Stepper.Step>
 
         <Stepper.Step label="Final step" description="Social media">
-          <TextInput
-            label="Website"
-            placeholder="Website"
-            {...form.getInputProps('website')}
-          />
+          <TextInput label="Website" placeholder="Website" {...form.getInputProps('website')} />
           <TextInput
             mt="md"
             label="GitHub"

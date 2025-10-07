@@ -1,9 +1,8 @@
-import { JSX, createEffect } from 'solid-js';
+import { createEffect, JSX } from 'solid-js';
+import { CodeHighlightAdapterProvider, createShikiAdapter } from '@empoleon/code-highlight';
+import { EmpoleonProvider, useEmpoleonColorScheme } from '@empoleon/core';
 import { renderDemo } from '../../../render-demo';
 import * as demos from './index';
-import { EmpoleonProvider, useEmpoleonColorScheme } from '@empoleon/core';
-import { createShikiAdapter } from '@empoleon/code-highlight';
-import { CodeHighlightAdapterProvider } from '@empoleon/code-highlight';
 
 const shikiAdapter = createShikiAdapter();
 
@@ -116,4 +115,3 @@ export const Demo_kitchenSink = {
   name: '⭐ Demo: kitchenSink',
   render: renderDemo(demos.kitchenSink),
 };
-

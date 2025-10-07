@@ -1,5 +1,5 @@
-import { JSX, splitProps } from 'solid-js';
 import cx from 'clsx';
+import { JSX, splitProps } from 'solid-js';
 import {
   __BaseInputProps,
   __InputStylesNames,
@@ -37,7 +37,7 @@ export type TimeInputFactory = Factory<{
 
 const defaultProps: Partial<TimeInputProps> = {};
 
-export const TimeInput = factory<TimeInputFactory>(_props => {
+export const TimeInput = factory<TimeInputFactory>((_props) => {
   const props = useProps('TimeInput', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -51,7 +51,7 @@ export const TimeInput = factory<TimeInputFactory>(_props => {
     'onChange',
     'onBlur',
     'step',
-    'ref'
+    'ref',
   ]);
 
   const { resolvedClassNames, resolvedStyles } = useResolvedStylesApi<TimeInputFactory>({
@@ -76,7 +76,10 @@ export const TimeInput = factory<TimeInputFactory>(_props => {
         if (
           hours < minHours ||
           (hours === minHours && minutes < minMinutes) ||
-          (local.withSeconds && hours === minHours && minutes === minMinutes && seconds < minSeconds)
+          (local.withSeconds &&
+            hours === minHours &&
+            minutes === minMinutes &&
+            seconds < minSeconds)
         ) {
           return -1;
         }
@@ -88,7 +91,10 @@ export const TimeInput = factory<TimeInputFactory>(_props => {
         if (
           hours > maxHours ||
           (hours === maxHours && minutes > maxMinutes) ||
-          (local.withSeconds && hours === maxHours && minutes === maxMinutes && seconds > maxSeconds)
+          (local.withSeconds &&
+            hours === maxHours &&
+            minutes === maxMinutes &&
+            seconds > maxSeconds)
         ) {
           return 1;
         }

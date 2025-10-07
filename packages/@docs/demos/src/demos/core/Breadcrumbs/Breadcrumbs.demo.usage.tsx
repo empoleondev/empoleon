@@ -1,6 +1,6 @@
+import { For } from 'solid-js';
 import { Anchor, Breadcrumbs } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { For } from 'solid-js';
 
 const code = `
 import { Breadcrumbs, Anchor } from '@empoleon/core';
@@ -52,13 +52,7 @@ function Demo() {
   return (
     <>
       <Breadcrumbs>
-        <For each={items}>
-          {(item) => (
-            <Anchor href={item.href}>
-              {item.title}
-            </Anchor>
-          )}
-        </For>
+        <For each={items}>{(item) => <Anchor href={item.href}>{item.title}</Anchor>}</For>
       </Breadcrumbs>
       <Breadcrumbs
         separator="→"
@@ -66,13 +60,7 @@ function Demo() {
         separatorMargin="md"
         classNames={{ separator: 'mantine-rotate-rtl' }}
       >
-        <For each={items}>
-          {(item) => (
-            <Anchor href={item.href}>
-              {item.title}
-            </Anchor>
-          )}
-        </For>
+        <For each={items}>{(item) => <Anchor href={item.href}>{item.title}</Anchor>}</For>
       </Breadcrumbs>
     </>
   );

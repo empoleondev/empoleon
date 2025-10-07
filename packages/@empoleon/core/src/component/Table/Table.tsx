@@ -1,15 +1,16 @@
-import { splitProps, JSX } from 'solid-js';
+import { JSX, splitProps } from 'solid-js';
+import { createStore } from 'solid-js/store';
 import {
   Box,
   BoxProps,
   createVarsResolver,
   ElementProps,
+  EmpoleonColor,
+  EmpoleonSpacing,
   factory,
   Factory,
   getSpacing,
   getThemeColor,
-  EmpoleonColor,
-  EmpoleonSpacing,
   rem,
   StylesApiProps,
   useProps,
@@ -28,7 +29,6 @@ import { TableProvider } from './Table.context';
 import { TableDataRenderer } from './TableDataRenderer';
 import { TableScrollContainer } from './TableScrollContainer';
 import classes from './Table.module.css';
-import { createStore } from 'solid-js/store';
 
 export type TableVariant = 'default' | 'vertical';
 
@@ -135,26 +135,24 @@ const defaultProps: Partial<TableProps> = {
   verticalSpacing: 7,
 };
 
-const varsResolver = createVarsResolver<TableFactory>(
-  (theme, props) => ({
-    table: {
-      '--table-layout': props.layout,
-      '--table-caption-side': props.captionSide,
-      '--table-horizontal-spacing': getSpacing(props.horizontalSpacing),
-      '--table-vertical-spacing': getSpacing(props.verticalSpacing),
-      '--table-border-color': props.borderColor ? getThemeColor(props.borderColor, theme) : undefined,
-      '--table-striped-color':
-        props.striped && props.stripedColor ? getThemeColor(props.stripedColor, theme) : undefined,
-      '--table-highlight-on-hover-color':
-        props.highlightOnHover && props.highlightOnHoverColor
-          ? getThemeColor(props.highlightOnHoverColor, theme)
-          : undefined,
-      '--table-sticky-header-offset': props.stickyHeader ? rem(props.stickyHeaderOffset) : undefined,
-    },
-  })
-);
+const varsResolver = createVarsResolver<TableFactory>((theme, props) => ({
+  table: {
+    '--table-layout': props.layout,
+    '--table-caption-side': props.captionSide,
+    '--table-horizontal-spacing': getSpacing(props.horizontalSpacing),
+    '--table-vertical-spacing': getSpacing(props.verticalSpacing),
+    '--table-border-color': props.borderColor ? getThemeColor(props.borderColor, theme) : undefined,
+    '--table-striped-color':
+      props.striped && props.stripedColor ? getThemeColor(props.stripedColor, theme) : undefined,
+    '--table-highlight-on-hover-color':
+      props.highlightOnHover && props.highlightOnHoverColor
+        ? getThemeColor(props.highlightOnHoverColor, theme)
+        : undefined,
+    '--table-sticky-header-offset': props.stickyHeader ? rem(props.stickyHeaderOffset) : undefined,
+  },
+}));
 
-export const Table = factory<TableFactory>(_props => {
+export const Table = factory<TableFactory>((_props) => {
   const props = useProps('Table', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -183,7 +181,7 @@ export const Table = factory<TableFactory>(_props => {
     'mod',
     'tabularNums',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<TableFactory>({
@@ -203,12 +201,24 @@ export const Table = factory<TableFactory>(_props => {
 
   const [contextValue] = createStore({
     getStyles,
-    get stickyHeader() { return local.stickyHeader; },
-    get striped() { return local.striped === true ? 'odd' : local.striped || undefined; },
-    get highlightOnHover() { return local.highlightOnHover; },
-    get withColumnBorders() { return local.withColumnBorders; },
-    get withRowBorders() { return local.withRowBorders; },
-    get captionSide() { return local.captionSide || 'bottom'; },
+    get stickyHeader() {
+      return local.stickyHeader;
+    },
+    get striped() {
+      return local.striped === true ? 'odd' : local.striped || undefined;
+    },
+    get highlightOnHover() {
+      return local.highlightOnHover;
+    },
+    get withColumnBorders() {
+      return local.withColumnBorders;
+    },
+    get withRowBorders() {
+      return local.withRowBorders;
+    },
+    get captionSide() {
+      return local.captionSide || 'bottom';
+    },
   });
 
   return (
@@ -217,7 +227,13 @@ export const Table = factory<TableFactory>(_props => {
         component="table"
         variant={local.variant}
         ref={local.ref}
-        mod={[{ 'data-with-table-border': local.withTableBorder, 'data-tabular-nums': local.tabularNums }, local.mod]}
+        mod={[
+          {
+            'data-with-table-border': local.withTableBorder,
+            'data-tabular-nums': local.tabularNums,
+          },
+          local.mod,
+        ]}
         {...getStyles('table')}
         {...others}
       >

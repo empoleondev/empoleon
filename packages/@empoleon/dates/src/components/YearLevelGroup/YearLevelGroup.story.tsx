@@ -1,6 +1,6 @@
 import { JSX } from 'solid-js/jsx-runtime';
-import { YearLevelGroup } from './YearLevelGroup';
 import { EmpoleonProvider } from '@empoleon/core';
+import { YearLevelGroup } from './YearLevelGroup';
 
 export default {
   title: 'YearLevelGroup',

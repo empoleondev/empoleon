@@ -1,7 +1,7 @@
+import { createSignal } from 'solid-js';
 import { Text, TextInput } from '@empoleon/core';
 import { useThrottledCallback } from '@empoleon/hooks';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal } from 'solid-js';
 
 const code = `
 import { Text, TextInput } from '@empoleon/core';

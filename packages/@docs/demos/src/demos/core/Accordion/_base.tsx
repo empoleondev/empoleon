@@ -1,5 +1,5 @@
-import { Accordion, AccordionProps } from '@empoleon/core';
 import { For } from 'solid-js';
+import { Accordion, AccordionProps } from '@empoleon/core';
 
 export const data = [
   {
@@ -44,14 +44,16 @@ export const dataCode = `export const data = [
 ];`;
 
 export function BaseDemo(props: Partial<AccordionProps>) {
-  return <Accordion {...props}>
-    <For each={data}>
-      {(item) => (
-        <Accordion.Item value={item.value}>
-          <Accordion.Control icon={item.emoji}>{item.value}</Accordion.Control>
-          <Accordion.Panel>{item.description}</Accordion.Panel>
-        </Accordion.Item>
-      )}
-    </For>
-  </Accordion>;
+  return (
+    <Accordion {...props}>
+      <For each={data}>
+        {(item) => (
+          <Accordion.Item value={item.value}>
+            <Accordion.Control icon={item.emoji}>{item.value}</Accordion.Control>
+            <Accordion.Panel>{item.description}</Accordion.Panel>
+          </Accordion.Item>
+        )}
+      </For>
+    </Accordion>
+  );
 }

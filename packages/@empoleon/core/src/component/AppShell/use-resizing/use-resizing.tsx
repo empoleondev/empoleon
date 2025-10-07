@@ -1,6 +1,6 @@
-import { createSignal, createEffect, startTransition } from 'solid-js';
-import { useWindowEvent } from '@empoleon/hooks';
+import { createEffect, createSignal, startTransition } from 'solid-js';
 import { isServer } from 'solid-js/web';
+import { useWindowEvent } from '@empoleon/hooks';
 
 interface UseResizingInput {
   transitionDuration: number | undefined;

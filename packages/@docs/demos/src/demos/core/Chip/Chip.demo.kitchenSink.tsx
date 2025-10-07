@@ -1,7 +1,7 @@
+import { IconBookmark, IconCheck, IconHeart, IconStar, IconX } from '@tabler/icons-solidjs';
+import { createEffect, createSignal } from 'solid-js';
 import { Chip, ChipProps } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { IconX, IconCheck, IconStar, IconHeart, IconBookmark } from '@tabler/icons-solidjs';
-import { createSignal, createEffect } from 'solid-js';
 
 function Wrapper(props: ChipProps & { iconType?: string }) {
   const [checked, setChecked] = createSignal(props.checked ?? false);
@@ -73,19 +73,19 @@ export const kitchenSink: EmpoleonDemo = {
       prop: 'disabled',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'checked',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'autoContrast',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'iconType',

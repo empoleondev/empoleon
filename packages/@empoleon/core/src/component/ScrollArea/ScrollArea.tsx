@@ -94,16 +94,14 @@ const defaultProps: Partial<ScrollAreaProps> = {
   scrollbars: 'xy',
 } satisfies Partial<ScrollAreaProps>;
 
-const varsResolver = createVarsResolver<ScrollAreaFactory>(
-  (_, props) => ({
-    root: {
-      '--scrollarea-scrollbar-size': rem(props.scrollbarSize),
-      '--scrollarea-over-scroll-behavior': props.overscrollBehavior,
-    },
-  })
-);
+const varsResolver = createVarsResolver<ScrollAreaFactory>((_, props) => ({
+  root: {
+    '--scrollarea-scrollbar-size': rem(props.scrollbarSize),
+    '--scrollarea-over-scroll-behavior': props.overscrollBehavior,
+  },
+}));
 
-export const ScrollArea = factory<ScrollAreaFactory>(_props => {
+export const ScrollArea = factory<ScrollAreaFactory>((_props) => {
   const props = useProps('ScrollArea', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -125,7 +123,7 @@ export const ScrollArea = factory<ScrollAreaFactory>(_props => {
     'onTopReached',
     'overscrollBehavior',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const [scrollbarHovered, setScrollbarHovered] = createSignal(false);
@@ -159,12 +157,12 @@ export const ScrollArea = factory<ScrollAreaFactory>(_props => {
     }
 
     const observer = new ResizeObserver(() => {
-      const scrollProps = (localViewportRef() as HTMLDivElement);
+      const scrollProps = localViewportRef() as HTMLDivElement;
       setVerticalThumbVisible(scrollProps.scrollHeight > scrollProps.clientHeight);
       setHorizontalThumbVisible(scrollProps.scrollWidth > scrollProps.clientWidth);
     });
 
-    observer.observe((localViewportRef() as HTMLDivElement));
+    observer.observe(localViewportRef() as HTMLDivElement);
 
     onCleanup(() => observer.disconnect());
   });
@@ -183,7 +181,9 @@ export const ScrollArea = factory<ScrollAreaFactory>(_props => {
         {...local.viewportProps}
         {...getStyles('viewport', { style: local.viewportProps?.style as any })}
         ref={combiedViewportRef}
-        data-offset-scrollbars={local.offsetScrollbars === true ? 'xy' : local.offsetScrollbars || undefined}
+        data-offset-scrollbars={
+          local.offsetScrollbars === true ? 'xy' : local.offsetScrollbars || undefined
+        }
         data-scrollbars={local.scrollbars || undefined}
         data-horizontal-hidden={
           local.offsetScrollbars === 'present' && !horizontalThumbVisible() ? 'true' : undefined
@@ -195,9 +195,16 @@ export const ScrollArea = factory<ScrollAreaFactory>(_props => {
           if (typeof local.viewportProps?.onScroll === 'function') {
             local.viewportProps?.onScroll?.(e);
           }
-          local.onScrollPositionChange?.({ x: e.currentTarget.scrollLeft, y: e.currentTarget.scrollTop });
+          local.onScrollPositionChange?.({
+            x: e.currentTarget.scrollLeft,
+            y: e.currentTarget.scrollTop,
+          });
           // threshold of -0.6 is required for some browsers that use sub-pixel rendering
-          if (e.currentTarget.scrollTop - (e.currentTarget.scrollHeight - e.currentTarget.clientHeight) >= -0.6) {
+          if (
+            e.currentTarget.scrollTop -
+              (e.currentTarget.scrollHeight - e.currentTarget.clientHeight) >=
+            -0.6
+          ) {
             local.onBottomReached?.();
           }
           if (e.currentTarget.scrollTop === 0) {
@@ -210,10 +217,11 @@ export const ScrollArea = factory<ScrollAreaFactory>(_props => {
 
       <Show when={local.scrollbars === 'xy' || local.scrollbars === 'x'}>
         <ScrollAreaScrollbar
-          {...getStyles('scrollbar') as any}
+          {...(getStyles('scrollbar') as any)}
           orientation="horizontal"
           data-hidden={
-            local.type === 'never' || (local.offsetScrollbars === 'present' && !horizontalThumbVisible())
+            local.type === 'never' ||
+            (local.offsetScrollbars === 'present' && !horizontalThumbVisible())
               ? true
               : undefined
           }
@@ -221,16 +229,17 @@ export const ScrollArea = factory<ScrollAreaFactory>(_props => {
           onMouseEnter={() => setScrollbarHovered(true)}
           onMouseLeave={() => setScrollbarHovered(false)}
         >
-          <ScrollAreaThumb {...getStyles('thumb') as any} />
+          <ScrollAreaThumb {...(getStyles('thumb') as any)} />
         </ScrollAreaScrollbar>
       </Show>
 
       <Show when={local.scrollbars === 'xy' || local.scrollbars === 'y'}>
         <ScrollAreaScrollbar
-          {...getStyles('scrollbar') as any}
+          {...(getStyles('scrollbar') as any)}
           orientation="vertical"
           data-hidden={
-            local.type === 'never' || (local.offsetScrollbars === 'present' && !verticalThumbVisible())
+            local.type === 'never' ||
+            (local.offsetScrollbars === 'present' && !verticalThumbVisible())
               ? true
               : undefined
           }
@@ -238,12 +247,12 @@ export const ScrollArea = factory<ScrollAreaFactory>(_props => {
           onMouseEnter={() => setScrollbarHovered(true)}
           onMouseLeave={() => setScrollbarHovered(false)}
         >
-          <ScrollAreaThumb {...getStyles('thumb') as any} />
+          <ScrollAreaThumb {...(getStyles('thumb') as any)} />
         </ScrollAreaScrollbar>
       </Show>
 
       <ScrollAreaCorner
-        {...getStyles('corner') as any}
+        {...(getStyles('corner') as any)}
         data-hovered={scrollbarHovered() || undefined}
         data-hidden={local.type === 'never' || undefined}
       />
@@ -253,7 +262,7 @@ export const ScrollArea = factory<ScrollAreaFactory>(_props => {
 
 ScrollArea.displayName = '@empoleon/core/ScrollArea';
 
-export const ScrollAreaAutosize = factory<ScrollAreaFactory>(_props => {
+export const ScrollAreaAutosize = factory<ScrollAreaFactory>((_props) => {
   const props = useProps('ScrollAreaAutosize', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'children',
@@ -274,7 +283,7 @@ export const ScrollAreaAutosize = factory<ScrollAreaFactory>(_props => {
     'vars',
     'onBottomReached',
     'onTopReached',
-    'ref'
+    'ref',
   ]);
 
   return (

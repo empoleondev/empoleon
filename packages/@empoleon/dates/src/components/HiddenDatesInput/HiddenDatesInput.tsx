@@ -48,7 +48,16 @@ function formatValue({ value, type, withTime }: FormatValueInput) {
 
 export function HiddenDatesInput(props: HiddenDatesInputProps) {
   return (
-    <input type="hidden" value={formatValue({ value: props.value, type: props.type, withTime: props.withTime ?? false })} name={props.name} form={props.form} />
+    <input
+      type="hidden"
+      value={formatValue({
+        value: props.value,
+        type: props.type,
+        withTime: props.withTime ?? false,
+      })}
+      name={props.name}
+      form={props.form}
+    />
   );
 }
 

@@ -129,8 +129,8 @@ export function Menu(_props: MenuProps) {
     'menuItemTabIndex',
     'keepMounted',
     'withInitialFocusPlaceholder',
-    'attributes'
-  ])
+    'attributes',
+  ]);
 
   const getStyles = useStyles<MenuFactory>({
     name: 'Menu',
@@ -139,7 +139,7 @@ export function Menu(_props: MenuProps) {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
-    attributes: local.attributes
+    attributes: local.attributes,
   });
 
   const [_opened, setOpened] = useUncontrolled({
@@ -195,7 +195,12 @@ export function Menu(_props: MenuProps) {
     return openDropdown;
   };
 
-  const { openDropdown, closeDropdown } = useDelayedHover({ open, close, closeDelay: local.closeDelay, openDelay: local.openDelay });
+  const { openDropdown, closeDropdown } = useDelayedHover({
+    open,
+    close,
+    closeDelay: local.closeDelay,
+    openDelay: local.openDelay,
+  });
 
   const getItemIndex = (node: HTMLButtonElement) =>
     getContextItemIndex('[data-menu-item]', '[data-menu-dropdown]', node);

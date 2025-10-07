@@ -25,30 +25,32 @@ interface CreateShikiAdapterOptions {
   forceColorScheme?: 'dark' | 'light';
 }
 
-export const createShikiAdapter = (
-  { forceColorScheme }: CreateShikiAdapterOptions = {}
-): CodeHighlightAdapter => {
+export const createShikiAdapter = ({
+  forceColorScheme,
+}: CreateShikiAdapterOptions = {}): CodeHighlightAdapter => {
   return {
-    getHighlighter: (ctx: any) => async ({ code, language, colorScheme }) => {
-      try {
-        const html = await codeToHtml(code, {
-          lang: language || 'text',
-          theme: forceColorScheme || (colorScheme === 'light' ? light : dark),
-        });
+    getHighlighter:
+      (ctx: any) =>
+      async ({ code, language, colorScheme }) => {
+        try {
+          const html = await codeToHtml(code, {
+            lang: language || 'text',
+            theme: forceColorScheme || (colorScheme === 'light' ? light : dark),
+          });
 
-        return {
-          isHighlighted: true,
-          highlightedCode: stripShikiCodeBlocks(html),
-          codeElementProps: {}
-        };
-      } catch (error) {
-        console.error('Shiki highlighting failed:', error);
-        return {
-          highlightedCode: code,
-          isHighlighted: false,
-          codeElementProps: {}
-        };
-      }
-    },
+          return {
+            isHighlighted: true,
+            highlightedCode: stripShikiCodeBlocks(html),
+            codeElementProps: {},
+          };
+        } catch (error) {
+          console.error('Shiki highlighting failed:', error);
+          return {
+            highlightedCode: code,
+            isHighlighted: false,
+            codeElementProps: {},
+          };
+        }
+      },
   };
 };

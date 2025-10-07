@@ -23,9 +23,11 @@ interface ResolveVarsInput {
 }
 
 export function resolveVars(_props: ResolveVarsInput) {
-  const _vars =  mergeVars([
+  const _vars = mergeVars([
     _props.headless ? {} : _props.varsResolver?.(_props.theme, _props.props, _props.stylesCtx),
-    ..._props.themeName.map((name) => _props.theme.components?.[name]?.vars?.(_props.theme, _props.props, _props.stylesCtx)),
+    ..._props.themeName.map((name) =>
+      _props.theme.components?.[name]?.vars?.(_props.theme, _props.props, _props.stylesCtx)
+    ),
     _props.vars?.(_props.theme, _props.props, _props.stylesCtx),
   ])?.[_props.selector] as JSX.CSSProperties;
 

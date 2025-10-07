@@ -1,4 +1,4 @@
-import { JSX, splitProps } from "solid-js";
+import { JSX, splitProps } from 'solid-js';
 
 interface ChevronProps extends Omit<JSX.SvgSVGAttributes<SVGSVGElement>, 'direction'> {
   direction: 'up' | 'down';

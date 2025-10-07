@@ -1,7 +1,7 @@
 import { JSX } from 'solid-js';
+import { EmpoleonProvider } from '../../core';
 import { Anchor } from '../Anchor';
 import { Breadcrumbs } from './Breadcrumbs';
-import { EmpoleonProvider } from '../../core';
 
 export default {
   title: 'Breadcrumbs',
@@ -16,7 +16,7 @@ export default {
 
 export function Usage() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Breadcrumbs>
         <Anchor>Link 1</Anchor>
         <Anchor>Link 2</Anchor>
@@ -28,7 +28,7 @@ export function Usage() {
 
 export function Unstyled() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Breadcrumbs unstyled>
         <a href="#">Link 1</a>
         <a href="#">Link 2</a>

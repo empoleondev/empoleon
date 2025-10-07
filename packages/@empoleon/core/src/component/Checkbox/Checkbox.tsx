@@ -1,4 +1,4 @@
-import { Component, createEffect, splitProps, JSX, createMemo } from 'solid-js';
+import { Component, createEffect, createMemo, JSX, splitProps } from 'solid-js';
 import { useId } from '@empoleon/hooks';
 import {
   Box,
@@ -6,6 +6,9 @@ import {
   createVarsResolver,
   DataAttributes,
   ElementProps,
+  EmpoleonColor,
+  EmpoleonRadius,
+  EmpoleonSize,
   extractStyleProps,
   factory,
   Factory,
@@ -14,9 +17,6 @@ import {
   getRadius,
   getSize,
   getThemeColor,
-  EmpoleonColor,
-  EmpoleonRadius,
-  EmpoleonSize,
   parseThemeColor,
   StylesApiProps,
   useProps,
@@ -103,30 +103,29 @@ const defaultProps: Partial<CheckboxProps> = {
   icon: CheckboxIcon,
 } satisfies Partial<CheckboxProps>;
 
-const varsResolver = createVarsResolver<CheckboxFactory>(
-  (theme, props) => {
-    const parsedColor = parseThemeColor({ color: props.color || theme.primaryColor, theme });
-    const outlineColor =
-      parsedColor.isThemeColor && parsedColor.shade === undefined
-        ? `var(--empoleon-color-${parsedColor.color}-outline)`
-        : parsedColor.color;
+const varsResolver = createVarsResolver<CheckboxFactory>((theme, props) => {
+  const parsedColor = parseThemeColor({ color: props.color || theme.primaryColor, theme });
+  const outlineColor =
+    parsedColor.isThemeColor && parsedColor.shade === undefined
+      ? `var(--empoleon-color-${parsedColor.color}-outline)`
+      : parsedColor.color;
 
-    return {
-      root: {
-        '--checkbox-size': getSize(props.size, 'checkbox-size'),
-        '--checkbox-radius': props.radius === undefined ? undefined : getRadius(props.radius),
-        '--checkbox-color': props.variant === 'outline' ? outlineColor : getThemeColor(props.color, theme),
-        '--checkbox-icon-color': props.iconColor
-          ? getThemeColor(props.iconColor, theme)
-          : getAutoContrastValue(props.autoContrast, theme)
-            ? getContrastColor({ color: props.color, theme, autoContrast: props.autoContrast })
-            : undefined,
-      },
-    };
-  }
-);
+  return {
+    root: {
+      '--checkbox-size': getSize(props.size, 'checkbox-size'),
+      '--checkbox-radius': props.radius === undefined ? undefined : getRadius(props.radius),
+      '--checkbox-color':
+        props.variant === 'outline' ? outlineColor : getThemeColor(props.color, theme),
+      '--checkbox-icon-color': props.iconColor
+        ? getThemeColor(props.iconColor, theme)
+        : getAutoContrastValue(props.autoContrast, theme)
+          ? getContrastColor({ color: props.color, theme, autoContrast: props.autoContrast })
+          : undefined,
+    },
+  };
+});
 
-export const Checkbox = factory<CheckboxFactory>(_props => {
+export const Checkbox = factory<CheckboxFactory>((_props) => {
   const props = useProps('Checkbox', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -156,11 +155,11 @@ export const Checkbox = factory<CheckboxFactory>(_props => {
     'autoContrast',
     'mod',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const ctx = useCheckboxGroupContext();
-  const _size = () => (local.size || ctx?.size);
+  const _size = () => local.size || ctx?.size;
   const Icon = local.icon!;
 
   const getStyles = useStyles<CheckboxFactory>({
@@ -212,8 +211,19 @@ export const Checkbox = factory<CheckboxFactory>(_props => {
     if (inputRef) inputRef.indeterminate = indeterminate() || false;
   });
 
-  const tooltipEvents = ['onmouseenter', 'onmouseleave', 'onmousemove', 'onpointerdown', 'onpointerenter']
-    .reduce((acc, key) => (others[key as keyof typeof others] ? { ...acc, [key]: others[key as keyof typeof others] } : acc), {});
+  const tooltipEvents = [
+    'onmouseenter',
+    'onmouseleave',
+    'onmousemove',
+    'onpointerdown',
+    'onpointerenter',
+  ].reduce(
+    (acc, key) =>
+      others[key as keyof typeof others]
+        ? { ...acc, [key]: others[key as keyof typeof others] }
+        : acc,
+    {}
+  );
 
   const toolTipEventsForRoot = local.rootRef ? tooltipEvents : {};
   const toolTipEventsForInput = !local.rootRef ? tooltipEvents : {};
@@ -238,7 +248,7 @@ export const Checkbox = factory<CheckboxFactory>(_props => {
       ref={local.rootRef}
       mod={local.mod}
       {...styleProps()}
-      {...local.wrapperProps as any}
+      {...(local.wrapperProps as any)}
       {...toolTipEventsForRoot}
     >
       <Box {...getStyles('inner')} mod={{ 'data-label-position': local.labelPosition }}>
@@ -252,7 +262,13 @@ export const Checkbox = factory<CheckboxFactory>(_props => {
           checked={contextProps().checked}
           data-checked={contextProps().checked || undefined}
           disabled={local.disabled}
-          mod={{ error: !!(local.error && (typeof (local.error as any) === 'function' ? (local.error as any)() : local.error)), indeterminate: local.indeterminate }}
+          mod={{
+            error: !!(
+              local.error &&
+              (typeof (local.error as any) === 'function' ? (local.error as any)() : local.error)
+            ),
+            indeterminate: local.indeterminate,
+          }}
           {...getStyles('input', { focusable: true, variant: local.variant })}
           {...rest()}
           {...contextProps()}

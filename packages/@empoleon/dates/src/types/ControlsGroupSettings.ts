@@ -5,16 +5,10 @@ export interface ControlsGroupSettings {
   __onControlClick?: (event: MouseEvent, date: DateStringValue) => void;
 
   /** Called when mouse enters control with event and date, used for ranges */
-  __onControlMouseEnter?: (
-    event: MouseEvent,
-    date: DateStringValue
-  ) => void;
+  __onControlMouseEnter?: (event: MouseEvent, date: DateStringValue) => void;
 
   /** Called when any keydown event is registered on control, used for arrows navigation */
-  __onControlKeyDown?: (
-    event: KeyboardEvent,
-    payload: ControlKeydownPayload
-  ) => void;
+  __onControlKeyDown?: (event: KeyboardEvent, payload: ControlKeydownPayload) => void;
 
   /** Assigns ref of every control based on its position in the table, used for arrows navigation */
   __getControlRef?: (rowIndex: number, cellIndex: number, node: HTMLButtonElement) => void;

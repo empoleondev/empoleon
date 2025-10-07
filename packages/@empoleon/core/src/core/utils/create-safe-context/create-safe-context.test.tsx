@@ -1,7 +1,7 @@
-import { renderHook, render } from '@solidjs/testing-library';
+import { render, renderHook } from '@solidjs/testing-library';
+import { JSX } from 'solid-js';
 import { patchConsoleError } from '@empoleon-tests/core';
 import { createSafeContext } from './create-safe-context';
-import { JSX } from 'solid-js';
 
 interface ContextType {
   value: number;

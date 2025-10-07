@@ -1,4 +1,4 @@
-import { getBreakpointValue, keys, EmpoleonTheme, rem } from '../../../../core';
+import { EmpoleonTheme, getBreakpointValue, keys, rem } from '../../../../core';
 import type { AppShellProps } from '../../AppShell';
 import { getBaseSize } from '../get-base-size/get-base-size';
 import type { CSSVariables, MediaQueryVariables } from '../get-variables/get-variables';
@@ -19,7 +19,8 @@ export function assignAsideVariables(props: AssignAsideVariablesInput) {
   const collapsedAsideTransformRtl = 'translateX(calc(var(--app-shell-aside-width) * -1))';
 
   if (props.aside?.breakpoint && !props.aside?.collapsed?.mobile) {
-    props.maxMediaStyles[props.aside?.breakpoint] = props.maxMediaStyles[props.aside?.breakpoint] || {};
+    props.maxMediaStyles[props.aside?.breakpoint] =
+      props.maxMediaStyles[props.aside?.breakpoint] || {};
     props.maxMediaStyles[props.aside?.breakpoint]['--app-shell-aside-width'] = '100%';
     props.maxMediaStyles[props.aside?.breakpoint]['--app-shell-aside-offset'] = '0px';
   }
@@ -49,16 +50,19 @@ export function assignAsideVariables(props: AssignAsideVariablesInput) {
     const breakpointValue = props.aside!.breakpoint;
     props.minMediaStyles[breakpointValue] = props.minMediaStyles[breakpointValue] || {};
     props.minMediaStyles[breakpointValue]['--app-shell-aside-transform'] = collapsedAsideTransform;
-    props.minMediaStyles[breakpointValue]['--app-shell-aside-transform-rtl'] = collapsedAsideTransformRtl;
+    props.minMediaStyles[breakpointValue]['--app-shell-aside-transform-rtl'] =
+      collapsedAsideTransformRtl;
     props.minMediaStyles[breakpointValue]['--app-shell-aside-offset'] = '0px !important';
   }
 
   if (props.aside?.collapsed?.mobile) {
-    const breakpointValue = getBreakpointValue(props.aside!.breakpoint, props.theme.breakpoints) - 0.1;
+    const breakpointValue =
+      getBreakpointValue(props.aside!.breakpoint, props.theme.breakpoints) - 0.1;
     props.maxMediaStyles[breakpointValue] = props.maxMediaStyles[breakpointValue] || {};
     props.maxMediaStyles[breakpointValue]['--app-shell-aside-width'] = '100%';
     props.maxMediaStyles[breakpointValue]['--app-shell-aside-offset'] = '0px';
     props.maxMediaStyles[breakpointValue]['--app-shell-aside-transform'] = collapsedAsideTransform;
-    props.maxMediaStyles[breakpointValue]['--app-shell-aside-transform-rtl'] = collapsedAsideTransformRtl;
+    props.maxMediaStyles[breakpointValue]['--app-shell-aside-transform-rtl'] =
+      collapsedAsideTransformRtl;
   }
 }

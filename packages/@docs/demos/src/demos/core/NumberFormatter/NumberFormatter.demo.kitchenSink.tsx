@@ -12,12 +12,7 @@ function Demo() {
 `;
 
 function Demo(props: NumberFormatterProps) {
-  return (
-    <NumberFormatter
-      {...props}
-      value={props.value ?? 1234567.89}
-    />
-  );
+  return <NumberFormatter {...props} value={props.value ?? 1234567.89} />;
 }
 
 export const kitchenSink: EmpoleonDemo = {
@@ -30,37 +25,37 @@ export const kitchenSink: EmpoleonDemo = {
       prop: 'prefix',
       type: 'string',
       initialValue: '',
-      libraryValue: ''
+      libraryValue: '',
     },
     {
       prop: 'suffix',
       type: 'string',
       initialValue: '',
-      libraryValue: ''
+      libraryValue: '',
     },
     {
       prop: 'thousandSeparator',
       type: 'string',
       initialValue: '',
-      libraryValue: ''
+      libraryValue: '',
     },
     {
       prop: 'decimalSeparator',
       type: 'string',
       initialValue: '.',
-      libraryValue: '.'
+      libraryValue: '.',
     },
     {
       prop: 'decimalScale',
       type: 'number',
       initialValue: undefined,
-      libraryValue: undefined
+      libraryValue: undefined,
     },
     {
       prop: 'fixedDecimalScale',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'thousandsGroupStyle',
@@ -78,13 +73,13 @@ export const kitchenSink: EmpoleonDemo = {
       prop: 'allowNegative',
       type: 'boolean',
       initialValue: true,
-      libraryValue: true
+      libraryValue: true,
     },
     {
       prop: 'allowDecimal',
       type: 'boolean',
       initialValue: true,
-      libraryValue: true
+      libraryValue: true,
     },
   ],
 };

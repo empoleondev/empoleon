@@ -1,4 +1,4 @@
-import { createSignal, createEffect, onCleanup, batch, splitProps } from 'solid-js';
+import { batch, createEffect, createSignal, onCleanup, splitProps } from 'solid-js';
 
 export interface UseCollapseParams {
   opened: () => boolean;
@@ -14,10 +14,10 @@ export function useCollapse(props: UseCollapseParams) {
     'transitionDuration',
     'transitionTimingFunction',
     'onTransitionEnd',
-    'keepMounted'
+    'keepMounted',
   ]);
 
-  const transitionDuration = () => (local.transitionDuration?.() || 0);
+  const transitionDuration = () => local.transitionDuration?.() || 0;
   const transitionTimingFunction = local.transitionTimingFunction || 'ease';
 
   const [elementRef, setElementRef] = createSignal<HTMLDivElement>();
@@ -75,10 +75,10 @@ export function useCollapse(props: UseCollapseParams) {
           const newHeight = measureContentHeight();
           updateHeight(newHeight);
           break;
-        }
-
-        else if (target.parentElement === contentElement &&
-                 target.getAttribute('role') === 'region') {
+        } else if (
+          target.parentElement === contentElement &&
+          target.getAttribute('role') === 'region'
+        ) {
           const newHeight = measureContentHeight();
           updateHeight(newHeight);
           break;
@@ -89,7 +89,7 @@ export function useCollapse(props: UseCollapseParams) {
     resizeObserver.observe(contentElement);
 
     const directChildren = Array.from(contentElement.children);
-    directChildren.forEach(child => {
+    directChildren.forEach((child) => {
       if (child.getAttribute('role') === 'region') {
         resizeObserver!.observe(child);
       }
@@ -196,6 +196,6 @@ export function useCollapse(props: UseCollapseParams) {
           setupResizeObserver();
         }
       }
-    }
+    },
   });
 }

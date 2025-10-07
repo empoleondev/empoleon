@@ -1,6 +1,6 @@
+import { createSignal, For } from 'solid-js';
 import { Button, Drawer, Group } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal, For } from 'solid-js';
 
 function Demo() {
   const [opened, setOpened] = createSignal(false);
@@ -24,8 +24,8 @@ function Demo() {
 
       <Group justify="center">
         <For each={['xs', 'sm', 'md', 'lg', 'xl', '100%', '40rem', '25%'] as const}>
-          {s => (
-            <Button variant="default" onClick={() => open(() => s)} >
+          {(s) => (
+            <Button variant="default" onClick={() => open(() => s)}>
               {s}
             </Button>
           )}

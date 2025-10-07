@@ -27,9 +27,11 @@ function Demo() {
     <CopyButton value="https://mantine.dev" timeout={2000}>
       {({ copied, copy }) => (
         <Tooltip label={copied ? 'Copied' : 'Copy'} withArrow position="right">
-          {(props) => <ActionIcon {...props} color={copied ? 'teal' : 'gray'} variant="subtle" onClick={copy}>
-            {copied ? <IconCheck size={16} /> : <IconCopy size={16} />}
-          </ActionIcon>}
+          {(props) => (
+            <ActionIcon {...props} color={copied ? 'teal' : 'gray'} variant="subtle" onClick={copy}>
+              {copied ? <IconCheck size={16} /> : <IconCopy size={16} />}
+            </ActionIcon>
+          )}
         </Tooltip>
       )}
     </CopyButton>

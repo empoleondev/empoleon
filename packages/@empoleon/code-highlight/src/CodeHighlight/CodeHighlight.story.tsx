@@ -1,14 +1,17 @@
 import { IconBrandCodesandbox } from '@tabler/icons-solidjs';
 import hljs from 'highlight.js';
+import { createEffect, createSignal, JSX } from 'solid-js';
+import { EmpoleonProvider, useEmpoleonColorScheme } from '@empoleon/core';
 import { getCodeFileIcon } from '@empoleonx/dev-icons';
 import { createHighlightJsAdapter } from '../CodeHighlightProvider/adapters/highlight-js-adapter';
 import { createShikiAdapter } from '../CodeHighlightProvider/adapters/shiki-adapter';
-import { CodeHighlightAdapterProvider, CodeHighlightProvider } from '../CodeHighlightProvider/CodeHighlightProvider';
+import {
+  CodeHighlightAdapterProvider,
+  CodeHighlightProvider,
+} from '../CodeHighlightProvider/CodeHighlightProvider';
 import { CodeHighlightTabs } from '../CodeHighlightTabs/CodeHighlightTabs';
 import { CodeHighlight } from './CodeHighlight';
 import { InlineCodeHighlight } from './InlineCodeHighlight';
-import { createEffect, createSignal, JSX } from 'solid-js';
-import { EmpoleonProvider, useEmpoleonColorScheme } from '@empoleon/core';
 
 const shikiAdapter = createShikiAdapter();
 
@@ -35,7 +38,7 @@ export default {
         </EmpoleonProvider>
       </CodeHighlightAdapterProvider>
     ),
-  ]
+  ],
 };
 
 const tsxCode = `

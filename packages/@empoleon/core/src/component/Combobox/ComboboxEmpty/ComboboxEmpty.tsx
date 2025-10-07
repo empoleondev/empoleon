@@ -25,7 +25,7 @@ export type ComboboxEmptyFactory = Factory<{
   compound: true;
 }>;
 
-export const ComboboxEmpty = factory<ComboboxEmptyFactory>(_props => {
+export const ComboboxEmpty = factory<ComboboxEmptyFactory>((_props) => {
   const props = useProps('ComboboxEmpty', null, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -33,7 +33,7 @@ export const ComboboxEmpty = factory<ComboboxEmptyFactory>(_props => {
     'style',
     'styles',
     'vars',
-    'ref'
+    'ref',
   ]);
 
   const ctx = useComboboxContext();
@@ -41,7 +41,12 @@ export const ComboboxEmpty = factory<ComboboxEmptyFactory>(_props => {
   return (
     <Box
       ref={local.ref}
-      {...ctx.getStyles('empty', { className: local.className, classNames: local.classNames, styles: local.styles, style: local.style })}
+      {...ctx.getStyles('empty', {
+        className: local.className,
+        classNames: local.classNames,
+        styles: local.styles,
+        style: local.style,
+      })}
       {...others}
     />
   );

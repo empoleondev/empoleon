@@ -1,7 +1,7 @@
+import { JSX } from 'solid-js';
 import { NotificationProps } from '@empoleon/core';
 import { randomId } from '@empoleon/hooks';
 import { createStore, EmpoleonStore, useStore } from '@empoleon/store';
-import { JSX } from 'solid-js';
 
 export type NotificationPosition =
   | 'top-left'

@@ -1,9 +1,8 @@
-
 import { createSignal, JSX } from 'solid-js';
+import { EmpoleonProvider } from '../../core';
 import { Button } from '../Button';
 import { Group } from '../Group';
 import { Stepper } from './Stepper';
-import { EmpoleonProvider } from '../../core';
 
 export default {
   title: 'Stepper',
@@ -22,7 +21,7 @@ export function Usage() {
   const prevStep = () => setActive((current) => (current > 0 ? current - 1 : current));
 
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <Stepper active={active()} onStepClick={setActive} color="lime.3" autoContrast>
         <Stepper.Step label="First step" description="Create an account">
           Step 1 content: Create an account
@@ -113,7 +112,12 @@ export function RightIconPosition() {
 
   return (
     <>
-      <Stepper active={active()} onStepClick={setActive} orientation="vertical" iconPosition="right">
+      <Stepper
+        active={active()}
+        onStepClick={setActive}
+        orientation="vertical"
+        iconPosition="right"
+      >
         <Stepper.Step label="First step" description="Create an account">
           Step 1 content: Create an account
         </Stepper.Step>

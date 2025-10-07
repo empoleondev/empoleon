@@ -1,6 +1,6 @@
 import { JSX } from 'solid-js';
-import { ColorInput } from './ColorInput';
 import { EmpoleonProvider } from '../../core';
+import { ColorInput } from './ColorInput';
 
 export default {
   title: 'ColorInput',
@@ -15,7 +15,7 @@ export default {
 
 export function Usage() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <ColorInput
         wrapperProps={{ 'data-test': 'hello' }}
         size="xl"
@@ -27,7 +27,7 @@ export function Usage() {
 
 export function Unstyled() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <ColorInput unstyled label="Unstyled" />
     </div>
   );

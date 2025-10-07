@@ -1,8 +1,8 @@
 import dayjs from 'dayjs';
+import { For, JSX } from 'solid-js';
 import { EmpoleonProvider, Group } from '@empoleon/core';
 import { DateInput } from '../DateInput';
 import { MonthPickerInput } from './MonthPickerInput';
-import { For, JSX } from 'solid-js';
 
 export default {
   title: 'MonthPickerInput',
@@ -103,17 +103,15 @@ export function Clearable() {
 }
 
 export function Sizes() {
- const sizes = ['xs', 'sm', 'md', 'lg', 'xl'] as const;
+  const sizes = ['xs', 'sm', 'md', 'lg', 'xl'] as const;
 
- return (
-   <div style={{ padding: '40px' }}>
-     <For each={sizes}>
-       {(size) => (
-         <MonthPickerInput size={size} placeholder={size} label={size} mt="xl" />
-       )}
-     </For>
-   </div>
- );
+  return (
+    <div style={{ padding: '40px' }}>
+      <For each={sizes}>
+        {(size) => <MonthPickerInput size={size} placeholder={size} label={size} mt="xl" />}
+      </For>
+    </div>
+  );
 }
 
 export function FocusReturn() {

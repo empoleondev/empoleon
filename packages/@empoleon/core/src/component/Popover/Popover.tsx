@@ -1,15 +1,15 @@
-import { createSignal, splitProps, JSX, createEffect, createMemo, onCleanup } from 'solid-js';
+import { createEffect, createMemo, createSignal, JSX, onCleanup, splitProps } from 'solid-js';
 import { useClickOutside, useId } from '@empoleon/hooks';
 import {
   createVarsResolver,
   ElementProps,
+  EmpoleonRadius,
+  EmpoleonShadow,
   ExtendComponent,
   Factory,
   getDefaultZIndex,
   getRadius,
   getShadow,
-  EmpoleonRadius,
-  EmpoleonShadow,
   StylesApiProps,
   useDirection,
   useEmpoleonEnv,
@@ -267,9 +267,15 @@ export function Popover(_props: PopoverProps) {
     varsResolver,
   });
 
-  const { resolvedStyles } = useResolvedStylesApi<PopoverFactory>({ classNames: local.classNames, styles: local.styles, props });
+  const { resolvedStyles } = useResolvedStylesApi<PopoverFactory>({
+    classNames: local.classNames,
+    styles: local.styles,
+    props,
+  });
 
-  const [dropdownVisible, setDropdownVisible] = createSignal(local.opened ?? local.defaultOpened ?? false);
+  const [dropdownVisible, setDropdownVisible] = createSignal(
+    local.opened ?? local.defaultOpened ?? false
+  );
   let positionRef: FloatingPosition = local.position!;
   const [arrowRef, setArrowRef] = createSignal<HTMLElement | undefined>(undefined);
   const [targetNode, setTargetNode] = createSignal<HTMLElement | null>(null);
@@ -282,7 +288,10 @@ export function Popover(_props: PopoverProps) {
     middlewares: local.middlewares,
     width: local.width,
     position: () => getFloatingPosition(dir, local.position!),
-    offset: () => typeof local.offset === 'number' ? local.offset + (local.withArrow ? local.arrowSize! / 2 : 0) : local.offset!,
+    offset: () =>
+      typeof local.offset === 'number'
+        ? local.offset + (local.withArrow ? local.arrowSize! / 2 : 0)
+        : local.offset!,
     arrowRef,
     arrowOffset: local.arrowOffset!,
     onPositionChange: local.onPositionChange,

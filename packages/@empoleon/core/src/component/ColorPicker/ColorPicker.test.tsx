@@ -8,13 +8,15 @@ const defaultProps: ColorPickerProps = {
 
 describe('@empoleon/core/ColorPicker', () => {
   tests.axe([
-    () => <ColorPicker
-      {...defaultProps}
-      format="rgba"
-      saturationLabel="Saturation"
-      alphaLabel="Alpha"
-      hueLabel="Hue"
-    />,
+    () => (
+      <ColorPicker
+        {...defaultProps}
+        format="rgba"
+        saturationLabel="Saturation"
+        alphaLabel="Alpha"
+        hueLabel="Hue"
+      />
+    ),
   ]);
 
   tests.itSupportsSystemProps<ColorPickerProps, ColorPickerStylesNames>({
@@ -70,18 +72,18 @@ describe('@empoleon/core/ColorPicker', () => {
 
   it('calls onChangeEnd when swatch is clicked', async () => {
     const spy = vi.fn();
-    const { container } = render(
-      () => <ColorPicker onChangeEnd={spy} format="hex" swatches={['#ffffff', '#000000']} />
-    );
+    const { container } = render(() => (
+      <ColorPicker onChangeEnd={spy} format="hex" swatches={['#ffffff', '#000000']} />
+    ));
     await userEvent.click(container.querySelectorAll('.empoleon-ColorSwatch-root')[0]);
     expect(spy).toHaveBeenCalledWith('#ffffff');
   });
 
   it('calls onColorSwatchClick when swatch is clicked', async () => {
     const spy = vi.fn();
-    const { container } = render(
-      () => <ColorPicker onColorSwatchClick={spy} format="hex" swatches={['#ffffff', '#000000']} />
-    );
+    const { container } = render(() => (
+      <ColorPicker onColorSwatchClick={spy} format="hex" swatches={['#ffffff', '#000000']} />
+    ));
     await userEvent.click(container.querySelectorAll('.empoleon-ColorSwatch-root')[0]);
     expect(spy).toHaveBeenCalledWith('#ffffff');
   });

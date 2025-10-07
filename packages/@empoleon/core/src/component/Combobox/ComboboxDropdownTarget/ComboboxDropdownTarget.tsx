@@ -1,8 +1,8 @@
 import { JSX, splitProps } from 'solid-js';
+import { useMergedRef } from '@empoleon/hooks';
 import { factory, Factory, isElement, useProps } from '../../../core';
 import { Popover } from '../../Popover';
 import { useComboboxContext } from '../Combobox.context';
-import { useMergedRef } from '@empoleon/hooks';
 
 export interface ComboboxDropdownTargetProps {
   /** Target element */
@@ -22,13 +22,9 @@ export type ComboboxDropdownTargetFactory = Factory<{
   compound: true;
 }>;
 
-export const ComboboxDropdownTarget = factory<ComboboxDropdownTargetFactory>(_props => {
+export const ComboboxDropdownTarget = factory<ComboboxDropdownTargetFactory>((_props) => {
   const props = useProps('ComboboxDropdownTarget', defaultProps, _props);
-  const [local, others] = splitProps(props, [
-    'children',
-    'refProp',
-    'ref'
-  ])
+  const [local, others] = splitProps(props, ['children', 'refProp', 'ref']);
   useComboboxContext();
 
   if (!isElement(local.children)) {

@@ -1,8 +1,8 @@
-import { createSignal, JSX } from 'solid-js';
 import { IconMoon } from '@tabler/icons-solidjs';
+import { createSignal, JSX } from 'solid-js';
+import { EmpoleonProvider } from '../../core';
 import { Stack } from '../Stack';
 import { Rating } from './Rating';
-import { EmpoleonProvider } from '../../core';
 
 export default {
   title: 'Rating',
@@ -59,10 +59,24 @@ export function WithCustomSymbol() {
         fractions={2}
         defaultValue={3}
         emptySymbol={
-          <div style={{ 'width': `${size}px`, 'height': `${size}px`, 'background-color': 'gray', 'border-radius': '999px' }} />
+          <div
+            style={{
+              width: `${size}px`,
+              height: `${size}px`,
+              'background-color': 'gray',
+              'border-radius': '999px',
+            }}
+          />
         }
         fullSymbol={
-          <div style={{ 'width': `${size}px`, 'height': `${size}px`, 'background-color': 'red', 'border-radius': '999px' }} />
+          <div
+            style={{
+              width: `${size}px`,
+              height: `${size}px`,
+              'background-color': 'red',
+              'border-radius': '999px',
+            }}
+          />
         }
       />
 

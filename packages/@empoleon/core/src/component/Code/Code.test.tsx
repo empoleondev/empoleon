@@ -25,11 +25,11 @@ describe('@empoleon/core/Code', () => {
     const { rerender } = render(() => <Code {...defaultProps}>inline-code</Code>);
     expect(screen.getByText('inline-code').nodeName).toBe('CODE');
 
-    rerender(
-      () => <Code {...defaultProps} block>
+    rerender(() => (
+      <Code {...defaultProps} block>
         block-code
       </Code>
-    );
+    ));
     expect(screen.getByText('block-code').nodeName).toBe('PRE');
   });
 });

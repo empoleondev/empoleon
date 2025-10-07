@@ -1,6 +1,6 @@
+import { createSignal } from 'solid-js';
 import { Input } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal } from 'solid-js';
 
 const code = (props: any) => `
 import { Input } from '@empoleon/core';

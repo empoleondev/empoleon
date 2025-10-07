@@ -1,3 +1,4 @@
+import { splitProps } from 'solid-js';
 import { useId } from '@empoleon/hooks';
 import {
   Box,
@@ -10,7 +11,6 @@ import {
 } from '../../../core';
 import { useComboboxContext } from '../Combobox.context';
 import classes from '../Combobox.module.css';
-import { splitProps } from 'solid-js';
 
 export type ComboboxOptionStylesNames = 'option';
 
@@ -40,7 +40,7 @@ export type ComboboxOptionFactory = Factory<{
 
 const defaultProps: Partial<ComboboxOptionProps> = {};
 
-export const ComboboxOption = factory<ComboboxOptionFactory>(_props => {
+export const ComboboxOption = factory<ComboboxOptionFactory>((_props) => {
   const props = useProps('ComboboxOption', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -56,7 +56,7 @@ export const ComboboxOption = factory<ComboboxOptionFactory>(_props => {
     'disabled',
     'selected',
     'mod',
-    'ref'
+    'ref',
   ]);
 
   const ctx = useComboboxContext();
@@ -65,33 +65,42 @@ export const ComboboxOption = factory<ComboboxOptionFactory>(_props => {
 
   return (
     <Box
-      {...ctx.getStyles('option', { className: local.className, classNames: local.classNames, styles: local.styles, style: local.style })}
+      {...ctx.getStyles('option', {
+        className: local.className,
+        classNames: local.classNames,
+        styles: local.styles,
+        style: local.style,
+      })}
       {...others}
       ref={local.ref}
       id={_id}
       mod={[
         'combobox-option',
-        { 'combobox-active': local.active, 'combobox-disabled': local.disabled, 'combobox-selected': local.selected },
+        {
+          'combobox-active': local.active,
+          'combobox-disabled': local.disabled,
+          'combobox-selected': local.selected,
+        },
         local.mod,
       ]}
       role="option"
       onClick={(event) => {
         if (!local.disabled) {
           ctx.onOptionSubmit?.(props.value, props);
-          typeof local.onClick === "function" && local.onClick?.(event);
+          typeof local.onClick === 'function' && local.onClick?.(event);
         } else {
           event.preventDefault();
         }
       }}
       onMouseDown={(event) => {
         event.preventDefault();
-        typeof local.onMouseDown === "function" && local.onMouseDown?.(event);
+        typeof local.onMouseDown === 'function' && local.onMouseDown?.(event);
       }}
       onMouseOver={(event) => {
         if (ctx.resetSelectionOnOptionHover) {
           ctx.store.resetSelectedOption();
         }
-        typeof local.onMouseOver === "function" && local.onMouseOver?.(event);
+        typeof local.onMouseOver === 'function' && local.onMouseOver?.(event);
       }}
     />
   );

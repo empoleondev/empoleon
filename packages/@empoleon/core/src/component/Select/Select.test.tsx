@@ -1,3 +1,4 @@
+import { createSignal } from 'solid-js';
 import {
   inputDefaultProps,
   inputStylesApiSelectors,
@@ -7,7 +8,6 @@ import {
   userEvent,
 } from '@empoleon-tests/core';
 import { Select, SelectProps, SelectStylesNames } from './Select';
-import { createSignal } from 'solid-js';
 
 const defaultProps: SelectProps = {
   ...inputDefaultProps,
@@ -21,11 +21,7 @@ describe('@empoleon/core/Select', () => {
     () => <Select label="test-label" data={['test-1', 'test-2']} />,
     () => <Select label="test-label" error data={['test-1', 'test-2']} />,
     () => <Select label="test-label" error="test-error" id="test" data={['test-1', 'test-2']} />,
-    () => <Select
-      label="test-label"
-      description="test-description"
-      data={['test-1', 'test-2']}
-    />,
+    () => <Select label="test-label" description="test-description" data={['test-1', 'test-2']} />,
   ]);
 
   tests.itSupportsSystemProps<SelectProps, SelectStylesNames>({

@@ -4,14 +4,14 @@ import {
   BoxProps,
   createVarsResolver,
   ElementProps,
+  EmpoleonGradient,
+  EmpoleonRadius,
+  EmpoleonSize,
   factory,
   Factory,
   getFontSize,
   getRadius,
   getSize,
-  EmpoleonGradient,
-  EmpoleonRadius,
-  EmpoleonSize,
   StylesApiProps,
   useProps,
   useStyles,
@@ -58,31 +58,29 @@ export type ActionIconGroupSectionFactory = Factory<{
 
 const defaultProps: Partial<ActionIconGroupSectionProps> = {};
 
-const varsResolver = createVarsResolver<ActionIconGroupSectionFactory>(
-  (theme, props) => {
-    const colors = theme.variantColorResolver({
-      color: props.color || theme.primaryColor,
-      theme,
-      gradient: props.gradient,
-      variant: props.variant || 'filled',
-      autoContrast: props.autoContrast,
-    });
+const varsResolver = createVarsResolver<ActionIconGroupSectionFactory>((theme, props) => {
+  const colors = theme.variantColorResolver({
+    color: props.color || theme.primaryColor,
+    theme,
+    gradient: props.gradient,
+    variant: props.variant || 'filled',
+    autoContrast: props.autoContrast,
+  });
 
-    return {
-      groupSection: {
-        '--section-height': getSize(props.size, 'section-height'),
-        '--section-padding-x': getSize(props.size, 'section-padding-x'),
-        '--section-fz': getFontSize(props.size),
-        '--section-radius': props.radius === undefined ? undefined : getRadius(props.radius),
-        '--section-bg': props.color || props.variant ? colors.background : undefined,
-        '--section-color': colors.color,
-        '--section-bd': props.color || props.variant ? colors.border : undefined,
-      },
-    };
-  }
-);
+  return {
+    groupSection: {
+      '--section-height': getSize(props.size, 'section-height'),
+      '--section-padding-x': getSize(props.size, 'section-padding-x'),
+      '--section-fz': getFontSize(props.size),
+      '--section-radius': props.radius === undefined ? undefined : getRadius(props.radius),
+      '--section-bg': props.color || props.variant ? colors.background : undefined,
+      '--section-color': colors.color,
+      '--section-bd': props.color || props.variant ? colors.border : undefined,
+    },
+  };
+});
 
-export const ActionIconGroupSection = factory<ActionIconGroupSectionFactory>(_props => {
+export const ActionIconGroupSection = factory<ActionIconGroupSectionFactory>((_props) => {
   const props = useProps('ActionIconGroupSection', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'className',
@@ -96,7 +94,7 @@ export const ActionIconGroupSection = factory<ActionIconGroupSectionFactory>(_pr
     'radius',
     'autoContrast',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<ActionIconGroupSectionFactory>({

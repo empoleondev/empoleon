@@ -3,10 +3,10 @@ import {
   Box,
   BoxProps,
   createVarsResolver,
-  getRadius,
-  getShadow,
   EmpoleonRadius,
   EmpoleonShadow,
+  getRadius,
+  getShadow,
   polymorphicFactory,
   PolymorphicFactory,
   StylesApiProps,
@@ -50,7 +50,7 @@ const varsResolver = createVarsResolver<PaperFactory>((_, props) => ({
   },
 }));
 
-export const Paper = polymorphicFactory<PaperFactory>(_props => {
+export const Paper = polymorphicFactory<PaperFactory>((_props) => {
   const props = useProps('Paper', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -65,7 +65,7 @@ export const Paper = polymorphicFactory<PaperFactory>(_props => {
     'variant',
     'mod',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<PaperFactory>({

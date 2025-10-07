@@ -21,5 +21,5 @@ export function useMutationObserver<T extends HTMLElement = any>(
     });
   });
 
-  return (el: T) => ref = el;
+  return (el: T) => (ref = el);
 }

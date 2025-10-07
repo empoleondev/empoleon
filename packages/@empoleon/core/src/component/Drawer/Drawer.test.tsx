@@ -54,9 +54,9 @@ describe('@empoleon/core/Drawer', () => {
   });
 
   it('does not render header if title and withCloseButton are not provided', () => {
-    const { container, rerender } = render(
-      () => <Drawer {...defaultProps} title={null} withCloseButton />
-    );
+    const { container, rerender } = render(() => (
+      <Drawer {...defaultProps} title={null} withCloseButton />
+    ));
     expect(container.querySelector('.empoleon-Drawer-header')).toBeInTheDocument();
 
     rerender(() => <Drawer {...defaultProps} withCloseButton={false} title="test-title" />);

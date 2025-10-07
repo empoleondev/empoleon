@@ -125,9 +125,7 @@ export function useField<
   T,
   Mode extends FormMode = 'controlled',
   FieldType extends GetInputPropsType = 'input',
->(
-  input: UseFieldInput<T, FieldType, Mode>
-): UseFieldReturnType<T, FieldType, Mode> {
+>(input: UseFieldInput<T, FieldType, Mode>): UseFieldReturnType<T, FieldType, Mode> {
   const props = mergeProps(
     {
       mode: 'controlled' as Mode,
@@ -146,8 +144,8 @@ export function useField<
   const [touchedState, setTouchedState] = createSignal(props.initialTouched || false);
   const [isValidating, setIsValidating] = createSignal(false);
 
-  const errorResolver = createMemo(() =>
-    props.resolveValidationError || ((err: any) => err as JSX.Element)
+  const errorResolver = createMemo(
+    () => props.resolveValidationError || ((err: any) => err as JSX.Element)
   );
 
   const setTouched = (val: boolean, { updateState = props.mode === 'controlled' } = {}) => {
@@ -182,7 +180,7 @@ export function useField<
     }
 
     if (updateKey) {
-      setKey(prev => prev + 1);
+      setKey((prev) => prev + 1);
     }
 
     if (props.validateOnChange) {

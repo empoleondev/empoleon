@@ -1,13 +1,13 @@
-import { splitProps, JSX, onMount } from 'solid-js';
+import { JSX, onMount, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
   createVarsResolver,
   ElementProps,
+  EmpoleonSpacing,
   factory,
   Factory,
   getSpacing,
-  EmpoleonSpacing,
   StylesApiProps,
   useProps,
   useStyles,
@@ -51,7 +51,7 @@ const varsResolver = createVarsResolver<StackFactory>((_, props) => ({
   },
 }));
 
-export const Stack = factory<StackFactory>(_props => {
+export const Stack = factory<StackFactory>((_props) => {
   const props = useProps('Stack', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -65,7 +65,7 @@ export const Stack = factory<StackFactory>(_props => {
     'gap',
     'variant',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<StackFactory>({

@@ -9,13 +9,17 @@ interface GetContrastColorInput {
 }
 
 export function getContrastColor(props: GetContrastColorInput) {
-  const _autoContrast = typeof props.autoContrast === 'boolean' ? props.autoContrast : props.theme.autoContrast;
+  const _autoContrast =
+    typeof props.autoContrast === 'boolean' ? props.autoContrast : props.theme.autoContrast;
 
   if (!_autoContrast) {
     return 'var(--empoleon-color-white)';
   }
 
-  const parsed = parseThemeColor({ color: props.color || props.theme.primaryColor, theme: props.theme });
+  const parsed = parseThemeColor({
+    color: props.color || props.theme.primaryColor,
+    theme: props.theme,
+  });
   return parsed.isLight ? 'var(--empoleon-color-black)' : 'var(--empoleon-color-white)';
 }
 

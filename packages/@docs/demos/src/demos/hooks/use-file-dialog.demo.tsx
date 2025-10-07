@@ -1,7 +1,7 @@
+import { createMemo, For, Show } from 'solid-js';
 import { Button, Group, List } from '@empoleon/core';
 import { useFileDialog } from '@empoleon/hooks';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createMemo, For, Show } from 'solid-js';
 
 const code = `
 import { createMemo, For, Show } from 'solid-js';
@@ -50,9 +50,7 @@ function Demo() {
       </Group>
       <Show when={pickedFiles().length}>
         <List mt="lg">
-          <For each={pickedFiles()}>
-            {(file) => <List.Item>{file.name}</List.Item>}
-          </For>
+          <For each={pickedFiles()}>{(file) => <List.Item>{file.name}</List.Item>}</For>
         </List>
       </Show>
     </div>

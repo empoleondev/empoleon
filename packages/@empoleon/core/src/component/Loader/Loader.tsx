@@ -3,12 +3,12 @@ import {
   Box,
   BoxProps,
   createVarsResolver,
+  EmpoleonColor,
+  EmpoleonSize,
   factory,
   Factory,
   getSize,
   getThemeColor,
-  EmpoleonColor,
-  EmpoleonSize,
   StylesApiProps,
   useProps,
   useStyles,
@@ -75,7 +75,7 @@ const varsResolver = createVarsResolver<LoaderFactory>((theme, props) => ({
   },
 }));
 
-export const Loader = factory<LoaderFactory>(_props => {
+export const Loader = factory<LoaderFactory>((_props) => {
   const props = useProps('Loader', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'size',
@@ -91,7 +91,7 @@ export const Loader = factory<LoaderFactory>(_props => {
     'variant',
     'children',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<LoaderFactory>({

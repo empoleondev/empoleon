@@ -1,7 +1,7 @@
-import { createSignal, JSX } from 'solid-js';
 import { IconPictureInPicture } from '@tabler/icons-solidjs';
-import { Accordion } from './Accordion';
+import { createSignal, JSX } from 'solid-js';
 import { EmpoleonProvider } from '../../core';
+import { Accordion } from './Accordion';
 
 export default {
   title: 'Accordion',
@@ -11,7 +11,7 @@ export default {
         <Story />
       </EmpoleonProvider>
     ),
-  ]
+  ],
 };
 
 export const Variants = () => (
@@ -35,8 +35,8 @@ export const Variants = () => (
         <Accordion.Item value="flex">
           <Accordion.Control>Flexibility</Accordion.Control>
           <Accordion.Panel>
-            Configure components appearance and behavior with vast amount of settings or overwrite any
-            part of component styles
+            Configure components appearance and behavior with vast amount of settings or overwrite
+            any part of component styles
           </Accordion.Panel>
         </Accordion.Item>
 
@@ -69,8 +69,8 @@ export const Variants = () => (
         <Accordion.Item value="flex">
           <Accordion.Control>Flexibility</Accordion.Control>
           <Accordion.Panel>
-            Configure components appearance and behavior with vast amount of settings or overwrite any
-            part of component styles
+            Configure components appearance and behavior with vast amount of settings or overwrite
+            any part of component styles
           </Accordion.Panel>
         </Accordion.Item>
 
@@ -103,8 +103,8 @@ export const Variants = () => (
         <Accordion.Item value="flex">
           <Accordion.Control>Flexibility</Accordion.Control>
           <Accordion.Panel>
-            Configure components appearance and behavior with vast amount of settings or overwrite any
-            part of component styles
+            Configure components appearance and behavior with vast amount of settings or overwrite
+            any part of component styles
           </Accordion.Panel>
         </Accordion.Item>
 
@@ -137,8 +137,8 @@ export const Variants = () => (
         <Accordion.Item value="flex">
           <Accordion.Control>Flexibility</Accordion.Control>
           <Accordion.Panel>
-            Configure components appearance and behavior with vast amount of settings or overwrite any
-            part of component styles
+            Configure components appearance and behavior with vast amount of settings or overwrite
+            any part of component styles
           </Accordion.Panel>
         </Accordion.Item>
 
@@ -175,8 +175,8 @@ export const ChevronPositions = () => (
         <Accordion.Item value="flex">
           <Accordion.Control>Flexibility</Accordion.Control>
           <Accordion.Panel>
-            Configure components appearance and behavior with vast amount of settings or overwrite any
-            part of component styles
+            Configure components appearance and behavior with vast amount of settings or overwrite
+            any part of component styles
           </Accordion.Panel>
         </Accordion.Item>
 
@@ -210,8 +210,8 @@ export const ChevronPositions = () => (
         <Accordion.Item value="flex">
           <Accordion.Control>Flexibility</Accordion.Control>
           <Accordion.Panel>
-            Configure components appearance and behavior with vast amount of settings or overwrite any
-            part of component styles
+            Configure components appearance and behavior with vast amount of settings or overwrite
+            any part of component styles
           </Accordion.Panel>
         </Accordion.Item>
 
@@ -271,8 +271,8 @@ export const ControlledSingle = () => {
         <Accordion.Item value="flex">
           <Accordion.Control>Flexibility</Accordion.Control>
           <Accordion.Panel>
-            Configure components appearance and behavior with vast amount of settings or overwrite any
-            part of component styles
+            Configure components appearance and behavior with vast amount of settings or overwrite
+            any part of component styles
           </Accordion.Panel>
         </Accordion.Item>
 
@@ -291,7 +291,13 @@ export const ControlledSingle = () => {
 export const ControlledMultiple = () => {
   const [value, setValue] = createSignal<string[]>([]);
   return (
-    <Accordion multiple value={value()} onChange={setValue} style={{ 'max-width': '400px' }} mx="auto">
+    <Accordion
+      multiple
+      value={value()}
+      onChange={setValue}
+      style={{ 'max-width': '400px' }}
+      mx="auto"
+    >
       <>
         <Accordion.Item value="customize">
           <Accordion.Control>Customization</Accordion.Control>
@@ -303,8 +309,8 @@ export const ControlledMultiple = () => {
         <Accordion.Item value="flex">
           <Accordion.Control>Flexibility</Accordion.Control>
           <Accordion.Panel>
-            Configure components appearance and behavior with vast amount of settings or overwrite any
-            part of component styles
+            Configure components appearance and behavior with vast amount of settings or overwrite
+            any part of component styles
           </Accordion.Panel>
         </Accordion.Item>
 
@@ -415,23 +421,24 @@ export const Nested = () => (
             <Accordion.Item value="customize">
               <Accordion.Control>Customization</Accordion.Control>
               <Accordion.Panel>
-                Colors, fonts, shadows and many other parts are customizable to fit your design needs
+                Colors, fonts, shadows and many other parts are customizable to fit your design
+                needs
               </Accordion.Panel>
             </Accordion.Item>
 
             <Accordion.Item value="flex">
               <Accordion.Control>Flexibility</Accordion.Control>
               <Accordion.Panel>
-                Configure components appearance and behavior with vast amount of settings or overwrite any
-                part of component styles
+                Configure components appearance and behavior with vast amount of settings or
+                overwrite any part of component styles
               </Accordion.Panel>
             </Accordion.Item>
 
             <Accordion.Item value="focus">
               <Accordion.Control>No annoying focus ring</Accordion.Control>
               <Accordion.Panel>
-                With new :focus-visible pseudo-class focus ring appears only when user navigates with
-                keyboard
+                With new :focus-visible pseudo-class focus ring appears only when user navigates
+                with keyboard
               </Accordion.Panel>
             </Accordion.Item>
           </>
@@ -447,23 +454,24 @@ export const Nested = () => (
             <Accordion.Item value="customize">
               <Accordion.Control>Customization</Accordion.Control>
               <Accordion.Panel>
-                Colors, fonts, shadows and many other parts are customizable to fit your design needs
+                Colors, fonts, shadows and many other parts are customizable to fit your design
+                needs
               </Accordion.Panel>
             </Accordion.Item>
 
             <Accordion.Item value="flex">
               <Accordion.Control>Flexibility</Accordion.Control>
               <Accordion.Panel>
-                Configure components appearance and behavior with vast amount of settings or overwrite any
-                part of component styles
+                Configure components appearance and behavior with vast amount of settings or
+                overwrite any part of component styles
               </Accordion.Panel>
             </Accordion.Item>
 
             <Accordion.Item value="focus">
               <Accordion.Control>No annoying focus ring</Accordion.Control>
               <Accordion.Panel>
-                With new :focus-visible pseudo-class focus ring appears only when user navigates with
-                keyboard
+                With new :focus-visible pseudo-class focus ring appears only when user navigates
+                with keyboard
               </Accordion.Panel>
             </Accordion.Item>
           </>

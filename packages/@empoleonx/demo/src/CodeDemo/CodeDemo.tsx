@@ -8,8 +8,8 @@ export interface CodeDemoProps extends DemoCodeProps, DemoAreaProps {}
 export function CodeDemo(props: CodeDemoProps) {
   const mergedProps = mergeProps({
     ...props,
-    defaultExpanded: true
-  })
+    defaultExpanded: true,
+  });
 
   return (
     <DemoRoot>

@@ -10,7 +10,7 @@ export function useValidatedState<T>(
     lastValidValue: Accessor<T | undefined>;
     valid: Accessor<boolean>;
   },
-  (val: T) => void
+  (val: T) => void,
 ] {
   const [value, setValue] = createSignal(initialValue);
   const [lastValidValue, setLastValidValue] = createSignal(

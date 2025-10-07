@@ -1,5 +1,5 @@
-import { Editor } from '@empoleon/solid-tiptap';
 import { createSafeContext, GetStylesApi } from '@empoleon/core';
+import { Editor } from '@empoleon/solid-tiptap';
 import { RichTextEditorLabels } from './labels';
 import type { RichTextEditorFactory } from './RichTextEditor';
 

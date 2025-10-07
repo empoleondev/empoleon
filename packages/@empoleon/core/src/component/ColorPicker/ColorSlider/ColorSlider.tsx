@@ -1,17 +1,12 @@
-import { createEffect, createSignal, splitProps, JSX, Index } from 'solid-js';
-import {
-  clampUseMovePosition,
-  useMergedRef,
-  useMove,
-  UseMovePosition,
-} from '@empoleon/hooks';
+import { createEffect, createSignal, Index, JSX, splitProps } from 'solid-js';
+import { clampUseMovePosition, useMergedRef, useMove, UseMovePosition } from '@empoleon/hooks';
 import {
   Box,
   BoxProps,
   ElementProps,
+  EmpoleonSize,
   factory,
   Factory,
-  EmpoleonSize,
   rem,
   StylesApiProps,
   useEmpoleonTheme,
@@ -52,7 +47,7 @@ export type ColorSliderFactory = Factory<{
   stylesNames: ColorSliderStylesNames;
 }>;
 
-export const ColorSlider = factory<ColorSliderFactory>(_props => {
+export const ColorSlider = factory<ColorSliderFactory>((_props) => {
   const props = useProps('ColorSlider', null, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -74,7 +69,7 @@ export const ColorSlider = factory<ColorSliderFactory>(_props => {
     'onScrubEnd',
     '__staticSelector',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const size = local.size ?? 'md';
@@ -91,7 +86,7 @@ export const ColorSlider = factory<ColorSliderFactory>(_props => {
     classNames: local.classNames,
     styles: local.styles,
     unstyled: local.unstyled,
-    attributes: local.attributes
+    attributes: local.attributes,
   });
 
   const ctxGetStyles = useColorPickerContext()?.getStyles;
@@ -100,7 +95,8 @@ export const ColorSlider = factory<ColorSliderFactory>(_props => {
   const theme = useEmpoleonTheme();
   const [position, setPosition] = createSignal({ y: 0, x: local.value / local.maxValue });
   let positionRef: { x: number; y: number } = position();
-  const getChangeValue = (val: number) => (local.round ? Math.round(val * local.maxValue) : val * local.maxValue);
+  const getChangeValue = (val: number) =>
+    local.round ? Math.round(val * local.maxValue) : val * local.maxValue;
   const { ref: sliderRef } = useMove(
     ({ x, y }: UseMovePosition) => {
       positionRef = { x, y };
@@ -141,11 +137,11 @@ export const ColorSlider = factory<ColorSliderFactory>(_props => {
     }
   };
 
-  const layers = <Index each={local.overlays}>
-    {(overlay) => (
-      <Box component='div' {...getStyles('sliderOverlay')} style={overlay()} />
-    )}
-  </Index>
+  const layers = (
+    <Index each={local.overlays}>
+      {(overlay) => <Box component="div" {...getStyles('sliderOverlay')} style={overlay()} />}
+    </Index>
+  );
 
   return (
     <Box
@@ -167,7 +163,7 @@ export const ColorSlider = factory<ColorSliderFactory>(_props => {
 
       <Thumb
         position={position()}
-        {...getStyles('thumb', { style: { top: rem(1), background: thumbColor() } }) as any}
+        {...(getStyles('thumb', { style: { top: rem(1), background: thumbColor() } }) as any)}
       />
     </Box>
   );

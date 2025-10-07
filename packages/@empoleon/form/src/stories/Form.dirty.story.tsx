@@ -1,20 +1,18 @@
 import { IconTrash } from '@tabler/icons-solidjs';
-import { ActionIcon, Button, Code, Group, EmpoleonProvider, Text, TextInput } from '@empoleon/core';
+import { createEffect, createSignal, For, JSX } from 'solid-js';
+import { ActionIcon, Button, Code, EmpoleonProvider, Group, Text, TextInput } from '@empoleon/core';
 import { useForm } from '../use-form';
-import { createEffect, JSX } from 'solid-js';
 
 export default {
-   title: 'Form',
-   decorators: [
+  title: 'Form',
+  decorators: [
     (Story: () => JSX.Element) => (
       <EmpoleonProvider>
         <Story />
       </EmpoleonProvider>
     ),
-  ]
+  ],
 };
-
-import { createSignal, For } from 'solid-js';
 
 export function Dirty() {
   const [formArray, setFormArray] = createSignal([
@@ -40,17 +38,17 @@ export function Dirty() {
   ];
 
   const removeListItem = (index: number) => {
-    setFormArray(prev => prev.filter((_, i) => i !== index));
+    setFormArray((prev) => prev.filter((_, i) => i !== index));
   };
 
   const insertListItem = (newItem: { one: string; two: string }) => {
-    setFormArray(prev => [...prev, newItem]);
+    setFormArray((prev) => [...prev, newItem]);
   };
 
   const updateItem = (index: number, field: keyof { one: string; two: string }, value: string) => {
-    setFormArray(prev => prev.map((item, i) =>
-      i === index ? { ...item, [field]: value } : item
-    ));
+    setFormArray((prev) =>
+      prev.map((item, i) => (i === index ? { ...item, [field]: value } : item))
+    );
   };
 
   const isDirty = () => {
@@ -76,9 +74,7 @@ export function Dirty() {
           </Group>
         )}
       </For>
-      <Button onClick={() => insertListItem({ one: '', two: '' })}>
-        Add item
-      </Button>
+      <Button onClick={() => insertListItem({ one: '', two: '' })}>Add item</Button>
       <Text>{isDirty() ? 'Dirty' : 'Not Dirty'}</Text>
       <Code block>{JSON.stringify(formArray(), null, 2)}</Code>
     </>
@@ -94,7 +90,7 @@ export function DirtyUncontrolled() {
   });
 
   return (
-    <div style={{ 'max-width': '500px', margin: 'auto', 'padding': '40px' }}>
+    <div style={{ 'max-width': '500px', margin: 'auto', padding: '40px' }}>
       <TextInput {...form.getInputProps('text')} />
       <div>{form.isDirty() ? 'Dirty' : 'Not dirty'}</div>
     </div>

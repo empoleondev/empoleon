@@ -4,12 +4,12 @@ import {
   Box,
   BoxProps,
   ElementProps,
-  getDefaultZIndex,
-  getShadow,
-  getSpacing,
   EmpoleonShadow,
   EmpoleonSize,
   EmpoleonSpacing,
+  getDefaultZIndex,
+  getShadow,
+  getSpacing,
 } from '../../core';
 import { OptionalPortal, PortalProps } from '../Portal';
 import { TransitionOverride } from '../Transition';
@@ -105,7 +105,7 @@ export function ModalBase(props: ModalBaseProps) {
     '__vars',
     'unstyled',
     'removeScrollProps',
-    'ref'
+    'ref',
   ]);
 
   const openedFn = () => {
@@ -120,8 +120,8 @@ export function ModalBase(props: ModalBaseProps) {
     trapFocus: () => local.trapFocus,
     closeOnEscape: () => local.closeOnEscape,
     onClose: local.onClose,
-    returnFocus: () => local.returnFocus
-  })
+    returnFocus: () => local.returnFocus,
+  });
 
   const { ...otherRemoveScrollProps } = local.removeScrollProps || {};
 
@@ -167,6 +167,6 @@ export function ModalBase(props: ModalBaseProps) {
       </ModalBaseProvider>
     </OptionalPortal>
   );
-};
+}
 
 ModalBase.displayName = '@empoleon/core/ModalBase';

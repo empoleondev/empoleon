@@ -20,7 +20,7 @@ function Demo() {
 
 function Demo() {
   return (
-    <Popover width='200px' position="bottom" clickOutsideEvents={['mouseup', 'touchend']}>
+    <Popover width="200px" position="bottom" clickOutsideEvents={['mouseup', 'touchend']}>
       <Popover.Target>
         <Button>Toggle popover</Button>
       </Popover.Target>

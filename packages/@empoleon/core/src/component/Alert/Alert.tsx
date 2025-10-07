@@ -5,11 +5,11 @@ import {
   BoxProps,
   createVarsResolver,
   ElementProps,
+  EmpoleonColor,
+  EmpoleonRadius,
   factory,
   Factory,
   getRadius,
-  EmpoleonColor,
-  EmpoleonRadius,
   StylesApiProps,
   useProps,
   useStyles,
@@ -68,27 +68,25 @@ export type AlertFactory = Factory<{
   variant: AlertVariant;
 }>;
 
-const varsResolver = createVarsResolver<AlertFactory>(
-  (theme, props) => {
-    const colors = theme.variantColorResolver({
-      color: props.color || theme.primaryColor,
-      theme,
-      variant: props.variant || 'light',
-      autoContrast: props.autoContrast,
-    });
+const varsResolver = createVarsResolver<AlertFactory>((theme, props) => {
+  const colors = theme.variantColorResolver({
+    color: props.color || theme.primaryColor,
+    theme,
+    variant: props.variant || 'light',
+    autoContrast: props.autoContrast,
+  });
 
-    return {
-      root: {
-        '--alert-radius': props.radius === undefined ? undefined : getRadius(props.radius),
-        '--alert-bg': props.color || props.variant ? colors.background : undefined,
-        '--alert-color': colors.color,
-        '--alert-bd': props.color || props.variant ? colors.border : undefined,
-      },
-    };
-  }
-);
+  return {
+    root: {
+      '--alert-radius': props.radius === undefined ? undefined : getRadius(props.radius),
+      '--alert-bg': props.color || props.variant ? colors.background : undefined,
+      '--alert-color': colors.color,
+      '--alert-bd': props.color || props.variant ? colors.border : undefined,
+    },
+  };
+});
 
-export const Alert = factory<AlertFactory>(_props => {
+export const Alert = factory<AlertFactory>((_props) => {
   const props = useProps('Alert', null, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -109,7 +107,7 @@ export const Alert = factory<AlertFactory>(_props => {
     'variant',
     'autoContrast',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<AlertFactory>({
@@ -133,7 +131,7 @@ export const Alert = factory<AlertFactory>(_props => {
   return (
     <Box
       id={rootId}
-      {...getStyles('root', { variant: local.variant  })}
+      {...getStyles('root', { variant: local.variant })}
       variant={local.variant}
       ref={local.ref}
       {...others}
@@ -141,20 +139,28 @@ export const Alert = factory<AlertFactory>(_props => {
       aria-describedby={bodyId}
       aria-labelledby={titleId}
     >
-      <Box component='div' {...getStyles('wrapper')}>
-        {local.icon && <Box component='div' {...getStyles('icon')}>{local.icon}</Box>}
+      <Box component="div" {...getStyles('wrapper')}>
+        {local.icon && (
+          <Box component="div" {...getStyles('icon')}>
+            {local.icon}
+          </Box>
+        )}
 
-        <Box component='div' {...getStyles('body')}>
+        <Box component="div" {...getStyles('body')}>
           {local.title && (
-            <Box component='div' {...getStyles('title')} data-with-close-button={local.withCloseButton || undefined}>
-              <Box component='span' id={titleId} {...getStyles('label')}>
+            <Box
+              component="div"
+              {...getStyles('title')}
+              data-with-close-button={local.withCloseButton || undefined}
+            >
+              <Box component="span" id={titleId} {...getStyles('label')}>
                 {local.title}
               </Box>
             </Box>
           )}
 
           {local.children && (
-            <Box component='div' id={bodyId} {...getStyles('message')} data-variant={local.variant}>
+            <Box component="div" id={bodyId} {...getStyles('message')} data-variant={local.variant}>
               {local.children}
             </Box>
           )}

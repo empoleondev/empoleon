@@ -1,7 +1,7 @@
+import { createEffect } from 'solid-js';
 import { Box, TextInput } from '@empoleon/core';
 import { useForm } from '@empoleon/form';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createEffect } from 'solid-js';
 
 const code = `
 import { useEffect } from 'react';
@@ -71,11 +71,7 @@ function Demo() {
 
   return (
     <Box maw={340} mx="auto">
-      <TextInput
-        label="Name"
-        placeholder="Name"
-        {...form.getInputProps('name')}
-      />
+      <TextInput label="Name" placeholder="Name" {...form.getInputProps('name')} />
       <TextInput
         mt="md"
         label="Occupation"

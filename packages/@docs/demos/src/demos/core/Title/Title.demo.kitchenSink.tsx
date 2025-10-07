@@ -13,14 +13,12 @@ function Demo() {
 }
 `;
 
-function Demo(props: TitleProps & {
-  text?: string;
-}) {
-  return (
-    <Title {...props}>
-      {props.text}
-    </Title>
-  );
+function Demo(
+  props: TitleProps & {
+    text?: string;
+  }
+) {
+  return <Title {...props}>{props.text}</Title>;
 }
 
 export const kitchenSink: EmpoleonDemo = {
@@ -89,8 +87,10 @@ export const kitchenSink: EmpoleonDemo = {
     {
       prop: 'text',
       type: 'textarea',
-      initialValue: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure doloremque quas dolorum. Quo amet earum alias consequuntur quam accusamus a quae beatae, odio, quod provident consectetur non repudiandae enim adipisci?',
-      libraryValue: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure doloremque quas dolorum. Quo amet earum alias consequuntur quam accusamus a quae beatae, odio, quod provident consectetur non repudiandae enim adipisci?',
+      initialValue:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure doloremque quas dolorum. Quo amet earum alias consequuntur quam accusamus a quae beatae, odio, quod provident consectetur non repudiandae enim adipisci?',
+      libraryValue:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure doloremque quas dolorum. Quo amet earum alias consequuntur quam accusamus a quae beatae, odio, quod provident consectetur non repudiandae enim adipisci?',
     },
   ],
 };

@@ -24,7 +24,10 @@ describe('@empoleon/core/Text', () => {
 
   it('sets data-truncate attribute based on truncate prop', () => {
     const { container, rerender } = render(() => <Text truncate="start" />);
-    expect(container.querySelector('.empoleon-Text-root')).toHaveAttribute('data-truncate', 'start');
+    expect(container.querySelector('.empoleon-Text-root')).toHaveAttribute(
+      'data-truncate',
+      'start'
+    );
 
     rerender(() => <Text truncate="end" />);
     expect(container.querySelector('.empoleon-Text-root')).toHaveAttribute('data-truncate', 'end');

@@ -4,7 +4,7 @@ import { getPropsValue } from '../shared/get-props-value';
 
 interface Options<Props = any> {
   component: (props: Props) => JSX.Element;
-  props: Props | (() => Props)
+  props: Props | (() => Props);
   selector?: string;
 }
 
@@ -16,25 +16,25 @@ export function itSupportsSizeProps<Props>(
   const baseProps = getPropsValue(options.props);
 
   it(name, () => {
-    const propsWithWTheme = { ...baseProps, w: "xl" } as Props & { w: string };
+    const propsWithWTheme = { ...baseProps, w: 'xl' } as Props & { w: string };
     const { container: theme } = render(() => <options.component {...propsWithWTheme} />);
 
-    const propsWithW = { ...baseProps, w: "10%" } as Props & { w: string };
+    const propsWithW = { ...baseProps, w: '10%' } as Props & { w: string };
     const { container: w } = render(() => <options.component {...propsWithW} />);
 
-    const propsWithMiw = { ...baseProps, miw: "10vh" } as Props & { miw: string };
+    const propsWithMiw = { ...baseProps, miw: '10vh' } as Props & { miw: string };
     const { container: miw } = render(() => <options.component {...propsWithMiw} />);
 
-    const propsWithMaw = { ...baseProps, maw: "20%" } as Props & { maw: string };
+    const propsWithMaw = { ...baseProps, maw: '20%' } as Props & { maw: string };
     const { container: maw } = render(() => <options.component {...propsWithMaw} />);
 
-    const propsWithH = { ...baseProps, h: "10%" } as Props & { h: string };
+    const propsWithH = { ...baseProps, h: '10%' } as Props & { h: string };
     const { container: h } = render(() => <options.component {...propsWithH} />);
 
-    const propsWithMih = { ...baseProps, mih: "10vh" } as Props & { mih: string };
+    const propsWithMih = { ...baseProps, mih: '10vh' } as Props & { mih: string };
     const { container: mih } = render(() => <options.component {...propsWithMih} />);
 
-    const propsWithMah = { ...baseProps, mah: "20%" } as Props & { mah: string };
+    const propsWithMah = { ...baseProps, mah: '20%' } as Props & { mah: string };
     const { container: mah } = render(() => <options.component {...propsWithMah} />);
 
     expect(theme.querySelector(selector)).toHaveStyle({ width: 'var(--empoleon-spacing-xl)' });

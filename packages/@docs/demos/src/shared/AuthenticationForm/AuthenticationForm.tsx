@@ -1,4 +1,5 @@
 import { IconAt, IconLock } from '@tabler/icons-solidjs';
+import { createSignal, JSX } from 'solid-js';
 import {
   Anchor,
   Button,
@@ -11,7 +12,6 @@ import {
   TextInput,
 } from '@empoleon/core';
 import { useForm } from '@empoleon/form';
-import { createSignal, JSX } from 'solid-js';
 
 export interface AuthenticationFormProps {
   noShadow?: boolean;
@@ -92,7 +92,7 @@ export function AuthenticationForm(props: AuthenticationFormProps) {
           required
           placeholder="Your email"
           label="Email"
-          leftSection={<IconAt size={16} stroke='1.5' />}
+          leftSection={<IconAt size={16} stroke="1.5" />}
           radius="md"
           {...form.getInputProps('email')}
         />
@@ -102,7 +102,7 @@ export function AuthenticationForm(props: AuthenticationFormProps) {
           required
           placeholder="Password"
           label="Password"
-          leftSection={<IconLock size={16} stroke='1.5' />}
+          leftSection={<IconLock size={16} stroke="1.5" />}
           radius="md"
           {...form.getInputProps('password')}
         />
@@ -113,7 +113,7 @@ export function AuthenticationForm(props: AuthenticationFormProps) {
             required
             label="Confirm Password"
             placeholder="Confirm password"
-            leftSection={<IconLock size={16} stroke='1.5' />}
+            leftSection={<IconLock size={16} stroke="1.5" />}
             radius="md"
             {...form.getInputProps('confirmPassword')}
           />

@@ -1,6 +1,6 @@
 import { JSX } from 'solid-js';
-import { TableOfContents } from './TableOfContents';
 import { EmpoleonProvider } from '../../core';
+import { TableOfContents } from './TableOfContents';
 
 export default {
   title: 'TableOfContents',
@@ -15,7 +15,7 @@ export default {
 
 export function Usage() {
   return (
-    <div style={{ 'padding': '40px', 'max-width': '350px' }}>
+    <div style={{ padding: '40px', 'max-width': '350px' }}>
       <TableOfContents
         size="sm"
         initialData={[

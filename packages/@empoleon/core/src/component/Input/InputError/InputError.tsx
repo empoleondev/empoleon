@@ -1,12 +1,13 @@
+import { splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
   createVarsResolver,
   ElementProps,
+  EmpoleonFontSize,
   factory,
   Factory,
   getFontSize,
-  EmpoleonFontSize,
   rem,
   StylesApiProps,
   useProps,
@@ -14,7 +15,6 @@ import {
 } from '../../../core';
 import { useInputWrapperContext } from '../InputWrapper.context';
 import classes from '../Input.module.css';
-import { splitProps } from 'solid-js';
 
 export type InputErrorStylesNames = 'error';
 export type InputErrorCssVariables = {
@@ -41,11 +41,12 @@ export type InputErrorFactory = Factory<{
 
 const varsResolver = createVarsResolver<InputErrorFactory>((_, props) => ({
   error: {
-    '--input-error-size': props.size === undefined ? undefined : `calc(${getFontSize(props.size)} - ${rem(2)})`,
+    '--input-error-size':
+      props.size === undefined ? undefined : `calc(${getFontSize(props.size)} - ${rem(2)})`,
   },
 }));
 
-export const InputError = factory<InputErrorFactory>(_props => {
+export const InputError = factory<InputErrorFactory>((_props) => {
   const props = useProps('InputError', null, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -58,7 +59,7 @@ export const InputError = factory<InputErrorFactory>(_props => {
     '__staticSelector',
     '__inheritStyles',
     'variant',
-    'ref'
+    'ref',
   ]);
 
   const _getStyles = useStyles<InputErrorFactory>({
@@ -86,7 +87,10 @@ export const InputError = factory<InputErrorFactory>(_props => {
       ref={local.ref}
       variant={local.variant}
       size={local.size}
-      {...getStyles('error', ctx?.getStyles ? { className: local.className, style: local.style } : undefined)}
+      {...getStyles(
+        'error',
+        ctx?.getStyles ? { className: local.className, style: local.style } : undefined
+      )}
       {...others}
     />
   );

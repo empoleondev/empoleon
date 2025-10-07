@@ -1,5 +1,5 @@
-import { JSX, mergeProps } from 'solid-js';
 import dayjs from 'dayjs';
+import { JSX, mergeProps } from 'solid-js';
 import type { DateLabelFormat, DayOfWeek } from '../../../types';
 
 interface GetWeekdaysNamesInput {
@@ -10,12 +10,12 @@ interface GetWeekdaysNamesInput {
 
 export function getWeekdayNames(props: GetWeekdaysNamesInput) {
   const merged = mergeProps(
-      {
-        format: 'dd',
-        firstDayOfWeek: 1,
-      },
-      props
-    );
+    {
+      format: 'dd',
+      firstDayOfWeek: 1,
+    },
+    props
+  );
 
   const baseDate = dayjs().day(merged.firstDayOfWeek);
   const labels: Array<string | JSX.Element> = [];

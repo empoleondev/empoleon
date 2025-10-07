@@ -1,7 +1,7 @@
 import Autoplay from 'embla-carousel-autoplay';
+import { createSignal, For, Index, JSX } from 'solid-js';
 import { Box, Button, EmpoleonProvider } from '@empoleon/core';
 import { Carousel } from './Carousel';
-import { createSignal, For, Index, JSX } from 'solid-js';
 
 export default {
   title: 'Carousel',
@@ -11,7 +11,7 @@ export default {
         <Story />
       </EmpoleonProvider>
     ),
-  ]
+  ],
 };
 
 const slides = [1, 2, 3, 4];
@@ -22,7 +22,7 @@ export function Usage() {
       <Carousel
         slideGap="md"
         slideSize={{ base: '100%', '400px': '50%', '600px': '33.333333%' }}
-        height='200px'
+        height="200px"
         withIndicators
         emblaOptions={{ align: 'start' }}
         type="container"
@@ -42,7 +42,7 @@ export function Usage() {
 export function Unstyled() {
   return (
     <div style={{ padding: '40px', 'max-width': '500px' }}>
-      <Carousel slideSize="70%" slideGap="md" height='200px' unstyled>
+      <Carousel slideSize="70%" slideGap="md" height="200px" unstyled>
         <Carousel.Slide bg="pink.1">
           <Box bg="pink.5">Slide 1</Box>
         </Carousel.Slide>
@@ -66,7 +66,7 @@ export function InitialSlide() {
       <Carousel
         slideSize="70%"
         slideGap="md"
-        height='200px'
+        height="200px"
         emblaOptions={{ loop: true }}
         initialSlide={2}
       >
@@ -90,7 +90,7 @@ export function InitialSlide() {
 export function SlidesToScroll() {
   return (
     <div style={{ padding: '40px', 'max-width': '500px' }}>
-      <Carousel slideSize="50%" slideGap="md" height='200px' emblaOptions={{ slidesToScroll: 2 }}>
+      <Carousel slideSize="50%" slideGap="md" height="200px" emblaOptions={{ slidesToScroll: 2 }}>
         <Carousel.Slide bg="pink.1">
           <Box bg="pink.5">Slide 1</Box>
         </Carousel.Slide>
@@ -111,7 +111,7 @@ export function SlidesToScroll() {
 export function Vertical() {
   return (
     <div style={{ padding: '40px', 'max-width': '500px' }}>
-      <Carousel slideSize={120} height='200px' slideGap="md" orientation="vertical">
+      <Carousel slideSize={120} height="200px" slideGap="md" orientation="vertical">
         <Carousel.Slide bg="pink.1">
           <Box bg="pink.5">Slide 1</Box>
         </Carousel.Slide>
@@ -135,7 +135,7 @@ export function AutoPlay() {
   return (
     <div style={{ padding: '40px', 'max-width': '500px' }}>
       <Carousel
-        height='200px'
+        height="200px"
         plugins={[autoplay]}
         onMouseEnter={autoplay.stop}
         onMouseLeave={autoplay.reset}
@@ -165,7 +165,7 @@ export function DynamicSlides() {
 
   return (
     <div style={{ padding: '40px', 'max-width': '500px' }}>
-      <Carousel height='200px' withIndicators>
+      <Carousel height="200px" withIndicators>
         <Index each={slideIndices()}>
           {(index) => (
             <Carousel.Slide style={{ height: '200px', background: 'pink', width: '100%' }}>

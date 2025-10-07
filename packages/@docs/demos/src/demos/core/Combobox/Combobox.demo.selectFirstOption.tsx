@@ -1,6 +1,6 @@
+import { createEffect, createSignal, For, Show } from 'solid-js';
 import { Combobox, TextInput, useCombobox } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createEffect, createSignal, For, Show } from 'solid-js';
 
 const code = `
 import { createEffect, createSignal, For, Show } from 'solid-js';
@@ -122,11 +122,7 @@ function Demo() {
             fallback={<Combobox.Empty>Nothing found</Combobox.Empty>}
           >
             <For each={filteredOptions}>
-              {(item) => (
-                <Combobox.Option value={item}>
-                  {item}
-                </Combobox.Option>
-              )}
+              {(item) => <Combobox.Option value={item}>{item}</Combobox.Option>}
             </For>
           </Show>
         </Combobox.Options>

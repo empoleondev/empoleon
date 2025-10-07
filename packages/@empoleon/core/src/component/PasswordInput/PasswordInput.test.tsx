@@ -8,30 +8,37 @@ const defaultProps: PasswordInputProps = {
 
 describe('@empoleon/core/PasswordInput', () => {
   tests.axe([
-    () => <PasswordInput
-      aria-label="test-label"
-      visibilityToggleButtonProps={{ 'aria-label': 'test' }}
-    />,
-    () => <PasswordInput
-      label="test-label"
-      visibilityToggleButtonProps={{ 'aria-label': 'test' }}
-    />,
-    () => <PasswordInput
-      label="test-label"
-      visibilityToggleButtonProps={{ 'aria-label': 'test' }}
-      error
-    />,
-    () => <PasswordInput
-      label="test-label"
-      visibilityToggleButtonProps={{ 'aria-label': 'test' }}
-      error="test-error"
-      id="test"
-    />,
-    () => <PasswordInput
-      label="test-label"
-      visibilityToggleButtonProps={{ 'aria-label': 'test' }}
-      description="test-description"
-    />,
+    () => (
+      <PasswordInput
+        aria-label="test-label"
+        visibilityToggleButtonProps={{ 'aria-label': 'test' }}
+      />
+    ),
+    () => (
+      <PasswordInput label="test-label" visibilityToggleButtonProps={{ 'aria-label': 'test' }} />
+    ),
+    () => (
+      <PasswordInput
+        label="test-label"
+        visibilityToggleButtonProps={{ 'aria-label': 'test' }}
+        error
+      />
+    ),
+    () => (
+      <PasswordInput
+        label="test-label"
+        visibilityToggleButtonProps={{ 'aria-label': 'test' }}
+        error="test-error"
+        id="test"
+      />
+    ),
+    () => (
+      <PasswordInput
+        label="test-label"
+        visibilityToggleButtonProps={{ 'aria-label': 'test' }}
+        description="test-description"
+      />
+    ),
   ]);
 
   tests.itSupportsSystemProps<PasswordInputProps, __InputStylesNames>({

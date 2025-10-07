@@ -1,5 +1,5 @@
 import { Component } from 'solid-js';
-import { createSafeContext, GetStylesApi, EmpoleonRadius } from '../../core';
+import { createSafeContext, EmpoleonRadius, GetStylesApi } from '../../core';
 import type { DrawerRootFactory } from './DrawerRoot';
 
 export type ScrollAreaComponent = Component<any>;

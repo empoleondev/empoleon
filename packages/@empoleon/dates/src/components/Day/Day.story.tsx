@@ -1,6 +1,6 @@
 import { For, JSX } from 'solid-js';
-import { Day } from './Day';
 import { EmpoleonProvider } from '@empoleon/core';
+import { Day } from './Day';
 
 export default {
   title: 'Day',
@@ -65,15 +65,11 @@ export function Range() {
 }
 
 export function Sizes() {
- const sizes = ['xs', 'sm', 'md', 'lg', 'xl'] as const;
+  const sizes = ['xs', 'sm', 'md', 'lg', 'xl'] as const;
 
- return (
-   <div style={{ padding: '40px' }}>
-     <For each={sizes}>
-       {(size) => (
-         <Day date={dateString} selected size={size} />
-       )}
-     </For>
-   </div>
- );
+  return (
+    <div style={{ padding: '40px' }}>
+      <For each={sizes}>{(size) => <Day date={dateString} selected size={size} />}</For>
+    </div>
+  );
 }

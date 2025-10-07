@@ -72,39 +72,39 @@ describe('@empoleon/dates/DatePickerInput', () => {
   });
 
   it('supports valueFormat prop', () => {
-    const { container, rerender } = render(
-      () => <DatePickerInput {...defaultProps} valueFormat="MMMM" value="2022-04-11" />
-    );
+    const { container, rerender } = render(() => (
+      <DatePickerInput {...defaultProps} valueFormat="MMMM" value="2022-04-11" />
+    ));
     expectValue(container, 'April');
 
-    rerender(
-      () => <DatePickerInput
+    rerender(() => (
+      <DatePickerInput
         {...defaultProps}
         type="multiple"
         valueFormat="MMMM"
         value={['2022-04-11', '2022-05-11']}
       />
-    );
+    ));
     expectValue(container, 'April, May');
 
-    rerender(
-      () => <DatePickerInput
+    rerender(() => (
+      <DatePickerInput
         {...defaultProps}
         type="range"
         valueFormat="MMMM"
         value={['2022-04-11', '2022-05-11']}
       />
-    );
+    ));
     expectValue(container, 'April – May');
   });
 
   it('has correct default __staticSelector', () => {
-    const { container } = render(
-      () => <DatePickerInput
+    const { container } = render(() => (
+      <DatePickerInput
         {...defaultProps}
         popoverProps={{ opened: true, withinPortal: false, transitionProps: { duration: 0 } }}
       />
-    );
+    ));
     expect(container.querySelector('[data-dates-input]')).toHaveClass(
       'empoleon-DatePickerInput-input'
     );
@@ -114,9 +114,9 @@ describe('@empoleon/dates/DatePickerInput', () => {
 
   it('supports controlled state (dropdown click)', async () => {
     const spy = vi.fn();
-    const { container } = render(
-      () => <DatePickerInput {...defaultProps} value="2022-04-11" onChange={spy} />
-    );
+    const { container } = render(() => (
+      <DatePickerInput {...defaultProps} value="2022-04-11" onChange={spy} />
+    ));
     await clickInput(container);
     await clickControl(container, 4);
     expectValue(container, 'April 11, 2022');

@@ -1,7 +1,0 @@
-Need to fix
-
-components:
-Card - Fucksup section
-
-
-

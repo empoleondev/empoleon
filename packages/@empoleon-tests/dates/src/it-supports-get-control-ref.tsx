@@ -1,6 +1,6 @@
-import { render } from '@empoleon-tests/core';
 import { JSX } from 'solid-js';
 import { vi } from 'vitest';
+import { render } from '@empoleon-tests/core';
 
 export interface ComponentTestProps {
   __getControlRef?: (rowIndex: number, cellIndex: number, node: HTMLButtonElement) => void;

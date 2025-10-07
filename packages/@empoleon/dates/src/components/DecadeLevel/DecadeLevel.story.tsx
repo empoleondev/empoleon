@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
-import { DecadeLevel } from './DecadeLevel';
 import { createSignal, For, JSX } from 'solid-js';
 import { EmpoleonProvider } from '@empoleon/core';
+import { DecadeLevel } from './DecadeLevel';
 
 export default {
   title: 'DecadeLevel',
@@ -60,9 +60,7 @@ export function Sizes() {
   return (
     <div style={{ padding: '40px' }}>
       <For each={sizes}>
-        {(size) => (
-          <DecadeLevel decade={dayjs().format('YYYY-MM-DD')} size={size} mt="xl" />
-        )}
+        {(size) => <DecadeLevel decade={dayjs().format('YYYY-MM-DD')} size={size} mt="xl" />}
       </For>
     </div>
   );

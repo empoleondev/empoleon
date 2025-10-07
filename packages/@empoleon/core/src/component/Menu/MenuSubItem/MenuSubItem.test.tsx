@@ -53,7 +53,9 @@ describe('@empoleon/core/MenuSubItem', () => {
   });
 
   it('renders given leftSection and rightSection', () => {
-    render(() => <TestContainer leftSection="test-left-section" rightSection="test-right-section" />);
+    render(() => (
+      <TestContainer leftSection="test-left-section" rightSection="test-right-section" />
+    ));
     expect(screen.getByText('test-left-section')).toBeInTheDocument();
     expect(screen.getByText('test-right-section')).toBeInTheDocument();
   });

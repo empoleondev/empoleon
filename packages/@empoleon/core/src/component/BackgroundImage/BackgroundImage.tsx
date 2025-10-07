@@ -3,8 +3,8 @@ import {
   Box,
   BoxProps,
   createVarsResolver,
-  getRadius,
   EmpoleonRadius,
+  getRadius,
   polymorphicFactory,
   PolymorphicFactory,
   StylesApiProps,
@@ -38,7 +38,7 @@ const varsResolver = createVarsResolver<BackgroundImageFactory>((_, props) => ({
   root: { '--bi-radius': props.radius === undefined ? undefined : getRadius(props.radius) },
 }));
 
-export const BackgroundImage = polymorphicFactory<BackgroundImageFactory>(_props => {
+export const BackgroundImage = polymorphicFactory<BackgroundImageFactory>((_props) => {
   const props = useProps('BackgroundImage', null, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -51,7 +51,7 @@ export const BackgroundImage = polymorphicFactory<BackgroundImageFactory>(_props
     'src',
     'variant',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<BackgroundImageFactory>({

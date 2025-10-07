@@ -3,13 +3,13 @@ import {
   Box,
   BoxProps,
   createVarsResolver,
-  getRadius,
-  getSize,
-  getThemeColor,
   EmpoleonColor,
   EmpoleonGradient,
   EmpoleonRadius,
   EmpoleonSize,
+  getRadius,
+  getSize,
+  getThemeColor,
   polymorphicFactory,
   PolymorphicFactory,
   StylesApiProps,
@@ -84,32 +84,30 @@ export type BadgeFactory = PolymorphicFactory<{
 
 const defaultProps: Partial<BadgeProps> = {};
 
-const varsResolver = createVarsResolver<BadgeFactory>(
-  (theme, props) => {
-    const colors = theme.variantColorResolver({
-      color: props.color || theme.primaryColor,
-      theme,
-      gradient: props.gradient,
-      variant: props.variant || 'filled',
-      autoContrast: props.autoContrast,
-    });
+const varsResolver = createVarsResolver<BadgeFactory>((theme, props) => {
+  const colors = theme.variantColorResolver({
+    color: props.color || theme.primaryColor,
+    theme,
+    gradient: props.gradient,
+    variant: props.variant || 'filled',
+    autoContrast: props.autoContrast,
+  });
 
-    return {
-      root: {
-        '--badge-height': getSize(props.size, 'badge-height'),
-        '--badge-padding-x': getSize(props.size, 'badge-padding-x'),
-        '--badge-fz': getSize(props.size, 'badge-fz'),
-        '--badge-radius': props.radius === undefined ? undefined : getRadius(props.radius),
-        '--badge-bg': props.color || props.variant ? colors.background : undefined,
-        '--badge-color': props.color || props.variant ? colors.color : undefined,
-        '--badge-bd': props.color || props.variant ? colors.border : undefined,
-        '--badge-dot-color': props.variant === 'dot' ? getThemeColor(props.color, theme) : undefined,
-      },
-    };
-  }
-);
+  return {
+    root: {
+      '--badge-height': getSize(props.size, 'badge-height'),
+      '--badge-padding-x': getSize(props.size, 'badge-padding-x'),
+      '--badge-fz': getSize(props.size, 'badge-fz'),
+      '--badge-radius': props.radius === undefined ? undefined : getRadius(props.radius),
+      '--badge-bg': props.color || props.variant ? colors.background : undefined,
+      '--badge-color': props.color || props.variant ? colors.color : undefined,
+      '--badge-bd': props.color || props.variant ? colors.border : undefined,
+      '--badge-dot-color': props.variant === 'dot' ? getThemeColor(props.color, theme) : undefined,
+    },
+  };
+});
 
-export const Badge = polymorphicFactory<BadgeFactory>(_props => {
+export const Badge = polymorphicFactory<BadgeFactory>((_props) => {
   const props = useProps('Badge', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -130,7 +128,7 @@ export const Badge = polymorphicFactory<BadgeFactory>(_props => {
     'circle',
     'mod',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles({
@@ -163,13 +161,15 @@ export const Badge = polymorphicFactory<BadgeFactory>(_props => {
       {...others}
     >
       {local.leftSection && (
-        <Box component='span' {...getStyles('section')} data-position="left">
+        <Box component="span" {...getStyles('section')} data-position="left">
           {local.leftSection}
         </Box>
       )}
-      <Box component='span' {...getStyles('label')}>{local.children}</Box>
+      <Box component="span" {...getStyles('label')}>
+        {local.children}
+      </Box>
       {local.rightSection && (
-        <Box component='span' {...getStyles('section')} data-position="right">
+        <Box component="span" {...getStyles('section')} data-position="right">
           {local.rightSection}
         </Box>
       )}

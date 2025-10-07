@@ -1,4 +1,4 @@
-import { children as solidChildren, JSX } from 'solid-js';
+import { JSX, children as solidChildren } from 'solid-js';
 
 export function filterFalsyChildren(children: JSX.Element) {
   const resolvedChildren = solidChildren(() => children).toArray();

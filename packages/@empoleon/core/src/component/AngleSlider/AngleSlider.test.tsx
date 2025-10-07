@@ -23,7 +23,9 @@ describe('@empoleon/core/AngleSlider', () => {
   });
 
   it('renders hidden input with correct name', () => {
-    const { container } = render(() => <AngleSlider {...defaultProps} value={120} name="test-name" />);
+    const { container } = render(() => (
+      <AngleSlider {...defaultProps} value={120} name="test-name" />
+    ));
     const input = container.querySelector('input[type="hidden"]');
     expect(input).toHaveAttribute('name', 'test-name');
     expect(input).toHaveAttribute('value', '120');

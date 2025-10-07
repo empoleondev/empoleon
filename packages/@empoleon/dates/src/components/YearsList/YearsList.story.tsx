@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
-import { YearsList } from './YearsList';
 import { createSignal, For, JSX } from 'solid-js';
 import { EmpoleonProvider } from '@empoleon/core';
+import { YearsList } from './YearsList';
 
 export default {
   title: 'YearsList',
@@ -79,20 +79,20 @@ export function WithSelection() {
 }
 
 export function Sizes() {
- const sizeOptions = ['xs', 'sm', 'md', 'lg', 'xl'] as const;
+  const sizeOptions = ['xs', 'sm', 'md', 'lg', 'xl'] as const;
 
- return (
-   <div style={{ padding: '40px' }}>
-     <For each={sizeOptions}>
-       {(size) => (
-         <YearsList
-           decade="2022-01-01"
-           size={size}
-           getYearControlProps={() => ({ selected: true })}
-           mt="xl"
-         />
-       )}
-     </For>
-   </div>
- );
+  return (
+    <div style={{ padding: '40px' }}>
+      <For each={sizeOptions}>
+        {(size) => (
+          <YearsList
+            decade="2022-01-01"
+            size={size}
+            getYearControlProps={() => ({ selected: true })}
+            mt="xl"
+          />
+        )}
+      </For>
+    </div>
+  );
 }

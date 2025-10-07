@@ -1,18 +1,25 @@
-import { Button, Checkbox, EmpoleonProvider, NativeSelect, Textarea, TextInput } from '@empoleon/core';
+import { createEffect, JSX, Show } from 'solid-js';
+import {
+  Button,
+  Checkbox,
+  EmpoleonProvider,
+  NativeSelect,
+  Textarea,
+  TextInput,
+} from '@empoleon/core';
 import { createFormActions } from '../actions';
 import { useForm } from '../use-form';
 import { FormBase } from './_base';
-import { createEffect, JSX, Show } from 'solid-js';
 
 export default {
-   title: 'Form',
-   decorators: [
+  title: 'Form',
+  decorators: [
     (Story: () => JSX.Element) => (
       <EmpoleonProvider>
         <Story />
       </EmpoleonProvider>
     ),
-  ]
+  ],
 };
 
 interface FormValues {
@@ -45,14 +52,21 @@ export function FormActions() {
       <NativeSelect
         label="native select"
         data={['React', 'Angular']}
-        {...form.getInputProps('select', { type: "select" })}
+        {...form.getInputProps('select', { type: 'select' })}
       />
 
-      <Button type="button" onClick={() => formActions.setValues({ name: 'test-name', area: 'test-area' })}>
+      <Button
+        type="button"
+        onClick={() => formActions.setValues({ name: 'test-name', area: 'test-area' })}
+      >
         Set values
       </Button>
-      <Button type="button" onClick={() => formActions.setFieldValue('terms', true)}>Set field value</Button>
-      <Button type="button" onClick={() => formActions.validate()}>Validate</Button>
+      <Button type="button" onClick={() => formActions.setFieldValue('terms', true)}>
+        Set field value
+      </Button>
+      <Button type="button" onClick={() => formActions.validate()}>
+        Validate
+      </Button>
     </FormBase>
   );
 }

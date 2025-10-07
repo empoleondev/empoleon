@@ -1,4 +1,5 @@
 import { createSignal, splitProps } from 'solid-js';
+import { useMergedRef } from '@empoleon/hooks';
 import {
   Box,
   BoxProps,
@@ -12,7 +13,6 @@ import {
 } from '../../core';
 import { useFloatingIndicator } from './use-floating-indicator';
 import classes from './FloatingIndicator.module.css';
-import { useMergedRef } from '@empoleon/hooks';
 
 export type FloatingIndicatorStylesNames = 'root';
 export type FloatingIndicatorCssVariables = {
@@ -45,16 +45,16 @@ export type FloatingIndicatorFactory = Factory<{
 
 const defaultProps: Partial<FloatingIndicatorProps> = {};
 
-const varsResolver = createVarsResolver<FloatingIndicatorFactory>(
-  (_theme, props) => ({
-    root: {
-      '--transition-duration':
-        typeof props.transitionDuration === 'number' ? `${props.transitionDuration}ms` : props.transitionDuration,
-    },
-  })
-);
+const varsResolver = createVarsResolver<FloatingIndicatorFactory>((_theme, props) => ({
+  root: {
+    '--transition-duration':
+      typeof props.transitionDuration === 'number'
+        ? `${props.transitionDuration}ms`
+        : props.transitionDuration,
+  },
+}));
 
-export const FloatingIndicator = factory<FloatingIndicatorFactory>(_props => {
+export const FloatingIndicator = factory<FloatingIndicatorFactory>((_props) => {
   const props = useProps('FloatingIndicator', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -69,7 +69,7 @@ export const FloatingIndicator = factory<FloatingIndicatorFactory>(_props => {
     'mod',
     'displayAfterTransitionEnd',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   const getStyles = useStyles<FloatingIndicatorFactory>({
@@ -101,7 +101,12 @@ export const FloatingIndicator = factory<FloatingIndicatorFactory>(_props => {
   }
 
   return (
-    <Box ref={mergedRef} mod={[{ initialized, hidden }, local.mod]} {...getStyles('root')} {...others} />
+    <Box
+      ref={mergedRef}
+      mod={[{ initialized, hidden }, local.mod]}
+      {...getStyles('root')}
+      {...others}
+    />
   );
 });
 

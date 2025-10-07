@@ -1,7 +1,7 @@
+import { createSignal, For } from 'solid-js';
 import { FloatingIndicator, UnstyledButton } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
 import classes from './FloatingIndicator.demo.segmented.module.css';
-import { createSignal, For } from 'solid-js';
 
 const code = `
 import { createSignal, For } from 'solid-js';
@@ -87,7 +87,9 @@ const data = ['React', 'Vue', 'Angular', 'Svelte'];
 
 function Demo() {
   const [rootRef, setRootRef] = createSignal<HTMLDivElement | null>(null);
-  const [controlsRefs, setControlsRefs] = createSignal<Record<string, HTMLButtonElement | null>>({});
+  const [controlsRefs, setControlsRefs] = createSignal<Record<string, HTMLButtonElement | null>>(
+    {}
+  );
   const [active, setActive] = createSignal(0);
 
   const setControlRef = (index: number) => (node: HTMLButtonElement) => {

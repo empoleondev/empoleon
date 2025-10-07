@@ -31,7 +31,7 @@ export type SpotlightActionsGroupFactory = Factory<{
   compound: true;
 }>;
 
-export const SpotlightActionsGroup = factory<SpotlightActionsGroupFactory>(_props => {
+export const SpotlightActionsGroup = factory<SpotlightActionsGroupFactory>((_props) => {
   const props = useProps('SpotlightActionsGroup', null, _props);
   const [local, others] = splitProps(props, [
     'className',
@@ -40,13 +40,18 @@ export const SpotlightActionsGroup = factory<SpotlightActionsGroupFactory>(_prop
     'classNames',
     'label',
     'children',
-    'ref'
+    'ref',
   ]);
   const ctx = useSpotlightContext();
 
   return (
     <Box
-      {...ctx.getStyles('actionsGroup', { className: local.className, style: local.style, classNames: local.classNames, styles: local.styles })}
+      {...ctx.getStyles('actionsGroup', {
+        className: local.className,
+        style: local.style,
+        classNames: local.classNames,
+        styles: local.styles,
+      })}
       ref={local.ref}
       {...others}
       __vars={{ '--spotlight-label': `'${local.label}'` }}

@@ -1,6 +1,6 @@
+import { createSignal } from 'solid-js';
 import { Button, Group, NumberInput, NumberInputHandlers } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal } from 'solid-js';
 
 const code = `
 import { useRef } from 'react';
@@ -35,7 +35,7 @@ function Demo() {
 `;
 
 function Demo() {
-  const [handlersRef, setHandlersRef] = createSignal<NumberInputHandlers | null>(null)
+  const [handlersRef, setHandlersRef] = createSignal<NumberInputHandlers | null>(null);
 
   return (
     <>

@@ -28,7 +28,7 @@ export type AppShellAsideFactory = Factory<{
 
 const defaultProps: Partial<AppShellAsideProps> = {};
 
-export const AppShellAside = factory<AppShellAsideFactory>(_props => {
+export const AppShellAside = factory<AppShellAsideFactory>((_props) => {
   const props = useProps('AppShellAside', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -40,7 +40,7 @@ export const AppShellAside = factory<AppShellAsideFactory>(_props => {
     'withBorder',
     'zIndex',
     'mod',
-    'ref'
+    'ref',
   ]);
 
   const ctx = useAppShellContext();
@@ -54,7 +54,12 @@ export const AppShellAside = factory<AppShellAsideFactory>(_props => {
       component="aside"
       ref={local.ref}
       mod={[{ 'with-border': local.withBorder ?? ctx.withBorder }, local.mod]}
-      {...ctx.getStyles('aside', { className: local.className, classNames: local.classNames, styles: local.styles, style: local.style })}
+      {...ctx.getStyles('aside', {
+        className: local.className,
+        classNames: local.classNames,
+        styles: local.styles,
+        style: local.style,
+      })}
       {...others}
       __vars={{
         '--app-shell-aside-z-index': `calc(${local.zIndex ?? ctx.zIndex} + 1)`,

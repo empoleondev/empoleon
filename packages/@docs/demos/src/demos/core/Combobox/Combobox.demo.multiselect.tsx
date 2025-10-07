@@ -1,6 +1,6 @@
+import { createSignal, For, Show } from 'solid-js';
 import { CheckIcon, Combobox, Group, Input, Pill, PillsInput, useCombobox } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal, For, Show } from 'solid-js';
 
 const code = `
 import { createSignal, For, Show } from 'solid-js';

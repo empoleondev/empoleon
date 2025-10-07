@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
+import { JSX } from 'solid-js';
 import { DatesProvider, useDatesContext } from '@empoleon/dates';
 import { render } from '@empoleon-tests/core';
-import { JSX } from 'solid-js';
 
 interface Options {
   component: (props: any) => JSX.Element;
@@ -61,38 +61,40 @@ export function itSupportsYearsListProps(options: Options, name = 'supports year
     });
 
     it('supports locale prop with custom yearsListFormat', () => {
-      const { container } = render(
-        () => <options.component {...options.props} locale="ru" yearsListFormat="MMM YYYY" />
-      );
+      const { container } = render(() => (
+        <options.component {...options.props} locale="ru" yearsListFormat="MMM YYYY" />
+      ));
       expectYearNames(container as any, ruYearsNames);
     });
 
     it('supports years list localization with DatesProvider', () => {
       const TestConsumer = () => {
         const ctx = useDatesContext();
-        return <options.component {...options.props} locale={ctx.locale} yearsListFormat="MMM YYYY" />;
+        return (
+          <options.component {...options.props} locale={ctx.locale} yearsListFormat="MMM YYYY" />
+        );
       };
 
-      const { container } = render(
-        () => <DatesProvider settings={{ locale: 'ru' }}>
+      const { container } = render(() => (
+        <DatesProvider settings={{ locale: 'ru' }}>
           <TestConsumer />
         </DatesProvider>
-      );
+      ));
 
       expectYearNames(container as any, ruYearsNames);
     });
 
     it('supports custom yearsListFormat format', () => {
-      const { container } = render(
-        () => <options.component {...options.props} yearsListFormat="MMM YY" />
-      );
+      const { container } = render(() => (
+        <options.component {...options.props} yearsListFormat="MMM YY" />
+      ));
       expectYearNames(container as any, customFormatYearsNames);
     });
 
     it('disables years if they are before minDate', () => {
-      const { container } = render(
-        () => <options.component {...options.props} decade="2022-04-11" minDate="2023-05-11" />
-      );
+      const { container } = render(() => (
+        <options.component {...options.props} decade="2022-04-11" minDate="2023-05-11" />
+      ));
       const years = container.querySelectorAll('table button');
       expect(years[0]).toBeDisabled();
       expect(years[1]).toBeDisabled();
@@ -102,9 +104,9 @@ export function itSupportsYearsListProps(options: Options, name = 'supports year
     });
 
     it('disables years if they are after minDate', () => {
-      const { container } = render(
-        () => <options.component {...options.props} decade="2022-04-11" maxDate="2023-05-11" />
-      );
+      const { container } = render(() => (
+        <options.component {...options.props} decade="2022-04-11" maxDate="2023-05-11" />
+      ));
       const years = container.querySelectorAll('[data-picker-control]');
       expect(years[0]).not.toBeDisabled();
       expect(years[3]).not.toBeDisabled();
@@ -113,14 +115,14 @@ export function itSupportsYearsListProps(options: Options, name = 'supports year
     });
 
     it('supports getYearControlProps', () => {
-      const { container } = render(
-        () => <options.component
+      const { container } = render(() => (
+        <options.component
           {...options.props}
           getYearControlProps={(date: string) => ({
             selected: dayjs(date).isSame('2022-04-11', 'year'),
           })}
         />
-      );
+      ));
 
       const years = container.querySelectorAll('[data-picker-control]');
       expect(years[1]).not.toHaveAttribute('data-selected');

@@ -29,25 +29,25 @@ export const kitchenSink: EmpoleonDemo = {
       prop: 'label',
       type: 'string',
       initialValue: 'Input label',
-      libraryValue: ''
+      libraryValue: '',
     },
     {
       prop: 'description',
       type: 'string',
       initialValue: '',
-      libraryValue: ''
+      libraryValue: '',
     },
     {
       prop: 'error',
       type: 'string',
       initialValue: '',
-      libraryValue: ''
+      libraryValue: '',
     },
     {
       prop: 'placeholder',
       type: 'string',
       initialValue: 'Input placeholder',
-      libraryValue: ''
+      libraryValue: '',
     },
     {
       prop: 'variant',
@@ -64,43 +64,43 @@ export const kitchenSink: EmpoleonDemo = {
       prop: 'size',
       type: 'size',
       initialValue: 'sm',
-      libraryValue: 'sm'
+      libraryValue: 'sm',
     },
     {
       prop: 'radius',
       type: 'size',
       initialValue: 'sm',
-      libraryValue: 'sm'
+      libraryValue: 'sm',
     },
     {
       prop: 'withAsterisk',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'required',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'disabled',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'readOnly',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'autosize',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'minRows',
@@ -109,7 +109,7 @@ export const kitchenSink: EmpoleonDemo = {
       libraryValue: undefined,
       min: 1,
       max: 20,
-      step: 1
+      step: 1,
     },
     {
       prop: 'maxRows',
@@ -118,7 +118,7 @@ export const kitchenSink: EmpoleonDemo = {
       libraryValue: undefined,
       min: 1,
       max: 20,
-      step: 1
+      step: 1,
     },
     {
       prop: 'resize',
@@ -135,19 +135,19 @@ export const kitchenSink: EmpoleonDemo = {
       prop: 'withErrorStyles',
       type: 'boolean',
       initialValue: true,
-      libraryValue: true
+      libraryValue: true,
     },
     {
       prop: 'leftSection',
       type: 'string',
       initialValue: '',
-      libraryValue: ''
+      libraryValue: '',
     },
     {
       prop: 'rightSection',
       type: 'string',
       initialValue: '',
-      libraryValue: ''
+      libraryValue: '',
     },
     {
       prop: 'leftSectionPointerEvents',

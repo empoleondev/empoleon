@@ -16,7 +16,7 @@ export type TextInputFactory = Factory<{
   stylesNames: __InputStylesNames;
 }>;
 
-export const TextInput = factory<TextInputFactory>(_props => {
+export const TextInput = factory<TextInputFactory>((_props) => {
   const props = useProps('TextInput', null, _props);
   const [local, others] = splitProps(props, ['ref']);
 

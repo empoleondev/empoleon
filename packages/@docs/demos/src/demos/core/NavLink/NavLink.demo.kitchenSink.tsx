@@ -1,14 +1,14 @@
-import { NavLink, NavLinkProps, Badge } from '@empoleon/core';
-import { EmpoleonDemo } from '@empoleonx/demo';
 import {
-  IconHome2,
-  IconGauge,
   IconActivity,
   IconChevronRight,
+  IconGauge,
   IconHeart,
+  IconHome2,
   IconStar,
 } from '@tabler/icons-solidjs';
-import { createSignal, createEffect, Show } from 'solid-js';
+import { createEffect, createSignal, Show } from 'solid-js';
+import { Badge, NavLink, NavLinkProps } from '@empoleon/core';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { NavLink, Badge } from '@empoleon/core';
@@ -27,13 +27,15 @@ function Demo() {
 }
 `;
 
-function Demo(props: NavLinkProps & {
-  iconType?: string;
-  showLeftSection?: boolean;
-  showRightSection?: boolean;
-  showDescription?: boolean;
-  noWrap?: boolean;
-}) {
+function Demo(
+  props: NavLinkProps & {
+    iconType?: string;
+    showLeftSection?: boolean;
+    showRightSection?: boolean;
+    showDescription?: boolean;
+    noWrap?: boolean;
+  }
+) {
   const [active, setActive] = createSignal(props.active || false);
 
   createEffect(() => {
@@ -43,7 +45,7 @@ function Demo(props: NavLinkProps & {
   const getLeftIcon = () => {
     const iconProps = {
       size: 16,
-      stroke: '1.5'
+      stroke: '1.5',
     };
 
     switch (props.iconType) {
@@ -67,7 +69,7 @@ function Demo(props: NavLinkProps & {
   };
 
   const getRightSection = () => {
-    return <IconChevronRight size={12} stroke='1.5' class="empoleon-rotate-rtl" />;
+    return <IconChevronRight size={12} stroke="1.5" class="empoleon-rotate-rtl" />;
   };
 
   return (
@@ -75,15 +77,15 @@ function Demo(props: NavLinkProps & {
       {...props}
       href="#required-for-focus"
       label="Navigation Link"
-      description={props.showDescription ? "Additional information" : undefined}
+      description={props.showDescription ? 'Additional information' : undefined}
       leftSection={props.showLeftSection ? getLeftIcon()() : undefined}
       rightSection={props.showRightSection ? getRightSection() : undefined}
       active={active()}
       onClick={() => setActive(!active())}
     >
-        <NavLink label="First child link" href="#required-for-focus" />
-        <NavLink label="Second child link" href="#required-for-focus" />
-        <NavLink label="Third child link" href="#required-for-focus" />
+      <NavLink label="First child link" href="#required-for-focus" />
+      <NavLink label="Second child link" href="#required-for-focus" />
+      <NavLink label="Third child link" href="#required-for-focus" />
     </NavLink>
   );
 }
@@ -110,49 +112,49 @@ export const kitchenSink: EmpoleonDemo = {
       prop: 'color',
       type: 'color',
       initialValue: 'blue',
-      libraryValue: 'blue'
+      libraryValue: 'blue',
     },
     {
       prop: 'active',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'disabled',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'autoContrast',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'noWrap',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'showLeftSection',
       type: 'boolean',
       initialValue: true,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'showRightSection',
       type: 'boolean',
       initialValue: true,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'showDescription',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'iconType',
@@ -172,13 +174,13 @@ export const kitchenSink: EmpoleonDemo = {
       prop: 'opened',
       type: 'boolean',
       initialValue: false,
-      libraryValue: false
+      libraryValue: false,
     },
     {
       prop: 'childrenOffset',
       type: 'size',
       initialValue: 'md',
-      libraryValue: 'md'
+      libraryValue: 'md',
     },
   ],
 };

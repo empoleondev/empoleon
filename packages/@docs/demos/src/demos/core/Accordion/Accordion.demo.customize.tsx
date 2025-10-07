@@ -1,8 +1,8 @@
+import { For } from 'solid-js';
 import { Accordion } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
 import { data, dataCode } from './_base';
 import classes from './Accordion.demo.customize.module.css';
-import { For } from 'solid-js';
 
 const code = `
 import { For } from 'solid-js';

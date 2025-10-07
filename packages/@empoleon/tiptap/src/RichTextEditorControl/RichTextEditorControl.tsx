@@ -1,3 +1,5 @@
+import { Component, createMemo, JSX, splitProps } from 'solid-js';
+import { Dynamic } from 'solid-js/web';
 import {
   BoxProps,
   CompoundStylesApiProps,
@@ -10,9 +12,6 @@ import {
 import { RichTextEditorLabels } from '../labels';
 import { useRichTextEditorContext } from '../RichTextEditor.context';
 import classes from '../RichTextEditor.module.css';
-import { Component, JSX, splitProps } from 'solid-js';
-import { Dynamic } from 'solid-js/web';
-import { createMemo } from 'solid-js';
 
 export type RichTextEditorControlStylesNames = 'control';
 
@@ -38,7 +37,7 @@ const defaultProps = {
   interactive: true,
 } satisfies Partial<RichTextEditorControlProps>;
 
-export const RichTextEditorControl = factory<RichTextEditorControlFactory>(_props => {
+export const RichTextEditorControl = factory<RichTextEditorControlFactory>((_props) => {
   const props = useProps('RichTextEditorControl', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'classNames',
@@ -50,7 +49,7 @@ export const RichTextEditorControl = factory<RichTextEditorControlFactory>(_prop
     'active',
     'onMouseDown',
     'disabled',
-    'ref'
+    'ref',
   ]);
 
   const ctx = useRichTextEditorContext();
@@ -58,7 +57,12 @@ export const RichTextEditorControl = factory<RichTextEditorControlFactory>(_prop
   return (
     <UnstyledButton
       {...others}
-      {...ctx.getStyles('control', { className: local.className, style: local.style, classNames: local.classNames, styles: local.styles })}
+      {...ctx.getStyles('control', {
+        className: local.className,
+        style: local.style,
+        classNames: local.classNames,
+        styles: local.styles,
+      })}
       disabled={local.disabled}
       data-rich-text-editor-control
       tabIndex={local.interactive ? 0 : -1}
@@ -72,7 +76,7 @@ export const RichTextEditorControl = factory<RichTextEditorControlFactory>(_prop
       variant={ctx.variant || 'default'}
       onMouseDown={(event) => {
         event.preventDefault();
-        typeof local.onMouseDown === "function" && local.onMouseDown?.(event);
+        typeof local.onMouseDown === 'function' && local.onMouseDown?.(event);
       }}
     />
   );
@@ -112,15 +116,19 @@ export function createControl(config: CreateControlProps) {
     const _label = () => context.labels[config.label] as string;
 
     const active = createMemo(() =>
-      config.isActive?.name ? context.editor?.isActive(config.isActive.name, config.isActive.attributes) : false
+      config.isActive?.name
+        ? context.editor?.isActive(config.isActive.name, config.isActive.attributes)
+        : false
     );
 
-    const disabled = createMemo(() =>
-      config.isDisabled?.(context.editor) || false
-    );
+    const disabled = createMemo(() => config.isDisabled?.(context.editor) || false);
 
     const handleClick = () => {
-      (context.editor as any)?.chain().focus()[config.operation.name](config.operation.attributes).run();
+      (context.editor as any)
+        ?.chain()
+        .focus()
+        [config.operation.name](config.operation.attributes)
+        .run();
     };
 
     return (

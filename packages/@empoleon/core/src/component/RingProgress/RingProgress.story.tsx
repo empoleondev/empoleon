@@ -1,6 +1,6 @@
 import { JSX } from 'solid-js';
-import { RingProgress } from './RingProgress';
 import { EmpoleonProvider } from '../../core';
+import { RingProgress } from './RingProgress';
 
 export default {
   title: 'RingProgress',
@@ -15,7 +15,7 @@ export default {
 
 export function ColorsIndex() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <RingProgress
         label="Hello"
         sections={[
@@ -39,7 +39,7 @@ export function ColorsIndex() {
 
 export function ThicknessOverlap() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <RingProgress
         size={60}
         thickness={22}
@@ -64,7 +64,7 @@ export function ThicknessOverlap() {
 
 export function WithTooltips() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <RingProgress
         sections={[
           { value: 40, color: 'cyan', tooltip: 'Hello' },
@@ -78,7 +78,7 @@ export function WithTooltips() {
 
 export function Unstyled() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <RingProgress
         unstyled
         sections={[
@@ -93,7 +93,7 @@ export function Unstyled() {
 
 export function WithSectionProps() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <RingProgress
         sections={[
           { value: 40, color: 'cyan', onClick: () => console.log('1') },
@@ -107,7 +107,7 @@ export function WithSectionProps() {
 
 export function WithRootColor() {
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <RingProgress
         sections={[
           { value: 40, color: 'cyan' },

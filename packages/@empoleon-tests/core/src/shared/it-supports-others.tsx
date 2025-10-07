@@ -4,7 +4,7 @@ import { getPropsValue } from './get-props-value';
 
 interface Options<Props = any> {
   component: (props: Props) => JSX.Element;
-  props: Props | (() => Props)
+  props: Props | (() => Props);
   selector?: string;
 }
 
@@ -14,9 +14,13 @@ export function itSupportsOthers<Props>(
 ) {
   it(name, () => {
     const baseProps = getPropsValue(options.props);
-    const propsWithDataAttribute = { ...baseProps, "data-test-attribute": true } as Props & { "data-test-attribute": boolean };
+    const propsWithDataAttribute = { ...baseProps, 'data-test-attribute': true } as Props & {
+      'data-test-attribute': boolean;
+    };
 
-    const { container } = render(() => <options.component {...propsWithDataAttribute} data-test-attribute />);
+    const { container } = render(() => (
+      <options.component {...propsWithDataAttribute} data-test-attribute />
+    ));
     expect(container.querySelector('[data-test-attribute]')).toBeInTheDocument();
   });
 }

@@ -33,25 +33,25 @@ export const kitchenSink: EmpoleonDemo = {
       prop: 'color',
       type: 'color',
       initialValue: 'gray',
-      libraryValue: 'gray'
+      libraryValue: 'gray',
     },
     {
       prop: 'size',
       type: 'size',
       initialValue: 'md',
-      libraryValue: 'md'
+      libraryValue: 'md',
     },
     {
       prop: 'radius',
       type: 'size',
       initialValue: 'sm',
-      libraryValue: 'sm'
+      libraryValue: 'sm',
     },
     {
       prop: 'withShadow',
       type: 'boolean',
       initialValue: true,
-      libraryValue: true
-    }
+      libraryValue: true,
+    },
   ],
 };

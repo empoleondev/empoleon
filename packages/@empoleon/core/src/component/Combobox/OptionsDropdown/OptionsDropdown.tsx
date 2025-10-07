@@ -1,5 +1,5 @@
-import { createEffect, createMemo, For, JSX, mergeProps, Show, splitProps } from 'solid-js';
 import cx from 'clsx';
+import { createEffect, createMemo, For, JSX, mergeProps, Show, splitProps } from 'solid-js';
 import { CheckIcon } from '../../Checkbox';
 import { ScrollArea, ScrollAreaProps } from '../../ScrollArea/ScrollArea';
 import { Combobox } from '../Combobox';
@@ -36,9 +36,11 @@ function Option(props: OptionProps) {
   if (!isOptionsGroup(props.data)) {
     const item = props.data as ComboboxItem;
     const checked = () => isValueChecked(props.value, item.value);
-    const check = <Show when={props.withCheckIcon && checked()}>
-      <CheckIcon class={classes.optionsDropdownCheckIcon} />
-    </Show>
+    const check = (
+      <Show when={props.withCheckIcon && checked()}>
+        <CheckIcon class={classes.optionsDropdownCheckIcon} />
+      </Show>
+    );
 
     const defaultContent = (
       <>
@@ -65,20 +67,22 @@ function Option(props: OptionProps) {
     );
   }
 
-  return <Combobox.Group label={props.data.group}>
-    <For each={props.data.items}>
-      {(item) => (
-        <Option
-          data={item}
-          value={props.value}
-          unstyled={props.unstyled}
-          withCheckIcon={props.withCheckIcon}
-          checkIconPosition={props.checkIconPosition}
-          renderOption={props.renderOption}
-        />
-      )}
-    </For>
-  </Combobox.Group>;
+  return (
+    <Combobox.Group label={props.data.group}>
+      <For each={props.data.items}>
+        {(item) => (
+          <Option
+            data={item}
+            value={props.value}
+            unstyled={props.unstyled}
+            withCheckIcon={props.withCheckIcon}
+            checkIconPosition={props.checkIconPosition}
+            renderOption={props.renderOption}
+          />
+        )}
+      </For>
+    </Combobox.Group>
+  );
 }
 
 export interface OptionsDropdownProps {
@@ -141,7 +145,7 @@ export function OptionsDropdown(_props: OptionsDropdownProps) {
     return shouldFilter
       ? (local.filter || defaultOptionsFilter)({
           options: local.data,
-          search: local.filterOptions ? (local.search || '') : '',
+          search: local.filterOptions ? local.search || '' : '',
           limit: local.limit ?? Infinity,
         })
       : local.data;
@@ -177,7 +181,9 @@ export function OptionsDropdown(_props: OptionsDropdownProps) {
         ) : (
           options()
         )}
-        {isEmpty() && local.nothingFoundMessage && <Combobox.Empty>{local.nothingFoundMessage}</Combobox.Empty>}
+        {isEmpty() && local.nothingFoundMessage && (
+          <Combobox.Empty>{local.nothingFoundMessage}</Combobox.Empty>
+        )}
       </Combobox.Options>
     </Combobox.Dropdown>
   );

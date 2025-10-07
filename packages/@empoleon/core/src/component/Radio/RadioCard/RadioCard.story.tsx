@@ -1,8 +1,8 @@
 import { createSignal, JSX } from 'solid-js';
+import { EmpoleonProvider } from '../../../core';
 import { RadioGroup } from '../RadioGroup/RadioGroup';
 import { RadioIndicator } from '../RadioIndicator/RadioIndicator';
 import { RadioCard } from './RadioCard';
-import { EmpoleonProvider } from '../../../core';
 
 export default {
   title: 'RadioCard',
@@ -18,7 +18,7 @@ export default {
 export function Usage() {
   const [checked, setChecked] = createSignal(false);
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <RadioCard p="md" checked={checked()} onClick={() => setChecked((c) => !c)}>
         <RadioIndicator />
         Some label
@@ -31,7 +31,7 @@ export function WithinGroup() {
   const [value, setValue] = createSignal<string | null>(null);
 
   return (
-    <div style={{ 'padding': '40px' }}>
+    <div style={{ padding: '40px' }}>
       <RadioGroup value={value()} onChange={setValue} name="test-name">
         <RadioCard value="1">
           <RadioIndicator />

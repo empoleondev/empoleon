@@ -1,4 +1,4 @@
-import { createTheme, Input, EmpoleonThemeProvider } from '@empoleon/core';
+import { createTheme, EmpoleonThemeProvider, Input } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
 import classes from './Styles.demo.dataSize.module.css';
 

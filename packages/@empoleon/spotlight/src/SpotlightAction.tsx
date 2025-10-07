@@ -4,10 +4,10 @@ import {
   BoxProps,
   CompoundStylesApiProps,
   ElementProps,
+  EmpoleonColor,
   factory,
   Factory,
   Highlight,
-  EmpoleonColor,
   UnstyledButton,
   useProps,
 } from '@empoleon/core';
@@ -69,7 +69,7 @@ const defaultProps = {
   highlightQuery: false,
 } satisfies Partial<SpotlightActionProps>;
 
-export const SpotlightAction = factory<SpotlightActionFactory>(_props => {
+export const SpotlightAction = factory<SpotlightActionFactory>((_props) => {
   const props = useProps('SpotlightAction', defaultProps, _props);
   const [local, others] = splitProps(props, [
     'className',
@@ -90,7 +90,7 @@ export const SpotlightAction = factory<SpotlightActionFactory>(_props => {
     'onMouseDown',
     'keywords',
     'vars',
-    'ref'
+    'ref',
   ]);
 
   const ctx = useSpotlightContext();
@@ -119,10 +119,10 @@ export const SpotlightAction = factory<SpotlightActionFactory>(_props => {
       {...others}
       onMouseDown={(event) => {
         event.preventDefault();
-        typeof local.onMouseDown === "function" && local.onMouseDown?.(event);
+        typeof local.onMouseDown === 'function' && local.onMouseDown?.(event);
       }}
       onClick={(event) => {
-        typeof local.onClick === "function" && local.onClick?.(event);
+        typeof local.onClick === 'function' && local.onClick?.(event);
         if (local.closeSpotlightOnTrigger ?? ctx.closeOnActionTrigger) {
           spotlightActions.close(ctx.store);
         }

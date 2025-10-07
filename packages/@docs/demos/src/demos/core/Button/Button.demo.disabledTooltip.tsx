@@ -18,9 +18,11 @@ function Demo() {
 function Demo() {
   return (
     <Tooltip label="Tooltip for disabled button">
-      {(props) => <Button {...props} data-disabled onClick={(event) => event.preventDefault()}>
-        Disabled button with tooltip
-      </Button>}
+      {(props) => (
+        <Button {...props} data-disabled onClick={(event) => event.preventDefault()}>
+          Disabled button with tooltip
+        </Button>
+      )}
     </Tooltip>
   );
 }

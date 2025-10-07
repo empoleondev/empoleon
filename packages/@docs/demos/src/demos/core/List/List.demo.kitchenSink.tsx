@@ -1,6 +1,6 @@
+import { IconCircleCheck } from '@tabler/icons-solidjs';
 import { List, ListProps } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { IconCircleCheck } from '@tabler/icons-solidjs';
 
 const code = `
 import { List } from '@empoleon/core';

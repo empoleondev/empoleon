@@ -19,7 +19,7 @@ function Demo() {
 function Wrapper(props: any) {
   return (
     <ActionIcon {...props} aria-label="Settings">
-      <IconAdjustments style={{ width: '70%', height: '70%' }} stroke='1.5' />
+      <IconAdjustments style={{ width: '70%', height: '70%' }} stroke="1.5" />
     </ActionIcon>
   );
 }

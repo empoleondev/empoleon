@@ -35,13 +35,13 @@ describe('@empoleon/core/Breadcrumbs', () => {
   });
 
   it('allows to set child className', () => {
-    render(
-      () => <Breadcrumbs>
+    render(() => (
+      <Breadcrumbs>
         <button type="button" class="test-class">
           test-label
         </button>
       </Breadcrumbs>
-    );
+    ));
 
     expect(screen.getByRole('button')).toHaveClass('test-class');
   });

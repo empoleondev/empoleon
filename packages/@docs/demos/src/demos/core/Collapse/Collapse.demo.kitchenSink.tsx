@@ -1,7 +1,7 @@
+import { createEffect, createSignal } from 'solid-js';
 import { Box, Button, Collapse, CollapseProps, Group, Text } from '@empoleon/core';
 import { useDisclosure } from '@empoleon/hooks';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal, createEffect } from 'solid-js';
 
 const code = `
 import { Button, Group, Text, Collapse, Box } from '@empoleon/core';

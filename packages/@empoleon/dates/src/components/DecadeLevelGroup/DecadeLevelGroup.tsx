@@ -1,5 +1,5 @@
-import { createEffect, For, JSX, splitProps } from 'solid-js';
 import dayjs from 'dayjs';
+import { createEffect, For, JSX, splitProps } from 'solid-js';
 import { BoxProps, ElementProps, factory, Factory, StylesApiProps, useProps } from '@empoleon/core';
 import { DateStringValue } from '../../types';
 import { handleControlKeyDown } from '../../utils';
@@ -40,7 +40,7 @@ const defaultProps: Partial<DecadeLevelGroupProps> = {
   numberOfColumns: 1,
 };
 
-export const DecadeLevelGroup = factory<DecadeLevelGroupFactory>(_props  => {
+export const DecadeLevelGroup = factory<DecadeLevelGroupFactory>((_props) => {
   const props = useProps('DecadeLevelGroup', defaultProps, _props);
   const [local, others] = splitProps(props, [
     // DecadeLevel settings
@@ -77,7 +77,7 @@ export const DecadeLevelGroup = factory<DecadeLevelGroupFactory>(_props  => {
     'size',
     'vars',
     'attributes',
-    'ref'
+    'ref',
   ]);
 
   let controlsRef: HTMLButtonElement[][][] = [];
@@ -93,11 +93,16 @@ export const DecadeLevelGroup = factory<DecadeLevelGroupFactory>(_props  => {
       attributes={local.attributes}
       {...others}
     >
-      <For each={Array(local.numberOfColumns).fill(0).map((_, index) => index)}>
+      <For
+        each={Array(local.numberOfColumns)
+          .fill(0)
+          .map((_, index) => index)}
+      >
         {(decadeIndex) => {
-          const currentDecade = () => dayjs(local.decade)
-            .add(decadeIndex * 10, 'years')
-            .format('YYYY-MM-DD');
+          const currentDecade = () =>
+            dayjs(local.decade)
+              .add(decadeIndex * 10, 'years')
+              .format('YYYY-MM-DD');
 
           return (
             <DecadeLevel

@@ -20,7 +20,11 @@ export type PolymorphicComponentWithProps<Payload extends PolymorphicFactoryPayl
 };
 
 export function polymorphicFactory<Payload extends PolymorphicFactoryPayload>(
-  ui: (props: Payload['props'] & { ref?: 'ref' extends keyof Payload['props'] ? Payload['props']['ref'] : any }) => JSX.Element
+  ui: (
+    props: Payload['props'] & {
+      ref?: 'ref' extends keyof Payload['props'] ? Payload['props']['ref'] : any;
+    }
+  ) => JSX.Element
 ) {
   type ComponentProps<C> = PolymorphicComponentProps<C, Payload['props']>;
 
@@ -39,16 +43,16 @@ export function polymorphicFactory<Payload extends PolymorphicFactoryPayload>(
       displayName?: string | undefined;
     };
 
-    const Component = ui as unknown as PolymorphicComponent;
-    Component.withProps = (fixedProps: any) => {
-      const Extended = ((props: any) => {
-        const mergedProps = mergeProps(fixedProps, props);
-        return Component(mergedProps as ComponentProps<any>);
-      }) as any;
-      Extended.extend = Component.extend;
-      Extended.displayName = `WithProps(${Component.displayName})`;
-      return Extended;
-    };
+  const Component = ui as unknown as PolymorphicComponent;
+  Component.withProps = (fixedProps: any) => {
+    const Extended = ((props: any) => {
+      const mergedProps = mergeProps(fixedProps, props);
+      return Component(mergedProps as ComponentProps<any>);
+    }) as any;
+    Extended.extend = Component.extend;
+    Extended.displayName = `WithProps(${Component.displayName})`;
+    return Extended;
+  };
 
   Component.extend = identity as any;
 

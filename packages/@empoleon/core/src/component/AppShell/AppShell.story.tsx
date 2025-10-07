@@ -1,9 +1,9 @@
+import { JSX } from 'solid-js';
 import { useDisclosure } from '@empoleon/hooks';
+import { EmpoleonProvider } from '../../core';
 import { Button } from '../Button';
 import { Group } from '../Group';
 import { AppShell } from './AppShell';
-import { JSX } from 'solid-js';
-import { EmpoleonProvider } from '../../core';
 
 export default {
   title: 'AppShell',

@@ -1,7 +1,7 @@
+import { createSignal } from 'solid-js';
 import { Button, Group, Modal } from '@empoleon/core';
 import { useDisclosure } from '@empoleon/hooks';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal } from 'solid-js';
 
 const code = `
 import { createSignal } from 'solid-js';

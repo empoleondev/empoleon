@@ -1,11 +1,11 @@
 import cx from 'clsx';
+import { JSX, splitProps } from 'solid-js';
 import { BoxProps, ElementProps, EmpoleonRadius, EmpoleonShadow } from '../../core';
 import { FocusTrap } from '../FocusTrap';
 import { Paper } from '../Paper';
 import { Transition, TransitionOverride } from '../Transition';
 import { useModalBaseContext } from './ModalBase.context';
 import classes from './ModalBase.module.css';
-import { JSX, splitProps } from 'solid-js';
 
 export interface ModalBaseContentProps extends BoxProps, ElementProps<'div'> {
   /** Props passed down to the `Transition` component */
@@ -29,7 +29,7 @@ export function ModalBaseContent(props: _ModalBaseContentProps) {
     'innerProps',
     'onKeyDown',
     'style',
-    'ref'
+    'ref',
   ]);
 
   const ctx = useModalBaseContext();

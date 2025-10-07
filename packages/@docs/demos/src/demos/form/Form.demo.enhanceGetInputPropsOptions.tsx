@@ -70,12 +70,7 @@ function Demo() {
   return (
     <>
       <TextInput {...form.getInputProps('name', { fieldType: 'name' })} />
-      <NumberInput
-        {...form.getInputProps('age')}
-        label="Age"
-        placeholder="Age"
-        mt="md"
-      />
+      <NumberInput {...form.getInputProps('age')} label="Age" placeholder="Age" mt="md" />
     </>
   );
 }

@@ -59,7 +59,9 @@ export function TreeNode(props: TreeNodeProps) {
       event.preventDefault();
 
       if (local.controller.expandedState()[local.node.value]) {
-        (event.currentTarget as HTMLElement)?.querySelector<HTMLLIElement>('[role=treeitem]')?.focus();
+        (event.currentTarget as HTMLElement)
+          ?.querySelector<HTMLLIElement>('[role=treeitem]')
+          ?.focus();
       } else {
         local.controller.expand(local.node.value);
       }
@@ -68,7 +70,10 @@ export function TreeNode(props: TreeNodeProps) {
     if (event.code === 'ArrowLeft') {
       event.stopPropagation();
       event.preventDefault();
-      if (local.controller.expandedState()[local.node.value] && (local.node.children || []).length > 0) {
+      if (
+        local.controller.expandedState()[local.node.value] &&
+        (local.node.children || []).length > 0
+      ) {
         local.controller.collapse(local.node.value);
       } else if (local.isSubtree) {
         findElementAncestor(event.currentTarget as HTMLElement, '[role=treeitem]')?.focus();
@@ -99,7 +104,11 @@ export function TreeNode(props: TreeNodeProps) {
 
         if (selectNode) {
           local.controller.setSelectedState(
-            getValuesRange(local.controller.anchorNode(), selectNode.dataset.value, local.flatValues)
+            getValuesRange(
+              local.controller.anchorNode(),
+              selectNode.dataset.value,
+              local.flatValues
+            )
           );
         }
       }
@@ -127,7 +136,9 @@ export function TreeNode(props: TreeNodeProps) {
     const element = ref();
 
     if (local.allowRangeSelection && event.shiftKey && local.controller.anchorNode) {
-      local.controller.setSelectedState(getValuesRange(local.controller.anchorNode(), local.node.value, local.flatValues));
+      local.controller.setSelectedState(
+        getValuesRange(local.controller.anchorNode(), local.node.value, local.flatValues)
+      );
       element?.focus();
     } else {
       local.expandOnClick && local.controller.toggleExpanded(local.node.value);
@@ -146,7 +157,8 @@ export function TreeNode(props: TreeNodeProps) {
   };
 
   return (
-    <Box component='li'
+    <Box
+      component="li"
       {...local.getStyles('node', {
         style: { '--label-offset': `calc(var(--level-offset) * ${level() - 1})` },
       })}
@@ -180,12 +192,14 @@ export function TreeNode(props: TreeNodeProps) {
           elementProps,
         })
       ) : (
-        <Box component='div' {...elementProps}>{local.node.label}</Box>
+        <Box component="div" {...elementProps}>
+          {local.node.label}
+        </Box>
       )}
 
       <Show when={local.node.children && local.node.children.length > 0}>
         <Show when={local.controller.expandedState()[local.node.value]}>
-          <Box component='ul' role="group" {...local.getStyles('subtree')} data-level={level}>
+          <Box component="ul" role="group" {...local.getStyles('subtree')} data-level={level}>
             <For each={local.node.children || []}>
               {(child) => (
                 <TreeNode

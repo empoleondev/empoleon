@@ -17,7 +17,7 @@ function Demo() {
 
 function Demo() {
   const MaskedInput = createMaskedInput({
-    mask: "+{7} (000) 000-00-00",
+    mask: '+{7} (000) 000-00-00',
   });
 
   return <Input component={MaskedInput} placeholder="Your phone" />;

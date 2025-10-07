@@ -1,7 +1,7 @@
-import { TextInput, Tooltip } from '@empoleon/core';
-import { EmpoleonDemo } from '@empoleonx/demo';
 import { createSignal } from 'solid-js';
 import { Dynamic } from 'solid-js/web';
+import { TextInput, Tooltip } from '@empoleon/core';
+import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { createSignal } from 'solid-js';

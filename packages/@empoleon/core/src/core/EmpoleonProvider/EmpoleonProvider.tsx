@@ -3,7 +3,10 @@ import './global.css';
 import './default-css-variables.css';
 
 import { JSX, mergeProps } from 'solid-js';
-import { localStorageColorSchemeManager, EmpoleonColorSchemeManager } from './color-scheme-managers';
+import {
+  EmpoleonColorSchemeManager,
+  localStorageColorSchemeManager,
+} from './color-scheme-managers';
 import { EmpoleonContext, EmpoleonStylesTransform } from './Empoleon.context';
 import { EmpoleonClasses } from './EmpoleonClasses';
 import { CSSVariablesResolver, EmpoleonCssVariables } from './EmpoleonCssVariables';
@@ -63,17 +66,20 @@ export interface EmpoleonProviderProps {
 }
 
 export function EmpoleonProvider(_props: EmpoleonProviderProps) {
-  const props = mergeProps({
-    withCssVariables: true,
-    withGlobalClasses: true,
-    deduplicateCssVariables: true,
-    withStaticClasses: true,
-    classNamesPrefix: 'empoleon',
-    colorSchemeManager: localStorageColorSchemeManager(),
-    defaultColorScheme: 'light' as const,
-    cssVariablesSelector: ':root',
-    getRootElement: () => document.documentElement,
-  }, _props);
+  const props = mergeProps(
+    {
+      withCssVariables: true,
+      withGlobalClasses: true,
+      deduplicateCssVariables: true,
+      withStaticClasses: true,
+      classNamesPrefix: 'empoleon',
+      colorSchemeManager: localStorageColorSchemeManager(),
+      defaultColorScheme: 'light' as const,
+      cssVariablesSelector: ':root',
+      getRootElement: () => document.documentElement,
+    },
+    _props
+  );
 
   const colorSchemeProps = useProviderColorScheme({
     defaultColorScheme: props.defaultColorScheme,

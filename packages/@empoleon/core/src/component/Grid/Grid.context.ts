@@ -1,4 +1,4 @@
-import { createSafeContext, GetStylesApi, EmpoleonSize } from '../../core';
+import { createSafeContext, EmpoleonSize, GetStylesApi } from '../../core';
 import type { GridFactory } from './Grid';
 
 export type GridBreakpoints = Record<EmpoleonSize, string>;
