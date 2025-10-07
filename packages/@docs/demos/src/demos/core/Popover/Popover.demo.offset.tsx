@@ -5,7 +5,6 @@ import { FLOATING_POSITION_DATA } from '../../../shared';
 const code = `
 import { Popover, Button, Text } from '@empoleon/core';
 
-
 function Demo() {
   return (
     <Popover

@@ -5,20 +5,21 @@ import { IconChevronDown, IconPlus, IconMinus } from '@tabler/icons-solidjs';
 import { For, createSignal, createEffect } from 'solid-js';
 
 const code = `
+import { For } from 'solid-js';
 import { Accordion } from '@empoleon/core';
 import { data } from './data';
 
 function Demo() {
-  const items = data.map((item) => (
-    <Accordion.Item value={item.value}>
-      <Accordion.Control icon={item.emoji}>{item.value}</Accordion.Control>
-      <Accordion.Panel>{item.description}</Accordion.Panel>
-    </Accordion.Item>
-  ));
-
   return (
     <Accordion{{props}} defaultValue="Apples">
-      {items}
+      <For each={data}>
+        {(item) => (
+          <Accordion.Item value={item.value}>
+            <Accordion.Control icon={item.emoji}>{item.value}</Accordion.Control>
+            <Accordion.Panel>{item.description}</Accordion.Panel>
+          </Accordion.Item>
+        )}
+      </For>
     </Accordion>
   );
 }

@@ -3,7 +3,7 @@ import { EmpoleonDemo } from '@empoleonx/demo';
 import { createSignal, For } from 'solid-js';
 
 const code = `
-import { useState } from 'react';
+import { createSignal, For } from 'solid-js';
 import { Input, InputBase, Combobox, useCombobox } from '@empoleon/core';
 
 const groceries = ['🍎 Apples', '🍌 Bananas', '🥦 Broccoli', '🥕 Carrots', '🍫 Chocolate'];
@@ -13,13 +13,7 @@ function Demo() {
     onDropdownClose: () => combobox.resetSelectedOption(),
   });
 
-  const [value, setValue] = useState<string | null>(null);
-
-  const options = groceries.map((item) => (
-    <Combobox.Option value={item} >
-      {item}
-    </Combobox.Option>
-  ));
+  const [value, setValue] = createSignal<string | null>(null);
 
   return (
     <Combobox
@@ -32,20 +26,29 @@ function Demo() {
       }}
     >
       <Combobox.Target>
-        <InputBase
-          component="button"
-          type="button"
-          pointer
-          rightSection={<Combobox.Chevron />}
-          rightSectionPointerEvents="none"
-          onClick={() => combobox.toggleDropdown()}
-        >
-          {value || <Input.Placeholder>Pick value</Input.Placeholder>}
-        </InputBase>
+        {(props) => (
+          <InputBase
+            {...props}
+            component="button"
+            type="button"
+            pointer
+            rightSection={<Combobox.Chevron />}
+            rightSectionPointerEvents="none"
+            onClick={() => combobox.toggleDropdown()}
+          >
+            {value() || <Input.Placeholder>Pick value</Input.Placeholder>}
+          </InputBase>
+        )}
       </Combobox.Target>
 
       <Combobox.Dropdown>
-        <Combobox.Options>{options}</Combobox.Options>
+        <For each={groceries}>
+          {(item) => (
+            <Combobox.Option value={item}>
+              {item}
+            </Combobox.Option>
+          )}
+        </For>
       </Combobox.Dropdown>
     </Combobox>
   );

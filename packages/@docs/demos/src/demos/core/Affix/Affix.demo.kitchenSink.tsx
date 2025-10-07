@@ -12,6 +12,18 @@ import { Affix, Button, Text, Transition } from '@empoleon/core';
 function Demo() {
   const [scroll, scrollTo] = useWindowScroll();
 
+  const [position, setPosition] = createSignal({
+    ...(props.bottom !== undefined ? { bottom: props.bottom } : props.top !== undefined ? { top: props.top } : {}),
+    ...(props.right !== undefined ? { right: props.right } : props.left !== undefined ? { left: props.left } : {}),
+  });
+
+  createEffect(() => {
+    setPosition({
+      ...(props.bottom !== undefined ? { bottom: props.bottom } : props.top !== undefined ? { top: props.top } : {}),
+      ...(props.right !== undefined ? { right: props.right } : props.left !== undefined ? { left: props.left } : {}),
+    });
+  });
+
   return (
     <>
       <Text ta="center">Affix is located at the configured position, scroll to see it</Text>
@@ -36,8 +48,6 @@ function Demo() {
 function Demo(props: any) {
   const [scroll, scrollTo] = useWindowScroll();
 
-  // Create a signal that constructs the position object from individual values
-  // with mutual exclusivity: bottom/top and left/right
   const [position, setPosition] = createSignal({
     ...(props.bottom !== undefined ? { bottom: props.bottom } : props.top !== undefined ? { top: props.top } : {}),
     ...(props.right !== undefined ? { right: props.right } : props.left !== undefined ? { left: props.left } : {}),

@@ -14,24 +14,26 @@ const data = [
 ];
 
 function Demo() {
-  const rows = data.map((item) => (
-    <Table.Tr >
-      <Table.Td>{item.product}</Table.Td>
-      <Table.Td>
-        <NumberFormatter value={item.unitsSold} thousandSeparator />
-      </Table.Td>
-    </Table.Tr>
-  ));
-
   return (
-    <Table{{props}}>
+    <Table {...props}>
       <Table.Thead>
         <Table.Tr>
           <Table.Th>Product</Table.Th>
           <Table.Th>Units sold</Table.Th>
         </Table.Tr>
       </Table.Thead>
-      <Table.Tbody>{rows}</Table.Tbody>
+      <Table.Tbody>
+        <For each={data}>
+          {(item) => (
+            <Table.Tr>
+              <Table.Td>{item.product}</Table.Td>
+              <Table.Td>
+                <NumberFormatter value={item.unitsSold} thousandSeparator />
+              </Table.Td>
+            </Table.Tr>
+          )}
+        </For>
+      </Table.Tbody>
     </Table>
   );
 }

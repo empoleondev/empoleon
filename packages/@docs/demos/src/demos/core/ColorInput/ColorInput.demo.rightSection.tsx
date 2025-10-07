@@ -4,19 +4,19 @@ import { EmpoleonDemo } from '@empoleonx/demo';
 import { createSignal } from 'solid-js';
 
 const code = `
-import { useState } from 'react';
+import { createSignal } from 'solid-js';
 import { IconRefresh } from '@tabler/icons-solidjs';
 import { ActionIcon, ColorInput } from '@empoleon/core';
 
 const randomColor = () => \`#\${Math.floor(Math.random() * 16777215).toString(16)}\`;
 
 function Demo() {
-  const [value, onChange] = useState(randomColor());
+  const [value, onChange] = createSignal(randomColor());
   return (
     <ColorInput
       placeholder="Pick color"
       label="Your favorite color"
-      value={value}
+      value={value()}
       onChange={onChange}
       rightSection={
         <ActionIcon onClick={() => onChange(randomColor())}>

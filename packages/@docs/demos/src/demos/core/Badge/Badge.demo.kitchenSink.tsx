@@ -4,9 +4,21 @@ import { IconAt, IconX } from '@tabler/icons-solidjs';
 import { createSignal, createEffect, Show } from 'solid-js';
 
 const code = `
+import { createSignal, createEffect, Show } from 'solid-js';
 import { Badge } from '@empoleon/core';
 
 function Demo() {
+  const [showLeft, setShowLeft] = createSignal(props.showLeftSection || false);
+  const [showRight, setShowRight] = createSignal(props.showRightSection || false);
+
+  createEffect(() => {
+    setShowLeft(props.showLeftSection || false);
+    setShowRight(props.showRightSection || false);
+  });
+
+  const leftSection = () => showLeft() ? <IconAt style={{ width: '12px', height: '12px' }} /> : undefined;
+  const rightSection = () => showRight() ? <IconX style={{ width: '10px', height: '10px' }} /> : undefined;
+
   return (
     <Badge{{props}}>
       Badge Text

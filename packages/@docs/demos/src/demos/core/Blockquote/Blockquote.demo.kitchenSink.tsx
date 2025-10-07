@@ -7,7 +7,29 @@ import { Blockquote } from '@empoleon/core';
 import { IconInfoCircle } from '@tabler/icons-solidjs';
 
 function Demo() {
-  const icon = <IconInfoCircle />;
+  const getIcon = () => {
+    const iconProps = {
+      style: { width: '100%', height: '100%' }
+    };
+
+    switch (props.icon) {
+      case 'heart':
+        return <IconHeart {...iconProps} />;
+      case 'flame':
+        return <IconFlame {...iconProps} />;
+      case 'star':
+        return <IconStar {...iconProps} />;
+      case 'alert':
+        return <IconAlertCircle {...iconProps} />;
+      case 'none':
+        return undefined;
+      default:
+        return <IconInfoCircle {...iconProps} />;
+    }
+  };
+
+  const icon = () => getIcon();
+
   return (
     <Blockquote{{props}} cite="– Forrest Gump" icon={icon}>
       Life is like an npm install – you never know what you are going to get.

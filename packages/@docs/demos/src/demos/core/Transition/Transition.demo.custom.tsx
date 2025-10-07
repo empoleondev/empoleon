@@ -4,7 +4,7 @@ import { EmpoleonDemo } from '@empoleonx/demo';
 import { createSignal } from 'solid-js';
 
 const code = `
-import { useState } from 'react';
+import { createSignal } from 'solid-js';
 import { useClickOutside } from '@empoleon/hooks';
 import { Transition, Paper, Button, Box } from '@empoleon/core';
 
@@ -16,7 +16,7 @@ const scaleY = {
 };
 
 function Demo() {
-  const [opened, setOpened] = useState(false);
+  const [opened, setOpened] = createSignal(false);
   const clickOutsideRef = useClickOutside(() => setOpened(false));
 
   return (
@@ -27,7 +27,7 @@ function Demo() {
     >
       <Button onClick={() => setOpened(true)}>Open dropdown</Button>
       <Transition
-        mounted={opened}
+        mounted={opened()}
         transition={scaleY}
         duration={200}
         timingFunction="ease"

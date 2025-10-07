@@ -3,7 +3,7 @@ import { EmpoleonDemo } from '@empoleonx/demo';
 import { createSignal } from 'solid-js';
 
 const code = `
-import { useState } from 'react';
+import { createSignal } from 'solid-js';
 import { Input, InputBase, Combobox, useCombobox } from '@empoleon/core';
 
 function Demo() {
@@ -11,7 +11,7 @@ function Demo() {
     onDropdownClose: () => combobox.resetSelectedOption(),
   });
 
-  const [value, setValue] = useState<string | null>(null);
+  const [value, setValue] = createSignal<string | null>(null);
 
   return (
     <Combobox

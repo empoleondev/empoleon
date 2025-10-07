@@ -4,11 +4,11 @@ import { Content } from './_content';
 import { createSignal } from 'solid-js';
 
 const code = `
-import { useState } from 'react';
+import { createSignal } from 'solid-js';
 import { Text, ScrollArea, Code, Box } from '@empoleon/core';
 
 function Demo() {
-  const [scrollPosition, onScrollPositionChange] = useState({ x: 0, y: 0 });
+  const [scrollPosition, onScrollPositionChange] = createSignal({ x: 0, y: 0 });
 
   return (
     <>
@@ -23,7 +23,7 @@ function Demo() {
       </ScrollArea>
 
       <Text>
-        Scroll position: <Code>{\`{ x: \${scrollPosition.x}, y: \${scrollPosition.y} }\`}</Code>
+        Scroll position: <Code>{\`{ x: \${scrollPosition().x}, y: \${scrollPosition().y} }\`}</Code>
       </Text>
     </>
   );

@@ -3,15 +3,15 @@ import { EmpoleonDemo } from '@empoleonx/demo';
 import { createSignal } from 'solid-js';
 
 const code = `
-import { useState } from 'react';
+import { createSignal } from 'solid-js';
 import { Skeleton, Button } from '@empoleon/core';
 
 function Demo() {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = createSignal(true);
 
   return (
     <>
-      <Skeleton visible={loading}>
+      <Skeleton visible={loading()}>
         Lorem ipsum dolor sit amet...
         {/* other content */}
       </Skeleton>

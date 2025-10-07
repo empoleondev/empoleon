@@ -8,6 +8,32 @@ import { ActionIcon } from '@empoleon/core';
 import { IconAdjustments } from '@tabler/icons-solidjs';
 
 function Demo() {
+  const [loading, setLoading] = createSignal(props.loading || false);
+
+  createEffect(() => {
+    setLoading(props.loading || false);
+  });
+
+  const getIcon = () => {
+    const iconProps = {
+      style: { width: \`\${props.iconSize || 70}%\`, height: \`\${props.iconSize || 70}%\` },
+      stroke: '1.5'
+    };
+
+    switch (props.iconType) {
+      case 'heart':
+        return () => <IconHeart {...iconProps} />;
+      case 'trash':
+        return () => <IconTrash {...iconProps} />;
+      case 'edit':
+        return () => <IconEdit {...iconProps} />;
+      case 'star':
+        return () => <IconStar {...iconProps} />;
+      default:
+        return () => <IconAdjustments {...iconProps} />;
+    }
+  };
+
   return (
     <ActionIcon{{props}} aria-label="Settings">
       <IconAdjustments style={{ width: '70%', height: '70%' }} stroke='1.5' />

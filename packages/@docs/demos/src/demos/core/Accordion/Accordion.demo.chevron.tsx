@@ -6,26 +6,27 @@ import classes from './Accordion.demo.chevron.module.css';
 import { For } from 'solid-js';
 
 const code = `
+import { For } from 'solid-js';
 import { IconPlus } from '@tabler/icons-solidjs';
 import { Accordion } from '@empoleon/core';
 import { data } from './data';
 import classes from './Demo.module.css';
 
 function Demo() {
-  const items = data.map((item) => (
-    <Accordion.Item value={item.value}>
-      <Accordion.Control icon={item.emoji}>{item.value}</Accordion.Control>
-      <Accordion.Panel>{item.description}</Accordion.Panel>
-    </Accordion.Item>
-  ));
-
   return (
     <Accordion
       defaultValue="Apples"
       classNames={{ chevron: classes.chevron }}
       chevron={<IconPlus className={classes.icon} />}
     >
-      {items}
+      <For each={data}>
+        {(item) => (
+          <Accordion.Item value={item.value}>
+            <Accordion.Control icon={item.emoji}>{item.value}</Accordion.Control>
+            <Accordion.Panel>{item.description}</Accordion.Panel>
+          </Accordion.Item>
+        )}
+      </For>
     </Accordion>
   );
 }

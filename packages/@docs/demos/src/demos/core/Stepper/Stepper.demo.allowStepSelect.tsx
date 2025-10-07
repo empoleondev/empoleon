@@ -4,11 +4,11 @@ import { Content } from './_content';
 import { createSignal } from 'solid-js';
 
 const code = `
-import { useState } from 'react';
+import { createSignal } from 'solid-js';
 import { Stepper, Button, Group } from '@empoleon/core';
 
 function Demo() {
-  const [active, setActive] = useState(1);
+  const [active, setActive] = createSignal(1);
   const [highestStepVisited, setHighestStepVisited] = useState(active);
 
   const handleStepChange = (nextStep: number) => {
@@ -27,7 +27,7 @@ function Demo() {
 
   return (
     <>
-      <Stepper active={active} onStepClick={setActive}>
+      <Stepper active={active()} onStepClick={setActive}>
         <Stepper.Step
           label="First step"
           description="Create an account"
@@ -56,10 +56,10 @@ function Demo() {
       </Stepper>
 
       <Group justify="center" mt="xl">
-        <Button variant="default" onClick={() => handleStepChange(active - 1)}>
+        <Button variant="default" onClick={() => handleStepChange(active() - 1)}>
           Back
         </Button>
-        <Button onClick={() => handleStepChange(active + 1)}>Next step</Button>
+        <Button onClick={() => handleStepChange(active() + 1)}>Next step</Button>
       </Group>
     </>
   );

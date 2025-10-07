@@ -4,26 +4,43 @@ import { Content } from './_content';
 import { createSignal } from 'solid-js';
 
 const code = `
-import { useRef } from 'react';
+import { createSignal } from 'solid-js';
 import { ScrollArea, Button, Stack, Group } from '@empoleon/core';
 
 function Demo() {
-  const viewport = useRef<HTMLDivElement>(null);
+  const [viewport, setViewport] = createSignal<HTMLDivElement>();
 
-  const scrollToBottom = () =>
-    viewport.current!.scrollTo({ top: viewport.current!.scrollHeight, behavior: 'smooth' });
+  const scrollToBottom = () => {
+    const el = viewport();
+    if (el) {
+      el.scrollTo({ top: el.scrollHeight, behavior: 'smooth' });
+    }
+  };
 
-  const scrollToCenter = () =>
-    viewport.current!.scrollTo({ top: viewport.current!.scrollHeight / 2, behavior: 'smooth' });
+  const scrollToCenter = () => {
+    const el = viewport();
+    if (el) {
+      el.scrollTo({ top: (el.scrollHeight - el.clientHeight) / 2, behavior: 'smooth' });
+    }
+  };
 
-  const scrollToTop = () => viewport.current!.scrollTo({ top: 0, behavior: 'smooth' });
+  const scrollToTop = () => {
+    const el = viewport();
+    if (el) {
+      el.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
 
   return (
     <Stack align="center">
-      <ScrollArea w={300} h={200} viewportRef={viewport}>
-        {/* ... content */}
+      <ScrollArea
+        w={300}
+        h={200}
+        // @ts-ignore - TypeScript definition is incorrect, this prop accepts a function
+        viewportRef={setViewport}
+      >
+        <Content />
       </ScrollArea>
-
       <Group justify="center">
         <Button onClick={scrollToBottom}>Scroll to bottom</Button>
         <Button onClick={scrollToCenter}>Scroll to center</Button>

@@ -4,11 +4,11 @@ import { createSignal } from 'solid-js';
 import { Dynamic } from 'solid-js/web';
 
 const code = `
-import { useState } from 'react';
+import { createSignal } from 'solid-js';
 import { TextInput, Tooltip } from '@empoleon/core';
 
 function Demo() {
-  const [focused, setFocused] = useState(false);
+  const [focused, setFocused] = createSignal(false);
 
   return (
     <TextInput
@@ -18,7 +18,7 @@ function Demo() {
       onFocus={() => setFocused(true)}
       onBlur={() => setFocused(false)}
       inputContainer={(children) => (
-        <Tooltip label="Additional information" position="top-start" opened={focused}>
+        <Tooltip label="Additional information" position="top-start" opened={focused()}>
           {children}
         </Tooltip>
       )}

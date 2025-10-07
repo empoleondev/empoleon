@@ -5,7 +5,7 @@ import { Component, createSignal } from 'solid-js';
 
 const getCode = (name: string) => `
 import dayjs from 'dayjs';
-import { useState } from 'react';
+import { createSignal } from 'solid-js';
 import { ${name}, DateFormatter } from '@empoleon/dates';
 
 const formatter: DateFormatter = ({ type, date, locale, format }) => {
@@ -25,13 +25,13 @@ const formatter: DateFormatter = ({ type, date, locale, format }) => {
 };
 
 function Demo() {
-  const [value, setValue] = useState<string[]>([]);
+  const [value, setValue] = createSignal<string[]>([]);
 
   return (
     <${name}
       label="Pick 2 dates or more"
       placeholder="Pick 2 dates or more"
-      value={value}
+      value={value()}
       onChange={setValue}
       type="multiple"
       valueFormatter={formatter}

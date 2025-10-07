@@ -4,17 +4,17 @@ import { Content } from './_content';
 import { createSignal } from 'solid-js';
 
 const code = `
-import { useState } from 'react';
+import { createSignal } from 'solid-js';
 import { Stepper, Button, Group } from '@empoleon/core';
 
 function Demo() {
-  const [active, setActive] = useState(1);
+  const [active, setActive] = createSignal(1);
   const nextStep = () => setActive((current) => (current < 3 ? current + 1 : current));
   const prevStep = () => setActive((current) => (current > 0 ? current - 1 : current));
 
   return (
     <>
-      <Stepper active={active} onStepClick={setActive} allowNextStepsSelect={false}>
+      <Stepper active={active()} onStepClick={setActive} allowNextStepsSelect={false}>
         <Stepper.Step label="First step" description="Create an account">
           Step 1 content: Create an account
         </Stepper.Step>

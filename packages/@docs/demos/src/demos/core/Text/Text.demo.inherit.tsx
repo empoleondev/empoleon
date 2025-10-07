@@ -5,7 +5,15 @@ const code = `
 import { Text, Title } from '@empoleon/core';
 
 function Demo() {
-  return <Title order={3}>Title in which you want to <Text span c="blue" inherit>highlight</Text> something</Title>;
+  return (
+    <Title order={3}>
+      Title in which you want to{' '}
+      <Text span c="blue" inherit>
+        highlight
+      </Text>{' '}
+      something
+    </Title>
+  );
 }
 `;
 

@@ -1,13 +1,13 @@
 import { Button, FileButton, Group, Text } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal } from 'solid-js';
+import { createSignal, Show } from 'solid-js';
 
 const code = `
-import { useState } from 'react';
+import { createSignal, Show } from 'solid-js';
 import { FileButton, Button, Group, Text } from '@empoleon/core';
 
 function Demo() {
-  const [file, setFile] = useState<File | null>(null);
+  const [file, setFile] = createSignal<File | null>(null);
   return (
     <>
       <Group justify="center">
@@ -16,11 +16,11 @@ function Demo() {
         </FileButton>
       </Group>
 
-      {file && (
+      <Show when={file()}>
         <Text size="sm" ta="center" mt="sm">
-          Picked file: {file.name}
+          Picked file: {file()?.name}
         </Text>
-      )}
+      </Show>
     </>
   );
 }
@@ -36,11 +36,11 @@ function Demo() {
         </FileButton>
       </Group>
 
-      {file() && (
+      <Show when={file()}>
         <Text size="sm" ta="center" mt="sm">
           Picked file: {file()?.name}
         </Text>
-      )}
+      </Show>
     </>
   );
 }

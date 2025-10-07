@@ -1,12 +1,12 @@
 import { IconActivity, IconChevronRight, IconFingerprint, IconGauge } from '@tabler/icons-solidjs';
 import { Box, Group, NavLink } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal } from 'solid-js';
+import { createSignal, For } from 'solid-js';
 
 const code = `
-import { useState } from 'react';
+import { createSignal, For } from 'solid-js';
 import { IconGauge, IconFingerprint, IconActivity, IconChevronRight } from '@tabler/icons-solidjs';
-import { Box, NavLink } from '@empoleon/core';
+import { Box, Group, NavLink } from '@empoleon/core';
 
 const data = [
   { icon: IconGauge, label: 'Dashboard', description: 'Item with description' },
@@ -19,23 +19,28 @@ const data = [
 ];
 
 function Demo() {
-  const [active, setActive] = useState(0);
+  const [active, setActive] = createSignal(0);
 
-  const items = data.map((item, index) => (
-    <NavLink
-      href="#required-for-focus"
-
-      active={index === active}
-      label={item.label}
-      description={item.description}
-      rightSection={item.rightSection}
-      leftSection={<item.icon size={16} stroke='1.5' />}
-      onClick={() => setActive(index)}
-      {{props}}
-    />
-  ));
-
-  return <Box w={220}>{items}</Box>;
+  return (
+    <Group justify="center">
+      <Box w={220}>
+        <For each={data}>
+          {(item, index) => (
+            <NavLink
+              href="#required-for-focus"
+              active={index() === active()}
+              label={item.label}
+              description={item.description}
+              rightSection={item.rightSection}
+              leftSection={<item.icon size={16} stroke='1.5' />}
+              onClick={() => setActive(index())}
+              {...props}
+            />
+          )}
+        </For>
+      </Box>;
+    </Group>
+  );
 }
 `;
 
@@ -68,7 +73,22 @@ function Demo(props: any) {
 
   return (
     <Group justify="center">
-      <Box w={220}>{items}</Box>
+      <Box w={220}>
+        <For each={data}>
+          {(item, index) => (
+            <NavLink
+              href="#required-for-focus"
+              active={index() === active()}
+              label={item.label}
+              description={item.description}
+              rightSection={item.rightSection}
+              leftSection={<item.icon size={16} stroke='1.5' />}
+              onClick={() => setActive(index())}
+              {...props}
+            />
+          )}
+        </For>
+      </Box>;
     </Group>
   );
 }

@@ -42,21 +42,21 @@ const cssCode = `
 `;
 
 const code = `
-import { useState } from 'react';
+import { createSignal } from 'solid-js';
 import { FloatingIndicator, Tabs } from '@empoleon/core';
 import classes from './Demo.module.css';
 
 function Demo() {
-  const [rootRef, setRootRef] = useState<HTMLDivElement | null>(null);
-  const [value, setValue] = useState<string | null>('1');
-  const [controlsRefs, setControlsRefs] = useState<Record<string, HTMLButtonElement | null>>({});
+  const [rootRef, setRootRef] = createSignal<HTMLDivElement | null>(null);
+  const [value, setValue] = createSignal<string>('1');
+  const [controlsRefs, setControlsRefs] = createSignal<Record<string, HTMLButtonElement | null>>({});
   const setControlRef = (val: string) => (node: HTMLButtonElement) => {
-    controlsRefs[val] = node;
+    controlsRefs()[val] = node;
     setControlsRefs(controlsRefs);
   };
 
   return (
-    <Tabs variant="none" value={value} onChange={setValue}>
+    <Tabs variant="none" value={value()} onChange={setValue}>
       <Tabs.List ref={setRootRef} className={classes.list}>
         <Tabs.Tab value="1" ref={setControlRef('1')} className={classes.tab}>
           First tab
@@ -69,8 +69,8 @@ function Demo() {
         </Tabs.Tab>
 
         <FloatingIndicator
-          target={value ? controlsRefs[value] : null}
-          parent={rootRef}
+          target={value() ? controlsRefs()[value()] : null}
+          parent={rootRef()}
           className={classes.indicator}
         />
       </Tabs.List>

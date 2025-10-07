@@ -9,8 +9,20 @@ import { Avatar } from '@empoleon/core';
 import { IconStar } from '@tabler/icons-solidjs';
 
 function Demo() {
+  const getSrc = () => {
+    return props.content === 'image' ? avatars[0] : undefined;
+  };
+
+  const getName = () => {
+    return props.content === 'name' ? 'John Doe' : undefined;
+  };
   return (
-    <Avatar{{props}} alt="Demo Avatar">
+    <Avatar
+      {{props}}
+      src={getSrc()}
+      name={getName()}
+      alt="Demo Avatar"
+    >
       <IconStar size={20} />
     </Avatar>
   );

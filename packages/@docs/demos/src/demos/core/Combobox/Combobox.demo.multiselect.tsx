@@ -3,7 +3,7 @@ import { EmpoleonDemo } from '@empoleonx/demo';
 import { createSignal, For, Show } from 'solid-js';
 
 const code = `
-import { useState } from 'react';
+import { createSignal, For, Show } from 'solid-js';
 import { PillsInput, Pill, Input, Combobox, CheckIcon, Group, useCombobox } from '@empoleon/core';
 
 const groceries = ['🍎 Apples', '🍌 Bananas', '🥦 Broccoli', '🥕 Carrots', '🍫 Chocolate'];
@@ -14,7 +14,7 @@ function Demo() {
     onDropdownOpen: () => combobox.updateSelectedOptionIndex('active'),
   });
 
-  const [value, setValue] = useState<string[]>([]);
+  const [value, setValue] = createSignal<string[]>([]);
 
   const handleValueSelect = (val: string) =>
     setValue((current) =>
@@ -24,19 +24,10 @@ function Demo() {
   const handleValueRemove = (val: string) =>
     setValue((current) => current.filter((v) => v !== val));
 
-  const values = value.map((item) => (
+  const values = value().map((item) => (
     <Pill withRemoveButton onRemove={() => handleValueRemove(item)}>
       {item}
     </Pill>
-  ));
-
-  const options = groceries.map((item) => (
-    <Combobox.Option value={item} active={value.includes(item)}>
-      <Group gap="sm">
-        {value.includes(item) ? <CheckIcon size={12} /> : null}
-        <span>{item}</span>
-      </Group>
-    </Combobox.Option>
   ));
 
   return (
@@ -55,9 +46,9 @@ function Demo() {
                 type="hidden"
                 onBlur={() => combobox.closeDropdown()}
                 onKeyDown={(event) => {
-                  if (event.key === 'Backspace' && value.length > 0) {
+                  if (event.key === 'Backspace' && value().length > 0) {
                     event.preventDefault();
-                    handleValueRemove(value[value.length - 1]);
+                    handleValueRemove(value()[value().length - 1]);
                   }
                 }}
               />
@@ -67,7 +58,20 @@ function Demo() {
       </Combobox.DropdownTarget>
 
       <Combobox.Dropdown>
-        <Combobox.Options>{options}</Combobox.Options>
+        <Combobox.Options>
+          <For each={groceries}>
+            {(item) => (
+              <Combobox.Option value={item} active={value().includes(item)}>
+                <Group gap="sm">
+                  <Show when={value().includes(item)}>
+                    <CheckIcon size={12} />
+                  </Show>
+                  <span>{item}</span>
+                </Group>
+              </Combobox.Option>
+            )}
+          </For>
+        </Combobox.Options>
       </Combobox.Dropdown>
     </Combobox>
   );

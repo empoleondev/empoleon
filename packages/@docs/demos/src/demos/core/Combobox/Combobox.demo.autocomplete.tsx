@@ -10,17 +10,11 @@ const groceries = ['🍎 Apples', '🍌 Bananas', '🥦 Broccoli', '🥕 Carrots
 
 function Demo() {
   const combobox = useCombobox();
-  const [value, setValue] = useState('');
+  const [value, setValue] = createSignal('');
   const shouldFilterOptions = !groceries.some((item) => item === value);
   const filteredOptions = shouldFilterOptions
     ? groceries.filter((item) => item.toLowerCase().includes(value.toLowerCase().trim()))
     : groceries;
-
-  const options = filteredOptions.map((item) => (
-    <Combobox.Option value={item} >
-      {item}
-    </Combobox.Option>
-  ));
 
   return (
     <Combobox
@@ -31,24 +25,38 @@ function Demo() {
       store={combobox}
     >
       <Combobox.Target>
-        <TextInput
-          label="Pick value or type anything"
-          placeholder="Pick value or type anything"
-          value={value}
-          onChange={(event) => {
-            setValue(event.currentTarget.value);
-            combobox.openDropdown();
-            combobox.updateSelectedOptionIndex();
-          }}
-          onClick={() => combobox.openDropdown()}
-          onFocus={() => combobox.openDropdown()}
-          onBlur={() => combobox.closeDropdown()}
-        />
+        {(props) => (
+          <TextInput
+            {...props}
+            label="Pick value or type anything"
+            placeholder="Pick value or type anything"
+            value={value()}
+            onChange={(event) => {
+              setValue(event.currentTarget.value);
+              combobox.openDropdown();
+              combobox.updateSelectedOptionIndex();
+            }}
+            onClick={() => combobox.openDropdown()}
+            onFocus={() => combobox.openDropdown()}
+            onBlur={() => combobox.closeDropdown()}
+          />
+        )}
       </Combobox.Target>
 
       <Combobox.Dropdown>
         <Combobox.Options>
-          {options.length === 0 ? <Combobox.Empty>Nothing found</Combobox.Empty> : options}
+          <Show
+            when={filteredOptions.length > 0}
+            fallback={<Combobox.Empty>Nothing found</Combobox.Empty>}
+          >
+            <For each={filteredOptions}>
+              {(item) => (
+                <Combobox.Option value={item}>
+                  {item}
+                </Combobox.Option>
+              )}
+            </For>
+          </Show>
         </Combobox.Options>
       </Combobox.Dropdown>
     </Combobox>

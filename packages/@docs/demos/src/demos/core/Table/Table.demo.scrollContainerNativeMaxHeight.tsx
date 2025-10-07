@@ -4,18 +4,10 @@ import { elementsLong } from './_data';
 import { For } from 'solid-js';
 
 const code = `
+import { For } from 'solid-js';
 import { Table } from '@empoleon/core';
 
 function Demo() {
-  const rows = elementsLong.map((element) => (
-    <Table.Tr >
-      <Table.Td>{element.position}</Table.Td>
-      <Table.Td>{element.name}</Table.Td>
-      <Table.Td>{element.symbol}</Table.Td>
-      <Table.Td>{element.mass}</Table.Td>
-    </Table.Tr>
-  ));
-
   return (
     <Table.ScrollContainer minWidth={500} maxHeight={300} type="native">
       <Table>
@@ -27,7 +19,18 @@ function Demo() {
             <Table.Th>Atomic mass</Table.Th>
           </Table.Tr>
         </Table.Thead>
-        <Table.Tbody>{rows}</Table.Tbody>
+        <Table.Tbody>
+          <For each={elementsLong}>
+            {(element) => (
+              <Table.Tr>
+                <Table.Td>{element.position}</Table.Td>
+                <Table.Td>{element.name}</Table.Td>
+                <Table.Td>{element.symbol}</Table.Td>
+                <Table.Td>{element.mass}</Table.Td>
+              </Table.Tr>
+            )}
+          </For>
+        </Table.Tbody>
       </Table>
     </Table.ScrollContainer>
   );

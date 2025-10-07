@@ -18,7 +18,6 @@ function Wrapper(props: any) {
 const code = `
 import { RangeSlider } from '@empoleon/core';
 
-
 function Demo() {
   return (
     <RangeSlider

@@ -1,45 +1,47 @@
 import { Group, Menu } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
 import { DemoMenuItems } from './_menu-items';
+import { For } from 'solid-js';
 
 const code = `
+import { For } from 'solid-js';
 import { Group, Menu } from '@empoleon/core';
 
 function Demo() {
-  const menus = Array(4)
-    .fill(0)
-    .map((e, i) => (
-      <Menu
-
-        trigger="click-hover"
-        loop={false}
-        withinPortal={false}
-        trapFocus={false}
-        menuItemTabIndex={0}
-      >
-        {/* ... menu items */}
-      </Menu>
-    ));
-  return <Group>{menus}</Group>;
+  return <Group>
+    <For each={Array(4).fill(0)}>
+      {() => (
+        <Menu
+          trigger="click-hover"
+          loop={false}
+          withinPortal={false}
+          trapFocus={false}
+          menuItemTabIndex={0}
+        >
+          <DemoMenuItems />
+        </Menu>
+      )}
+    </For>
+  </Group>;
 }
 `;
 
 function Demo() {
-  const menus = Array(4)
-    .fill(0)
-    .map((_, i) => (
-      <Menu
-
-        trigger="click-hover"
-        loop={false}
-        withinPortal={false}
-        trapFocus={false}
-        menuItemTabIndex={0}
-      >
-        <DemoMenuItems />
-      </Menu>
-    ));
-  return <Group>{menus}</Group>;
+  return <Group>
+    <For each={Array(4).fill(0)}>
+      {() => (
+        <Menu
+          trigger="click-hover"
+          loop={false}
+          withinPortal={false}
+          trapFocus={false}
+          menuItemTabIndex={0}
+        >
+          <DemoMenuItems />
+        </Menu>
+      )}
+    </For>
+  </Group>;
 }
 
 export const navigation: EmpoleonDemo = {

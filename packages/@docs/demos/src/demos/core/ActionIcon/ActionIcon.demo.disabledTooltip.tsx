@@ -9,9 +9,9 @@ import { IconHeart } from '@tabler/icons-solidjs';
 function Demo() {
   return (
     <Tooltip label="Tooltip for disabled button">
-      <ActionIcon size="xl" data-disabled onClick={(event) => event.preventDefault()}>
+      {(props) => <ActionIcon {...props} size="xl" data-disabled onClick={(event) => event.preventDefault()}>
         <IconHeart />
-      </ActionIcon>
+      </ActionIcon>}
     </Tooltip>
   );
 }

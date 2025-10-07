@@ -3,11 +3,11 @@ import { EmpoleonDemo } from '@empoleonx/demo';
 import { createSignal } from 'solid-js';
 
 const code = `
-import { useState } from 'react';
+import { createSignal } from 'solid-js';
 import { Tooltip, Button } from '@empoleon/core';
 
 function Demo() {
-  const [opened, setOpened] = useState(true);
+  const [opened, setOpened] = createSignal(true);
 
   return (
     <Tooltip label="Ctrl + J" opened={opened()}>

@@ -9,7 +9,7 @@ import { EmpoleonDemo } from '@empoleonx/demo';
 import { createSignal } from 'solid-js';
 
 const code = `
-import { useState } from 'react';
+import { createSignal } from 'solid-js';
 import {
   IconUserCheck,
   IconMailOpened,
@@ -19,11 +19,11 @@ import {
 import { Stepper } from '@empoleon/core';
 
 function Demo() {
-  const [active, setActive] = useState(1);
+  const [active, setActive] = createSignal(1);
 
   return (
     <Stepper
-      active={active}
+      active={active()}
       onStepClick={setActive}
       completedIcon={<IconCircleCheck size={18} />}
     >

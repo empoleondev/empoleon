@@ -4,14 +4,14 @@ import { EmpoleonDemo } from '@empoleonx/demo';
 import { createSignal } from 'solid-js';
 
 const code = `
-import { useState } from 'react';
+import { createSignal } from 'solid-js';
 import { Button, Group, Drawer } from '@empoleon/core';
 import { useDisclosure } from '@empoleon/hooks';
 
 function Demo() {
   const [firstOpened, firstHandlers] = useDisclosure(false);
   const [secondOpened, secondHandlers] = useDisclosure(false);
-  const [drawerData, setDrawerData] = useState({
+  const [drawerData, setDrawerData] = createSignal({
     title: '',
     message: '',
   });
@@ -24,9 +24,9 @@ function Demo() {
           firstHandlers.close();
           setDrawerData({ title: '', message: '' });
         }}
-        title={drawerData.title}
+        title={drawerData().title}
       >
-        {drawerData.message}
+        {drawerData().message}
       </Drawer>
       <Drawer
         opened={secondOpened}
@@ -34,7 +34,7 @@ function Demo() {
         onExitTransitionEnd={() => setDrawerData({ title: '', message: '' })}
         title={drawerData.title}
       >
-        {drawerData.message}
+        {drawerData().message}
       </Drawer>
 
       <Group>

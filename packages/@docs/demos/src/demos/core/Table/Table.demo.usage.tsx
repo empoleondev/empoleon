@@ -7,15 +7,6 @@ const code = `
 import { Table } from '@empoleon/core';
 
 function Demo() {
-  const rows = elements.map((element) => (
-    <Table.Tr >
-      <Table.Td>{element.position}</Table.Td>
-      <Table.Td>{element.name}</Table.Td>
-      <Table.Td>{element.symbol}</Table.Td>
-      <Table.Td>{element.mass}</Table.Td>
-    </Table.Tr>
-  ));
-
   return (
     <Table>
       <Table.Thead>
@@ -26,7 +17,18 @@ function Demo() {
           <Table.Th>Atomic mass</Table.Th>
         </Table.Tr>
       </Table.Thead>
-      <Table.Tbody>{rows}</Table.Tbody>
+      <Table.Tbody>
+        <For each={elements}>
+          {(element) => (
+            <Table.Tr>
+              <Table.Td>{element.position}</Table.Td>
+              <Table.Td>{element.name}</Table.Td>
+              <Table.Td>{element.symbol}</Table.Td>
+              <Table.Td>{element.mass}</Table.Td>
+            </Table.Tr>
+          )}
+        </For>
+      </Table.Tbody>
     </Table>
   );
 }

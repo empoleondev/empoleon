@@ -55,18 +55,6 @@ const data = [
 function Demo() {
   const [value, setValue] = useState<string[]>([]);
 
-  const cards = data.map((item) => (
-    <Checkbox.Card className={classes.root} radius="md" value={item.name} >
-      <Group wrap="nowrap" align="flex-start">
-        <Checkbox.Indicator />
-        <div>
-          <Text className={classes.label}>{item.name}</Text>
-          <Text className={classes.description}>{item.description}</Text>
-        </div>
-      </Group>
-    </Checkbox.Card>
-  ));
-
   return (
     <>
       <Checkbox.Group
@@ -76,7 +64,19 @@ function Demo() {
         description="Choose all packages that you will need in your application"
       >
         <Stack pt="md" gap="xs">
-          {cards}
+          <For each={data}>
+            {(item) => (
+              <Checkbox.Card className={classes.root} radius="md" value={item.name}>
+                <Group wrap="nowrap" align="flex-start">
+                  <Checkbox.Indicator />
+                  <div>
+                    <Text className={classes.label}>{item.name}</Text>
+                    <Text className={classes.description}>{item.description}</Text>
+                  </div>
+                </Group>
+              </Checkbox.Card>
+            )}
+          </For>
         </Stack>
       </Checkbox.Group>
 

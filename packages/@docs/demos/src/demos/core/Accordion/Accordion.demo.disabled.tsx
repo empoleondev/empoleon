@@ -4,22 +4,23 @@ import { data, dataCode } from './_base';
 import { For } from 'solid-js';
 
 const code = `
+import { For } from 'solid-js';
 import { Accordion } from '@empoleon/core';
 import { data } from './data';
 
 function Demo() {
-  const items = data.map((item) => (
-    <Accordion.Item value={item.value}>
-      <Accordion.Control icon={item.emoji} disabled={item.value === 'Bananas'}>
-        {item.value}
-      </Accordion.Control>
-      <Accordion.Panel>{item.description}</Accordion.Panel>
-    </Accordion.Item>
-  ));
-
   return (
     <Accordion maw={400} defaultValue="Apples">
-      {items}
+      <For each={data}>
+        {(item) => (
+          <Accordion.Item value={item.value}>
+            <Accordion.Control icon={item.emoji} disabled={item.value === 'Bananas'}>
+              {item.value}
+            </Accordion.Control>
+            <Accordion.Panel>{item.description}</Accordion.Panel>
+          </Accordion.Item>
+        )}
+      </For>
     </Accordion>
   );
 }

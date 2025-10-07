@@ -3,11 +3,11 @@ import { EmpoleonDemo } from '@empoleonx/demo';
 import { createSignal } from 'solid-js';
 
 const code = `
-import { useState } from 'react';
+import { createSignal } from 'solid-js';
 import { ColorSwatch, CheckIcon } from '@empoleon/core';
 
 function Demo() {
-  const [checked, setChecked] = useState(true);
+  const [checked, setChecked] = createSignal(true);
 
   return (
     <ColorSwatch
@@ -16,7 +16,7 @@ function Demo() {
       onClick={() => setChecked((c) => !c)}
       style={{ color: '#fff', cursor: 'pointer' }}
     >
-      {checked && <CheckIcon size={12} />}
+      {checked() && <CheckIcon size={12} />}
     </ColorSwatch>
   );
 }

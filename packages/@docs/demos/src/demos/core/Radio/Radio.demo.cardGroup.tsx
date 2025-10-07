@@ -39,7 +39,7 @@ const cssCode = `.root {
 `;
 
 const code = `
-import { useState } from 'react';
+import { createSignal, For } from 'solid-js';
 import { Radio, Group, Stack, Text } from '@empoleon/core';
 import classes from './Demo.module.css';
 
@@ -53,35 +53,35 @@ const data = [
 ];
 
 function Demo() {
-  const [value, setValue] = useState<string | null>(null);
-
-  const cards = data.map((item) => (
-    <Radio.Card className={classes.root} radius="md" value={item.name} >
-      <Group wrap="nowrap" align="flex-start">
-        <Radio.Indicator />
-        <div>
-          <Text className={classes.label}>{item.name}</Text>
-          <Text className={classes.description}>{item.description}</Text>
-        </div>
-      </Group>
-    </Radio.Card>
-  ));
+  const [value, setValue] = createSignal<string | null>(null);
 
   return (
     <>
       <Radio.Group
-        value={value}
+        value={value()}
         onChange={setValue}
         label="Pick one package to install"
         description="Choose a package that you will need in your application"
       >
         <Stack pt="md" gap="xs">
-          {cards}
+          <For each={data}>
+            {(item) => (
+              <Radio.Card className={classes.root} radius="md" value={item.name}>
+                <Group wrap="nowrap" align="flex-start">
+                  <Radio.Indicator />
+                  <div>
+                    <Text className={classes.label}>{item.name}</Text>
+                    <Text className={classes.description}>{item.description}</Text>
+                  </div>
+                </Group>
+              </Radio.Card>
+            )}
+          </For>
         </Stack>
       </Radio.Group>
 
       <Text fz="xs" mt="md">
-        CurrentValue: {value || '–'}
+        CurrentValue: {value() || '–'}
       </Text>
     </>
   );

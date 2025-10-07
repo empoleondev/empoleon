@@ -3,20 +3,14 @@ import { EmpoleonDemo } from '@empoleonx/demo';
 import { createSignal, For } from 'solid-js';
 
 const code = `
-import { useState } from 'react';
+import { createSignal, For } from 'solid-js';
 import { TextInput, Button, Combobox, useCombobox } from '@empoleon/core';
 
 const groceries = ['🍎 Apples', '🍌 Bananas', '🥦 Broccoli', '🥕 Carrots', '🍫 Chocolate'];
 
 function Demo() {
-  const [opened, setOpened] = useState(false);
+  const [opened, setOpened] = createSignal(false);
   const combobox = useCombobox({ opened });
-
-  const options = groceries.map((item) => (
-    <Combobox.Option value={item} >
-      {item}
-    </Combobox.Option>
-  ));
 
   return (
     <>
@@ -26,15 +20,24 @@ function Demo() {
 
       <Combobox store={combobox}>
         <Combobox.Target>
-          <TextInput
-            label="Autocomplete"
-            description="Dropdown is opened/closed when button is clicked"
-            placeholder="Click button to toggle dropdown"
-          />
+          {(props) => (
+            <TextInput
+              {...props}
+              label="Autocomplete"
+              description="Dropdown is opened/closed when button is clicked"
+              placeholder="Click button to toggle dropdown"
+            />
+          )}
         </Combobox.Target>
 
         <Combobox.Dropdown>
-          <Combobox.Options>{options}</Combobox.Options>
+           <For each={groceries}>
+            {(item) => (
+              <Combobox.Option value={item}>
+                {item}
+              </Combobox.Option>
+            )}
+          </For>
         </Combobox.Dropdown>
       </Combobox>
     </>

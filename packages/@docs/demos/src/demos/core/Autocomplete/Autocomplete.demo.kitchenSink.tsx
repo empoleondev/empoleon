@@ -8,6 +8,35 @@ import { Autocomplete } from '@empoleon/core';
 import { IconSearch } from '@tabler/icons-solidjs';
 
 function Demo() {
+  const [value, setValue] = createSignal(props.value || '');
+
+  createEffect(() => {
+    setValue(props.value || '');
+  });
+
+  const getIcon = () => {
+    const iconProps = {
+      style: { width: '70%', height: '70%' },
+      stroke: '1.5'
+    };
+
+    switch (props.iconType) {
+      case 'star':
+        return () => <IconStar {...iconProps} />;
+      case 'user':
+        return () => <IconUser {...iconProps} />;
+      case 'mail':
+        return () => <IconMail {...iconProps} />;
+      default:
+        return () => <IconSearch {...iconProps} />;
+    }
+  };
+
+  const data = [
+    { group: 'Frontend', items: ['React', 'Angular', 'Vue', 'Svelte'] },
+    { group: 'Backend', items: ['Express', 'Django', 'FastAPI', 'Rails'] },
+  ];
+
   return (
     <Autocomplete{{props}}
       label="Your favorite library"

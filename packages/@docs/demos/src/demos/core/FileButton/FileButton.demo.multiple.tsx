@@ -1,13 +1,13 @@
 import { Button, FileButton, Group, Text } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { createSignal } from 'solid-js';
+import { createSignal, For, Show } from 'solid-js';
 
 const code = `
-import { useState } from 'react';
+import { createSignal, For, Show } from 'solid-js';
 import { FileButton, Button, Group, Text } from '@empoleon/core';
 
 function Demo() {
-  const [files, setFiles] = useState<File[]>([]);
+  const [files, setFiles] = createSignal<File[]>([]);
   return (
     <>
       <Group justify="center">
@@ -16,16 +16,16 @@ function Demo() {
         </FileButton>
       </Group>
 
-      {files.length > 0 && (
+      <Show when={files().length > 0}>
         <Text size="sm" mt="sm">
           Picked files:
         </Text>
-      )}
+      </Show>
 
       <ul>
-        {files.map((file, index) => (
-          <li >{file.name}</li>
-        ))}
+        <For each={files()}>
+          {(file) => <li>{file.name}</li>}
+        </For>
       </ul>
     </>
   );
@@ -42,16 +42,16 @@ function Demo() {
         </FileButton>
       </Group>
 
-      {files().length > 0 && (
+      <Show when={files().length > 0}>
         <Text size="sm" mt="sm">
           Picked files:
         </Text>
-      )}
+      </Show>
 
       <ul>
-        {files().map((file, index) => (
-          <li >{file.name}</li>
-        ))}
+        <For each={files()}>
+          {(file) => <li>{file.name}</li>}
+        </For>
       </ul>
     </>
   );

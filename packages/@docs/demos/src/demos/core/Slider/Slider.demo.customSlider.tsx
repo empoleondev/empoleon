@@ -90,15 +90,15 @@ const cssCode = `
 `;
 
 const code = `
-import { useState } from 'react';
+import { createSignal } from 'solid-js';
 import { IconGripVertical } from '@tabler/icons-solidjs';
 import { clamp, useMove } from '@empoleon/hooks';
 import classes from './Demo.module.css';
 
 function Demo() {
-  const [value, setValue] = useState(0.3);
+  const [value, setValue] = createSignal(0.3);
   const { ref } = useMove(({ x }) => setValue(clamp(x, 0.1, 0.9)));
-  const labelFloating = value < 0.2 || value > 0.8;
+  const labelFloating = value() < 0.2 || value() > 0.8;
 
   return (
     <div class={classes.root}>
@@ -106,28 +106,28 @@ function Demo() {
         <div
           className={classes.filled}
           style={{
-            width: \`calc(\${value * 100}% - var(--thumb-width) / 2 - var(--thumb-offset) / 2)\`,
+            width: \`calc(\${value() * 100}% - var(--thumb-width) / 2 - var(--thumb-offset) / 2)\`,
           }}
         >
           <span className={classes.label} data-floating={labelFloating || undefined} data-filled>
-            {(value * 100).toFixed(0)}
+            {(value() * 100).toFixed(0)}
           </span>
         </div>
 
         <div
           className={classes.empty}
           style={{
-            width: \`calc(\${(1 - value) * 100}% - var(--thumb-width) / 2 - var(--thumb-offset) / 2)\`,
+            width: \`calc(\${(1 - value()) * 100}% - var(--thumb-width) / 2 - var(--thumb-offset) / 2)\`,
           }}
         >
           <span className={classes.label} data-floating={labelFloating || undefined}>
-            {((1 - value) * 100).toFixed(0)}
+            {((1 - value()) * 100).toFixed(0)}
           </span>
         </div>
 
         <div
           className={classes.thumb}
-          style={{ left: \`calc(\${value * 100}% - var(--thumb-width) / 2)\` }}
+          style={{ left: \`calc(\${value() * 100}% - var(--thumb-width) / 2)\` }}
         >
           <IconGripVertical stroke='1.5' />
         </div>

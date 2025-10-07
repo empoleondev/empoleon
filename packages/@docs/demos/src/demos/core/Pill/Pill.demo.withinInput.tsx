@@ -1,38 +1,39 @@
 import { InputBase, Pill } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
+import { For } from 'solid-js';
 
 const code = `
 import { Pill, InputBase } from '@empoleon/core';
 
 function Demo() {
-  const pills = Array(10)
-    .fill(0)
-    .map((_, index) => (
-      <Pill withRemoveButton>
-        Item {index}
-      </Pill>
-    ));
-
   return (
     <InputBase component="div" multiline>
-      <Pill.Group>{pills}</Pill.Group>
+      <Pill.Group>
+        <For each={Array(10).fill(0)}>
+          {(_, index) => (
+            <Pill withRemoveButton>
+              Item {index()}
+            </Pill>
+          )}
+        </For>
+      </Pill.Group>
     </InputBase>
   );
 }
 `;
 
 function Demo() {
-  const pills = Array(10)
-    .fill(0)
-    .map((_, index) => (
-      <Pill withRemoveButton>
-        Item {index}
-      </Pill>
-    ));
-
   return (
     <InputBase component="div" multiline>
-      <Pill.Group>{pills}</Pill.Group>
+      <Pill.Group>
+        <For each={Array(10).fill(0)}>
+          {(_, index) => (
+            <Pill withRemoveButton>
+              Item {index()}
+            </Pill>
+          )}
+        </For>
+      </Pill.Group>
     </InputBase>
   );
 }

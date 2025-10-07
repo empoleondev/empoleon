@@ -2,12 +2,12 @@ import { EmpoleonDemo } from '@empoleonx/demo';
 import { Component, createSignal } from 'solid-js';
 
 const getCode = (name: string) => `
-import { useState } from 'react';
+import { createSignal } from 'solid-js';
 import { ${name} } from '@empoleon/dates';
 
 function Demo() {
-  const [value, setValue] = useState<string | null>(null);
-  return <${name} value={value} onChange={setValue} />;
+  const [value, setValue] = createSignal<string | null>(null);
+  return <${name} value={value()} onChange={setValue} />;
 }
 `;
 

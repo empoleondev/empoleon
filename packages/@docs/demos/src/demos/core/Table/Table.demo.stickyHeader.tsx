@@ -15,17 +15,8 @@ const elements = [
 ];
 
 function Demo() {
-  const rows = elements.map((element) => (
-    <Table.Tr >
-      <Table.Td>{element.position}</Table.Td>
-      <Table.Td>{element.name}</Table.Td>
-      <Table.Td>{element.symbol}</Table.Td>
-      <Table.Td>{element.mass}</Table.Td>
-    </Table.Tr>
-  ));
-
   return (
-    <Table stickyHeader stickyHeaderOffset={60}>
+    <Table stickyHeader stickyHeaderOffset="var(--docs-header-height)">
       <Table.Thead>
         <Table.Tr>
           <Table.Th>Element position</Table.Th>
@@ -34,7 +25,18 @@ function Demo() {
           <Table.Th>Atomic mass</Table.Th>
         </Table.Tr>
       </Table.Thead>
-      <Table.Tbody>{rows}</Table.Tbody>
+      <Table.Tbody>
+        <For each={elements}>
+          {(element) => (
+            <Table.Tr>
+              <Table.Td>{element.position}</Table.Td>
+              <Table.Td>{element.name}</Table.Td>
+              <Table.Td>{element.symbol}</Table.Td>
+              <Table.Td>{element.mass}</Table.Td>
+            </Table.Tr>
+          )}
+        </For>
+      </Table.Tbody>
       <Table.Caption>Scroll page to see sticky thead</Table.Caption>
     </Table>
   );

@@ -3,12 +3,12 @@ import { EmpoleonDemo } from '@empoleonx/demo';
 import { Component, createSignal } from 'solid-js';
 
 const getCode = (name: string) => `
-import { useState } from 'react';
+import { createSignal } from 'solid-js';
 import { IconCalendar } from '@tabler/icons-solidjs';
 import { ${name} } from '@empoleon/dates';
 
 function Demo() {
-  const [value, setValue] = useState<string | null>(null);
+  const [value, setValue] = createSignal<string | null>(null);
   const icon = <IconCalendar size={18} stroke='1.5' />;
   return (
     <${name}
@@ -16,7 +16,7 @@ function Demo() {
       leftSectionPointerEvents="none"
       label="Pick date"
       placeholder="Pick date"
-      value={value}
+      value={value()}
       onChange={setValue}
     />
   );

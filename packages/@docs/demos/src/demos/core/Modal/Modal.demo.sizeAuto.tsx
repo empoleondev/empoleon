@@ -1,8 +1,10 @@
 import { Badge, Button, Group, Modal, Text } from '@empoleon/core';
 import { useCounter, useDisclosure } from '@empoleon/hooks';
 import { EmpoleonDemo } from '@empoleonx/demo';
+import { For } from 'solid-js';
 
 const code = `
+import { For } from 'solid-js';
 import { useDisclosure, useCounter } from '@empoleon/hooks';
 import { Modal, Button, Group, Text, Badge } from '@empoleon/core';
 
@@ -10,17 +12,15 @@ function Demo() {
   const [opened, { close, open }] = useDisclosure(false);
   const [count, { increment, decrement }] = useCounter(3, { min: 0 });
 
-  const badges = Array(count)
-    .fill(0)
-    .map((_, index) => <Badge >Badge {index}</Badge>);
-
   return (
     <>
       <Modal opened={opened()} onClose={close} size="auto" title="Modal size auto">
         <Text>Modal with size auto will fits its content</Text>
 
         <Group wrap="nowrap" mt="md">
-          {badges}
+          <For each={Array(count()).fill(0)}>
+            {(_, index) => <Badge>Badge {index()}</Badge>}
+          </For>
         </Group>
 
         <Group mt="xl">
@@ -41,17 +41,15 @@ function Demo() {
   const [opened, { close, open }] = useDisclosure(false);
   const [count, { increment, decrement }] = useCounter(3, { min: 0 });
 
-  const badges = Array(count())
-    .fill(0)
-    .map((_, index) => <Badge >Badge {index}</Badge>);
-
   return (
     <>
       <Modal opened={opened()} onClose={close} size="auto" title="Modal size auto">
         <Text>Modal with size auto will fits its content</Text>
 
         <Group wrap="nowrap" mt="md">
-          {badges}
+          <For each={Array(count()).fill(0)}>
+            {(_, index) => <Badge>Badge {index()}</Badge>}
+          </For>
         </Group>
 
         <Group mt="xl">

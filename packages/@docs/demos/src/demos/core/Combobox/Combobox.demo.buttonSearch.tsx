@@ -9,8 +9,8 @@ import { Button, Combobox, useCombobox, Text, Box } from '@empoleon/core';
 const groceries = ['🍎 Apples', '🍌 Bananas', '🥦 Broccoli', '🥕 Carrots', '🍫 Chocolate'];
 
 function Demo() {
-  const [search, setSearch] = useState('');
-  const [selectedItem, setSelectedItem] = useState<string | null>(null);
+  const [search, setSearch] = createSignal('');
+  const [selectedItem, setSelectedItem] = createSignal<string | null>(null);
   const combobox = useCombobox({
     onDropdownClose: () => {
       combobox.resetSelectedOption();
@@ -23,13 +23,11 @@ function Demo() {
     },
   });
 
-  const options = groceries
-    .filter((item) => item.toLowerCase().includes(search.toLowerCase().trim()))
-    .map((item) => (
-      <Combobox.Option value={item} >
-        {item}
-      </Combobox.Option>
-    ));
+  const filteredGroceries = createMemo(() =>
+    groceries.filter((item) =>
+      item.toLowerCase().includes(search().toLowerCase().trim())
+    )
+  );
 
   return (
     <>
@@ -39,13 +37,13 @@ function Demo() {
         </Text>
 
         <Text span size="sm">
-          {selectedItem || 'Nothing selected'}
+          {selectedItem() || 'Nothing selected'}
         </Text>
       </Box>
 
       <Combobox
         store={combobox}
-        width={250}
+        width='250px'
         position="bottom-start"
         withArrow
         onOptionSubmit={(val) => {
@@ -54,17 +52,30 @@ function Demo() {
         }}
       >
         <Combobox.Target withAriaAttributes={false}>
-          <Button onClick={() => combobox.toggleDropdown()}>Pick item</Button>
+          {(props) => (
+            <Button {...props} onClick={() => combobox.toggleDropdown()}>Pick item</Button>
+          )}
         </Combobox.Target>
 
         <Combobox.Dropdown>
           <Combobox.Search
-            value={search}
+            value={search()}
             onChange={(event) => setSearch(event.currentTarget.value)}
             placeholder="Search groceries"
           />
           <Combobox.Options>
-            {options.length > 0 ? options : <Combobox.Empty>Nothing found</Combobox.Empty>}
+            <Show
+              when={filteredGroceries().length > 0}
+              fallback={<Combobox.Empty>Nothing found</Combobox.Empty>}
+            >
+              <For each={filteredGroceries()}>
+                {(item) => (
+                  <Combobox.Option value={item}>
+                    {item}
+                  </Combobox.Option>
+                )}
+              </For>
+            </Show>
           </Combobox.Options>
         </Combobox.Dropdown>
       </Combobox>

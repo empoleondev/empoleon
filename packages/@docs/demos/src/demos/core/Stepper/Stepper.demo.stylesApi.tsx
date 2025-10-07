@@ -5,16 +5,17 @@ import { Content } from './_content';
 import { createSignal } from 'solid-js';
 
 const code = `
+import { createSignal } from 'solid-js';
 import { Stepper } from '@empoleon/core';
 
 function Demo() {
-  const [active, setActive] = useState(1);
+  const [active, setActive] = createSignal(1);
   const nextStep = () => setActive((current) => (current < 2 ? current + 1 : current));
   const prevStep = () => setActive((current) => (current > 0 ? current - 1 : current));
 
   return (
     <>
-      <Stepper active={active} onStepClick={setActive}{{props}}>
+      <Stepper active={active()} onStepClick={setActive}{{props}}>
         <Stepper.Step label="First step" description="Create an account" loading>
           <Content>Step 1 content: Create an account</Content>
         </Stepper.Step>

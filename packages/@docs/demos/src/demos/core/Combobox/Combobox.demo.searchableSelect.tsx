@@ -3,7 +3,7 @@ import { EmpoleonDemo } from '@empoleonx/demo';
 import { createSignal, For, Show } from 'solid-js';
 
 const code = `
-import { useState } from 'react';
+import { createSignal, For, Show } from 'solid-js';
 import { InputBase, Combobox, useCombobox } from '@empoleon/core';
 
 const groceries = ['🍎 Apples', '🍌 Bananas', '🥦 Broccoli', '🥕 Carrots', '🍫 Chocolate'];
@@ -13,19 +13,13 @@ function Demo() {
     onDropdownClose: () => combobox.resetSelectedOption(),
   });
 
-  const [value, setValue] = useState<string | null>(null);
-  const [search, setSearch] = useState('');
+  const [value, setValue] = createSignal<string | null>(null);
+  const [search, setSearch] = createSignal('');
 
-  const shouldFilterOptions = groceries.every((item) => item !== search);
+  const shouldFilterOptions = groceries.every((item) => item !== search());
   const filteredOptions = shouldFilterOptions
-    ? groceries.filter((item) => item.toLowerCase().includes(search.toLowerCase().trim()))
+    ? groceries.filter((item) => item.toLowerCase().includes(search().toLowerCase().trim()))
     : groceries;
-
-  const options = filteredOptions.map((item) => (
-    <Combobox.Option value={item} >
-      {item}
-    </Combobox.Option>
-  ));
 
   return (
     <Combobox
@@ -37,27 +31,41 @@ function Demo() {
       }}
     >
       <Combobox.Target>
-        <InputBase
-          rightSection={<Combobox.Chevron />}
-          rightSectionPointerEvents="none"
-          onClick={() => combobox.openDropdown()}
-          onFocus={() => combobox.openDropdown()}
-          onBlur={() => {
-            combobox.closeDropdown();
-            setSearch(value || '');
-          }}
-          placeholder="Search value"
-          value={search}
-          onChange={(event) => {
-            combobox.updateSelectedOptionIndex();
-            setSearch(event.currentTarget.value);
-          }}
-        />
+        {(props) => (
+          <InputBase
+            {...props}
+            rightSection={<Combobox.Chevron />}
+            rightSectionPointerEvents="none"
+            onClick={() => combobox.openDropdown()}
+            onFocus={() => combobox.openDropdown()}
+            onBlur={() => {
+              combobox.closeDropdown();
+              setSearch(value() || '');
+            }}
+            placeholder="Search value"
+            value={search()}
+            onChange={(event) => {
+              combobox.updateSelectedOptionIndex();
+              setSearch(event.currentTarget.value);
+            }}
+          />
+        )}
       </Combobox.Target>
 
       <Combobox.Dropdown>
         <Combobox.Options>
-          {options.length > 0 ? options : <Combobox.Empty>Nothing found</Combobox.Empty>}
+          <Show
+            when={filteredOptions.length > 0}
+            fallback={<Combobox.Empty>Nothing found</Combobox.Empty>}
+          >
+            <For each={filteredOptions}>
+              {(item) => (
+                <Combobox.Option value={item}>
+                  {item}
+                </Combobox.Option>
+              )}
+            </For>
+          </Show>
         </Combobox.Options>
       </Combobox.Dropdown>
     </Combobox>

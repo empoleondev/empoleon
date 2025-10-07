@@ -12,8 +12,25 @@ const items = [
 ];
 
 function Demo() {
+  const getSeparator = () => {
+    switch (props.separatorType) {
+      case 'slash':
+        return '/';
+      case 'arrow':
+        return '→';
+      case 'chevron':
+        return '›';
+      case 'dot':
+        return '•';
+      case 'pipe':
+        return '|';
+      default:
+        return '/';
+    }
+  };
+
   return (
-    <Breadcrumbs{{props}}>
+    <Breadcrumbs{{props}} separator={getSeparator()}>
       <For each={items}>
         {(item) => (
           <Anchor href={item.href}>

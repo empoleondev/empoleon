@@ -4,15 +4,15 @@ import { createSignal } from 'solid-js';
 
 const code = `
 import { useState } from 'react';
-import { ColorInput, Text } from '@empoleon/core';
+import { createSignal } from 'solid-js';
 
 function Demo() {
-  const [changeEndValue, setChangeEndValue] = useState('#FFFFFF');
+  const [changeEndValue, setChangeEndValue] = createSignal('#FFFFFF');
 
   return (
     <>
       <Text mb="md">
-        Change end value: <b>{changeEndValue}</b>
+        Change end value: <b>{changeEndValue()}</b>
       </Text>
 
       <ColorInput

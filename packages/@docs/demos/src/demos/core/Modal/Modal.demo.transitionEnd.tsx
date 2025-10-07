@@ -4,14 +4,14 @@ import { EmpoleonDemo } from '@empoleonx/demo';
 import { createSignal } from 'solid-js';
 
 const code = `
-import { useState } from 'react';
+import { createSignal } from 'solid-js';
 import { Button, Group, Modal } from '@empoleon/core';
 import { useDisclosure } from '@empoleon/hooks';
 
 function Demo() {
   const [firstOpened, firstHandlers] = useDisclosure(false);
   const [secondOpened, secondHandlers] = useDisclosure(false);
-  const [modalData, setModalData] = useState({
+  const [modalData, setModalData] = createSignal({
     title: '',
     message: '',
   });
@@ -24,17 +24,17 @@ function Demo() {
           firstHandlers.close();
           setModalData({ title: '', message: '' });
         }}
-        title={modalData.title}
+        title={modalData().title}
       >
-        {modalData.message}
+        {modalData().message}
       </Modal>
       <Modal
         opened={secondOpened}
         onClose={secondHandlers.close}
         onExitTransitionEnd={() => setModalData({ title: '', message: '' })}
-        title={modalData.title}
+        title={modalData().title}
       >
-        {modalData.message}
+        {modalData().message}
       </Modal>
 
       <Group>

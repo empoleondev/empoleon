@@ -9,18 +9,33 @@ const items = [
   { title: 'Mantine', href: '#' },
   { title: 'Mantine hooks', href: '#' },
   { title: 'use-id', href: '#' },
-].map((item, index) => (
-  <Anchor href={item.href} >
-    {item.title}
-  </Anchor>
-));
+];
 
 function Demo() {
   return (
     <>
-      <Breadcrumbs>{items}</Breadcrumbs>
-      <Breadcrumbs separator="→" separatorMargin="md" mt="xs">
-        {items}
+      <Breadcrumbs>
+        <For each={items}>
+          {(item) => (
+            <Anchor href={item.href}>
+              {item.title}
+            </Anchor>
+          )}
+        </For>
+      </Breadcrumbs>
+      <Breadcrumbs
+        separator="→"
+        mt="xs"
+        separatorMargin="md"
+        classNames={{ separator: 'mantine-rotate-rtl' }}
+      >
+        <For each={items}>
+          {(item) => (
+            <Anchor href={item.href}>
+              {item.title}
+            </Anchor>
+          )}
+        </For>
       </Breadcrumbs>
     </>
   );

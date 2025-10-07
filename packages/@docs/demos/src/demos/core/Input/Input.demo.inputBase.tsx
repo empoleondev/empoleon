@@ -4,15 +4,18 @@ import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
 import { InputBase } from '@empoleon/core';
-import { IMaskInput } from 'react-imask';
+import { createMaskedInput } from 'solid-imask';
 
 function Demo() {
+  const MaskedInput = createMaskedInput({
+    mask: "+{7} (000) 000-00-00",
+  });
+
   return (
     <>
       <InputBase
         label="Your phone"
         component={IMaskInput}
-        mask="+7 (000) 000-0000"
         placeholder="Your phone"
       />
 

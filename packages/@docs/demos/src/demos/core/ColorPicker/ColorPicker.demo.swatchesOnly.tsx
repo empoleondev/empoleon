@@ -3,17 +3,17 @@ import { EmpoleonDemo } from '@empoleonx/demo';
 import { createSignal } from 'solid-js';
 
 const code = `
-import { useState } from 'react';
+import { createSignal } from 'solid-js';
 import { DEFAULT_THEME, ColorPicker, Text } from '@empoleon/core';
 
 function Demo() {
-  const [value, onChange] = useState('#fff');
+  const [value, onChange] = createSignal('#fff');
 
   return (
     <>
       <ColorPicker
         format="hex"
-        value={value}
+        value={value()}
         onChange={onChange}
         withPicker={false}
         fullWidth
@@ -24,7 +24,7 @@ function Demo() {
         ]}
       />
 
-      <Text>{value}</Text>
+      <Text>{value()}</Text>
     </>
   );
 }

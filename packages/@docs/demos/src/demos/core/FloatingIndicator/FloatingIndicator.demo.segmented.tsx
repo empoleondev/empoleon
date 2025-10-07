@@ -1,44 +1,43 @@
 import { FloatingIndicator, UnstyledButton } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
 import classes from './FloatingIndicator.demo.segmented.module.css';
-import { createSignal } from 'solid-js';
+import { createSignal, For } from 'solid-js';
 
 const code = `
-import { useState } from 'react';
+import { createSignal, For } from 'solid-js';
 import { FloatingIndicator, UnstyledButton } from '@empoleon/core';
 import classes from './Demo.module.css';
 
 const data = ['React', 'Vue', 'Angular', 'Svelte'];
 
 function Demo() {
-  const [rootRef, setRootRef] = useState<HTMLDivElement | null>(null);
-  const [controlsRefs, setControlsRefs] = useState<Record<string, HTMLButtonElement | null>>({});
-  const [active, setActive] = useState(0);
+  const [rootRef, setRootRef] = createSignal<HTMLDivElement | null>(null);
+  const [controlsRefs, setControlsRefs] = createSignal<Record<string, HTMLButtonElement | null>>({});
+  const [active, setActive] = createSignal(0);
 
   const setControlRef = (index: number) => (node: HTMLButtonElement) => {
-    controlsRefs[index] = node;
-    setControlsRefs(controlsRefs);
+    controlsRefs()[index] = node;
+    setControlsRefs(controlsRefs());
   };
-
-  const controls = data.map((item, index) => (
-    <UnstyledButton
-
-      className={classes.control}
-      ref={setControlRef(index)}
-      onClick={() => setActive(index)}
-      mod={{ active: active === index }}
-    >
-      <span className={classes.controlLabel}>{item}</span>
-    </UnstyledButton>
-  ));
 
   return (
     <div class={classes.root} ref={setRootRef}>
-      {controls}
+      <For each={data}>
+        {(item, index) => (
+          <UnstyledButton
+            className={classes.control}
+            ref={setControlRef(index())}
+            onClick={() => setActive(index())}
+            mod={{ active: active() === index() }}
+          >
+            <span class={classes.controlLabel}>{item}</span>
+          </UnstyledButton>
+        )}
+      </For>
 
       <FloatingIndicator
-        target={controlsRefs[active]}
-        parent={rootRef}
+        target={controlsRefs()[active()]}
+        parent={rootRef()}
         className={classes.indicator}
       />
     </div>
@@ -96,21 +95,20 @@ function Demo() {
     setControlsRefs(controlsRefs);
   };
 
-  const controls = data.map((item, index) => (
-    <UnstyledButton
-
-      className={classes.control}
-      ref={setControlRef(index)}
-      onClick={() => setActive(index)}
-      mod={{ active: active() === index }}
-    >
-      <span class={classes.controlLabel}>{item}</span>
-    </UnstyledButton>
-  ));
-
   return (
     <div class={classes.root} ref={setRootRef}>
-      {controls}
+      <For each={data}>
+        {(item, index) => (
+          <UnstyledButton
+            className={classes.control}
+            ref={setControlRef(index())}
+            onClick={() => setActive(index())}
+            mod={{ active: active() === index() }}
+          >
+            <span class={classes.controlLabel}>{item}</span>
+          </UnstyledButton>
+        )}
+      </For>
 
       <FloatingIndicator
         target={controlsRefs()[active()]}

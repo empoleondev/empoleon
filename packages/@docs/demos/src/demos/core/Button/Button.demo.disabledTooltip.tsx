@@ -7,9 +7,9 @@ import { Button, Tooltip } from '@empoleon/core';
 function Demo() {
   return (
     <Tooltip label="Tooltip for disabled button">
-      <Button data-disabled onClick={(event) => event.preventDefault()}>
+      {(props) => <Button data-disabled onClick={(event) => event.preventDefault()}>
         Disabled button with tooltip
-      </Button>
+      </Button>}
     </Tooltip>
   );
 }

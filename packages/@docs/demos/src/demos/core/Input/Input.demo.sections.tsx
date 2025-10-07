@@ -4,18 +4,18 @@ import { EmpoleonDemo } from '@empoleonx/demo';
 import { createSignal } from 'solid-js';
 
 const code = `
-import { useState } from 'react';
+import { createSignal } from 'solid-js';
 import { Input, CloseButton } from '@empoleon/core';
 import { IconAt } from '@tabler/icons-solidjs';
 
 function Demo() {
-  const [value, setValue] = useState('Clear me');
+  const [value, setValue] = createSignal('Clear me');
   return (
     <>
       <Input placeholder="Your email" leftSection={<IconAt size={16} />} />
       <Input
         placeholder="Clearable input"
-        value={value}
+        value={value()}
         onChange={(event) => setValue(event.currentTarget.value)}
         rightSectionPointerEvents="all"
         mt="md"
@@ -23,7 +23,7 @@ function Demo() {
           <CloseButton
             aria-label="Clear input"
             onClick={() => setValue('')}
-            style={{ display: value ? undefined : 'none' }}
+            style={{ display: value() ? undefined : 'none' }}
           />
         }
       />

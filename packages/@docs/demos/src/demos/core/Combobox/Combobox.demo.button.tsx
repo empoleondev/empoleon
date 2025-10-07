@@ -14,12 +14,6 @@ function Demo() {
     onDropdownClose: () => combobox.resetSelectedOption(),
   });
 
-  const options = groceries.map((item) => (
-    <Combobox.Option value={item} >
-      {item}
-    </Combobox.Option>
-  ));
-
   return (
     <>
       <Box mb="xs">
@@ -28,13 +22,13 @@ function Demo() {
         </Text>
 
         <Text span size="sm">
-          {selectedItem || 'Nothing selected'}
+          {selectedItem() || 'Nothing selected'}
         </Text>
       </Box>
 
       <Combobox
         store={combobox}
-        width={250}
+        width='250px'
         position="bottom-start"
         withArrow
         onOptionSubmit={(val) => {
@@ -43,11 +37,21 @@ function Demo() {
         }}
       >
         <Combobox.Target>
-          <Button onClick={() => combobox.toggleDropdown()}>Pick item</Button>
+          {(props) => (
+            <Button {...props} onClick={() => combobox.toggleDropdown()}>Pick item</Button>
+          )}
         </Combobox.Target>
 
         <Combobox.Dropdown>
-          <Combobox.Options>{options}</Combobox.Options>
+          <Combobox.Options>
+            <For each={groceries}>
+              {(item) => (
+                <Combobox.Option value={item}>
+                  {item}
+                </Combobox.Option>
+              )}
+            </For>
+          </Combobox.Options>
         </Combobox.Dropdown>
       </Combobox>
     </>

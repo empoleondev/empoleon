@@ -32,6 +32,7 @@ const charactersList = [
 ];
 
 const code = `
+import { For } from 'solid-js';
 import { Group, Avatar, Text, Accordion } from '@empoleon/core';
 
 const charactersList = [
@@ -94,7 +95,18 @@ function Demo() {
 
   return (
     <Accordion chevronPosition="right" variant="contained" radius="md">
-      {items}
+      <For each={charactersList}>
+        {(item) => (
+          <Accordion.Item value={item.id}>
+            <Accordion.Control aria-label={item.label}>
+              <AccordionLabel {...item} />
+            </Accordion.Control>
+            <Accordion.Panel>
+              <Text size="sm">{item.content}</Text>
+            </Accordion.Panel>
+          </Accordion.Item>
+        )}
+      </For>
     </Accordion>
   );
 }

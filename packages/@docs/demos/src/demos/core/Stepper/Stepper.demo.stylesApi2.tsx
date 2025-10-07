@@ -3,7 +3,7 @@ import { EmpoleonDemo } from '@empoleonx/demo';
 import { createSignal } from 'solid-js';
 
 const code = `
-import { useState } from 'react';
+import { createSignal } from 'solid-js';
 import { Stepper, StepperProps } from '@empoleon/core';
 
 function StyledStepper(props: StepperProps) {
@@ -34,9 +34,9 @@ function StyledStepper(props: StepperProps) {
 }
 
 function Demo() {
-  const [active, setActive] = useState(1);
+  const [active, setActive] = createSignal(1);
   return (
-    <StyledStepper active={active} onStepClick={setActive}>
+    <StyledStepper active={active()} onStepClick={setActive}>
       <Stepper.Step label="Step 1" description="Create an account" />
       <Stepper.Step label="Step 2" description="Verify email" />
       <Stepper.Step label="Step 3" description="Get full access" />

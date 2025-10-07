@@ -6,6 +6,44 @@ const code = `
 import { AngleSlider } from '@empoleon/core';
 
 function Demo() {
+  const [value, setValue] = createSignal(props.defaultValue || 0);
+
+  createEffect(() => {
+    if (props.defaultValue !== undefined) {
+      setValue(props.defaultValue);
+    }
+  });
+
+  const formatLabel = () => props.withLabel
+    ? props.labelFormat === 'degrees'
+      ? (val: number) => \`\${val}°\`
+      : props.labelFormat === 'radians'
+      ? (val: number) => \`\${(val * Math.PI / 180).toFixed(2)} rad\`
+      : undefined
+    : null;
+
+  const marks = () => props.withMarks
+  ? props.markType === 'cardinal'
+    ? [
+        { value: 0, label: props.withMarkLabels ? (props.labelFormat === 'radians' ? '0 rad' : '0°') : undefined },
+        { value: 90, label: props.withMarkLabels ? (props.labelFormat === 'radians' ? \`\${(90 * Math.PI / 180).toFixed(2)} rad\` : '90°') : undefined },
+        { value: 180, label: props.withMarkLabels ? (props.labelFormat === 'radians' ? \`\${(180 * Math.PI / 180).toFixed(2)} rad\` : '180°') : undefined },
+        { value: 270, label: props.withMarkLabels ? (props.labelFormat === 'radians' ? \`\${(270 * Math.PI / 180).toFixed(2)} rad\` : '270°') : undefined },
+      ]
+    : props.markType === 'octants'
+    ? [
+        { value: 0, label: props.withMarkLabels ? (props.labelFormat === 'radians' ? '0 rad' : '0°') : undefined },
+        { value: 45, label: props.withMarkLabels ? (props.labelFormat === 'radians' ? \`\${(45 * Math.PI / 180).toFixed(2)} rad\` : '45°') : undefined },
+        { value: 90, label: props.withMarkLabels ? (props.labelFormat === 'radians' ? \`\${(90 * Math.PI / 180).toFixed(2)} rad\` : '90°') : undefined },
+        { value: 135, label: props.withMarkLabels ? (props.labelFormat === 'radians' ? \`\${(135 * Math.PI / 180).toFixed(2)} rad\` : '135°') : undefined },
+        { value: 180, label: props.withMarkLabels ? (props.labelFormat === 'radians' ? \`\${(180 * Math.PI / 180).toFixed(2)} rad\` : '180°') : undefined },
+        { value: 225, label: props.withMarkLabels ? (props.labelFormat === 'radians' ? \`\${(225 * Math.PI / 180).toFixed(2)} rad\` : '225°') : undefined },
+        { value: 270, label: props.withMarkLabels ? (props.labelFormat === 'radians' ? \`\${(270 * Math.PI / 180).toFixed(2)} rad\` : '270°') : undefined },
+        { value: 315, label: props.withMarkLabels ? (props.labelFormat === 'radians' ? \`\${(315 * Math.PI / 180).toFixed(2)} rad\` : '315°') : undefined },
+      ]
+    : undefined
+  : undefined;
+
   return (
     <AngleSlider
       aria-label="Angle slider"{{props}}

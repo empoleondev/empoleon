@@ -5,21 +5,22 @@ import classes from './Accordion.demo.customize.module.css';
 import { For } from 'solid-js';
 
 const code = `
+import { For } from 'solid-js';
 import { Accordion } from '@empoleon/core';
 import { data } from './data';
 import classes from './Demo.module.css';
 
 function Demo() {
-  const items = data.map((item) => (
-    <Accordion.Item value={item.value}>
-      <Accordion.Control icon={item.emoji}>{item.value}</Accordion.Control>
-      <Accordion.Panel>{item.description}</Accordion.Panel>
-    </Accordion.Item>
-  ));
-
   return (
     <Accordion maw={400} defaultValue="Apples" classNames={classes}>
-      {items}
+      <For each={data}>
+        {(item) => (
+          <Accordion.Item value={item.value}>
+            <Accordion.Control icon={item.emoji}>{item.value}</Accordion.Control>
+            <Accordion.Panel>{item.description}</Accordion.Panel>
+          </Accordion.Item>
+        )}
+      </For>
     </Accordion>
   );
 }

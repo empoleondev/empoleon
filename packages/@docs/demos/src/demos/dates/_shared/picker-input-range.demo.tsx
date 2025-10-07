@@ -2,17 +2,17 @@ import { EmpoleonDemo } from '@empoleonx/demo';
 import { Component, createSignal } from 'solid-js';
 
 const getCode = (name: string) => `
-import { useState } from 'react';
+import { createSignal } from 'solid-js';
 import { ${name} } from '@empoleon/dates';
 
 function Demo() {
-  const [value, setValue] = useState<[string | null, string | null]>([null, null]);
+  const [value, setValue] = createSignal<[string | null, string | null]>([null, null]);
   return (
     <${name}
       type="range"
       label="Pick dates range"
       placeholder="Pick dates range"
-      value={value}
+      value={value()}
       onChange={setValue}
     />
   );
