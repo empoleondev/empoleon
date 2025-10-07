@@ -18,7 +18,7 @@ export default defineConfig({
     pool: 'forks',
     isolate: true,
     // include: [
-    //   '**/Pagination/*.test.{ts,tsx}'
+    //   '**/Input/*.test.{ts,tsx}'
     // ],
     exclude: [
       // Exclude all node_modules test files
