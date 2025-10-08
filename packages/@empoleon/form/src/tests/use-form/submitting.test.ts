@@ -1,8 +1,8 @@
-import { renderHook, waitFor } from '@solidjs/testing-library';
+import { renderHook } from '@solidjs/testing-library';
 import { FormMode } from '../../types';
 import { useForm } from '../../use-form';
 
-const asyncHandler = (values, event) => {
+const asyncHandler = () => {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve(undefined);
@@ -11,22 +11,6 @@ const asyncHandler = (values, event) => {
 };
 
 function tests(mode: FormMode) {
-  it('sets submitting when form.onSubmit function receives async handler', async () => {
-    const hook = renderHook(() => useForm({ mode, initialValues: { a: 1, b: 2 } }));
-
-    expect(hook.result.submitting).toBe(false);
-
-    const event = { preventDefault: vi.fn(), type: 'submit' };
-    const submitPromise = hook.result.onSubmit(asyncHandler)(event);
-
-    expect(hook.result.submitting).toBe(true);
-
-    vi.runAllTimers();
-    await submitPromise;
-
-    expect(hook.result.submitting).toBe(false);
-  });
-
   it('sets submitting when form.onSubmit function receives async handler', async () => {
     const hook = renderHook(() => useForm({ mode, initialValues: { a: 1, b: 2 } }));
 

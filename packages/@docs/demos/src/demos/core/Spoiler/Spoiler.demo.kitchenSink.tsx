@@ -1,4 +1,4 @@
-import { Spoiler, SpoilerProps } from '@empoleon/core';
+import { SpoilerProps } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
 import { Wrapper } from './_wrapper';
 

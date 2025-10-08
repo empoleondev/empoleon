@@ -1,4 +1,4 @@
-import { createSignal, JSX, mergeProps } from 'solid-js';
+import { createSignal } from 'solid-js';
 import { Dynamic } from 'solid-js/web';
 import { Text, UnstyledButton } from '@empoleon/core';
 import { DemoAreaProps } from '../DemoArea';

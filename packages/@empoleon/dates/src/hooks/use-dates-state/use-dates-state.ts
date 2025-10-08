@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { createEffect, createMemo, createSignal, JSX } from 'solid-js';
+import { createEffect, createSignal, JSX } from 'solid-js';
 import { DatePickerType, DateStringValue, PickerBaseProps } from '../../types';
 import { useUncontrolledDates } from '../use-uncontrolled-dates/use-uncontrolled-dates';
 import { isInRange } from './is-in-range/is-in-range';

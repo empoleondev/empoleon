@@ -1,4 +1,3 @@
-import { createEffect, createSignal } from 'solid-js';
 import { Button, Modal, ModalProps } from '@empoleon/core';
 import { useDisclosure } from '@empoleon/hooks';
 import { EmpoleonDemo } from '@empoleonx/demo';

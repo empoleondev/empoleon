@@ -122,7 +122,7 @@ export const TooltipFloating = factory<TooltipFloatingFactory>((_props) => {
     floating.setOpened(true);
   };
 
-  const onMouseLeave = (event: MouseEvent) => {
+  const onMouseLeave = () => {
     floating.setOpened(false);
   };
 
@@ -155,8 +155,8 @@ export const TooltipFloating = factory<TooltipFloatingFactory>((_props) => {
       {typeof local.children === 'function' ? (
         local.children({
           [local.refProp!]: targetRef,
-          onMouseEnter: onMouseEnter,
-          onMouseLeave: onMouseLeave,
+          onMouseEnter,
+          onMouseLeave,
         })
       ) : (
         <Dynamic

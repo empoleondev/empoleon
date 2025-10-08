@@ -1,4 +1,4 @@
-import { createMemo, createSignal, JSX, splitProps } from 'solid-js';
+import { createSignal, JSX, splitProps } from 'solid-js';
 import { getDefaultZIndex, Modal } from '@empoleon/core';
 import { randomId } from '@empoleon/hooks';
 import { ConfirmModal } from './ConfirmModal';

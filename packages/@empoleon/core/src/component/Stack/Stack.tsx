@@ -1,4 +1,4 @@
-import { JSX, onMount, splitProps } from 'solid-js';
+import { JSX, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,

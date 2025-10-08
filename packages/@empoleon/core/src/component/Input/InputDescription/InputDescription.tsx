@@ -81,7 +81,7 @@ export const InputDescription = factory<InputDescriptionFactory>((_props) => {
     varsResolver,
   });
 
-  const getStyles = ((__inheritStyles || true) && ctx?.getStyles) || _getStyles;
+  const getStyles = (__inheritStyles && ctx?.getStyles) || _getStyles;
 
   return (
     <Box

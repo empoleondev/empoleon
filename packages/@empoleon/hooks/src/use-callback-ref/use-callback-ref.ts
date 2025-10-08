@@ -1,4 +1,4 @@
-import { createEffect, createMemo } from 'solid-js';
+import { createEffect } from 'solid-js';
 
 export function useCallbackRef<T extends (...args: any[]) => any>(callback: T | undefined): T {
   let callbackRef = callback;

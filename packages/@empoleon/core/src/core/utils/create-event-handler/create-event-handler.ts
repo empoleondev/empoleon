@@ -1,9 +1,3 @@
-type EventHandler<Event = any> =
-  | ((event: Event) => void)
-  | ((event?: Event) => void)
-  | (() => void)
-  | undefined;
-
 export function createEventHandler<Event = any>(
   parentEventHandler?: any,
   eventHandler?: any

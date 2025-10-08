@@ -1,4 +1,4 @@
-import { createEffect, createMemo, For } from 'solid-js';
+import { createMemo, For } from 'solid-js';
 import { Checkbox, Table } from '@empoleon/core';
 import { useSelection } from '@empoleon/hooks';
 import { EmpoleonDemo } from '@empoleonx/demo';

@@ -3,7 +3,6 @@ import { EmpoleonProvider } from '../../core';
 // import { useForm } from '@empoleon/form';
 import { Button } from '../Button';
 import { Group } from '../Group';
-import { TextInput } from '../TextInput';
 import { NumberInput, NumberInputHandlers } from './NumberInput';
 
 export default {

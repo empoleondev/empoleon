@@ -1,4 +1,4 @@
-import { createEffect, createSignal, JSX, onMount, splitProps, useContext } from 'solid-js';
+import { createSignal, JSX, onMount, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,

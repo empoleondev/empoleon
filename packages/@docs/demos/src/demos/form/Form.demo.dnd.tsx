@@ -1,12 +1,11 @@
 // import { DragDropContext, Draggable, Droppable } from '@hello-pangea/dnd';
-import { IconGripVertical } from '@tabler/icons-solidjs';
-import { Button, Center, Group, TextInput } from '@empoleon/core';
+import { Button, Group } from '@empoleon/core';
 import { useForm } from '@empoleon/form';
 import { randomId } from '@empoleon/hooks';
 import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `
-import { Group, TextInput, Button, Center } from '@empoleon/core';
+import { Button, Group } from '@empoleon/core';
 import { useForm } from '@empoleon/form';
 import { randomId } from '@empoleon/hooks';
 import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';

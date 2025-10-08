@@ -70,7 +70,7 @@ describe('@empoleon/core/CheckboxGroup', () => {
 
   it('supports controlled state', async () => {
     const spy = vi.fn();
-    let currentValue = ['test-value-2'];
+    const currentValue = ['test-value-2'];
 
     const TestComponent = () => {
       return (

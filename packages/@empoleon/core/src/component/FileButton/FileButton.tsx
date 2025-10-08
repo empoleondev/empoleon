@@ -66,7 +66,7 @@ export function FileButton<Multiple extends boolean = false>(_props: FileButtonP
 
   const handleChange: JSX.EventHandler<HTMLInputElement, Event> = (event) => {
     const files = (event.currentTarget as HTMLInputElement).files;
-    if (!files) return;
+    if (!files) {return};
 
     if (local.multiple) {
       local.onChange(Array.from(files) as any);

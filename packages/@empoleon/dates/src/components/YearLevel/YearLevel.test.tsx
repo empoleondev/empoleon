@@ -10,10 +10,6 @@ const defaultProps: YearLevelProps = {
   previousLabel: 'prev',
 };
 
-function expectLabel(label: string) {
-  expect(screen.getByLabelText('level-control')).toHaveTextContent(label);
-}
-
 describe('@empoleon/dates/YearLevel', () => {
   tests.itSupportsSystemProps<YearLevelProps, YearLevelStylesNames>({
     component: YearLevel,

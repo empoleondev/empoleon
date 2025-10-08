@@ -43,7 +43,7 @@ export function useSelection<T>(input: UseSelectionInput<T>): UseSelectionReturn
 
   let isFirstRun = true;
   createEffect(() => {
-    const currentData = input.data;
+    input.data;
 
     if (!isFirstRun && input.resetSelectionOnDataChange) {
       setSelectionSet(new Set() as Set<T>);

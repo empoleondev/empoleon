@@ -21,7 +21,7 @@ export function TableDataRenderer({ data }: TableDataRendererProps) {
       {data.head && (
         <TableThead>
           <TableTr>
-            {data.head.map((item, index) => (
+            {data.head.map((item) => (
               <TableTh>{item}</TableTh>
             ))}
           </TableTr>
@@ -30,9 +30,9 @@ export function TableDataRenderer({ data }: TableDataRendererProps) {
 
       {data.body && (
         <TableTbody>
-          {data.body.map((row, rowIndex) => (
+          {data.body.map((row) => (
             <TableTr>
-              {row.map((item, index) => (
+              {row.map((item) => (
                 <TableTd>{item}</TableTd>
               ))}
             </TableTr>
@@ -43,7 +43,7 @@ export function TableDataRenderer({ data }: TableDataRendererProps) {
       {data.foot && (
         <TableTfoot>
           <TableTr>
-            {data.foot.map((item, index) => (
+            {data.foot.map((item) => (
               <TableTh>{item}</TableTh>
             ))}
           </TableTr>

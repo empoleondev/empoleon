@@ -1,5 +1,4 @@
 import { fireEvent } from '@solidjs/testing-library';
-import userEvent from '@testing-library/user-event';
 import { render, tests } from '@empoleon-tests/core';
 import { PinInput, PinInputProps, PinInputStylesNames } from './PinInput';
 

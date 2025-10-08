@@ -1,5 +1,3 @@
-import { IconStar } from '@tabler/icons-solidjs';
-import { Show } from 'solid-js';
 import { Avatar, AvatarProps } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
 import { avatars } from './_mockdata';

@@ -12,6 +12,7 @@ declare global {
   interface Window {
     EyeDropper?: {
       new (): {
+        /* eslint-disable */
         open(options?: EyeDropperOpenOptions): Promise<EyeDropperOpenReturnType>;
       };
     };

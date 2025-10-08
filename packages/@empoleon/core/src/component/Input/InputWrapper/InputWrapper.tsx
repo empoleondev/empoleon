@@ -1,9 +1,7 @@
 import {
-  createMemo,
   For,
   JSX,
   Match,
-  children as resolveChildren,
   Show,
   splitProps,
   Switch,

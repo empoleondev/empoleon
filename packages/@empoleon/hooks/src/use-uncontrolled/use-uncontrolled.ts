@@ -1,4 +1,4 @@
-import { createSignal, untrack, type Accessor, type Setter, type Signal } from 'solid-js';
+import { createSignal, untrack, type Accessor, type Setter } from 'solid-js';
 
 /**
  * Creates a simple reactive state with a getter and setter. Can be controlled by providing your own state through the `value` prop.
@@ -34,12 +34,14 @@ function useUncontrolled<T>(props: {
 
   const setValue: Setter<T | undefined> = (next?: unknown, ...payload: any[]) => {
     return untrack(() => {
+      /* eslint-disable */
       let nextValue: Exclude<T, Function>;
       if (typeof next === 'function') {
         nextValue = next(value()) as Exclude<T, Function>;
       } else {
         nextValue = next as Exclude<T, Function>;
       }
+      /* eslint-enable */
 
       if (!Object.is(nextValue, value())) {
         if (!isControlled()) {

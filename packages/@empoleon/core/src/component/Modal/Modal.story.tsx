@@ -312,7 +312,7 @@ export function WithScrollArea() {
 
   const content = Array(100)
     .fill(0)
-    .map((_, index) => <p>Modal with scroll</p>);
+    .map(() => <p>Modal with scroll</p>);
 
   return (
     <>

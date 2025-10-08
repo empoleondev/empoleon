@@ -1,4 +1,4 @@
-import { createEffect, createSignal, JSX, onCleanup, onMount, splitProps } from 'solid-js';
+import { createEffect, createSignal, JSX, onMount, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
@@ -81,7 +81,9 @@ export const CardSection = polymorphicFactory<CardSectionFactory>((_props) => {
   ]);
 
   const ctx = useCardContext();
-  if (!ctx) return <div>CardSection must be used within Card</div>;
+  if (!ctx) {
+    return <div>CardSection must be used within Card</div>;
+  }
 
   const [sectionIndex, setSectionIndex] = createSignal(-1);
   const [isFirst, setIsFirst] = createSignal(false);

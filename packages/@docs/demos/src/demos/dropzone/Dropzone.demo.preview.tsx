@@ -33,7 +33,7 @@ function Demo() {
 function Demo() {
   const [files, setFiles] = createSignal<FileWithPath[]>([]);
 
-  const previews = files().map((file, index) => {
+  const previews = files().map((file) => {
     const imageUrl = URL.createObjectURL(file);
     return <Image src={imageUrl} onLoad={() => URL.revokeObjectURL(imageUrl)} />;
   });

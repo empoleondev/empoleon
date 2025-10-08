@@ -1,5 +1,5 @@
 import { Ref } from '@solid-primitives/refs';
-import { createEffect, JSX, Show, splitProps } from 'solid-js';
+import { JSX, Show, splitProps } from 'solid-js';
 import { useElementSize, useId, useUncontrolled } from '@empoleon/hooks';
 import {
   Box,

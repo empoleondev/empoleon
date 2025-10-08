@@ -27,12 +27,12 @@ function Demo(
   const [value, setValue] = createSignal('');
 
   const getLeftSection = () => {
-    if (!props.hasLeftSection) return undefined;
+    if (!props.hasLeftSection) {return undefined};
     return '📄';
   };
 
   const getRightSection = () => {
-    if (!props.hasRightSection) return undefined;
+    if (!props.hasRightSection) {return undefined};
     return '✓';
   };
 

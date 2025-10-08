@@ -1,4 +1,4 @@
-import { createEffect, createSignal, onCleanup } from 'solid-js';
+import { createSignal, onCleanup } from 'solid-js';
 import { useReducedMotion } from '../use-reduced-motion/use-reduced-motion';
 import { useWindowEvent } from '../use-window-event/use-window-event';
 import { easeInOutQuad } from './utils/ease-in-out-quad';

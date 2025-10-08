@@ -24,7 +24,7 @@ export function useTimeout(
   };
 
   onMount(() => {
-    if (options.autoInvoke) start();
+    if (options.autoInvoke) {start()};
   });
 
   onCleanup(() => clear());

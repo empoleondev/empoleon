@@ -143,21 +143,6 @@ describe('@empoleon/core/Select', () => {
     expect(document.querySelector('input[name="test-select"]')).toHaveValue('test-1');
   });
 
-  // it('allows selecting multiple Selects with react testing library', async () => {
-  //   render(() =>
-  //     <>
-  //       <Select label="First" data={['first-1', 'first-2']} />
-  //       <Select label="Second" data={['second-1', 'second-2']} />
-  //     </>
-  //   );
-
-  //   await userEvent.click(screen.getByRole('textbox', { name: 'First' }));
-  //   expect(screen.queryByRole('listbox', { name: 'First' })).toBeVisible();
-
-  //   await userEvent.click(screen.getByRole('textbox', { name: 'Second' }));
-  //   expect(screen.queryByRole('listbox', { name: 'Second' })).toBeVisible();
-  // });
-
   it('allows selecting multiple Selects with react testing library', async () => {
     render(() => (
       <>

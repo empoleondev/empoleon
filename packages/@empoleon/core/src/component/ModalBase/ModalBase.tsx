@@ -1,4 +1,4 @@
-import { ComponentProps, createEffect, JSX, splitProps } from 'solid-js';
+import { ComponentProps, JSX, splitProps } from 'solid-js';
 import { RemoveScroll } from '@empoleon/solid-remove-scroll';
 import {
   Box,

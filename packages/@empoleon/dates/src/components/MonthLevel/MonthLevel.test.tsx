@@ -9,10 +9,6 @@ const defaultProps: MonthLevelProps = {
   previousLabel: 'prev',
 };
 
-function expectLabel(label: string) {
-  expect(screen.getByLabelText('level-control')).toHaveTextContent(label);
-}
-
 describe('@empoleon/dates/MonthLevel', () => {
   tests.itSupportsSystemProps<MonthLevelProps, MonthLevelStylesNames>({
     component: MonthLevel,

@@ -1,4 +1,4 @@
-import { createEffect, JSX, splitProps } from 'solid-js';
+import { JSX, splitProps } from 'solid-js';
 import { useUncontrolled } from '@empoleon/hooks';
 import { DataAttributes, EmpoleonSize, factory, Factory, useProps } from '../../../core';
 import { InputsGroupFieldset } from '../../../utils/InputsGroupFieldset';

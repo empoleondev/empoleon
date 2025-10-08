@@ -18,7 +18,7 @@ export function DemoCode(props: DemoCodeProps) {
   const _code = createMemo(() => {
     const codeValue = typeof props.code === 'function' ? props.code() : props.code;
 
-    if (!codeValue) return undefined;
+    if (!codeValue) {return undefined};
 
     if (typeof codeValue === 'string') {
       return [{ code: codeValue, fileName: 'Demo.tsx', language: 'tsx' }];

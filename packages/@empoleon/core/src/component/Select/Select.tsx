@@ -342,7 +342,7 @@ export const Select = factory<SelectFactory>((_props) => {
                   combobox.openDropdown();
                   local.selectFirstOptionOnChange && combobox.selectFirstOption();
                 }}
-                onChange={(event) => {
+                onChange={() => {
                   handleSearchChange(
                     _value() != null ? optionsLockup()[_value()!]?.label || '' : ''
                   );

@@ -1,7 +1,5 @@
 import { waitFor } from '@solidjs/testing-library';
 import { render, tests } from '@empoleon-tests/core';
-// import { CardSection } from './CardSection/CardSection';
-import { DEFAULT_THEME, EmpoleonProvider } from '../../core';
 import { Card, CardProps, CardSection, CardStylesNames } from './Card';
 
 describe('@empoleon/core/Card', () => {

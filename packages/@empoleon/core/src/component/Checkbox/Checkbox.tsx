@@ -208,7 +208,7 @@ export const Checkbox = factory<CheckboxFactory>((_props) => {
   const indeterminate = createMemo(() => local.indeterminate);
 
   createEffect(() => {
-    if (inputRef) inputRef.indeterminate = indeterminate() || false;
+    if (inputRef) {inputRef.indeterminate = indeterminate() || false};
   });
 
   const tooltipEvents = [
@@ -257,7 +257,7 @@ export const Checkbox = factory<CheckboxFactory>((_props) => {
           id={uuid}
           ref={(el) => {
             inputRef = el;
-            if (typeof ref === 'function') ref(el);
+            if (typeof ref === 'function') {ref(el)};
           }}
           checked={contextProps().checked}
           data-checked={contextProps().checked || undefined}

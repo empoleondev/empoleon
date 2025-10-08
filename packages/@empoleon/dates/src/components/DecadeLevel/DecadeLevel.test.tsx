@@ -10,10 +10,6 @@ const defaultProps: DecadeLevelProps = {
   previousLabel: 'prev',
 };
 
-function expectLabel(label: string) {
-  expect(screen.getByLabelText('level-control')).toHaveTextContent(label);
-}
-
 describe('@empoleon/dates/DecadeLevel', () => {
   tests.itSupportsSystemProps<DecadeLevelProps, DecadeLevelStylesNames>({
     component: DecadeLevel,

@@ -214,13 +214,13 @@ export const PinInput = factory<PinInputFactory>((_props) => {
   const [focusedIndex, setFocusedIndex] = createSignal(-1);
 
   const controlledValue = createMemo(() => {
-    if (local.value === undefined) return undefined;
+    if (local.value === undefined) {return undefined};
     return createPinArray(local.length ?? 0, local.value);
   });
 
   const [_value, setValues] = useUncontrolled<string[]>({
     value: controlledValue,
-    defaultValue: local.defaultValue?.split('').slice(0, local.length ?? 0)!,
+    defaultValue: local.defaultValue?.split('').slice(0, local.length ?? 0) as string[],
     finalValue: createPinArray(local.length ?? 0, ''),
     onChange:
       typeof local.onChange === 'function'
@@ -232,7 +232,7 @@ export const PinInput = factory<PinInputFactory>((_props) => {
 
   const _valueToString = _value().join('').trim();
 
-  let inputRefs: (HTMLInputElement | null)[] = Array(local.length || 0).fill(null);
+  const inputRefs: (HTMLInputElement | null)[] = Array(local.length || 0).fill(null);
 
   createEffect(() => {
     if (typeof _props.ref === 'function' && inputRefs[0]) {

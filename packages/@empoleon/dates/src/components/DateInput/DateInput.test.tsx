@@ -11,8 +11,6 @@ import {
   clickControl,
   datesTests,
   expectNoPopover,
-  expectOpenedPopover,
-  expectValue,
 } from '@empoleon-tests/dates';
 import { DateInput, DateInputProps } from './DateInput';
 

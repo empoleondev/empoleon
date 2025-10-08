@@ -1,10 +1,10 @@
-import { createContextContainer, patchConsoleError, render, tests } from '@empoleon-tests/core';
+import { createContextContainer, patchConsoleError, render } from '@empoleon-tests/core';
 import { Menu } from '../Menu';
-import { MenuSubTarget, MenuSubTargetProps } from './MenuSubTarget';
+import { MenuSubTarget } from './MenuSubTarget';
 
-const defaultProps: MenuSubTargetProps = {
-  children: <div>test</div>,
-};
+// const defaultProps: MenuSubTargetProps = {
+//   children: <div>test</div>,
+// };
 
 const TestContainer = createContextContainer(MenuSubTarget, Menu, { opened: true });
 

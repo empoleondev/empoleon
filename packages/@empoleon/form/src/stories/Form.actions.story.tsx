@@ -1,4 +1,4 @@
-import { createEffect, JSX, Show } from 'solid-js';
+import { JSX } from 'solid-js';
 import {
   Button,
   Checkbox,

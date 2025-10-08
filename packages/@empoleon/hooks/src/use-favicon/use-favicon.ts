@@ -1,5 +1,4 @@
-import { createEffect } from 'solid-js';
-import type { Accessor } from 'solid-js';
+import { Accessor, createEffect } from 'solid-js';
 
 const MIME_TYPES: Record<string, string> = {
   ico: 'image/x-icon',

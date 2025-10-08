@@ -42,7 +42,7 @@ const ValueComponent: FileInputProps['valueComponent'] = ({ value }) => {
   if (Array.isArray(value)) {
     return (
       <Pill.Group>
-        {value.map((file, index) => (
+        {value.map((file) => (
           <Pill>{file.name}</Pill>
         ))}
       </Pill.Group>

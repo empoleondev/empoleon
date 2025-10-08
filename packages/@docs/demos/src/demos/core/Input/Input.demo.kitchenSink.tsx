@@ -1,5 +1,5 @@
 import { IconAt, IconCurrencyDollar, IconLock, IconSearch } from '@tabler/icons-solidjs';
-import { createEffect, createSignal, Show } from 'solid-js';
+import { createEffect, createSignal } from 'solid-js';
 import { Input, InputProps } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
 

@@ -92,7 +92,7 @@ export const MonthLevelGroup = factory<MonthLevelGroupFactory>((_props) => {
     'ref',
   ]);
 
-  let daysRefs: HTMLButtonElement[][][] = [];
+  const daysRefs: HTMLButtonElement[][][] = [];
 
   return (
     <LevelsGroup

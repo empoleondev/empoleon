@@ -62,7 +62,7 @@ describe('@empoleon/core/RadioGroup', () => {
 
   it('supports controlled state', async () => {
     const spy = vi.fn();
-    let currentValue = 'test-value-2';
+    const currentValue = 'test-value-2';
 
     // Create a wrapper component that manages the controlled state
     const ControlledRadioGroup = () => {

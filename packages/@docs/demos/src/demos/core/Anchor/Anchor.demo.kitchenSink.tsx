@@ -1,4 +1,3 @@
-import { createEffect, splitProps } from 'solid-js';
 import { Anchor, AnchorProps, Box } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
 

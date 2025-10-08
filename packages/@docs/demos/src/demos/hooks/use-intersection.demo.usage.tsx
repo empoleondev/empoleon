@@ -1,4 +1,4 @@
-import { createEffect, createSignal } from 'solid-js';
+import { createSignal } from 'solid-js';
 import { Box, Paper, Text } from '@empoleon/core';
 import { useIntersection } from '@empoleon/hooks';
 import { EmpoleonDemo } from '@empoleonx/demo';

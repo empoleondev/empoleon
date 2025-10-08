@@ -1,4 +1,4 @@
-import { patchConsoleError, render, screen, tests, userEvent } from '@empoleon-tests/core';
+import { render, screen, tests, userEvent } from '@empoleon-tests/core';
 import { Tooltip, TooltipProps } from './Tooltip';
 import { TooltipStylesNames } from './Tooltip.types';
 import { TooltipFloating } from './TooltipFloating/TooltipFloating';

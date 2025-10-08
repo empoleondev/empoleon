@@ -62,7 +62,7 @@ export interface ParseStylePropsResult {
 }
 
 function camelToKebab(str: string) {
-  return str.replace(/[A-Z]/g, (m) => '-' + m.toLowerCase());
+  return str.replace(/[A-Z]/g, (m) => `-${m.toLowerCase()}`);
 }
 
 export function parseStyleProps(props: ParseStylePropsOptions): SortMediaQueriesResult {

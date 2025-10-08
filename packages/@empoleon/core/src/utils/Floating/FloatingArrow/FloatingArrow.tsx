@@ -1,4 +1,4 @@
-import { Accessor, createEffect, createMemo, JSX, splitProps } from 'solid-js';
+import { Accessor, createMemo, JSX, splitProps } from 'solid-js';
 import { useDirection } from '../../../core';
 import { ArrowPosition, FloatingPosition } from '../types';
 import { getArrowPositionStyles } from './get-arrow-position-styles';

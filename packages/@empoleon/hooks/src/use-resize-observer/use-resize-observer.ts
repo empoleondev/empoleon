@@ -1,4 +1,4 @@
-import { createElementSize, makeResizeObserver } from '@solid-primitives/resize-observer';
+import { createResizeObserver, makeResizeObserver } from '@solid-primitives/resize-observer';
 import { Accessor, createEffect, createSignal, onCleanup } from 'solid-js';
 
 // Define the shape of the observed bounding box
@@ -32,7 +32,7 @@ export function useResizeObserver<T extends HTMLElement = any>(
 
   const { observe, unobserve } = makeResizeObserver<T>((entries) => {
     const entry = entries[0];
-    if (entry) setRect(entry.contentRect);
+    if (entry) {setRect(entry.contentRect)};
   }, options);
 
   createEffect(() => {
@@ -51,6 +51,7 @@ export function useResizeObserver<T extends HTMLElement = any>(
  * @param options native ResizeObserverOptions
  * @returns { ref, width, height }
  */
+
 export function useElementSize<T extends HTMLElement = any>(
   options?: ResizeObserverOptions
 ): {
@@ -61,15 +62,14 @@ export function useElementSize<T extends HTMLElement = any>(
   /** Reactive height (never null) */
   height: Accessor<number>;
 } {
-  // 1) Signal to hold the target element
   const [el, setEl] = createSignal<T | undefined>();
+  const [width, setWidth] = createSignal<number>(0);
+  const [height, setHeight] = createSignal<number>(0);
 
-  // 2) Primitive store { width, height } driven by ResizeObserver under the hood
-  const size = createElementSize(el);
-
-  // 3) Coerce null to 0 so width/height are always numbers
-  const width: Accessor<number> = () => size.width ?? 0;
-  const height: Accessor<number> = () => size.height ?? 0;
+  createResizeObserver(el, ({ width: w, height: h }) => {
+    setWidth(w ?? 0);
+    setHeight(h ?? 0);
+  }, options);
 
   return { ref: setEl, width, height };
 }

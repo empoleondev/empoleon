@@ -1,5 +1,5 @@
 import { createSignal, JSX } from 'solid-js';
-import { Button, EmpoleonProvider, Group, Modal, Text } from '@empoleon/core';
+import { Box, Button, EmpoleonProvider, Group, Modal, Text } from '@empoleon/core';
 import {
   closeAllModals,
   closeModal,
@@ -56,9 +56,9 @@ export function Usage() {
       title: 'Hello there',
       children: (
         <div>
-          <span style={{ color: 'blue' }} onClick={() => closeModal('content-modal')}>
+          <Box component='span' style={{ color: 'blue' }} onClick={() => closeModal('content-modal')}>
             My content modal
-          </span>
+          </Box>
         </div>
       ),
       onClose: () => console.log('content modal 1 closed'),

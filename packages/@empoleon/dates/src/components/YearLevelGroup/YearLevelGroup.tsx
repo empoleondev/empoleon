@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { createEffect, For, JSX, splitProps } from 'solid-js';
+import { For, JSX, splitProps } from 'solid-js';
 import { BoxProps, ElementProps, factory, Factory, StylesApiProps, useProps } from '@empoleon/core';
 import { DateStringValue } from '../../types';
 import { handleControlKeyDown } from '../../utils';
@@ -80,7 +80,7 @@ export const YearLevelGroup = factory<YearLevelGroupFactory>((_props) => {
     'ref',
   ]);
 
-  let controlsRef: HTMLButtonElement[][][] = [];
+  const controlsRef: HTMLButtonElement[][][] = [];
 
   return (
     <LevelsGroup
@@ -117,7 +117,7 @@ export const YearLevelGroup = factory<YearLevelGroupFactory>((_props) => {
                   levelIndex: yearIndex,
                   rowIndex: payload.rowIndex,
                   cellIndex: payload.cellIndex,
-                  event: event,
+                  event,
                   controlsRef,
                 })
               }

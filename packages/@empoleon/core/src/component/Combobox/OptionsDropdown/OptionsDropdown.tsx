@@ -1,5 +1,5 @@
 import cx from 'clsx';
-import { createEffect, createMemo, For, JSX, mergeProps, Show, splitProps } from 'solid-js';
+import { createMemo, For, JSX, mergeProps, Show, splitProps } from 'solid-js';
 import { CheckIcon } from '../../Checkbox';
 import { ScrollArea, ScrollAreaProps } from '../../ScrollArea/ScrollArea';
 import { Combobox } from '../Combobox';

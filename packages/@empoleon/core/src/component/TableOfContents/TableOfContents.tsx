@@ -1,7 +1,6 @@
 import { splitProps } from 'solid-js';
 import {
   assignRef,
-  useId,
   useScrollSpy,
   UseScrollSpyHeadingData,
   UseScrollSpyOptions,
@@ -158,7 +157,6 @@ export const TableOfContents = factory<TableOfContentsFactory>((_props) => {
     varsResolver,
   });
 
-  const idBase = useId();
   const spy = useScrollSpy(local.scrollSpyOptions);
 
   assignRef(local.reinitializeRef, spy.reinitialize);

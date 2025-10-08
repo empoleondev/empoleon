@@ -1,5 +1,4 @@
 import { createMemo, JSX, splitProps } from 'solid-js';
-import { Dynamic } from 'solid-js/web';
 import {
   Box,
   BoxProps,

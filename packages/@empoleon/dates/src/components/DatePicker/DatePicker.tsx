@@ -10,7 +10,6 @@ import {
   Factory,
   getFontSize,
   StylesApiProps,
-  UnstyledButton,
   useProps,
   useResolvedStylesApi,
   useStyles,

@@ -1,4 +1,4 @@
-import { createRoot, createSignal, JSX } from 'solid-js';
+import { JSX } from 'solid-js';
 import { render, screen, tests, userEvent } from '@empoleon-tests/core';
 import { Switch } from '../Switch';
 import { SwitchGroup, SwitchGroupProps, SwitchGroupStylesNames } from './SwitchGroup';

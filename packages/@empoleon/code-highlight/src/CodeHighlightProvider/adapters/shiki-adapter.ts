@@ -30,7 +30,7 @@ export const createShikiAdapter = ({
 }: CreateShikiAdapterOptions = {}): CodeHighlightAdapter => {
   return {
     getHighlighter:
-      (ctx: any) =>
+      () =>
       async ({ code, language, colorScheme }) => {
         try {
           const html = await codeToHtml(code, {
@@ -44,7 +44,9 @@ export const createShikiAdapter = ({
             codeElementProps: {},
           };
         } catch (error) {
+          /* eslint-disable no-console */
           console.error('Shiki highlighting failed:', error);
+          /* eslint-enable no-console */
           return {
             highlightedCode: code,
             isHighlighted: false,

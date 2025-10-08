@@ -1,5 +1,5 @@
 import cx from 'clsx';
-import { createEffect, createMemo, createSignal, JSX, splitProps } from 'solid-js';
+import { createEffect, createMemo, createSignal, JSX, Show, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
@@ -214,13 +214,6 @@ export const CodeHighlight = factory<CodeHighlightFactory>((_props) => {
     })
       .then((result) => {
         setHighlightedResult(result);
-      })
-      .catch((error) => {
-        setHighlightedResult({
-          highlightedCode: code,
-          isHighlighted: false,
-          codeElementProps: {},
-        });
       });
   });
 
@@ -235,98 +228,97 @@ export const CodeHighlight = factory<CodeHighlightFactory>((_props) => {
     Object.entries(others).filter(([key]) => !key.startsWith('on') || key === 'onClick')
   );
 
-  if (local.__inline) {
-    return (
-      <Box
-        component="code"
-        ref={local.ref as any}
-        {...safeOthers}
-        {...highlightedResult().codeElementProps}
-        {...getStyles('codeHighlight', {
-          className: cx(highlightedResult().codeElementProps?.className, local.className),
-          style: [{ ...highlightedResult().codeElementProps?.style }, local.style],
-        })}
-        data-with-border={local.withBorder || undefined}
-        innerHTML={codeContent().innerHTML || undefined}
-      >
-        {!codeContent().innerHTML ? codeContent().children : undefined}
-      </Box>
-    );
-  }
-
   return (
     <CodeHighlightContextProvider value={{ getStyles, codeColorScheme: local.codeColorScheme }}>
-      <Box
-        ref={local.ref}
-        {...getStyles('codeHighlight')}
-        {...others}
-        dir="ltr"
-        data-code-color-scheme={local.codeColorScheme}
-        data-with-border={local.withBorder || undefined}
-      >
-        {shouldDisplayControls && (
-          <div {...getStyles('controls')} data-with-offset={local.__withOffset || undefined}>
-            {typeof local.controls === 'function' ? local.controls() : local.controls}
-
-            {local.withExpandButton && (
-              <ExpandCodeButton
-                expanded={_expanded()}
-                onExpand={setExpanded}
-                expandCodeLabel={local.expandCodeLabel}
-                collapseCodeLabel={local.collapseCodeLabel}
-              />
-            )}
-            {local.withCopyButton && (
-              <CopyCodeButton
-                code={typeof local.code === 'function' ? local.code() : local.code || ''}
-                copiedLabel={local.copiedLabel}
-                copyLabel={local.copyLabel}
-              />
-            )}
-          </div>
-        )}
-
-        <ScrollArea
-          type="hover"
-          scrollbarSize={4}
+      <Show when={!local.__inline} fallback={
+        <Box
+          component="code"
+          ref={local.ref as any}
+          {...safeOthers}
+          {...highlightedResult().codeElementProps}
+          {...getStyles('codeHighlight', {
+            className: cx(highlightedResult().codeElementProps?.className, local.className),
+            style: [{ ...highlightedResult().codeElementProps?.style }, local.style],
+          })}
+          data-with-border={local.withBorder || undefined}
+          // innerHTML={codeContent().innerHTML || undefined}
+        >
+          {!codeContent().innerHTML ? codeContent().children : undefined}
+        </Box>
+      }>
+        <Box
+          ref={local.ref}
+          {...getStyles('codeHighlight')}
+          {...others}
           dir="ltr"
-          offsetScrollbars={false}
-          data-collapsed={!_expanded() || undefined}
-          {...getStyles('scrollarea')}
-        >
-          <pre {...getStyles('pre')} data-with-offset={local.__withOffset || undefined}>
-            {codeContent().innerHTML ? (
-              <code
-                {...highlightedResult().codeElementProps}
-                {...getStyles('code', {
-                  className: highlightedResult().codeElementProps?.className,
-                  style: highlightedResult().codeElementProps?.style,
-                })}
-                innerHTML={codeContent().innerHTML}
-              />
-            ) : (
-              <code
-                {...highlightedResult().codeElementProps}
-                {...getStyles('code', {
-                  className: highlightedResult().codeElementProps?.className,
-                  style: highlightedResult().codeElementProps?.style,
-                })}
-              >
-                {codeContent().children}
-              </code>
-            )}
-          </pre>
-        </ScrollArea>
-
-        <UnstyledButton
-          {...getStyles('showCodeButton')}
-          mod={{ hidden: _expanded() }}
-          onClick={() => setExpanded(true)}
           data-code-color-scheme={local.codeColorScheme}
+          data-with-border={local.withBorder || undefined}
         >
-          {local.expandCodeLabel}
-        </UnstyledButton>
-      </Box>
+          {shouldDisplayControls && (
+            <Box component='div' {...getStyles('controls')} data-with-offset={local.__withOffset || undefined}>
+              {typeof local.controls === 'function' ? local.controls() : local.controls}
+
+              <Show when={local.withExpandButton}>
+                <ExpandCodeButton
+                  expanded={_expanded()}
+                  onExpand={setExpanded}
+                  expandCodeLabel={local.expandCodeLabel}
+                  collapseCodeLabel={local.collapseCodeLabel}
+                />
+              </Show>
+              <Show when={local.withCopyButton}>
+                <CopyCodeButton
+                  code={typeof local.code === 'function' ? local.code() : local.code || ''}
+                  copiedLabel={local.copiedLabel}
+                  copyLabel={local.copyLabel}
+                />
+              </Show>
+            </Box>
+          )}
+
+          <ScrollArea
+            type="hover"
+            scrollbarSize={4}
+            dir="ltr"
+            offsetScrollbars={false}
+            data-collapsed={!_expanded() || undefined}
+            {...getStyles('scrollarea')}
+          >
+            <Box component='pre' {...getStyles('pre')} data-with-offset={local.__withOffset || undefined}>
+              {codeContent().innerHTML ? (
+                <Box component='code'
+                  {...highlightedResult().codeElementProps}
+                  {...getStyles('code', {
+                    className: highlightedResult().codeElementProps?.className,
+                    style: highlightedResult().codeElementProps?.style,
+                  })}
+                  innerHTML={codeContent().innerHTML}
+                />
+              ) : (
+                <Box component='code'
+                  {...highlightedResult().codeElementProps}
+                  {...getStyles('code', {
+                    className: highlightedResult().codeElementProps?.className,
+                    style: highlightedResult().codeElementProps?.style,
+                  })}
+                >
+                  {codeContent().children}
+                </Box>
+              )}
+            </Box>
+          </ScrollArea>
+
+          <UnstyledButton
+            {...getStyles('showCodeButton')}
+            mod={{ hidden: _expanded() }}
+            onClick={() => setExpanded(true)}
+            data-code-color-scheme={local.codeColorScheme}
+          >
+            {local.expandCodeLabel}
+          </UnstyledButton>
+        </Box>
+      </Show>
+
     </CodeHighlightContextProvider>
   );
 });

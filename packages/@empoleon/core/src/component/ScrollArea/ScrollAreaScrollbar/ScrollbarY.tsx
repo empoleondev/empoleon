@@ -1,5 +1,5 @@
 import { createSignal, onCleanup, onMount, splitProps } from 'solid-js';
-import { PossibleRef, useMergedRef } from '@empoleon/hooks';
+import { useMergedRef } from '@empoleon/hooks';
 import { useScrollAreaContext } from '../ScrollArea.context';
 import { ScrollAreaScrollbarAxisProps } from '../ScrollArea.types';
 import { getThumbSize, isScrollingWithinScrollbarBounds, toInt } from '../utils';

@@ -1,9 +1,7 @@
 import {
-  createEffect,
   createMemo,
   createSignal,
   For,
-  Index,
   JSX,
   Show,
   splitProps,

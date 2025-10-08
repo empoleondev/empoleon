@@ -22,11 +22,8 @@ function Demo() {
 
 function Demo() {
   const [value, setValue] = createSignal('');
-  console.log('[Demo] Current value:', value());
 
-  // Pass the signal accessor (value) not the value itself (value())
   const throttledValue = useThrottledValue(value, 1000);
-  console.log('[Demo] Throttled value:', throttledValue());
 
   return (
     <>
@@ -34,7 +31,6 @@ function Demo() {
         placeholder="Search"
         onInput={(event) => {
           const newValue = event.currentTarget.value;
-          console.log('[Demo] Input changed to:', newValue);
           setValue(newValue);
         }}
       />

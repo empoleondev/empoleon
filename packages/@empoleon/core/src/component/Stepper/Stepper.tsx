@@ -1,7 +1,6 @@
 import {
   children,
   Component,
-  createEffect,
   createMemo,
   createSignal,
   For,
@@ -271,15 +270,15 @@ function StepNodes(props: StepNodeProps) {
     return children(() => props.children)
       .toArray()
       .filter((item) => {
-        if (!item) return false;
+        if (!item) {return false};
 
         // Check both JSX props and DOM dataset for type
         const itemType = (item as any).props?.['data-type'] || (item as any).dataset?.type;
-        if (itemType === 'completed') return false;
+        if (itemType === 'completed') {return false};
 
         // Check class names for separator components
         const className = (item as any).className || (item as any).props?.className || '';
-        if (className.includes('separator')) return false;
+        if (className.includes('separator')) {return false};
 
         return true;
       });
@@ -329,7 +328,7 @@ function CompletedNode(props: CompletedProps) {
 
   const completedContent = createMemo(() => {
     const completedItems = completed();
-    if (completedItems.length === 0) return null;
+    if (completedItems.length === 0) {return null};
 
     const item = completedItems[0] as any;
 
@@ -353,9 +352,9 @@ function CompletedNode(props: CompletedProps) {
     const current = props.active;
     if (current > lastIndex()) {
       return completedContent();
-    } else {
-      return stepContentsSignal()[current] ?? null;
     }
+
+    return stepContentsSignal()[current] ?? null;
   });
 
   return (

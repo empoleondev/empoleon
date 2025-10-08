@@ -79,7 +79,7 @@ function Demo() {
     },
   });
 
-  const fields = form.getValues().employees.map((item, index) => (
+  const fields = form.getValues().employees.map((_, index) => (
     <Group mt="xs">
       <TextInput
         placeholder="John Doe"

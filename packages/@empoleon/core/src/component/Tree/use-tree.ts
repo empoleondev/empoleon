@@ -1,4 +1,4 @@
-import { Accessor, createMemo, createSignal } from 'solid-js';
+import { Accessor, createSignal } from 'solid-js';
 import {
   CheckedNodeStatus,
   getAllCheckedNodes,

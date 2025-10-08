@@ -20,9 +20,9 @@ function createDropzoneStatus(status: keyof DropzoneContextValue) {
     if (ctx[status]) {
       if (typeof local.children === 'function') {
         return <Dynamic component={local.children as Component} {...others} />;
-      } else {
-        return <span {...others}>{local.children}</span>;
       }
+
+      return <span {...others}>{local.children}</span>
     }
 
     return null;

@@ -23,7 +23,9 @@ export function useThrottledCallbackWithClearTimeout<T extends (...args: any[]) 
 
   const timerCallback = createMemo(() => () => {
     if (latestInArgsRef && latestInArgsRef !== latestOutArgsRef) {
+      /* eslint-disable prefer-spread */
       callThrottledCallback().apply(null, latestInArgsRef);
+      /* eslint-enable prefer-spread */
 
       timeoutRef = window.setTimeout(timerCallback(), waitRef);
     } else {
@@ -33,7 +35,9 @@ export function useThrottledCallbackWithClearTimeout<T extends (...args: any[]) 
 
   const throttled = createMemo(() => (...args: Parameters<T>) => {
     if (active) {
+      /* eslint-disable prefer-spread */
       callThrottledCallback().apply(null, args);
+      /* eslint-enable prefer-spread */
       timeoutRef = window.setTimeout(timerCallback(), waitRef);
     } else {
       latestInArgsRef = args;

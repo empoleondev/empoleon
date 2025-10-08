@@ -172,18 +172,6 @@ describe('@empoleon/dates/DateTimePicker', () => {
     expectNoPopover(container);
   });
 
-  // it('supports uncontrolled state', async () => {
-  //   const { container } = render(() => <DateTimePicker {...defaultProps} defaultValue="2022-04-11" />);
-
-  //   await clickInput(container);
-  //   await userEvent.click(container.querySelectorAll('table button')[6]);
-  //   expectValue(container, '03/04/2022 00:00');
-
-  //   await userEvent.clear(getTimePicker());
-  //   await userEvent.type(getTimePicker(), '14:45');
-  //   expectValue(container, '03/04/2022 14:45');
-  // });
-
   it('supports uncontrolled state', async () => {
     const { container } = render(() => (
       <DateTimePicker {...defaultProps} defaultValue="2022-04-11" />

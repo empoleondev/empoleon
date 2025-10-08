@@ -1,4 +1,4 @@
-import { createEffect, createMemo, splitProps } from 'solid-js';
+import { createMemo, splitProps } from 'solid-js';
 import {
   Box,
   BoxComponentProps,

@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { createEffect, createMemo, Ref, Show, splitProps } from 'solid-js';
+import { createMemo, Ref, Show, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,

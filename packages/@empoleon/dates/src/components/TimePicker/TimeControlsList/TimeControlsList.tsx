@@ -1,4 +1,4 @@
-import { createEffect, createSignal, For } from 'solid-js';
+import { createEffect, For } from 'solid-js';
 import { ScrollArea } from '@empoleon/core';
 import { useTimePickerContext } from '../TimePicker.context';
 import { TimeControl } from './TimeControl';

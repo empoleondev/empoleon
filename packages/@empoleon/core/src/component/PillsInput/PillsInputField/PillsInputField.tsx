@@ -1,5 +1,5 @@
 import { splitProps } from 'solid-js';
-import { PossibleRef, useMergedRef } from '@empoleon/hooks';
+import { useMergedRef } from '@empoleon/hooks';
 import {
   Box,
   BoxProps,

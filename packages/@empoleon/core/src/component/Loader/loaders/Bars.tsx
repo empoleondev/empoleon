@@ -1,5 +1,5 @@
 import cx from 'clsx';
-import { mergeProps, splitProps } from 'solid-js';
+import { splitProps } from 'solid-js';
 import { Box } from '../../../core';
 import { EmpoleonLoaderComponent } from '../Loader.types';
 import classes from '../Loader.module.css';

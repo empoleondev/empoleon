@@ -1,4 +1,4 @@
-import { Component, createEffect, JSX, splitProps } from 'solid-js';
+import { Component, JSX, splitProps } from 'solid-js';
 import { Dynamic } from 'solid-js/web';
 import {
   Box,
@@ -123,7 +123,7 @@ export const AccordionControl = factory<AccordionControlFactory>((_props) => {
         {
           (() => {
             const chevronFn = local.chevron || ctx.chevron();
-            if (chevronFn === null) return null;
+            if (chevronFn === null) {return null};
             if (typeof chevronFn === 'function') {
               return chevronFn();
             }

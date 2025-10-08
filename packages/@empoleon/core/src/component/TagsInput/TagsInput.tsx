@@ -1,5 +1,5 @@
 import { ComponentProps, createEffect, createMemo, For, JSX, splitProps } from 'solid-js';
-import { PossibleRef, useId, useMergedRef, useUncontrolled } from '@empoleon/hooks';
+import { useId, useMergedRef, useUncontrolled } from '@empoleon/hooks';
 import {
   BoxProps,
   ElementProps,
@@ -478,7 +478,7 @@ export const TagsInput = factory<TagsInputFactory>((_props) => {
                     combobox.openDropdown();
                     local.selectFirstOptionOnChange && combobox.selectFirstOption();
                   }}
-                  onChange={(event) => {
+                  onChange={() => {
                     handleSearchChange(
                       _value() != null ? optionsLockup()[_value()[0]!]?.label || '' : ''
                     );

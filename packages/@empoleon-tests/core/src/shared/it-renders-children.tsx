@@ -1,4 +1,4 @@
-import { screen, waitFor } from '@solidjs/testing-library';
+import { waitFor } from '@solidjs/testing-library';
 import { JSX } from 'solid-js';
 import { render } from '../render';
 import { getPropsValue } from './get-props-value';

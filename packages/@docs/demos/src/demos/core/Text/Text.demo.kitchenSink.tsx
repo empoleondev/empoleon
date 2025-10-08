@@ -1,4 +1,3 @@
-import { createEffect } from 'solid-js';
 import { Box, rgba, Text, TextProps } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
 

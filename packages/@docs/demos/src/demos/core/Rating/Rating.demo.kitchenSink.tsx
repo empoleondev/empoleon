@@ -1,4 +1,4 @@
-import { IconHeart, IconMoon, IconStar, IconSun } from '@tabler/icons-solidjs';
+import { IconHeart, IconMoon, IconSun } from '@tabler/icons-solidjs';
 import { createEffect, createSignal } from 'solid-js';
 import { Rating, RatingProps } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';

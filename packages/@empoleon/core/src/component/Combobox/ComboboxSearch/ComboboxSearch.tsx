@@ -1,4 +1,4 @@
-import { JSX, splitProps } from 'solid-js';
+import { splitProps } from 'solid-js';
 import { useMergedRef } from '@empoleon/hooks';
 import { ElementProps, factory, Factory, useProps } from '../../../core';
 import { Input, InputProps, InputStylesNames } from '../../Input/Input';

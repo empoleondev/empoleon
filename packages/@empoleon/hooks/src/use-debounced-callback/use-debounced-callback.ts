@@ -22,13 +22,13 @@ export function useDebouncedCallback<T extends (...args: any[]) => any>(
   // flush method: cancel pending and invoke immediately
   wrapped.flush = () => {
     debouncedFn.clear();
-    if (lastArgs.length) callback(...lastArgs);
+    if (lastArgs.length) {callback(...lastArgs)};
   };
 
   // cleanup on unmount
   onCleanup(() => {
     debouncedFn.clear();
-    if (flushOnUnmount) wrapped.flush();
+    if (flushOnUnmount) {wrapped.flush()};
   });
 
   return wrapped;

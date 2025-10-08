@@ -10,7 +10,6 @@ import {
   factory,
   Factory,
   getSize,
-  noop,
   StylesApiProps,
   useProps,
   useResolvedStylesApi,
@@ -264,7 +263,7 @@ export const NumberInput = factory<NumberInputFactory>((_props) => {
   const { resolvedClassNames, resolvedStyles } = useResolvedStylesApi<NumberInputFactory>({
     classNames: local.classNames,
     styles: local.styles,
-    props: props,
+    props,
   });
 
   const [_value, setValue] = useUncontrolled({

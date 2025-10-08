@@ -1,4 +1,3 @@
-import { IconAt } from '@tabler/icons-solidjs';
 import { createEffect, createSignal } from 'solid-js';
 import { Textarea, TextareaProps } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';

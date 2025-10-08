@@ -1,4 +1,4 @@
-import { createEffect, createMemo, createSignal, For, JSX } from 'solid-js';
+import { createMemo, createSignal, For } from 'solid-js';
 import { Dynamic } from 'solid-js/web';
 import { DemoAreaProps } from '../DemoArea';
 import { DemoCode } from '../DemoCode';

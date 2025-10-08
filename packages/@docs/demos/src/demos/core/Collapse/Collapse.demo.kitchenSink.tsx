@@ -58,7 +58,9 @@ function Demo(props: Omit<CollapseProps, 'children' | 'in'>) {
         transitionDuration={transitionDuration()}
         transitionTimingFunction={transitionTimingFunction()}
         animateOpacity={animateOpacity()}
+        /* eslint-disable no-console */
         onTransitionEnd={() => console.log('Transition ended')}
+        /* eslint-enable no-console */
       >
         <Text>
           From Bulbapedia: Bulbasaur is a small, quadrupedal Pokémon that has blue-green skin with

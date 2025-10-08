@@ -58,8 +58,6 @@ export type BurgerFactory = Factory<{
   vars: BurgerCssVariables;
 }>;
 
-const defaultProps: Partial<BurgerProps> = {};
-
 const varsResolver = createVarsResolver<BurgerFactory>((theme, props) => ({
   root: {
     '--burger-color': props.color ? getThemeColor(props.color, theme) : undefined,

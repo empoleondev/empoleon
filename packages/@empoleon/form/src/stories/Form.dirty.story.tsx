@@ -1,5 +1,5 @@
 import { IconTrash } from '@tabler/icons-solidjs';
-import { createEffect, createSignal, For, JSX } from 'solid-js';
+import { createSignal, For, JSX } from 'solid-js';
 import { ActionIcon, Button, Code, EmpoleonProvider, Group, Text, TextInput } from '@empoleon/core';
 import { useForm } from '../use-form';
 

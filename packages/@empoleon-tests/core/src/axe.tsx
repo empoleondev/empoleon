@@ -34,7 +34,7 @@ function checkAccessibility(element: Element): string[] {
   if (headings.length > 1) {
     let prevLevel = 0;
     headings.forEach((heading, index) => {
-      const level = parseInt(heading.tagName[1]);
+      const level = parseInt(heading.tagName[1], 10);
       if (index === 0 && level !== 1) {
         // First heading should be h1, but this might be too strict for components
       } else if (level > prevLevel + 1) {
@@ -80,7 +80,7 @@ function checkAccessibility(element: Element): string[] {
   );
   focusableElements.forEach((el, index) => {
     const tabIndex = el.getAttribute('tabindex');
-    if (tabIndex && parseInt(tabIndex) > 0) {
+    if (tabIndex && parseInt(tabIndex, 10) > 0) {
       violations.push(
         `Element ${index + 1} has positive tabindex (${tabIndex}), which can disrupt tab order`
       );
@@ -113,6 +113,9 @@ export function axe(elementFactories: (() => JSX.Element)[]): void {
 
         // Run our custom accessibility checks
         const violations = checkAccessibility(element as Element);
+
+        // Add explicit assertion
+        expect(violations).toHaveLength(0);
 
         if (violations.length > 0) {
           const summary = violations.join('\n• ');

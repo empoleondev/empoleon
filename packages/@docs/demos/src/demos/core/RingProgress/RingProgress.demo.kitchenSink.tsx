@@ -51,7 +51,7 @@ function Demo(
   });
 
   const getLabel = (): JSX.Element | undefined => {
-    if (!props.showLabel) return undefined;
+    if (!props.showLabel) {return undefined};
 
     const totalValue = sections().reduce((sum, section) => sum + section.value, 0);
     return (

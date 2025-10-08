@@ -1,4 +1,4 @@
-import { Component, JSX, Ref, splitProps } from 'solid-js';
+import { Component, JSX, splitProps } from 'solid-js';
 import { useId } from '@empoleon/hooks';
 import {
   Box,

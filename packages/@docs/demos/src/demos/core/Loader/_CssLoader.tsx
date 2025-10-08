@@ -1,5 +1,4 @@
 import cx from 'clsx';
-import { JSX } from 'solid-js';
 import { Box, EmpoleonLoaderComponent } from '@empoleon/core';
 import classes from './CssLoader.module.css';
 

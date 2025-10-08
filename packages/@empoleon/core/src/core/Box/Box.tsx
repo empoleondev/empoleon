@@ -1,6 +1,6 @@
-import { mergeRefs, Ref } from '@solid-primitives/refs';
+import { Ref } from '@solid-primitives/refs';
 import cx from 'clsx';
-import { createEffect, createMemo, JSX, Show, splitProps } from 'solid-js';
+import { createMemo, JSX, Show, splitProps } from 'solid-js';
 import { Dynamic } from 'solid-js/web';
 import { EmpoleonBreakpoint, useEmpoleonSxTransform, useEmpoleonTheme } from '../EmpoleonProvider';
 import { createPolymorphicComponent } from '../factory';
@@ -102,11 +102,7 @@ const _Box = <T extends HTMLElement = HTMLDivElement>(
   const transformedSx = createMemo(() => useSxTransform?.()?.(styleProps().sx));
   const responsiveClassName = useRandomClassName();
 
-  let _innerEl: HTMLElement | undefined;
   const forwardedRef = local.ref as Ref<HTMLElement> | undefined;
-  const refToPass = mergeRefs(forwardedRef, (el?: HTMLElement) => {
-    _innerEl = el;
-  });
 
   const parsedStyleProps = createMemo(() =>
     parseStyleProps({
@@ -118,7 +114,7 @@ const _Box = <T extends HTMLElement = HTMLDivElement>(
 
   const elementProps = createMemo(() => {
     return {
-      ref: refToPass,
+      ref: forwardedRef,
       style: getBoxStyle({
         theme,
         style: local.style,
@@ -138,34 +134,6 @@ const _Box = <T extends HTMLElement = HTMLDivElement>(
       ...getBoxMod(local.mod),
       ...rest,
     };
-  });
-
-  // Needed otherwise disabled is not reactive
-  createEffect(() => {
-    const p = elementProps();
-    const el = _innerEl as HTMLElement | null;
-    if (!el) return;
-
-    // data-* attributes (clear then set)
-    // for (const name of el.getAttributeNames()) {
-    //   if (name.startsWith('data-')) el.removeAttribute(name);
-    // }
-    // for (const k of Object.keys(p)) {
-    //   if (k.startsWith('data-')) {
-    //     const v = (p as any)[k];
-    //     if (v != null && v !== false) el.setAttribute(k, String(v));
-    //   }
-    // }
-
-    // disabled (prop + attr)
-    // if ('disabled' in p) {
-    //   try { (el as any).disabled = !!(p as any).disabled; } catch {}
-    //   if ((p as any).disabled) el.setAttribute('disabled', '');
-    //   else el.removeAttribute('disabled');
-    // } else {
-    //   el.removeAttribute('disabled');
-    //   try { (el as any).disabled = false; } catch {}
-    // }
   });
 
   return (

@@ -1,4 +1,4 @@
-import { ComponentProps, JSX, splitProps } from 'solid-js';
+import { ComponentProps, splitProps } from 'solid-js';
 
 export interface ComboboxHiddenInputProps extends Omit<ComponentProps<'input'>, 'value'> {
   /** Input value */

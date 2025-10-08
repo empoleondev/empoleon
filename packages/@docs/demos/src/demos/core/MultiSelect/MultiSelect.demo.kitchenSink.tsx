@@ -1,8 +1,7 @@
 import { IconSearch } from '@tabler/icons-solidjs';
-import { createEffect, createSignal } from 'solid-js';
+import { createSignal } from 'solid-js';
 import { MultiSelect, MultiSelectProps } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
-import { inputControls } from '../../../shared';
 
 const code = `
 import { MultiSelect } from '@empoleon/core';
@@ -29,12 +28,12 @@ function Demo(
   const [searchValue, setSearchValue] = createSignal('');
 
   const getLeftSection = () => {
-    if (!props.hasLeftSection) return undefined;
+    if (!props.hasLeftSection) {return undefined};
     return <IconSearch style={{ width: '16px', height: '16px' }} />;
   };
 
   const getRightSection = () => {
-    if (!props.hasRightSection) return undefined;
+    if (!props.hasRightSection) {return undefined};
     return '🔍';
   };
 

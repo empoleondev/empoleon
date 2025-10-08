@@ -1,7 +1,7 @@
 import clsx from 'clsx';
-import { createEffect, children as getChildren, JSX, splitProps } from 'solid-js';
+import { JSX, splitProps } from 'solid-js';
 import { useMergedRef } from '@empoleon/hooks';
-import { factory, Factory, getRefProp, isElement, useProps } from '../../../core';
+import { Box, factory, Factory, getRefProp, isElement, useProps } from '../../../core';
 import { usePopoverContext } from '../Popover.context';
 
 export interface PopoverTargetProps {
@@ -65,7 +65,7 @@ export const PopoverTarget = factory<PopoverTargetFactory>((_props) => {
   }
 
   return (
-    <span
+    <Box component='span'
       {...others}
       {...accessibleProps}
       {...ctx.targetProps}
@@ -74,7 +74,7 @@ export const PopoverTarget = factory<PopoverTargetFactory>((_props) => {
       onClick={!ctx.controlled ? ctx.onToggle : undefined}
     >
       {local.children}
-    </span>
+    </Box>
   );
 });
 

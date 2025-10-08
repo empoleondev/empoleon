@@ -1,4 +1,4 @@
-import { createEffect, splitProps } from 'solid-js';
+import { splitProps } from 'solid-js';
 import { factory, Factory, useEmpoleonEnv } from '../../core';
 import { Portal, PortalProps } from './Portal';
 

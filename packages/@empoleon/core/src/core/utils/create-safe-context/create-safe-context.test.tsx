@@ -1,5 +1,4 @@
 import { render, renderHook } from '@solidjs/testing-library';
-import { JSX } from 'solid-js';
 import { patchConsoleError } from '@empoleon-tests/core';
 import { createSafeContext } from './create-safe-context';
 

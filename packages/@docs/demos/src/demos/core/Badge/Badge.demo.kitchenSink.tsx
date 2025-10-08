@@ -1,6 +1,6 @@
 import { IconAt, IconX } from '@tabler/icons-solidjs';
-import { createEffect, createSignal, Show } from 'solid-js';
-import { Badge, BadgeProps, Box } from '@empoleon/core';
+import { createEffect, createSignal } from 'solid-js';
+import { Badge, BadgeProps } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
 
 const code = `

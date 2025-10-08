@@ -1,4 +1,4 @@
-import { createMemo, createSignal, JSX, splitProps } from 'solid-js';
+import { createMemo, JSX } from 'solid-js';
 import { useUncontrolled } from '@empoleon/hooks';
 import { useProps } from '../../../core';
 import { ChipGroupProvider } from '../ChipGroup.context';
@@ -24,19 +24,12 @@ const defaultProps: Partial<ChipGroupProps<false>> = {};
 
 export function ChipGroup<T extends boolean>(_props: ChipGroupProps<T>) {
   const props = useProps('ChipGroup', defaultProps as any, _props);
-  const [local, others] = splitProps(props, [
-    'value',
-    'defaultValue',
-    'onChange',
-    'multiple',
-    'children',
-  ]);
 
   const [_value, setValue] = useUncontrolled<string | null | string[]>({
-    value: () => local.value,
-    defaultValue: local.defaultValue!,
-    finalValue: local.multiple ? ([] as string[]) : null,
-    onChange: local.onChange as any,
+    value: () => props.value,
+    defaultValue: props.defaultValue!,
+    finalValue: props.multiple ? ([] as string[]) : null,
+    onChange: props.onChange as any,
   });
 
   const isChipSelected = createMemo(() => {
@@ -63,7 +56,7 @@ export function ChipGroup<T extends boolean>(_props: ChipGroupProps<T>) {
       }
 
       setValue(newValue);
-      local.onChange?.(newValue as any);
+      props.onChange?.(newValue as any);
     };
   });
 
@@ -72,10 +65,10 @@ export function ChipGroup<T extends boolean>(_props: ChipGroupProps<T>) {
       value={{
         isChipSelected: isChipSelected(),
         onChange: handleChange(),
-        multiple: !!local.multiple,
+        multiple: !!props.multiple,
       }}
     >
-      {local.children}
+      {props.children}
     </ChipGroupProvider>
   );
 }

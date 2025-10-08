@@ -1,4 +1,4 @@
-import { children, JSX } from 'solid-js';
+import { JSX } from 'solid-js';
 import { render, screen, tests, userEvent } from '@empoleon-tests/core';
 import { DirectionProvider } from '../../core';
 import { Tabs, TabsProps, TabsStylesNames } from './Tabs';

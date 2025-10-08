@@ -1,5 +1,5 @@
 import { createEffect, createSignal, JSX, onCleanup, Show, splitProps } from 'solid-js';
-import { PossibleRef, useMergedRef } from '@empoleon/hooks';
+import { useMergedRef } from '@empoleon/hooks';
 import {
   Box,
   BoxProps,

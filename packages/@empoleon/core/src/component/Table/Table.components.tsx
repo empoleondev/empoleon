@@ -125,8 +125,7 @@ export function tableElement<Factory extends FactoryPayload>(
   const Component = factory<Factory>((_props) => {
     const props = useProps(name, {}, _props);
 
-    // Split props to separate known props from others (same pattern as Affix and other components)
-    const [local, others] = splitProps(props, [
+    const [_, others] = splitProps(props, [
       'classNames',
       'className',
       'style',

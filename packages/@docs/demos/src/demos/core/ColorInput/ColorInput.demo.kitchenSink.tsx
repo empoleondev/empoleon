@@ -1,4 +1,3 @@
-import { IconPalette } from '@tabler/icons-solidjs';
 import { createEffect, createSignal } from 'solid-js';
 import { ColorInput, ColorInputProps } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';

@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import { IconSearch } from '@tabler/icons-solidjs';
-import { createMemo, createSignal, For, Show } from 'solid-js';
+import { createSignal, For, Show } from 'solid-js';
 import { Badge, Button, Center, Group, Text } from '@empoleon/core';
 import { createSpotlight, Spotlight } from '@empoleon/spotlight';
 import { EmpoleonDemo } from '@empoleonx/demo';

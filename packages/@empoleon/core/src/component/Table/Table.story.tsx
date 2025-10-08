@@ -1,8 +1,5 @@
 import { For, JSX } from 'solid-js';
 import { EmpoleonProvider } from '../../core';
-import { Stack } from '../Stack';
-import { Text } from '../Text';
-import { Title } from '../Title';
 import { Table } from './Table';
 
 export default {

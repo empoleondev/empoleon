@@ -48,9 +48,9 @@ function Wrapper(props: any) {
   const getMarks = () => {
     if (props.showMarks) {
       const formatMarkLabel = (val: number) => {
-        if (!props.showMarkLabels) return undefined;
-        if (props.labelFormat === 'celsius') return `${val} °C`;
-        if (props.labelFormat === 'percentage') return `${val}%`;
+        if (!props.showMarkLabels) {return undefined};
+        if (props.labelFormat === 'celsius') {return `${val} °C`};
+        if (props.labelFormat === 'percentage') {return `${val}%`};
         return `${val}`;
       };
 

@@ -1,4 +1,4 @@
-import { createEffect, JSX, Show, splitProps } from 'solid-js';
+import { JSX, Show, splitProps } from 'solid-js';
 import { Transition as SolidTransition } from 'solid-transition-group';
 import { useEmpoleonEnv } from '../../core';
 import { getTransitionStyles } from './get-transition-styles/get-transition-styles';
@@ -89,7 +89,7 @@ export function Transition(props: TransitionProps) {
     Object.assign(el.style, from);
     void el.offsetHeight;
     Object.assign(el.style, { transition: `all ${dur}ms ${timingFunction}`, ...to });
-    if (cb) setTimeout(cb, dur);
+    if (cb) {setTimeout(cb, dur)};
   }
 
   // No-animation fallback
@@ -109,7 +109,7 @@ export function Transition(props: TransitionProps) {
         el instanceof HTMLElement && Object.assign(el.style, mkStyles('pre-entering', duration))
       }
       onEnter={(el, done) => {
-        if (!(el instanceof HTMLElement)) return done();
+        if (!(el instanceof HTMLElement)) {return done()};
         local.onEnter?.();
         animate(el, 'pre-entering', 'entering', duration, () => {
           local.onEntered?.();
@@ -123,7 +123,7 @@ export function Transition(props: TransitionProps) {
         el instanceof HTMLElement && Object.assign(el.style, mkStyles('pre-exiting', exitDuration))
       }
       onExit={(el, done) => {
-        if (!(el instanceof HTMLElement)) return done();
+        if (!(el instanceof HTMLElement)) {return done()};
         local.onExit?.();
         animate(el, 'exiting', 'exiting', exitDuration, () => {
           local.onExited?.();

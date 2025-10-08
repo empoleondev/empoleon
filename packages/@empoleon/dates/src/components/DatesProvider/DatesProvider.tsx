@@ -1,4 +1,4 @@
-import { createContext, createMemo, JSX } from 'solid-js';
+import { createContext, JSX } from 'solid-js';
 import { DayOfWeek } from '../../types';
 
 export interface DatesProviderValue {

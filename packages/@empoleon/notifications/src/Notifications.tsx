@@ -1,5 +1,5 @@
 import { createListTransition } from '@solid-primitives/transition-group';
-import { createEffect, createMemo, createSignal, For, splitProps } from 'solid-js';
+import { createEffect, createSignal, For, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
@@ -19,7 +19,6 @@ import {
 import { useReducedMotion } from '@empoleon/hooks';
 import {
   getGroupedNotifications,
-  positions,
 } from './get-grouped-notifications/get-grouped-notifications';
 import { getNotificationStateStyles } from './get-notification-state-styles';
 import { NotificationContainer } from './NotificationContainer';
@@ -147,20 +146,10 @@ function PositionTransitions(props: {
 
   createListTransition(notificationRefs, {
     appear: true,
-    onChange({ list, added, removed, unchanged, finishRemoved }) {
-      added.forEach((el, i) => {
-        const id = el.getAttribute('data-notification-id');
-      });
-
-      removed.forEach((el, i) => {
-        const id = el.getAttribute('data-notification-id');
-      });
-
+    onChange({ added, removed, finishRemoved }) {
       if (added.length > 0) {
         queueMicrotask(() => {
-          added.forEach((el, i) => {
-            const id = el.getAttribute('data-notification-id');
-
+          added.forEach((el) => {
             // Figure direction and start position
             const isRight = props.position.includes('right');
             const isLeft = props.position.includes('left');
@@ -228,7 +217,7 @@ function PositionTransitions(props: {
                     el.style.transform = 'translateX(0) translateY(0)';
 
                     const onFinalTransitionEnd = (ev: any) => {
-                      if (ev.target !== el) return;
+                      if (ev.target !== el) {return};
                       el.removeEventListener('transitionend', onFinalTransitionEnd);
                       el.style.transition = '';
                       el.style.willChange = '';
@@ -250,9 +239,7 @@ function PositionTransitions(props: {
       }
 
       if (removed.length > 0) {
-        removed.forEach((el, i) => {
-          const id = el.getAttribute('data-notification-id');
-
+        removed.forEach((el) => {
           el.style.transition = `all ${props.duration}ms ease-out`;
           el.classList.remove(`notification-${props.position}-entered`);
           el.classList.add(`notification-${props.position}-exit`);
@@ -325,7 +312,7 @@ export const Notifications = factory<NotificationsFactory>((_props) => {
   const theme = useEmpoleonTheme();
   const data = useNotifications(local.store);
   const shouldReduceMotion = useReducedMotion();
-  let refs: Record<string, HTMLDivElement> = {};
+  const refs: Record<string, HTMLDivElement> = {};
 
   const reduceMotion = theme.respectReducedMotion ? shouldReduceMotion : false;
   const duration = reduceMotion ? 1 : local.transitionDuration;

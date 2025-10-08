@@ -1,10 +1,10 @@
 import { createContextContainer, patchConsoleError, render, tests } from '@empoleon-tests/core';
 import { Combobox } from '../Combobox';
-import { ComboboxTarget, ComboboxTargetProps } from './ComboboxTarget';
+import { ComboboxTarget } from './ComboboxTarget';
 
-const defaultProps: ComboboxTargetProps = {
-  children: <div>test</div>,
-};
+// const defaultProps: ComboboxTargetProps = {
+//   children: <div>test</div>,
+// };
 
 const TestContainer = createContextContainer(ComboboxTarget, Combobox, {});
 

@@ -132,7 +132,7 @@ export function SelectedItemRemoved() {
 
   createEffect(() => {
     const data = dataList();
-    if (value() && !data.includes(value())) setValue(data[0] ?? '');
+    if (value() && !data.includes(value())) {setValue(data[0] ?? '')};
   });
 
   return (

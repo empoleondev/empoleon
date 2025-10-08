@@ -1,6 +1,6 @@
 import { renderHook } from '@solidjs/testing-library';
 import { createSignal } from 'solid-js';
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { useSelection } from './use-selection';
 
 describe('@empoleon/hooks/use-selection', () => {

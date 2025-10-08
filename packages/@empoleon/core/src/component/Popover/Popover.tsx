@@ -1,4 +1,4 @@
-import { createEffect, createMemo, createSignal, JSX, onCleanup, splitProps } from 'solid-js';
+import { createEffect, createSignal, JSX, onCleanup, splitProps } from 'solid-js';
 import { useClickOutside, useId } from '@empoleon/hooks';
 import {
   createVarsResolver,

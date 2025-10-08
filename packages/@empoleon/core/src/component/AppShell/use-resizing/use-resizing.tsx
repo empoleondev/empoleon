@@ -7,7 +7,7 @@ interface UseResizingInput {
   disabled: boolean | undefined;
 }
 
-export function useResizing({ transitionDuration, disabled }: UseResizingInput) {
+export function useResizing(props: UseResizingInput) {
   const [resizing, setResizing] = createSignal(true);
   let resizingTimeout = -1;
   let disabledTimeout = -1;
@@ -27,6 +27,10 @@ export function useResizing({ transitionDuration, disabled }: UseResizingInput) 
   }
 
   createEffect(() => {
+    // Track both disabled and transitionDuration
+    props.disabled;
+    props.transitionDuration;
+
     setResizing(true);
     clearTimeout(disabledTimeout);
     disabledTimeout = window.setTimeout(
@@ -34,7 +38,7 @@ export function useResizing({ transitionDuration, disabled }: UseResizingInput) 
         startTransition(() => {
           setResizing(false);
         }),
-      transitionDuration || 0
+      props.transitionDuration || 0
     );
   });
 

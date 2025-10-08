@@ -2,6 +2,7 @@ import { createEffect, createSignal, JSX, onCleanup, onMount, Show, splitProps }
 import {
   __BaseInputProps,
   __InputStylesNames,
+  Box,
   BoxProps,
   CloseButton,
   CloseButtonProps,
@@ -335,7 +336,7 @@ export const TimePicker = factory<TimePickerFactory>((_props) => {
 
   // Blur detection for InputBase
   onMount(() => {
-    if (!timePickerRef) return;
+    if (!timePickerRef) {return};
 
     const handleClickOutside = (event: Event) => {
       const target = event.target as Element;
@@ -351,31 +352,6 @@ export const TimePicker = factory<TimePickerFactory>((_props) => {
     document.addEventListener('mousedown', handleClickOutside);
     onCleanup(() => document.removeEventListener('mousedown', handleClickOutside));
   });
-
-  // createEffect(() => {
-  //   controller.isClearable()
-  // })
-
-  const ClearButtonSection = () => {
-    console.log('ClearButtonSection render: isClearable =', controller.isClearable());
-
-    return controller.isClearable() ? (
-      <CloseButton
-        {...local.clearButtonProps}
-        size={local.size}
-        onClick={(event) => {
-          controller.clear();
-          typeof local.clearButtonProps?.onClick === 'function' &&
-            local.clearButtonProps?.onClick?.(event);
-        }}
-        onMouseDown={(event) => {
-          event.preventDefault();
-          typeof local.clearButtonProps?.onMouseDown === 'function' &&
-            local.clearButtonProps?.onMouseDown?.(event);
-        }}
-      />
-    ) : null;
-  };
 
   return (
     <div ref={timePickerRef}>
@@ -446,8 +422,9 @@ export const TimePicker = factory<TimePickerFactory>((_props) => {
                   __staticSelector="TimePicker"
                   {...others}
                 >
-                  <div {...getStyles('fieldsRoot')} dir="ltr">
-                    <div {...getStyles('fieldsGroup')} onBlur={handleBlur}>
+                  <Box component='div' {...getStyles('fieldsRoot')} dir="ltr">
+                    <Box component='div' {...getStyles('fieldsGroup')} onBlur={handleBlur}>
+                      {/* @ts-ignore */}
                       <SpinInput
                         id={hoursInputId}
                         {...local.hoursInputProps}
@@ -474,6 +451,7 @@ export const TimePicker = factory<TimePickerFactory>((_props) => {
                         }}
                       />
                       <span>:</span>
+                      {/* @ts-ignore */}
                       <SpinInput
                         {...local.minutesInputProps}
                         {...getStyles('field', {
@@ -506,6 +484,7 @@ export const TimePicker = factory<TimePickerFactory>((_props) => {
                       {local.withSeconds && (
                         <>
                           <span>:</span>
+                          {/* @ts-ignore */}
                           <SpinInput
                             {...local.secondsInputProps}
                             {...getStyles('field', {
@@ -579,8 +558,8 @@ export const TimePicker = factory<TimePickerFactory>((_props) => {
                           }}
                         />
                       )}
-                    </div>
-                  </div>
+                    </Box>
+                  </Box>
 
                   <input
                     type="hidden"
@@ -607,7 +586,7 @@ export const TimePicker = factory<TimePickerFactory>((_props) => {
                 withSeconds={local.withSeconds || false}
               />
             ) : (
-              <div {...getStyles('controlsListGroup')}>
+              <Box component='div' {...getStyles('controlsListGroup')}>
                 <TimeControlsList
                   min={local.format === '12h' ? 1 : 0}
                   max={local.format === '12h' ? 12 : 23}
@@ -638,7 +617,7 @@ export const TimePicker = factory<TimePickerFactory>((_props) => {
                     onSelect={controller.setAmPm}
                   />
                 )}
-              </div>
+              </Box>
             )}
           </Popover.Dropdown>
         </Popover>

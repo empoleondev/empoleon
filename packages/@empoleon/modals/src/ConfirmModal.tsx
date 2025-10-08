@@ -1,5 +1,5 @@
 import { JSX } from 'solid-js';
-import { Box, Button, ButtonProps, Group, GroupProps } from '@empoleon/core';
+import { Button, ButtonProps, Group, GroupProps } from '@empoleon/core';
 import { ConfirmLabels } from './context';
 import { useModals } from './use-modals/use-modals';
 

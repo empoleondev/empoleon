@@ -95,6 +95,7 @@ export const RichTextEditorControlBase = (props: RichTextEditorControlBaseProps)
 
   return (
     <RichTextEditorControl {...others}>
+      {/* @ts-ignore */}
       <Dynamic component={local.icon} {...ctx.getStyles('controlIcon')} />
     </RichTextEditorControl>
   );
@@ -127,6 +128,7 @@ export function createControl(config: CreateControlProps) {
       (context.editor as any)
         ?.chain()
         .focus()
+        /* eslint-disable */
         [config.operation.name](config.operation.attributes)
         .run();
     };

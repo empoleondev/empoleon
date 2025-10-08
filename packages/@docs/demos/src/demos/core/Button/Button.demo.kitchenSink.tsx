@@ -1,5 +1,5 @@
-import { IconArrowRight, IconDownload, IconPhoto } from '@tabler/icons-solidjs';
-import { createEffect, createSignal, Show } from 'solid-js';
+import { IconDownload, IconPhoto } from '@tabler/icons-solidjs';
+import { createEffect, createSignal } from 'solid-js';
 import { Button, ButtonProps } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
 

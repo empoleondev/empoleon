@@ -1,4 +1,4 @@
-import { Component, ComponentProps, JSX } from 'solid-js';
+import { Component, JSX } from 'solid-js';
 
 type ExtendedProps<Props = {}, OverrideProps = {}> = OverrideProps &
   Omit<Props, keyof OverrideProps>;

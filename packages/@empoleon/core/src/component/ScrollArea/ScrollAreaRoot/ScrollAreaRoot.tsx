@@ -1,4 +1,4 @@
-import { createEffect, createMemo, createSignal, splitProps } from 'solid-js';
+import { createMemo, createSignal, splitProps } from 'solid-js';
 import { useMergedRef } from '@empoleon/hooks';
 import { Box, BoxProps, ElementProps, Factory, GetStylesApi, useProps } from '../../../core';
 import type { ScrollAreaFactory } from '../ScrollArea';

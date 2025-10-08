@@ -10,7 +10,6 @@ const groceries = ['🍎 Apples', '🍌 Bananas', '🥦 Broccoli', '🥕 Carrots
 
 function Demo() {
   const combobox = useCombobox({{comboboxOptions}});
-  const [value, setValue] = createSignal('');
   const [search, setSearch] = createSignal('');
 
   const filteredOptions = () =>
@@ -23,7 +22,6 @@ function Demo() {
       store={combobox}
       {{props}}
       onOptionSubmit={(val) => {
-        setValue(val);
         setSearch(val);
         combobox.closeDropdown();
       }}
@@ -92,7 +90,6 @@ function Demo(
   }
 
   const combobox = useCombobox(comboboxOptions);
-  const [value, setValue] = createSignal('');
   const [search, setSearch] = createSignal('');
 
   createEffect(() => {
@@ -119,7 +116,6 @@ function Demo(
       resetSelectionOnOptionHover={props.resetSelectionOnOptionHover}
       readOnly={props.readOnly}
       onOptionSubmit={(val) => {
-        setValue(val);
         setSearch(val);
         combobox.closeDropdown();
       }}

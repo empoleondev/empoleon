@@ -1,5 +1,5 @@
 import isEqual from 'fast-deep-equal';
-import { createMemo, createSignal } from 'solid-js';
+import { createSignal } from 'solid-js';
 import { getStatus } from '../../get-status';
 import { clearListState } from '../../lists';
 import { getPath } from '../../paths';

@@ -1,4 +1,4 @@
-import { JSX, splitProps } from 'solid-js';
+import { JSX } from 'solid-js';
 import { useMergedRef } from '@empoleon/hooks';
 import { factory, Factory, isElement, useProps } from '../../../core';
 import { Popover } from '../../Popover';
@@ -24,10 +24,9 @@ export type ComboboxDropdownTargetFactory = Factory<{
 
 export const ComboboxDropdownTarget = factory<ComboboxDropdownTargetFactory>((_props) => {
   const props = useProps('ComboboxDropdownTarget', defaultProps, _props);
-  const [local, others] = splitProps(props, ['children', 'refProp', 'ref']);
   useComboboxContext();
 
-  if (!isElement(local.children)) {
+  if (!isElement(props.children)) {
     throw new Error(
       'Combobox.DropdownTarget component children should be an element or a component that accepts ref. Fragments, strings, numbers and other primitive values are not supported'
     );
@@ -36,8 +35,8 @@ export const ComboboxDropdownTarget = factory<ComboboxDropdownTargetFactory>((_p
   return (
     <Popover.Target>
       {(popoverProps) => (
-        <div ref={useMergedRef(local.ref, popoverProps.ref) as (el: HTMLDivElement) => void}>
-          {local.children}
+        <div ref={useMergedRef(props.ref, popoverProps.ref) as (el: HTMLDivElement) => void}>
+          {props.children}
         </div>
       )}
     </Popover.Target>

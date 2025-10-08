@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 import { createSignal, For, JSX } from 'solid-js';
 import { Box, EmpoleonProvider, EmpoleonThemeProvider } from '../../core';
 import { Group } from '../Group';

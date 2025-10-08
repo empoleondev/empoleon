@@ -1,4 +1,4 @@
-import { IconChevronDown, IconMinus, IconPlus } from '@tabler/icons-solidjs';
+import { IconChevronDown, IconPlus } from '@tabler/icons-solidjs';
 import { createEffect, createSignal, For } from 'solid-js';
 import { Accordion, AccordionProps } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
@@ -33,11 +33,13 @@ function Demo(props: AccordionProps & { chevron?: string }) {
   });
 
   const getChevron = () => {
-    if (props.chevron === 'plus-minus')
+    if (props.chevron === 'plus-minus') {
       return () => <IconPlus size={props.chevronIconSize || 16} />;
-    if (props.chevron === 'default')
+    }
+    if (props.chevron === 'default') {
       return () => <IconChevronDown size={props.chevronIconSize || 16} />;
-    if (props.chevron === 'none') return null;
+    }
+    if (props.chevron === 'none') { return null };
     return undefined;
   };
 

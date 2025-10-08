@@ -1,4 +1,4 @@
-import { createEffect, mergeProps, onCleanup, onMount, splitProps } from 'solid-js';
+import { createEffect, onCleanup, onMount, splitProps } from 'solid-js';
 import { Notification, NotificationProps } from '@empoleon/core';
 import { getAutoClose } from './get-auto-close/get-auto-close';
 import { NotificationData } from './notifications.store';

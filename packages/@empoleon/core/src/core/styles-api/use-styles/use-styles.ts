@@ -1,4 +1,4 @@
-import { createEffect, JSX } from 'solid-js';
+import { JSX } from 'solid-js';
 import type { EmpoleonStyleProp } from '../../Box';
 import {
   useEmpoleonClassNamesPrefix,

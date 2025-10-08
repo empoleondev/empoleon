@@ -1,4 +1,3 @@
-import { IconCheck, IconCircle } from '@tabler/icons-solidjs';
 import { Radio, RadioProps } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
 

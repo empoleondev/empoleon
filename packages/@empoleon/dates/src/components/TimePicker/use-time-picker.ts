@@ -5,7 +5,7 @@ import type {
   TimePickerPasteSplit,
 } from './TimePicker.types';
 import { clampTime } from './utils/clamp-time/clamp-time';
-import { convertTimeTo12HourFormat, getParsedTime } from './utils/get-parsed-time/get-parsed-time';
+import { getParsedTime } from './utils/get-parsed-time/get-parsed-time';
 import { getTimeString } from './utils/get-time-string/get-time-string';
 
 interface UseTimePickerInput {
@@ -167,7 +167,7 @@ export function useTimePicker(props: UseTimePickerInput) {
   const onPaste = (event: ClipboardEvent) => {
     event.preventDefault();
     const pastedValue = event.clipboardData?.getData('text');
-    if (!pastedValue) return;
+    if (!pastedValue) {return};
     const parsedTime = (props.pasteSplit || getParsedTime)({
       time: pastedValue,
       format: props.format,

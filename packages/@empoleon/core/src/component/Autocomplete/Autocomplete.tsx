@@ -213,7 +213,7 @@ export const Autocomplete = factory<AutocompleteFactory>((_props) => {
                 combobox.openDropdown();
                 local.selectFirstOptionOnChange && combobox.selectFirstOption();
               }}
-              onChange={(event) => {
+              onChange={() => {
                 handleValueChange(_value() != null ? optionsLockup()[_value()]?.label || '' : '');
               }}
               onFocus={(event) => {

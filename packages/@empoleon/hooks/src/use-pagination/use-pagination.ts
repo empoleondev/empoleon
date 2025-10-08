@@ -1,4 +1,4 @@
-import { Accessor, createEffect, createMemo, splitProps } from 'solid-js';
+import { Accessor, createMemo, splitProps } from 'solid-js';
 import { useUncontrolled } from '../use-uncontrolled/use-uncontrolled';
 
 function range(start: number, end: number) {

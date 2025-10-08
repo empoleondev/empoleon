@@ -113,7 +113,7 @@ function getStrength(password: string) {
 function Demo() {
   const [popoverOpened, setPopoverOpened] = createSignal(false);
   const [value, setValue] = createSignal('');
-  const checks = requirements.map((requirement, index) => (
+  const checks = requirements.map((requirement) => (
     <PasswordRequirement label={requirement.label} meets={requirement.re.test(value())} />
   ));
 

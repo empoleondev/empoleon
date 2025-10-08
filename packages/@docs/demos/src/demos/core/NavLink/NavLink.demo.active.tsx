@@ -57,19 +57,6 @@ const data = [
 function Demo(props: any) {
   const [active, setActive] = createSignal(0);
 
-  const items = data.map((item, index) => (
-    <NavLink
-      href="#required-for-focus"
-      active={index === active()}
-      label={item.label}
-      description={item.description}
-      rightSection={item.rightSection}
-      leftSection={<item.icon size={16} stroke="1.5" />}
-      onClick={() => setActive(index)}
-      {...props}
-    />
-  ));
-
   return (
     <Group justify="center">
       <Box w={220}>

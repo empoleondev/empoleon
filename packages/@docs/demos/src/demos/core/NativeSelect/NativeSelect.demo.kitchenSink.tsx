@@ -1,4 +1,3 @@
-import { createSignal } from 'solid-js';
 import { NativeSelect, NativeSelectProps } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
 
@@ -21,12 +20,12 @@ function Demo(
   }
 ) {
   const getLeftSection = () => {
-    if (!props.hasLeftSection) return undefined;
+    if (!props.hasLeftSection) {return undefined};
     return '🔽';
   };
 
   const getRightSection = () => {
-    if (!props.hasRightSection) return undefined;
+    if (!props.hasRightSection) {return undefined};
     return '✓';
   };
 

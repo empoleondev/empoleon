@@ -1,4 +1,4 @@
-import { createEffect, createMemo, createSignal, Index, JSX, splitProps } from 'solid-js';
+import { createMemo, createSignal, Index, JSX, splitProps } from 'solid-js';
 import { clamp, useId, useMergedRef, useUncontrolled } from '@empoleon/hooks';
 import {
   Box,

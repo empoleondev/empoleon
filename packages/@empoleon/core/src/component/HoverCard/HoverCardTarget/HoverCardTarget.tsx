@@ -1,4 +1,4 @@
-import { children as getChildren, JSX, splitProps } from 'solid-js';
+import { JSX, splitProps } from 'solid-js';
 import { createEventHandler, isElement, useProps } from '../../../core';
 import { Popover, PopoverTargetProps } from '../../Popover';
 import { useHoverCardContext } from '../HoverCard.context';

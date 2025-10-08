@@ -16,6 +16,7 @@ import {
 } from '../../core';
 import classes from './Overlay.module.css';
 
+/* eslint-disable no-console */
 const originalWarn = console.warn;
 console.warn = (message, ...args) => {
   if (
@@ -28,6 +29,7 @@ console.warn = (message, ...args) => {
   }
   originalWarn(message, ...args);
 };
+/* eslint-enable no-console */
 
 export type OverlayStylesNames = 'root';
 export type OverlayCssVariables = {
