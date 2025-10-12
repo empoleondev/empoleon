@@ -56,7 +56,11 @@ export function Usage() {
       title: 'Hello there',
       children: (
         <div>
-          <Box component='span' style={{ color: 'blue' }} onClick={() => closeModal('content-modal')}>
+          <Box
+            component="span"
+            style={{ color: 'blue' }}
+            onClick={() => closeModal('content-modal')}
+          >
             My content modal
           </Box>
         </div>

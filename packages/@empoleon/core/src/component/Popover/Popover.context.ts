@@ -32,7 +32,7 @@ interface PopoverContext {
   arrowPosition: () => ArrowPosition;
   trapFocus: boolean | undefined;
   placement: () => FloatingPosition;
-  withinPortal: boolean | undefined;
+  withinPortal: () => boolean | undefined;
   portalProps?: Omit<PortalProps, 'children'>;
   closeOnEscape: boolean | undefined;
   zIndex: string | number | undefined;

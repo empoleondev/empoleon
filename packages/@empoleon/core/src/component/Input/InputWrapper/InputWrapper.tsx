@@ -1,12 +1,4 @@
-import {
-  For,
-  JSX,
-  Match,
-  Show,
-  splitProps,
-  Switch,
-  untrack,
-} from 'solid-js';
+import { For, JSX, Match, Show, splitProps, Switch, untrack } from 'solid-js';
 import { useId } from '@empoleon/hooks';
 import {
   Box,

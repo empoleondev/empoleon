@@ -1,4 +1,4 @@
-import { splitProps } from 'solid-js';
+import { Show, splitProps } from 'solid-js';
 import { factory, Factory, useEmpoleonEnv } from '../../core';
 import { Portal, PortalProps } from './Portal';
 
@@ -16,14 +16,12 @@ export const OptionalPortal = factory<OptionalPortalFactory>((_props) => {
   const env = useEmpoleonEnv();
   const shouldUsePortal = () => local.withinPortal !== false && env !== 'test';
 
-  if (!shouldUsePortal()) {
-    return <>{local.children}</>;
-  }
-
   return (
-    <Portal ref={local.ref} {...others}>
-      {local.children}
-    </Portal>
+    <Show when={shouldUsePortal()} fallback={<>{local.children}</>}>
+      <Portal ref={local.ref} {...others}>
+        {local.children}
+      </Portal>
+    </Show>
   );
 });
 

@@ -110,14 +110,14 @@ function getStrengthColor(strength: number) {
 
 function Demo() {
   const [value, setValue] = createSignal('');
-  const strength = getStrength(value());
-  const color = getStrengthColor(strength);
+  const strength = () => getStrength(value());
+  const color = () => getStrengthColor(strength());
 
   return (
     <div>
       <PasswordInput
         value={value()}
-        onChange={(event) => setValue(event.currentTarget.value)}
+        onInput={(event) => setValue(event.currentTarget.value)}
         placeholder="Enter password"
         label="Enter password"
       />
@@ -125,13 +125,13 @@ function Demo() {
       <Group grow gap={5} mt="xs">
         <Progress
           size="xs"
-          color={color}
+          color={color()}
           value={value().length > 0 ? 100 : 0}
           transitionDuration={0}
         />
-        <Progress size="xs" color={color} transitionDuration={0} value={strength < 30 ? 0 : 100} />
-        <Progress size="xs" color={color} transitionDuration={0} value={strength < 50 ? 0 : 100} />
-        <Progress size="xs" color={color} transitionDuration={0} value={strength < 70 ? 0 : 100} />
+        <Progress size="xs" color={color()} transitionDuration={0} value={strength() < 30 ? 0 : 100} />
+        <Progress size="xs" color={color()} transitionDuration={0} value={strength() < 50 ? 0 : 100} />
+        <Progress size="xs" color={color()} transitionDuration={0} value={strength() < 70 ? 0 : 100} />
       </Group>
     </div>
   );

@@ -142,7 +142,9 @@ export function OnBottomReached() {
         });
         requestAnimationFrame(() => {
           requestAnimationFrame(() => {
-            if (viewportEl) {viewportEl.scrollTop = 0};
+            if (viewportEl) {
+              viewportEl.scrollTop = 0;
+            }
             setSuppressBottomEvent(false);
           });
         });
@@ -159,7 +161,9 @@ export function OnBottomReached() {
           h={100}
           onScrollPositionChange={onScrollPositionChange}
           onBottomReached={() => {
-            if (!suppressBottomEvent()) {setHasReachedBottom(true)};
+            if (!suppressBottomEvent()) {
+              setHasReachedBottom(true);
+            }
           }}
           viewportRef={setViewport as unknown as HTMLDivElement}
           viewportProps={{
@@ -167,11 +171,13 @@ export function OnBottomReached() {
             onScroll: (e) => {
               const { scrollTop, scrollHeight, clientHeight } = e.currentTarget;
               const atBottom = scrollTop + clientHeight >= scrollHeight - 1;
-              if (customReachedBottom() !== atBottom) {setCustomReachedBottom(atBottom)};
+              if (customReachedBottom() !== atBottom) {
+                setCustomReachedBottom(atBottom);
+              }
             },
           }}
         >
-          {Array.from({ length: 7 }).map(_k => (
+          {Array.from({ length: 7 }).map((_k) => (
             <Box h={40.5}>
               <h1 style={{ 'font-size': `${fsize()}px` }}>My Example</h1>
             </Box>

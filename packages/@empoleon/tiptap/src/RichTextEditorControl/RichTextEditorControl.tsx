@@ -124,14 +124,15 @@ export function createControl(config: CreateControlProps) {
 
     const disabled = createMemo(() => config.isDisabled?.(context.editor) || false);
 
+    /* eslint-disable no-unexpected-multiline */
     const handleClick = () => {
       (context.editor as any)
         ?.chain()
         .focus()
-        /* eslint-disable */
         [config.operation.name](config.operation.attributes)
         .run();
     };
+    /* eslint-enable no-unexpected-multiline */
 
     return (
       <RichTextEditorControlBase

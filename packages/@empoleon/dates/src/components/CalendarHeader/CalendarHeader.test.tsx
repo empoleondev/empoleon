@@ -38,9 +38,9 @@ describe('@empoleon/dates/CalendarHeader', () => {
   });
 
   it('supports levelControlAriaLabel', () => {
-    render(
-      () => <CalendarHeader {...defaultProps} label="test-label" levelControlAriaLabel="Change month" />
-    );
+    render(() => (
+      <CalendarHeader {...defaultProps} label="test-label" levelControlAriaLabel="Change month" />
+    ));
 
     expect(screen.getByText('test-label')).toHaveAttribute('aria-label', 'Change month');
   });

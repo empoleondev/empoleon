@@ -69,7 +69,7 @@ export function AsyncReset() {
     <>
       <PinInput disabled={isLoading()} onChange={handleChange} value={value()} />
       <div class="text-red-500">{errorMessage()}</div>
-      <pre>{JSON.stringify({ value }, null, 2)}</pre>
+      <pre>{JSON.stringify({ value: value() }, null, 2)}</pre>
     </>
   );
 }

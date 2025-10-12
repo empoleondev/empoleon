@@ -25,6 +25,7 @@ export function extractStyleProps<T extends Record<string, any>>(
     'pe',
     'ps',
     'bd',
+    'bdrs',
     'bg',
     'c',
     'opacity',

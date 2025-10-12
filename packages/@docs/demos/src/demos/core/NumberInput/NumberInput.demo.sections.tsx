@@ -23,12 +23,12 @@ function Demo() {
 `;
 
 function Demo() {
-  const icon = <IconCurrencyDram size={20} stroke="1.5" />;
+  const icon = () => <IconCurrencyDram size={20} stroke="1.5" />;
   return (
     <>
-      <NumberInput leftSection={icon} label="With left section" placeholder="With left section" />
+      <NumberInput leftSection={icon()} label="With left section" placeholder="With left section" />
       <NumberInput
-        rightSection={icon}
+        rightSection={icon()}
         label="With right section"
         placeholder="With right section"
         mt="md"

@@ -18,7 +18,7 @@ export default defineConfig({
     pool: 'forks',
     isolate: true,
     // include: [
-    //   '**/use-resize-observer/*.test.{ts,tsx}'
+    //   '**/Transition/*.test.{ts,tsx}'
     // ],
     exclude: [
       // Exclude all node_modules test files

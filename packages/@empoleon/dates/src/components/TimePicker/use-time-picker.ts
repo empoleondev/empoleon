@@ -167,7 +167,9 @@ export function useTimePicker(props: UseTimePickerInput) {
   const onPaste = (event: ClipboardEvent) => {
     event.preventDefault();
     const pastedValue = event.clipboardData?.getData('text');
-    if (!pastedValue) {return};
+    if (!pastedValue) {
+      return;
+    }
     const parsedTime = (props.pasteSplit || getParsedTime)({
       time: pastedValue,
       format: props.format,

@@ -183,8 +183,7 @@ function Demo() {
   const [active, setActive] = createSignal('center');
 
   const setControlRef = (name: string) => (node: HTMLButtonElement) => {
-    controlsRefs()[name] = node;
-    setControlsRefs(controlsRefs);
+    setControlsRefs((prev) => ({ ...prev, [name]: node }));
   };
 
   return (

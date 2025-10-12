@@ -31,13 +31,13 @@ function Demo() {
 `;
 
 function Demo() {
-  const icon = <IconComponents size={16} />;
+  const icon = () => <IconComponents size={16} />;
   return (
     <>
       <MultiSelect
         data={['React', 'Angular', 'Vue']}
         leftSectionPointerEvents="none"
-        leftSection={icon}
+        leftSection={icon()}
         label="Your favorite libraries"
         placeholder="Your favorite libraries"
       />
@@ -45,7 +45,7 @@ function Demo() {
         mt="md"
         data={['React', 'Angular', 'Vue']}
         rightSectionPointerEvents="none"
-        rightSection={icon}
+        rightSection={icon()}
         label="Your favorite libraries"
         placeholder="Your favorite libraries"
       />

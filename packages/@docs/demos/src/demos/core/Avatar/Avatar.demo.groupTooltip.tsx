@@ -10,13 +10,13 @@ function Demo() {
     <Tooltip.Group openDelay={300} closeDelay={100}>
       <Avatar.Group spacing="sm">
         <Tooltip label="Salazar Troop" withArrow>
-          <Avatar src="image.png" radius="xl" />
+          {(props) => <Avatar src="image.png" radius="xl" />}
         </Tooltip>
         <Tooltip label="Bandit Crimes" withArrow>
-          <Avatar src="image.png" radius="xl" />
+          {(props) => <Avatar src="image.png" radius="xl" />}
         </Tooltip>
         <Tooltip label="Jane Rata" withArrow>
-          <Avatar src="image.png" radius="xl" />
+          {(props) => <Avatar src="image.png" radius="xl" />}
         </Tooltip>
         <Tooltip
           withArrow
@@ -27,7 +27,9 @@ function Demo() {
             </>
           }
         >
-          <Avatar radius="xl">+2</Avatar>
+          {(props) => (
+            <Avatar radius="xl">+2</Avatar>
+          )}
         </Tooltip>
       </Avatar.Group>
     </Tooltip.Group>

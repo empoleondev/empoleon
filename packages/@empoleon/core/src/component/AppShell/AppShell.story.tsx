@@ -89,15 +89,15 @@ export function AltLayout() {
       aside={{
         width: { base: 140 },
         breakpoint: 'sm',
-        collapsed: { desktop: !opened, mobile: !mobileOpened },
+        collapsed: { desktop: !opened(), mobile: !mobileOpened() },
       }}
       header={{
         height: 50,
-        collapsed: !headerOpened,
+        collapsed: !headerOpened(),
       }}
       footer={{
         height: 50,
-        collapsed: !headerOpened,
+        collapsed: !headerOpened(),
       }}
     >
       <AppShell.Aside>Aside</AppShell.Aside>
@@ -127,7 +127,7 @@ export function HeaderOnly() {
       padding="md"
       header={{
         height: 50,
-        collapsed: !headerOpened,
+        collapsed: !headerOpened(),
       }}
     >
       <AppShell.Header>Header</AppShell.Header>
@@ -184,20 +184,20 @@ export function Unstyled() {
       navbar={{
         width: { base: 200, md: 300 },
         breakpoint: 'sm',
-        collapsed: { desktop: !navbarOpened, mobile: !navbarMobileOpened },
+        collapsed: { desktop: !navbarOpened(), mobile: !navbarMobileOpened() },
       }}
       aside={{
         width: { base: 200, md: 300 },
         breakpoint: 'sm',
-        collapsed: { desktop: !asideOpened, mobile: !asideMobileOpened },
+        collapsed: { desktop: !asideOpened(), mobile: !asideMobileOpened() },
       }}
       header={{
         height: 50,
-        collapsed: !headerOpened,
+        collapsed: !headerOpened(),
       }}
       footer={{
         height: 50,
-        collapsed: !footerOpened,
+        collapsed: !footerOpened(),
       }}
     >
       <AppShell.Navbar>

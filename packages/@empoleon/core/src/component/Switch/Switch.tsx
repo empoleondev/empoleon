@@ -197,6 +197,23 @@ export const Switch = factory<SwitchFactory>((_props) => {
     return isChecked ? true : undefined;
   });
 
+  const tooltipEvents = [
+    'onmouseenter',
+    'onmouseleave',
+    'onmousemove',
+    'onpointerdown',
+    'onpointerenter',
+  ].reduce(
+    (acc, key) =>
+      others[key as keyof typeof others]
+        ? { ...acc, [key]: others[key as keyof typeof others] }
+        : acc,
+    {}
+  );
+
+  const toolTipEventsForRoot = local.rootRef ? tooltipEvents : {};
+  const toolTipEventsForInput = !local.rootRef ? tooltipEvents : {};
+
   return (
     <InlineInput
       {...getStyles('root')}
@@ -220,6 +237,7 @@ export const Switch = factory<SwitchFactory>((_props) => {
       mod={local.mod}
       {...styleProps}
       {...(local.wrapperProps as any)}
+      {...toolTipEventsForRoot}
     >
       <Box
         component="input"
@@ -238,6 +256,7 @@ export const Switch = factory<SwitchFactory>((_props) => {
         type="checkbox"
         role="switch"
         {...getStyles('input')}
+        {...toolTipEventsForInput}
       />
 
       <Box

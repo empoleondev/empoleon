@@ -202,7 +202,7 @@ const _FileInput = factory<FileInputFactory>((_props) => {
           styles={local.styles}
           attributes={local.attributes}
         >
-          {!hasValue ? (
+          {!hasValue() ? (
             <Input.Placeholder
               __staticSelector="FileInput"
               classNames={resolvedClassNames}

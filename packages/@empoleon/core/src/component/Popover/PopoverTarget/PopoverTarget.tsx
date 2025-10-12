@@ -65,7 +65,8 @@ export const PopoverTarget = factory<PopoverTargetFactory>((_props) => {
   }
 
   return (
-    <Box component='span'
+    <Box
+      component="span"
       {...others}
       {...accessibleProps}
       {...ctx.targetProps}

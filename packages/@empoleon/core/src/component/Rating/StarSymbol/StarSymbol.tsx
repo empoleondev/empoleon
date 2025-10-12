@@ -7,8 +7,8 @@ export interface StarSymbolProps {
 
 export function StarSymbol(props: StarSymbolProps) {
   const ctx = useRatingContext();
-  // @ts-ignore
   return (
+    // @ts-ignore
     <StarIcon
       {...ctx.getStyles('starSymbol')}
       data-filled={props.type === 'full' ? true : undefined}

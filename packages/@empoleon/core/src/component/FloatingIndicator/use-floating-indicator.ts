@@ -7,11 +7,15 @@ function isParent(
   parentElement: HTMLElement | EventTarget | null,
   childElement: HTMLElement | null
 ) {
-  if (!childElement || !parentElement) {return false};
+  if (!childElement || !parentElement) {
+    return false;
+  }
 
   let parent = childElement.parentNode;
   while (parent) {
-    if (parent === parentElement) {return true};
+    if (parent === parentElement) {
+      return true;
+    }
     parent = parent.parentNode;
   }
   return false;
@@ -43,7 +47,9 @@ export function useFloatingIndicator({
     const currentTarget = getTarget();
     const currentParent = getParent();
     const el = ref();
-    if (!currentTarget || !currentParent || !el) {return};
+    if (!currentTarget || !currentParent || !el) {
+      return;
+    }
 
     const targetRect = currentTarget.getBoundingClientRect();
     const parentRect = currentParent.getBoundingClientRect();
@@ -64,11 +70,15 @@ export function useFloatingIndicator({
   const updatePositionWithoutAnimation = () => {
     clearTimeout(transitionTimeout);
     const el = ref();
-    if (el) {el.style.transitionDuration = '0ms'};
+    if (el) {
+      el.style.transitionDuration = '0ms';
+    }
     updatePosition();
     transitionTimeout = window.setTimeout(() => {
       const el2 = ref();
-      if (el2) {el2.style.transitionDuration = ''};
+      if (el2) {
+        el2.style.transitionDuration = '';
+      }
     }, 30);
   };
 
@@ -128,7 +138,9 @@ export function useFloatingIndicator({
 
   useTimeout(
     () => {
-      if (getEnv() !== 'test') {setInitialized(true)};
+      if (getEnv() !== 'test') {
+        setInitialized(true);
+      }
     },
     20,
     { autoInvoke: true }

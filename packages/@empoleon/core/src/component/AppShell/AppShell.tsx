@@ -140,7 +140,7 @@ export const AppShell = factory<AppShellFactory>((_props) => {
     'ref',
   ]);
 
-  const offsetScrollbars = local.layout !== 'alt';
+  const offsetScrollbars = () => local.layout !== 'alt';
 
   const getStyles = useStyles<AppShellFactory>({
     name: 'AppShell',
@@ -165,9 +165,9 @@ export const AppShell = factory<AppShellFactory>((_props) => {
     <AppShellProvider
       value={{
         getStyles,
-        withBorder: local.withBorder,
-        zIndex: local.zIndex,
-        disabled: local.disabled,
+        withBorder: () => local.withBorder,
+        zIndex: () => local.zIndex,
+        disabled: () => local.disabled,
         offsetScrollbars,
       }}
     >
@@ -181,7 +181,7 @@ export const AppShell = factory<AppShellFactory>((_props) => {
       <Box
         ref={local.ref}
         {...getStyles('root')}
-        mod={[{ resizing, layout: local.layout, disabled: local.disabled }, local.mod]}
+        mod={[{ resizing: resizing(), layout: local.layout, disabled: local.disabled }, local.mod]}
         {...others}
       />
     </AppShellProvider>

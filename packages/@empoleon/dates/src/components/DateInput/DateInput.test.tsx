@@ -7,11 +7,7 @@ import {
   tests,
   userEvent,
 } from '@empoleon-tests/core';
-import {
-  clickControl,
-  datesTests,
-  expectNoPopover,
-} from '@empoleon-tests/dates';
+import { clickControl, datesTests, expectNoPopover } from '@empoleon-tests/dates';
 import { DateInput, DateInputProps } from './DateInput';
 
 const defaultProps: DateInputProps = {

@@ -1,4 +1,4 @@
-import { createSignal, splitProps } from 'solid-js';
+import { createSignal, Show, splitProps } from 'solid-js';
 import { useMergedRef } from '@empoleon/hooks';
 import {
   Box,
@@ -96,17 +96,15 @@ export const FloatingIndicator = factory<FloatingIndicatorFactory>((_props) => {
 
   const mergedRef = useMergedRef(local.ref, setInnerRef);
 
-  if (!local.target || !parent) {
-    return null;
-  }
-
   return (
-    <Box
-      ref={mergedRef}
-      mod={[{ initialized, hidden }, local.mod]}
-      {...getStyles('root')}
-      {...others}
-    />
+    <Show when={local.target && local.parent} fallback={null}>
+      <Box
+        ref={mergedRef}
+        mod={[{ initialized, hidden }, local.mod]}
+        {...getStyles('root')}
+        {...others}
+      />
+    </Show>
   );
 });
 

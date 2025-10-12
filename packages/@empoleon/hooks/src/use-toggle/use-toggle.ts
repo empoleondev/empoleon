@@ -13,7 +13,9 @@ export function useToggle<T = boolean>(options: readonly T[] = [false, true] as 
         typeof action === 'function' ? (action as (current: T) => T)(prevState[0]) : action;
 
       const index = prevState.indexOf(value);
-      if (index === -1) {return prevState};
+      if (index === -1) {
+        return prevState;
+      }
 
       return prevState.slice(index).concat(prevState.slice(0, index));
     });

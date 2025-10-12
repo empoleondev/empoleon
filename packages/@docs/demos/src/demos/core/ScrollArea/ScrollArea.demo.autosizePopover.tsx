@@ -61,39 +61,42 @@ function Demo() {
   return (
     <Popover width="target" opened={opened()}>
       <Popover.Target>
-        <TextInput
-          value={query()}
-          onFocus={() => setOpened(true)}
-          onBlur={() => setOpened(false)}
-          onChange={(event) => {
-            setQuery(event.currentTarget.value);
-            setHovered(-1);
-          }}
-          onKeyDown={(event) => {
-            if (event.key === 'ArrowDown') {
-              event.preventDefault();
-              setHovered((current) => {
-                const nextIndex = current + 1 >= filtered.length ? current : current + 1;
-                viewportRef()
-                  ?.querySelectorAll('[data-list-item]')
-                  ?.[nextIndex]?.scrollIntoView({ block: 'nearest' });
-                return nextIndex;
-              });
-            }
+        {(popoverProps) => (
+          <TextInput
+            {...popoverProps}
+            value={query()}
+            onFocus={() => setOpened(true)}
+            onBlur={() => setOpened(false)}
+            onChange={(event) => {
+              setQuery(event.currentTarget.value);
+              setHovered(-1);
+            }}
+            onKeyDown={(event) => {
+              if (event.key === 'ArrowDown') {
+                event.preventDefault();
+                setHovered((current) => {
+                  const nextIndex = current + 1 >= filtered.length ? current : current + 1;
+                  viewportRef()
+                    ?.querySelectorAll('[data-list-item]')
+                    ?.[nextIndex]?.scrollIntoView({ block: 'nearest' });
+                  return nextIndex;
+                });
+              }
 
-            if (event.key === 'ArrowUp') {
-              event.preventDefault();
-              setHovered((current) => {
-                const nextIndex = current - 1 < 0 ? current : current - 1;
-                viewportRef()
-                  ?.querySelectorAll('[data-list-item]')
-                  ?.[nextIndex]?.scrollIntoView({ block: 'nearest' });
-                return nextIndex;
-              });
-            }
-          }}
-          placeholder="Search groceries"
-        />
+              if (event.key === 'ArrowUp') {
+                event.preventDefault();
+                setHovered((current) => {
+                  const nextIndex = current - 1 < 0 ? current : current - 1;
+                  viewportRef()
+                    ?.querySelectorAll('[data-list-item]')
+                    ?.[nextIndex]?.scrollIntoView({ block: 'nearest' });
+                  return nextIndex;
+                });
+              }
+            }}
+            placeholder="Search groceries"
+          />
+        )}
       </Popover.Target>
       <Popover.Dropdown p={0}>
         <ScrollArea.Autosize viewport-ref={setViewportRef} mah={200} type="always" scrollbars="y">
@@ -161,39 +164,42 @@ function Demo() {
   return (
     <Popover width="target" opened={opened()}>
       <Popover.Target>
-        <TextInput
-          value={query()}
-          onFocus={() => setOpened(true)}
-          onBlur={() => setOpened(false)}
-          onChange={(event) => {
-            setQuery(event.currentTarget.value);
-            setHovered(-1);
-          }}
-          onKeyDown={(event) => {
-            if (event.key === 'ArrowDown') {
-              event.preventDefault();
-              setHovered((current) => {
-                const nextIndex = current + 1 >= filtered.length ? current : current + 1;
-                viewportRef()
-                  ?.querySelectorAll('[data-list-item]')
-                  ?.[nextIndex]?.scrollIntoView({ block: 'nearest' });
-                return nextIndex;
-              });
-            }
+        {(popoverProps) => (
+          <TextInput
+            {...popoverProps}
+            value={query()}
+            onFocus={() => setOpened(true)}
+            onBlur={() => setOpened(false)}
+            onChange={(event) => {
+              setQuery(event.currentTarget.value);
+              setHovered(-1);
+            }}
+            onKeyDown={(event) => {
+              if (event.key === 'ArrowDown') {
+                event.preventDefault();
+                setHovered((current) => {
+                  const nextIndex = current + 1 >= filtered.length ? current : current + 1;
+                  viewportRef()
+                    ?.querySelectorAll('[data-list-item]')
+                    ?.[nextIndex]?.scrollIntoView({ block: 'nearest' });
+                  return nextIndex;
+                });
+              }
 
-            if (event.key === 'ArrowUp') {
-              event.preventDefault();
-              setHovered((current) => {
-                const nextIndex = current - 1 < 0 ? current : current - 1;
-                viewportRef()
-                  ?.querySelectorAll('[data-list-item]')
-                  ?.[nextIndex]?.scrollIntoView({ block: 'nearest' });
-                return nextIndex;
-              });
-            }
-          }}
-          placeholder="Search groceries"
-        />
+              if (event.key === 'ArrowUp') {
+                event.preventDefault();
+                setHovered((current) => {
+                  const nextIndex = current - 1 < 0 ? current : current - 1;
+                  viewportRef()
+                    ?.querySelectorAll('[data-list-item]')
+                    ?.[nextIndex]?.scrollIntoView({ block: 'nearest' });
+                  return nextIndex;
+                });
+              }
+            }}
+            placeholder="Search groceries"
+          />
+        )}
       </Popover.Target>
       <Popover.Dropdown p={0}>
         <ScrollArea.Autosize viewport-ref={setViewportRef} mah={200} type="always" scrollbars="y">

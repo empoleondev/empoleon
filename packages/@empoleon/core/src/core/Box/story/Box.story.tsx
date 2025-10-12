@@ -17,7 +17,7 @@ export default {
 export function Usage() {
   return (
     <div style={{ padding: '40px' }}>
-      <Box bg="orange.4" ms="xl" fz="h2" lh="h1">
+      <Box bg="orange.4" ms="xl" fz="h2" lh="h1" bdrs={100}>
         Visible from sm
       </Box>
     </div>

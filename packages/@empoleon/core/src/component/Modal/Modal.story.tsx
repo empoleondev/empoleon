@@ -31,14 +31,14 @@ function generateContent(count: number) {
     .map((_) => <p style={{ margin: 0 }}>{lorem}</p>);
 }
 
-const content = generateContent(20);
+const content = () => generateContent(20);
 
 export function Usage() {
   const [opened, { open, close }] = useDisclosure(true);
   return (
     <div style={{ padding: '40px' }}>
       <Button onClick={open}>Open modal</Button>
-      {content}
+      {content()}
       <Button onClick={open}>Open modal</Button>
       <Modal
         opened={opened}
@@ -62,7 +62,7 @@ export function ModalsStack() {
       <Modal.Stack>
         <Modal {...stack.register('first')} title="First modal" overlayProps={{ blur: 3 }}>
           First modal
-          {content}
+          {content()}
           <Button onClick={() => stack.open('second')} fullWidth mt="md">
             Open second modal
           </Button>
@@ -126,7 +126,7 @@ export function ConsistentHeaderHeight() {
   return (
     <div style={{ padding: '40px' }}>
       <Button onClick={open}>Open modal</Button>
-      {content}
+      {content()}
       <Button onClick={open}>Open modal</Button>
       <Modal
         opened={opened}
@@ -171,7 +171,7 @@ export function Unstyled() {
   return (
     <div style={{ padding: '40px' }}>
       <Button onClick={open}>Open modal</Button>
-      {content}
+      {content()}
       <Button onClick={open}>Open modal</Button>
       <Modal
         opened={opened}
@@ -193,7 +193,7 @@ export function CustomTransition() {
   return (
     <div style={{ padding: '40px' }}>
       <Button onClick={open}>Open modal</Button>
-      {content}
+      {content()}
       <Button onClick={open}>Open modal</Button>
       <Modal
         opened={opened}
@@ -233,7 +233,7 @@ export function WithScroll() {
   return (
     <div style={{ padding: '40px' }}>
       <Modal opened={() => true} onClose={() => {}} title="Just a Modal" size="md">
-        {content}
+        {content()}
       </Modal>
     </div>
   );
@@ -243,9 +243,9 @@ export function FullscreenWithScroll() {
   return (
     <div style={{ padding: '40px' }}>
       <Modal opened={() => true} onClose={() => {}} title="Just a Modal" size="md" fullScreen>
-        {content}
-        {content}
-        {content}
+        {content()}
+        {content()}
+        {content()}
       </Modal>
     </div>
   );
@@ -262,9 +262,9 @@ export function FullscreenWithScrollArea() {
         fullScreen
         scrollAreaComponent={ScrollArea.Autosize}
       >
-        {content}
-        {content}
-        {content}
+        {content()}
+        {content()}
+        {content()}
       </Modal>
     </div>
   );
@@ -280,7 +280,7 @@ export function AutosizeScrollarea() {
         size="md"
         scrollAreaComponent={ScrollArea.Autosize}
       >
-        {content}
+        {content()}
       </Modal>
     </div>
   );

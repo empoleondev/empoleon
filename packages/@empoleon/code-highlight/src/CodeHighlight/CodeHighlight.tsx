@@ -211,10 +211,9 @@ export const CodeHighlight = factory<CodeHighlightFactory>((_props) => {
       code,
       language,
       colorScheme: scheme,
-    })
-      .then((result) => {
-        setHighlightedResult(result);
-      });
+    }).then((result) => {
+      setHighlightedResult(result);
+    });
   });
 
   const codeContent = createMemo(() => {
@@ -230,22 +229,27 @@ export const CodeHighlight = factory<CodeHighlightFactory>((_props) => {
 
   return (
     <CodeHighlightContextProvider value={{ getStyles, codeColorScheme: local.codeColorScheme }}>
-      <Show when={!local.__inline} fallback={
-        <Box
-          component="code"
-          ref={local.ref as any}
-          {...safeOthers}
-          {...highlightedResult().codeElementProps}
-          {...getStyles('codeHighlight', {
-            className: cx(highlightedResult().codeElementProps?.className, local.className),
-            style: [{ ...highlightedResult().codeElementProps?.style }, local.style],
-          })}
-          data-with-border={local.withBorder || undefined}
-          // innerHTML={codeContent().innerHTML || undefined}
-        >
-          {!codeContent().innerHTML ? codeContent().children : undefined}
-        </Box>
-      }>
+      <Show
+        when={!local.__inline}
+        fallback={
+          /* eslint-disable solid/jsx-no-duplicate-props */
+          <Box
+            component="code"
+            ref={local.ref as any}
+            {...safeOthers}
+            {...highlightedResult().codeElementProps}
+            {...getStyles('codeHighlight', {
+              className: cx(highlightedResult().codeElementProps?.className, local.className),
+              style: [{ ...highlightedResult().codeElementProps?.style }, local.style],
+            })}
+            data-with-border={local.withBorder || undefined}
+            innerHTML={codeContent().innerHTML}
+          >
+            {!codeContent().innerHTML ? codeContent().children : undefined}
+          </Box>
+          /* eslint-enable solid/jsx-no-duplicate-props */
+        }
+      >
         <Box
           ref={local.ref}
           {...getStyles('codeHighlight')}
@@ -255,7 +259,11 @@ export const CodeHighlight = factory<CodeHighlightFactory>((_props) => {
           data-with-border={local.withBorder || undefined}
         >
           {shouldDisplayControls && (
-            <Box component='div' {...getStyles('controls')} data-with-offset={local.__withOffset || undefined}>
+            <Box
+              component="div"
+              {...getStyles('controls')}
+              data-with-offset={local.__withOffset || undefined}
+            >
               {typeof local.controls === 'function' ? local.controls() : local.controls}
 
               <Show when={local.withExpandButton}>
@@ -284,9 +292,14 @@ export const CodeHighlight = factory<CodeHighlightFactory>((_props) => {
             data-collapsed={!_expanded() || undefined}
             {...getStyles('scrollarea')}
           >
-            <Box component='pre' {...getStyles('pre')} data-with-offset={local.__withOffset || undefined}>
+            <Box
+              component="pre"
+              {...getStyles('pre')}
+              data-with-offset={local.__withOffset || undefined}
+            >
               {codeContent().innerHTML ? (
-                <Box component='code'
+                <Box
+                  component="code"
                   {...highlightedResult().codeElementProps}
                   {...getStyles('code', {
                     className: highlightedResult().codeElementProps?.className,
@@ -295,7 +308,8 @@ export const CodeHighlight = factory<CodeHighlightFactory>((_props) => {
                   innerHTML={codeContent().innerHTML}
                 />
               ) : (
-                <Box component='code'
+                <Box
+                  component="code"
                   {...highlightedResult().codeElementProps}
                   {...getStyles('code', {
                     className: highlightedResult().codeElementProps?.className,
@@ -318,7 +332,6 @@ export const CodeHighlight = factory<CodeHighlightFactory>((_props) => {
           </UnstyledButton>
         </Box>
       </Show>
-
     </CodeHighlightContextProvider>
   );
 });

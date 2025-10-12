@@ -1,6 +1,6 @@
-import { Ref } from '@solid-primitives/refs';
+import { mergeRefs, Ref } from '@solid-primitives/refs';
 import cx from 'clsx';
-import { createMemo, JSX, Show, splitProps } from 'solid-js';
+import { createEffect, createMemo, JSX, Show, splitProps } from 'solid-js';
 import { Dynamic } from 'solid-js/web';
 import { EmpoleonBreakpoint, useEmpoleonSxTransform, useEmpoleonTheme } from '../EmpoleonProvider';
 import { createPolymorphicComponent } from '../factory';
@@ -91,9 +91,6 @@ const _Box = <T extends HTMLElement = HTMLDivElement>(
 
   const theme = useEmpoleonTheme();
   const Element = () => local.component || 'div';
-  // const [_, rest] = splitProps(extractStyleProps(others), ['styleProps']);
-  // const extracted = () => extractStyleProps(others);
-  // const styleProps = () => extracted().styleProps;
   const [{ rest }, _] = splitProps(extractStyleProps(others), ['rest']);
   const extracted = () => extractStyleProps(others);
   const styleProps = () => extracted().styleProps;
@@ -102,7 +99,11 @@ const _Box = <T extends HTMLElement = HTMLDivElement>(
   const transformedSx = createMemo(() => useSxTransform?.()?.(styleProps().sx));
   const responsiveClassName = useRandomClassName();
 
+  let _innerEl: HTMLElement | undefined;
   const forwardedRef = local.ref as Ref<HTMLElement> | undefined;
+  const refToPass = mergeRefs(forwardedRef, (el?: HTMLElement) => {
+    _innerEl = el;
+  });
 
   const parsedStyleProps = createMemo(() =>
     parseStyleProps({
@@ -114,7 +115,7 @@ const _Box = <T extends HTMLElement = HTMLDivElement>(
 
   const elementProps = createMemo(() => {
     return {
-      ref: forwardedRef,
+      ref: refToPass,
       style: getBoxStyle({
         theme,
         style: local.style,
@@ -136,6 +137,55 @@ const _Box = <T extends HTMLElement = HTMLDivElement>(
     };
   });
 
+  // required because boxMod is not reactive enough
+  createEffect(() => {
+    const p = elementProps();
+    const el = _innerEl as HTMLElement | null;
+    if (!el) { return };
+
+    const propKeys = Object.keys(p);
+
+    // Collect existing data-* attributes for removal
+    const existingDataAttrs = el.getAttributeNames().filter(name => name.startsWith('data-'));
+
+    // Remove old data-* attributes that aren't in new props
+    for (let i = 0; i < existingDataAttrs.length; i++) {
+      const name = existingDataAttrs[i];
+      if (!(name in p)) {
+        el.removeAttribute(name);
+      }
+    }
+
+    // Set/update data-* attributes from props
+    for (let i = 0; i < propKeys.length; i++) {
+      const k = propKeys[i];
+      if (k.startsWith('data-')) {
+        const v = (p as any)[k];
+        if (v != null && v !== false) {
+          el.setAttribute(k, String(v));
+        } else {
+          el.removeAttribute(k);
+        }
+      }
+    }
+
+    // Handle disabled property and attribute
+    const hasDisabled = 'disabled' in p;
+    const isDisabled = hasDisabled && !!(p as any).disabled;
+
+    if (hasDisabled) {
+      (el as any).disabled = isDisabled;
+      if (isDisabled) {
+        el.setAttribute('disabled', '');
+      } else {
+        el.removeAttribute('disabled');
+      }
+    } else {
+      (el as any).disabled = false;
+      el.removeAttribute('disabled');
+    }
+  });
+
   return (
     <>
       <Show when={parsedStyleProps().hasResponsiveStyles}>
@@ -147,7 +197,7 @@ const _Box = <T extends HTMLElement = HTMLDivElement>(
       </Show>
 
       {typeof local.renderRoot === 'function' ? (
-        local.renderRoot(elementProps())
+        local.renderRoot(props)
       ) : (
         <Dynamic component={Element()} {...elementProps()}>
           {local.children}

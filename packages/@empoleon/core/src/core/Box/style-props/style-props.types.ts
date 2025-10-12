@@ -50,6 +50,8 @@ export interface EmpoleonStyleProps {
 
   /** Border */
   bd?: StyleProp<JSX.CSSProperties['border']>;
+  /** BorderRadius, theme key: theme.radius */
+  bdrs?: StyleProp<EmpoleonSpacing>;
   /** Background, theme key: theme.colors */
   bg?: StyleProp<EmpoleonColor>;
   /** Color */

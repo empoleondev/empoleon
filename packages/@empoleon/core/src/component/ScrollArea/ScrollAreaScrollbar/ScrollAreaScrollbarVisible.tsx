@@ -72,10 +72,14 @@ export function ScrollAreaScrollbarVisible(props: ScrollAreaScrollbarVisibleProp
             }
           }}
           onWheelScroll={(scrollPos) => {
-            if (ctx.viewport) {ctx.viewport.scrollLeft = scrollPos};
+            if (ctx.viewport) {
+              ctx.viewport.scrollLeft = scrollPos;
+            }
           }}
           onDragScroll={(pointerPos) => {
-            if (ctx.viewport) {ctx.viewport.scrollLeft = getScrollPosition(pointerPos, dir)};
+            if (ctx.viewport) {
+              ctx.viewport.scrollLeft = getScrollPosition(pointerPos, dir);
+            }
           }}
         >
           {local.children}
@@ -100,10 +104,14 @@ export function ScrollAreaScrollbarVisible(props: ScrollAreaScrollbarVisibleProp
             }
           }}
           onWheelScroll={(scrollPos) => {
-            if (ctx.viewport) {ctx.viewport.scrollTop = scrollPos};
+            if (ctx.viewport) {
+              ctx.viewport.scrollTop = scrollPos;
+            }
           }}
           onDragScroll={(pointerPos) => {
-            if (ctx.viewport) {ctx.viewport.scrollTop = getScrollPosition(pointerPos)};
+            if (ctx.viewport) {
+              ctx.viewport.scrollTop = getScrollPosition(pointerPos);
+            }
           }}
         >
           {local.children}

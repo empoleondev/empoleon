@@ -26,7 +26,7 @@ sodales, leo sapien faucibus eros, eu tincidunt nisl quam eget mauris. Nulla fac
 facilisi. Nulla facilisi. Nulla facilisi. Nulla facilisi. Nulla facilisi. Nulla facilisi. Nulla
 `;
 
-const scrollableContent = <For each={Array(20).fill(0)}>{() => <p>{lorem}</p>}</For>;
+const scrollableContent = () => <For each={Array(20).fill(0)}>{() => <p>{lorem}</p>}</For>;
 
 export function Usage() {
   const [opened, setOpened] = createSignal(true);
@@ -262,7 +262,7 @@ export function WithScrollArea() {
 
   return (
     <div style={{ padding: '40px' }}>
-      {scrollableContent}
+      {scrollableContent()}
       <Combobox store={store} withinPortal={false} onOptionSubmit={setValue}>
         <Combobox.Target>
           {(props) => (
@@ -288,7 +288,7 @@ export function WithScrollArea() {
           </Combobox.Options>
         </Combobox.Dropdown>
       </Combobox>
-      {scrollableContent}
+      {scrollableContent()}
     </div>
   );
 }

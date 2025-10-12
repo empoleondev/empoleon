@@ -1,4 +1,4 @@
-import { Accessor, createMemo, JSX, splitProps } from 'solid-js';
+import { Accessor, createMemo, JSX, Show, splitProps } from 'solid-js';
 import { useDirection } from '../../../core';
 import { ArrowPosition, FloatingPosition } from '../types';
 import { getArrowPositionStyles } from './get-arrow-position-styles';
@@ -31,10 +31,6 @@ export function FloatingArrow(props: FloatingArrowProps) {
 
   const { dir } = useDirection();
 
-  if (!local.visible()) {
-    return null;
-  }
-
   const finalStyles = createMemo(() => ({
     ...(typeof local.style === 'object' && local.style !== null ? local.style : {}),
     ...getArrowPositionStyles({
@@ -50,11 +46,13 @@ export function FloatingArrow(props: FloatingArrowProps) {
   }));
 
   return (
+    <Show when={local.visible()} fallback={null}>
     <div
       {...others}
       ref={local.ref}
-      style={finalStyles()} // Use the variable instead
+      style={finalStyles()}
     />
+    </Show>
   );
 }
 

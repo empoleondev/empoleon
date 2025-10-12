@@ -1,5 +1,5 @@
 import cx from 'clsx';
-import { splitProps } from 'solid-js';
+import { Show, splitProps } from 'solid-js';
 import { RemoveScroll } from '@empoleon/solid-remove-scroll';
 import {
   Box,
@@ -47,27 +47,25 @@ export const AppShellFooter = factory<AppShellFooterFactory>((_props) => {
 
   const ctx = useAppShellContext();
 
-  if (ctx.disabled) {
-    return null;
-  }
-
   return (
-    <Box
-      component="footer"
-      ref={local.ref}
-      mod={[{ 'with-border': local.withBorder ?? ctx.withBorder }, local.mod]}
-      {...ctx.getStyles('footer', {
-        className: cx(
-          { [RemoveScroll.classNames.zeroRight]: ctx.offsetScrollbars },
-          local.className
-        ),
-        classNames: local.classNames,
-        styles: local.styles,
-        style: local.style,
-      })}
-      {...others}
-      __vars={{ '--app-shell-footer-z-index': (local.zIndex ?? ctx.zIndex)?.toString() }}
-    />
+    <Show when={!ctx.disabled()} fallback={null}>
+      <Box
+        component="footer"
+        ref={local.ref}
+        mod={[{ 'with-border': local.withBorder ?? ctx.withBorder() }, local.mod]}
+        {...ctx.getStyles('footer', {
+          className: cx(
+            { [RemoveScroll.classNames.zeroRight]: ctx.offsetScrollbars },
+            local.className
+          ),
+          classNames: local.classNames,
+          styles: local.styles,
+          style: local.style,
+        })}
+        {...others}
+        __vars={{ '--app-shell-footer-z-index': (local.zIndex ?? ctx.zIndex())?.toString() }}
+      />
+    </Show>
   );
 });
 

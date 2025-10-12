@@ -2,6 +2,7 @@ import { IconChevronDown, IconChevronUp } from '@tabler/icons-solidjs';
 import { createSignal, For, JSX } from 'solid-js';
 import { DEFAULT_THEME, EmpoleonProvider, rem } from '../../core';
 import { Button, ButtonProps } from './Button';
+import { FileButton } from '../FileButton';
 
 export default {
   title: 'Button',
@@ -14,9 +15,13 @@ export default {
   ],
 };
 
-// export function RenderRoot() {
-//   return <Button renderRoot={(props) => <a {...props} href="#" />}>Some content</Button>;
-// }
+export function Base() {
+  return <Button attributes={{ inner: { 'data-test-id': 1 } }}>Button</Button>;
+}
+
+export function RenderRoot() {
+  return <Button renderRoot={(props) => <a {...props} href="#" />}>Some content</Button>;
+}
 
 export function AutoContrast() {
   const buttons = Array.from({ length: 10 }, (_, i) => `red.${i}`);
@@ -92,10 +97,6 @@ function Colors({ index, ...others }: ButtonProps & { index?: number }) {
       </For>
     </div>
   );
-}
-
-export function Single() {
-  return <Button darkHidden>hello</Button>;
 }
 
 export function Usage() {
@@ -395,5 +396,20 @@ export function GroupSection() {
         </Button>
       </Button.Group>
     </div>
+  );
+}
+
+export function WithFileButton() {
+  return (
+    <Button.Group>
+      <Button variant="outline">Button 1</Button>
+      <FileButton onChange={(f) => console.log(f)}>
+        {(props) => (
+          <Button {...props} variant="outline">
+            Files
+          </Button>
+        )}
+      </FileButton>
+    </Button.Group>
   );
 }

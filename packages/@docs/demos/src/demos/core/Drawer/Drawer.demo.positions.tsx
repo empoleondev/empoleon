@@ -5,7 +5,7 @@ import { EmpoleonDemo } from '@empoleonx/demo';
 function Demo() {
   const [opened, setOpened] = createSignal(false);
   const [position, setPosition] = createSignal<'top' | 'left' | 'right' | 'bottom'>('top');
-  const open = (p: typeof position) => {
+  const open = (p: 'top' | 'left' | 'right' | 'bottom') => {
     setPosition(p);
     setOpened(true);
   };
@@ -23,16 +23,16 @@ function Demo() {
       </Drawer>
 
       <Group justify="center">
-        <Button variant="default" onClick={() => open(() => 'left')}>
+        <Button variant="default" onClick={() => open('left')}>
           Left
         </Button>
-        <Button variant="default" onClick={() => open(() => 'right')}>
+        <Button variant="default" onClick={() => open('right')}>
           Right
         </Button>
-        <Button variant="default" onClick={() => open(() => 'top')}>
+        <Button variant="default" onClick={() => open('top')}>
           Top
         </Button>
-        <Button variant="default" onClick={() => open(() => 'bottom')}>
+        <Button variant="default" onClick={() => open('bottom')}>
           Bottom
         </Button>
       </Group>

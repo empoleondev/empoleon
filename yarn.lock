@@ -1292,7 +1292,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@corvu/utils@npm:~0.4.1":
+"@corvu/utils@npm:~0.4.1, @corvu/utils@npm:~0.4.2":
   version: 0.4.2
   resolution: "@corvu/utils@npm:0.4.2"
   dependencies:
@@ -1509,6 +1509,7 @@ __metadata:
     "@solid-primitives/resize-observer": "npm:2.1.1"
     "@solid-primitives/utils": "npm:6.3.1"
     clsx: "npm:^2.1.1"
+    solid-presence: "npm:^0.2.0"
     solid-textarea-autosize: "npm:0.0.5"
     solid-transition-group: "npm:0.3.0"
     type-fest: "npm:^4.27.0"
@@ -12106,6 +12107,17 @@ __metadata:
     seroval: "npm:~1.3.0"
     seroval-plugins: "npm:~1.3.0"
   checksum: 10c0/60f90a38d1c49d1e4d48717e2a4c3d27d93a69f5429eca958ad4f89864a967b054e80f888cf7d89f57a19d4a15368dc3311d5941d887e0ff5dce8b383b563cea
+  languageName: node
+  linkType: hard
+
+"solid-presence@npm:^0.2.0":
+  version: 0.2.0
+  resolution: "solid-presence@npm:0.2.0"
+  dependencies:
+    "@corvu/utils": "npm:~0.4.2"
+  peerDependencies:
+    solid-js: ^1.8
+  checksum: 10c0/84a258f5fa2040f81f07158aa6a34a92150c2718124d1741c674a9cfdc2ec9d6f3ca54f1ffd4103acee86e5c61f7fb40ccb681205a396a68f7fc3660828230c7
   languageName: node
   linkType: hard
 

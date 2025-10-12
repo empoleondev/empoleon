@@ -34,7 +34,9 @@ function Demo(
   });
 
   const getThumbIcon = () => {
-    if (!props.withThumbIndicator) {return undefined};
+    if (!props.withThumbIndicator) {
+      return undefined;
+    }
     return checked() ? (
       <IconCheck size={12} color="var(--empoleon-color-teal-6)" stroke="3" />
     ) : (

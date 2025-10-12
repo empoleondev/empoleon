@@ -19,12 +19,18 @@ export function ScrollAreaScrollbar(props: ScrollAreaScrollbarProps) {
   const isHorizontal = () => props.orientation === 'horizontal';
 
   createEffect(() => {
-    if (isHorizontal()) {ctx.onScrollbarXEnabledChange(true)}
-    else {ctx.onScrollbarYEnabledChange(true)};
+    if (isHorizontal()) {
+      ctx.onScrollbarXEnabledChange(true);
+    } else {
+      ctx.onScrollbarYEnabledChange(true);
+    }
 
     onCleanup(() => {
-      if (isHorizontal()) {ctx.onScrollbarXEnabledChange(false)}
-      else {ctx.onScrollbarYEnabledChange(false);}
+      if (isHorizontal()) {
+        ctx.onScrollbarXEnabledChange(false);
+      } else {
+        ctx.onScrollbarYEnabledChange(false);
+      }
     });
   });
 

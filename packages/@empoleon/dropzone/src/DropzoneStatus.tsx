@@ -22,7 +22,7 @@ function createDropzoneStatus(status: keyof DropzoneContextValue) {
         return <Dynamic component={local.children as Component} {...others} />;
       }
 
-      return <span {...others}>{local.children}</span>
+      return <span {...others}>{local.children}</span>;
     }
 
     return null;

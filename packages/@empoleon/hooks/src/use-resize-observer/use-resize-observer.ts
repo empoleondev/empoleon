@@ -32,7 +32,9 @@ export function useResizeObserver<T extends HTMLElement = any>(
 
   const { observe, unobserve } = makeResizeObserver<T>((entries) => {
     const entry = entries[0];
-    if (entry) {setRect(entry.contentRect)};
+    if (entry) {
+      setRect(entry.contentRect);
+    }
   }, options);
 
   createEffect(() => {
@@ -66,10 +68,14 @@ export function useElementSize<T extends HTMLElement = any>(
   const [width, setWidth] = createSignal<number>(0);
   const [height, setHeight] = createSignal<number>(0);
 
-  createResizeObserver(el, ({ width: w, height: h }) => {
-    setWidth(w ?? 0);
-    setHeight(h ?? 0);
-  }, options);
+  createResizeObserver(
+    el,
+    ({ width: w, height: h }) => {
+      setWidth(w ?? 0);
+      setHeight(h ?? 0);
+    },
+    options
+  );
 
   return { ref: setEl, width, height };
 }

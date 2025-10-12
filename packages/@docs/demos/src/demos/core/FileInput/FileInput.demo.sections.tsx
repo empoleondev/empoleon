@@ -30,18 +30,18 @@ function Demo() {
 `;
 
 function Demo() {
-  const icon = <IconFileCv size={18} stroke="1.5" />;
+  const icon = () => <IconFileCv size={18} stroke="1.5" />;
 
   return (
     <>
       <FileInput
-        leftSection={icon}
+        leftSection={icon()}
         label="Attach your CV"
         placeholder="Your CV"
         leftSectionPointerEvents="none"
       />
       <FileInput
-        rightSection={icon}
+        rightSection={icon()}
         label="Attach your CV"
         placeholder="Your CV"
         rightSectionPointerEvents="none"

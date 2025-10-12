@@ -42,30 +42,6 @@ export function Usage() {
   );
 }
 
-export function OnBlur() {
-  return (
-    <div style={{ padding: '40px' }}>
-      <TextInput
-        onBlur={() => {
-          console.log("I'm blurring");
-        }}
-      />
-    </div>
-  );
-}
-
-export function OnKeyDown() {
-  return (
-    <div style={{ padding: '40px' }}>
-      <TextInput
-        onkeydown={(event) => {
-          console.log(event.target.value);
-        }}
-      />
-    </div>
-  );
-}
-
 export function InputWrapperOrder() {
   const props = {
     label: 'Label',

@@ -113,9 +113,11 @@ export function ModalBase(props: ModalBaseProps) {
     return result;
   };
 
+  const transitionProps = () => local.transitionProps;
+
   const modalProps = useModal({
     id: local.id,
-    transitionProps: local.transitionProps,
+    transitionProps: transitionProps(),
     opened: openedFn,
     trapFocus: () => local.trapFocus,
     closeOnEscape: () => local.closeOnEscape,
@@ -134,7 +136,7 @@ export function ModalBase(props: ModalBaseProps) {
           closeOnClickOutside: () => local.closeOnClickOutside,
           onExitTransitionEnd: local.onEnterTransitionEnd,
           onEnterTransitionEnd: local.onEnterTransitionEnd,
-          transitionProps: { ...local.transitionProps, keepMounted: local.keepMounted },
+          transitionProps: { ...transitionProps(), keepMounted: local.keepMounted },
           getTitleId: () => `${modalProps._id}-title`,
           getBodyId: () => `${modalProps._id}-body`,
           titleMounted: modalProps.titleMounted(),

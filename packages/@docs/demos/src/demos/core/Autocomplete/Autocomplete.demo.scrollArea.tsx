@@ -50,7 +50,7 @@ function Demo() {
         placeholder="Pick value or enter anything"
         data={data}
         withScrollArea={false}
-        styles={{ dropdown: { maxHeight: 200, overflowY: 'auto' } }}
+        styles={{ dropdown: { 'max-height': '200px', 'overflow-y': 'auto' } }}
         mt="md"
       />
     </>

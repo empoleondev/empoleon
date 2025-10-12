@@ -89,7 +89,9 @@ export function Transition(props: TransitionProps) {
     Object.assign(el.style, from);
     void el.offsetHeight;
     Object.assign(el.style, { transition: `all ${dur}ms ${timingFunction}`, ...to });
-    if (cb) {setTimeout(cb, dur)};
+    if (cb) {
+      setTimeout(cb, dur);
+    }
   }
 
   // No-animation fallback
@@ -105,38 +107,91 @@ export function Transition(props: TransitionProps) {
     <SolidTransition
       appear
       mode="inout"
-      onBeforeEnter={(el) =>
-        el instanceof HTMLElement && Object.assign(el.style, mkStyles('pre-entering', duration))
-      }
+      onBeforeEnter={(el) => {
+        if (!(el instanceof HTMLElement)) { return };
+
+        const delay = local.enterDelay ?? 0;
+        if (delay > 0) {
+          Object.assign(el.style, mkStyles('exited', duration));
+        } else {
+          Object.assign(el.style, mkStyles('pre-entering', duration));
+        }
+      }}
       onEnter={(el, done) => {
-        if (!(el instanceof HTMLElement)) {return done()};
-        local.onEnter?.();
-        animate(el, 'pre-entering', 'entering', duration, () => {
-          local.onEntered?.();
-          done();
-        });
+        if (!(el instanceof HTMLElement)) {
+          return done();
+        }
+
+        const delay = local.enterDelay ?? 0;
+
+        if (delay > 0) {
+          setTimeout(() => {
+            local.onEnter?.();
+            Object.assign(el.style, mkStyles('pre-entering', duration));
+            void el.offsetHeight;
+            animate(el, 'pre-entering', 'entering', duration, () => {
+              local.onEntered?.();
+              done();
+            });
+          }, delay);
+        } else {
+          local.onEnter?.();
+          animate(el, 'pre-entering', 'entering', duration, () => {
+            local.onEntered?.();
+            done();
+          });
+        }
       }}
       onAfterEnter={(el) =>
         el instanceof HTMLElement && Object.assign(el.style, mkStyles('entered', duration))
       }
-      onBeforeExit={(el) =>
-        el instanceof HTMLElement && Object.assign(el.style, mkStyles('pre-exiting', exitDuration))
-      }
+      onBeforeExit={(el) => {
+        if (!(el instanceof HTMLElement)) { return };
+
+        const delay = local.exitDelay ?? 0;
+        if (delay > 0) {
+          Object.assign(el.style, mkStyles('entered', exitDuration));
+        } else {
+          Object.assign(el.style, mkStyles('pre-exiting', exitDuration));
+        }
+      }}
       onExit={(el, done) => {
-        if (!(el instanceof HTMLElement)) {return done()};
-        local.onExit?.();
-        animate(el, 'exiting', 'exiting', exitDuration, () => {
-          local.onExited?.();
-          done();
-        });
+        if (!(el instanceof HTMLElement)) {
+          return done();
+        }
+
+        const delay = local.exitDelay ?? 0;
+
+        if (delay > 0) {
+          setTimeout(() => {
+            local.onExit?.();
+            Object.assign(el.style, mkStyles('pre-exiting', exitDuration));
+            void el.offsetHeight;
+            animate(el, 'pre-exiting', 'exiting', exitDuration, () => {
+              local.onExited?.();
+              done();
+            });
+          }, delay);
+        } else {
+          local.onExit?.();
+          animate(el, 'pre-exiting', 'exiting', exitDuration, () => {
+            local.onExited?.();
+            done();
+          });
+        }
       }}
       onAfterExit={(el) =>
         el instanceof HTMLElement && Object.assign(el.style, mkStyles('exited', exitDuration))
       }
     >
-      <Show when={local.mounted || local.keepMounted} fallback={null}>
-        {local.children(local.mounted ? mkStyles('entered', duration) : { display: 'none' })}
-      </Show>
+      {local.keepMounted
+        ? // Keep element in the tree, but control visibility
+          <Show when={local.mounted}>
+            {local.children({})}
+          </Show>
+        : // Fully unmount when not mounted
+          (local.mounted ? local.children({}) : null)
+      }
     </SolidTransition>
   );
 }

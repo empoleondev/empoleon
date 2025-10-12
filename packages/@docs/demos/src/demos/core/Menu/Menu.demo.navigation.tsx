@@ -34,7 +34,8 @@ function Demo() {
           <Menu
             trigger="click-hover"
             loop={false}
-            withinPortal={false}
+            // Current issue with SolidJS (locked to true)
+            // withinPortal={false}
             trapFocus={false}
             menuItemTabIndex={0}
           >

@@ -214,7 +214,9 @@ export const PinInput = factory<PinInputFactory>((_props) => {
   const [focusedIndex, setFocusedIndex] = createSignal(-1);
 
   const controlledValue = createMemo(() => {
-    if (local.value === undefined) {return undefined};
+    if (local.value === undefined) {
+      return undefined;
+    }
     return createPinArray(local.length ?? 0, local.value);
   });
 
@@ -475,7 +477,7 @@ export const PinInput = factory<PinInputFactory>((_props) => {
                 autofocus={local.autoFocus && index === 0}
                 unstyled={local.unstyled}
                 aria-label={local.ariaLabel}
-                read-only={local.readOnly}
+                readonly={local.readOnly}
                 {...local.getInputProps?.(index)}
               />
             );

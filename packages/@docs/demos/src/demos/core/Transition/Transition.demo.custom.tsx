@@ -88,7 +88,7 @@ export function Demo() {
             left={0}
             right={0}
             ref={clickOutsideRef}
-            style={{ ...transitionStyle, zIndex: 1 }}
+            style={{ ...transitionStyle, 'z-index': 1 }}
           >
             Dropdown
           </Paper>

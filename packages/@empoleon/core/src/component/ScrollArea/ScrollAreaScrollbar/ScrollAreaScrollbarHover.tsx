@@ -13,7 +13,9 @@ export function ScrollAreaScrollbarHover(props: ScrollAreaScrollbarHoverProps) {
 
   createEffect(() => {
     const el = ctx.scrollArea;
-    if (!el) {return};
+    if (!el) {
+      return;
+    }
 
     let hideTimer: number = 0;
 

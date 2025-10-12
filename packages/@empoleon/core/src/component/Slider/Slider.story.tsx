@@ -44,10 +44,10 @@ export function Usage() {
   return (
     <div style={{ padding: '40px', 'max-width': '400px' }}>
       <Slider defaultValue={45} marks={marks} size="md" onChangeEnd={console.log} restrictToMarks />
-      <Slider defaultValue={45} disabled mt={60} />
+      {/* <Slider defaultValue={45} disabled mt={60} />
       <Slider defaultValue={45} inverted mt="xl" />
       <Slider defaultValue={45} inverted disabled mt="xl" />
-      <Slider defaultValue={45} mt="xl" labelAlwaysOn />
+      <Slider defaultValue={45} mt="xl" labelAlwaysOn /> */}
     </div>
   );
 }
@@ -67,6 +67,20 @@ export function SizeSlider() {
       <div style={{ background: 'pink' }}>
         <Slider step={25} defaultValue={50} marks={sizeMarks} size="md" />
       </div>
+    </div>
+  );
+}
+
+export function DomainSlider() {
+  return (
+    <div style={{ 'padding': '40px', 'max-width': '300px' }}>
+      <Slider
+      // @ts-ignore
+        domain={[0, 100]}
+        min={20}
+        max={60}
+      />
+      <RangeSlider domain={[0, 100]} min={20} max={60} pushOnOverlap={false} />
     </div>
   );
 }

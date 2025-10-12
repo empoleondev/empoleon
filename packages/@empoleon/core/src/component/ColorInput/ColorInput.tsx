@@ -209,8 +209,12 @@ export const ColorInput = factory<ColorInputFactory>((__props) => {
     setDropdownOpened(true);
   };
 
+  // Track the actual dropdown state (internal or external)
+  const actualDropdownState = () =>
+    local.popoverProps?.opened !== undefined ? local.popoverProps.opened : dropdownOpened();
+
   createEffect(() => {
-    if (dropdownOpened()) {
+    if (actualDropdownState()) {
       setTimeout(() => setIsInitialMount(false), 0);
     } else {
       setIsInitialMount(true);
@@ -263,7 +267,7 @@ export const ColorInput = factory<ColorInputFactory>((__props) => {
           {(popoverProps) => (
             <div ref={popoverProps.ref}>
               <Input<'input'>
-                auto-complete="off"
+                autocomplete="off"
                 {...others}
                 {...local.inputProps}
                 classNames={resolvedClassNames}
@@ -311,7 +315,6 @@ export const ColorInput = factory<ColorInputFactory>((__props) => {
         </Popover.Target>
         <Popover.Dropdown className={classes.dropdown}>
           <ColorPicker
-            auto-complete="none"
             __staticSelector="ColorInput"
             value={_value().trim() === '' ? undefined : _value()}
             onChange={(color) => {

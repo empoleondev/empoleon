@@ -39,7 +39,9 @@ function Demo(props: AccordionProps & { chevron?: string }) {
     if (props.chevron === 'default') {
       return () => <IconChevronDown size={props.chevronIconSize || 16} />;
     }
-    if (props.chevron === 'none') { return null };
+    if (props.chevron === 'none') {
+      return null;
+    }
     return undefined;
   };
 

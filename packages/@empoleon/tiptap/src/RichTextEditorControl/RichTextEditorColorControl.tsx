@@ -17,7 +17,9 @@ export const RichTextEditorColorControl: Component<RichTextEditorColorControlPro
 
   const currentColor = () => {
     const editor = textEditorProps.editor;
-    if (!editor) {return null};
+    if (!editor) {
+      return null;
+    }
     return editor.getAttributes('textStyle').color || null;
   };
   const label = () => textEditorProps.labels.colorControlLabel(local.color);
@@ -31,7 +33,9 @@ export const RichTextEditorColorControl: Component<RichTextEditorColorControlPro
       title={label()}
       onClick={() => {
         const editor = textEditorProps.editor;
-        if (!editor) {return};
+        if (!editor) {
+          return;
+        }
         (editor.chain() as any).focus().setColor(local.color).run();
       }}
       ref={local.ref}

@@ -336,7 +336,9 @@ export const TimePicker = factory<TimePickerFactory>((_props) => {
 
   // Blur detection for InputBase
   onMount(() => {
-    if (!timePickerRef) {return};
+    if (!timePickerRef) {
+      return;
+    }
 
     const handleClickOutside = (event: Event) => {
       const target = event.target as Element;
@@ -422,8 +424,8 @@ export const TimePicker = factory<TimePickerFactory>((_props) => {
                   __staticSelector="TimePicker"
                   {...others}
                 >
-                  <Box component='div' {...getStyles('fieldsRoot')} dir="ltr">
-                    <Box component='div' {...getStyles('fieldsGroup')} onBlur={handleBlur}>
+                  <Box component="div" {...getStyles('fieldsRoot')} dir="ltr">
+                    <Box component="div" {...getStyles('fieldsGroup')} onBlur={handleBlur}>
                       {/* @ts-ignore */}
                       <SpinInput
                         id={hoursInputId}
@@ -586,7 +588,7 @@ export const TimePicker = factory<TimePickerFactory>((_props) => {
                 withSeconds={local.withSeconds || false}
               />
             ) : (
-              <Box component='div' {...getStyles('controlsListGroup')}>
+              <Box component="div" {...getStyles('controlsListGroup')}>
                 <TimeControlsList
                   min={local.format === '12h' ? 1 : 0}
                   max={local.format === '12h' ? 12 : 23}

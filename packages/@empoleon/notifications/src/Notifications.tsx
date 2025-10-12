@@ -1,5 +1,4 @@
-import { createListTransition } from '@solid-primitives/transition-group';
-import { createEffect, createSignal, For, splitProps } from 'solid-js';
+import { createEffect, createMemo, splitProps, For, createSignal } from 'solid-js';
 import {
   Box,
   BoxProps,
@@ -17,9 +16,8 @@ import {
   useStyles,
 } from '@empoleon/core';
 import { useReducedMotion } from '@empoleon/hooks';
-import {
-  getGroupedNotifications,
-} from './get-grouped-notifications/get-grouped-notifications';
+import { Transition, TransitionGroup } from './solid-transition-group';
+import { getGroupedNotifications } from './get-grouped-notifications/get-grouped-notifications';
 import { getNotificationStateStyles } from './get-notification-state-styles';
 import { NotificationContainer } from './NotificationContainer';
 import {
@@ -41,34 +39,15 @@ export interface NotificationsProps
   extends BoxProps,
     StylesApiProps<NotificationsFactory>,
     ElementProps<'div'> {
-  /** Notifications default position, `'bottom-right'` by default */
   position?: NotificationPosition;
-
-  /** Auto close timeout for all notifications in ms, `false` to disable auto close, can be overwritten for individual notifications in `notifications.show` function, `4000` by default */
   autoClose?: number | false;
-
-  /** Notification transition duration in ms, `250` by default */
   transitionDuration?: number;
-
-  /** Notification width, cannot exceed 100%, `440` by default */
   containerWidth?: number | string;
-
-  /** Notification `max-height`, used for transitions, `200` by default */
   notificationMaxHeight?: number | string;
-
-  /** Maximum number of notifications displayed at a time, other new notifications will be added to queue, `5` by default */
   limit?: number;
-
-  /** Notifications container z-index, `400` by default */
   zIndex?: string | number;
-
-  /** Props passed down to the `Portal` component */
   portalProps?: Omit<PortalProps, 'children'>;
-
-  /** Store for notifications state, can be used to create multiple instances of notifications system in your application */
   store?: NotificationsStore;
-
-  /** Determines whether notifications container should be rendered inside `Portal`, `true` by default */
   withinPortal?: boolean;
 }
 
@@ -106,7 +85,19 @@ const varsResolver = createVarsResolver<NotificationsFactory>((_, props) => ({
   },
 }));
 
-// Position-specific transition component with full debugging
+function kebabToCamelCase(styles: Record<string, any>): Record<string, any> {
+  const camelCased: Record<string, any> = {};
+  for (const key in styles) {
+    /* eslint-disable no-prototype-builtins */
+    if (styles.hasOwnProperty(key)) {
+      const camelKey = key.replace(/-([a-z])/g, (g) => g[1].toUpperCase());
+      camelCased[camelKey] = styles[key];
+    }
+    /* eslint-enable no-prototype-builtins */
+  }
+  return camelCased;
+}
+
 function PositionTransitions(props: {
   notifications: any[];
   position: NotificationPosition;
@@ -117,173 +108,127 @@ function PositionTransitions(props: {
   getStyles: any;
   refs: Record<string, HTMLDivElement>;
 }) {
-  const [notificationRefs, setNotificationRefs] = createSignal<HTMLElement[]>([]);
+  const entries = new Map<string, { item: any; visible: () => boolean; setVisible: (v: boolean) => void }>();
+  const [renderList, setRenderList] = createSignal<string[]>([]);
 
-  const trackElement = (el: HTMLElement, id: string) => {
-    props.refs[id] = el as HTMLDivElement;
+  createEffect(() => {
+    const incoming = props.notifications ?? [];
+    const incomingIds = new Set(incoming.map((n) => n.id));
 
-    setNotificationRefs((prev) => {
-      const newRefs = [...prev];
-      if (!newRefs.includes(el)) {
-        newRefs.push(el);
+    for (const n of incoming) {
+      const id = n.id;
+      if (!entries.has(id)) {
+        const [visible, setVisible] = createSignal(true);
+        entries.set(id, { item: n, visible, setVisible });
+      } else {
+        const e = entries.get(id)!;
+        e.item = n;
+        e.setVisible(true);
       }
-      return newRefs;
-    });
+    }
+
+    for (const [id, e] of entries) {
+      if (!incomingIds.has(id) && e.visible()) {
+        e.setVisible(false)
+      };
+    }
+
+    setRenderList(Array.from(entries.keys()));
+  });
+
+  const handleExited = (id: string) => {
+    entries.delete(id);
+    setRenderList((prev) => prev.filter((x) => x !== id));
+    delete props.refs[id];
   };
 
-  // Update refs when notifications change
-  createEffect(() => {
-    const currentRefs: HTMLElement[] = [];
-    props.notifications.forEach((notification) => {
-      const existingRef = props.refs[notification.id];
-      if (existingRef) {
-        currentRefs.push(existingRef);
-      }
-    });
-
-    setNotificationRefs(currentRefs);
-  });
-
-  createListTransition(notificationRefs, {
-    appear: true,
-    onChange({ added, removed, finishRemoved }) {
-      if (added.length > 0) {
-        queueMicrotask(() => {
-          added.forEach((el) => {
-            // Figure direction and start position
-            const isRight = props.position.includes('right');
-            const isLeft = props.position.includes('left');
-            const isTop = props.position.includes('top');
-            const isBottom = props.position.includes('bottom');
-
-            // Start off-screen in the direction the notification comes from
-            let startTransform;
-            if (isRight) {
-              startTransform = 'translateX(100%)';
-            } else if (isLeft) {
-              startTransform = 'translateX(-100%)';
-            } else if (isTop) {
-              startTransform = 'translateY(-100%)';
-            } else if (isBottom) {
-              startTransform = 'translateY(100%)';
-            } else {
-              // Default center - slide from above
-              startTransform = 'translateY(-100%)';
-            }
-
-            // Apply initial state - off-screen
-            el.style.transform = startTransform;
-            el.style.opacity = '1';
-            el.style.willChange = 'transform';
-
-            // Force reflow
-            void el.offsetHeight;
-
-            // Phase 1: Slide to final position first
-            el.style.transition = `transform ${props.duration * 0.6}ms cubic-bezier(0.25, 0.46, 0.45, 0.94)`;
-
-            requestAnimationFrame(() => {
-              requestAnimationFrame(() => {
-                // First go to the final position, then add a small overshoot
-                el.style.transform = 'translateX(0) translateY(0)';
-
-                // Wait for that transition, then add the small overshoot
-                const onReachFinalPosition = () => {
-                  el.removeEventListener('transitionend', onReachFinalPosition);
-
-                  // Now add a small overshoot
-                  el.style.transition = `transform ${props.duration * 0.15}ms ease-out`;
-
-                  let overshootTransform;
-                  if (isRight) {
-                    overshootTransform = 'translateX(-22px)'; // Overshoot left
-                  } else if (isLeft) {
-                    overshootTransform = 'translateX(22px)'; // Overshoot right
-                  } else if (isTop) {
-                    overshootTransform = 'translateY(22px)'; // Overshoot down
-                  } else if (isBottom) {
-                    overshootTransform = 'translateY(-22px)'; // Overshoot up
-                  } else {
-                    overshootTransform = 'translateY(22px)'; // Default overshoot down
-                  }
-
-                  el.style.transform = overshootTransform;
-
-                  // Phase 3: Bounce back to final position
-                  const onOvershootEnd = () => {
-                    el.removeEventListener('transitionend', onOvershootEnd);
-
-                    el.style.transition = `transform ${props.duration * 0.25}ms cubic-bezier(0.68, -0.55, 0.265, 1.55)`;
-                    el.style.transform = 'translateX(0) translateY(0)';
-
-                    const onFinalTransitionEnd = (ev: any) => {
-                      if (ev.target !== el) {return};
-                      el.removeEventListener('transitionend', onFinalTransitionEnd);
-                      el.style.transition = '';
-                      el.style.willChange = '';
-
-                      el.classList.remove(`notification-${props.position}-enter`);
-                      el.classList.add(`notification-${props.position}-entered`);
-                    };
-                    el.addEventListener('transitionend', onFinalTransitionEnd);
-                  };
-
-                  el.addEventListener('transitionend', onOvershootEnd);
-                };
-
-                el.addEventListener('transitionend', onReachFinalPosition);
-              });
-            });
-          });
-        });
-      }
-
-      if (removed.length > 0) {
-        removed.forEach((el) => {
-          el.style.transition = `all ${props.duration}ms ease-out`;
-          el.classList.remove(`notification-${props.position}-entered`);
-          el.classList.add(`notification-${props.position}-exit`);
-        });
-
-        setTimeout(() => {
-          finishRemoved(removed);
-        }, props.duration);
-      } else {
-        finishRemoved(removed);
-      }
-    },
-  });
-
   return (
-    <For each={props.notifications}>
-      {({ style: notificationStyle, ...notification }) => {
-        return (
-          <div
-            ref={(el) => trackElement(el, notification.id)}
-            data-notification-id={notification.id}
-            {...props.getStyles('notification', {
-              style: {
-                ...getNotificationStateStyles({
-                  state: 'entered',
-                  position: props.position,
-                  transitionDuration: props.duration,
-                  maxHeight: props.maxHeight,
-                }),
-                ...notificationStyle,
-              },
-            })}
-          >
-            <NotificationContainer
-              data={notification}
-              onHide={(id) => {
-                props.onHide(id);
+    <TransitionGroup>
+      <For each={renderList()}>
+        {(id) => {
+          const e = entries.get(id);
+          if (!e) { return null };
+
+          const notification = e.item;
+          let divRef: HTMLDivElement | undefined;
+          const nodeRef = { current: null as HTMLElement | null };
+          let hasInitialized = false;
+          let isFirstExitedApplication = true;
+
+          const applyStyles = (state: string) => {
+            if (!divRef) { return };
+
+            const styles = getNotificationStateStyles({
+              state,
+              position: props.position,
+              transitionDuration: props.duration,
+              maxHeight: props.maxHeight,
+            });
+
+            const camelStyles = kebabToCamelCase(styles);
+
+            if (state === 'exited' && isFirstExitedApplication) {
+              isFirstExitedApplication = false;
+              const { transitionDuration, transitionTimingFunction, transitionProperty, ...stylesWithoutTransition } = camelStyles;
+
+              // Only set the specific properties, don't use Object.assign
+              for (const [key, value] of Object.entries(stylesWithoutTransition)) {
+                divRef.style[key as any] = value;
+              }
+              divRef.style.transitionDuration = transitionDuration;
+              divRef.style.transitionTimingFunction = transitionTimingFunction;
+              divRef.style.transitionProperty = transitionProperty;
+            } else {
+              // Only set the specific properties, don't use Object.assign
+              for (const [key, value] of Object.entries(camelStyles)) {
+                divRef.style[key as any] = value;
+              }
+            }
+          };
+
+          return (
+            <Transition
+              appear
+              in={e.visible()}
+              timeout={props.duration}
+              nodeRef={nodeRef}
+               onEnter={() => {
+                applyStyles('exited');
+                if (divRef) { void divRef.offsetHeight };
               }}
-              autoClose={props.autoClose}
-            />
-          </div>
-        );
-      }}
-    </For>
+              onEntering={() => applyStyles('entering')}
+              onEntered={() => applyStyles('entered')}
+              onExit={() => applyStyles('entered')}
+              onExiting={() => applyStyles('exiting')}
+              onExited={() => {
+                applyStyles('exited');
+                handleExited(notification.id);
+              }}
+            >
+              <div
+                ref={(el) => {
+                  divRef = el;
+                  nodeRef.current = el;
+                  props.refs[notification.id] = el;
+                  if (!hasInitialized) {
+                    hasInitialized = true;
+                    applyStyles('exited');
+                  }
+                }}
+                class={props.getStyles('notification').className}
+                style={props.getStyles('notification').style()}
+              >
+                <NotificationContainer
+                  data={notification}
+                  onHide={props.onHide}
+                  autoClose={props.autoClose}
+                />
+              </div>
+            </Transition>
+          );
+        }}
+      </For>
+    </TransitionGroup>
   );
 }
 
@@ -311,11 +256,9 @@ export const Notifications = factory<NotificationsFactory>((_props) => {
 
   const theme = useEmpoleonTheme();
   const data = useNotifications(local.store);
-  const shouldReduceMotion = useReducedMotion();
   const refs: Record<string, HTMLDivElement> = {};
 
-  const reduceMotion = theme.respectReducedMotion ? shouldReduceMotion : false;
-  const duration = reduceMotion ? 1 : local.transitionDuration;
+  const duration = theme.respectReducedMotion && useReducedMotion() ? 1 : local.transitionDuration;
 
   const getStyles = useStyles<NotificationsFactory>({
     name: 'Notifications',
@@ -338,90 +281,28 @@ export const Notifications = factory<NotificationsFactory>((_props) => {
     }));
   });
 
-  const grouped = () => {
-    const result = getGroupedNotifications(data().notifications, local.position!);
-    return result;
-  };
+  const grouped = createMemo(() => getGroupedNotifications(data().notifications, local.position!));
+
+  const positions: NotificationPosition[] = ['top-center', 'top-left', 'top-right', 'bottom-right', 'bottom-left', 'bottom-center'];
 
   return (
     <OptionalPortal withinPortal={local.withinPortal} {...local.portalProps}>
-      <Box {...getStyles('root')} data-position="top-center" ref={local.ref} {...others}>
-        <PositionTransitions
-          notifications={grouped()['top-center']}
-          position="top-center"
-          duration={duration!}
-          maxHeight={local.notificationMaxHeight!}
-          onHide={(id) => hideNotification(id, local.store)}
-          autoClose={local.autoClose!}
-          getStyles={getStyles}
-          refs={refs}
-        />
-      </Box>
-
-      <Box {...getStyles('root')} data-position="top-left" {...others}>
-        <PositionTransitions
-          notifications={grouped()['top-left']}
-          position="top-left"
-          duration={duration!}
-          maxHeight={local.notificationMaxHeight!}
-          onHide={(id) => hideNotification(id, local.store)}
-          autoClose={local.autoClose!}
-          getStyles={getStyles}
-          refs={refs}
-        />
-      </Box>
-
-      <Box {...getStyles('root')} data-position="top-right" {...others}>
-        <PositionTransitions
-          notifications={grouped()['top-right']}
-          position="top-right"
-          duration={duration!}
-          maxHeight={local.notificationMaxHeight!}
-          onHide={(id) => hideNotification(id, local.store)}
-          autoClose={local.autoClose!}
-          getStyles={getStyles}
-          refs={refs}
-        />
-      </Box>
-
-      <Box {...getStyles('root')} data-position="bottom-right" {...others}>
-        <PositionTransitions
-          notifications={grouped()['bottom-right']}
-          position="bottom-right"
-          duration={duration!}
-          maxHeight={local.notificationMaxHeight!}
-          onHide={(id) => hideNotification(id, local.store)}
-          autoClose={local.autoClose!}
-          getStyles={getStyles}
-          refs={refs}
-        />
-      </Box>
-
-      <Box {...getStyles('root')} data-position="bottom-left" {...others}>
-        <PositionTransitions
-          notifications={grouped()['bottom-left']}
-          position="bottom-left"
-          duration={duration!}
-          maxHeight={local.notificationMaxHeight!}
-          onHide={(id) => hideNotification(id, local.store)}
-          autoClose={local.autoClose!}
-          getStyles={getStyles}
-          refs={refs}
-        />
-      </Box>
-
-      <Box {...getStyles('root')} data-position="bottom-center" {...others}>
-        <PositionTransitions
-          notifications={grouped()['bottom-center']}
-          position="bottom-center"
-          duration={duration!}
-          maxHeight={local.notificationMaxHeight!}
-          onHide={(id) => hideNotification(id, local.store)}
-          autoClose={local.autoClose!}
-          getStyles={getStyles}
-          refs={refs}
-        />
-      </Box>
+      <For each={positions}>
+        {(position) => (
+          <Box {...getStyles('root')} data-position={position} ref={position === 'top-center' ? local.ref : undefined} {...others}>
+            <PositionTransitions
+              notifications={grouped()[position]}
+              position={position}
+              duration={duration!}
+              maxHeight={local.notificationMaxHeight!}
+              onHide={(id) => hideNotification(id, local.store)}
+              autoClose={local.autoClose!}
+              getStyles={getStyles}
+              refs={refs}
+            />
+          </Box>
+        )}
+      </For>
     </OptionalPortal>
   );
 });

@@ -131,7 +131,7 @@ function Demo() {
                 onBlur={() => combobox.closeDropdown()}
                 value={search()}
                 placeholder="Search values"
-                onChange={(event) => {
+                onInput={(event) => {
                   combobox.updateSelectedOptionIndex();
                   setSearch(event.currentTarget.value);
                 }}

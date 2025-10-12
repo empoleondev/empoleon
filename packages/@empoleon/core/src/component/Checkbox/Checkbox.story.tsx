@@ -68,7 +68,7 @@ export function AutoContrast() {
       <Checkbox
         label="Auto contrast icon color"
         value="hello"
-        default-checked
+        defaultChecked
         color="lime.4"
         // AutoContrast
       />

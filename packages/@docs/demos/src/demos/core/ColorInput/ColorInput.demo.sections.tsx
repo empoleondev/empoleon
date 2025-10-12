@@ -30,20 +30,20 @@ function Demo() {
 `;
 
 function Demo() {
-  const icon = <IconColorPicker size={18} stroke="1.5" />;
+  const icon = () => <IconColorPicker size={18} stroke="1.5" />;
 
   return (
     <>
       <ColorInput
         label="With custom left section"
         placeholder="Replaces color swatch"
-        leftSection={icon}
+        leftSection={icon()}
         withEyeDropper={false}
       />
       <ColorInput
         label="With custom right section"
         placeholder="Replaces eye dropper"
-        rightSection={icon}
+        rightSection={icon()}
         mt="md"
       />
     </>

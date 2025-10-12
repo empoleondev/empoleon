@@ -1,4 +1,4 @@
-import { splitProps } from 'solid-js';
+import { Show, splitProps } from 'solid-js';
 import {
   createVarsResolver,
   EmpoleonRadius,
@@ -143,20 +143,23 @@ export const DrawerRoot = factory<DrawerRootFactory>((_props) => {
     varsResolver,
   });
 
-  const drawerTransition = (dir === 'rtl' ? rtlTransitions : transitions)[local.position!];
+  const position = () => local.position!;
+  const drawerTransition = () => (dir === 'rtl' ? rtlTransitions : transitions)[position()];
 
   return (
     <DrawerProvider
       value={{ scrollAreaComponent: local.scrollAreaComponent, getStyles, radius: local.radius }}
     >
-      <ModalBase
-        ref={local.ref}
-        {...getStyles('root')}
-        transitionProps={{ transition: drawerTransition, ...local.transitionProps }}
-        data-offset-scrollbars={local.scrollAreaComponent === ScrollArea.Autosize || undefined}
-        unstyled={local.unstyled}
-        {...others}
-      />
+      <Show when={position()} keyed>
+        <ModalBase
+          ref={local.ref}
+          {...getStyles('root')}
+          transitionProps={{ transition: drawerTransition(), ...local.transitionProps }}
+          data-offset-scrollbars={local.scrollAreaComponent === ScrollArea.Autosize || undefined}
+          unstyled={local.unstyled}
+          {...others}
+        />
+      </Show>
     </DrawerProvider>
   );
 });

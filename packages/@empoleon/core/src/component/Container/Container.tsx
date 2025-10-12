@@ -81,7 +81,7 @@ export const Container = factory<ContainerFactory>((_props) => {
   return (
     <Box
       ref={local.ref}
-      mod={[{ fluid: local.fluid, strategy: local.strategy }, local.mod]}
+      mod={[{ fluid: local.fluid, strategy: local.strategy || 'block' }, local.mod]}
       {...getStyles('root')}
       {...others}
     />

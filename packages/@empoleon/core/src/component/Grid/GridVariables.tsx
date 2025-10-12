@@ -25,7 +25,7 @@ export function GridVariables(props: GridVariablesProps) {
     })
   );
 
-  const queries = () =>
+  const queries = createMemo(() =>
     keys(_breakpoints).reduce<Record<string, Record<string, any>>>((acc, breakpoint) => {
       if (!acc[breakpoint]) {
         acc[breakpoint] = {};
@@ -36,9 +36,9 @@ export function GridVariables(props: GridVariablesProps) {
       }
 
       return acc;
-    }, {});
+    }, {}));
 
-  const sortedBreakpoints = getSortedBreakpoints(keys(queries), _breakpoints).filter(
+  const sortedBreakpoints = getSortedBreakpoints(keys(queries()), _breakpoints).filter(
     (breakpoint) => keys(queries()[breakpoint.value]).length > 0
   );
 

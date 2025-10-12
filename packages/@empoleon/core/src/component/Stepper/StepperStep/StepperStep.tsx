@@ -1,10 +1,4 @@
-import {
-  createMemo,
-  createSignal,
-  JSX,
-  onMount,
-  splitProps,
-} from 'solid-js';
+import { createMemo, createSignal, JSX, onMount, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
@@ -155,8 +149,12 @@ export const StepperStep = factory<StepperStepFactory>((_props) => {
 
   const state = createMemo<'stepInactive' | 'stepProgress' | 'stepCompleted'>(() => {
     const active = ctx.activeIndex();
-    if (active === idx()) {return 'stepProgress'};
-    if (active > idx()) {return 'stepCompleted'};
+    if (active === idx()) {
+      return 'stepProgress';
+    }
+    if (active > idx()) {
+      return 'stepCompleted';
+    }
     return 'stepInactive';
   });
 
@@ -166,7 +164,9 @@ export const StepperStep = factory<StepperStepFactory>((_props) => {
   }));
 
   const shouldAllowSelect = createMemo<boolean>(() => {
-    if (typeof ctx.onStepClick !== 'function') {return false};
+    if (typeof ctx.onStepClick !== 'function') {
+      return false;
+    }
     if (typeof local.allowStepSelect === 'boolean') {
       return local.allowStepSelect;
     }

@@ -123,7 +123,9 @@ export const AccordionControl = factory<AccordionControlFactory>((_props) => {
         {
           (() => {
             const chevronFn = local.chevron || ctx.chevron();
-            if (chevronFn === null) {return null};
+            if (chevronFn === null) {
+              return null;
+            }
             if (typeof chevronFn === 'function') {
               return chevronFn();
             }

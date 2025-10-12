@@ -28,12 +28,16 @@ function Demo(
   const [searchValue, setSearchValue] = createSignal('');
 
   const getLeftSection = () => {
-    if (!props.hasLeftSection) {return undefined};
+    if (!props.hasLeftSection) {
+      return undefined;
+    }
     return <IconSearch style={{ width: '16px', height: '16px' }} />;
   };
 
   const getRightSection = () => {
-    if (!props.hasRightSection) {return undefined};
+    if (!props.hasRightSection) {
+      return undefined;
+    }
     return '🔍';
   };
 

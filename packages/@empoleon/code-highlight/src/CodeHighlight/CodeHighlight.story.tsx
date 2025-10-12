@@ -1,5 +1,6 @@
 import { IconBrandCodesandbox } from '@tabler/icons-solidjs';
 import hljs from 'highlight.js';
+import 'highlight.js/styles/atom-one-dark.css';
 import { createEffect, createSignal, JSX } from 'solid-js';
 import { EmpoleonProvider, useEmpoleonColorScheme } from '@empoleon/core';
 import { getCodeFileIcon } from '@empoleonx/dev-icons';
@@ -259,7 +260,7 @@ export function ExtraControls() {
         defaultExpanded={false}
         radius="md"
         withBorder
-        controls={[
+        controls={() => [
           <CodeHighlight.Control
             tooltipLabel="Open in codesandbox"
             component="a"

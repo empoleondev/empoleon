@@ -1,4 +1,4 @@
-import { renderHook, cleanup } from '@solidjs/testing-library';
+import { cleanup, renderHook } from '@solidjs/testing-library';
 import { useElementSize, useResizeObserver } from './use-resize-observer';
 
 class MockResizeObserver {

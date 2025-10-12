@@ -27,7 +27,7 @@ function Wrapper(props: any) {
   return (
     <Input
       placeholder="Clearable input"
-      value={value}
+      value={value()}
       onChange={(event) => setValue(event.currentTarget.value)}
       rightSection={value() !== '' ? <Input.ClearButton onClick={() => setValue('')} /> : undefined}
       rightSectionPointerEvents="auto"

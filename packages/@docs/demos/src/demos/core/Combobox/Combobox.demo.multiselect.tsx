@@ -96,22 +96,23 @@ function Demo() {
   const handleValueRemove = (val: string) =>
     setValue((current) => current.filter((v) => v !== val));
 
-  const values = value().map((item) => (
-    <Pill withRemoveButton onRemove={() => handleValueRemove(item)}>
-      {item}
-    </Pill>
-  ));
-
   return (
     <Combobox store={combobox} onOptionSubmit={handleValueSelect}>
       <Combobox.DropdownTarget>
         <PillsInput pointer onClick={() => combobox.toggleDropdown()}>
           <Pill.Group>
-            {values.length > 0 ? (
-              values
-            ) : (
-              <Input.Placeholder>Pick one or more values</Input.Placeholder>
-            )}
+            <Show
+              when={value().length > 0}
+              fallback={<Input.Placeholder>Pick one or more values</Input.Placeholder>}
+            >
+              <For each={value()}>
+                {(item) => (
+                  <Pill withRemoveButton onRemove={() => handleValueRemove(item)}>
+                    {item}
+                  </Pill>
+                )}
+              </For>
+            </Show>
 
             <Combobox.EventsTarget>
               <PillsInput.Field

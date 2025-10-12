@@ -50,7 +50,7 @@ export function Demo() {
             inset={0}
             bottom="auto"
             onClick={() => setOpened(false)}
-            style={{ ...transitionStyle, zIndex: 1 }}
+            style={{ ...transitionStyle, 'z-index': 1 }}
           >
             Click here to close
           </Paper>

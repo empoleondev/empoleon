@@ -38,6 +38,7 @@ export function getNotificationStateStyles({
     opacity: 0,
     'max-height': `${maxHeight}px`,
     transform: transforms[property],
+    'clip-path': 'inset(-30px)',
     'transition-duration': `${transitionDuration}ms, ${transitionDuration}ms, ${transitionDuration}ms`,
     'transition-timing-function':
       'cubic-bezier(.51,.3,0,1.21), cubic-bezier(.51,.3,0,1.21), linear',
@@ -51,7 +52,7 @@ export function getNotificationStateStyles({
 
   const outState: JSX.CSSProperties = {
     opacity: 0,
-    'max-height': `${maxHeight}px`,
+    'max-height': 0,
     transform: transforms[property],
   };
 

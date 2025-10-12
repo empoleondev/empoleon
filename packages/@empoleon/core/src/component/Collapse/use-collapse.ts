@@ -29,16 +29,22 @@ export function useCollapse(props: UseCollapseParams) {
 
   const measureContentHeight = (): number => {
     const element = elementRef();
-    if (!element) {return 0};
+    if (!element) {
+      return 0;
+    }
 
     const contentElement = element.querySelector('[data-collapse-content]') as HTMLElement;
-    if (!contentElement) {return 0};
+    if (!contentElement) {
+      return 0;
+    }
 
     return contentElement.scrollHeight;
   };
 
   const updateHeight = (newHeight: number, immediate = false) => {
-    if (Math.abs(newHeight - lastKnownHeight) <= 1) {return};
+    if (Math.abs(newHeight - lastKnownHeight) <= 1) {
+      return;
+    }
 
     batch(() => {
       lastKnownHeight = newHeight;
@@ -60,13 +66,19 @@ export function useCollapse(props: UseCollapseParams) {
 
   const setupResizeObserver = () => {
     const element = elementRef();
-    if (!element || resizeObserver) {return};
+    if (!element || resizeObserver) {
+      return;
+    }
 
     const contentElement = element.querySelector('[data-collapse-content]');
-    if (!contentElement) {return};
+    if (!contentElement) {
+      return;
+    }
 
     resizeObserver = new ResizeObserver((entries) => {
-      if (isAnimating() || !local.opened()) {return};
+      if (isAnimating() || !local.opened()) {
+        return;
+      }
 
       for (const entry of entries) {
         const target = entry.target as HTMLElement;
@@ -107,7 +119,9 @@ export function useCollapse(props: UseCollapseParams) {
     const element = elementRef();
     const isOpened = local.opened();
 
-    if (!element) {return};
+    if (!element) {
+      return;
+    }
 
     if (timeoutId) {
       clearTimeout(timeoutId);
@@ -159,7 +173,9 @@ export function useCollapse(props: UseCollapseParams) {
 
   return () => ({
     ref: (el: HTMLDivElement) => {
-      if (!el || elementRef() === el) {return};
+      if (!el || elementRef() === el) {
+        return;
+      }
 
       setElementRef(el);
 

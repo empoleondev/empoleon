@@ -1,5 +1,5 @@
 import { IconCheck, IconX } from '@tabler/icons-solidjs';
-import { createSignal } from 'solid-js';
+import { createSignal, For } from 'solid-js';
 import { Box, PasswordInput, Popover, Progress, Text } from '@empoleon/core';
 import { EmpoleonDemo } from '@empoleonx/demo';
 
@@ -77,16 +77,16 @@ function Demo() {
 }
 `;
 
-function PasswordRequirement({ meets, label }: { meets: boolean; label: string }) {
+function PasswordRequirement(props: { meets: boolean; label: string }) {
   return (
     <Text
-      c={meets ? 'teal' : 'red'}
+      c={props.meets ? 'teal' : 'red'}
       style={{ display: 'flex', alignItems: 'center' }}
       mt={7}
       size="sm"
     >
-      {meets ? <IconCheck size={14} /> : <IconX size={14} />}
-      <Box ml={10}>{label}</Box>
+      {props.meets ? <IconCheck size={14} /> : <IconX size={14} />}
+      <Box ml={10}>{props.label}</Box>
     </Text>
   );
 }
@@ -113,12 +113,8 @@ function getStrength(password: string) {
 function Demo() {
   const [popoverOpened, setPopoverOpened] = createSignal(false);
   const [value, setValue] = createSignal('');
-  const checks = requirements.map((requirement) => (
-    <PasswordRequirement label={requirement.label} meets={requirement.re.test(value())} />
-  ));
-
-  const strength = getStrength(value());
-  const color = strength === 100 ? 'teal' : strength > 50 ? 'yellow' : 'red';
+  const strength = () => getStrength(value());
+  const color = () => strength() === 100 ? 'teal' : strength() > 50 ? 'yellow' : 'red';
 
   return (
     <Popover
@@ -128,23 +124,30 @@ function Demo() {
       transitionProps={{ transition: 'pop' }}
     >
       <Popover.Target>
-        <div
-          on-focus-capture={() => setPopoverOpened(true)}
-          on-blur-capture={() => setPopoverOpened(false)}
-        >
-          <PasswordInput
-            withAsterisk
-            label="Your password"
-            placeholder="Your password"
-            value={value()}
-            onChange={(event) => setValue(event.currentTarget.value)}
-          />
-        </div>
+        {(targetProps) => (
+          <div
+            {...targetProps}
+            onFocusIn={() => setPopoverOpened(true)}
+            onFocusOut={() => setPopoverOpened(false)}
+          >
+            <PasswordInput
+              withAsterisk
+              label="Your password"
+              placeholder="Your password"
+              value={value()}
+              onInput={(event) => setValue(event.currentTarget.value)}
+            />
+          </div>
+        )}
       </Popover.Target>
       <Popover.Dropdown>
-        <Progress color={color} value={strength} size={5} mb="xs" />
-        <PasswordRequirement label="Includes at least 6 characters" meets={value.length > 5} />
-        {checks}
+        <Progress color={color()} value={strength()} size={5} mb="xs" />
+        <PasswordRequirement label="Includes at least 6 characters" meets={value().length > 5} />
+        <For each={requirements}>
+          {(requirement) => (
+            <PasswordRequirement label={requirement.label} meets={requirement.re.test(value())} />
+          )}
+        </For>
       </Popover.Dropdown>
     </Popover>
   );

@@ -38,7 +38,7 @@ function Demo() {
 
   const showNotification = () => {
     notifications.show({
-      title: `Notification ${counter}`,
+      title: `Notification ${counter()}`,
       message: 'Most notifications are added to queue',
     });
 

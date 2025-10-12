@@ -1,7 +1,9 @@
 import { JSX } from 'solid-js';
 
 export function isElement(value: any): value is JSX.Element {
-  if (value == null) {return false};
+  if (value == null) {
+    return false;
+  }
 
   // Primitive values are not elements
   if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') {

@@ -44,7 +44,7 @@ export function WithinGroup() {
         </RadioCard>
       </RadioGroup>
 
-      <div>{JSON.stringify(value)}</div>
+      <div>{JSON.stringify(value())}</div>
     </div>
   );
 }

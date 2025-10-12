@@ -379,7 +379,7 @@ export function Popover(_props: PopoverProps) {
         arrowPosition: () => local.arrowPosition!,
         placement: () => popover.floating().placement,
         trapFocus: local.trapFocus,
-        withinPortal: local.withinPortal,
+        withinPortal: () => local.withinPortal,
         portalProps: local.portalProps,
         zIndex: local.zIndex,
         radius: local.radius,

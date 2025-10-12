@@ -1,4 +1,4 @@
-import { splitProps } from 'solid-js';
+import { Show, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
@@ -43,27 +43,25 @@ export const AppShellNavbar = factory<AppShellNavbarFactory>((_props) => {
 
   const ctx = useAppShellContext();
 
-  if (ctx.disabled) {
-    return null;
-  }
-
   return (
-    // @ts-ignore
-    <Box
-      component="nav"
-      ref={local.ref}
-      mod={[{ 'with-border': local.withBorder ?? ctx.withBorder }, local.mod]}
-      {...ctx.getStyles('navbar', {
-        className: local.className,
-        classNames: local.classNames,
-        styles: local.styles,
-        style: local.style,
-      })}
-      {...others}
-      __vars={{
-        '--app-shell-navbar-z-index': `calc(${local.zIndex ?? ctx.zIndex} + 1)`,
-      }}
-    />
+    <Show when={!ctx.disabled()} fallback={null}>
+      {/* @ts-ignore */}
+      <Box
+        component="nav"
+        ref={local.ref}
+        mod={[{ 'with-border': local.withBorder ?? ctx.withBorder() }, local.mod]}
+        {...ctx.getStyles('navbar', {
+          className: local.className,
+          classNames: local.classNames,
+          styles: local.styles,
+          style: local.style,
+        })}
+        {...others}
+        __vars={{
+          '--app-shell-navbar-z-index': `calc(${local.zIndex ?? ctx.zIndex()} + 1)`,
+        }}
+      />
+    </Show>
   );
 });
 
