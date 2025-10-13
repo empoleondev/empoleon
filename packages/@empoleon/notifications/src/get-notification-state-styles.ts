@@ -1,9 +1,9 @@
-// import { TransitionStatus } from 'solid-transition-group';
+import { TransitionStatus } from './solid-transition-group';
 import { JSX } from 'solid-js';
 import type { NotificationsProps } from './Notifications';
 
 interface NotificationStateStylesProps {
-  state: any /*TransitionStatus;*/;
+  state: TransitionStatus;
   maxHeight: number | string;
   position: NotificationsProps['position'];
   transitionDuration: number;
@@ -23,23 +23,18 @@ const noTransform = {
   'bottom-center': 'translateY(0)',
 };
 
-export function getNotificationStateStyles({
-  state,
-  maxHeight,
-  position,
-  transitionDuration,
-}: NotificationStateStylesProps): JSX.CSSProperties {
-  const [vertical, horizontal] = position!.split('-');
+export function getNotificationStateStyles(props: NotificationStateStylesProps): JSX.CSSProperties {
+  const [vertical, horizontal] = props.position!.split('-');
   const property = (
     horizontal === 'center' ? `${vertical}-center` : horizontal
   ) as keyof typeof transforms;
 
   const commonStyles: JSX.CSSProperties = {
     opacity: 0,
-    'max-height': `${maxHeight}px`,
+    'max-height': `${props.maxHeight}px`,
     transform: transforms[property],
     'clip-path': 'inset(-30px)',
-    'transition-duration': `${transitionDuration}ms, ${transitionDuration}ms, ${transitionDuration}ms`,
+    'transition-duration': `${props.transitionDuration}ms, ${props.transitionDuration}ms, ${props.transitionDuration}ms`,
     'transition-timing-function':
       'cubic-bezier(.51,.3,0,1.21), cubic-bezier(.51,.3,0,1.21), linear',
     'transition-property': 'opacity, transform, max-height',
@@ -63,5 +58,5 @@ export function getNotificationStateStyles({
     exited: outState,
   };
 
-  return { ...commonStyles, ...transitionStyles[state as keyof typeof transitionStyles] };
+  return { ...commonStyles, ...transitionStyles[props.state as keyof typeof transitionStyles] };
 }

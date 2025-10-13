@@ -38,7 +38,7 @@ export function AutoContrast() {
       <Radio
         label="Auto contrast icon color"
         value="hello"
-        default-checked
+        defaultChecked
         color="lime.4"
         autoContrast
       />
@@ -49,7 +49,7 @@ export function AutoContrast() {
 export function OutlineVariant() {
   return (
     <div style={{ padding: '20px', display: 'flex', gap: '40px' }}>
-      <Radio variant="outline" label="React" value="react" name="hello" default-checked />
+      <Radio variant="outline" label="React" value="react" name="hello" defaultChecked />
       <Radio variant="outline" label="Angular" value="nu" name="hello" disabled />
       <Radio variant="outline" label="Svelte" value="sv" disabled={false} name="hello" />
     </div>

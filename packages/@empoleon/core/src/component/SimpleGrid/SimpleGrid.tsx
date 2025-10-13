@@ -1,4 +1,4 @@
-import { splitProps } from 'solid-js';
+import { Show, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
@@ -78,9 +78,9 @@ export const SimpleGrid = factory<SimpleGridFactory>((_props) => {
 
   const responsiveClassName = useRandomClassName();
 
-  if (local.type === 'container') {
-    return (
-      <>
+  return (
+    <>
+      <Show when={local.type === 'container'}>
         <SimpleGridContainerVariables {...props} selector={`.${responsiveClassName}`} />
         <Box component="div" {...getStyles('container')}>
           <Box
@@ -89,14 +89,11 @@ export const SimpleGrid = factory<SimpleGridFactory>((_props) => {
             {...others}
           />
         </Box>
-      </>
-    );
-  }
-
-  return (
-    <>
-      <SimpleGridMediaVariables {...props} selector={`.${responsiveClassName}`} />
-      <Box ref={local.ref} {...getStyles('root', { className: responsiveClassName })} {...others} />
+      </Show>
+      <Show when={local.type === 'media'}>
+        <SimpleGridMediaVariables {...props} selector={`.${responsiveClassName}`} />
+        <Box ref={local.ref} {...getStyles('root', { className: responsiveClassName })} {...others} />
+      </Show>
     </>
   );
 });

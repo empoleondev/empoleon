@@ -4,8 +4,8 @@ import type { StepperFactory } from './Stepper';
 
 interface StepperContextValue {
   getStyles: GetStylesApi<StepperFactory>;
-  orientation: 'horizontal' | 'vertical' | undefined;
-  iconPosition: 'left' | 'right' | undefined;
+  orientation: () => 'horizontal' | 'vertical' | undefined;
+  iconPosition: () => 'left' | 'right' | undefined;
   registerStep: () => number;
   activeIndex: () => number;
   onStepClick?: (stepIndex: number) => void;

@@ -13,7 +13,7 @@ function Demo() {
 
 function Demo() {
   return (
-    <Radio icon={CheckIcon} label="Custom check icon" name="check" value="check" default-checked />
+    <Radio icon={CheckIcon} label="Custom check icon" name="check" value="check" defaultChecked />
   );
 }
 

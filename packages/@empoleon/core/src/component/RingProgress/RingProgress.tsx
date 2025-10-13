@@ -1,4 +1,4 @@
-import { For, JSX, splitProps } from 'solid-js';
+import { Index, JSX, splitProps } from 'solid-js';
 import {
   Box,
   BoxProps,
@@ -73,9 +73,7 @@ const varsResolver = createVarsResolver<RingProgressFactory>((_, props) => ({
   root: {
     '--rp-size': rem(props.size),
     '--rp-label-offset': rem(props.thickness! * 2),
-    '--rp-transition-duration': props.transitionDuration
-      ? `${props.transitionDuration}ms`
-      : undefined,
+    '--rp-transition-duration': props.transitionDuration ? `${props.transitionDuration}ms`: undefined,
   },
 }));
 
@@ -127,21 +125,21 @@ export const RingProgress = factory<RingProgressFactory>((_props) => {
   return (
     <Box {...getStyles('root')} size={local.size} ref={local.ref} {...others}>
       <Box component="svg" {...getStyles('svg')}>
-        <For each={curvesData()}>
+        <Index each={curvesData()}>
           {(item) => (
             <Curve
-              {...item.data}
+              {...item().data}
               size={local.size!}
               thickness={clampedThickness()}
-              sum={item.sum}
-              offset={item.offset}
-              color={item.data?.color}
-              root={item.root}
-              lineRoundCaps={item.lineRoundCaps}
+              sum={item().sum}
+              offset={item().offset}
+              color={item().data?.color}
+              root={item().root}
+              lineRoundCaps={item().lineRoundCaps}
               getStyles={getStyles}
             />
           )}
-        </For>
+        </Index>
       </Box>
       {local.label && (
         <Box component="div" {...getStyles('label')}>

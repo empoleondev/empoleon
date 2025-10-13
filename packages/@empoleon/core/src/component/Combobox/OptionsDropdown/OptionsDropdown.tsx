@@ -153,18 +153,6 @@ export function OptionsDropdown(_props: OptionsDropdownProps) {
 
   const isEmpty = createMemo(() => isEmptyComboboxData(filteredData()));
 
-  const options = () =>
-    filteredData().map((item) => (
-      <Option
-        data={item}
-        withCheckIcon={local.withCheckIcon}
-        value={local.value}
-        checkIconPosition={local.checkIconPosition}
-        unstyled={local.unstyled}
-        renderOption={local.renderOption}
-      />
-    ));
-
   return (
     <Combobox.Dropdown hidden={local.hidden || (local.hiddenWhenEmpty && isEmpty())} data-composed>
       <Combobox.Options labelledBy={local.labelId} aria-label={local['aria-label']}>
@@ -176,10 +164,32 @@ export function OptionsDropdown(_props: OptionsDropdownProps) {
             offsetScrollbars="y"
             {...local.scrollAreaProps}
           >
-            {options()}
+            <For each={filteredData()}>
+              {(item) => (
+                <Option
+                  data={item}
+                  withCheckIcon={local.withCheckIcon}
+                  value={local.value}
+                  checkIconPosition={local.checkIconPosition}
+                  unstyled={local.unstyled}
+                  renderOption={local.renderOption}
+                />
+              )}
+            </For>
           </ScrollArea.Autosize>
         ) : (
-          options()
+          <For each={filteredData()}>
+            {(item) => (
+              <Option
+                data={item}
+                withCheckIcon={local.withCheckIcon}
+                value={local.value}
+                checkIconPosition={local.checkIconPosition}
+                unstyled={local.unstyled}
+                renderOption={local.renderOption}
+              />
+            )}
+          </For>
         )}
         {isEmpty() && local.nothingFoundMessage && (
           <Combobox.Empty>{local.nothingFoundMessage}</Combobox.Empty>

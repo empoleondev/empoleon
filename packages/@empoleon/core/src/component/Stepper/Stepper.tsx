@@ -206,8 +206,8 @@ export const Stepper = factory<StepperFactory>((_props) => {
     <StepperProvider
       value={{
         getStyles,
-        orientation: local.orientation,
-        iconPosition: local.iconPosition,
+        orientation: () => local.orientation,
+        iconPosition: () => local.iconPosition,
         registerStep,
         activeIndex: () => local.active,
         onStepClick: local.onStepClick,
@@ -231,7 +231,8 @@ export const Stepper = factory<StepperFactory>((_props) => {
           }}
         >
           <StepNodes
-            {...(getStyles('separator') as any)}
+            className={getStyles('separator').className}
+            style={(getStyles('separator') as any).style()}
             active={local.active}
             orientation={local.orientation}
             children={local.children}

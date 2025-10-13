@@ -1,6 +1,7 @@
 import { createEffect, JSX } from 'solid-js';
 import { CodeHighlightAdapterProvider, createShikiAdapter } from '@empoleon/code-highlight';
 import { EmpoleonProvider, useEmpoleonColorScheme } from '@empoleon/core';
+import { Notifications } from '@empoleon/notifications';
 import { renderDemo } from '../../render-demo';
 import * as demos from './index';
 
@@ -23,6 +24,7 @@ export default {
     (Story: () => JSX.Element, context: any) => (
       <CodeHighlightAdapterProvider adapter={shikiAdapter}>
         <EmpoleonProvider>
+          <Notifications zIndex={10000} />
           <ColorSchemeWrapper globals={context.globals}>
             <Story />
           </ColorSchemeWrapper>

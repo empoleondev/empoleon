@@ -41,7 +41,7 @@ function Demo() {
       mx="auto"
       label="Change visibility toggle icon"
       placeholder="Change visibility toggle icon"
-      default-value="secret"
+      defaultValue="secret"
       visibilityToggleIcon={VisibilityToggleIcon}
     />
   );

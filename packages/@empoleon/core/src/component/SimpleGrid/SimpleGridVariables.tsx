@@ -38,8 +38,10 @@ export function SimpleGridMediaVariables(props: SimpleGridVariablesProps) {
         acc[breakpoint]['--sg-spacing-x'] = getSpacing(props.spacing[breakpoint]);
       }
 
-      if (typeof _verticalSpacing === 'object' && _verticalSpacing[breakpoint] !== undefined) {
-        acc[breakpoint]['--sg-spacing-y'] = getSpacing(_verticalSpacing[breakpoint]);
+      const verticalSpacing = _verticalSpacing();
+
+      if (typeof verticalSpacing === 'object' && verticalSpacing[breakpoint] !== undefined) {
+        acc[breakpoint]['--sg-spacing-y'] = getSpacing(verticalSpacing[breakpoint]);
       }
 
       if (typeof props.cols === 'object' && props.cols[breakpoint] !== undefined) {
@@ -114,8 +116,10 @@ export function SimpleGridContainerVariables(props: SimpleGridVariablesProps) {
         acc[breakpoint]['--sg-spacing-x'] = getSpacing(props.spacing[breakpoint]);
       }
 
-      if (typeof _verticalSpacing === 'object' && _verticalSpacing[breakpoint] !== undefined) {
-        acc[breakpoint]['--sg-spacing-y'] = getSpacing(_verticalSpacing[breakpoint]);
+      const verticalSpacing = _verticalSpacing();
+
+      if (typeof verticalSpacing === 'object' && verticalSpacing[breakpoint] !== undefined) {
+        acc[breakpoint]['--sg-spacing-y'] = getSpacing(verticalSpacing[breakpoint]);
       }
 
       if (typeof props.cols === 'object' && props.cols[breakpoint] !== undefined) {

@@ -29,7 +29,7 @@ export function WithinDisabledFieldset() {
 export function Usage() {
   return (
     <div style={{ padding: '40px' }}>
-      <Switch label="Default Switch" default-checked />
+      <Switch label="Default Switch" defaultChecked />
     </div>
   );
 }

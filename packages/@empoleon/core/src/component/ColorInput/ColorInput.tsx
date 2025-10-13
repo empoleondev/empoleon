@@ -46,7 +46,7 @@ export interface ColorInputProps
     __BaseInputProps,
     __ColorPickerProps,
     StylesApiProps<ColorInputFactory>,
-    ElementProps<'input', 'size' | 'onChange' | 'value' | 'defaultValue'> {
+    Omit<ElementProps<'input', 'size' | 'onChange' | 'value' | 'defaultValue'>, 'defaultValue'> {
   /** If input is not allowed, the user can only pick value with color picker and swatches, `false` by default */
   disallowInput?: boolean;
 

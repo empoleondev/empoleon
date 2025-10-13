@@ -75,7 +75,6 @@ export function DomainSlider() {
   return (
     <div style={{ 'padding': '40px', 'max-width': '300px' }}>
       <Slider
-      // @ts-ignore
         domain={[0, 100]}
         min={20}
         max={60}

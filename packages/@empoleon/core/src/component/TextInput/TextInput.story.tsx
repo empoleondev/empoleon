@@ -180,7 +180,7 @@ export function HomepageCollage() {
               <Radio value="svelte" label="Svelte" size="md" />
             </Group>
           </Radio.Group>
-          <Checkbox label="I agree to terms and condition" size="md" default-checked />
+          <Checkbox label="I agree to terms and condition" size="md" defaultChecked />
         </Stack>
 
         <Stack gap="lg">

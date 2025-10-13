@@ -206,12 +206,12 @@ export const StepperStep = factory<StepperStepFactory>((_props) => {
       {...ctx.getStyles('step', {
         className: local.className,
         style: local.style,
-        variant: ctx.orientation,
+        variant: ctx.orientation(),
         ...stylesApi,
       })}
       mod={[
         {
-          'icon-position': local.iconPosition || ctx.iconPosition,
+          'icon-position': ctx.iconPosition() || local.iconPosition,
           'allow-click': local.allowStepClick,
           type: 'step',
         },
@@ -270,7 +270,7 @@ export const StepperStep = factory<StepperStepFactory>((_props) => {
               )
             ) : null}
           </Box>
-          {ctx.orientation === 'vertical' && (
+          {ctx.orientation() === 'vertical' && (
             <Box
               component="span"
               {...ctx.getStyles('verticalSeparator', stylesApi)}
@@ -284,8 +284,8 @@ export const StepperStep = factory<StepperStepFactory>((_props) => {
         <Box
           component="span"
           {...ctx.getStyles('stepBody', stylesApi)}
-          data-orientation={ctx.orientation}
-          data-icon-position={local.iconPosition || ctx.iconPosition}
+          data-orientation={ctx.orientation()}
+          data-icon-position={ctx.iconPosition() || local.iconPosition}
         >
           {local.label && (
             <Box component="span" {...ctx.getStyles('stepLabel', stylesApi)}>

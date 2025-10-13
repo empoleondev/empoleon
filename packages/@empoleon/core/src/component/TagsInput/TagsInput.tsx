@@ -346,10 +346,16 @@ export const TagsInput = factory<TagsInputFactory>((_props) => {
     }
   };
 
-  createEffect(() => {
-    if (local.selectFirstOptionOnChange) {
+  createEffect((prev) => {
+    const currentSearch = _searchValue();
+    const shouldSelect = local.selectFirstOptionOnChange;
+
+    // Only run if search changed and not on initial mount
+    if (shouldSelect && prev !== undefined && prev !== currentSearch) {
       combobox.selectFirstOption();
     }
+
+    return currentSearch;
   });
 
   return (

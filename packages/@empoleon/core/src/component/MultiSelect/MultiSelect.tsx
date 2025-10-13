@@ -291,10 +291,16 @@ export const MultiSelect = factory<MultiSelectFactory>((_props) => {
     </span>
   );
 
-  createEffect(() => {
-    if (local.selectFirstOptionOnChange) {
+  createEffect((prev) => {
+    const currentSearch = _searchValue();
+    const shouldSelect = local.selectFirstOptionOnChange;
+
+    // Only run if search changed and not on initial mount
+    if (shouldSelect && prev !== undefined && prev !== currentSearch) {
       combobox.selectFirstOption();
     }
+
+    return currentSearch;
   });
 
   const clearButton = (
@@ -308,7 +314,7 @@ export const MultiSelect = factory<MultiSelectFactory>((_props) => {
     />
   );
 
-  const filteredData = filterPickedValues({ data: parsedData, value: _value() });
+  const filteredData = () => filterPickedValues({ data: parsedData, value: _value() });
   const _clearable = () =>
     local.clearable && _value().length > 0 && !local.disabled && !local.readOnly;
 
@@ -389,7 +395,7 @@ export const MultiSelect = factory<MultiSelectFactory>((_props) => {
             }}
             pointer={!local.searchable}
             onClick={() => (local.searchable ? combobox.openDropdown() : combobox.toggleDropdown())}
-            data-expanded={combobox.dropdownOpened || undefined}
+            data-expanded={combobox.dropdownOpened() || undefined}
             id={_id}
             required={local.required}
             mod={local.mod}
@@ -444,7 +450,7 @@ export const MultiSelect = factory<MultiSelectFactory>((_props) => {
         </Combobox.DropdownTarget>
 
         <OptionsDropdown
-          data={local.hidePickedOptions ? filteredData : parsedData}
+          data={local.hidePickedOptions ? filteredData() : parsedData}
           hidden={local.readOnly || local.disabled}
           filter={local.filter}
           search={_searchValue()}

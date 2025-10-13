@@ -55,6 +55,9 @@ export interface SliderProps
   /** Maximum possible value, `100` by default */
   max?: number;
 
+  /** Domain of the slider, defines the full range of possible values @default `[min, max]` */
+  domain?: [number, number];
+
   /** Number by which value will be incremented/decremented with thumb drag and arrows, `1` by default */
   step?: number;
 
@@ -161,6 +164,7 @@ export const Slider = factory<SliderFactory>((_props) => {
     'size',
     'min',
     'max',
+    'domain',
     'step',
     'precision',
     'defaultValue',
@@ -222,11 +226,15 @@ export const Slider = factory<SliderFactory>((_props) => {
 
   const root = null as HTMLDivElement | null;
   const thumb = null as HTMLDivElement | null;
+  const domain = createMemo(() => local.domain || [local.min!, local.max!]);
+  const domainMin = () => domain()[0];
+  const domainMax = () => domain()[1];
   const position = createMemo(() => {
-    const pos = getPosition({ value: _value(), min: local.min!, max: local.max! });
+    const pos = getPosition({ value: _value(), min: domainMin(), max: domainMax() });
     return pos;
   });
   const scaledValue = createMemo(() => local.scale!(_value()));
+
   const _label = createMemo(() =>
     typeof local.label === 'function' ? local.label(scaledValue()) : local.label
   );
@@ -236,20 +244,21 @@ export const Slider = factory<SliderFactory>((_props) => {
     if (!local.disabled) {
       const nextValue = getChangeValue({
         value: x,
-        min: local.min!,
-        max: local.max!,
+        min: domainMin(),
+        max: domainMax(),
         step: local.step!,
         precision,
       });
+      const clampedValue = clamp(nextValue, local.min!, local.max!);
       const finalValue =
         local.restrictToMarks && local.marks?.length
           ? findClosestNumber(
-              nextValue,
+              clampedValue,
               local.marks.map((mark: any) => mark.value)
             )
-          : nextValue;
+          : clampedValue;
       setValue(finalValue);
-      valueRef = nextValue;
+      valueRef = clampedValue;
 
       local.onChange?.(finalValue);
     }
@@ -425,8 +434,8 @@ export const Slider = factory<SliderFactory>((_props) => {
           offset={0}
           filled={position()}
           marks={local.marks}
-          min={local.min!}
-          max={local.max!}
+          min={domainMin()}
+          max={domainMax()}
           value={scaledValue()}
           disabled={local.disabled}
           containerProps={{
@@ -438,8 +447,8 @@ export const Slider = factory<SliderFactory>((_props) => {
           }}
         >
           <Thumb
-            max={local.max!}
-            min={local.min!}
+            max={domainMax()}
+            min={domainMin()}
             value={scaledValue()}
             position={position()}
             dragging={active()}

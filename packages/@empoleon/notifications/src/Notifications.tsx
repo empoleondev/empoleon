@@ -16,7 +16,7 @@ import {
   useStyles,
 } from '@empoleon/core';
 import { useReducedMotion } from '@empoleon/hooks';
-import { Transition, TransitionGroup } from './solid-transition-group';
+import { Transition, TransitionGroup, TransitionStatus } from './solid-transition-group';
 import { getGroupedNotifications } from './get-grouped-notifications/get-grouped-notifications';
 import { getNotificationStateStyles } from './get-notification-state-styles';
 import { NotificationContainer } from './NotificationContainer';
@@ -108,7 +108,7 @@ function PositionTransitions(props: {
   getStyles: any;
   refs: Record<string, HTMLDivElement>;
 }) {
-  const entries = new Map<string, { item: any; visible: () => boolean; setVisible: (v: boolean) => void }>();
+  const entries = new Map<string, { item: () => any; setItem: (v: any) => void; visible: () => boolean; setVisible: (v: boolean) => void }>();
   const [renderList, setRenderList] = createSignal<string[]>([]);
 
   createEffect(() => {
@@ -119,10 +119,11 @@ function PositionTransitions(props: {
       const id = n.id;
       if (!entries.has(id)) {
         const [visible, setVisible] = createSignal(true);
-        entries.set(id, { item: n, visible, setVisible });
+        const [item, setItem] = createSignal(n);
+        entries.set(id, { item, setItem, visible, setVisible });
       } else {
         const e = entries.get(id)!;
-        e.item = n;
+        e.setItem(n);
         e.setVisible(true);
       }
     }
@@ -149,13 +150,12 @@ function PositionTransitions(props: {
           const e = entries.get(id);
           if (!e) { return null };
 
-          const notification = e.item;
           let divRef: HTMLDivElement | undefined;
           const nodeRef = { current: null as HTMLElement | null };
           let hasInitialized = false;
           let isFirstExitedApplication = true;
 
-          const applyStyles = (state: string) => {
+          const applyStyles = (state: TransitionStatus) => {
             if (!divRef) { return };
 
             const styles = getNotificationStateStyles({
@@ -202,14 +202,14 @@ function PositionTransitions(props: {
               onExiting={() => applyStyles('exiting')}
               onExited={() => {
                 applyStyles('exited');
-                handleExited(notification.id);
+                handleExited(e.item().id);
               }}
             >
               <div
                 ref={(el) => {
                   divRef = el;
                   nodeRef.current = el;
-                  props.refs[notification.id] = el;
+                  props.refs[e.item().id] = el;
                   if (!hasInitialized) {
                     hasInitialized = true;
                     applyStyles('exited');
@@ -219,7 +219,7 @@ function PositionTransitions(props: {
                 style={props.getStyles('notification').style()}
               >
                 <NotificationContainer
-                  data={notification}
+                  data={e.item()}
                   onHide={props.onHide}
                   autoClose={props.autoClose}
                 />
@@ -315,3 +315,4 @@ Notifications.update = notifications.update;
 Notifications.clean = notifications.clean;
 Notifications.cleanQueue = notifications.cleanQueue;
 Notifications.updateState = notifications.updateState;
+

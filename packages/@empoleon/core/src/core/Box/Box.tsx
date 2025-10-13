@@ -52,7 +52,10 @@ export interface BoxProps extends EmpoleonStyleProps {
 export type ElementProps<
   ElementType extends keyof JSX.IntrinsicElements,
   PropsToOmit extends string = never,
-> = Omit<JSX.IntrinsicElements[ElementType], 'style' | PropsToOmit>;
+> = Omit<JSX.IntrinsicElements[ElementType], 'style' | PropsToOmit> & {
+  defaultValue?: any;
+  defaultChecked?: any;
+};
 
 export interface BoxComponentProps extends BoxProps {
   /** Variant passed from parent component, sets `data-variant` */
@@ -113,6 +116,25 @@ const _Box = <T extends HTMLElement = HTMLDivElement>(
     })
   );
 
+  // Handle defaultValue -> value conversion for form elements
+  const processedRest = createMemo(() => {
+    const processed = { ...rest };
+
+    // If defaultValue exists and value doesn't, convert defaultValue to value
+    if ('defaultValue' in processed && !('value' in processed)) {
+      processed.value = processed.defaultValue;
+      delete processed.defaultValue;
+    }
+
+    // Similarly for defaultChecked -> checked
+    if ('defaultChecked' in processed && !('checked' in processed)) {
+      processed.checked = processed.defaultChecked;
+      delete processed.defaultChecked;
+    }
+
+    return processed;
+  });
+
   const elementProps = createMemo(() => {
     return {
       ref: refToPass,
@@ -133,7 +155,7 @@ const _Box = <T extends HTMLElement = HTMLDivElement>(
       'data-size': isNumberLike(local.size) ? undefined : local.size || undefined,
       size: local.__size,
       ...getBoxMod(local.mod),
-      ...rest,
+      ...processedRest(),
     };
   });
 

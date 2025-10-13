@@ -26,7 +26,7 @@ function Demo() {
       label="Custom icon color"
       name="check"
       value="check"
-      default-checked
+      defaultChecked
     />
   );
 }

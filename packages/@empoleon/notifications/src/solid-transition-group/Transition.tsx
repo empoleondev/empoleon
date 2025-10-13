@@ -15,6 +15,8 @@ export const ENTERING = "entering";
 export const ENTERED = "entered";
 export const EXITING = "exiting";
 
+export type TransitionStatus = typeof ENTERING | typeof ENTERED | typeof EXITING | typeof EXITED | typeof UNMOUNTED;
+
 type Timeout = number | { enter?: number; exit?: number; appear?: number };
 type NodeRef = { current: Element | null };
 

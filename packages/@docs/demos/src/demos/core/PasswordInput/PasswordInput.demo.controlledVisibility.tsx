@@ -33,13 +33,13 @@ function Demo() {
     <Stack>
       <PasswordInput
         label="Password"
-        default-value="secret"
+        defaultValue="secret"
         visible={visible()}
         onVisibilityChange={toggle}
       />
       <PasswordInput
         label="Confirm password"
-        default-value="secret"
+        defaultValue="secret"
         visible={visible()}
         onVisibilityChange={toggle}
       />

@@ -1,5 +1,5 @@
 import { createEffect, createMemo, createSignal, JSX, splitProps } from 'solid-js';
-import { useMergedRef, useMove, useUncontrolled } from '@empoleon/hooks';
+import { clamp, useMergedRef, useMove, useUncontrolled } from '@empoleon/hooks';
 import {
   BoxProps,
   createVarsResolver,
@@ -234,7 +234,7 @@ export const RangeSlider = factory<RangeSliderFactory>((_props) => {
   const [hovered, setHovered] = createSignal(false);
   const [_value, setValue] = useUncontrolled<RangeSliderValue>({
     value: () => local.value,
-    defaultValue: local.defaultValue ?? [0, 0],
+    defaultValue: local.defaultValue!,
     finalValue: [local.min!, local.max!],
     onChange: local.onChange,
   });
@@ -306,35 +306,50 @@ export const RangeSlider = factory<RangeSliderFactory>((_props) => {
         }
       }
     } else {
-      clone[index] = val;
+       const clampedVal = clamp(val, local.min!, local.max!);
+      clone[index] = clampedVal;
 
       if (index === 0) {
-        if (val > clone[1] - (local.minRange! - 0.000000001)) {
-          const newThumb1 = Math.min(val + local.minRange!, local.max!);
-          clone[1] = newThumb1;
+        if (clampedVal > clone[1] - (local.minRange! - 0.000000001)) {
+          if (local.pushOnOverlap) {
+            clone[1] = Math.min(val + local.minRange!, local.max!);
+          } else {
+            clone[index] = valueRef[index];
+          }
         }
 
-        if (val > (local.max! - (local.minRange! - 0.000000001) || local.min!)) {
+        if (clampedVal > (local.max! - (local.minRange! - 0.000000001) || local.min!)) {
           clone[index] = valueRef[index];
         }
 
         if (clone[1] - val > local.maxRange!) {
-          clone[1] = val + local.maxRange!;
+          if (local.pushOnOverlap) {
+            clone[1] = val + local.maxRange!;
+          } else {
+            clone[index] = valueRef[index];
+          }
         }
       }
 
       if (index === 1) {
-        if (val < clone[0] + local.minRange!) {
-          const newThumb0 = Math.max(val - local.minRange!, local.min!);
-          clone[0] = newThumb0;
+        if (clampedVal < clone[0] + local.minRange!) {
+          if (local.pushOnOverlap) {
+            clone[0] = Math.max(val - local.minRange!, local.min!);
+          } else {
+            clone[index] = valueRef[index];
+          }
         }
 
-        if (val < clone[0] + local.minRange!) {
+        if (clampedVal < clone[0] + local.minRange!) {
           clone[index] = valueRef[index];
         }
 
-        if (val - clone[0] > local.maxRange!) {
-          clone[0] = val - local.maxRange!;
+        if (clampedVal - clone[0] > local.maxRange!) {
+          if (local.pushOnOverlap) {
+            clone[0] = val - local.maxRange!;
+          } else {
+            clone[index] = valueRef[index];
+          }
         }
       }
     }

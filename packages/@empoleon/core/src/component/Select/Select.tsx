@@ -184,21 +184,12 @@ export const Select = factory<SelectFactory>((_props) => {
   });
   const previousSelectedOption = usePrevious(selectedOption);
 
-  // const [search, setSearch] = useUncontrolled({
-  //   value: () => local.searchValue,
-  //   defaultValue: local.defaultSearchValue!,
-  //   finalValue: local.searchable ? (selectedOption() ? selectedOption()!.label : '') : '',
-  //   onChange: local.onSearchChange,
-  // });
   const [search, setSearch] = useUncontrolled({
     value: () => local.searchValue,
     defaultValue: local.defaultSearchValue!,
-    finalValue: local.searchable ? (selectedOption() ? selectedOption()!.label : '') : '',
+    finalValue: selectedOption() ? selectedOption()!.label : '',
     onChange: local.onSearchChange,
   });
-
-  // For non-searchable selects, override search to be empty when dropdown is open
-  const effectiveSearch = () => (local.searchable ? search() : '');
 
   const combobox = useCombobox({
     opened: () => local.dropdownOpened!,
@@ -225,16 +216,16 @@ export const Select = factory<SelectFactory>((_props) => {
     classNames: local.classNames,
   });
 
-  createEffect(() => {
-    if (local.selectFirstOptionOnChange) {
-      combobox.selectFirstOption();
-    }
-  });
+  createEffect((prev) => {
+    const currentSearch = search();
+    const shouldSelect = local.selectFirstOptionOnChange;
 
-  createEffect(() => {
-    if (local.selectFirstOptionOnChange) {
+    // Only run if search changed and not on initial mount
+    if (shouldSelect && prev !== undefined && prev !== currentSearch) {
       combobox.selectFirstOption();
     }
+
+    return currentSearch;
   });
 
   createEffect(() => {
@@ -258,6 +249,25 @@ export const Select = factory<SelectFactory>((_props) => {
     const currentOption = selectedOption();
     if (typeof local.value === 'string' && currentOption) {
       handleSearchChange(currentOption.label);
+    }
+  });
+
+  // Update search value when data changes and component is uncontrolled
+  createEffect(() => {
+    if (!controlled) {
+      const currentOption = selectedOption();
+      const currentValue = _value();
+
+      // When data becomes available and we have a value, update the search
+      if (typeof currentValue === 'string' && currentOption) {
+        const currentSearch = search();
+        const expectedSearch = currentOption.label;
+
+        // Only update if search doesn't match the expected label
+        if (currentSearch !== expectedSearch) {
+          setSearch(expectedSearch);
+        }
+      }
     }
   });
 
@@ -380,7 +390,7 @@ export const Select = factory<SelectFactory>((_props) => {
           data={parsedData()}
           hidden={local.readOnly || local.disabled}
           filter={local.filter}
-          search={effectiveSearch()}
+          search={search()}
           limit={local.limit}
           hiddenWhenEmpty={!local.nothingFoundMessage}
           withScrollArea={local.withScrollArea}

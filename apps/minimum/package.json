@@ -1,0 +1,27 @@
+{
+  "name": "playground",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@empoleon/core": "workspace:*",
+    "@empoleon/hooks": "workspace:*"
+  },
+  "devDependencies": {
+    "@empoleon/postcss-preset": "^1.18.1",
+    "@vitejs/plugin-react": "^5.0.2",
+    "postcss": "^8.5.6",
+    "postcss-simple-vars": "^7.0.1",
+    "solid-js": "^1.9.7",
+    "typescript": "^5.9.2",
+    "vite": "^7.1.5",
+    "vite-plugin-solid": "^2.11.9"
+  },
+  "packageManager": "yarn@4.10.3"
+}
