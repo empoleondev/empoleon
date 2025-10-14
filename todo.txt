@@ -1,0 +1,30 @@
+- Note make sure all Popover.Target have popoverProps.
+
+Core:
+
+Collapse - ok but needs more attention
+Drawer - ok - but focus on close
+Input - demo inputcontainer tooltip not working
+Loader - cssLoader demo does not work
+Menu - navigation withPortal={false} does not work
+Modal - With Menu not right
+MultiSelect - demo checkIcon not working
+NumberFormatter - demo decimalScale not work
+NumberInput - story FormValidateOnBlur does not work
+Popover // had major change.  no longer uses useFloatingAutoUpdate
+- popoverEvents story not working - hideDetached not working - reference hidden not working
+TagsInput - nativescroll has height with input, dropdownpadding demo has height with input, acceptValueonBlur has height with input
+Tooltip // remember to remove useFloatingAutoUpdate
+
+Others:
+
+Carousel
+Dropzone
+Form
+Modals Manager
+Modals - not working
+Notifications
+NProgress - ok
+NavigationProgress
+Spotlight
+Tiptap

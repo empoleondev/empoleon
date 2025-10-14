@@ -11,6 +11,10 @@
   </p>
 </div>
 
+## Paused
+
+Development on this has been paused.  Even though it's 95% there.  The issues to solve are quite challenging and enough time has been spent on this (5+ months).  Enough with the sunk cost fallacy!
+
 ## Notes
 
 Check the storybook as some components had to be changed slightly to accomodate the difference between React and SolidJS.
